@@ -11,7 +11,7 @@ public class MapReader {
     Country country= new Country();
 
     public String getMapFolerPath() {
-        return System.getProperty("user.dir") + "/src/main/java/resources/maps/";
+        return System.getProperty("user.dir") + "/src/resources/maps/";
     }
 
     public Country mapCountry(String line){

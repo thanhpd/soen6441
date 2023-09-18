@@ -1,5 +1,5 @@
 package main.java.models;
 
-public class GameMap {
+public class Continent {
     
 }

@@ -1,6 +1,7 @@
 package main.java;
 
 import main.java.View.Start;
+import main.java.utils.MapReader;
 
 /**
  * @author Omnia Alam
@@ -8,7 +9,8 @@ import main.java.View.Start;
  */
 public class Load {
     public static void main(String[] args)throws InterruptedException{
-        Start st= new Start();
-        st.welcomeDisplay();
+        var mapName = "europe.map";
+        MapReader mapReader=new MapReader();
+        mapReader.readMapFile(mapName);
     }
 }

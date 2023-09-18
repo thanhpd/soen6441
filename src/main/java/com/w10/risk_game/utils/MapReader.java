@@ -24,7 +24,7 @@ public class MapReader {
 
     public void readMapFile(String mapFilename) {
 
-        var path = getMapFolerPath() + "" + mapFilename;
+        String path = getMapFolerPath() + "" + mapFilename;
         try {
             FileReader reader = new FileReader(path);
 

@@ -9,7 +9,7 @@ import com.w10.risk_game.utils.MapReader;
 public class Load {
     public static void main(String[] args) throws InterruptedException {
 
-        var mapName = "europe.map";
+        String mapName = "europe.map";
         MapReader mapReader = new MapReader();
         mapReader.readMapFile(mapName);
 

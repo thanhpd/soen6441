@@ -17,14 +17,6 @@ public class Logger {
     public void log(){
         System.out.println("\n Enter the commands");
         input=sc.nextLine();
-            switch(input){
-                case "showmap":
-                    System.out.println("Enter map file name");
-                    fileName= sc.nextLine();
-                    mapviewer.showmap(fileName);
-                    break;
-
             
-        }
     }
 }

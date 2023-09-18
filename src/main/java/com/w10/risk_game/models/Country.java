@@ -1,22 +1,22 @@
-package main.java.models;
+package com.w10.risk_game.models;
 
 public class Country {
-    
-    private int countryId;
-    private String countryName;
-    private int continentId;
 
-    public Country(){
+  private int countryId;
+  private String countryName;
+  private int continentId;
 
-    }
+  public Country() {
 
-    private Country(int countryId,String countryName,int continentId){
-        this.countryId = countryId;
-        this.countryName = countryName;
-        this.continentId = continentId;
-    }
+  }
 
-    // Getter
+  private Country(int countryId, String countryName, int continentId) {
+    this.countryId = countryId;
+    this.countryName = countryName;
+    this.continentId = continentId;
+  }
+
+  // Getter
   public int countryId() {
     return countryId;
   }
@@ -36,7 +36,7 @@ public class Country {
     this.countryName = countryName;
   }
 
- // Getter
+  // Getter
   public int continentId() {
     return continentId;
   }

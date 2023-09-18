@@ -1,20 +1,19 @@
-package main.java.models;
+package com.w10.risk_game.models;
 
 public class Continent {
-    private int continentId;
-    private String continentName;
+  private int continentId;
+  private String continentName;
 
+  public Continent() {
 
-    public Continent(){
+  }
 
-    }
+  private Continent(int continentId, String continentName) {
+    this.continentId = continentId;
+    this.continentName = continentName;
+  }
 
-    private Continent(int continentId,String continentName){
-        this.continentId = continentId;
-        this.continentName = continentName;
-    }
-
-    // Getter
+  // Getter
   public int continentId() {
     return continentId;
   }
@@ -33,6 +32,5 @@ public class Continent {
   public void continentName(String continentName) {
     this.continentName = continentName;
   }
-
 
 }

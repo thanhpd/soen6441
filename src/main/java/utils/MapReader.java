@@ -3,15 +3,23 @@ package main.java.utils;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-import main.java.models.GameMap;
+import main.java.models.Country;
 
 public class MapReader {
+    Country country= new Country();
 
     public String getMapFolerPath() {
         return System.getProperty("user.dir") + "/src/main/java/resources/maps/";
+    }
+
+    public Country mapCountry(String line){
+        String[] splitted =line.split(" ");
+        country.countryId(Integer.parseInt(splitted[0]));
+        country.countryName(splitted[1]);
+        country.continentId(Integer.parseInt(splitted[2]));
+        return country;
     }
 
     public void readMapFile(String mapFilename) {
@@ -24,7 +32,7 @@ public class MapReader {
             HashMap<Integer,String> countryMap = new HashMap<Integer,String>();
             String line;
 /**
- * Hash parse: load countries in to hasmap.
+ * Hash parse: load countries in to hashmap.
  */
 
             while(scanner.hasNextLine()){
@@ -35,9 +43,8 @@ public class MapReader {
                         if(line.equals("[continents]")||line.equals("[borders]")||line.isEmpty()){
                         break;
                         }
-                        String[] splitted =line.split(" ");
-                        countryMap.put(Integer.parseInt(splitted[0]),splitted[1]);
-                        System.out.println(line);
+                        mapCountry(line);
+                       
                         
                             
                 
@@ -48,7 +55,8 @@ public class MapReader {
                 
             }
 
-            countryMap.forEach((key, value) -> System.out.println(key + " " + value));
+           
+            System.out.println(countryMap);
 
             } catch (FileNotFoundException e) {
 

@@ -1,6 +1,7 @@
 package main.java;
 
-import main.java.View.Start;
+import java.util.*;
+
 import main.java.utils.MapReader;
 
 /**
@@ -9,8 +10,10 @@ import main.java.utils.MapReader;
  */
 public class Load {
     public static void main(String[] args)throws InterruptedException{
+
         var mapName = "europe.map";
         MapReader mapReader=new MapReader();
         mapReader.readMapFile(mapName);
+    
     }
 }

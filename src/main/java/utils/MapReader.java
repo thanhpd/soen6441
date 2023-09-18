@@ -1,9 +1,5 @@
 package main.java.utils;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import main.java.models.GameMap;
 
 public class MapReader {
@@ -12,14 +8,12 @@ public class MapReader {
         return System.getProperty("user.dir") + "/src/main/java/resources/maps/";
     }
 
-    public GameMap readMapFile(String mapFilename) {
-        try {
+    public void readMapFile(String mapFilename) {
+     
             var path = getMapFolerPath() + "" + mapFilename;
-            FileReader reader = new FileReader(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-            return null;
+            GameMap gameMap =new GameMap();
+            gameMap.loadmap(path);
+
         }
     }
 

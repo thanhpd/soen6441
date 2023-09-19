@@ -6,10 +6,13 @@ public class Player {
     private String name;
     private List<Country> countriesOwned;
     private List<Order> orders;
+    private int leftoverArmies;
 
-    public Player(String name, List<Country> countriesOwned) {
+    public Player(String name, List<Country> countriesOwned, List<Order> orders, int leftoverArmies) {
         this.name = name;
         this.countriesOwned = countriesOwned;
+        this.orders = orders;
+        this.leftoverArmies = leftoverArmies;
     }
 
     public String getName() {
@@ -42,5 +45,21 @@ public class Player {
 
     public Order nextOrder() {
         return orders.remove(0);
+    }
+
+    public int getLeftoverArmies() {
+        return leftoverArmies;
+    }
+
+    public void setLeftoverArmies(int leftoverArmies) {
+        this.leftoverArmies = leftoverArmies;
+    }
+
+    public void deployArmies(int num) {
+        this.leftoverArmies = leftoverArmies - num;
+    }
+
+    public void addArmies(int num) {
+        this.leftoverArmies = leftoverArmies + num;
     }
 }

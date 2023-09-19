@@ -1,17 +1,21 @@
-package main.java.utils;
+package utils;
+
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashMap;
 import java.util.Scanner;
 
-import main.java.models.Country;
+import com.w10.risk_game.models.Continent;
+import com.w10.risk_game.models.Country;
+
+
 
 public class MapReader {
     Country country= new Country();
+    Continent continent= new Continent();
 
     public String getMapFolerPath() {
-        return System.getProperty("user.dir") + "/src/resources/maps/";
+        return System.getProperty("user.dir") + "/src/main/resources/maps/";
     }
 
     public Country mapCountry(String line){
@@ -22,41 +26,44 @@ public class MapReader {
         return country;
     }
 
+    public Continent mapContinent(String line){
+        String[] splitted =line.split(" ");
+        continent.continentId(Integer.parseInt(splitted[0]));
+        continent.continentName(splitted[1]);
+        return continent; 
+    }
+
     public void readMapFile(String mapFilename) {
      
-            var path = getMapFolerPath() + "" + mapFilename;
+            String path = getMapFolerPath() + "" + mapFilename;
             try {
                 FileReader reader= new FileReader(path);
         
             Scanner scanner= new Scanner(reader);
-            HashMap<Integer,String> countryMap = new HashMap<Integer,String>();
             String line;
-/**
- * Hash parse: load countries in to hashmap.
- */
+
 
             while(scanner.hasNextLine()){
                 line=scanner.nextLine();
-                if(line.equals("[countries]")){
-                    while(scanner.hasNextLine()){
+                    if(line.equals("[countries]")){
+                        while(scanner.hasNextLine()){
                         line=scanner.nextLine();
+                        //if(line.equals("[continents]")&&!line.equals("[countries]")&&!line.isEmpty()){
+                        //mapContinent(line);
+                        //}
+                        
                         if(line.equals("[continents]")||line.equals("[borders]")||line.isEmpty()){
                         break;
                         }
                         mapCountry(line);
-                       
-                        
-                            
-                
+                        //System.out.println(mapCountry(line).countryId()+"-"+mapCountry(line).countryName());      
                     }
-                
-                }
-                
+                    }
                 
             }
 
            
-            System.out.println(countryMap);
+            
 
             } catch (FileNotFoundException e) {
 

@@ -19,6 +19,9 @@ public class Continent {
   }
 
   // Setter
+
+  public void continentId(int continentId) {
+=======
   public void continentId(int continentId) {
     this.continentId = continentId;
   }

@@ -1,8 +1,7 @@
-package main.java.view;
+package com.w10.risk_game.view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 public class Logger {
     Scanner sc;
@@ -10,13 +9,15 @@ public class Logger {
     String input;
     String fileName;
     ArrayList<String> inputLogList;
-    public Logger(){
-        sc= new Scanner(System.in); 
+
+    public Logger() {
+        sc = new Scanner(System.in);
         mapviewer = new ShowMap();
     }
-    public void log(){
+
+    public void log() {
         System.out.println("\n Enter the commands");
-        input=sc.nextLine();
-            
+        input = sc.nextLine();
+
     }
 }

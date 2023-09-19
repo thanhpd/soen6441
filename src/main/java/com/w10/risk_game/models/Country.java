@@ -1,10 +1,16 @@
 package com.w10.risk_game.models;
 
-public class Country {
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Country implements Serializable{
 
   private int countryId;
   private String countryName;
   private int continentId;
+  private int adjacentCountry;
+  
 
   public Country() {
 
@@ -44,6 +50,10 @@ public class Country {
   // Setter
   public void continentId(int continentId) {
     this.continentId = continentId;
+  }
+
+  public String toString(){
+    return countryId+" "+countryName+" "+continentId;
   }
 
 }

@@ -3,6 +3,8 @@ package com.w10.risk_game.utils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import com.w10.risk_game.models.Continent;
@@ -11,21 +13,24 @@ import com.w10.risk_game.models.Country;
 
 
 public class MapReader {
-    Country country= new Country();
+    
     Continent continent= new Continent();
+    ArrayList<Country> countries = new ArrayList<Country>();
 
     public String getMapFolerPath() {
         return System.getProperty("user.dir") + "/src/main/resources/maps/";
     }
 
-    public Country mapCountry(String line){
+    public void mapCountry(String line){
+        Country country= new Country();
         String[] splitted =line.split(" ");
         country.countryId(Integer.parseInt(splitted[0]));
         country.countryName(splitted[1]);
         country.continentId(Integer.parseInt(splitted[2]));
-        return country;
+        countries.add(country);
     }
 
+    
     public Continent mapContinent(String line){
         String[] splitted =line.split(" ");
         continent.continentId(Integer.parseInt(splitted[0]));
@@ -56,12 +61,12 @@ public class MapReader {
                         break;
                         }
                         mapCountry(line);
-                        //System.out.println(mapCountry(line).countryId()+"-"+mapCountry(line).countryName());      
                     }
                     }
-                
             }
-
+            for (int i = 0; i < countries.size(); i++) {
+                System.out.println(countries.get(i));
+                }
            
             
 

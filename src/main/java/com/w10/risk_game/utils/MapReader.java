@@ -62,7 +62,7 @@ public class MapReader {
             String line;
 
 
-            while(scanner.hasNextLine()){
+           /*  while(scanner.hasNextLine()){
                 line=scanner.nextLine();
                     if(line.equals("[countries]")){
                         while(scanner.hasNextLine()){
@@ -73,14 +73,12 @@ public class MapReader {
                         mapCountry(line);
                     }
                     }
-            }
-
-            while(scanner.hasNextLine()){
+            }*/
+                while(scanner.hasNextLine()){
                 line=scanner.nextLine();
                     if(line.equals("[borders]")){
                         while(scanner.hasNextLine()){
                         line=scanner.nextLine();
-                     
                         if(line.equals("[continents]")||line.equals("[countries]")||line.isEmpty()){
                         break;
                         }
@@ -88,8 +86,6 @@ public class MapReader {
                     }
                     }
             }
-
-
 
             
             for (int i = 0; i < countries.size(); i++) {

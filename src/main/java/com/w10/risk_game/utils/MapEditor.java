@@ -9,6 +9,16 @@ public class MapEditor {
     }
 
     public void addBorder(){
+
+    }
+
+    public void removeCountry(){
+
+    }
+    public void removeContinent(){
+
+    }
+    public void removeNeighbour(){
         
     }
 }

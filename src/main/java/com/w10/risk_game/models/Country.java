@@ -1,6 +1,7 @@
 package com.w10.risk_game.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,8 +10,7 @@ public class Country implements Serializable{
   private int countryId;
   private String countryName;
   private int continentId;
-  private int adjacentCountry;
-  
+  private HashMap<Integer, ArrayList<Integer>> adjacentCountries = new HashMap<>();
 
   public Country() {
 
@@ -22,6 +22,29 @@ public class Country implements Serializable{
     this.continentId = continentId;
   }
 
+ 
+
+public HashMap<Integer, ArrayList<Integer>> adjacentCountries() {
+ return adjacentCountries;
+ }
+
+
+  
+ public void adjacentCountries(HashMap<Integer, ArrayList<Integer>> adjacentCountries) {
+ this.adjacentCountries = adjacentCountries;
+ }
+
+ //Getter
+ public ArrayList<Integer> adjacentCountries(Integer countryId) {
+  return adjacentCountries.get(countryId);
+  }
+ //Setter
+  public void adjacentCountries(Integer countryId, ArrayList<Integer> listOfNeighbours) {
+  this.adjacentCountries.put(countryId, listOfNeighbours);
+  }
+
+
+ 
   // Getter
   public int countryId() {
     return countryId;

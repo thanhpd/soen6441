@@ -46,32 +46,32 @@ public HashMap<Integer, ArrayList<Integer>> adjacentCountries() {
 
  
   // Getter
-  public int countryId() {
+  public int getCountryId() {
     return countryId;
   }
 
   // Setter
-  public void countryId(int countryId) {
+  public void setCountryId(int countryId) {
     this.countryId = countryId;
   }
 
   // Getter
-  public String countryName() {
+  public String getCountryName() {
     return countryName;
   }
 
   // Setter
-  public void countryName(String countryName) {
+  public void setCountryName(String countryName) {
     this.countryName = countryName;
   }
 
   // Getter
-  public int continentId() {
+  public int getContinentId() {
     return continentId;
   }
 
   // Setter
-  public void continentId(int continentId) {
+  public void setContinentId(int continentId) {
     this.continentId = continentId;
   }
 

@@ -14,23 +14,23 @@ public class Continent {
   }
 
   // Getter
-  public int continentId() {
+  public int getContinentId() {
     return continentId;
   }
 
   // Setter
 
-  public void continentId(int continentId) {
+  public void setContinentId(int continentId) {
     this.continentId = continentId;
   }
 
   // Getter
-  public String continentName() {
+  public String getContinentName() {
     return continentName;
   }
 
   // Setter
-  public void continentName(String continentName) {
+  public void setContinentName(String continentName) {
     this.continentName = continentName;
   }
 

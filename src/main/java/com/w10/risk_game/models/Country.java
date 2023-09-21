@@ -10,7 +10,8 @@ public class Country implements Serializable{
   private int countryId;
   private String countryName;
   private int continentId;
-  private HashMap<Integer, ArrayList<Integer>> adjacentCountries = new HashMap<>();
+  private Map<Integer, ArrayList<Integer>> adjacentCountries = new HashMap<>();
+  ArrayList <Country> neighbors= new ArrayList<>();
 
   public Country() {
 
@@ -21,29 +22,6 @@ public class Country implements Serializable{
     this.countryName = countryName;
     this.continentId = continentId;
   }
-
- 
-
-public HashMap<Integer, ArrayList<Integer>> adjacentCountries() {
- return adjacentCountries;
- }
-
-
-  
- public void adjacentCountries(HashMap<Integer, ArrayList<Integer>> adjacentCountries) {
- this.adjacentCountries = adjacentCountries;
- }
-
- //Getter
- public ArrayList<Integer> adjacentCountries(Integer countryId) {
-  return adjacentCountries.get(countryId);
-  }
- //Setter
-  public void adjacentCountries(Integer countryId, ArrayList<Integer> listOfNeighbours) {
-  this.adjacentCountries.put(countryId, listOfNeighbours);
-  }
-
-
  
   // Getter
   public int getCountryId() {
@@ -74,9 +52,19 @@ public HashMap<Integer, ArrayList<Integer>> adjacentCountries() {
   public void setContinentId(int continentId) {
     this.continentId = continentId;
   }
-
+@Override
   public String toString(){
-    return countryId+" "+countryName+" "+continentId;
+    StringBuilder builder =  new StringBuilder();
+    builder.append(countryId+" "+countryName+" "+continentId);
+
+    for (Country country : neighbors) {
+      builder.append(" ");
+      builder.append(country.countryId);
+    } 
+    return builder.toString();
   }
 
+  public void addBorder(Country neighbourCountry){
+    neighbors.add(neighbourCountry);
+  }
 }

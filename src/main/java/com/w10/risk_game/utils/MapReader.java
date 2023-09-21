@@ -49,8 +49,23 @@ public class MapReader {
      * @return Returns a list of neighbouring countries with their parent country id
      */
 
-    public Map<String, Country> parseBorders() {
-        return null;
+    public void parseBorders(Map<Integer, Country> countries, Scanner scanner) {
+        String line;
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            if (line.equals("[continents]") || line.equals("[countries]") || line.isEmpty()) {
+                break;
+            }
+        String[] splitted = line.split(" ");
+        Country country=countries.get(Integer.parseInt(splitted[0]));
+        for (int i = 1; i < splitted.length; i++) {
+        Country neighbor= countries.get(Integer.parseInt(splitted[i]));
+        country.addBorder(neighbor);
+        }
+
+
+        }
+        
     }
 
     /**
@@ -106,22 +121,6 @@ public class MapReader {
         return continent;
     }
 
-    /**
-     * 
-     * @param line
-     * 
-     */
-    public void mapAdjacentCountry(String line) {
-
-        Country country = new Country();
-        String[] splitted = line.split(" ");
-        int key = Integer.parseInt(splitted[0]);
-        ArrayList<Integer> values = new ArrayList<>();
-        for (int i = 1; i < splitted.length; i++) {
-            values.add(Integer.parseInt(splitted[i]));
-        }
-        country.adjacentCountries(key, values);
-    }
 
     /**
      * Reading the map file
@@ -131,6 +130,7 @@ public class MapReader {
     public void readMapFile(String mapFilename) {
         Map<Integer, Country> countries = new HashMap<Integer, Country>();
         Map<Integer, Continent> continents = new HashMap<Integer, Continent>();
+
 
         String path = getMapFolerPath() + "" + mapFilename;
         try {
@@ -156,26 +156,23 @@ public class MapReader {
                     break;
                 }
             }
+
+            // read until border
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                if (line.equals("[borders]")) {
+                    parseBorders(countries, scanner);
+                    break;
+                }
+            }
+            System.out.println("###############List of Continents:################");
             for (Integer key: continents.keySet()){
                 System.out.println(key +" = "+continents.get(key));
             }
+            System.out.println("#########List of Countries:############");
             for (Integer key: countries.keySet()){
                 System.out.println(key +" = "+countries.get(key));
             } 
-
-            // read unitl borders
-            // while (scanner.hasNextLine()) {
-            //     line = scanner.nextLine();
-            //     if (line.equals("[borders]")) {
-            //         while (scanner.hasNextLine()) {
-            //             line = scanner.nextLine();
-            //             if (line.equals("[continents]") || line.equals("[countries]") || line.isEmpty()) {
-            //                 break;
-            //             }
-            //             mapAdjacentCountry(line);
-            //         }
-            //     }
-            // }
 
         } catch (FileNotFoundException e) {
 

@@ -33,5 +33,8 @@ public class Continent {
   public void setContinentName(String continentName) {
     this.continentName = continentName;
   }
+  public String toString(){
+    return continentId+" "+continentName;
+  }
 
 }

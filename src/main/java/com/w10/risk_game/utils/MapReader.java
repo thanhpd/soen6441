@@ -65,6 +65,7 @@ public class MapReader {
         int continentId=1;
         while (scanner.hasNextLine()) {
             line = scanner.nextLine();
+        
             if (line.equals("[countries]") || line.equals("[borders]") || line.isEmpty()) {
                 break;
             }
@@ -85,7 +86,7 @@ public class MapReader {
     public Country mapCountry(String line) {
         Country country = new Country();
         String[] splitted = line.split(" ");
-        country.setContinentId(Integer.parseInt(splitted[0]));
+        country.setCountryId(Integer.parseInt(splitted[0]));
         country.setCountryName(splitted[1]);
         country.setContinentId(Integer.parseInt(splitted[2]));
         return country;
@@ -152,24 +153,29 @@ public class MapReader {
                 line = scanner.nextLine();
                 if (line.equals("[countries]")) {
                     countries = readCountries(scanner);
-                    
                     break;
                 }
             }
+            for (Integer key: continents.keySet()){
+                System.out.println(key +" = "+continents.get(key));
+            }
+            for (Integer key: countries.keySet()){
+                System.out.println(key +" = "+countries.get(key));
+            } 
 
             // read unitl borders
-            while (scanner.hasNextLine()) {
-                line = scanner.nextLine();
-                if (line.equals("[borders]")) {
-                    while (scanner.hasNextLine()) {
-                        line = scanner.nextLine();
-                        if (line.equals("[continents]") || line.equals("[countries]") || line.isEmpty()) {
-                            break;
-                        }
-                        mapAdjacentCountry(line);
-                    }
-                }
-            }
+            // while (scanner.hasNextLine()) {
+            //     line = scanner.nextLine();
+            //     if (line.equals("[borders]")) {
+            //         while (scanner.hasNextLine()) {
+            //             line = scanner.nextLine();
+            //             if (line.equals("[continents]") || line.equals("[countries]") || line.isEmpty()) {
+            //                 break;
+            //             }
+            //             mapAdjacentCountry(line);
+            //         }
+            //     }
+            // }
 
         } catch (FileNotFoundException e) {
 

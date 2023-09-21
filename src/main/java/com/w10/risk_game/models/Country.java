@@ -16,7 +16,7 @@ public class Country implements Serializable{
 
   }
 
-  private Country(int countryId, String countryName, int continentId) {
+  public Country(int countryId, String countryName, int continentId) {
     this.countryId = countryId;
     this.countryName = countryName;
     this.continentId = continentId;

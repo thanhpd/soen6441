@@ -8,21 +8,25 @@ private Map<Integer, Country> countries = new HashMap<Integer, Country>();
 private Map<Integer, Continent> continents = new HashMap<Integer, Continent>();
 
 //Getter
-public  Map<Integer, Country> getCountry(){
+public  Map<Integer, Country> getCountries(){
     return countries;
   }
 
-//Setter
-public void setCountry(Map<Integer, Country> countries) {
-    this.countries = countries;
-  }
 
-public  Map<Integer, Continent> getContinent(){
+
+public  Map<Integer, Continent> getContinents(){
     return continents;
   }
-//Setter
-public void setContinent(Map<Integer, Continent> continents) {
-    this. continents = continents;
+
+  public void addCountries( Map<Integer, Country> countries){
+ this.countries.putAll(countries);
   }
+
+  public void addContinentes(Map<Integer, Continent> continents){
+    this.continents.putAll(continents);
+  }
+
+  
+
 
 }

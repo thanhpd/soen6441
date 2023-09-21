@@ -1,8 +1,16 @@
+/*
+ * @author Omnia Alam
+ * in the MapReader class, 
+ * we have a function called showMap that prints the map in text.
+ * to use the show map, we need to call the function called readMapFile(String mapFilename).
+ * We need to link the Commandline "showmap filename" with readMapFile(String mapFilename) and pass the map file name
+ * 
+ */
+
 package com.w10.risk_game.utils;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -70,8 +78,7 @@ public class MapReader {
     }
 
     /**
-     * 
-     * 
+     *
      * @return Returns a list of contnents with their id as key
      */
     public Map<Integer, Continent> readCointinents(Scanner scanner) {
@@ -122,7 +129,8 @@ public class MapReader {
         return continent;
     }
 
-    public void printMap(Map<Integer, Country> countries, Map<Integer, Continent> continents) {
+    // read a map and show it in the commandline
+    public void showMap(Map<Integer, Country> countries, Map<Integer, Continent> continents) {
         System.out.println("###############List of Continents:################");
         for (Integer key : continents.keySet()) {
             System.out.println(key + " = " + continents.get(key));
@@ -182,9 +190,9 @@ public class MapReader {
             }
             
             
-            gamemap.setCountry(countries);
-            gamemap.setContinent(continents);
-            printMap(countries, continents);
+            gamemap.addCountries(countries);
+            gamemap.addContinentes(continents);
+            showMap(countries, continents);
 
 
            

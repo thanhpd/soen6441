@@ -8,7 +8,7 @@ public class Continent {
 
   }
 
-  private Continent(int continentId, String continentName) {
+  public Continent(int continentId, String continentName) {
     this.continentId = continentId;
     this.continentName = continentName;
   }

@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
+import com.w10.risk_game.models.GameMap;
 
 public class MapReader {
 
@@ -121,16 +122,30 @@ public class MapReader {
         return continent;
     }
 
+    public void printMap(Map<Integer, Country> countries, Map<Integer, Continent> continents) {
+        System.out.println("###############List of Continents:################");
+        for (Integer key : continents.keySet()) {
+            System.out.println(key + " = " + continents.get(key));
+        }
+        System.out.println("#########List of Countries:############");
+        for (Integer key : countries.keySet()) {
+            System.out.println(key + " = " + countries.get(key));
+        }
+
+    }
+
 
     /**
      * Reading the map file
-     * 
+     * Example: europe.map
      * @param mapFilename
+     * Returns GameMap object
+     * 
      */
-    public void readMapFile(String mapFilename) {
+    public GameMap readMapFile(String mapFilename) {
         Map<Integer, Country> countries = new HashMap<Integer, Country>();
         Map<Integer, Continent> continents = new HashMap<Integer, Continent>();
-
+        GameMap gamemap= new GameMap();
 
         String path = getMapFolerPath() + "" + mapFilename;
         try {
@@ -165,19 +180,19 @@ public class MapReader {
                     break;
                 }
             }
-            System.out.println("###############List of Continents:################");
-            for (Integer key: continents.keySet()){
-                System.out.println(key +" = "+continents.get(key));
-            }
-            System.out.println("#########List of Countries:############");
-            for (Integer key: countries.keySet()){
-                System.out.println(key +" = "+countries.get(key));
-            } 
+            
+            
+            gamemap.setCountry(countries);
+            gamemap.setContinent(continents);
+            printMap(countries, continents);
 
+
+           
         } catch (FileNotFoundException e) {
 
             e.printStackTrace();
         }
 
+        return gamemap;
     }
 }

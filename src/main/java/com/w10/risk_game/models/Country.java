@@ -10,8 +10,7 @@ public class Country implements Serializable{
   private int countryId;
   private String countryName;
   private int continentId;
-  private Map<Integer, ArrayList<Integer>> adjacentCountries = new HashMap<>();
-  ArrayList <Country> neighbors= new ArrayList<>();
+  private Map<Integer, Country> neighbors = new HashMap<>();
 
   public Country() {
 
@@ -57,7 +56,7 @@ public class Country implements Serializable{
     StringBuilder builder =  new StringBuilder();
     builder.append(countryId+" "+countryName+" "+continentId);
 
-    for (Country country : neighbors) {
+    for (Country country : neighbors.values()) {
       builder.append(" ");
       builder.append(country.countryId);
     } 
@@ -65,6 +64,10 @@ public class Country implements Serializable{
   }
 
   public void addBorder(Country neighbourCountry){
-    neighbors.add(neighbourCountry);
+    neighbors.put(neighbourCountry.countryId,neighbourCountry);
+  }
+
+  public  Map<Integer, Country> getNeighbors(){
+    return neighbors;
   }
 }

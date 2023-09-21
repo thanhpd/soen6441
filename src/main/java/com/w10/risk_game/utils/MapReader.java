@@ -24,7 +24,7 @@ public class MapReader {
     /**
      * 
      * 
-     * @param scanner
+     * 
      * @return Returns a list of countries with their id as key
      */
 
@@ -46,7 +46,7 @@ public class MapReader {
     }
 
     /**
-     * @param takes country Id and Scanner for the borders
+     * 
      * creates list of neighbouring countries with their parent country id
      */
 
@@ -71,7 +71,7 @@ public class MapReader {
 
     /**
      * 
-     * @param scanner
+     * 
      * @return Returns a list of contnents with their id as key
      */
     public Map<Integer, Continent> readCointinents(Scanner scanner) {
@@ -95,7 +95,7 @@ public class MapReader {
 
     /**
      * 
-     * @param line
+     * 
      * @return returns Country objects for each line
      */
 
@@ -110,7 +110,7 @@ public class MapReader {
 
     /**
      * 
-     * @param line
+     *
      * @return returns Continent objecct for each line
      */
 

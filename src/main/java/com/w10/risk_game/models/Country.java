@@ -63,7 +63,7 @@ public class Country implements Serializable{
     return builder.toString();
   }
 
-  public void addBorder(Country neighbourCountry){
+  public void addNeighbor(Country neighbourCountry){
     neighbors.put(neighbourCountry.countryId,neighbourCountry);
   }
 

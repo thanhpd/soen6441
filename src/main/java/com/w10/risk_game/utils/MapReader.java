@@ -46,8 +46,8 @@ public class MapReader {
     }
 
     /**
-     * 
-     * @return Returns a list of neighbouring countries with their parent country id
+     * @param takes country Id and Scanner for the borders
+     * creates list of neighbouring countries with their parent country id
      */
 
     public void parseBorders(Map<Integer, Country> countries, Scanner scanner) {
@@ -61,7 +61,7 @@ public class MapReader {
         Country country=countries.get(Integer.parseInt(splitted[0]));
         for (int i = 1; i < splitted.length; i++) {
         Country neighbor= countries.get(Integer.parseInt(splitted[i]));
-        country.addBorder(neighbor);
+        country.addNeighbor(neighbor);
         }
 
 

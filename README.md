@@ -23,7 +23,7 @@ $ mvn surefire:test
 
 ### To generate Javadoc documentation
 ```sh
-// The output folder is located at target/site/apidocs
+// The output folder is located at `apidocs/`
 // Open the index.html file inside the output folder to see the doc
 
 $ mvn javadoc:javadoc

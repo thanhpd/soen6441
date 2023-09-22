@@ -29,3 +29,6 @@ replay_pid*
 
 # Files in Target
 target/**
+
+# API docs folder
+apidocs/

@@ -17,28 +17,28 @@ public class GameEngine {
 		d_players = new ArrayList<>();
 	}
 
-	private void runInitializeMapStep() {
-		System.out.println("Enter name of map file:");
-		String l_mapFileName = d_input.nextLine();
+	public void loadMap(String p_fileName) {
 		MapReader l_mapReader = new MapReader();
-		d_gameMap = l_mapReader.loadMapFile(l_mapFileName);
+		d_gameMap = l_mapReader.loadMapFile(p_fileName);
 	}
 
-	private void runInitializePlayerStep() {
-		System.out.println("Enter number of players: ");
-		Integer l_numberofplayers = Integer.parseInt(d_input.nextLine());
-		for (int i = 0; i < l_numberofplayers; i++) {
-			System.out.format("Enter name of player %d: ", i + 1);
-			String l_playerName = d_input.nextLine();
-			Player player = new Player(l_playerName, null, null, i);
-			d_players.add(player);
-		}
+	public void showMap() {
+		// TO-DO: Add show map logic
 	}
 
-	public void runStartUpPhase() {
-		runInitializeMapStep();
-		runInitializePlayerStep();
+	public void createPlayer(String p_playerName) {
+		Player l_player = new Player(p_playerName, null, null, 0);
+		d_players.add(l_player);
 	}
+
+	public void removePlayer(String p_playerName) {
+		// TO-DO: Add remove player logic
+	}
+
+	// public void runStartUpPhase() {
+	// runInitializeMapStep();
+	// runInitializePlayerStep();
+	// }
 
 	public void runGameEngine() {
 

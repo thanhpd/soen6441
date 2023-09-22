@@ -5,7 +5,8 @@ package com.w10.risk_game;
  */
 public class App {
 	/**
-	 * @param args passed in arguments for the application
+	 * @param args
+	 *            passed in arguments for the application
 	 */
 	public static void main(String[] args) {
 		App.printToTerminal();

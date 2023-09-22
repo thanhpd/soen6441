@@ -150,7 +150,7 @@ public class MapReader {
      * Returns GameMap object
      * 
      */
-    public GameMap readMapFile(String mapFilename) {
+    public GameMap loadMapFile(String mapFilename) {
         Map<Integer, Country> countries = new HashMap<Integer, Country>();
         Map<Integer, Continent> continents = new HashMap<Integer, Continent>();
         GameMap gamemap= new GameMap();

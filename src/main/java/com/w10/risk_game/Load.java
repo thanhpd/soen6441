@@ -13,7 +13,7 @@ public class Load {
 
         String mapName = "europe.map";
         MapReader mapReader = new MapReader();
-        GameMap gameMap=mapReader.readMapFile(mapName);
+        GameMap gameMap=mapReader.loadMapFile(mapName);
         MapEditor mapEditor= new MapEditor(gameMap);
 
 

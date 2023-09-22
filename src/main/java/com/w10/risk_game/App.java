@@ -1,23 +1,18 @@
 package com.w10.risk_game;
 
+import com.w10.risk_game.models.GameEngine;
 
 /**
  * Initialize the Application
  */
 public class App {
-    /**
-     * @param args passed in arguments for the application
-     */
-    public static void main(String[] args) {
-        App.printToTerminal();
-    }
-
-    /**
-     * This test method print out a line in the terminal
-     */
-    private static void printToTerminal() {
-        System.out.println("Hello World!");
-    }
+	/**
+	 * @param args passed in arguments for the application
+	 */
+	public static void main(String[] args) {
+		GameEngine l_GameEngine = new GameEngine();
+		l_GameEngine.runStartUpPhase();
+	}
 }
 
-//haha test failure
+// haha test failure

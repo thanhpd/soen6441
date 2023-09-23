@@ -32,9 +32,7 @@ public class App {
         System.out.println("\t=======================");
         System.out.println("\t\t 1. New Game");
         System.out.println("\t\t 2. Load Game");
-        System.out.println("\t\t 3. Single Game Mode");
-        System.out.println("\t\t 4. Simulation Mode");
-        System.out.println("\t\t 5. Exit");
+        System.out.println("\t\t 3. Exit");
         System.out.println("\t=======================");
         System.out.println("\t\tSelect the option");
         System.out.println("==================================");
@@ -49,12 +47,6 @@ public class App {
                 System.out.println("Loading a Game...");
                 break;
             case 3:
-                System.out.println("Entering Single Game Mode...");
-                break;
-            case 4:
-                System.out.println("Entering Simulation Mode...");
-                break;
-            case 5:
                 System.out.println("Exiting the Game...");
                 break;
             default:

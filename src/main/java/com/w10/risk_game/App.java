@@ -41,6 +41,26 @@ public class App {
 
 		int option = scanner.nextInt();
 
+		switch (option) {
+            case 1:
+                System.out.println("Starting a New Game...");
+                break;
+            case 2:
+                System.out.println("Loading a Game...");
+                break;
+            case 3:
+                System.out.println("Entering Single Game Mode...");
+                break;
+            case 4:
+                System.out.println("Entering Simulation Mode...");
+                break;
+            case 5:
+                System.out.println("Exiting the Game...");
+                break;
+            default:
+                System.out.println("Invalid Option. Please choose a valid option.");
+        }
+
 		
 	}
 }

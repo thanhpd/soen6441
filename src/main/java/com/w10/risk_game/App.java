@@ -19,9 +19,10 @@ public class App {
 	 */
 	private static void printToTerminal() {
 		System.out.println("Hello World!");
+		start();
 	}
 
-	public void start(){ 
+	public static void start(){ 
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("");

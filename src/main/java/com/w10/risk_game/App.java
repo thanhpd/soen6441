@@ -17,7 +17,6 @@ public class App {
 	 * This test method prints out a line in the terminal
 	 */
 	private static void printToTerminal() {
-		System.out.println("Hello World!");
 		start();
 	}
 

@@ -14,8 +14,7 @@ public class GameEngine {
 		d_players = new HashMap<>();
 	}
 
-	
-	/** 
+	/**
 	 * @param p_fileName
 	 */
 	public void loadMap(String p_fileName) {

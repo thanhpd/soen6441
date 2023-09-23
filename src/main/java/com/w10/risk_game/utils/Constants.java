@@ -7,14 +7,10 @@ public final class Constants {
 	}
 
 	// Menu
-	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n" +
-			"You can enter any of the below commands:\n" +
-			"1. loadmap <filename>\n" +
-			"2. showmap\n" +
-			"3. gameplayer -add <playername>\n" +
-			"4. gameplayer -remove <playername>\n" +
-			"5. assigncountries\n" +
-			"5. quit\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
+			+ "You can enter any of the below commands:\n" + "1. loadmap <filename>\n" + "2. showmap\n"
+			+ "3. gameplayer -add <playername>\n" + "4. gameplayer -remove <playername>\n" + "5. assigncountries\n"
+			+ "5. quit\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a input: ";

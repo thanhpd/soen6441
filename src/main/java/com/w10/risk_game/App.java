@@ -10,7 +10,8 @@ import com.w10.risk_game.utils.Constants;
  */
 public class App {
 	/**
-	 * @param args passed in arguments for the application
+	 * @param args
+	 *            passed in arguments for the application
 	 */
 	public static void main(String[] args) {
 		GameEngine l_GameEngine = new GameEngine();

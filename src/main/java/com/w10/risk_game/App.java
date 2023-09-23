@@ -7,7 +7,8 @@ import java.util.Scanner;
  */
 public class App {
 	/**
-	 * @param args passed in arguments for the application
+	 * @param args
+	 *            passed in arguments for the application
 	 */
 	public static void main(String[] args) {
 		App.printToTerminal();
@@ -39,16 +40,16 @@ public class App {
 		int option = scanner.nextInt();
 
 		switch (option) {
-			case 1:
+			case 1 :
 				System.out.println("Starting a New Game");
 				break;
-			case 2:
+			case 2 :
 				System.out.println("Loading a Game");
 				break;
-			case 3:
+			case 3 :
 				System.out.println("Exiting the Game");
 				break;
-			default:
+			default :
 				System.out.println("Invalid Option. Please choose a valid option.");
 		}
 	}

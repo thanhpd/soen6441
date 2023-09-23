@@ -51,7 +51,6 @@ public class Country implements Serializable {
 	public void setContinentId(int continentId) {
 		this.continentId = continentId;
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

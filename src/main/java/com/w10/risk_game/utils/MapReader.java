@@ -145,7 +145,7 @@ public class MapReader {
 	 * Reading the map file Example: europe.map
 	 *
 	 * @param mapFilename
-	 *                    Returns GameMap object
+	 *            Returns GameMap object
 	 *
 	 */
 	public GameMap loadMapFile(String mapFilename) {

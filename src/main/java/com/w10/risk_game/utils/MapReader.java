@@ -1,10 +1,10 @@
 /*
  * @author Omnia Alam
- * in the MapReader class, 
+ * in the MapReader class,
  * we have a function called showMap that prints the map in text.
  * to use the show map, we need to call the function called readMapFile(String mapFilename).
  * We need to link the Commandline "showmap filename" with readMapFile(String mapFilename) and pass the map file name
- * 
+ *
  */
 
 package com.w10.risk_game.utils;
@@ -22,7 +22,7 @@ import com.w10.risk_game.models.GameMap;
 public class MapReader {
 
 	/**
-	 * 
+	 *
 	 * @return the map file directory
 	 */
 	public String getMapFolerPath() {
@@ -30,9 +30,9 @@ public class MapReader {
 	}
 
 	/**
-	 * 
-	 * 
-	 * 
+	 *
+	 *
+	 *
 	 * @return Returns a list of countries with their id as key
 	 */
 
@@ -54,7 +54,7 @@ public class MapReader {
 	}
 
 	/**
-	 * 
+	 *
 	 * creates list of neighbouring countries with their parent country id
 	 */
 
@@ -100,8 +100,8 @@ public class MapReader {
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @return returns Country objects for each line
 	 */
 
@@ -115,7 +115,7 @@ public class MapReader {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @return returns Continent objecct for each line
 	 */
@@ -142,12 +142,11 @@ public class MapReader {
 	}
 
 	/**
-	 * Reading the map file
-	 * Example: europe.map
-	 * 
+	 * Reading the map file Example: europe.map
+	 *
 	 * @param mapFilename
 	 *                    Returns GameMap object
-	 * 
+	 *
 	 */
 	public GameMap loadMapFile(String mapFilename) {
 		Map<Integer, Country> countries = new HashMap<Integer, Country>();

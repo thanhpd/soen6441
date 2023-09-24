@@ -17,15 +17,53 @@ public class GameMap {
   }
 
   public Country getCountryByName(String p_countryNmae) {
-    return l_countries.get(p_countryNmae);
+    return l_countries.values()
+        .stream()
+        .filter(counrty -> counrty.getCountryName().equals(p_countryNmae))
+        .findFirst()
+        .get();
   }
 
-  public Continent gContinentByName(String p_continentName) {
-    return l_continents.get(p_continentName);
+  public Continent getContinentByName(String p_continentName) {
+    return l_continents.values()
+        .stream()
+        .filter(counrty -> counrty.getContinentName().equals(p_continentName))
+        .findFirst()
+        .get();
   }
 
   public Map<Integer, Continent> getContinents() {
     return l_continents;
+  }
+
+  public boolean containsCountry(int p_id) {
+    return l_countries.containsKey(p_id);
+  }
+/*
+ * Method overloading- polymorphism
+ */
+  public boolean containsCountry(String p_countryName) {
+      return l_countries.values()
+        .stream()
+        .filter(counrty -> counrty.getCountryName().equals(p_countryName))
+        .findFirst()
+        .isPresent();
+  }
+
+  public boolean containsContinent(int p_id){
+    return l_continents.containsKey(p_id);
+  }
+
+  /*
+ * Method overloading- polymorphism
+ * 
+ */
+  public boolean containsContinent(String p_continentName){
+    return l_continents.values()
+        .stream()
+        .filter(continent -> continent.getContinentName().equals(p_continentName))
+        .findFirst()
+        .isPresent();
   }
 
   public Continent getContinentById(int p_continentId) {

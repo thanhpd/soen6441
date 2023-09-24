@@ -17,6 +17,9 @@ public  Map<Integer, Country> getCountries(){
 public  Map<Integer, Continent> getContinents(){
     return continents;
   }
+public Continent getContinentById(int continentId){
+  return continents.get(continentId);
+}
 
   public void addCountries( Map<Integer, Country> countries){
  this.countries.putAll(countries);

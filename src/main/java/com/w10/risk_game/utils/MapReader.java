@@ -129,19 +129,6 @@ public class MapReader {
         return continent;
     }
 
-    // read a map and show it in the commandline
-    public void showMap(Map<Integer, Country> countries, Map<Integer, Continent> continents) {
-        System.out.println("###############List of Continents:################");
-        for (Integer key : continents.keySet()) {
-            System.out.println(key + " = " + continents.get(key));
-        }
-        System.out.println("#########List of Countries:############");
-        for (Integer key : countries.keySet()) {
-            System.out.println(key + " = " + countries.get(key));
-        }
-
-    }
-
 
     /**
      * Reading the map file
@@ -192,7 +179,6 @@ public class MapReader {
             
             gamemap.addCountries(countries);
             gamemap.addContinentes(continents);
-            showMap(countries, continents);
 
 
            

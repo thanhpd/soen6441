@@ -12,11 +12,11 @@ import com.w10.risk_game.utils.MapReader;
 public class Load {
     public static void main(String[] args) throws InterruptedException {
 
-        String mapName = "europe.map";
-        MapReader mapReader = new MapReader();
-        GameMap gameMap=mapReader.loadMapFile(mapName);
+        String l_mapName = "europe.map";
+        MapReader l_mapReader = new MapReader();
+        GameMap l_gameMap=l_mapReader.loadMapFile(l_mapName);
         MapDisplay displayMap= new MapDisplay();
-        displayMap.formatMap(gameMap);
+        displayMap.formatMap(l_gameMap);
         //MapEditor mapEditor= new MapEditor(gameMap);
 
 

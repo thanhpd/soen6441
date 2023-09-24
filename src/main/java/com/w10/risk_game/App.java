@@ -1,6 +1,5 @@
 package com.w10.risk_game;
 
-
 /**
  * Initialize the Application
  */
@@ -20,4 +19,4 @@ public class App {
     }
 }
 
-//haha test failure
+// haha test failure

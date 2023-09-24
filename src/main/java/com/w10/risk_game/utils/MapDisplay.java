@@ -1,10 +1,7 @@
 package com.w10.risk_game.utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
@@ -14,49 +11,48 @@ import dnl.utils.text.table.TextTable;
 
 public class MapDisplay {
 
-    public String[] populateRow(Country country,Continent continent, boolean showArmies) {
-        String[] values= new String[3];
+    public String[] populateRow(Country p_country, Continent p_continent, boolean p_showArmies) {
+        String[] l_values = new String[3];
 
-        ArrayList<String> neighborNames = new ArrayList<>();
-        for (Country neighbor : country.getNeighbors().values()) {
-            neighborNames.add(neighbor.getCountryName());
+        ArrayList<String> l_neighborNames = new ArrayList<>();
+        for (Country neighbor : p_country.getNeighbors().values()) {
+            l_neighborNames.add(neighbor.getCountryName());
         }
 
-        String neighborValue = String.join(", ", neighborNames);
-        
-        values[0]= country.getCountryName();
-        if(showArmies){
+        String l_neighborValue = String.join(", ", l_neighborNames);
+
+        l_values[0] = p_country.getCountryName();
+        if (p_showArmies) {
 
         }
-        values[1] = (country.getContinentId()+"("+continent.getContinentName()+")");
-        values[2] = neighborValue;
-        
-        return values;
+        l_values[1] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
+        l_values[2] = l_neighborValue;
+
+        return l_values;
 
     }
 
     public void formatMap(GameMap map) {
-                String[] columnNames = {
+        String[] l_columnNames = {
                 "Country Name",
                 "Continent Name",
                 "Neighbors"
         };
 
-        Map<Integer, Country> countries = map.getCountries();
-         Object[][] data = new Object[countries.size()][columnNames.length];
-         int d_count=0;
-        for (Map.Entry<Integer, Country> entry : countries.entrySet()) {
-            data[d_count]=populateRow(entry.getValue(),map.getContinentById(entry.getValue().getContinentId()), false);
+        Map<Integer, Country> l_countries = map.getCountries();
+        Object[][] l_data = new Object[l_countries.size()][l_columnNames.length];
+        int d_count = 0;
+        for (Map.Entry<Integer, Country> entry : l_countries.entrySet()) {
+            l_data[d_count] = populateRow(entry.getValue(), map.getContinentById(entry.getValue().getContinentId()),
+                    false);
             d_count++;
 
-            
         }
 
-
-        TextTable tt = new TextTable(columnNames, data);
-        tt.setAddRowNumbering(true);
-        tt.setSort(0);
-        tt.printTable();
+        TextTable l_mapTable = new TextTable(l_columnNames, l_data);
+        l_mapTable.setAddRowNumbering(true);
+        l_mapTable.setSort(0);
+        l_mapTable.printTable();
 
     }
 }

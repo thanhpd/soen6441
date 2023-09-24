@@ -39,7 +39,7 @@ public class GameEngine {
 				System.out.println("Player name already exists!");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
 		}
 	}
 

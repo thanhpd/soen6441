@@ -27,6 +27,7 @@ public final class Constants {
 	// Game Engine Class Constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
 	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
+	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
 
 	// Other constants

@@ -24,6 +24,10 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
+	// Game Engine Class Constants
+	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
+	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
+
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 

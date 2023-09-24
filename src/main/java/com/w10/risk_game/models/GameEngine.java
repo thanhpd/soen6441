@@ -1,7 +1,11 @@
 package com.w10.risk_game.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapReader;
 
 public class GameEngine {
@@ -27,7 +31,8 @@ public class GameEngine {
 
 	public void createPlayer(String p_playerName) {
 		try {
-			Player l_player = new Player(p_playerName.trim(), null, null, 0);
+			List<Country> l_defaultCountryList = new ArrayList<>();
+			Player l_player = new Player(p_playerName.trim(), l_defaultCountryList, null, 0);
 			if (!d_players.containsKey(p_playerName.trim())) {
 				d_players.put(p_playerName, l_player);
 			} else {
@@ -50,11 +55,35 @@ public class GameEngine {
 	public void showAllPlayers() {
 		d_players.forEach((p_playerName, p_player) -> {
 			System.out.println(p_playerName);
+			for (Country c : p_player.getCountriesOwned()) {
+				try {
+					System.out.println(c.getCountryName());
+
+				} catch (Exception e) {
+					System.out.println(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
+				}
+			}
+			System.out.println();
 		});
 	}
 
 	public void assignCountries() {
-		// TO-DO: Add assign countries logic
+		Map<Integer, Country> l_countries = d_gameMap.getCountries();
+		List<String> l_playerNames = new ArrayList<>(d_players.keySet());
+		int l_noOfPlayers = d_players.size();
+
+		if (l_noOfPlayers > l_countries.size()) {
+			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, l_countries.size(), l_noOfPlayers);
+			return;
+		}
+
+		int i = 0;
+		while (i < l_countries.size()) {
+			String l_playerName = l_playerNames.get(i % l_noOfPlayers);
+			d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i + 1));
+			i += 1;
+		}
+
 	}
 
 }

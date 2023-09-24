@@ -64,6 +64,23 @@ public class Country implements Serializable {
     return builder.toString();
   }
 
+  public boolean hasNeighbor(int p_neighbourCountryId) {
+    return d_neighbors.containsKey(p_neighbourCountryId);
+  }
+
+  public boolean hasNeighbor(String p_neighborCoutryName) {
+    for (var neighborCountry : d_neighbors.values()) {
+      if (neighborCountry.getCountryName().equals(p_neighborCoutryName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean hasNeighbor(Country p_country) {
+    return d_neighbors.containsKey(p_country.getCountryId());
+  }
+
   public void addNeighbor(Country p_neighbourCountry) {
     d_neighbors.put(p_neighbourCountry.d_countryId, p_neighbourCountry);
   }

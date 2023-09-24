@@ -15,7 +15,7 @@ public class GameMap {
     return l_countries;
   }
 
-  public Country getCountryById(int p_countryId) {
+  public Country findCountry(int p_countryId) {
     return l_countries.get(p_countryId);
   }
 
@@ -42,26 +42,27 @@ public class GameMap {
   public boolean containsCountry(int p_id) {
     return l_countries.containsKey(p_id);
   }
-/*
- * Method overloading- polymorphism
- */
+
+  /*
+   * Method overloading- polymorphism
+   */
   public boolean containsCountry(String p_countryName) {
-      return l_countries.values()
+    return l_countries.values()
         .stream()
         .filter(counrty -> counrty.getCountryName().equals(p_countryName))
         .findFirst()
         .isPresent();
   }
 
-  public boolean containsContinent(int p_id){
+  public boolean containsContinent(int p_id) {
     return l_continents.containsKey(p_id);
   }
 
   /*
- * Method overloading- polymorphism
- * 
- */
-  public boolean containsContinent(String p_continentName){
+   * Method overloading- polymorphism
+   * 
+   */
+  public boolean containsContinent(String p_continentName) {
     return l_continents.values()
         .stream()
         .filter(continent -> continent.getContinentName().equals(p_continentName))
@@ -72,12 +73,14 @@ public class GameMap {
   public Continent getContinentById(int p_continentId) {
     return l_continents.get(p_continentId);
   }
-public ArrayList<Country> getCountriesOfContinent(int p_continentId){
-  return l_countries.values()
-          .stream()
-          .filter(country -> country.getContinentId() == p_continentId)
-          .collect(Collectors.toCollection(ArrayList:: new));
-}
+
+  public ArrayList<Country> getCountriesOfContinent(int p_continentId) {
+    return l_countries.values()
+        .stream()
+        .filter(country -> country.getContinentId() == p_continentId)
+        .collect(Collectors.toCollection(ArrayList::new));
+  }
+
   public void addCountries(Map<Integer, Country> p_countries) {
     this.l_countries.putAll(p_countries);
   }

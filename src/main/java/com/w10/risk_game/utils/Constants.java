@@ -8,12 +8,12 @@ public final class Constants {
 
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You can enter any of the below commands:\n" + "1. loadmap <filename>\n" + "2. showmap\n"
-			+ "3. gameplayer -add <playername>\n" + "4. gameplayer -remove <playername>\n" + "5. assigncountries\n"
-			+ "5. quit\n";
+			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> showmap\n"
+			+ "-> gameplayer -add <playername>\n" + "-> gameplayer -remove <playername>\n" + "-> assigncountries\n"
+			+ "-> quit\n";
 
 	// User input command constants
-	public static final String USER_INPUT_REQUEST = "Please enter a input: ";
+	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER = "gameplayer";
@@ -27,6 +27,7 @@ public final class Constants {
 	// Game Engine Class Constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
 	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
+	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";

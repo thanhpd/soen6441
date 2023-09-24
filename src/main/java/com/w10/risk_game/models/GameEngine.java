@@ -38,7 +38,6 @@ public class GameEngine {
 			} else {
 				System.out.println("Player name already exists!");
 			}
-			d_players.put(p_playerName, l_player);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +47,7 @@ public class GameEngine {
 		try {
 			d_players.remove(p_playerName.trim());
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
 	}
 
@@ -58,7 +57,6 @@ public class GameEngine {
 			for (Country c : p_player.getCountriesOwned()) {
 				try {
 					System.out.println(c.getCountryName());
-
 				} catch (Exception e) {
 					System.out.println(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
 				}

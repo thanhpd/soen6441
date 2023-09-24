@@ -69,7 +69,9 @@ public class MapReader {
 			Country d_country = p_countries.get(Integer.parseInt(l_splitted[0]));
 			for (int i = 1; i < l_splitted.length; i++) {
 				Country l_neighbor = p_countries.get(Integer.parseInt(l_splitted[i]));
-				d_country.addNeighbor(l_neighbor);
+				if (d_country != null && l_neighbor != null) {
+					d_country.addNeighbor(l_neighbor);
+				}
 			}
 
 		}

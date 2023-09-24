@@ -1,6 +1,5 @@
 package com.w10.risk_game.models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.w10.risk_game.utils.MapReader;
@@ -29,6 +28,11 @@ public class GameEngine {
 	public void createPlayer(String p_playerName) {
 		try {
 			Player l_player = new Player(p_playerName.trim(), null, null, 0);
+			if (!d_players.containsKey(p_playerName.trim())) {
+				d_players.put(p_playerName, l_player);
+			} else {
+				System.out.println("Player name already exists!");
+			}
 			d_players.put(p_playerName, l_player);
 		} catch (Exception e) {
 			e.printStackTrace();

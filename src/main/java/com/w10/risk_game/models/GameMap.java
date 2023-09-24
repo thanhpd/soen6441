@@ -1,7 +1,10 @@
 package com.w10.risk_game.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class GameMap {
   private Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
@@ -69,7 +72,12 @@ public class GameMap {
   public Continent getContinentById(int p_continentId) {
     return l_continents.get(p_continentId);
   }
-
+public ArrayList<Country> getCountriesOfContinent(int p_continentId){
+  return l_countries.values()
+          .stream()
+          .filter(country -> country.getContinentId() == p_continentId)
+          .collect(Collectors.toCollection(ArrayList:: new));
+}
   public void addCountries(Map<Integer, Country> p_countries) {
     this.l_countries.putAll(p_countries);
   }

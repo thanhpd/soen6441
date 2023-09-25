@@ -29,14 +29,13 @@ public class MapDisplay {
 		l_values[2] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
 		l_values[3] = "" + p_continent.getBouns();
 		l_values[4] = l_neighborValue;
-		
 
 		return l_values;
 
 	}
 
 	public void formatMap(GameMap map) {
-		String[] l_columnNames = { "Country ID", "Country Name", "ID(Continent Name)","Bonus", "ID(Neighbors)" };
+		String[] l_columnNames = {"Country ID", "Country Name", "ID(Continent Name)", "Bonus", "ID(Neighbors)"};
 
 		Map<Integer, Country> l_countries = map.getCountries();
 		Object[][] l_data = new Object[l_countries.size()][l_columnNames.length];

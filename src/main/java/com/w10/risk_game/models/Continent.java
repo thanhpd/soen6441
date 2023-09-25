@@ -13,9 +13,10 @@ public class Continent {
 
 	}
 
-	public Continent(int p_continentId, String p_continentName, int d_bouns) {
+	public Continent(int p_continentId, String p_continentName, int p_bouns) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
+		this.d_bouns = p_bouns;
 	}
 
 	// Getter

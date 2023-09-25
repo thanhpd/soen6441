@@ -1,5 +1,9 @@
 package com.w10.risk_game.models;
 
+/**
+ * @author Omnia Alam
+ */
+
 public class Continent {
   private int d_continentId;
   private String d_continentName;

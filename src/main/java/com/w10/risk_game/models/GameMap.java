@@ -1,10 +1,14 @@
 package com.w10.risk_game.models;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+/**
+ * @author Omnia Alam
+ */
+
 
 public class GameMap {
   private Map<Integer, Country> l_countries = new HashMap<Integer, Country>();

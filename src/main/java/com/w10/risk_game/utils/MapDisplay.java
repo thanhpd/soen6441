@@ -12,21 +12,22 @@ import dnl.utils.text.table.TextTable;
 public class MapDisplay {
 
     public String[] populateRow(Country p_country, Continent p_continent, boolean p_showArmies) {
-        String[] l_values = new String[3];
+        String[] l_values = new String[4];
 
         ArrayList<String> l_neighborNames = new ArrayList<>();
         for (Country neighbor : p_country.getNeighbors().values()) {
-            l_neighborNames.add(neighbor.getCountryName());
+            l_neighborNames.add(neighbor.getCountryId()+"-"+neighbor.getCountryName());
         }
 
         String l_neighborValue = String.join(", ", l_neighborNames);
 
-        l_values[0] = p_country.getCountryName();
+        l_values[0] =""+p_country.getCountryId();
+        l_values[1] = p_country.getCountryName();
         if (p_showArmies) {
 
         }
-        l_values[1] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
-        l_values[2] = l_neighborValue;
+        l_values[2] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
+        l_values[3] = l_neighborValue;
 
         return l_values;
 
@@ -34,9 +35,10 @@ public class MapDisplay {
 
     public void formatMap(GameMap map) {
         String[] l_columnNames = {
+                "Country ID",
                 "Country Name",
-                "Continent Name",
-                "Neighbors"
+                "ID(Continent Name)",
+                "ID(Neighbors)"
         };
 
         Map<Integer, Country> l_countries = map.getCountries();

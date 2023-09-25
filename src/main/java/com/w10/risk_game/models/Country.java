@@ -1,9 +1,12 @@
 package com.w10.risk_game.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * @author Omnia Alam
+ */
 
 public class Country implements Serializable {
 
@@ -16,10 +19,10 @@ public class Country implements Serializable {
 
   }
 
-  public Country(int countryId, String countryName, int continentId) {
-    this.d_countryId = countryId;
-    this.d_countryName = countryName;
-    this.d_countryId = continentId;
+  public Country(int p_countryId, String p_countryName, int p_continentId) {
+    this.d_countryId = p_countryId;
+    this.d_countryName = p_countryName;
+    this.d_continentId = p_continentId;
   }
 
   // Getter
@@ -63,7 +66,10 @@ public class Country implements Serializable {
     }
     return builder.toString();
   }
-
+/*
+ * API: Checks for different parameters if the neighbor exists
+ * 
+ */
   public boolean hasNeighbor(int p_neighbourCountryId) {
     return d_neighbors.containsKey(p_neighbourCountryId);
   }
@@ -81,6 +87,8 @@ public class Country implements Serializable {
     return d_neighbors.containsKey(p_country.getCountryId());
   }
 
+
+  
   public void addNeighbor(Country p_neighbourCountry) {
     d_neighbors.put(p_neighbourCountry.d_countryId, p_neighbourCountry);
   }

@@ -1,3 +1,7 @@
+# Ignore IDE project settings
+.idea
+.vscode
+
 # Compiled class file
 *.class
 
@@ -24,4 +28,7 @@ hs_err_pid*
 replay_pid*
 
 # Files in Target
-target/**
+target
+
+# API docs folder
+apidocs/

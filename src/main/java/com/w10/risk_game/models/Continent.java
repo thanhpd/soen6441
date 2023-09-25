@@ -5,52 +5,52 @@ package com.w10.risk_game.models;
  */
 
 public class Continent {
-  private int d_continentId;
-  private String d_continentName;
-  private int d_bouns;
+	private int d_continentId;
+	private String d_continentName;
+	private int d_bouns;
 
-  public Continent() {
+	public Continent() {
 
-  }
+	}
 
-  public Continent(int p_continentId, String p_continentName) {
-    this.d_continentId = p_continentId;
-    this.d_continentName = p_continentName;
-  }
+	public Continent(int p_continentId, String p_continentName) {
+		this.d_continentId = p_continentId;
+		this.d_continentName = p_continentName;
+	}
 
-  // Getter
-  public int getContinentId() {
-    return d_continentId;
-  }
+	// Getter
+	public int getContinentId() {
+		return d_continentId;
+	}
 
-  // Setter
+	// Setter
 
-  public void setContinentId(int p_continentId) {
-    this.d_continentId = p_continentId;
-  }
+	public void setContinentId(int p_continentId) {
+		this.d_continentId = p_continentId;
+	}
 
-  // Getter
-  public String getContinentName() {
-    return d_continentName;
-  }
+	// Getter
+	public String getContinentName() {
+		return d_continentName;
+	}
 
-  // Setter
-  public void setContinentName(String p_continentName) {
-    this.d_continentName = p_continentName;
-  }
+	// Setter
+	public void setContinentName(String p_continentName) {
+		this.d_continentName = p_continentName;
+	}
 
-  // Getter
-  public int getbous() {
-    return d_bouns;
-  }
+	// Getter
+	public int getbous() {
+		return d_bouns;
+	}
 
-  // Setter
-  public void setbous(int p_bouns) {
-    this.d_bouns = p_bouns;
-  }
+	// Setter
+	public void setbous(int p_bouns) {
+		this.d_bouns = p_bouns;
+	}
 
-  public String toString() {
-    return d_continentId + " " + d_continentName;
-  }
+	public String toString() {
+		return d_continentId + " " + d_continentName;
+	}
 
 }

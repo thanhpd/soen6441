@@ -133,6 +133,7 @@ public class MapReader {
 		String[] l_splitted = p_line.split(" ");
 		l_continent.setContinentId(p_continentId);
 		l_continent.setContinentName(l_splitted[0]);
+		l_continent.setBous(Integer.parseInt(l_splitted[1]));
 		return l_continent;
 	}
 

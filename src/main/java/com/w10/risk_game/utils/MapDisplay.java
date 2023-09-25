@@ -12,7 +12,7 @@ import dnl.utils.text.table.TextTable;
 public class MapDisplay {
 
 	public String[] populateRow(Country p_country, Continent p_continent, boolean p_showArmies) {
-		String[] l_values = new String[4];
+		String[] l_values = new String[5];
 
 		ArrayList<String> l_neighborNames = new ArrayList<>();
 		for (Country neighbor : p_country.getNeighbors().values()) {
@@ -27,14 +27,16 @@ public class MapDisplay {
 
 		}
 		l_values[2] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
-		l_values[3] = l_neighborValue;
+		l_values[3] = "" + p_continent.getBouns();
+		l_values[4] = l_neighborValue;
+		
 
 		return l_values;
 
 	}
 
 	public void formatMap(GameMap map) {
-		String[] l_columnNames = {"Country ID", "Country Name", "ID(Continent Name)", "ID(Neighbors)"};
+		String[] l_columnNames = { "Country ID", "Country Name", "ID(Continent Name)","Bonus", "ID(Neighbors)" };
 
 		Map<Integer, Country> l_countries = map.getCountries();
 		Object[][] l_data = new Object[l_countries.size()][l_columnNames.length];

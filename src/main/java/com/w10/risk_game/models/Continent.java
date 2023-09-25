@@ -13,9 +13,20 @@ public class Continent {
 
 	}
 
-	public Continent(int p_continentId, String p_continentName) {
+	public Continent(int p_continentId, String p_continentName, int d_bouns) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
+	}
+
+	// Getter
+	public int getBouns() {
+		return d_bouns;
+	}
+
+	// Setter
+
+	public void setBous(int p_bouns) {
+		this.d_bouns = p_bouns;
 	}
 
 	// Getter
@@ -50,7 +61,7 @@ public class Continent {
 	}
 
 	public String toString() {
-		return d_continentId + " " + d_continentName;
+		return d_continentId + " " + d_continentName + " " + d_bouns;
 	}
 
 }

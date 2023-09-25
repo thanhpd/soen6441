@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  * Test bonus reinforcement 2. Test basic reinforcement 3. Test group countries
  * by continent (all belong to one continent, not all belong to one continent,
  * order
- * 
+ *
  * @author Yajing LIU
  */
 public class ReinforcementsTest {
@@ -27,7 +27,7 @@ public class ReinforcementsTest {
 	List<Country> countries3;
 	/**
 	 * This method is to set up the test environment
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Before

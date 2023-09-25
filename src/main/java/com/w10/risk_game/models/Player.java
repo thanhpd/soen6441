@@ -41,8 +41,8 @@ public class Player {
 	}
 
 	/**
-	 * This method is used to issue an order
-	 * This method gets the command input, creates an order object and adds it to the list of orders
+	 * This method is used to issue an order This method gets the command input,
+	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
 		// todo - to add an order to the list of orders held by the player

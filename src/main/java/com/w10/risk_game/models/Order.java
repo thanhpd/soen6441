@@ -1,11 +1,10 @@
 package com.w10.risk_game.models;
 
 /**
- * This class is used to create order objects
- * d_player: the player who issues the order
- * d_orderType: the type of the order
- * d_countryId: the country id that the order is issued to
- * d_num: the number of armies that the order is issued to
+ * This class is used to create order objects d_player: the player who issues
+ * the order d_orderType: the type of the order d_countryId: the country id that
+ * the order is issued to d_num: the number of armies that the order is issued
+ * to
  */
 public class Order {
 	private Player d_player;
@@ -19,8 +18,8 @@ public class Order {
 		this.d_num = p_num;
 	}
 	/**
-	 * This method is used to deploy the armies
-	 * This method gets the number of armies to deploy from the player and deploys them to the country
+	 * This method is used to deploy the armies This method gets the number of
+	 * armies to deploy from the player and deploys them to the country
 	 */
 	public void deploy() {
 		Player l_player = this.d_player;

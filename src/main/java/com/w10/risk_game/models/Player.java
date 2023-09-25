@@ -1,6 +1,7 @@
 package com.w10.risk_game.models;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
 	private String name;
@@ -39,8 +40,22 @@ public class Player {
 		this.orders = orders;
 	}
 
+	/**
+	 * This method is used to issue an order
+	 * This method gets the command input, creates an order object and adds it to the list of orders
+	 */
 	public void issueOrder() {
 		// todo - to add an order to the list of orders held by the player
+		// todo - check the input
+		System.out.println("Please enter your order in the format of \"orderType countryId num\".");
+		Scanner l_scanner = new Scanner(System.in);
+		String l_input = l_scanner.nextLine();
+		String[] l_inputArray = l_input.split(" ");
+		String l_orderType = l_inputArray[0];
+		int countryId = Integer.parseInt(l_inputArray[1]);
+		int num = Integer.parseInt(l_inputArray[2]);
+		Order order = new Order(this, l_orderType, countryId, num);
+		this.orders.add(order);
 	}
 
 	public Order nextOrder() {

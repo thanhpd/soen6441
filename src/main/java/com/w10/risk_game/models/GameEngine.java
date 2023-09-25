@@ -36,7 +36,7 @@ public class GameEngine {
 			if (!d_players.containsKey(p_playerName.trim())) {
 				d_players.put(p_playerName, l_player);
 			} else {
-				System.out.println("Player name already exists!");
+				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);

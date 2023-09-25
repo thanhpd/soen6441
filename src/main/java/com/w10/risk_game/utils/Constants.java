@@ -29,6 +29,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
 	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
+	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS = "Player name already exists!";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";

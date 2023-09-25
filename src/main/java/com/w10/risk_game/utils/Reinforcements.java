@@ -14,7 +14,7 @@ import java.util.List;
  * This class is to reinforce armies for each player. It uses list of countries
  * owned by the player to calculate basic reinforcement armies. It also
  * calculates the bonus armies based on the number of continents owned.
- * 
+ *
  * @author Yajing LIU
  */
 public class Reinforcements {
@@ -26,7 +26,7 @@ public class Reinforcements {
 	 * finished by groupCountries method. 2. Compare the two groups and calculate
 	 * the bonus armies. Notes! The bonus armies are not added to the leftover
 	 * armies because it is missing in Continent class.
-	 * 
+	 *
 	 * @param p_player
 	 *            this parameter represents a player object. It is used to access
 	 *            the information of owned countries and leftover armies.
@@ -34,6 +34,7 @@ public class Reinforcements {
 	public void reinforcementPhase(Player p_player) {
 		int l_armies = p_player.getLeftoverArmies();
 		List<Country> l_playerCountries = p_player.getCountriesOwned();
+		// GameMap l_gameMap = MapReader.loadMapFile("europe.map");
 		GameMap l_gameMap = new GameMap();
 		List<Country> allCountries = new ArrayList<Country>(l_gameMap.getCountries().values());
 		// Calculate continent bonus armies
@@ -60,14 +61,15 @@ public class Reinforcements {
 	 * country ids from being out of order, the country ids are sorted. After
 	 * finishing grouping for both Player and GameMap, the Strings in these two
 	 * lists can be compared directly to calculate the bonus armies.
-	 * 
+	 *
 	 * @param p_countries
 	 *            This parameter represents a list of countries.
 	 * @return
 	 */
-	private List<String> groupCountries(List<Country> p_countries) {
+	public List<String> groupCountries(List<Country> p_countries) {
 		GameMap l_gameMap = new GameMap();
-		int l_continentNum = l_gameMap.getContinents().size();
+		// int l_continentNum = l_gameMap.getContinents().size();
+		int l_continentNum = 4;
 		List<String> l_groupCountries = new ArrayList<String>();
 		for (int i = 0; i < l_continentNum; i++) {
 			l_groupCountries.add("");
@@ -76,19 +78,19 @@ public class Reinforcements {
 			int l_continentId = country.getContinentId();
 			int l_countryId = country.getCountryId();
 			if (l_groupCountries.get(l_continentId - 1) == "") {
-				l_groupCountries.set(l_continentId - 1, l_countryId + "");
+				l_groupCountries.set(l_continentId - 1, l_groupCountries.get(l_continentId - 1) + l_countryId + "");
 			} else {
-				l_groupCountries.set(l_continentId - 1, " " + l_countryId);
+				l_groupCountries.set(l_continentId - 1, l_groupCountries.get(l_continentId - 1) + " " + l_countryId);
 			}
 		}
 		// Order the country ids in each continent
-		for (String groupCountry : l_groupCountries) {
+		for (int i = 0; i < l_groupCountries.size(); i++) {
 			List<String> countryIds = new ArrayList<String>();
-			for (String countryId : groupCountry.split(" ")) {
+			for (String countryId : l_groupCountries.get(i).split(" ")) {
 				countryIds.add(countryId);
 			}
 			Collections.sort(countryIds);
-			groupCountry = String.join(" ", countryIds);
+			l_groupCountries.set(i, String.join(" ", countryIds));
 		}
 		return l_groupCountries;
 	}

@@ -25,18 +25,26 @@ public class App {
 
 			switch (l_splitStr[0]) {
 				case Constants.USER_INPUT_COMMAND_LOADMAP :
-					l_GameEngine.loadMap(l_splitStr[1]);
+					try {
+						l_GameEngine.loadMap(l_splitStr[1]);
+					} catch (Exception e) {
+						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
+					}
 					break;
 				case Constants.USER_INPUT_COMMAND_SHOWMAP :
 					l_GameEngine.showMap();
 					break;
 				case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
-					if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_GAMEPLAYER_OPTION_ADD)) {
-						l_GameEngine.createPlayer(l_splitStr[2].toString());
-					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_GAMEPLAYER_OPTION_REMOVE)) {
-						l_GameEngine.removePlayer(l_splitStr[2].toString());
-					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_GAMEPLAYER_OPTION_SHOW_ALL)) {
-						l_GameEngine.showAllPlayers();
+					try {
+						if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_GAMEPLAYER_OPTION_ADD)) {
+							l_GameEngine.createPlayer(l_splitStr[2].toString());
+						} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_GAMEPLAYER_OPTION_REMOVE)) {
+							l_GameEngine.removePlayer(l_splitStr[2].toString());
+						} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_GAMEPLAYER_OPTION_SHOW_ALL)) {
+							l_GameEngine.showAllPlayers();
+						}
+					} catch (Exception e) {
+						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 					}
 					break;
 				case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :

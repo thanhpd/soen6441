@@ -46,8 +46,10 @@ public class Player {
 	/**
 	 * The function sets the name of the player.
 	 *
-	 * @param p_name The parameter "p_name" is a String that represents the name of
-	 *               the player.
+	 * @param p_name
+	 *               The parameter "p_name" is a String that represents the name of
+	 *               the
+	 *               player.
 	 */
 	public void setName(String p_name) {
 		this.d_name = p_name;
@@ -66,9 +68,10 @@ public class Player {
 	/**
 	 * The function sets the list of countries owned by a player.
 	 *
-	 * @param p_countriesOwned This parameter is a List of objects of type Country.
-	 *                         It represents the countries that are owned by a
-	 *                         player.
+	 * @param p_countriesOwned
+	 *                         This parameter is a List of objects of type Country.
+	 *                         It represents
+	 *                         the countries that are owned by a player.
 	 */
 	public void setCountriesOwned(List<Country> p_countriesOwned) {
 		this.d_countriesOwned = p_countriesOwned;
@@ -86,8 +89,8 @@ public class Player {
 	/**
 	 * The function sets the list of orders for a given player.
 	 *
-	 * @param p_orders The parameter "p_orders" is a List of Order objects of a
-	 *                 player.
+	 * @param p_orders
+	 *                 The parameter "p_orders" is a List of Order of a player.
 	 */
 	public void setOrders(List<Order> p_orders) {
 		this.d_orders = p_orders;
@@ -106,8 +109,10 @@ public class Player {
 	/**
 	 * The function sets the value of the "leftoverArmies" variable.
 	 *
-	 * @param p_leftoverArmies The parameter "p_leftoverArmies" is an integer that
-	 *                         represents the number of leftover armies.
+	 * @param p_leftoverArmies
+	 *                         The parameter "p_leftoverArmies" is an integer that
+	 *                         represents the
+	 *                         number of leftover armies.
 	 */
 	public void setLeftoverArmies(int p_leftoverArmies) {
 		this.d_leftoverArmies = p_leftoverArmies;
@@ -117,7 +122,8 @@ public class Player {
 	 * The function "deployArmies" subtracts the specified number of armies from the
 	 * leftover armies.
 	 *
-	 * @param p_num The parameter "p_num" represents the number of armies that are
+	 * @param p_num
+	 *              The parameter "p_num" represents the number of armies that are
 	 *              being deployed.
 	 */
 	public void deployArmies(int p_num) {
@@ -127,7 +133,8 @@ public class Player {
 	/**
 	 * The function adds a specified number of armies to a player's leftoverArmies.
 	 *
-	 * @param p_num The parameter "p_num" represents the number of armies that will
+	 * @param p_num
+	 *              The parameter "p_num" represents the number of armies that will
 	 *              be added to the existing number of leftover armies.
 	 */
 	public void addArmies(int p_num) {

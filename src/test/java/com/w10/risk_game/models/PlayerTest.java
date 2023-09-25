@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * The PlayerTest class is a JUnit test class that tests the functionality of
- * the Player class in a
- * game.
+ * the Player class in a game.
  *
  * @author Darlene-Naz
  */

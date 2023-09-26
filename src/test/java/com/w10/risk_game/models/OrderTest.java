@@ -19,10 +19,10 @@ public class OrderTest {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
-		List<Country> countries = new ArrayList<>();
-		countries.add(new Country(1, "England", 1));
-		Player player1 = new Player("Player1", countries, new ArrayList<>(), 10);
-		d_order1 = new Order(player1, "deploy", 1, 6);
+		List<Country> l_countries = new ArrayList<>();
+		l_countries.add(new Country(1, "England", 1));
+		Player l_player1 = new Player("Player1", l_countries, new ArrayList<>(), 10);
+		d_order1 = new Order(l_player1, "deploy", 1, 6);
 	}
 	/**
 	 * This method is to test the method of deploy

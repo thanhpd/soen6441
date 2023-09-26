@@ -63,9 +63,9 @@ public class PlayerTest {
 	 */
 	@Test
 	public void issueOrderTest() {
-		String input1 = "deploy 1 6\ndeploy 2 4";
-		System.setIn(new ByteArrayInputStream(input1.getBytes()));
-		Scanner scanner = new Scanner(System.in);
+		String l_input1 = "deploy 1 6\ndeploy 2 4";
+		System.setIn(new ByteArrayInputStream(l_input1.getBytes()));
+		Scanner l_scanner = new Scanner(System.in);
 		d_player1.issueOrder();
 		assertEquals(2, d_player1.getOrders().size());
 		assertEquals("deploy", d_player1.getOrders().get(0).getD_orderType());

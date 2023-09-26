@@ -12,12 +12,15 @@ public class Country implements Serializable {
 	private int d_countryId;
 	private String d_countryName;
 	private int d_continentId;
+	private int d_armyCount;
+	private Player owner;
 	private Map<Integer, Country> d_neighbors;
 
-	public Country(int p_countryId, String p_countryName, int p_continentId) {
+	public Country(int p_countryId, String p_countryName, int p_continentId, int p_armyCount) {
 		this.d_countryId = p_countryId;
 		this.d_countryName = p_countryName;
 		this.d_continentId = p_continentId;
+		this.d_armyCount = p_armyCount;
 		this.d_neighbors = new HashMap<>();
 	}
 
@@ -49,6 +52,14 @@ public class Country implements Serializable {
 	// Setter
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
+	}
+
+	public int getArmyCount() {
+		return d_armyCount;
+	}
+
+	public void setArmyCount(int d_armyCount) {
+		this.d_armyCount = d_armyCount;
 	}
 
 	@Override

@@ -38,7 +38,7 @@ public class MapEditorTest {
 		assertEquals("Continent id already exists!", error);
 		p_continentId = 2;
 		p_continentName = "North_Europe1";
-		l_mapDisplay.formatMap(l_gameMap,false);
+		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 
 	/*
@@ -75,32 +75,32 @@ public class MapEditorTest {
 		p_countryName = "England1";
 		p_continentName = "North_Europe";
 		l_mapEditor.addCounrty(p_countryId, p_countryName, p_continentName);
-		l_mapDisplay.formatMap(l_gameMap,false);
+		l_mapDisplay.formatMap(l_gameMap, false);
 
 	}
 
 	@Test
 	public void testAddNeighbor() {
 		l_mapEditor.addNeighbor(1, 7);
-		l_mapDisplay.formatMap(l_gameMap,false);
+		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 
 	@Test
 	public void testRemoveContinent() {
 		l_mapEditor.removeContinent("North_Europe");
-		l_mapDisplay.formatMap(l_gameMap,false);
+		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 
 	@Test
 	public void testRemoveCountry() {
 		l_mapEditor.removeCountry(1);
-		l_mapDisplay.formatMap(l_gameMap,false);
+		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 
 	@Test
 	public void testRemoveNeighbour() {
 		l_mapEditor.removeNeighbour(1, 21);
-		l_mapDisplay.formatMap(l_gameMap,false);
+		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 
 }

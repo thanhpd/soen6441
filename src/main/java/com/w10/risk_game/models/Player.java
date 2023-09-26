@@ -7,7 +7,7 @@ import java.util.List;
  * name, countries owned, orders, and leftover armies, as well as methods to
  * manipulate these properties.
  *
- * @author Darlene-Naz
+ * @author Darlene-Naz, Omnia Alam
  */
 public class Player {
 	private String d_name;
@@ -82,6 +82,22 @@ public class Player {
 	 */
 	public List<Order> getOrders() {
 		return d_orders;
+	}
+	/**
+	 *
+	 * @param p_CountryId
+	 * @return boolan based on if the country id is associated with player or not
+	 */
+	public boolean hasCountry(int p_CountryId) {
+		if (d_countriesOwned == null) {
+			return false;
+		}
+		for (int l_country = 0; l_country < d_countriesOwned.size(); l_country++) {
+			if (d_countriesOwned.get(l_country).getCountryId() == p_CountryId) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

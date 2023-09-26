@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * This is a test class for Order
  */
 public class OrderTest {
-	Order order1;
+	Order d_order1;
 	/**
 	 * This method is to set up the test environment
 	 *
@@ -22,7 +22,7 @@ public class OrderTest {
 		List<Country> countries = new ArrayList<>();
 		countries.add(new Country(1, "England", 1));
 		Player player1 = new Player("Player1", countries, new ArrayList<>(), 10);
-		order1 = new Order(player1, "deploy", 1, 6);
+		d_order1 = new Order(player1, "deploy", 1, 6);
 	}
 	/**
 	 * This method is to test the method of deploy
@@ -30,8 +30,8 @@ public class OrderTest {
 	@Test
 	public void deployTest() {
 		// Test deploy
-		order1.deploy();
-		assertEquals(4, order1.getD_player().getLeftoverArmies());
-		assertEquals(6, order1.getD_player().getCountriesOwned().get(0).getArmies());
+		d_order1.deploy();
+		assertEquals(4, d_order1.getD_player().getLeftoverArmies());
+		assertEquals(6, d_order1.getD_player().getCountriesOwned().get(0).getArmies());
 	}
 }

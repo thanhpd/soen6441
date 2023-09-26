@@ -13,6 +13,39 @@ public class Order {
 	private String d_orderType;
 	private int d_countryId;
 	private int d_num;
+
+	// Getter
+	public Player getD_player() {
+		return d_player;
+	}
+
+	public String getD_orderType() {
+		return d_orderType;
+	}
+
+	public int getD_countryId() {
+		return d_countryId;
+	}
+
+	public int getD_num() {
+		return d_num;
+	}
+	// Setter
+	public void setD_player(Player d_player) {
+		this.d_player = d_player;
+	}
+
+	public void setD_orderType(String d_orderType) {
+		this.d_orderType = d_orderType;
+	}
+
+	public void setD_countryId(int d_countryId) {
+		this.d_countryId = d_countryId;
+	}
+
+	public void setD_num(int d_num) {
+		this.d_num = d_num;
+	}
 	public Order(Player p_player, String p_orderType, int p_countryId, int p_num) {
 		this.d_player = p_player;
 		this.d_orderType = p_orderType;

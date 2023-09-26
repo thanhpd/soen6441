@@ -9,21 +9,16 @@ import java.util.Map;
  */
 
 public class Country implements Serializable {
-
 	private int d_countryId;
 	private String d_countryName;
 	private int d_continentId;
-	private Map<Integer, Country> d_neighbors = new HashMap<>();
-	private int d_armies = 0;
-
-	public Country() {
-
-	}
+	private Map<Integer, Country> d_neighbors;
 
 	public Country(int p_countryId, String p_countryName, int p_continentId) {
 		this.d_countryId = p_countryId;
 		this.d_countryName = p_countryName;
 		this.d_continentId = p_continentId;
+		this.d_neighbors = new HashMap<>();
 	}
 
 	// Getter
@@ -56,14 +51,6 @@ public class Country implements Serializable {
 		this.d_continentId = p_continentId;
 	}
 
-	public int getArmies() {
-		return d_armies;
-	}
-
-	public void setArmies(int p_armies) {
-		this.d_armies = p_armies;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -75,17 +62,18 @@ public class Country implements Serializable {
 		}
 		return builder.toString();
 	}
+
 	/*
 	 * API: Checks for different parameters if the neighbor exists
 	 *
 	 */
-	public boolean hasNeighbor(int p_neighbourCountryId) {
-		return d_neighbors.containsKey(p_neighbourCountryId);
+	public boolean hasNeighbor(int p_neighborCountryId) {
+		return d_neighbors.containsKey(p_neighborCountryId);
 	}
 
-	public boolean hasNeighbor(String p_neighborCoutryName) {
+	public boolean hasNeighbor(String p_neighborCountryName) {
 		for (var neighborCountry : d_neighbors.values()) {
-			if (neighborCountry.getCountryName().equals(p_neighborCoutryName)) {
+			if (neighborCountry.getCountryName().equals(p_neighborCountryName)) {
 				return true;
 			}
 		}
@@ -96,8 +84,8 @@ public class Country implements Serializable {
 		return d_neighbors.containsKey(p_country.getCountryId());
 	}
 
-	public void addNeighbor(Country p_neighbourCountry) {
-		d_neighbors.put(p_neighbourCountry.d_countryId, p_neighbourCountry);
+	public void addNeighbor(Country p_neighborCountry) {
+		d_neighbors.put(p_neighborCountry.d_countryId, p_neighborCountry);
 	}
 
 	public Map<Integer, Country> getNeighbors() {

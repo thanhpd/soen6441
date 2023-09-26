@@ -8,14 +8,15 @@ public final class Constants {
 
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> showmap\n"
-			+ "-> gameplayer -add <playername>\n" + "-> gameplayer -remove <playername>\n" + "-> assigncountries\n"
-			+ "-> quit\n";
+			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
+			+ "-> showmap\n" + "-> gameplayer -add <playername>\n" + "-> gameplayer -remove <playername>\n"
+			+ "-> assigncountries\n" + "-> quit\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
+	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER = "gameplayer";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER_OPTION_ADD = "-add";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER_OPTION_REMOVE = "-remove";
@@ -33,5 +34,8 @@ public final class Constants {
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
+
+	// Maps Folder Path
+	public static final String GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
 
 }

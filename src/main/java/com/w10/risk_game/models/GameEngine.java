@@ -17,10 +17,10 @@ public class GameEngine {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
 
-	// The `public GameEngine()` constructor initializes a new instance of the `GameEngine` class. It
-	// creates a new `GameMap` object and assigns it to the `d_gameMap` variable. It also creates a new
-	// `HashMap` object and assigns it to the `d_players` variable. This constructor is called when a new
-	// `GameEngine` object is created.
+	
+	/**
+	 * Game Engine constructor
+	 */
 	public GameEngine() {
 		d_gameMap = new GameMap();
 		d_players = new HashMap<>();

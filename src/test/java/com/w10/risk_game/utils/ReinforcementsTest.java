@@ -1,17 +1,16 @@
 package com.w10.risk_game.utils;
 
 import com.w10.risk_game.models.Country;
-import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Order;
 import com.w10.risk_game.models.Player;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * This is a test class for Reinforcements It will test the following cases: 1.
@@ -27,12 +26,13 @@ public class ReinforcementsTest {
 	List<Country> countries;
 	List<Country> countries2;
 	List<Country> countries3;
+
 	/**
 	 * This method is to set up the test environment
 	 *
 	 * @throws Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		countries = new ArrayList<>();
 		countries.add(new Country(1, "England", 1));
@@ -74,12 +74,13 @@ public class ReinforcementsTest {
 		countries3.add(new Country(2, "Scotland", 1));
 		countries3.add(new Country(1, "England", 1));
 	}
+
 	/**
 	 * This method is to test reinforcementPhase method to-do: need to be modified
 	 * after getting the bonus value of the continent and global GameMap
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testReinforcementPhase() {
 		// Test bonus
 		// Reinforcements reinforcement = new Reinforcements();
@@ -90,11 +91,12 @@ public class ReinforcementsTest {
 		// reinforcement1.reinforcementPhase(player1);
 		// assertEquals(12, player1.getLeftoverArmies());
 	}
+
 	/**
 	 * This method is to test groupCountries method
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGroupCountry() {
 		// Test all countries belong to one continent
 		Reinforcements reinforcement = new Reinforcements();

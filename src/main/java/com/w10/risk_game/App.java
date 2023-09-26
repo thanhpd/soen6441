@@ -35,6 +35,9 @@ public class App {
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 					}
 					break;
+				case Constants.USER_INPUT_COMMAND_SAVEMAP :
+					l_GameEngine.getGameMap().saveMap(l_splitStr[1]);
+					break;
 				case Constants.USER_INPUT_COMMAND_SHOWMAP :
 					l_GameEngine.showMap();
 					break;

@@ -1,5 +1,6 @@
 package com.w10.risk_game.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Continent {
@@ -9,13 +10,12 @@ public class Continent {
 	private List<Country> d_countries;
 	private List<Country> d_neighborCountries;
 
-	public Continent() {
-	}
-
 	public Continent(int p_continentId, String p_continentName, int p_armyCount) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
 		this.d_armyCount = p_armyCount;
+		this.d_countries = new ArrayList<>();
+		this.d_neighborCountries = new ArrayList<>();
 	}
 
 	public int getContinentId() {
@@ -46,8 +46,8 @@ public class Continent {
 		return d_countries;
 	}
 
-	public void setCountries(List<Country> d_countries) {
-		this.d_countries = d_countries;
+	public void addCountry(Country d_country) {
+		this.d_countries.add(d_country);
 	}
 
 	public List<Country> getNeighborCountries() {

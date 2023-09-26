@@ -36,19 +36,18 @@ public class MapReader {
 	 * @return Returns a list of countries with their id as key
 	 */
 
-	public Map<Integer, Country> readCountries(Scanner scanner) {
+	public Map<Integer, Country> readCountries(Scanner scanner, Map<Integer, Continent> continents) {
 
 		String line;
-		HashMap<Integer, Country> countries = new HashMap<Integer, Country>();
+		HashMap<Integer, Country> countries = new HashMap<>();
 		while (scanner.hasNextLine()) {
 			line = scanner.nextLine();
 			if (line.equals("[continents]") || line.equals("[borders]") || line.isEmpty()) {
 				break;
 			}
-
 			Country country = mapCountry(line);
 			countries.put(country.getCountryId(), country);
-
+			continents.get(country.getContinentId()).addCountry(country);
 		}
 		return countries;
 	}
@@ -111,6 +110,7 @@ public class MapReader {
 		country.setCountryId(Integer.parseInt(splitted[0]));
 		country.setCountryName(splitted[1]);
 		country.setContinentId(Integer.parseInt(splitted[2]));
+
 		return country;
 	}
 
@@ -121,11 +121,8 @@ public class MapReader {
 	 */
 
 	public Continent mapContinent(String line, int continentId) {
-		Continent continent = new Continent();
 		String[] splitted = line.split(" ");
-		continent.setContinentId(continentId);
-		continent.setContinentName(splitted[0]);
-		return continent;
+		return new Continent(continentId, splitted[0], 0);
 	}
 
 	// read a map and show it in the commandline
@@ -173,7 +170,7 @@ public class MapReader {
 			while (scanner.hasNextLine()) {
 				line = scanner.nextLine();
 				if (line.equals("[countries]")) {
-					countries = readCountries(scanner);
+					countries = readCountries(scanner, continents);
 					break;
 				}
 			}

@@ -105,13 +105,8 @@ public class MapReader {
 	 */
 
 	public Country mapCountry(String line) {
-		Country country = new Country();
 		String[] splitted = line.split(" ");
-		country.setCountryId(Integer.parseInt(splitted[0]));
-		country.setCountryName(splitted[1]);
-		country.setContinentId(Integer.parseInt(splitted[2]));
-
-		return country;
+		return new Country(Integer.parseInt(splitted[0]), splitted[1], Integer.parseInt(splitted[2]));
 	}
 
 	/**
@@ -142,7 +137,7 @@ public class MapReader {
 	 * Reading the map file Example: europe.map
 	 *
 	 * @param mapFilename
-	 *            Returns GameMap object
+	 *                    Returns GameMap object
 	 *
 	 */
 	public GameMap loadMapFile(String mapFilename) {

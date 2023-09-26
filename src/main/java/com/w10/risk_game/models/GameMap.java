@@ -41,6 +41,10 @@ public class GameMap {
 				l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
 						country.getContinentId());
 			}
+			l_printWriter.println("\n[borders]");
+			for (Country country : countries.values()) {
+				l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet());
+			}
 			l_printWriter.close();
 		} catch (IOException e) {
 			System.out.format("Error - Unable to save file. Please try again. %s", e.getMessage());

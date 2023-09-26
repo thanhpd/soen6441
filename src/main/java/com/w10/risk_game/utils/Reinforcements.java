@@ -65,7 +65,7 @@ public class Reinforcements {
 	 * lists can be compared directly to calculate the bonus armies.
 	 *
 	 * @param p_countries
-	 *        This parameter represents a list of countries.
+	 *            This parameter represents a list of countries.
 	 * @return A String list is returned. Each String represents the country ids in
 	 *         a continent.
 	 */

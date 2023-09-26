@@ -1,6 +1,7 @@
 # Ignore IDE project settings
-.idea
-.vscode
+.idea/
+.vscode/
+soen6441.iml
 
 # Compiled class file
 *.class

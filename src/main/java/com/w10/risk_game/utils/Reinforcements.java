@@ -30,6 +30,9 @@ public class Reinforcements {
 	 * @param p_player
 	 *            this parameter represents a player object. It is used to access
 	 *            the information of owned countries and leftover armies.
+	 * @param p_gameMap
+	 *            this parameter represents a game map object. It is used to access
+	 *            the information of all countries.
 	 */
 	public void reinforcementPhase(Player p_player, GameMap p_gameMap) {
 		int l_armies = p_player.getLeftoverArmies();
@@ -63,7 +66,8 @@ public class Reinforcements {
 	 *
 	 * @param p_countries
 	 *            This parameter represents a list of countries.
-	 * @return
+	 * @return A String list is returned. Each String represents the country ids in
+	 *         a continent.
 	 */
 	public List<String> groupCountries(List<Country> p_countries) {
 		GameMap l_gameMap = new GameMap();

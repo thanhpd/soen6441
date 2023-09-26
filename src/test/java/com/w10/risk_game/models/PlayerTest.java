@@ -55,9 +55,14 @@ public class PlayerTest {
 		d_player.deployArmies(3);
 		assertEquals(7, d_player.getLeftoverArmies());
 	}
+
+	/**
+	 * The issueOrderTest function tests the issueOrder method of the player object.
+	 * It sets the input, and test whether the orders are added to the player's
+	 * order list
+	 */
 	@Test
 	public void issueOrderTest() {
-		// Test issueOrder
 		String input1 = "deploy 1 6\ndeploy 2 4";
 		System.setIn(new ByteArrayInputStream(input1.getBytes()));
 		Scanner scanner = new Scanner(System.in);

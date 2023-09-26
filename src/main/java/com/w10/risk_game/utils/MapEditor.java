@@ -48,7 +48,7 @@ public class MapEditor {
 			return "Continent doesnot exists!";
 		}
 		Continent l_continent = l_gameMap.getContinentByName(p_continentName);
-		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId());
+		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
 		l_gameMap.getCountries().put(p_countryId, l_country);
 		return p_countryName + " is Added! and to the continent " + p_continentName;
 	}
@@ -67,7 +67,7 @@ public class MapEditor {
 		if (l_gameMap.containsContinent(p_continentId)) {
 			return "Continent id already exists!";
 		}
-		Continent l_continent = new Continent(p_continentId, p_continentName, 0, 0);
+		Continent l_continent = new Continent(p_continentId, p_continentName, 0);
 		l_gameMap.getContinents().put(l_gameMap.getContinents().size() + 1, l_continent);
 
 		return p_continentName + " is added!";

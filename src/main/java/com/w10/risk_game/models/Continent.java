@@ -10,15 +10,13 @@ import java.util.List;
 public class Continent {
 	private int d_continentId;
 	private String d_continentName;
-	private int d_armyCount;
 	private List<Country> d_countries;
 	private List<Country> d_neighborCountries;
 	private int d_bonus;
 
-	public Continent(int p_continentId, String p_continentName, int p_bonus, int p_armyCount) {
+	public Continent(int p_continentId, String p_continentName, int p_bonus) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
-		this.d_armyCount = p_armyCount;
 		this.d_bonus = p_bonus;
 		this.d_countries = new ArrayList<>();
 		this.d_neighborCountries = new ArrayList<>();
@@ -36,14 +34,6 @@ public class Continent {
 
 	public String getContinentName() {
 		return d_continentName;
-	}
-
-	public int getArmyCount() {
-		return d_armyCount;
-	}
-
-	public void setArmyCount(int d_armyCount) {
-		this.d_armyCount = d_armyCount;
 	}
 
 	public List<Country> getCountries() {

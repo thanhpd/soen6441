@@ -114,7 +114,7 @@ public class MapReader {
 	 */
 	public Country mapCountry(String p_line) {
 		String[] l_splitted = p_line.split(" ");
-		return new Country(Integer.parseInt(l_splitted[0]), l_splitted[1], Integer.parseInt(l_splitted[2]));
+		return new Country(Integer.parseInt(l_splitted[0]), l_splitted[1], Integer.parseInt(l_splitted[2]), 0);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class MapReader {
 
 	public Continent mapContinent(String p_line, int p_continentId) {
 		String[] l_splitted = p_line.split(" ");
-		return new Continent(p_continentId, l_splitted[0], Integer.parseInt(l_splitted[1]), 0);
+		return new Continent(p_continentId, l_splitted[0], Integer.parseInt(l_splitted[1]));
 	}
 
 	/**

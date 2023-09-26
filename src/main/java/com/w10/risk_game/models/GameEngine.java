@@ -10,14 +10,12 @@ import com.w10.risk_game.utils.MapReader;
 
 /**
  * The GameEngine class is responsible for managing the game map, players, and
- * their interactions in a
- * game.
+ * their interactions in a game.
  */
 public class GameEngine {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
 
-	
 	/**
 	 * Game Engine constructor
 	 */
@@ -28,12 +26,11 @@ public class GameEngine {
 
 	/**
 	 * The function "loadMap" loads a map file using a MapReader object and assigns
-	 * the loaded map to the
-	 * "d_gameMap" variable.
-	 * 
-	 * @param p_fileName The parameter "p_fileName" is a String that represents the
-	 *                   name of the file that
-	 *                   contains the map data.
+	 * the loaded map to the "d_gameMap" variable.
+	 *
+	 * @param p_fileName
+	 *            The parameter "p_fileName" is a String that represents the name of
+	 *            the file that contains the map data.
 	 */
 	public void loadMap(String p_fileName) {
 		MapReader l_mapReader = new MapReader();
@@ -49,17 +46,15 @@ public class GameEngine {
 
 	/**
 	 * The function creates a player with a given name and adds it to a map of
-	 * players, checking for
-	 * duplicate names.
-	 * 
-	 * @param p_playerName The parameter "p_playerName" is a String that represents
-	 *                     the name of the player
-	 *                     being created.
+	 * players, checking for duplicate names.
+	 *
+	 * @param p_playerName
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
-			List<Country> l_defaultCountryList = new ArrayList<>();
-			Player l_player = new Player(p_playerName.trim(), l_defaultCountryList, null, 0);
+			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), null, 0);
 			if (!d_players.containsKey(p_playerName.trim())) {
 				d_players.put(p_playerName, l_player);
 			} else {
@@ -72,13 +67,27 @@ public class GameEngine {
 
 	/**
 	 * The function removes a player from a list of players in a game engine.
-	 * 
-	 * @param p_playerName The parameter "p_playerName" is a String that represents
-	 *                     the name of the player
-	 *                     that needs to be removed.
+	 *
+	 * @param p_playerName
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player that needs to be removed.
 	 */
 	public void removePlayer(String p_playerName) {
 		try {
+			p_playerName = p_playerName.trim();
+			List<String> l_playerNames = new ArrayList<>(d_players.keySet());
+			if (l_playerNames.size() > 1) {
+				List<Country> l_ownedCounriesOfPlayer = d_players.get(p_playerName).getCountriesOwned();
+
+				l_playerNames.remove(p_playerName);
+				int i = 0;
+
+				while (i < l_ownedCounriesOfPlayer.size()) {
+					d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
+							.add(l_ownedCounriesOfPlayer.get(i));
+					i += 1;
+				}
+			}
 			d_players.remove(p_playerName.trim());
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
@@ -105,26 +114,32 @@ public class GameEngine {
 
 	/**
 	 * The function assigns countries to players in a game, ensuring that each
-	 * player receives at least
-	 * one country.
+	 * player receives at least one country.
 	 */
 	public void assignCountries() {
-		Map<Integer, Country> l_countries = d_gameMap.getCountries();
-		List<String> l_playerNames = new ArrayList<>(d_players.keySet());
-		int l_noOfPlayers = d_players.size();
+		try {
+			d_players.forEach((p_playerName, p_player) -> {
+				p_player.setCountriesOwned(new ArrayList<Country>());
+			});
+			Map<Integer, Country> l_countries = d_gameMap.getCountries();
+			List<String> l_playerNames = new ArrayList<>(d_players.keySet());
+			int l_noOfPlayers = d_players.size();
 
-		if (l_noOfPlayers > l_countries.size()) {
-			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, l_countries.size(), l_noOfPlayers);
-			return;
+			if (l_noOfPlayers > l_countries.size()) {
+				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, l_countries.size(), l_noOfPlayers);
+				return;
+			}
+
+			int i = 0;
+			while (i < l_countries.size()) {
+				String l_playerName = l_playerNames.get(i % l_noOfPlayers);
+				d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i + 1));
+				i += 1;
+			}
+
+		} catch (Exception e) {
+			System.out.println(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
 		}
-
-		int i = 0;
-		while (i < l_countries.size()) {
-			String l_playerName = l_playerNames.get(i % l_noOfPlayers);
-			d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i + 1));
-			i += 1;
-		}
-
 	}
 
 }

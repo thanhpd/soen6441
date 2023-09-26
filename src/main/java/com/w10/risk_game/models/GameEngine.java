@@ -11,6 +11,8 @@ import com.w10.risk_game.utils.MapReader;
 /**
  * The GameEngine class is responsible for managing the game map, players, and
  * their interactions in a game.
+ *
+ * @author Sherwyn Dsouza
  */
 public class GameEngine {
 	private GameMap d_gameMap;
@@ -28,6 +30,7 @@ public class GameEngine {
 	 * The function "loadMap" loads a map file using a MapReader object and assigns
 	 * the loaded map to the "d_gameMap" variable.
 	 *
+	 * @author Sherwyn Dsouza
 	 * @param p_fileName
 	 *            The parameter "p_fileName" is a String that represents the name of
 	 *            the file that contains the map data.
@@ -48,6 +51,7 @@ public class GameEngine {
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
 	 *
+	 * @author Sherwyn Dsouza
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player being created.
@@ -68,6 +72,7 @@ public class GameEngine {
 	/**
 	 * The function removes a player from a list of players in a game engine.
 	 *
+	 * @author Sherwyn Dsouza
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that needs to be removed.
@@ -97,6 +102,8 @@ public class GameEngine {
 	/**
 	 * The function "showAllPlayers" prints the names of all players and the
 	 * countries they own.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void showAllPlayers() {
 		d_players.forEach((p_playerName, p_player) -> {
@@ -115,6 +122,8 @@ public class GameEngine {
 	/**
 	 * The function assigns countries to players in a game, ensuring that each
 	 * player receives at least one country.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void assignCountries() {
 		try {
@@ -140,6 +149,38 @@ public class GameEngine {
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
 		}
+	}
+
+	/**
+	 * The function returns the number of players in a game.
+	 *
+	 * @return The number of players in the list "d_players".
+	 * @author Sherwyn Dsouza
+	 */
+	public Integer getNoOfPlayers() {
+		return d_players.size();
+	}
+
+	/**
+	 * The function returns the game map.
+	 *
+	 * @return The method is returning an object of type GameMap.
+	 * @author Sherwyn Dsouza
+	 */
+	public GameMap getGameMap() {
+		return d_gameMap;
+	}
+
+	/**
+	 * The function returns the details of a player based on their name.
+	 *
+	 * @param p_playerName
+	 *            The name of the player for which you want to retrieve the details.
+	 * @return The method is returning a Player object.
+	 * @author Sherwyn Dsouza
+	 */
+	public Player getPlayerDetails(String p_playerName) {
+		return d_players.get(p_playerName);
 	}
 
 }

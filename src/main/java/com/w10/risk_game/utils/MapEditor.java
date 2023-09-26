@@ -93,7 +93,7 @@ public class MapEditor {
 		l_country.addNeighbor(l_negibor);
 		l_negibor.addNeighbor(l_country);
 
-		return p_countryId + " is added with " + p_neighbourCountryId;
+		return p_countryId + " added with " + p_neighbourCountryId;
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class MapEditor {
 		}
 		// Self remove
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
-		return p_continentName + " is removed!" + l_countriesRemoved + "these countries also removed!";
+		return p_continentName + " removed!" + l_countriesRemoved + "these countries also removed!";
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class MapEditor {
 		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighbourCountryId);
 		l_gameMap.findCountry(p_neighbourCountryId).getNeighbors().remove(p_countryId);
 
-		return p_countryId + " is added with " + p_neighbourCountryId;
+		return p_countryId + " added with " + p_neighbourCountryId;
 	}
 
 }

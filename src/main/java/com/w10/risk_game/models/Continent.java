@@ -7,7 +7,7 @@ package com.w10.risk_game.models;
 public class Continent {
 	private int d_continentId;
 	private String d_continentName;
-	private int d_bouns;
+	private int d_bonus;
 
 	public Continent() {
 
@@ -16,18 +16,15 @@ public class Continent {
 	public Continent(int p_continentId, String p_continentName, int p_bouns) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
-		this.d_bouns = p_bouns;
+		this.d_bonus = p_bouns;
 	}
 
-	// Getter
-	public int getBouns() {
-		return d_bouns;
-	}
+
 
 	// Setter
 
-	public void setBous(int p_bouns) {
-		this.d_bouns = p_bouns;
+	public void setBous(int p_bonus) {
+		this.d_bonus = p_bonus;
 	}
 
 	// Getter
@@ -52,17 +49,17 @@ public class Continent {
 	}
 
 	// Getter
-	public int getbous() {
-		return d_bouns;
+	public int getBonus() {
+		return d_bonus;
 	}
 
 	// Setter
-	public void setbous(int p_bouns) {
-		this.d_bouns = p_bouns;
+	public void setBonus(int p_bouns) {
+		this.d_bonus = p_bouns;
 	}
 
 	public String toString() {
-		return d_continentId + " " + d_continentName + " " + d_bouns;
+		return d_continentId + " " + d_continentName + " " + d_bonus;
 	}
 
 }

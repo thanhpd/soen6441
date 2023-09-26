@@ -24,7 +24,7 @@ public class MapDisplay {
 		if (p_showArmies == false) {
 			l_values = new String[5];
 			l_values[0] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
-			l_values[1] = "" + p_continent.getBouns();
+			l_values[1] = "" + p_continent.getBonus();
 			l_values[2] = "" + p_country.getCountryId();
 			l_values[3] = p_country.getCountryName();
 			l_values[4] = l_neighborValue;
@@ -33,7 +33,7 @@ public class MapDisplay {
 
 				l_values = new String[7];
 				l_values[0] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
-				l_values[1] = "" + p_continent.getBouns();
+				l_values[1] = "" + p_continent.getBonus();
 				l_values[2] = "" + p_country.getCountryId();
 				l_values[3] = p_country.getCountryName();
 				l_values[4] = l_neighborValue;

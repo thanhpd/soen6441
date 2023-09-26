@@ -21,11 +21,11 @@ import java.util.List;
  * @author Yajing LIU
  */
 public class ReinforcementsTest {
-	Player player;
-	Player player1;
-	List<Country> countries;
-	List<Country> countries2;
-	List<Country> countries3;
+	Player d_player;
+	Player d_player1;
+	List<Country> d_countries;
+	List<Country> d_countries2;
+	List<Country> d_countries3;
 
 	/**
 	 * This method is to set up the test environment
@@ -34,45 +34,45 @@ public class ReinforcementsTest {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
-		countries = new ArrayList<>();
-		countries.add(new Country(1, "England", 1));
-		countries.add(new Country(2, "Scotland", 1));
-		countries.add(new Country(3, "N_Ireland", 1));
-		countries.add(new Country(4, "Rep_Ireland", 1));
-		countries.add(new Country(5, "Wales", 1));
-		countries.add(new Country(6, "Belgum", 1));
-		countries.add(new Country(7, "Netherlands", 1));
-		String playerName = "Player";
-		List<Order> orders = new ArrayList<>();
-		int armies = 10;
-		player = new Player(playerName, countries, orders, armies);
+		d_countries = new ArrayList<>();
+		d_countries.add(new Country(1, "England", 1));
+		d_countries.add(new Country(2, "Scotland", 1));
+		d_countries.add(new Country(3, "N_Ireland", 1));
+		d_countries.add(new Country(4, "Rep_Ireland", 1));
+		d_countries.add(new Country(5, "Wales", 1));
+		d_countries.add(new Country(6, "Belgum", 1));
+		d_countries.add(new Country(7, "Netherlands", 1));
+		String l_playerName = "Player";
+		List<Order> l_orders = new ArrayList<>();
+		int l_armies = 10;
+		d_player = new Player(l_playerName, d_countries, l_orders, l_armies);
 
-		List<Country> countries1 = new ArrayList<>();
-		countries1.add(new Country(1, "England", 1));
-		countries1.add(new Country(2, "Scotland", 1));
-		countries1.add(new Country(3, "N_Ireland", 1));
-		countries1.add(new Country(4, "Rep_Ireland", 1));
-		countries1.add(new Country(5, "Wales", 1));
-		countries1.add(new Country(6, "Belgum", 1));
-		String playerName1 = "Player1";
-		List<Order> orders1 = new ArrayList<>();
-		int armies1 = 10;
-		player1 = new Player(playerName1, countries1, orders1, armies1);
+		List<Country> l_countries1 = new ArrayList<>();
+		l_countries1.add(new Country(1, "England", 1));
+		l_countries1.add(new Country(2, "Scotland", 1));
+		l_countries1.add(new Country(3, "N_Ireland", 1));
+		l_countries1.add(new Country(4, "Rep_Ireland", 1));
+		l_countries1.add(new Country(5, "Wales", 1));
+		l_countries1.add(new Country(6, "Belgum", 1));
+		String l_playerName1 = "Player1";
+		List<Order> l_orders1 = new ArrayList<>();
+		int l_armies1 = 10;
+		d_player1 = new Player(l_playerName1, l_countries1, l_orders1, l_armies1);
 
-		countries2 = new ArrayList<>();
-		countries2.add(new Country(1, "England", 1));
-		countries2.add(new Country(2, "Scotland", 1));
-		countries2.add(new Country(3, "N_Ireland", 1));
-		countries2.add(new Country(4, "Rep_Ireland", 1));
-		countries2.add(new Country(5, "Wales", 1));
-		countries2.add(new Country(6, "Belgum", 1));
-		countries2.add(new Country(7, "Netherlands", 1));
-		countries2.add(new Country(8, "Denmark", 2));
-		countries2.add(new Country(9, "Germany", 2));
+		d_countries2 = new ArrayList<>();
+		d_countries2.add(new Country(1, "England", 1));
+		d_countries2.add(new Country(2, "Scotland", 1));
+		d_countries2.add(new Country(3, "N_Ireland", 1));
+		d_countries2.add(new Country(4, "Rep_Ireland", 1));
+		d_countries2.add(new Country(5, "Wales", 1));
+		d_countries2.add(new Country(6, "Belgum", 1));
+		d_countries2.add(new Country(7, "Netherlands", 1));
+		d_countries2.add(new Country(8, "Denmark", 2));
+		d_countries2.add(new Country(9, "Germany", 2));
 
-		countries3 = new ArrayList<>();
-		countries3.add(new Country(2, "Scotland", 1));
-		countries3.add(new Country(1, "England", 1));
+		d_countries3 = new ArrayList<>();
+		d_countries3.add(new Country(2, "Scotland", 1));
+		d_countries3.add(new Country(1, "England", 1));
 	}
 
 	/**
@@ -83,13 +83,13 @@ public class ReinforcementsTest {
 	@Disabled
 	public void testReinforcementPhase() {
 		// Test bonus
-		// Reinforcements reinforcement = new Reinforcements();
-		// reinforcement.reinforcementPhase(player);
-		// assertEquals(17, player.getLeftoverArmies());
+		// Reinforcements l_reinforcement = new Reinforcements();
+		// reinforcement.reinforcementPhase(d_player);
+		// assertEquals(17, d_player.getLeftoverArmies());
 		// Test basic
-		// Reinforcements reinforcement1 = new Reinforcements();
-		// reinforcement1.reinforcementPhase(player1);
-		// assertEquals(12, player1.getLeftoverArmies());
+		// Reinforcements l_reinforcement1 = new Reinforcements();
+		// reinforcement1.reinforcementPhase(d_player1);
+		// assertEquals(12, d_player1.getLeftoverArmies());
 	}
 
 	/**
@@ -99,16 +99,16 @@ public class ReinforcementsTest {
 	@Disabled
 	public void testGroupCountry() {
 		// Test all countries belong to one continent
-		Reinforcements reinforcement = new Reinforcements();
-		List<String> groupCountries = reinforcement.groupCountries(countries);
-		assertEquals("1 2 3 4 5 6 7", groupCountries.get(0));
+		Reinforcements l_reinforcement = new Reinforcements();
+		List<String> l_groupCountries = l_reinforcement.groupCountries(d_countries);
+		assertEquals("1 2 3 4 5 6 7", l_groupCountries.get(0));
 		// Test not all countries belong to one continent
-		Reinforcements reinforcement1 = new Reinforcements();
-		List<String> groupCountries1 = reinforcement1.groupCountries(countries2);
-		assertEquals("8 9", groupCountries1.get(1));
+		Reinforcements l_reinforcement1 = new Reinforcements();
+		List<String> l_groupCountries1 = l_reinforcement1.groupCountries(d_countries2);
+		assertEquals("8 9", l_groupCountries1.get(1));
 		// Test order
-		Reinforcements reinforcement2 = new Reinforcements();
-		List<String> groupCountries2 = reinforcement2.groupCountries(countries3);
-		assertEquals("1 2", groupCountries2.get(0));
+		Reinforcements l_reinforcement2 = new Reinforcements();
+		List<String> l_groupCountries2 = l_reinforcement2.groupCountries(d_countries3);
+		assertEquals("1 2", l_groupCountries2.get(0));
 	}
 }

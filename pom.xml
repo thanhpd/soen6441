@@ -7,7 +7,7 @@
 
 	<groupId>com.w10.risk_game</groupId>
 	<artifactId>risk_game</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0</version>
 
 	<name>risk_game</name>
 	<description>SOEN6441 - W10 Group Project</description>
@@ -31,6 +31,11 @@
 			<artifactId>junit-platform-suite-engine</artifactId>
 			<version>1.9.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.massisframework</groupId>
+			<artifactId>j-text-utils</artifactId>
+			<version>0.3.4</version>
 		</dependency>
 	</dependencies>
 

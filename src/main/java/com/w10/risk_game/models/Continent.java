@@ -19,8 +19,6 @@ public class Continent {
 		this.d_bonus = p_bouns;
 	}
 
-
-
 	// Setter
 
 	public void setBous(int p_bonus) {

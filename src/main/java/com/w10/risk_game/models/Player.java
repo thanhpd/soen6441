@@ -83,11 +83,11 @@ public class Player {
 	public List<Order> getOrders() {
 		return d_orders;
 	}
-/**
- * 
- * @param p_CountryId
- * @return boolan based on if the country id is associated with player or not
- */
+	/**
+	 *
+	 * @param p_CountryId
+	 * @return boolan based on if the country id is associated with player or not
+	 */
 	public boolean hasCountry(int p_CountryId) {
 		if (d_countriesOwned == null) {
 			return false;
@@ -99,7 +99,6 @@ public class Player {
 		}
 		return false;
 	}
-
 
 	/**
 	 * The function sets the list of orders for a given player.

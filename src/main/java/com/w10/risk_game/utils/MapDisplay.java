@@ -10,25 +10,21 @@ import com.w10.risk_game.models.Player;
 
 import dnl.utils.text.table.TextTable;
 
-
 /**
- * @author Omnia Alam
- * Displays map from Game map object
- * Can be called any time by calling formatMap() method
+ * @author Omnia Alam Displays map from Game map object Can be called any time
+ *         by calling formatMap() method
  */
 
 public class MapDisplay {
 
-
-/**
- * 
- * @param p_country
- * @param p_continent
- * @param p_player
- * @param p_showArmies
- * @return list of string to dispaly in a table
- */
-
+	/**
+	 *
+	 * @param p_country
+	 * @param p_continent
+	 * @param p_player
+	 * @param p_showArmies
+	 * @return list of string to dispaly in a table
+	 */
 
 	public String[] populateRow(Country p_country, Continent p_continent, Player p_player, boolean p_showArmies) {
 
@@ -73,12 +69,12 @@ public class MapDisplay {
 		return l_values;
 
 	}
-/**
- * 
- * @param map
- * @param p_showArmies
- * Show map in a formated table
- */
+	/**
+	 *
+	 * @param map
+	 * @param p_showArmies
+	 *            Show map in a formated table
+	 */
 	public void formatMap(GameMap map, boolean p_showArmies) {
 		String[] l_columnNames;
 		if (p_showArmies == false) {

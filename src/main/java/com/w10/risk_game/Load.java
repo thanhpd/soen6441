@@ -16,7 +16,6 @@ public class Load {
 		GameMap l_gameMap = l_mapReader.loadMapFile(l_mapName);
 		MapDisplay displayMap = new MapDisplay();
 		displayMap.formatMap(l_gameMap, true);
-	
 
 	}
 }

@@ -1,17 +1,16 @@
 package com.w10.risk_game.utils;
 
 import com.w10.risk_game.models.Country;
-import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Order;
 import com.w10.risk_game.models.Player;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * This is a test class for Reinforcements It will test the following cases: 1.
@@ -32,7 +31,7 @@ public class ReinforcementsTest {
 	 *
 	 * @throws Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		countries = new ArrayList<>();
 		countries.add(new Country(1, "England", 1));
@@ -79,7 +78,7 @@ public class ReinforcementsTest {
 	 * after getting the bonus value of the continent and global GameMap
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testReinforcementPhase() {
 		// Test bonus
 		// Reinforcements reinforcement = new Reinforcements();
@@ -94,7 +93,7 @@ public class ReinforcementsTest {
 	 * This method is to test groupCountries method
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGroupCountry() {
 		// Test all countries belong to one continent
 		Reinforcements reinforcement = new Reinforcements();

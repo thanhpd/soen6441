@@ -12,23 +12,31 @@
 	<name>risk_game</name>
 	<description>SOEN6441 - W10 Group Project</description>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<exec.mainClass>com.w10.risk_game.App</exec.mainClass>
+	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.9.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite-engine</artifactId>
+			<version>1.9.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be
+			moved to
       parent pom) -->
 			<plugins>
 				<!-- clean lifecycle, see
@@ -48,12 +56,16 @@
 					<version>3.8.0</version>
 				</plugin>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
+					<version>3.1.2</version>
+					<configuration>
+						<test>com.w10.risk_game.suites.RiskGameTestSuite</test>
+					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
@@ -125,7 +137,8 @@
 					<version>3.4.1</version>
 					<configuration>
 						<gitConfig>
-							<!-- The location of the directory you are using to store the Git hooks in your
+							<!-- The location of the directory you are using to store the Git hooks
+							in your
 							project. -->
 							<core.hooksPath>hooks-directory/</core.hooksPath>
 							<!-- Some other project specific git config that you want to set. -->

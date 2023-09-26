@@ -1,12 +1,12 @@
 package com.w10.risk_game.models;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * This is a test class for Order
  */
@@ -17,7 +17,7 @@ public class OrderTest {
 	 *
 	 * @throws Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		List<Country> countries = new ArrayList<>();
 		countries.add(new Country(1, "England", 1));

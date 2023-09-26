@@ -1,6 +1,7 @@
 # Ignore IDE project settings
-.idea
-.vscode
+.idea/
+.vscode/
+soen6441.iml
 
 # Compiled class file
 *.class
@@ -28,7 +29,7 @@ hs_err_pid*
 replay_pid*
 
 # Files in Target
-target/**
+target
 
 # API docs folder
 apidocs/

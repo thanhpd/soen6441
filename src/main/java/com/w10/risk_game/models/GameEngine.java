@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.MapDisplay;
+import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
 
 /**
@@ -17,6 +19,7 @@ import com.w10.risk_game.utils.MapReader;
 public class GameEngine {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
+	private MapEditor d_mapEditor;
 
 	/**
 	 * Game Engine constructor
@@ -38,13 +41,15 @@ public class GameEngine {
 	public void loadMap(String p_fileName) {
 		MapReader l_mapReader = new MapReader();
 		d_gameMap = l_mapReader.loadMapFile(p_fileName);
+		d_mapEditor = new MapEditor(d_gameMap);
 	}
 
 	/**
 	 * The function "showMap" is a placeholder for adding logic to display a map.
 	 */
 	public void showMap() {
-		// TO-DO: Add show map logic
+		MapDisplay l_displayMap = new MapDisplay();
+		l_displayMap.formatMap(d_gameMap, true);
 	}
 
 	/**

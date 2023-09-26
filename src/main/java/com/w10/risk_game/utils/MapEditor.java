@@ -1,12 +1,9 @@
 package com.w10.risk_game.utils;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import com.w10.risk_game.exceptions.ApplicationException;
 import org.apache.commons.lang.StringUtils;
+
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;

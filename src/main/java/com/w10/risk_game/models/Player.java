@@ -35,6 +35,18 @@ public class Player {
 		return orders;
 	}
 
+	public boolean hasCountry(int p_CountryId) {
+		if (countriesOwned == null) {
+			return false;
+		}
+		for (int l_country = 0; l_country < countriesOwned.size(); l_country++) {
+			if (countriesOwned.get(l_country).getCountryId() == p_CountryId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}

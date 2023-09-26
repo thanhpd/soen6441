@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class GameMap {
 	private Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
 	private Map<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
+	private Map<Integer, Player> l_player = new HashMap<Integer, Player>();
 
 	// Getter
 	public Map<Integer, Country> getCountries() {
@@ -20,6 +21,10 @@ public class GameMap {
 
 	public Country findCountry(int p_countryId) {
 		return l_countries.get(p_countryId);
+	}
+
+	public Player getPlayerbyCountry(int p_countryId) {
+		return l_player.get(p_countryId);
 	}
 
 	public Country getCountryByName(String p_countryNmae) {
@@ -36,8 +41,8 @@ public class GameMap {
 		return l_continents;
 	}
 
-	public boolean containsCountry(int p_id) {
-		return l_countries.containsKey(p_id);
+	public boolean containsCountry(int p_countryId) {
+		return l_countries.containsKey(p_countryId);
 	}
 
 	/*

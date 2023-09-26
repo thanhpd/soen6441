@@ -15,7 +15,7 @@ public class Load {
 		MapReader l_mapReader = new MapReader();
 		GameMap l_gameMap = l_mapReader.loadMapFile(l_mapName);
 		MapDisplay displayMap = new MapDisplay();
-		displayMap.formatMap(l_gameMap);
+		displayMap.formatMap(l_gameMap, true);
 		// var test= l_gameMap.getCountryByName("Poland");
 		// test.toString();
 		// MapEditor mapEditor= new MapEditor(l_gameMap);

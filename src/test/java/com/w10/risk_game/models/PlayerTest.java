@@ -2,6 +2,7 @@ package com.w10.risk_game.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,7 +23,7 @@ public class PlayerTest {
 	 */
 	@BeforeEach
 	public void beforeAllPlayerTests() {
-		d_player = new Player("TestPlayerName", null, List.of(), 10);
+		d_player = new Player("TestPlayerName", new ArrayList<Country>(), List.of(), 10);
 	}
 
 	/**

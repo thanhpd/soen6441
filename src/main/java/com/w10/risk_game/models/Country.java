@@ -11,6 +11,7 @@ public class Country implements Serializable {
 	private String countryName;
 	private int continentId;
 	private Map<Integer, Country> neighbors = new HashMap<>();
+	private int armies = 0;
 
 	public Country() {
 
@@ -51,6 +52,16 @@ public class Country implements Serializable {
 	public void setContinentId(int continentId) {
 		this.continentId = continentId;
 	}
+
+	// Getter
+	public int getArmies() {
+		return armies;
+	}
+	// Setter
+	public void setArmies(int armies) {
+		this.armies = armies;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

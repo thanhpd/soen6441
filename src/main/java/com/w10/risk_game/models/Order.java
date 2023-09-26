@@ -1,5 +1,7 @@
 package com.w10.risk_game.models;
 
+import java.util.List;
+
 /**
  * This class is used to create order objects d_player: the player who issues
  * the order d_orderType: the type of the order d_countryId: the country id that
@@ -26,11 +28,13 @@ public class Order {
 		int l_countryId = this.d_countryId;
 		int l_num = this.d_num;
 		int l_armies = l_player.getLeftoverArmies();
-		if (l_armies >= l_num) {
-			l_player.setLeftoverArmies(l_armies - l_num);
-			// Missing countries army count
-		} else {
-			System.out.println("You don't have enough armies to deploy!");
+		l_player.setLeftoverArmies(l_armies - l_num);
+		List<Country> l_countries = l_player.getCountriesOwned();
+		for (Country l_country : l_countries) {
+			if (l_country.getCountryId() == l_countryId) {
+				int l_countryArmies = l_country.getArmies();
+				l_country.setArmies(l_countryArmies + l_num);
+			}
 		}
 	}
 }

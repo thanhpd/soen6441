@@ -47,15 +47,61 @@ public class Player {
 	public void issueOrder() {
 		// todo - to add an order to the list of orders held by the player
 		// todo - check the input
-		System.out.println("Please enter your order in the format of \"orderType countryId num\".");
-		Scanner l_scanner = new Scanner(System.in);
-		String l_input = l_scanner.nextLine();
-		String[] l_inputArray = l_input.split(" ");
-		String l_orderType = l_inputArray[0];
-		int countryId = Integer.parseInt(l_inputArray[1]);
-		int num = Integer.parseInt(l_inputArray[2]);
-		Order order = new Order(this, l_orderType, countryId, num);
-		this.orders.add(order);
+		int l_army = this.leftoverArmies;
+		boolean l_again = true;
+		while (l_again) {
+			boolean l_isValidFormat = true;
+			boolean l_isValidOrder = true;
+			boolean l_isValidCountry = false;
+			boolean l_isValidNum = true;
+			System.out.println("Please enter your order in the format of \"orderType countryId num\".");
+			Scanner l_scanner = new Scanner(System.in);
+			String l_input = l_scanner.nextLine();
+			String[] l_inputArray = l_input.split(" ");
+			// check the input format
+			if (l_inputArray.length != 3) {
+				l_isValidFormat = false;
+			}
+			String l_orderType = l_inputArray[0];
+			String l_countryId = l_inputArray[1];
+			String l_num = l_inputArray[2];
+			for (int i = 0; i < l_countryId.length(); i++) {
+				if (!Character.isDigit(l_countryId.charAt(i))) {
+					l_isValidFormat = false;
+				}
+			}
+			for (int i = 0; i < l_num.length(); i++) {
+				if (!Character.isDigit(l_num.charAt(i))) {
+					l_isValidFormat = false;
+				}
+			}
+			// check the order
+			if (!l_orderType.equals("deploy")) {
+				l_isValidOrder = false;
+			}
+			// check the country
+			for (Country country : countriesOwned) {
+				if (country.getCountryId() == Integer.parseInt(l_countryId)) {
+					l_isValidCountry = true;
+				}
+			}
+			// check the num
+			if (Integer.parseInt(l_num) > leftoverArmies) {
+				l_isValidNum = false;
+			}
+			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
+				l_again = false;
+				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
+				this.orders.add(order);
+				l_army = l_army - Integer.parseInt(l_num);
+			} else {
+				l_again = true;
+				System.out.println("Invalid input! Please try again.");
+			}
+			if (l_army <= 0) {
+				l_again = false;
+			}
+		}
 	}
 
 	public Order nextOrder() {

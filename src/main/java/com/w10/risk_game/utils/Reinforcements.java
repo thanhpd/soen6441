@@ -31,11 +31,10 @@ public class Reinforcements {
 	 *            this parameter represents a player object. It is used to access
 	 *            the information of owned countries and leftover armies.
 	 */
-	public void reinforcementPhase(Player p_player) {
+	public void reinforcementPhase(Player p_player, GameMap p_gameMap) {
 		int l_armies = p_player.getLeftoverArmies();
 		List<Country> l_playerCountries = p_player.getCountriesOwned();
-		// GameMap l_gameMap = MapReader.loadMapFile("europe.map");
-		GameMap l_gameMap = new GameMap();
+		GameMap l_gameMap = p_gameMap;
 		List<Country> allCountries = new ArrayList<Country>(l_gameMap.getCountries().values());
 		// Calculate continent bonus armies
 		List<String> l_groupPlayerCountries = groupCountries(l_playerCountries);
@@ -68,9 +67,8 @@ public class Reinforcements {
 	 */
 	public List<String> groupCountries(List<Country> p_countries) {
 		GameMap l_gameMap = new GameMap();
-		// int l_continentNum = l_gameMap.getContinents().size();
-		int l_continentNum = 4;
-		List<String> l_groupCountries = new ArrayList<String>();
+		int l_continentNum = l_gameMap.getContinents().size();
+		List<String> l_groupCountries = new ArrayList<>();
 		for (int i = 0; i < l_continentNum; i++) {
 			l_groupCountries.add("");
 		}
@@ -85,7 +83,7 @@ public class Reinforcements {
 		}
 		// Order the country ids in each continent
 		for (int i = 0; i < l_groupCountries.size(); i++) {
-			List<String> countryIds = new ArrayList<String>();
+			List<String> countryIds = new ArrayList<>();
 			for (String countryId : l_groupCountries.get(i).split(" ")) {
 				countryIds.add(countryId);
 			}

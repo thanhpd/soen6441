@@ -16,6 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		<exec.mainClass>com.w10.risk_game.App</exec.mainClass>
 	</properties>
 
 	<dependencies>
@@ -34,7 +35,8 @@
 	</dependencies>
 
 	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be
+			moved to
       parent pom) -->
 			<plugins>
 				<!-- clean lifecycle, see
@@ -63,7 +65,7 @@
 				</plugin>
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
-					<version>3.0.2</version>
+					<version>3.1.0</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-install-plugin</artifactId>
@@ -135,7 +137,8 @@
 					<version>3.4.1</version>
 					<configuration>
 						<gitConfig>
-							<!-- The location of the directory you are using to store the Git hooks in your
+							<!-- The location of the directory you are using to store the Git hooks
+							in your
 							project. -->
 							<core.hooksPath>hooks-directory/</core.hooksPath>
 							<!-- Some other project specific git config that you want to set. -->

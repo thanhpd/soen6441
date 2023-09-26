@@ -3,6 +3,7 @@ package com.w10.risk_game.utils;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import com.w10.risk_game.models.GameMap;
 
@@ -12,7 +13,7 @@ import com.w10.risk_game.models.GameMap;
  *         class For example: add country, add continent, add neighbor remove
  *         country , continent and neighbor
  */
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MapEditorTest {
 	private GameMap l_gameMap;
 	private MapEditor l_mapEditor;

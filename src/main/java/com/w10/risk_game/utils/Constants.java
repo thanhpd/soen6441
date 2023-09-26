@@ -35,4 +35,7 @@ public final class Constants {
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 
+	// Maps Folder Path
+	public static final String GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+
 }

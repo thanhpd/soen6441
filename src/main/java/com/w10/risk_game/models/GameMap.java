@@ -15,9 +15,15 @@ import java.util.stream.Collectors;
 import com.w10.risk_game.utils.Constants;
 
 public class GameMap {
-	private Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
-	private Map<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
-	private Map<Integer, Player> l_player = new HashMap<Integer, Player>();
+	private Map<Integer, Country> l_countries;
+	private Map<Integer, Continent> l_continents;
+	private Map<Integer, Player> l_player;
+
+	public GameMap() {
+		this.l_countries = new HashMap<>();
+		this.l_continents = new HashMap<>();
+		this.l_player = new HashMap<>();
+	}
 
 	// Getter
 	public Map<Integer, Country> getCountries() {

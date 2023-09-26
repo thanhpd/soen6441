@@ -35,7 +35,7 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testAssignCountries() {
-		d_gameEngine.loadMap("Europe.map");
+		d_gameEngine.loadMap("europe.map");
 
 		d_gameEngine.createPlayer(d_player1.getName());
 		d_gameEngine.createPlayer(d_player2.getName());
@@ -67,13 +67,13 @@ public class GameEngineTest {
 
 	/**
 	 * The testLoadMap function tests whether the d_gameEngine successfully loads
-	 * the "Europe.map" file.
+	 * the "europe.map" file.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
 	@Test
 	void testLoadMap() {
-		d_gameEngine.loadMap("Europe.map");
+		d_gameEngine.loadMap("europe.map");
 		assertNotNull(d_gameEngine.getGameMap());
 	}
 
@@ -127,7 +127,7 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testGameMap() {
-		d_gameEngine.loadMap("Europe.map");
+		d_gameEngine.loadMap("europe.map");
 		assertNotNull(d_gameEngine.getGameMap());
 	}
 

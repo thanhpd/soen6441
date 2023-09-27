@@ -66,10 +66,10 @@ public class GameEngine {
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
 	 *
-	 * @author Sherwyn Dsouza
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player being created.
+	 * @author Sherwyn Dsouza
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
@@ -87,10 +87,11 @@ public class GameEngine {
 	/**
 	 * The function removes a player from a list of players in a game engine.
 	 *
-	 * @author Sherwyn Dsouza
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that needs to be removed.
+	 * 
+	 * @author Sherwyn Dsouza
 	 */
 	public void removePlayer(String p_playerName) {
 		try {

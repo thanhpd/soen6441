@@ -47,35 +47,35 @@ public class MapEditorTest {
 	 * handled in the method
 	 */
 	@Test
-	public void testAddCounrty() {
+	public void testAddCountry() {
 		int p_countryId = 25;
 		String p_countryName = "England";
-		String p_continentName = "North_Europe";
-		String l_error = l_mapEditor.addCounrty(p_countryId, p_countryName, p_continentName);
+		int p_continentId = 1;
+		String l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
 		assertTrue("Country name already exists!".equals(l_error));
 
 		p_countryId = 1;
 		p_countryName = "England1";
-		p_continentName = "North_Europe";
-		l_error = l_mapEditor.addCounrty(p_countryId, p_countryName, p_continentName);
+		p_continentId = 1;
+		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
 		assertTrue("Country ID already exists!".equals(l_error));
 
 		p_countryId = 25;
 		p_countryName = "England1";
-		p_continentName = "";
-		l_error = l_mapEditor.addCounrty(p_countryId, p_countryName, p_continentName);
+		p_continentId = 1;
+		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
 		assertTrue("Continent Name is emplty!".equals(l_error));
 
 		p_countryId = 25;
 		p_countryName = "England1";
-		p_continentName = "North_Europe1";
-		l_error = l_mapEditor.addCounrty(p_countryId, p_countryName, p_continentName);
+		p_continentId = 1;
+		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
 		assertTrue("Continent doesnot exists!".equals(l_error));
 
 		p_countryId = 25;
 		p_countryName = "England1";
-		p_continentName = "North_Europe";
-		l_mapEditor.addCounrty(p_countryId, p_countryName, p_continentName);
+		p_continentId = 1;
+		l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
 		l_mapDisplay.formatMap(l_gameMap, false);
 
 	}
@@ -88,7 +88,7 @@ public class MapEditorTest {
 
 	@Test
 	public void testRemoveContinent() {
-		l_mapEditor.removeContinent("North_Europe");
+		l_mapEditor.removeContinent(1);
 		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 

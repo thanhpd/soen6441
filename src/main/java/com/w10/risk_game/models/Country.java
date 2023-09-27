@@ -104,7 +104,7 @@ public class Country implements Serializable {
 		return d_neighbors;
 	}
 
-		public Player getOwner() {
+	public Player getOwner() {
 		return this.d_owner;
 	}
 

@@ -30,13 +30,10 @@ public class MapEditor {
 	 *         gamemap
 	 */
 
-	public String addCounrty(int p_countryId, String p_countryName, String p_continentName) {
+	public String addCountry(int p_countryId, String p_countryName, int p_continentId) {
 
 		if (StringUtils.isBlank(p_countryName)) {
 			return "Country Name is empty!";
-		}
-		if (StringUtils.isBlank(p_continentName)) {
-			return "Continent Name is emplty!";
 		}
 		if (l_gameMap.containsCountry(p_countryName)) {
 			return "Country name already exists!";
@@ -44,13 +41,13 @@ public class MapEditor {
 		if (l_gameMap.containsCountry(p_countryId)) {
 			return "Country ID already exists!";
 		}
-		if (l_gameMap.containsContinent(p_continentName) == false) {
+		if (l_gameMap.containsContinent(p_continentId) == false) {
 			return "Continent doesnot exists!";
 		}
-		Continent l_continent = l_gameMap.getContinentByName(p_continentName);
+		Continent l_continent = l_gameMap.getContinentById(p_continentId);
 		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
 		l_gameMap.getCountries().put(p_countryId, l_country);
-		return p_countryName + " is Added! and to the continent " + p_continentName;
+		return p_countryName + " is Added! and to the continent with id: " + p_continentId;
 	}
 
 	/**
@@ -121,21 +118,20 @@ public class MapEditor {
 	}
 
 	/**
+	 * The function removes a continent and all its associated countries from a game
+	 * map.
 	 *
-	 * @param p_continentName
-	 * @return string based on operation performed Looks for the continent elements
-	 *         if they exist Remove operation on the current Game map if exists then
-	 *         get all the adjacent countries and remove the countries before it
-	 *         removes the continent
+	 * @param p_continentId
+	 *            The parameter p_continentId is the ID of the continent that needs
+	 *            to be removed from the game map.
+	 * @return The method is returning a string.
 	 */
-	public String removeContinent(String p_continentName) {
-		if (StringUtils.isBlank(p_continentName)) {
-			return "Continent Name is empty!";
+	public String removeContinent(int p_continentId) {
+
+		if (l_gameMap.containsContinent(p_continentId) == false) {
+			return "Continent doesnot exists";
 		}
-		if (l_gameMap.containsContinent(p_continentName) == false) {
-			return "Continent Name doesnot exists";
-		}
-		Continent l_toRemove = l_gameMap.getContinentByName(p_continentName);
+		Continent l_toRemove = l_gameMap.getContinentById(p_continentId);
 		String l_countriesRemoved = "";
 		ArrayList<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
 		for (Country l_country : l_countriesToRemove) {
@@ -144,7 +140,7 @@ public class MapEditor {
 		}
 		// Self remove
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
-		return p_continentName + " removed!" + l_countriesRemoved + "these countries also removed!";
+		return p_continentId + " removed!" + l_countriesRemoved + "these countries also removed!";
 	}
 
 	/**

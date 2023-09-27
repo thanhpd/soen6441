@@ -9,8 +9,11 @@ public final class Constants {
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
 			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> gameplayer -add <playername>\n" + "-> gameplayer -remove <playername>\n"
-			+ "-> assigncountries\n" + "-> quit\n";
+			+ "-> showmap\n" + "-> editmap\n"
+			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
+			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
+			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
+			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
@@ -31,11 +34,11 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants
-	public static final String CLI_LOAD_MAP = "Loading Map";
-	public static final String CLI_SHOW_MAP = "Show Map";
-	public static final String CLI_GAME_PLAYER_ADD = "Adding Player";
-	public static final String CLI_GAME_PLAYER_REMOVE = "Removing Player";
-	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries";
+	public static final String CLI_LOAD_MAP = "Loading Map: ";
+	public static final String CLI_SHOW_MAP = "Show Map...";
+	public static final String CLI_GAME_PLAYER_ADD = "Adding Player: ";
+	public static final String CLI_GAME_PLAYER_REMOVE = "Removing Player: ";
+	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 
 	// Game Engine Class Constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
@@ -43,6 +46,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
 	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS = "Player name already exists!";
+	public static final String GAME_ENGINE_FAILED_TO_EDIT_MAP = "Error in editing map!";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";

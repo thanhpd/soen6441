@@ -12,9 +12,9 @@ import dnl.utils.text.table.TextTable;
 
 /**
  * @author Omnia Alam
- * 
- *         Displays map from Game map object Can be called any time
- *         by calling formatMap() method
+ *
+ *         Displays map from Game map object Can be called any time by calling
+ *         formatMap() method
  */
 
 public class MapDisplay {
@@ -76,23 +76,23 @@ public class MapDisplay {
 	 *
 	 * @param p_map
 	 * @param p_showArmies
-	 *                     Show map in a formated table
+	 *            Show map in a formated table
 	 */
 	public void formatMap(GameMap p_map, boolean p_showArmies) {
 		String[] l_columnNames;
 		if (p_showArmies) {
-			l_columnNames = new String[] { "ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)",
-					"Player", "Armies" };
+			l_columnNames = new String[]{"ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)",
+					"Player", "Armies"};
 		} else {
-			l_columnNames = new String[] { "ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)" };
+			l_columnNames = new String[]{"ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)"};
 		}
 
 		Map<Integer, Country> l_countries = p_map.getCountries();
 		Object[][] l_data = new Object[l_countries.size()][l_columnNames.length];
 		int d_count = 0;
 		for (Country l_country : l_countries.values()) {
-			l_data[d_count] = populateRow(l_country, p_map.getContinentById(l_country.getContinentId()), l_country.getOwner(),
-					p_showArmies);
+			l_data[d_count] = populateRow(l_country, p_map.getContinentById(l_country.getContinentId()),
+					l_country.getOwner(), p_showArmies);
 			d_count++;
 
 		}

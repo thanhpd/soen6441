@@ -99,8 +99,8 @@ public class MapEditorTest {
 	}
 
 	@Test
-	public void testRemoveNeighbour() {
-		l_mapEditor.removeNeighbour(1, 21);
+	public void testRemoveneighbor() {
+		l_mapEditor.removeneighbor(1, 21);
 		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 

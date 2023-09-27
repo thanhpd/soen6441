@@ -1,6 +1,7 @@
 package com.w10.risk_game.models;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * The Player class represents a player in this game, with properties such as
@@ -154,8 +155,61 @@ public class Player {
 		this.d_leftoverArmies += p_num;
 	}
 
+	/**
+	 * This method is used to issue an order This method gets the command input,
+	 * creates an order object and adds it to the list of orders
+	 */
 	public void issueOrder() {
 		// todo - to add an order to the list of orders held by the player
+		// todo - check the input
+		int l_army = this.getLeftoverArmies();
+		List<Country> l_countries = this.getCountriesOwned();
+		boolean l_again = true;
+		Scanner l_scanner = new Scanner(System.in);
+		while (l_again) {
+			boolean l_isValidFormat;
+			boolean l_isValidOrder;
+			boolean l_isValidCountry = false;
+			boolean l_isValidNum = true;
+			System.out.println("Please enter your order in the format of \"orderType countryId num\".");
+			String l_input = l_scanner.nextLine();
+			String[] l_inputArray = l_input.split(" ");
+			// check the input format
+			l_isValidFormat = checkValidForm(l_inputArray);
+			if (!l_isValidFormat) {
+				continue;
+			}
+			String l_orderType = l_inputArray[0];
+			String l_countryId = l_inputArray[1];
+			String l_num = l_inputArray[2];
+			// check the order type
+			l_isValidOrder = checkValidOrder(l_orderType);
+			// check the country
+			l_isValidCountry = checkValidCountry(l_countries, l_countryId);
+			// check the num
+			l_isValidNum = checkValidNum(Integer.parseInt(l_num), l_army);
+			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
+				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
+				d_orders.add(order);
+				l_army = l_army - Integer.parseInt(l_num);
+				if (l_army <= 0) {
+					l_again = false;
+				} else {
+					l_again = true;
+				}
+			} else {
+				l_again = true;
+				System.out.print("Invalid input! ");
+				if (!l_isValidOrder) {
+					System.out.print("The order type should be \"deploy\". ");
+				} else if (!l_isValidCountry) {
+					System.out.print("The country id should be one of the countries owned by the player. ");
+				} else {
+					System.out.print("The number of leftover armies should be more than the number of armies. ");
+				}
+				System.out.println("Please try again.");
+			}
+		}
 	}
 
 	/**
@@ -166,5 +220,87 @@ public class Player {
 	 */
 	public Order nextOrder() {
 		return d_orders.remove(0);
+	}
+
+	/**
+	 * This function is used to check the input format. The input should have three
+	 * parts (one string and two integers)
+	 *
+	 * @param p_inputArray
+	 *            the input string
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public boolean checkValidForm(String[] p_inputArray) {
+		if (p_inputArray.length != 3) {
+			System.out.println("Invalid input! The command should contain three parts. Please try again.");
+			return false;
+		}
+		String l_countryId = p_inputArray[1];
+		String l_num = p_inputArray[2];
+		for (int i = 0; i < l_countryId.length(); i++) {
+			if (!Character.isDigit(l_countryId.charAt(i))) {
+				System.out.println("Invalid input! The country id should be integers. Please try again.");
+				return false;
+			}
+		}
+		for (int i = 0; i < l_num.length(); i++) {
+			if (!Character.isDigit(l_num.charAt(i))) {
+				System.out.println("Invalid input! The number of armies should be integers. Please try again.");
+				return false;
+			}
+		}
+		return true;
+	}
+	/**
+	 * This function is used to check the order type. The order type should be
+	 * "deploy"
+	 *
+	 * @param p_orderType
+	 *            the order type
+	 * @return boolean value to show whether the order type is valid
+	 */
+	public boolean checkValidOrder(String p_orderType) {
+		String l_orderType = p_orderType;
+		if (!l_orderType.equals("deploy")) {
+			System.out.println("Invalid input! The order type should be \"deploy\". Please try again.");
+			return false;
+		}
+		return true;
+	}
+	/**
+	 * This function is used to check the country id. The country id should be one
+	 * of the countries owned by the player
+	 *
+	 * @param p_countries
+	 *            the list of countries owned by the player
+	 * @param p_countryId
+	 *            the country id
+	 * @return boolean value to show whether the country id is valid
+	 */
+	public boolean checkValidCountry(List<Country> p_countries, String p_countryId) {
+		for (Country country : p_countries) {
+			if (country.getCountryId() == Integer.parseInt(p_countryId)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * This function is used to check the number of armies. The number of armies
+	 * should be less than the number of leftover armies
+	 *
+	 * @param p_num
+	 *            the number of armies
+	 * @param p_army
+	 *            the number of leftover armies
+	 * @return boolean value to show whether the number of armies is valid
+	 */
+	public boolean checkValidNum(int p_num, int p_army) {
+		if (p_num > p_army) {
+			System.out.println(
+					"Invalid input! The number of leftover armies should be more than the number of armies. Please try again.");
+			return false;
+		}
+		return true;
 	}
 }

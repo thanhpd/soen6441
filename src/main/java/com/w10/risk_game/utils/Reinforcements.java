@@ -40,13 +40,12 @@ public class Reinforcements {
 		GameMap l_gameMap = p_gameMap;
 		List<Country> allCountries = new ArrayList<Country>(l_gameMap.getCountries().values());
 		// Calculate continent bonus armies
-		List<String> l_groupPlayerCountries = groupCountries(l_playerCountries);
-		List<String> l_groupAllCountries = groupCountries(allCountries);
+		List<String> l_groupPlayerCountries = groupCountries(l_playerCountries, p_gameMap);
+		List<String> l_groupAllCountries = groupCountries(allCountries, p_gameMap);
 		int l_bonus = 0;
 		for (int i = 0; i < l_groupPlayerCountries.size(); i++) {
 			if (l_groupPlayerCountries.get(i).equals(l_groupAllCountries.get(i))) {
-				// Need the bonus value of the continent
-				// bonus += gameMap.getContinents().get(i + 1).getBonus();
+				l_bonus += p_gameMap.getContinents().get(i + 1).getBonus();
 			}
 		}
 		// Calculate the number of reinforcement armies
@@ -66,11 +65,13 @@ public class Reinforcements {
 	 *
 	 * @param p_countries
 	 *            This parameter represents a list of countries.
+	 * @param p_gameMap
+	 *            This parameter represents a game map object.
 	 * @return A String list is returned. Each String represents the country ids in
 	 *         a continent.
 	 */
-	public List<String> groupCountries(List<Country> p_countries) {
-		GameMap l_gameMap = new GameMap();
+	public List<String> groupCountries(List<Country> p_countries, GameMap p_gameMap) {
+		GameMap l_gameMap = p_gameMap;
 		int l_continentNum = l_gameMap.getContinents().size();
 		List<String> l_groupCountries = new ArrayList<>();
 		for (int i = 0; i < l_continentNum; i++) {

@@ -170,6 +170,7 @@ public class GameEngine {
 	 * The function returns the number of players in a game.
 	 *
 	 * @return The number of players in the list "this.d_players".
+	 *
 	 * @author Sherwyn Dsouza
 	 */
 	public Integer getNoOfPlayers() {
@@ -180,6 +181,7 @@ public class GameEngine {
 	 * The function returns the game map.
 	 *
 	 * @return The method is returning an object of type GameMap.
+	 *
 	 * @author Sherwyn Dsouza
 	 */
 	public GameMap getGameMap() {
@@ -192,6 +194,7 @@ public class GameEngine {
 	 * @param p_playerName
 	 *            The name of the player for which you want to retrieve the details.
 	 * @return The method is returning a Player object.
+	 *
 	 * @author Sherwyn Dsouza
 	 */
 	public Player getPlayerDetails(String p_playerName) {
@@ -214,7 +217,7 @@ public class GameEngine {
 	 */
 	public void addContinent(int p_continentId, String p_ContinentName) {
 		try {
-			String l_output = d_mapEditor.addContinent(p_continentId, p_ContinentName);
+			String l_output = this.d_mapEditor.addContinent(p_continentId, p_ContinentName);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -233,10 +236,12 @@ public class GameEngine {
 	 * @param p_continentId
 	 *            The p_continentId parameter is an integer that represents the ID
 	 *            of the continent to which the country belongs.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void addCountry(int p_countryId, String p_countryName, int p_continentId) {
 		try {
-			String l_output = d_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
+			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -249,10 +254,12 @@ public class GameEngine {
 	 * @param p_continentId
 	 *            The parameter "p_continentId" is an integer that represents the ID
 	 *            of the continent that needs to be removed.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void removeContinent(int p_continentId) {
 		try {
-			String l_output = d_mapEditor.removeContinent(p_continentId);
+			String l_output = this.d_mapEditor.removeContinent(p_continentId);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -260,17 +267,25 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function removes a country from a map editor and prints the output.
+	 * The function removes a country from the game map and updates the player's
+	 * ownership if necessary.
 	 *
 	 * @param p_countryId
-	 *            The parameter `p_countryId` is an integer that represents the ID
-	 *            of the country that needs to be removed.
+	 *            The parameter `p_countryId` is an integer representing the ID of
+	 *            the country that needs to be removed.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void removeCountry(int p_countryId) {
 		try {
-			String l_output = d_mapEditor.removeCountry(p_countryId);
+			Player l_player = this.d_gameMap.getCountries().get(p_countryId).getOwner();
+			String l_output = this.d_mapEditor.removeCountry(p_countryId);
+			if (this.d_isCountriesAssigned) {
+				removeCountryFromPlayer(p_countryId, l_player);
+			}
 			System.out.println(l_output);
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
@@ -285,10 +300,12 @@ public class GameEngine {
 	 *            The parameter "p_neighbourCountryId" represents the ID of the
 	 *            neighboring country that you want to add to the country with the
 	 *            ID "p_countryId".
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
-			String l_output = d_mapEditor.addNeighbor(p_countryId, p_neighbourCountryId);
+			String l_output = this.d_mapEditor.addNeighbor(p_countryId, p_neighbourCountryId);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -305,12 +322,38 @@ public class GameEngine {
 	 *            The parameter "p_neighbourCountryId" represents the ID of the
 	 *            neighbor country that you want to remove from the country with ID
 	 *            "p_countryId".
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
-			String l_output = d_mapEditor.removeNeighbour(p_countryId, p_neighbourCountryId);
+			String l_output = this.d_mapEditor.removeNeighbour(p_countryId, p_neighbourCountryId);
 			System.out.println(l_output);
 		} catch (Exception e) {
+			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+		}
+	}
+
+	/**
+	 * The function removes a specific country from a player's list of owned
+	 * countries.
+	 *
+	 * @param p_countryId
+	 *            The ID of the country that needs to be removed from the player's
+	 *            list of owned countries.
+	 * @param p_player
+	 *            The parameter "p_player" is of type Player and represents the
+	 *            player from whom the country needs to be removed.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	private void removeCountryFromPlayer(int p_countryId, Player p_player) {
+		try {
+			List<Country> l_playerCountries = this.d_players.get(p_player.getName()).getCountriesOwned();
+			l_playerCountries.removeIf(p_country -> p_country.getCountryId() == p_countryId);
+			this.d_players.get(p_player.getName()).setCountriesOwned(l_playerCountries);
+		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}

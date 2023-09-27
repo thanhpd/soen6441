@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.w10.risk_game.utils.Constants;
+
 /**
  * @author Omnia Alam
  */
-
-import com.w10.risk_game.utils.Constants;
 
 public class GameMap {
 	private Map<Integer, Country> l_countries;

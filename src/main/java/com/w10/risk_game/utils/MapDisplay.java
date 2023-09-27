@@ -11,7 +11,9 @@ import com.w10.risk_game.models.Player;
 import dnl.utils.text.table.TextTable;
 
 /**
- * @author Omnia Alam Displays map from Game map object Can be called any time
+ * @author Omnia Alam
+ * 
+ *         Displays map from Game map object Can be called any time
  *         by calling formatMap() method
  */
 
@@ -52,7 +54,7 @@ public class MapDisplay {
 				l_values[3] = p_country.getCountryName();
 				l_values[4] = l_neighborValue;
 
-				if (p_player.hasCountry(p_country.getCountryId()) == true && p_player != null) {
+				if (p_player != null && p_player.hasCountry(p_country.getCountryId())) {
 					l_values[5] = p_player.getName();
 					l_values[6] = "" + p_player.getLeftoverArmies();
 				} else {
@@ -69,27 +71,28 @@ public class MapDisplay {
 		return l_values;
 
 	}
+
 	/**
 	 *
-	 * @param map
+	 * @param p_map
 	 * @param p_showArmies
-	 *            Show map in a formated table
+	 *                     Show map in a formated table
 	 */
-	public void formatMap(GameMap map, boolean p_showArmies) {
+	public void formatMap(GameMap p_map, boolean p_showArmies) {
 		String[] l_columnNames;
-		if (p_showArmies == false) {
-			l_columnNames = new String[]{"ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)"};
+		if (p_showArmies) {
+			l_columnNames = new String[] { "ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)",
+					"Player", "Armies" };
 		} else {
-			l_columnNames = new String[]{"ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)",
-					"Player", "Armies"};
+			l_columnNames = new String[] { "ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)" };
 		}
 
-		Map<Integer, Country> l_countries = map.getCountries();
+		Map<Integer, Country> l_countries = p_map.getCountries();
 		Object[][] l_data = new Object[l_countries.size()][l_columnNames.length];
 		int d_count = 0;
-		for (Map.Entry<Integer, Country> entry : l_countries.entrySet()) {
-			l_data[d_count] = populateRow(entry.getValue(), map.getContinentById(entry.getValue().getContinentId()),
-					map.getPlayerbyCountry(entry.getValue().getCountryId()), p_showArmies);
+		for (Country l_country : l_countries.values()) {
+			l_data[d_count] = populateRow(l_country, p_map.getContinentById(l_country.getContinentId()), l_country.getOwner(),
+					p_showArmies);
 			d_count++;
 
 		}

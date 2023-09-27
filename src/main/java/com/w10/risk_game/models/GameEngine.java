@@ -20,36 +20,43 @@ public class GameEngine {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
 	private MapEditor d_mapEditor;
+	private boolean d_isCountriesAssigned;
 
 	/**
 	 * Game Engine constructor
 	 */
 	public GameEngine() {
-		d_gameMap = new GameMap();
-		d_players = new HashMap<>();
+		this.d_gameMap = new GameMap();
+		this.d_players = new HashMap<>();
+		this.d_isCountriesAssigned = false;
 	}
 
 	/**
 	 * The function "loadMap" loads a map file using a MapReader object and assigns
-	 * the loaded map to the "d_gameMap" variable.
+	 * the loaded map to the "this.d_gameMap" variable.
 	 *
 	 * @author Sherwyn Dsouza
 	 * @param p_fileName
-	 *            The parameter "p_fileName" is a String that represents the name of
-	 *            the file that contains the map data.
+	 *                   The parameter "p_fileName" is a String that represents the
+	 *                   name of
+	 *                   the file that contains the map data.
 	 */
 	public void loadMap(String p_fileName) {
 		MapReader l_mapReader = new MapReader();
-		d_gameMap = l_mapReader.loadMapFile(p_fileName);
-		d_mapEditor = new MapEditor(d_gameMap);
+		this.d_gameMap = l_mapReader.loadMapFile(p_fileName);
+		d_mapEditor = new MapEditor(this.d_gameMap);
 	}
 
 	/**
-	 * The function "showMap" is a placeholder for adding logic to display a map.
+	 * 
+	 * The function "showMap" displays the map in a tabular form with info
+	 * such as continent id, country, bonus, etc.
+	 * 
+	 * @author Sherwyn Dsouza
 	 */
 	public void showMap() {
 		MapDisplay l_displayMap = new MapDisplay();
-		l_displayMap.formatMap(d_gameMap, true);
+		l_displayMap.formatMap(this.d_gameMap, this.d_players.size() > 0 && this.d_isCountriesAssigned);
 	}
 
 	/**
@@ -58,14 +65,15 @@ public class GameEngine {
 	 *
 	 * @author Sherwyn Dsouza
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player being created.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), null, 0);
-			if (!d_players.containsKey(p_playerName.trim())) {
-				d_players.put(p_playerName, l_player);
+			if (!this.d_players.containsKey(p_playerName.trim())) {
+				this.d_players.put(p_playerName, l_player);
 			} else {
 				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
@@ -79,26 +87,27 @@ public class GameEngine {
 	 *
 	 * @author Sherwyn Dsouza
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player that needs to be removed.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player that needs to be removed.
 	 */
 	public void removePlayer(String p_playerName) {
 		try {
 			p_playerName = p_playerName.trim();
-			List<String> l_playerNames = new ArrayList<>(d_players.keySet());
+			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			if (l_playerNames.size() > 1) {
-				List<Country> l_ownedCounriesOfPlayer = d_players.get(p_playerName).getCountriesOwned();
+				List<Country> l_ownedCounriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
 
 				l_playerNames.remove(p_playerName);
 				int i = 0;
 
 				while (i < l_ownedCounriesOfPlayer.size()) {
-					d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
+					this.d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
 							.add(l_ownedCounriesOfPlayer.get(i));
 					i += 1;
 				}
 			}
-			d_players.remove(p_playerName.trim());
+			this.d_players.remove(p_playerName.trim());
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
@@ -111,7 +120,7 @@ public class GameEngine {
 	 * @author Sherwyn Dsouza
 	 */
 	public void showAllPlayers() {
-		d_players.forEach((p_playerName, p_player) -> {
+		this.d_players.forEach((p_playerName, p_player) -> {
 			System.out.println(p_playerName);
 			for (Country c : p_player.getCountriesOwned()) {
 				try {
@@ -132,12 +141,12 @@ public class GameEngine {
 	 */
 	public void assignCountries() {
 		try {
-			d_players.forEach((p_playerName, p_player) -> {
+			this.d_players.forEach((p_playerName, p_player) -> {
 				p_player.setCountriesOwned(new ArrayList<Country>());
 			});
-			Map<Integer, Country> l_countries = d_gameMap.getCountries();
-			List<String> l_playerNames = new ArrayList<>(d_players.keySet());
-			int l_noOfPlayers = d_players.size();
+			Map<Integer, Country> l_countries = this.d_gameMap.getCountries();
+			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
+			int l_noOfPlayers = this.d_players.size();
 
 			if (l_noOfPlayers > l_countries.size()) {
 				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, l_countries.size(), l_noOfPlayers);
@@ -147,10 +156,11 @@ public class GameEngine {
 			int i = 0;
 			while (i < l_countries.size()) {
 				String l_playerName = l_playerNames.get(i % l_noOfPlayers);
-				d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i + 1));
+				this.d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i + 1));
+				l_countries.get(i + 1).setOwner(this.d_players.get(l_playerName));
 				i += 1;
 			}
-
+			this.d_isCountriesAssigned = true;
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
 		}
@@ -159,11 +169,11 @@ public class GameEngine {
 	/**
 	 * The function returns the number of players in a game.
 	 *
-	 * @return The number of players in the list "d_players".
+	 * @return The number of players in the list "this.d_players".
 	 * @author Sherwyn Dsouza
 	 */
 	public Integer getNoOfPlayers() {
-		return d_players.size();
+		return this.d_players.size();
 	}
 
 	/**
@@ -173,19 +183,20 @@ public class GameEngine {
 	 * @author Sherwyn Dsouza
 	 */
 	public GameMap getGameMap() {
-		return d_gameMap;
+		return this.d_gameMap;
 	}
 
 	/**
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *            The name of the player for which you want to retrieve the details.
+	 *                     The name of the player for which you want to retrieve the
+	 *                     details.
 	 * @return The method is returning a Player object.
 	 * @author Sherwyn Dsouza
 	 */
 	public Player getPlayerDetails(String p_playerName) {
-		return d_players.get(p_playerName);
+		return this.d_players.get(p_playerName);
 	}
 
 }

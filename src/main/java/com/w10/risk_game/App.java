@@ -18,7 +18,7 @@ public class App {
 	 */
 
 	public static void main(String[] args) {
-		GameEngine l_GameEngine = new GameEngine();
+		GameEngine l_gameEngine = new GameEngine();
 		System.out.println(Constants.STARTUP_PHASE_ENTRY_STRING);
 		boolean l_exit = false;
 		while (true) {
@@ -32,43 +32,46 @@ public class App {
 				case Constants.USER_INPUT_COMMAND_LOADMAP :
 					try {
 						System.out.println(Constants.CLI_LOAD_MAP + l_splitStr[1]);
-						l_GameEngine.loadMap(l_splitStr[1]);
+						l_gameEngine.loadMap(l_splitStr[1]);
 
 					} catch (Exception e) {
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 					}
 					break;
 				case Constants.USER_INPUT_COMMAND_SAVEMAP :
-					l_GameEngine.getGameMap().saveMap(l_splitStr[1]);
+					l_gameEngine.getGameMap().saveMap(l_splitStr[1]);
 					break;
 				case Constants.USER_INPUT_COMMAND_SHOWMAP :
 					System.out.println(Constants.CLI_SHOW_MAP);
-					l_GameEngine.showMap();
+					l_gameEngine.showMap();
 					break;
 				case Constants.USER_INPUT_COMMAND_EDITMAP :
-					l_GameEngine.editMap();
+					l_gameEngine.editMap();
 					break;
 				case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 					if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-						l_GameEngine.addContinent(Integer.parseInt(l_splitStr[2]), l_splitStr[3].toString());
+						l_gameEngine.addContinent(Integer.parseInt(l_splitStr[2]), l_splitStr[3].toString());
 					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-						l_GameEngine.removeContinent(Integer.parseInt(l_splitStr[2]));
+						l_gameEngine.removeContinent(Integer.parseInt(l_splitStr[2]));
 					}
 					break;
 				case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
 					if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-						l_GameEngine.addCountry(Integer.parseInt(l_splitStr[2]), l_splitStr[3].toString(),
+						l_gameEngine.addCountry(Integer.parseInt(l_splitStr[2]), l_splitStr[3].toString(),
 								Integer.parseInt(l_splitStr[4]));
 					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-						l_GameEngine.removeCountry(Integer.parseInt(l_splitStr[2]));
+						l_gameEngine.removeCountry(Integer.parseInt(l_splitStr[2]));
 					}
 					break;
 				case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
 					if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-						l_GameEngine.addNeighbor(Integer.parseInt(l_splitStr[2]), Integer.parseInt(l_splitStr[4]));
+						l_gameEngine.addNeighbor(Integer.parseInt(l_splitStr[2]), Integer.parseInt(l_splitStr[4]));
 					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-						l_GameEngine.removeNeighbor(Integer.parseInt(l_splitStr[2]), Integer.parseInt(l_splitStr[4]));
+						l_gameEngine.removeNeighbor(Integer.parseInt(l_splitStr[2]), Integer.parseInt(l_splitStr[4]));
 					}
+					break;
+				case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
+					l_gameEngine.checkIfMapIsValid();
 					break;
 
 				// Gameplay: Start up phase
@@ -77,12 +80,12 @@ public class App {
 						if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							System.out.println(Constants.CLI_GAME_PLAYER_ADD + l_splitStr[2].toString());
 
-							l_GameEngine.createPlayer(l_splitStr[2].toString());
+							l_gameEngine.createPlayer(l_splitStr[2].toString());
 						} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 							System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + l_splitStr[2].toString());
-							l_GameEngine.removePlayer(l_splitStr[2].toString());
+							l_gameEngine.removePlayer(l_splitStr[2].toString());
 						} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL)) {
-							l_GameEngine.showAllPlayers();
+							l_gameEngine.showAllPlayers();
 						}
 					} catch (Exception e) {
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
@@ -90,7 +93,7 @@ public class App {
 					break;
 				case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 					System.out.println(Constants.CLI_ASSIGN_COUNTRIES);
-					l_GameEngine.assignCountries();
+					l_gameEngine.assignCountries();
 					break;
 
 				// Others

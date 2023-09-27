@@ -9,7 +9,7 @@ public final class Constants {
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
 			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> editmap\n"
+			+ "-> showmap\n" + "-> editmap\n" + "-> validatemap\n"
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
@@ -21,10 +21,10 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
 	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
 	public static final String USER_INPUT_COMMAND_EDITMAP = "editmap";
+	public static final String USER_INPUT_COMMAND_VALIDATEMAP = "validatemap";
 	public static final String USER_INPUT_COMMAND_EDIT_CONTINENT = "editcontinent";
 	public static final String USER_INPUT_COMMAND_EDIT_COUNTRY = "editcountry";
 	public static final String USER_INPUT_COMMAND_EDIT_NEIGHBOR = "editneighbor";
-	public static final String USER_INPUT_COMMAND_VALIDATE_MAP = "validatemap";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER = "gameplayer";
 	public static final String USER_INPUT_COMMAND_OPTION_ADD = "-add";
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
@@ -47,7 +47,10 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
 	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS = "Player name already exists!";
 	public static final String GAME_ENGINE_FAILED_TO_EDIT_MAP = "Error in editing map!";
-
+	public static final String GAME_ENGINE_FAILED_TO_VALIDATE_MAP = "Error in validating map!";
+	public static final String GAME_ENGINE_MAP_NOT_CREATED = "Map is not created!";
+	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
+	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 

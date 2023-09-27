@@ -25,6 +25,10 @@ public class GameMap {
 		this.l_player = new HashMap<>();
 	}
 
+	public boolean isMapCreated() {
+		return this.l_continents.size() != 0 || this.l_countries.size() != 0;
+	}
+
 	// Getter
 	public Map<Integer, Country> getCountries() {
 		return l_countries;

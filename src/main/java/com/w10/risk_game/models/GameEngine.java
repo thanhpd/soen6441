@@ -9,6 +9,7 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
+import com.w10.risk_game.utils.MapValidator;
 
 /**
  * The GameEngine class is responsible for managing the game map, players, and
@@ -353,8 +354,29 @@ public class GameEngine {
 			l_playerCountries.removeIf(p_country -> p_country.getCountryId() == p_countryId);
 			this.d_players.get(p_player.getName()).setCountriesOwned(l_playerCountries);
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+		}
+	}
+
+	/**
+	 * The function checks if a game map is valid and prints a corresponding
+	 * message.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public void checkIfMapIsValid() {
+		try {
+			if (this.d_gameMap.isMapCreated()) {
+				if (MapValidator.isMapCorrect(this.d_gameMap)) {
+					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
+				} else {
+					System.out.println(Constants.GAME_ENGINE_MAP_INVALID);
+				}
+			} else {
+				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+			}
+		} catch (Exception e) {
+			System.out.println(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
 		}
 	}
 

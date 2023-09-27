@@ -225,7 +225,7 @@ public class Player {
 	/**
 	 * This function is used to check the input format. The input should have three
 	 * parts (one string and two integers)
-	 * 
+	 *
 	 * @param p_inputArray
 	 *            the input string
 	 * @return boolean value to show whether the input format is valid
@@ -254,7 +254,7 @@ public class Player {
 	/**
 	 * This function is used to check the order type. The order type should be
 	 * "deploy"
-	 * 
+	 *
 	 * @param p_orderType
 	 *            the order type
 	 * @return boolean value to show whether the order type is valid
@@ -270,7 +270,7 @@ public class Player {
 	/**
 	 * This function is used to check the country id. The country id should be one
 	 * of the countries owned by the player
-	 * 
+	 *
 	 * @param p_countries
 	 *            the list of countries owned by the player
 	 * @param p_countryId
@@ -288,7 +288,7 @@ public class Player {
 	/**
 	 * This function is used to check the number of armies. The number of armies
 	 * should be less than the number of leftover armies
-	 * 
+	 *
 	 * @param p_num
 	 *            the number of armies
 	 * @param p_army

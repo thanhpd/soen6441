@@ -1,12 +1,3 @@
-/*
- * @author Omnia Alam
- * in the MapReader class,
- * we have a function called showMap that prints the map in text.
- * to use the show map, we need to call the function called readMapFile(String mapFilename).
- * We need to link the Commandline "showmap filename" with readMapFile(String mapFilename) and pass the map file name
- *
- */
-
 package com.w10.risk_game.utils;
 
 import java.io.FileNotFoundException;
@@ -18,6 +9,12 @@ import java.util.Scanner;
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+
+/*
+ * @author Omnia Alam
+ * This class reads a map file and initialize into the Country and Continents
+ * This is use to populate the Gamemap
+ */
 
 public class MapReader {
 
@@ -31,165 +28,158 @@ public class MapReader {
 
 	/**
 	 *
-	 *
-	 *
-	 * @return Returns a list of countries with their id as key
+	 * @param takes
+	 *            scanner of the file reads untill Continent, Borders or empty line
+	 *            found Put it in a hashmap
+	 * @return a hashmap where county id is the key and value is the country object
 	 */
 
-	public Map<Integer, Country> readCountries(Scanner scanner) {
+	public Map<Integer, Country> readCountries(Scanner p_scanner, Map<Integer, Continent> p_continents) {
 
-		String line;
-		HashMap<Integer, Country> countries = new HashMap<Integer, Country>();
-		while (scanner.hasNextLine()) {
-			line = scanner.nextLine();
-			if (line.equals("[continents]") || line.equals("[borders]") || line.isEmpty()) {
+		String l_line;
+		HashMap<Integer, Country> l_countries = new HashMap<Integer, Country>();
+		while (p_scanner.hasNextLine()) {
+			l_line = p_scanner.nextLine();
+			if (l_line.equals("[continents]") || l_line.equals("[borders]") || l_line.isEmpty()) {
 				break;
 			}
 
-			Country country = mapCountry(line);
-			countries.put(country.getCountryId(), country);
+			Country l_country = mapCountry(l_line);
+			l_countries.put(l_country.getCountryId(), l_country);
+			p_continents.get(l_country.getContinentId()).addCountry(l_country);
+		}
+		return l_countries;
+	}
+
+	/**
+	 * @param takes
+	 *            scanner and read untill continents, countries and empty line found
+	 *            add the neighboring counties based on the parent id in the country
+	 *            object
+	 */
+
+	public void parseBorders(Map<Integer, Country> p_countries, Scanner p_scanner) {
+		String l_line;
+		while (p_scanner.hasNextLine()) {
+			l_line = p_scanner.nextLine();
+			if (l_line.equals("[continents]") || l_line.equals("[countries]") || l_line.isEmpty()) {
+				break;
+			}
+			String[] l_splitted = l_line.split(" ");
+			Country d_country = p_countries.get(Integer.parseInt(l_splitted[0]));
+			for (int i = 1; i < l_splitted.length; i++) {
+				Country l_neighbor = p_countries.get(Integer.parseInt(l_splitted[i]));
+				if (d_country != null && l_neighbor != null) {
+					d_country.addNeighbor(l_neighbor);
+				}
+			}
 
 		}
-		return countries;
+
 	}
 
 	/**
 	 *
-	 * creates list of neighbouring countries with their parent country id
+	 * @param takes
+	 *            scanner of the file reads untill Country, Borders or empty line
+	 *            found Put it in a hashmap
+	 * @return a hashmap where continent id is the key and value is the continent
+	 *         object
 	 */
+	public Map<Integer, Continent> readCointinents(Scanner p_scanner) {
 
-	public void parseBorders(Map<Integer, Country> countries, Scanner scanner) {
-		String line;
-		while (scanner.hasNextLine()) {
-			line = scanner.nextLine();
-			if (line.equals("[continents]") || line.equals("[countries]") || line.isEmpty()) {
+		String l_line;
+		HashMap<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
+		int l_continentId = 1;
+		while (p_scanner.hasNextLine()) {
+			l_line = p_scanner.nextLine();
+
+			if (l_line.equals("[countries]") || l_line.equals("[borders]") || l_line.isEmpty()) {
 				break;
 			}
-			String[] splitted = line.split(" ");
-			Country country = countries.get(Integer.parseInt(splitted[0]));
-			for (int i = 1; i < splitted.length; i++) {
-				Country neighbor = countries.get(Integer.parseInt(splitted[i]));
-				country.addNeighbor(neighbor);
-			}
 
+			Continent l_continent = mapContinent(l_line, l_continentId);
+			l_continents.put(l_continent.getContinentId(), l_continent);
+			l_continentId++;
 		}
-
+		return l_continents;
 	}
 
 	/**
 	 *
-	 * @return Returns a list of contnents with their id as key
-	 */
-	public Map<Integer, Continent> readCointinents(Scanner scanner) {
-
-		String line;
-		HashMap<Integer, Continent> continents = new HashMap<Integer, Continent>();
-		int continentId = 1;
-		while (scanner.hasNextLine()) {
-			line = scanner.nextLine();
-
-			if (line.equals("[countries]") || line.equals("[borders]") || line.isEmpty()) {
-				break;
-			}
-
-			Continent continent = mapContinent(line, continentId);
-			continents.put(continent.getContinentId(), continent);
-			continentId++;
-		}
-		return continents;
-	}
-
-	/**
-	 *
-	 *
+	 * @param calls
+	 *            from readCountry method for each line of the country splits the
+	 *            line and set it to the country object
 	 * @return returns Country objects for each line
 	 */
-
-	public Country mapCountry(String line) {
-		Country country = new Country();
-		String[] splitted = line.split(" ");
-		country.setCountryId(Integer.parseInt(splitted[0]));
-		country.setCountryName(splitted[1]);
-		country.setContinentId(Integer.parseInt(splitted[2]));
-		return country;
+	public Country mapCountry(String p_line) {
+		String[] l_splitted = p_line.split(" ");
+		return new Country(Integer.parseInt(l_splitted[0]), l_splitted[1], Integer.parseInt(l_splitted[2]), 0);
 	}
 
 	/**
 	 *
-	 *
-	 * @return returns Continent objecct for each line
+	 * @param calls
+	 *            from readContinent method for each line of the continents splits
+	 *            the line and set it to the country object
+	 * @return returns Continent objects for each line
 	 */
 
-	public Continent mapContinent(String line, int continentId) {
-		Continent continent = new Continent();
-		String[] splitted = line.split(" ");
-		continent.setContinentId(continentId);
-		continent.setContinentName(splitted[0]);
-		return continent;
-	}
-
-	// read a map and show it in the commandline
-	public void showMap(Map<Integer, Country> countries, Map<Integer, Continent> continents) {
-		System.out.println("###############List of Continents:################");
-		for (Integer key : continents.keySet()) {
-			System.out.println(key + " = " + continents.get(key));
-		}
-		System.out.println("#########List of Countries:############");
-		for (Integer key : countries.keySet()) {
-			System.out.println(key + " = " + countries.get(key));
-		}
-
+	public Continent mapContinent(String p_line, int p_continentId) {
+		String[] l_splitted = p_line.split(" ");
+		return new Continent(p_continentId, l_splitted[0], Integer.parseInt(l_splitted[1]));
 	}
 
 	/**
 	 * Reading the map file Example: europe.map
 	 *
+	 * @throws file
+	 *             not found expection
 	 * @param mapFilename
 	 *            Returns GameMap object
 	 *
 	 */
 	public GameMap loadMapFile(String mapFilename) {
-		Map<Integer, Country> countries = new HashMap<Integer, Country>();
-		Map<Integer, Continent> continents = new HashMap<Integer, Continent>();
+		Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
+		Map<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
 		GameMap gamemap = new GameMap();
 
-		String path = getMapFolerPath() + "" + mapFilename;
+		String l_path = getMapFolerPath() + "" + mapFilename;
 		try {
-			FileReader reader = new FileReader(path);
+			FileReader l_reader = new FileReader(l_path);
 
-			Scanner scanner = new Scanner(reader);
-			String line;
+			Scanner l_scanner = new Scanner(l_reader);
+			String l_line;
 
 			// read unitl continents
-			while (scanner.hasNextLine()) {
-				line = scanner.nextLine();
-				if (line.equals("[continents]")) {
-					continents = readCointinents(scanner);
+			while (l_scanner.hasNextLine()) {
+				l_line = l_scanner.nextLine();
+				if (l_line.equals("[continents]")) {
+					l_continents = readCointinents(l_scanner);
 					break;
 				}
 			}
 
 			// read until countries
-			while (scanner.hasNextLine()) {
-				line = scanner.nextLine();
-				if (line.equals("[countries]")) {
-					countries = readCountries(scanner);
+			while (l_scanner.hasNextLine()) {
+				l_line = l_scanner.nextLine();
+				if (l_line.equals("[countries]")) {
+					l_countries = readCountries(l_scanner, l_continents);
 					break;
 				}
 			}
 
 			// read until border
-			while (scanner.hasNextLine()) {
-				line = scanner.nextLine();
-				if (line.equals("[borders]")) {
-					parseBorders(countries, scanner);
+			while (l_scanner.hasNextLine()) {
+				l_line = l_scanner.nextLine();
+				if (l_line.equals("[borders]")) {
+					parseBorders(l_countries, l_scanner);
 					break;
 				}
 			}
 
-			gamemap.addCountries(countries);
-			gamemap.addContinentes(continents);
-			showMap(countries, continents);
+			gamemap.addCountries(l_countries);
+			gamemap.addContinentes(l_continents);
 
 		} catch (FileNotFoundException e) {
 

@@ -1,6 +1,8 @@
 # Ignore IDE project settings
-.idea
-.vscode
+.idea/
+.vscode/
+soen6441.iml
+risk_game.iml
 
 # Compiled class file
 *.class

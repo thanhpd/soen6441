@@ -11,8 +11,12 @@ import com.w10.risk_game.utils.Constants;
 public class App {
 	/**
 	 * @param args
-	 *            passed in arguments for the application
+	 *            - passed in arguments for the application. The code is the main
+	 *            method of the application. It initializes a GameEngine object and
+	 *            starts a loop that prompts the user for input and performs
+	 *            different actions based on the input.
 	 */
+
 	public static void main(String[] args) {
 		GameEngine l_GameEngine = new GameEngine();
 		System.out.println(Constants.STARTUP_PHASE_ENTRY_STRING);
@@ -32,6 +36,9 @@ public class App {
 					} catch (Exception e) {
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 					}
+					break;
+				case Constants.USER_INPUT_COMMAND_SAVEMAP :
+					l_GameEngine.getGameMap().saveMap(l_splitStr[1]);
 					break;
 				case Constants.USER_INPUT_COMMAND_SHOWMAP :
 					System.out.println(Constants.CLI_SHOW_MAP);

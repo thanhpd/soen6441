@@ -1,73 +1,105 @@
 package com.w10.risk_game.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Omnia Alam
+ */
+
 public class Country implements Serializable {
+	private int d_countryId;
+	private String d_countryName;
+	private int d_continentId;
+	private int d_armyCount;
+	private Player owner;
+	private Map<Integer, Country> d_neighbors;
 
-	private int countryId;
-	private String countryName;
-	private int continentId;
-	private Map<Integer, Country> neighbors = new HashMap<>();
-
-	public Country() {
-
-	}
-
-	public Country(int countryId, String countryName, int continentId) {
-		this.countryId = countryId;
-		this.countryName = countryName;
-		this.continentId = continentId;
+	public Country(int p_countryId, String p_countryName, int p_continentId, int p_armyCount) {
+		this.d_countryId = p_countryId;
+		this.d_countryName = p_countryName;
+		this.d_continentId = p_continentId;
+		this.d_armyCount = p_armyCount;
+		this.d_neighbors = new HashMap<>();
 	}
 
 	// Getter
 	public int getCountryId() {
-		return countryId;
+		return d_countryId;
 	}
 
 	// Setter
-	public void setCountryId(int countryId) {
-		this.countryId = countryId;
+	public void setCountryId(int p_countryId) {
+		this.d_countryId = p_countryId;
 	}
 
 	// Getter
 	public String getCountryName() {
-		return countryName;
+		return d_countryName;
 	}
 
 	// Setter
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
+	public void setCountryName(String p_countryName) {
+		this.d_countryName = p_countryName;
 	}
 
 	// Getter
 	public int getContinentId() {
-		return continentId;
+		return d_continentId;
 	}
 
 	// Setter
-	public void setContinentId(int continentId) {
-		this.continentId = continentId;
+	public void setContinentId(int p_continentId) {
+		this.d_continentId = p_continentId;
 	}
+
+	public int getArmyCount() {
+		return d_armyCount;
+	}
+
+	public void setArmyCount(int d_armyCount) {
+		this.d_armyCount = d_armyCount;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(countryId + " " + countryName + " " + continentId);
+		builder.append(d_countryId + " " + d_countryName + " " + d_continentId);
 
-		for (Country country : neighbors.values()) {
+		for (Country country : d_neighbors.values()) {
 			builder.append(" ");
-			builder.append(country.countryId);
+			builder.append(country.d_countryId);
 		}
 		return builder.toString();
 	}
 
-	public void addNeighbor(Country neighbourCountry) {
-		neighbors.put(neighbourCountry.countryId, neighbourCountry);
+	/*
+	 * API: Checks for different parameters if the neighbor exists
+	 *
+	 */
+	public boolean hasNeighbor(int p_neighborCountryId) {
+		return d_neighbors.containsKey(p_neighborCountryId);
+	}
+
+	public boolean hasNeighbor(String p_neighborCountryName) {
+		for (var neighborCountry : d_neighbors.values()) {
+			if (neighborCountry.getCountryName().equals(p_neighborCountryName)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean hasNeighbor(Country p_country) {
+		return d_neighbors.containsKey(p_country.getCountryId());
+	}
+
+	public void addNeighbor(Country p_neighborCountry) {
+		d_neighbors.put(p_neighborCountry.d_countryId, p_neighborCountry);
 	}
 
 	public Map<Integer, Country> getNeighbors() {
-		return neighbors;
+		return d_neighbors;
 	}
 }

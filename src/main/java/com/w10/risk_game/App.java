@@ -30,7 +30,9 @@ public class App {
 			switch (l_splitStr[0]) {
 				case Constants.USER_INPUT_COMMAND_LOADMAP:
 					try {
+						System.out.println(Constants.CLI_LOAD_MAP + l_splitStr[1]);
 						l_GameEngine.loadMap(l_splitStr[1]);
+
 					} catch (Exception e) {
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 					}
@@ -39,13 +41,27 @@ public class App {
 					l_GameEngine.getGameMap().saveMap(l_splitStr[1]);
 					break;
 				case Constants.USER_INPUT_COMMAND_SHOWMAP:
+					System.out.println(Constants.CLI_SHOW_MAP);
 					l_GameEngine.showMap();
+					break;
+				case Constants.USER_INPUT_COMMAND_EDITMAP:
+					l_GameEngine.editMap();
+					break;
+				case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT:
+					l_GameEngine.editContinent();
+					break;
+				case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY:
+					l_GameEngine.editCountry();
 					break;
 				case Constants.USER_INPUT_COMMAND_GAMEPLAYER:
 					try {
 						if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
+							System.out.println(Constants.CLI_GAME_PLAYER_ADD + l_splitStr[2].toString());
+
 							l_GameEngine.createPlayer(l_splitStr[2].toString());
 						} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
+							System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + l_splitStr[2].toString());
+
 							l_GameEngine.removePlayer(l_splitStr[2].toString());
 						} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL)) {
 							l_GameEngine.showAllPlayers();
@@ -55,6 +71,7 @@ public class App {
 					}
 					break;
 				case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES:
+					System.out.println(Constants.CLI_ASSIGN_COUNTRIES);
 					l_GameEngine.assignCountries();
 					break;
 				case Constants.USER_INPUT_COMMAND_QUIT:

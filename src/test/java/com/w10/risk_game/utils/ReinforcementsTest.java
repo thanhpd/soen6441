@@ -35,44 +35,44 @@ public class ReinforcementsTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		d_countries = new ArrayList<>();
-		d_countries.add(new Country(1, "England", 1));
-		d_countries.add(new Country(2, "Scotland", 1));
-		d_countries.add(new Country(3, "N_Ireland", 1));
-		d_countries.add(new Country(4, "Rep_Ireland", 1));
-		d_countries.add(new Country(5, "Wales", 1));
-		d_countries.add(new Country(6, "Belgum", 1));
-		d_countries.add(new Country(7, "Netherlands", 1));
+		d_countries.add(new Country(1, "England", 1, 0));
+		d_countries.add(new Country(2, "Scotland", 1, 0));
+		d_countries.add(new Country(3, "N_Ireland", 1, 0));
+		d_countries.add(new Country(4, "Rep_Ireland", 1, 0));
+		d_countries.add(new Country(5, "Wales", 1, 0));
+		d_countries.add(new Country(6, "Belgum", 1, 0));
+		d_countries.add(new Country(7, "Netherlands", 1, 0));
 		String l_playerName = "Player";
 		List<Order> l_orders = new ArrayList<>();
 		int l_armies = 10;
 		d_player = new Player(l_playerName, d_countries, l_orders, l_armies);
 
 		List<Country> l_countries1 = new ArrayList<>();
-		l_countries1.add(new Country(1, "England", 1));
-		l_countries1.add(new Country(2, "Scotland", 1));
-		l_countries1.add(new Country(3, "N_Ireland", 1));
-		l_countries1.add(new Country(4, "Rep_Ireland", 1));
-		l_countries1.add(new Country(5, "Wales", 1));
-		l_countries1.add(new Country(6, "Belgum", 1));
+		l_countries1.add(new Country(1, "England", 1, 0));
+		l_countries1.add(new Country(2, "Scotland", 1, 0));
+		l_countries1.add(new Country(3, "N_Ireland", 1, 0));
+		l_countries1.add(new Country(4, "Rep_Ireland", 1, 0));
+		l_countries1.add(new Country(5, "Wales", 1, 0));
+		l_countries1.add(new Country(6, "Belgum", 1, 0));
 		String l_playerName1 = "Player1";
 		List<Order> l_orders1 = new ArrayList<>();
 		int l_armies1 = 10;
 		d_player1 = new Player(l_playerName1, l_countries1, l_orders1, l_armies1);
 
 		d_countries2 = new ArrayList<>();
-		d_countries2.add(new Country(1, "England", 1));
-		d_countries2.add(new Country(2, "Scotland", 1));
-		d_countries2.add(new Country(3, "N_Ireland", 1));
-		d_countries2.add(new Country(4, "Rep_Ireland", 1));
-		d_countries2.add(new Country(5, "Wales", 1));
-		d_countries2.add(new Country(6, "Belgum", 1));
-		d_countries2.add(new Country(7, "Netherlands", 1));
-		d_countries2.add(new Country(8, "Denmark", 2));
-		d_countries2.add(new Country(9, "Germany", 2));
+		d_countries2.add(new Country(1, "England", 1, 0));
+		d_countries2.add(new Country(2, "Scotland", 1, 0));
+		d_countries2.add(new Country(3, "N_Ireland", 1, 0));
+		d_countries2.add(new Country(4, "Rep_Ireland", 1, 0));
+		d_countries2.add(new Country(5, "Wales", 1, 0));
+		d_countries2.add(new Country(6, "Belgum", 1, 0));
+		d_countries2.add(new Country(7, "Netherlands", 1, 0));
+		d_countries2.add(new Country(8, "Denmark", 2, 0));
+		d_countries2.add(new Country(9, "Germany", 2, 0));
 
 		d_countries3 = new ArrayList<>();
-		d_countries3.add(new Country(2, "Scotland", 1));
-		d_countries3.add(new Country(1, "England", 1));
+		d_countries3.add(new Country(2, "Scotland", 1, 0));
+		d_countries3.add(new Country(1, "England", 1, 0));
 	}
 
 	/**

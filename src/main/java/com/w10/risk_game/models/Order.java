@@ -65,8 +65,8 @@ public class Order {
 		List<Country> l_countries = l_player.getCountriesOwned();
 		for (Country l_country : l_countries) {
 			if (l_country.getCountryId() == l_countryId) {
-				int l_countryArmies = l_country.getArmies();
-				l_country.setArmies(l_countryArmies + l_num);
+				int l_countryArmies = l_country.getArmyCount();
+				l_country.setArmyCount(l_countryArmies + l_num);
 			}
 		}
 	}

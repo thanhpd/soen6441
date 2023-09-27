@@ -20,7 +20,7 @@ public class OrderTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		List<Country> l_countries = new ArrayList<>();
-		l_countries.add(new Country(1, "England", 1));
+		l_countries.add(new Country(1, "England", 1, 0));
 		Player l_player1 = new Player("Player1", l_countries, new ArrayList<>(), 10);
 		d_order1 = new Order(l_player1, "deploy", 1, 6);
 	}
@@ -28,10 +28,10 @@ public class OrderTest {
 	 * This method is to test the method of deploy
 	 */
 	@Test
-	public void deployTest() {
+	public void executeTest() {
 		// Test deploy
-		d_order1.deploy();
+		d_order1.execute();
 		assertEquals(4, d_order1.getD_player().getLeftoverArmies());
-		assertEquals(6, d_order1.getD_player().getCountriesOwned().get(0).getArmies());
+		assertEquals(6, d_order1.getD_player().getCountriesOwned().get(0).getArmyCount());
 	}
 }

@@ -34,7 +34,7 @@ public class MapReader {
 	 * @return a hashmap where county id is the key and value is the country object
 	 */
 
-	public Map<Integer, Country> readCountries(Scanner p_scanner) {
+	public Map<Integer, Country> readCountries(Scanner p_scanner, Map<Integer, Continent> p_continents) {
 
 		String l_line;
 		HashMap<Integer, Country> l_countries = new HashMap<Integer, Country>();
@@ -46,7 +46,7 @@ public class MapReader {
 
 			Country l_country = mapCountry(l_line);
 			l_countries.put(l_country.getCountryId(), l_country);
-
+			p_continents.get(l_country.getContinentId()).addCountry(l_country);
 		}
 		return l_countries;
 	}
@@ -112,14 +112,9 @@ public class MapReader {
 	 *            line and set it to the country object
 	 * @return returns Country objects for each line
 	 */
-
 	public Country mapCountry(String p_line) {
-		Country l_country = new Country();
 		String[] l_splitted = p_line.split(" ");
-		l_country.setCountryId(Integer.parseInt(l_splitted[0]));
-		l_country.setCountryName(l_splitted[1]);
-		l_country.setContinentId(Integer.parseInt(l_splitted[2]));
-		return l_country;
+		return new Country(Integer.parseInt(l_splitted[0]), l_splitted[1], Integer.parseInt(l_splitted[2]), 0);
 	}
 
 	/**
@@ -131,12 +126,8 @@ public class MapReader {
 	 */
 
 	public Continent mapContinent(String p_line, int p_continentId) {
-		Continent l_continent = new Continent();
 		String[] l_splitted = p_line.split(" ");
-		l_continent.setContinentId(p_continentId);
-		l_continent.setContinentName(l_splitted[0]);
-		l_continent.setBous(Integer.parseInt(l_splitted[1]));
-		return l_continent;
+		return new Continent(p_continentId, l_splitted[0], Integer.parseInt(l_splitted[1]));
 	}
 
 	/**
@@ -173,7 +164,7 @@ public class MapReader {
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
 				if (l_line.equals("[countries]")) {
-					l_countries = readCountries(l_scanner);
+					l_countries = readCountries(l_scanner, l_continents);
 					break;
 				}
 			}

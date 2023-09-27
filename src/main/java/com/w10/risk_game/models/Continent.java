@@ -1,5 +1,8 @@
 package com.w10.risk_game.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Omnia Alam
  */
@@ -7,22 +10,16 @@ package com.w10.risk_game.models;
 public class Continent {
 	private int d_continentId;
 	private String d_continentName;
+	private List<Country> d_countries;
+	private List<Country> d_neighborCountries;
 	private int d_bonus;
 
-	public Continent() {
-
-	}
-
-	public Continent(int p_continentId, String p_continentName, int p_bouns) {
+	public Continent(int p_continentId, String p_continentName, int p_bonus) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
-		this.d_bonus = p_bouns;
-	}
-
-	// Setter
-
-	public void setBous(int p_bonus) {
 		this.d_bonus = p_bonus;
+		this.d_countries = new ArrayList<>();
+		this.d_neighborCountries = new ArrayList<>();
 	}
 
 	// Getter
@@ -31,14 +28,28 @@ public class Continent {
 	}
 
 	// Setter
-
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
 	}
 
-	// Getter
 	public String getContinentName() {
 		return d_continentName;
+	}
+
+	public List<Country> getCountries() {
+		return d_countries;
+	}
+
+	public void addCountry(Country d_country) {
+		this.d_countries.add(d_country);
+	}
+
+	public List<Country> getNeighborCountries() {
+		return d_neighborCountries;
+	}
+
+	public void setNeighborCountries(List<Country> d_neighborCountries) {
+		this.d_neighborCountries = d_neighborCountries;
 	}
 
 	// Setter
@@ -59,5 +70,4 @@ public class Continent {
 	public String toString() {
 		return d_continentId + " " + d_continentName + " " + d_bonus;
 	}
-
 }

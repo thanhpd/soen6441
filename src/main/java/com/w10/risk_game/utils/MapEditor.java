@@ -1,7 +1,9 @@
 package com.w10.risk_game.utils;
 
 import java.util.ArrayList;
+
 import org.apache.commons.lang.StringUtils;
+
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
@@ -46,7 +48,7 @@ public class MapEditor {
 			return "Continent doesnot exists!";
 		}
 		Continent l_continent = l_gameMap.getContinentByName(p_continentName);
-		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId());
+		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
 		l_gameMap.getCountries().put(p_countryId, l_country);
 		return p_countryName + " is Added! and to the continent " + p_continentName;
 	}
@@ -170,5 +172,4 @@ public class MapEditor {
 
 		return p_countryId + " added with " + p_neighbourCountryId;
 	}
-
 }

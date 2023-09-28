@@ -29,8 +29,9 @@ public class MapReader {
 	/**
 	 *
 	 * @param takes
-	 *            scanner of the file reads untill Continent, Borders or empty line
-	 *            found Put it in a hashmap
+	 *              scanner of the file reads untill Continent, Borders or empty
+	 *              line
+	 *              found Put it in a hashmap
 	 * @return a hashmap where county id is the key and value is the country object
 	 */
 
@@ -53,9 +54,11 @@ public class MapReader {
 
 	/**
 	 * @param takes
-	 *            scanner and read untill continents, countries and empty line found
-	 *            add the neighboring counties based on the parent id in the country
-	 *            object
+	 *              scanner and read untill continents, countries and empty line
+	 *              found
+	 *              add the neighboring counties based on the parent id in the
+	 *              country
+	 *              object
 	 */
 
 	public void parseBorders(Map<Integer, Country> p_countries, Scanner p_scanner) {
@@ -81,12 +84,12 @@ public class MapReader {
 	/**
 	 *
 	 * @param takes
-	 *            scanner of the file reads untill Country, Borders or empty line
-	 *            found Put it in a hashmap
+	 *              scanner of the file reads untill Country, Borders or empty line
+	 *              found Put it in a hashmap
 	 * @return a hashmap where continent id is the key and value is the continent
 	 *         object
 	 */
-	public Map<Integer, Continent> readCointinents(Scanner p_scanner) {
+	public Map<Integer, Continent> readContinents(Scanner p_scanner) {
 
 		String l_line;
 		HashMap<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
@@ -108,8 +111,8 @@ public class MapReader {
 	/**
 	 *
 	 * @param calls
-	 *            from readCountry method for each line of the country splits the
-	 *            line and set it to the country object
+	 *              from readCountry method for each line of the country splits the
+	 *              line and set it to the country object
 	 * @return returns Country objects for each line
 	 */
 	public Country mapCountry(String p_line) {
@@ -120,8 +123,8 @@ public class MapReader {
 	/**
 	 *
 	 * @param calls
-	 *            from readContinent method for each line of the continents splits
-	 *            the line and set it to the country object
+	 *              from readContinent method for each line of the continents splits
+	 *              the line and set it to the country object
 	 * @return returns Continent objects for each line
 	 */
 
@@ -134,9 +137,9 @@ public class MapReader {
 	 * Reading the map file Example: europe.map
 	 *
 	 * @throws file
-	 *             not found expection
+	 *              not found expection
 	 * @param mapFilename
-	 *            Returns GameMap object
+	 *                    Returns GameMap object
 	 *
 	 */
 	public GameMap loadMapFile(String mapFilename) {
@@ -155,7 +158,7 @@ public class MapReader {
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
 				if (l_line.equals("[continents]")) {
-					l_continents = readCointinents(l_scanner);
+					l_continents = readContinents(l_scanner);
 					break;
 				}
 			}

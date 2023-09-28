@@ -183,7 +183,7 @@ public class MapReader {
 
 		} catch (FileNotFoundException e) {
 
-			e.printStackTrace();
+			System.out.println("Map file not Found!-" + mapFilename);
 		}
 
 		return gamemap;

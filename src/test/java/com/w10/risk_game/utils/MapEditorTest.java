@@ -91,25 +91,25 @@ public class MapEditorTest {
 		l_countryId = 25;
 		l_countryName = "Scotland";
 		l_continentName = "North_Europe";
-		l_error = l_mapEditor.addCounrty(l_countryId, l_countryName, l_continentName);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentName);
 		assertTrue("Country name already exists!".equals(l_error));
 
 		l_countryId = 9;
 		l_countryName = "England12";
 		l_continentName = "North_Europe";
-		l_error = l_mapEditor.addCounrty(l_countryId, l_countryName, l_continentName);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentName);
 		assertTrue("Country ID already exists!".equals(l_error));
 
 		l_countryId = 25;
 		l_countryName = "England1";
 		l_continentName = "";
-		l_error = l_mapEditor.addCounrty(l_countryId, l_countryName, l_continentName);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentName);
 		assertTrue("Continent Name is emplty!".equals(l_error));
 
 		l_countryId = 30;
 		l_countryName = "England12";
 		l_continentName = "North_Europe12";
-		l_error = l_mapEditor.addCounrty(l_countryId, l_countryName, l_continentName);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentName);
 		assertTrue("Continent doesnot exists!".equals(l_error));
 	}
 

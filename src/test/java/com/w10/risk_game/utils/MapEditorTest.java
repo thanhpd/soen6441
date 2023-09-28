@@ -254,7 +254,7 @@ public class MapEditorTest {
 		l_countryId = 1;
 		l_neighborCountryId = 7;
 		l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
-		assertTrue((l_countryId + " removed from " + l_neighborCountryId).equals(l_error));
+		assertTrue((l_countryId + " remove from " + l_neighborCountryId).equals(l_error));
 		System.out.println("###############After Removing neighbor");
 		l_mapDisplay.formatMap(l_gameMap, false);
 	}

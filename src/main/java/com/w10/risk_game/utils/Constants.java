@@ -48,18 +48,24 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
 	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
-	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS = "Player name already exists!";
+	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST = "Player doesn't exist!";
+	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS = "Player already exists!";
+	public static final String GAME_ENGINE_CANNOT_LOAD_MAP = "Cannot load map!";
 	public static final String GAME_ENGINE_FAILED_TO_EDIT_MAP = "Error in editing map!";
 	public static final String GAME_ENGINE_FAILED_TO_VALIDATE_MAP = "Error in validating map!";
 	public static final String GAME_ENGINE_MAP_NOT_CREATED = "Map is not created!";
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
 	public static final String GAME_ENGINE_CANNOT_START_GAME = "Game cannot begin!";
-
+	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
+	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 
 	// Maps Folder Path
 	public static final String GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+
+	// Map Reader Constants
+	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
 }

@@ -46,7 +46,10 @@ public class MapReader {
 
 			Country l_country = mapCountry(l_line);
 			l_countries.put(l_country.getCountryId(), l_country);
-			p_continents.get(l_country.getContinentId()).addCountry(l_country);
+			Continent p_continent = p_continents.get(l_country.getContinentId());
+			if (p_continent != null) {
+				p_continent.addCountry(l_country);
+			}
 		}
 		return l_countries;
 	}
@@ -182,8 +185,7 @@ public class MapReader {
 			gamemap.addContinentes(l_continents);
 
 		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
+			System.out.println(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
 
 		return gamemap;

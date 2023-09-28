@@ -5,8 +5,6 @@ import com.w10.risk_game.models.GameMap;
 
 import java.util.*;
 
-// TODO: comment all classes and methods and unit tests
-
 /**
  * Needs to cover these cases: - Empty map - Countries: Non-existent continent -
  * Borders: Non-existent country - Borders: Self-referenced country -
@@ -15,8 +13,20 @@ import java.util.*;
  * least one neighbor - Countries: 1 country must have at least one neighbor
  * (fully connected graph check)
  */
-
 public class MapValidator {
+	/**
+	 * The function isMapCorrect checks if a given game map is valid by checking for
+	 * various conditions such as empty map, non-existent continents or neighbors,
+	 * self-referencing neighbors, inaccessible countries, and disconnected
+	 * continents.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method isMapCorrect is returning a boolean value indicating if
+	 *         the map satisfies all conditions.
+	 */
 	public static boolean isMapCorrect(GameMap p_gameMap) {
 		if (isMapEmpty(p_gameMap)) {
 			System.out.println("MapValidator: The map is empty!");
@@ -51,42 +61,94 @@ public class MapValidator {
 		return true;
 	}
 
+	/**
+	 * The function checks if a game map is empty by verifying if the list of
+	 * countries or continents is empty.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method is returning a boolean value, which indicates whether the
+	 *         given game map is empty or not.
+	 */
 	protected static boolean isMapEmpty(GameMap p_gameMap) {
 		return p_gameMap.getCountries().isEmpty() || p_gameMap.getContinents().isEmpty();
 	}
 
+	/**
+	 * The function checks if there are any countries in the game map that have a
+	 * non-existent continent.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is an instance of the `GameMap` class.
+	 *            It represents the game map that contains information about the
+	 *            countries and continents in the game.
+	 * @return The method is returning a boolean value.
+	 */
 	protected static boolean hasNonExistentContinent(GameMap p_gameMap) {
-		var l_countries = p_gameMap.getCountries().values();
+		Collection<Country> l_countries = p_gameMap.getCountries().values();
 
 		return l_countries.stream()
 				.anyMatch(country -> !p_gameMap.getContinents().containsKey(country.getContinentId()));
 	}
 
+	/**
+	 * The function checks if any country in a game map has a neighbor that does not
+	 * exist in the map.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method is returning a boolean value.
+	 */
 	protected static boolean hasNonExistentNeighbor(GameMap p_gameMap) {
-		var l_countries = p_gameMap.getCountries().values();
+		Collection<Country> l_countries = p_gameMap.getCountries().values();
 
 		return l_countries.stream().anyMatch(country -> country.getNeighbors().keySet().stream()
 				.anyMatch(neighborId -> !p_gameMap.getCountries().containsKey(neighborId)));
 	}
 
+	/**
+	 * The function checks if any country in a game map has a neighbor that
+	 * references itself.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method is returning a boolean value.
+	 */
 	protected static boolean hasSelfReferencingNeighbor(GameMap p_gameMap) {
-		var l_countries = p_gameMap.getCountries().values();
+		Collection<Country> l_countries = p_gameMap.getCountries().values();
 
 		return l_countries.stream().anyMatch(country -> country.getNeighbors().values().stream()
 				.anyMatch(neighbor -> neighbor.getCountryId() == country.getCountryId()));
 	}
 
+	/**
+	 * The function checks if all countries in a given map are connected to each
+	 * other.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method is returning a boolean value. It returns true if all the
+	 *         countries in the given map are connected, and false otherwise.
+	 */
 	protected static boolean areCountriesConnected(Map<Integer, Country> p_countryMap) {
 		// Initialize the visited and to be visited list
-		var l_visitedCountryIds = new HashSet<Integer>();
-		var l_queuedCountryIds = new LinkedList<Integer>();
+		Set<Integer> l_visitedCountryIds = new HashSet<>();
+		LinkedList<Integer> l_queuedCountryIds = new LinkedList<>();
 
 		// Set up the first element for visiting
 		if (!p_countryMap.isEmpty()) {
-			var l_firstNode = p_countryMap.values().iterator().next();
+			Country l_firstCountry = p_countryMap.values().iterator().next();
 
-			if (l_firstNode != null) {
-				l_queuedCountryIds.add(l_firstNode.getCountryId());
+			if (l_firstCountry != null) {
+				l_queuedCountryIds.add(l_firstCountry.getCountryId());
 			}
 		}
 
@@ -96,12 +158,12 @@ public class MapValidator {
 		// 3. Remove the node from `l_queuedCountryIds`
 		while (!l_queuedCountryIds.isEmpty()) {
 			Integer l_nextCountryId = l_queuedCountryIds.remove();
-			Country l_visitingNode = p_countryMap.get(l_nextCountryId);
+			Country l_visitingCountry = p_countryMap.get(l_nextCountryId);
 
-			if (l_visitingNode != null) {
-				l_visitedCountryIds.add(l_visitingNode.getCountryId());
+			if (l_visitingCountry != null) {
+				l_visitedCountryIds.add(l_visitingCountry.getCountryId());
 
-				for (Integer l_countryId : l_visitingNode.getNeighbors().keySet()) {
+				for (Integer l_countryId : l_visitingCountry.getNeighbors().keySet()) {
 					if (!l_queuedCountryIds.contains(l_countryId) && !l_visitedCountryIds.contains(l_countryId)) {
 						l_queuedCountryIds.add(l_countryId);
 					}
@@ -114,23 +176,45 @@ public class MapValidator {
 		return l_visitedCountryIds.size() == p_countryMap.size();
 	}
 
+	/**
+	 * The function checks if all continents in a game map are connected and if the
+	 * number of continents in the map matches the number of continents in the
+	 * continentIdToCountryIdsMap.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method is returning a boolean value.
+	 */
 	protected static boolean areContinentsConnected(GameMap p_gameMap) {
-		var continentIdToCountryIdsMap = getContinentIdToCountryIdsMap(p_gameMap);
+		Map<Integer, Map<Integer, Country>> continentIdToCountryIdsMap = getContinentIdToCountryIdsMap(p_gameMap);
 
-		return continentIdToCountryIdsMap.entrySet().stream()
-				.allMatch(entry -> areCountriesConnected(entry.getValue()));
+		return continentIdToCountryIdsMap.entrySet().stream().allMatch(entry -> areCountriesConnected(entry.getValue()))
+				&& p_gameMap.getContinents().size() == continentIdToCountryIdsMap.size();
 	}
 
+	/**
+	 * The function `getContinentIdToCountryIdsMap` creates a map that maps
+	 * continent IDs to maps of country IDs to country objects.
+	 *
+	 * @param p_gameMap
+	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
+	 *            game map. It contains information about the countries, continents,
+	 *            and their connections in the game.
+	 * @return The method is returning a map that maps continent IDs to maps of
+	 *         country IDs to countries.
+	 */
 	protected static Map<Integer, Map<Integer, Country>> getContinentIdToCountryIdsMap(GameMap p_gameMap) {
-		var l_continentIdToCountryIdsMap = new HashMap<Integer, Map<Integer, Country>>();
+		Map<Integer, Map<Integer, Country>> l_continentIdToCountryIdsMap = new HashMap<>();
 
 		for (Map.Entry<Integer, Country> l_entry : p_gameMap.getCountries().entrySet()) {
-			var l_country = l_entry.getValue();
-			var l_countryMap = l_continentIdToCountryIdsMap.get(l_country.getContinentId());
+			Country l_country = l_entry.getValue();
+			Map<Integer, Country> l_countryMap = l_continentIdToCountryIdsMap.get(l_country.getContinentId());
 			if (l_countryMap != null) {
 				l_countryMap.put(l_entry.getKey(), l_entry.getValue());
 			} else {
-				var l_newCountryMap = new HashMap<Integer, Country>();
+				Map<Integer, Country> l_newCountryMap = new HashMap<>();
 				l_newCountryMap.put(l_entry.getKey(), l_entry.getValue());
 				l_continentIdToCountryIdsMap.put(l_country.getContinentId(), l_newCountryMap);
 			}

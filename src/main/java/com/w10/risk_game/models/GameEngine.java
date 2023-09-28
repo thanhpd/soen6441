@@ -364,7 +364,7 @@ public class GameEngine {
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
-			String l_output = this.d_mapEditor.removeNeighbour(p_countryId, p_neighbourCountryId);
+			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighbourCountryId);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);

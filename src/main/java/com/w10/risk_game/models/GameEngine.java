@@ -250,6 +250,8 @@ public class GameEngine {
 	 * @param p_ContinentName
 	 *            The parameter "p_ContinentName" is a String that represents the
 	 *            name of the continent that you want to add.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void addContinent(int p_continentId, String p_ContinentName) {
 		try {
@@ -477,6 +479,8 @@ public class GameEngine {
 	 *
 	 * @param p_mapFileName
 	 *            The name of the file where the map will be saved.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void saveMap(String p_mapFileName) {
 		if (checkIfMapIsValid()) {

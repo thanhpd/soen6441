@@ -426,6 +426,8 @@ public class GameEngine {
 	 * The function checks if a game map is valid and prints a corresponding
 	 * message.
 	 *
+	 * @return a boolean value indicate if the game map is valid
+	 *
 	 * @author Sherwyn Dsouza
 	 */
 	public boolean checkIfMapIsValid() {

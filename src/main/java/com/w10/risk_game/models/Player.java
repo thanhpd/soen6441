@@ -24,9 +24,13 @@ public class Player {
 	 * (`d_leftoverArmies`).
 	 *
 	 * @param p_name
+	 *            the player name
 	 * @param p_countriesOwned
+	 *            the list of countries owned by the player
 	 * @param p_orders
+	 *            the list of orders to issue
 	 * @param p_leftoverArmies
+	 *            the number of current army in possess by the player
 	 */
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
 		this.d_name = p_name;
@@ -86,9 +90,12 @@ public class Player {
 	}
 
 	/**
+	 * The function checks if a given country ID exists in a list of owned
+	 * countries.
 	 *
 	 * @param p_CountryId
-	 * @return boolan based on if the country id is associated with player or not
+	 *            An integer representing the ID of a country.
+	 * @return The method is returning a boolean value.
 	 */
 	public boolean hasCountry(int p_CountryId) {
 		if (d_countriesOwned == null) {

@@ -11,23 +11,31 @@ import com.w10.risk_game.models.Player;
 import dnl.utils.text.table.TextTable;
 
 /**
- * @author Omnia Alam
+ * The MapDisplay class contains methods to populate and format a table
+ * displaying information about countries, continents, players, and neighboring
+ * countries on a game map.
  *
- *         Displays map from Game map object Can be called any time by calling
- *         formatMap() method
+ * @author Omnia Alam
  */
-
 public class MapDisplay {
 
 	/**
+	 * The function "populateRow" takes in various parameters and returns an array
+	 * of strings containing information about a country, continent, player, and
+	 * neighboring countries.
 	 *
 	 * @param p_country
+	 *            The p_country parameter represents a specific country object.
 	 * @param p_continent
+	 *            The p_continent parameter is an object of the Continent class.
 	 * @param p_player
+	 *            The parameter "p_player" is of type Player and represents a player
+	 *            in the game.
 	 * @param p_showArmies
-	 * @return list of string to dispaly in a table
+	 *            A boolean value indicating whether to show the number of armies in
+	 *            the row or not.
+	 * @return The method is returning an array of strings.
 	 */
-
 	public String[] populateRow(Country p_country, Continent p_continent, Player p_player, boolean p_showArmies) {
 
 		ArrayList<String> l_neighborNames = new ArrayList<>();
@@ -73,10 +81,17 @@ public class MapDisplay {
 	}
 
 	/**
+	 * The function prints a formatted table of the map's countries and their
+	 * information.
 	 *
 	 * @param p_map
+	 *            An instance of the GameMap class, which represents the game map
+	 *            containing countries and continents.
 	 * @param p_showArmies
-	 *            Show map in a formated table
+	 *            A boolean value that determines whether or not to display the
+	 *            number of armies in each country. If it is set to true, the table
+	 *            will include a column for the number of armies. If it is set to
+	 *            false, the table will not include this column
 	 */
 	public void formatMap(GameMap p_map, boolean p_showArmies) {
 		String[] l_columnNames;

@@ -6,12 +6,10 @@ import com.w10.risk_game.models.GameMap;
 import java.util.*;
 
 /**
- * Needs to cover these cases: - Empty map - Countries: Non-existent continent -
- * Borders: Non-existent country - Borders: Self-referenced country -
- * Continents: 1 continent must have at least one country - Continents,
- * countries, borders: Check duplicated ids/names - File: countries must have at
- * least one neighbor - Countries: 1 country must have at least one neighbor
- * (fully connected graph check)
+ * The MapValidator class provides methods to validate a game map by checking
+ * for various conditions such as empty map, non-existent continents or
+ * neighbors, self-referencing neighbors, inaccessible countries, and
+ * disconnected continents.
  */
 public class MapValidator {
 	/**
@@ -131,10 +129,9 @@ public class MapValidator {
 	 * The function checks if all countries in a given map are connected to each
 	 * other.
 	 *
-	 * @param p_gameMap
-	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
-	 *            game map. It contains information about the countries, continents,
-	 *            and their connections in the game.
+	 * @param p_countryMap
+	 *            A map that contains the countries as values, where the key is an
+	 *            integer representing the country's ID.
 	 * @return The method is returning a boolean value. It returns true if all the
 	 *         countries in the given map are connected, and false otherwise.
 	 */

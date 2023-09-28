@@ -112,13 +112,13 @@ public class MapEditorTest {
 	 */
 	@Test
 	public void testAddNeighbor() {
-		int l_countryId = 25;
+		int l_countryId = 30;
 		int l_neighborCountryId = 7;
 		String l_error = l_mapEditor.addNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue("Country does not exist! please add first".equals(l_error));
 
 		l_countryId = 1;
-		l_neighborCountryId = 7;
+		l_neighborCountryId = 8;
 		l_error = l_mapEditor.addNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue(("Connection already exists!").equals(l_error));
 

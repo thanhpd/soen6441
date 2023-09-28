@@ -11,7 +11,7 @@ public final class Constants {
 			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
 			+ "-> showmap\n" + "-> editmap\n" + "-> validatemap\n"
 			+ "-> editcontinent -add <continentName> <bonus> -remove <continentID>\n"
-			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
+			+ "-> editcountry -add <countryname> <continentname> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
 			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> start\n"
 			+ "-> quit\n";

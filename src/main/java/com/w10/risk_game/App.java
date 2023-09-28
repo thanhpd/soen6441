@@ -57,8 +57,7 @@ public class App {
 					break;
 				case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
 					if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-						l_gameEngine.addCountry(Integer.parseInt(l_splitStr[2]), l_splitStr[3].toString(),
-								Integer.parseInt(l_splitStr[4]));
+						l_gameEngine.addCountry(l_splitStr[2].toString(), l_splitStr[3].toString());
 					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 						l_gameEngine.removeCountry(Integer.parseInt(l_splitStr[2]));
 					}

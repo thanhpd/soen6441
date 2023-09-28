@@ -239,6 +239,16 @@ public class GameEngine {
 		return this.d_players.get(p_playerName);
 	}
 
+	/**
+	 * The function `editMap` checks if a map file exists, loads it if it does,
+	 * creates a new file if it doesn't, and returns a boolean indicating success or
+	 * failure.
+	 *
+	 * @param p_mapFileName
+	 *            The parameter `p_mapFileName` is a String that represents the file
+	 *            name or path of the map file that needs to be edited.
+	 * @return The method is returning a boolean value.
+	 */
 	public boolean editMap(String p_mapFileName) {
 		File l_file = new File(p_mapFileName);
 		if (l_file.exists()) {

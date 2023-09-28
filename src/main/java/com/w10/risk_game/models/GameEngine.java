@@ -411,6 +411,8 @@ public class GameEngine {
 	 * there are at least two players, and countries have been assigned.
 	 *
 	 * @return The method is returning a boolean value.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	private boolean checkIfGameCanBegin() {
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
@@ -419,6 +421,8 @@ public class GameEngine {
 	/**
 	 * The startGameLoop function checks if the game can begin and then iterates
 	 * through the players, allowing each player to issue an order.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void startGameLoop() {
 		if (!checkIfGameCanBegin()) {
@@ -444,6 +448,8 @@ public class GameEngine {
 	/**
 	 * The startExecution function iterates through each player and executes their
 	 * orders.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	private void startExecution() {
 		for (Player l_player : this.d_players.values()) {

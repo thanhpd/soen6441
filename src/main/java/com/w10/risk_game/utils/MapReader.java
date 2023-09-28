@@ -46,7 +46,10 @@ public class MapReader {
 
 			Country l_country = mapCountry(l_line);
 			l_countries.put(l_country.getCountryId(), l_country);
-			p_continents.get(l_country.getContinentId()).addCountry(l_country);
+			Continent p_continent = p_continents.get(l_country.getContinentId());
+			if (p_continent != null) {
+				p_continent.addCountry(l_country);
+			}
 		}
 		return l_countries;
 	}

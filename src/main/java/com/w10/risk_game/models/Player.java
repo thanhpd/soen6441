@@ -84,6 +84,7 @@ public class Player {
 	public List<Order> getOrders() {
 		return d_orders;
 	}
+
 	/**
 	 *
 	 * @param p_CountryId
@@ -160,8 +161,6 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
-		// todo - to add an order to the list of orders held by the player
-		// todo - check the input
 		int l_army = this.getLeftoverArmies();
 		List<Country> l_countries = this.getCountriesOwned();
 		boolean l_again = true;
@@ -171,9 +170,11 @@ public class Player {
 			boolean l_isValidOrder;
 			boolean l_isValidCountry = false;
 			boolean l_isValidNum = true;
-			System.out.println("Please enter your order in the format of \"orderType countryId num\".");
+			System.out.println("Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".");
 			String l_input = l_scanner.nextLine();
 			String[] l_inputArray = l_input.split(" ");
+			if (l_inputArray[0].contains("done"))
+				break;
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
 			if (!l_isValidFormat) {
@@ -192,11 +193,8 @@ public class Player {
 				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
 				d_orders.add(order);
 				l_army = l_army - Integer.parseInt(l_num);
-				if (l_army <= 0) {
-					l_again = false;
-				} else {
-					l_again = true;
-				}
+				this.setLeftoverArmies(l_army);
+				l_again = false;
 			} else {
 				l_again = true;
 				System.out.print("Invalid input! ");
@@ -251,6 +249,7 @@ public class Player {
 		}
 		return true;
 	}
+
 	/**
 	 * This function is used to check the order type. The order type should be
 	 * "deploy"
@@ -267,6 +266,7 @@ public class Player {
 		}
 		return true;
 	}
+
 	/**
 	 * This function is used to check the country id. The country id should be one
 	 * of the countries owned by the player
@@ -285,6 +285,7 @@ public class Player {
 		}
 		return false;
 	}
+
 	/**
 	 * This function is used to check the number of armies. The number of armies
 	 * should be less than the number of leftover armies

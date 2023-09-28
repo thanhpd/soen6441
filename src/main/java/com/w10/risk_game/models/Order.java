@@ -15,35 +15,35 @@ public class Order {
 	private int d_num;
 
 	// Getter
-	public Player getD_player() {
+	public Player getPlayer() {
 		return d_player;
 	}
 
-	public String getD_orderType() {
+	public String getOrderType() {
 		return d_orderType;
 	}
 
-	public int getD_countryId() {
+	public int getCountryId() {
 		return d_countryId;
 	}
 
-	public int getD_num() {
+	public int getNum() {
 		return d_num;
 	}
 	// Setter
-	public void setD_player(Player d_player) {
+	public void setDlayer(Player d_player) {
 		this.d_player = d_player;
 	}
 
-	public void setD_orderType(String d_orderType) {
+	public void setOrderType(String d_orderType) {
 		this.d_orderType = d_orderType;
 	}
 
-	public void setD_countryId(int d_countryId) {
+	public void setCountryId(int d_countryId) {
 		this.d_countryId = d_countryId;
 	}
 
-	public void setD_num(int d_num) {
+	public void setNum(int d_num) {
 		this.d_num = d_num;
 	}
 	public Order(Player p_player, String p_orderType, int p_countryId, int p_num) {
@@ -60,8 +60,8 @@ public class Order {
 		Player l_player = this.d_player;
 		int l_countryId = this.d_countryId;
 		int l_num = this.d_num;
-		int l_armies = l_player.getLeftoverArmies();
-		l_player.setLeftoverArmies(l_armies - l_num);
+		// int l_armies = l_player.getLeftoverArmies();
+		// l_player.setLeftoverArmies(l_armies - l_num);
 		List<Country> l_countries = l_player.getCountriesOwned();
 		for (Country l_country : l_countries) {
 			if (l_country.getCountryId() == l_countryId) {

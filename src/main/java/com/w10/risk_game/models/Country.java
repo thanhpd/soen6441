@@ -13,7 +13,8 @@ public class Country implements Serializable {
 	private String d_countryName;
 	private int d_continentId;
 	private int d_armyCount;
-	private Player owner;
+	private Player d_owner;
+
 	private Map<Integer, Country> d_neighbors;
 
 	public Country(int p_countryId, String p_countryName, int p_continentId, int p_armyCount) {
@@ -101,5 +102,13 @@ public class Country implements Serializable {
 
 	public Map<Integer, Country> getNeighbors() {
 		return d_neighbors;
+	}
+
+	public Player getOwner() {
+		return this.d_owner;
+	}
+
+	public void setOwner(Player p_owner) {
+		this.d_owner = p_owner;
 	}
 }

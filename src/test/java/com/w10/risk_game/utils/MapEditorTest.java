@@ -120,6 +120,11 @@ public class MapEditorTest {
 		l_countryId = 1;
 		l_neighborCountryId = 7;
 		l_error = l_mapEditor.addNeighbor(l_countryId, l_neighborCountryId);
+		assertTrue(("Connection already exists!").equals(l_error));
+
+		l_countryId = 1;
+		l_neighborCountryId = 12;
+		l_error = l_mapEditor.addNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue((l_countryId + " added with " + l_neighborCountryId).equals(l_error));
 		l_mapDisplay.formatMap(l_gameMap, false);
 	}

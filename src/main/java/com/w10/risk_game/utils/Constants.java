@@ -65,4 +65,7 @@ public final class Constants {
 	// Maps Folder Path
 	public static final String GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
 
+	// Map Reader Constants
+	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
+
 }

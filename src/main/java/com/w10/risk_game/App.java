@@ -12,10 +12,10 @@ import com.w10.risk_game.utils.MapValidator;
 public class App {
 	/**
 	 * @param args
-	 *             - passed in arguments for the application. The code is the main
-	 *             method of the application. It initializes a GameEngine object and
-	 *             starts a loop that prompts the user for input and performs
-	 *             different actions based on the input.
+	 *            - passed in arguments for the application. The code is the main
+	 *            method of the application. It initializes a GameEngine object and
+	 *            starts a loop that prompts the user for input and performs
+	 *            different actions based on the input.
 	 */
 
 	public static void main(String[] args) {
@@ -31,21 +31,21 @@ public class App {
 
 				switch (l_userInputArr[0]) {
 					// Map editor phase
-					case Constants.USER_INPUT_COMMAND_LOADMAP:
+					case Constants.USER_INPUT_COMMAND_LOADMAP :
 						System.out.println(Constants.CLI_LOAD_MAP + l_userInputArr[1]);
 						l_gameEngine.loadMap(l_userInputArr[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_SAVEMAP:
+					case Constants.USER_INPUT_COMMAND_SAVEMAP :
 						l_gameEngine.saveMap(l_userInputArr[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_SHOWMAP:
+					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						System.out.println(Constants.CLI_SHOW_MAP);
 						l_gameEngine.showMap();
 						break;
-					case Constants.USER_INPUT_COMMAND_EDITMAP:
+					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						l_gameEngine.editMap(l_userInputArr[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT:
+					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							l_gameEngine.addContinent(Integer.parseInt(l_userInputArr[2]),
 									l_userInputArr[3].toString());
@@ -53,7 +53,7 @@ public class App {
 							l_gameEngine.removeContinent(Integer.parseInt(l_userInputArr[2]));
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY:
+					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							l_gameEngine.addCountry(Integer.parseInt(l_userInputArr[2]), l_userInputArr[3].toString(),
 									Integer.parseInt(l_userInputArr[4]));
@@ -61,7 +61,7 @@ public class App {
 							l_gameEngine.removeCountry(Integer.parseInt(l_userInputArr[2]));
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR:
+					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							l_gameEngine.addNeighbor(Integer.parseInt(l_userInputArr[2]),
 									Integer.parseInt(l_userInputArr[3]));
@@ -70,12 +70,12 @@ public class App {
 									Integer.parseInt(l_userInputArr[3]));
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_VALIDATEMAP:
+					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
 						l_gameEngine.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up phase
-					case Constants.USER_INPUT_COMMAND_GAMEPLAYER:
+					case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							l_gameEngine.createPlayer(l_userInputArr[2].toString());
 						} else if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
@@ -84,20 +84,20 @@ public class App {
 							l_gameEngine.showAllPlayers();
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES:
+					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 						System.out.println(Constants.CLI_ASSIGN_COUNTRIES);
 						l_gameEngine.assignCountries();
 						break;
-					case Constants.USER_INPUT_COMMAND_BEGIN_GAME:
+					case Constants.USER_INPUT_COMMAND_BEGIN_GAME :
 						l_gameEngine.startGameLoop();
 						break;
 
 					// Others
-					case Constants.USER_INPUT_COMMAND_QUIT:
+					case Constants.USER_INPUT_COMMAND_QUIT :
 						l_scanner.close();
 						l_exit = true;
 						break;
-					default:
+					default :
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 				}
 				if (l_exit)

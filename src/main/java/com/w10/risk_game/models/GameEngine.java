@@ -3,9 +3,9 @@ package com.w10.risk_game.models;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
@@ -42,18 +42,30 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function "loadMap" loads a map file using a MapReader object and assigns
-	 * the loaded map to the "this.d_gameMap" variable.
+	 * The function "loadMap" loads a map file, creates a game map object, and
+	 * checks if the map is valid.
 	 *
-	 * @author Sherwyn Dsouza
 	 * @param p_fileName
-	 *            The parameter "p_fileName" is a String that represents the name of
-	 *            the file that contains the map data.
+	 *            The parameter `p_fileName` is a String that represents the name of
+	 *            the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_fileName) {
-		this.d_mapReader = new MapReader();
-		this.d_gameMap = d_mapReader.loadMapFile(p_fileName);
-		this.d_mapEditor = new MapEditor(this.d_gameMap);
+		try {
+			this.d_mapReader = new MapReader();
+			this.d_gameMap = d_mapReader.loadMapFile(p_fileName);
+			this.d_mapEditor = new MapEditor(this.d_gameMap);
+			if (this.d_gameMap.isMapCreated()) {
+				if (!checkIfMapIsValid()) {
+					this.d_gameMap = null;
+					System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+				}
+			} else {
+				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+			}
+
+		} catch (Exception e) {
+			System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+		}
 	}
 
 	/**
@@ -90,7 +102,9 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function removes a player from a list of players in a game engine.
+	 * The function removes a player from a list of players in a game engine. It
+	 * also randomly assigns the countries of the removed player to the remaining
+	 * players
 	 *
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
@@ -100,17 +114,24 @@ public class GameEngine {
 	 */
 	public void removePlayer(String p_playerName) {
 		try {
+			if (!this.d_players.containsKey(p_playerName)) {
+				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
+				return;
+			}
 			p_playerName = p_playerName.trim();
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			if (l_playerNames.size() > 1) {
-				List<Country> l_ownedCounriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
+				List<Country> l_ownedCountriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
+				Collections.shuffle(l_ownedCountriesOfPlayer);
 
 				l_playerNames.remove(p_playerName);
 				int i = 0;
 
-				while (i < l_ownedCounriesOfPlayer.size()) {
+				while (i < l_ownedCountriesOfPlayer.size()) {
 					this.d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
-							.add(l_ownedCounriesOfPlayer.get(i));
+							.add(l_ownedCountriesOfPlayer.get(i));
+					l_ownedCountriesOfPlayer.get(i)
+							.setOwner(this.d_players.get(l_playerNames.get(i % l_playerNames.size())));
 					i += 1;
 				}
 
@@ -119,6 +140,7 @@ public class GameEngine {
 				}
 			}
 			this.d_players.remove(p_playerName.trim());
+			System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
@@ -154,6 +176,8 @@ public class GameEngine {
 		try {
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			int l_noOfPlayers = this.d_players.size();
+			List<Country> l_countries = new ArrayList<>(this.d_gameMap.getCountries().values());
+			Collections.shuffle(l_countries);
 
 			if (l_noOfPlayers > this.d_gameMap.getCountries().size()) {
 				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
@@ -162,10 +186,10 @@ public class GameEngine {
 			}
 
 			int i = 0;
-			while (i < this.d_gameMap.getCountries().size()) {
+			while (i < l_countries.size()) {
 				String l_playerName = l_playerNames.get(i % l_noOfPlayers);
-				this.d_players.get(l_playerName).getCountriesOwned().add(this.d_gameMap.getCountries().get(i + 1));
-				this.d_gameMap.getCountries().get(i + 1).setOwner(this.d_players.get(l_playerName));
+				this.d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i));
+				l_countries.get(i).setOwner(this.d_players.get(l_playerName));
 				i += 1;
 			}
 
@@ -175,7 +199,8 @@ public class GameEngine {
 
 			this.d_isCountriesAssigned = true;
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
+			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
+					this.d_players.size());
 		}
 	}
 
@@ -243,6 +268,8 @@ public class GameEngine {
 	 * @param p_ContinentName
 	 *            The parameter "p_ContinentName" is a String that represents the
 	 *            name of the continent that you want to add.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void addContinent(int p_continentId, String p_ContinentName) {
 		try {
@@ -314,7 +341,6 @@ public class GameEngine {
 			}
 			System.out.println(l_output);
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
@@ -392,19 +418,23 @@ public class GameEngine {
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void checkIfMapIsValid() {
+	public boolean checkIfMapIsValid() {
 		try {
 			if (this.d_gameMap.isMapCreated()) {
 				if (MapValidator.isMapCorrect(this.d_gameMap)) {
 					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
+					return true;
 				} else {
 					System.out.println(Constants.GAME_ENGINE_MAP_INVALID);
+					return false;
 				}
 			} else {
 				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+				return false;
 			}
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
+			return false;
 		}
 	}
 
@@ -413,6 +443,8 @@ public class GameEngine {
 	 * there are at least two players, and countries have been assigned.
 	 *
 	 * @return The method is returning a boolean value.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	private boolean checkIfGameCanBegin() {
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
@@ -421,6 +453,8 @@ public class GameEngine {
 	/**
 	 * The startGameLoop function checks if the game can begin and then iterates
 	 * through the players, allowing each player to issue an order.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public void startGameLoop() {
 		if (!checkIfGameCanBegin()) {
@@ -438,7 +472,7 @@ public class GameEngine {
 				}
 				i += 1;
 			}
-			System.out.println("Executing orders now...");
+			System.out.println(Constants.GAME_ENGINE_EXECUTING_ORDERS);
 			startExecution();
 		}
 	}
@@ -446,12 +480,31 @@ public class GameEngine {
 	/**
 	 * The startExecution function iterates through each player and executes their
 	 * orders.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	private void startExecution() {
 		for (Player l_player : this.d_players.values()) {
 			while (l_player.getOrders().size() != 0) {
 				l_player.nextOrder().execute();
 			}
+		}
+	}
+
+	/**
+	 * The function saves the game map to a file if it is valid, otherwise it prints
+	 * an error message.
+	 *
+	 * @param p_mapFileName
+	 *            The name of the file where the map will be saved.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public void saveMap(String p_mapFileName) {
+		if (checkIfMapIsValid()) {
+			this.d_gameMap.saveMap(p_mapFileName);
+		} else {
+			System.out.println(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
 	}
 }

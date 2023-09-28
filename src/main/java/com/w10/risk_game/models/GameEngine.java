@@ -226,9 +226,9 @@ public class GameEngine {
 	 *            The parameter "p_ContinentName" is a String that represents the
 	 *            name of the continent that you want to add.
 	 */
-	public void addContinent(int p_continentId, String p_ContinentName) {
+	public void addContinent(String p_continentName,int p_bonus) {
 		try {
-			String l_output = this.d_mapEditor.addContinent(p_continentId, p_ContinentName);
+			String l_output = this.d_mapEditor.addContinent(p_continentName,p_bonus);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);

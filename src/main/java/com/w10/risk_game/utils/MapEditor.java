@@ -57,14 +57,12 @@ public class MapEditor {
 	 * @return string based on operation performed add operation on the current
 	 *         gamemap
 	 */
-	public String addContinent(int p_continentId, String p_continentName) {
+	public String addContinent(String p_continentName,int p_bonus) {
 		if (l_gameMap.containsContinent(p_continentName)) {
 			return "Continent name already exists!";
 		}
-		if (l_gameMap.containsContinent(p_continentId)) {
-			return "Continent id already exists!";
-		}
-		Continent l_continent = new Continent(p_continentId, p_continentName, 0);
+		int l_newContinetid= l_gameMap.getContinents().size()+1;
+		Continent l_continent = new Continent(l_newContinetid, p_continentName, p_bonus);
 		l_gameMap.getContinents().put(l_gameMap.getContinents().size() + 1, l_continent);
 
 		return p_continentName + " is added!";

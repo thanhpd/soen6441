@@ -50,7 +50,7 @@ public class App {
 					break;
 				case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 					if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-						l_gameEngine.addContinent(Integer.parseInt(l_splitStr[2]), l_splitStr[3].toString());
+						l_gameEngine.addContinent(l_splitStr[2].toString(), Integer.parseInt(l_splitStr[3]));
 					} else if (l_splitStr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 						l_gameEngine.removeContinent(Integer.parseInt(l_splitStr[2]));
 					}

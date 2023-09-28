@@ -122,7 +122,7 @@ public class MapEditorTest {
 		l_countryId = 25;
 		l_countryName = "England1";
 		l_continentName = "North_Europe";
-		l_error = l_mapEditor.addCounrty(l_countryId, l_countryName, l_continentName);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentName);
 		assertTrue((l_countryName + " is Added! and to the continent " + l_continentName).equals(l_error));
 		System.out.println("###############After Country added " + l_countryName);
 		l_mapDisplay.formatMap(l_gameMap, false);
@@ -232,20 +232,20 @@ public class MapEditorTest {
 	 * Invalid inputs test to remove a neighbor
 	 */
 	@Test
-	public void testRemoveneighborWithErrorHandle() {
+	public void testRemoveNeighborWithErrorHandle() {
 		int l_countryId = 26;
 		int l_neighborCountryId = 7;
-		String l_error = l_mapEditor.removeneighbor(l_countryId, l_neighborCountryId);
+		String l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue(("Country does not exist! please add first").equals(l_error));
 
 		l_countryId = 25;
 		l_neighborCountryId = 12;
-		l_error = l_mapEditor.removeneighbor(l_countryId, l_neighborCountryId);
+		l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue(("Connection doesnot exists!").equals(l_error));
 
 		l_countryId = 11;
 		l_neighborCountryId = 27;
-		l_error = l_mapEditor.removeneighbor(l_countryId, l_neighborCountryId);
+		l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue(("Neighbor country does not exist!please add first").equals(l_error));
 	}
 	/**
@@ -255,7 +255,7 @@ public class MapEditorTest {
 	public void testRemoveneighbor() {
 		l_countryId = 1;
 		l_neighborCountryId = 7;
-		l_error = l_mapEditor.removeneighbor(l_countryId, l_neighborCountryId);
+		l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue((l_countryId + " removed from " + l_neighborCountryId).equals(l_error));
 		System.out.println("###############After Removing neighbor");
 		l_mapDisplay.formatMap(l_gameMap, false);

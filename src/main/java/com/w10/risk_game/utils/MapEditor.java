@@ -48,7 +48,7 @@ public class MapEditor {
 	 *         already contains a country with the same name as p_countryName. -
 	 *         "Country ID already
 	 */
-	public String addCounrty(int p_countryId, String p_countryName, String p_continentName) {
+	public String addCountry(int p_countryId, String p_countryName, String p_continentName) {
 
 		if (StringUtils.isBlank(p_countryName)) {
 			return "Country Name is empty!";
@@ -188,7 +188,7 @@ public class MapEditor {
 	 *            connection with.
 	 * @return The method is returning a string.
 	 */
-	public String removeneighbor(int p_countryId, int p_neighborCountryId) {
+	public String removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return "Country does not exist! please add first";
 		}

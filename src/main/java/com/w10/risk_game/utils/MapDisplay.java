@@ -56,7 +56,7 @@ public class MapDisplay {
 
 				if (p_player != null && p_player.hasCountry(p_country.getCountryId())) {
 					l_values[5] = p_player.getName();
-					l_values[6] = "" + p_player.getLeftoverArmies();
+					l_values[6] = "" + p_country.getArmyCount();
 				} else {
 					l_values[5] = " ";
 					l_values[6] = " ";

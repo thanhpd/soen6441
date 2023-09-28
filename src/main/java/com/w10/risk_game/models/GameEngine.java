@@ -150,23 +150,20 @@ public class GameEngine {
 	 */
 	public void assignCountries() {
 		try {
-			this.d_players.forEach((p_playerName, p_player) -> {
-				p_player.setCountriesOwned(new ArrayList<Country>());
-			});
-			Map<Integer, Country> l_countries = this.d_gameMap.getCountries();
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			int l_noOfPlayers = this.d_players.size();
 
-			if (l_noOfPlayers > l_countries.size()) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, l_countries.size(), l_noOfPlayers);
+			if (l_noOfPlayers > this.d_gameMap.getCountries().size()) {
+				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
+						l_noOfPlayers);
 				return;
 			}
 
 			int i = 0;
-			while (i < l_countries.size()) {
+			while (i < this.d_gameMap.getCountries().size()) {
 				String l_playerName = l_playerNames.get(i % l_noOfPlayers);
-				this.d_players.get(l_playerName).getCountriesOwned().add(l_countries.get(i + 1));
-				l_countries.get(i + 1).setOwner(this.d_players.get(l_playerName));
+				this.d_players.get(l_playerName).getCountriesOwned().add(this.d_gameMap.getCountries().get(i + 1));
+				this.d_gameMap.getCountries().get(i + 1).setOwner(this.d_players.get(l_playerName));
 				i += 1;
 			}
 
@@ -434,9 +431,8 @@ public class GameEngine {
 	 */
 	private void startExecution() {
 		for (Player l_player : this.d_players.values()) {
-			List<Order> l_orders = l_player.getOrders();
-			for (Order l_order : l_orders) {
-				l_order.execute();
+			while (l_player.getOrders().size() != 0) {
+				l_player.nextOrder().execute();
 			}
 		}
 	}

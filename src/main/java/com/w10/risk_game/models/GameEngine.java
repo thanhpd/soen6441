@@ -40,18 +40,25 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function "loadMap" loads a map file using a MapReader object and assigns
-	 * the loaded map to the "this.d_gameMap" variable.
+	 * The function loads a map file, checks if it is valid, and prints an error
+	 * message if it is not.
 	 *
-	 * @author Sherwyn Dsouza
 	 * @param p_fileName
-	 *            The parameter "p_fileName" is a String that represents the name of
-	 *            the file that contains the map data.
+	 *            The parameter `p_fileName` is a String that represents the name of
+	 *            the file containing the map data that needs to be loaded.
 	 */
 	public void loadMap(String p_fileName) {
-		this.d_mapReader = new MapReader();
-		this.d_gameMap = d_mapReader.loadMapFile(p_fileName);
-		this.d_mapEditor = new MapEditor(this.d_gameMap);
+		try {
+			this.d_mapReader = new MapReader();
+			this.d_gameMap = d_mapReader.loadMapFile(p_fileName);
+			this.d_mapEditor = new MapEditor(this.d_gameMap);
+			if (!checkIfMapIsValid()) {
+				this.d_gameMap = null;
+				System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+			}
+		} catch (Exception e) {
+			System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+		}
 	}
 
 	/**

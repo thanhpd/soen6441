@@ -95,6 +95,9 @@ public class App {
 					System.out.println(Constants.CLI_ASSIGN_COUNTRIES);
 					l_gameEngine.assignCountries();
 					break;
+				case Constants.USER_INPUT_COMMAND_BEGIN_GAME :
+					l_gameEngine.startGameLoop();
+					break;
 
 				// Others
 				case Constants.USER_INPUT_COMMAND_QUIT :

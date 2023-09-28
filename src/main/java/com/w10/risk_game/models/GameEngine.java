@@ -10,6 +10,7 @@ import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
 import com.w10.risk_game.utils.MapValidator;
+import com.w10.risk_game.utils.Reinforcements;
 
 /**
  * The GameEngine class is responsible for managing the game map, players, and
@@ -24,6 +25,7 @@ public class GameEngine {
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
+	private Reinforcements d_reinforcements;
 
 	/**
 	 * Game Engine constructor
@@ -34,6 +36,7 @@ public class GameEngine {
 		this.d_isCountriesAssigned = false;
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
+		this.d_reinforcements = new Reinforcements();
 	}
 
 	/**
@@ -73,7 +76,7 @@ public class GameEngine {
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
-			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), null, 0);
+			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
 			} else {
@@ -90,7 +93,7 @@ public class GameEngine {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that needs to be removed.
-	 * 
+	 *
 	 * @author Sherwyn Dsouza
 	 */
 	public void removePlayer(String p_playerName) {
@@ -107,6 +110,10 @@ public class GameEngine {
 					this.d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
 							.add(l_ownedCounriesOfPlayer.get(i));
 					i += 1;
+				}
+
+				for (Player l_player : this.d_players.values()) {
+					this.d_reinforcements.reinforcementPhase(l_player, this.d_gameMap);
 				}
 			}
 			this.d_players.remove(p_playerName.trim());
@@ -162,6 +169,11 @@ public class GameEngine {
 				l_countries.get(i + 1).setOwner(this.d_players.get(l_playerName));
 				i += 1;
 			}
+
+			for (Player l_player : this.d_players.values()) {
+				this.d_reinforcements.reinforcementPhase(l_player, this.d_gameMap);
+			}
+
 			this.d_isCountriesAssigned = true;
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
@@ -381,4 +393,51 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * The function checks if the game can begin by verifying if the map is created,
+	 * there are at least two players, and countries have been assigned.
+	 *
+	 * @return The method is returning a boolean value.
+	 */
+	private boolean checkIfGameCanBegin() {
+		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
+	}
+
+	/**
+	 * The startGameLoop function checks if the game can begin and then iterates
+	 * through the players, allowing each player to issue an order.
+	 */
+	public void startGameLoop() {
+		if (!checkIfGameCanBegin()) {
+			System.out.println(Constants.GAME_ENGINE_CANNOT_START_GAME);
+		} else {
+			List<String> l_playerName = new ArrayList<>(this.d_players.keySet());
+			int i = 0;
+			while (l_playerName.size() > 0) {
+				Player l_player = this.d_players.get(l_playerName.get(i % l_playerName.size()));
+				if (l_player.getLeftoverArmies() == 0) {
+					l_playerName.remove(i % l_playerName.size());
+				} else {
+					System.out.println(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName().toString() + ":");
+					l_player.issueOrder();
+				}
+				i += 1;
+			}
+			System.out.println("Executing orders now...");
+			startExecution();
+		}
+	}
+
+	/**
+	 * The startExecution function iterates through each player and executes their
+	 * orders.
+	 */
+	private void startExecution() {
+		for (Player l_player : this.d_players.values()) {
+			List<Order> l_orders = l_player.getOrders();
+			for (Order l_order : l_orders) {
+				l_order.execute();
+			}
+		}
+	}
 }

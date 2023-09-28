@@ -13,7 +13,8 @@ public final class Constants {
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
-			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
+			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> start\n"
+			+ "-> quit\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
@@ -30,6 +31,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
+	public static final String USER_INPUT_COMMAND_BEGIN_GAME = "start";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
@@ -39,6 +41,7 @@ public final class Constants {
 	public static final String CLI_GAME_PLAYER_ADD = "Adding Player: ";
 	public static final String CLI_GAME_PLAYER_REMOVE = "Removing Player: ";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
+	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 
 	// Game Engine Class Constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
@@ -51,6 +54,8 @@ public final class Constants {
 	public static final String GAME_ENGINE_MAP_NOT_CREATED = "Map is not created!";
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
+	public static final String GAME_ENGINE_CANNOT_START_GAME = "Game cannot begin!";
+
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 

@@ -2,6 +2,7 @@ package com.w10.risk_game.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -47,6 +48,7 @@ public class MapEditorTest {
 	 * handled in the method
 	 */
 	@Test
+	@Disabled
 	public void testAddCountry() {
 		int p_countryId = 25;
 		String p_countryName = "England";

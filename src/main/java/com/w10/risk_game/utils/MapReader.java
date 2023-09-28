@@ -182,8 +182,7 @@ public class MapReader {
 			gamemap.addContinentes(l_continents);
 
 		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
+			System.out.println(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
 
 		return gamemap;

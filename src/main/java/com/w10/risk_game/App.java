@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import com.w10.risk_game.models.GameEngine;
 import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.MapValidator;
 
 /**
  * Initialize the Application

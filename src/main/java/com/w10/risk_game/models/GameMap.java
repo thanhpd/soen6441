@@ -26,7 +26,7 @@ public class GameMap {
 	}
 
 	public boolean isMapCreated() {
-		return this.l_continents.size() != 0 || this.l_countries.size() != 0;
+		return this.l_continents.size() != 0 && this.l_countries.size() != 0;
 	}
 
 	// Getter

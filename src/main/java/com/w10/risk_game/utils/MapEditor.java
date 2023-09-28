@@ -202,6 +202,6 @@ public class MapEditor {
 		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighborCountryId);
 		l_gameMap.findCountry(p_neighborCountryId).getNeighbors().remove(p_countryId);
 
-		return p_countryId + " added with " + p_neighborCountryId;
+		return p_countryId + " removed from " + p_neighborCountryId;
 	}
 }

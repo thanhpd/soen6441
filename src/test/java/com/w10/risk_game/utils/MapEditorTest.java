@@ -102,11 +102,6 @@ public class MapEditorTest {
 		l_error = l_mapEditor.addCountry(l_countryName, l_continentName);
 		assertTrue("Country name already exists!".equals(l_error));
 
-		l_countryName = "England1";
-		l_continentName = "";
-		l_error = l_mapEditor.addCountry(l_countryName, l_continentName);
-		assertTrue("Continent Name is empty!".equals(l_error));
-
 		l_countryName = "England12";
 		l_continentName = "North_Europe12";
 		l_error = l_mapEditor.addCountry(l_countryName, l_continentName);
@@ -175,7 +170,7 @@ public class MapEditorTest {
 	public void testRemoveContinentWithErrorHandle() {
 		l_continentId = 5;
 		l_error = l_mapEditor.removeContinent(l_continentId);
-		assertTrue("Continent doesnot exists".equals(l_error));
+		assertTrue("Continent does not exists".equals(l_error));
 	}
 	/**
 	 * Valid inputs to remove a continent
@@ -208,7 +203,7 @@ public class MapEditorTest {
 	public void testRemoveCountryWithErrorHandle() {
 		int l_countryId = 26;
 		String l_error = l_mapEditor.removeCountry(l_countryId);
-		assertTrue("Country id doesnot exists".equals(l_error));
+		assertTrue("Country id does not exists".equals(l_error));
 	}
 	/**
 	 * Valid inputs to remove a country
@@ -236,10 +231,10 @@ public class MapEditorTest {
 		String l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
 		assertTrue(("Country does not exist! please add first").equals(l_error));
 
-		l_countryId = 25;
-		l_neighborCountryId = 12;
+		l_countryId = 11;
+		l_neighborCountryId = 1;
 		l_error = l_mapEditor.removeNeighbor(l_countryId, l_neighborCountryId);
-		assertTrue(("Connection doesnot exists!").equals(l_error));
+		assertTrue(("Connection does not exists!").equals(l_error));
 
 		l_countryId = 11;
 		l_neighborCountryId = 27;

@@ -86,7 +86,7 @@ public class MapReader {
 	 * @return a hashmap where continent id is the key and value is the continent
 	 *         object
 	 */
-	public Map<Integer, Continent> readCointinents(Scanner p_scanner) {
+	public Map<Integer, Continent> readContinents(Scanner p_scanner) {
 
 		String l_line;
 		HashMap<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
@@ -155,7 +155,7 @@ public class MapReader {
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
 				if (l_line.equals("[continents]")) {
-					l_continents = readCointinents(l_scanner);
+					l_continents = readContinents(l_scanner);
 					break;
 				}
 			}

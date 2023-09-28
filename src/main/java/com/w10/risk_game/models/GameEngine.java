@@ -309,7 +309,6 @@ public class GameEngine {
 			}
 			System.out.println(l_output);
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}

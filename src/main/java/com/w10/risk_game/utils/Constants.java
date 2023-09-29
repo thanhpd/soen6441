@@ -9,7 +9,7 @@ public final class Constants {
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
 			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> editmap\n" + "-> validatemap\n"
+			+ "-> showmap\n" + "-> editmap <filename>\n" + "-> validatemap\n"
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
@@ -33,6 +33,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_COMMAND_BEGIN_GAME = "start";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
+	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants

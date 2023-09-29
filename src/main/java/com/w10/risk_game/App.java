@@ -103,7 +103,7 @@ public class App {
 					break;
 				System.out.println();
 			} catch (Exception e) {
-				System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
+				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
 			}
 		}
 	}

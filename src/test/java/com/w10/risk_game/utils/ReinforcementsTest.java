@@ -83,7 +83,8 @@ public class ReinforcementsTest {
 	 */
 	@Test
 	public void testReinforcementPhase() {
-		GameMap d_gameMap = d_mapReader.loadMapFile("europe.map");
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
 		// Test bonus
 		Reinforcements.reinforcementPhase(d_player, d_gameMap);
 		assertEquals(17, d_player.getLeftoverArmies());
@@ -99,7 +100,8 @@ public class ReinforcementsTest {
 	 */
 	@Test
 	public void testGroupCountry() {
-		GameMap d_gameMap = d_mapReader.loadMapFile("europe.map");
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
 		// Test all countries belong to one continent
 		List<String> l_groupCountries = Reinforcements.groupCountries(d_countries, d_gameMap);
 		assertEquals("1 2 3 4 5 6 7", l_groupCountries.get(0));

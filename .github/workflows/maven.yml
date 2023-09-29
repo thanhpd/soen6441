@@ -39,8 +39,8 @@ jobs:
         cache: 'maven'
     - name: Build and run unit tests
       run: mvn -B package --file pom.xml
-    # - name: Generate Javadoc
-    #   run: mvn javadoc:javadoc
+    - name: Generate Javadoc
+      run: mvn -B javadoc:javadoc
     - name: Store as artifact for downloading
       uses: actions/upload-artifact@v3
       with:

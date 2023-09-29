@@ -95,7 +95,7 @@ public class GameMap {
 		this.d_countries.putAll(p_countries);
 	}
 
-	public void addContinentes(Map<Integer, Continent> p_continents) {
+	public void addContinents(Map<Integer, Continent> p_continents) {
 		this.d_continents.putAll(p_continents);
 	}
 

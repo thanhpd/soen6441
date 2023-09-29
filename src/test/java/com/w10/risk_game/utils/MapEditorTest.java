@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.utils.Constants;
 
 /**
  * @author Omnia Alam This is test class on the MapEditor There are some test
@@ -23,7 +24,8 @@ public class MapEditorTest {
 	@BeforeAll
 	public void setUp() {
 		MapReader l_mapReader = new MapReader();
-		l_gameMap = l_mapReader.loadMapFile("test.map");
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map";
+		l_gameMap = l_mapReader.loadMapFile(l_mapFilePath);
 		l_mapEditor = new MapEditor(l_gameMap);
 
 	}

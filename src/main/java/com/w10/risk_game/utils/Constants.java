@@ -68,6 +68,10 @@ public final class Constants {
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 
+	// Maps Folder Path
+	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
+
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 

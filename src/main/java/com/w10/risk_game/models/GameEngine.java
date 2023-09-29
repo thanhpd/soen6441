@@ -259,8 +259,8 @@ public class GameEngine {
 			String[] l_filePathSplit = p_mapFileName.split("/");
 			try {
 				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFileName,
-						l_filePathSplit[l_filePathSplit.length]);
-				return new File(Constants.GAME_MAP_FOLDER_PATH + l_filePathSplit[l_filePathSplit.length])
+						l_filePathSplit[l_filePathSplit.length - 1]);
+				return new File(Constants.GAME_MAP_FOLDER_PATH + l_filePathSplit[l_filePathSplit.length - 1])
 						.createNewFile();
 			} catch (IOException e) {
 				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFileName, e.getMessage());

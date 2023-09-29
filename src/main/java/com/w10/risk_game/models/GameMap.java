@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapValidator;
 
 /**
@@ -99,9 +98,9 @@ public class GameMap {
 		this.d_continents.putAll(p_continents);
 	}
 
-	public void saveMap(String p_fileName) {
+	public void saveMap(String p_filePath) {
 		if (MapValidator.isMapCorrect(this))
-			try (FileWriter l_fileWriter = new FileWriter(Constants.GAME_MAP_FOLDER_PATH + p_fileName)) {
+			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
 				l_printWriter.println("[continents]");
 				for (Continent continent : this.d_continents.values()) {

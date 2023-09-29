@@ -9,7 +9,7 @@ public final class Constants {
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
 			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> editmap\n" + "-> validatemap\n"
+			+ "-> showmap\n" + "-> editmap <filename>\n" + "-> validatemap\n"
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"

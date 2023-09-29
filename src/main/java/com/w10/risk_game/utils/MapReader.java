@@ -159,8 +159,8 @@ public class MapReader {
 	 * this information.
 	 *
 	 * @param p_mapFilePath
-	 *            A String that represents the path of
-	 *            the map file that needs to be loaded.
+	 *            A String that represents the path of the map file that needs to be
+	 *            loaded.
 	 * @return The method is returning a GameMap object.
 	 */
 	public GameMap loadMapFile(String p_mapFilePath) {

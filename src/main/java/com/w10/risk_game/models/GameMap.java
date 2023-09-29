@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang.Validate;
-
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapValidator;
 

@@ -33,6 +33,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_COMMAND_BEGIN_GAME = "start";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
+	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants

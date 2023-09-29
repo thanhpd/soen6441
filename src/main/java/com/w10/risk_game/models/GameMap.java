@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang.Validate;
+
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.MapValidator;
 
 /**
  * @author Omnia Alam
@@ -99,24 +102,25 @@ public class GameMap {
 	}
 
 	public void saveMap(String p_fileName) {
-		try (FileWriter l_fileWriter = new FileWriter(Constants.GAME_MAP_FOLDER_PATH + p_fileName)) {
-			PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
-			l_printWriter.println("[continents]");
-			for (Continent continent : l_continents.values()) {
-				l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getCountries().size());
+		if (MapValidator.isMapCorrect(this))
+			try (FileWriter l_fileWriter = new FileWriter(Constants.GAME_MAP_FOLDER_PATH + p_fileName)) {
+				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
+				l_printWriter.println("[continents]");
+				for (Continent continent : this.l_continents.values()) {
+					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getCountries().size());
+				}
+				l_printWriter.println("\n[countries]");
+				for (Country country : this.l_countries.values()) {
+					l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
+							country.getContinentId());
+				}
+				l_printWriter.println("\n[borders]");
+				for (Country country : this.l_countries.values()) {
+					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet());
+				}
+				l_printWriter.close();
+			} catch (IOException e) {
+				System.out.format("Error - Unable to save file. Please try again.%n%s", e.getMessage());
 			}
-			l_printWriter.println("\n[countries]");
-			for (Country country : l_countries.values()) {
-				l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
-						country.getContinentId());
-			}
-			l_printWriter.println("\n[borders]");
-			for (Country country : l_countries.values()) {
-				l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet());
-			}
-			l_printWriter.close();
-		} catch (IOException e) {
-			System.out.format("Error - Unable to save file. Please try again. %s", e.getMessage());
-		}
 	}
 }

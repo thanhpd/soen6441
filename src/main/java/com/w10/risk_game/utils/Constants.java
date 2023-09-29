@@ -57,6 +57,9 @@ public final class Constants {
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
 	public static final String GAME_ENGINE_CANNOT_START_GAME = "Game cannot begin!";
+	public static final String GAME_ENGINE_MAP_EDIT_SUCCESS = "Map edited successfully!";
+	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File %s does not exist.%nCreating new map named %s.";
+	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	// Other constants

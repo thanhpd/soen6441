@@ -42,7 +42,7 @@ public class App {
 						l_gameEngine.showMap();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
-						l_gameEngine.editMap();
+						l_gameEngine.editMap(l_userInputArr[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {

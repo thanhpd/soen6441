@@ -1,5 +1,7 @@
 package com.w10.risk_game.models;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -237,8 +239,34 @@ public class GameEngine {
 		return this.d_players.get(p_playerName);
 	}
 
-	public void editMap() {
-		// todo: Add logic for edit map
+	/**
+	 * The function `editMap` checks if a map file exists, loads it if it does,
+	 * creates a new file if it doesn't, and returns a boolean indicating success or
+	 * failure.
+	 *
+	 * @param p_mapFileName
+	 *            The parameter `p_mapFileName` is a String that represents the file
+	 *            name or path of the map file that needs to be edited.
+	 * @return The method is returning a boolean value.
+	 */
+	public boolean editMap(String p_mapFileName) {
+		File l_file = new File(p_mapFileName);
+		if (l_file.exists()) {
+			this.d_mapReader.loadMapFile(p_mapFileName);
+			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
+			return true;
+		} else {
+			String[] l_filePathSplit = p_mapFileName.split("/");
+			try {
+				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFileName,
+						l_filePathSplit[l_filePathSplit.length - 1]);
+				return new File(Constants.GAME_MAP_FOLDER_PATH + l_filePathSplit[l_filePathSplit.length - 1])
+						.createNewFile();
+			} catch (IOException e) {
+				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFileName, e.getMessage());
+			}
+		}
+		return false;
 	}
 
 	/**

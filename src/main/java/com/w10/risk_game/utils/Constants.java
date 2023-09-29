@@ -9,9 +9,9 @@ public final class Constants {
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
 			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> editmap\n" + "-> validatemap\n"
-			+ "-> editcontinent -add <continentName> <bonus> -remove <continentID>\n"
-			+ "-> editcountry -add <countryname> <continentname> -remove <countryID>\n"
+			+ "-> showmap\n" + "-> editmap <filename>\n" + "-> validatemap\n"
+			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
+			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
 			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> start\n"
 			+ "-> quit\n";
@@ -33,6 +33,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_COMMAND_BEGIN_GAME = "start";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
+	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants
@@ -57,6 +58,9 @@ public final class Constants {
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
 	public static final String GAME_ENGINE_CANNOT_START_GAME = "Game cannot begin!";
+	public static final String GAME_ENGINE_MAP_EDIT_SUCCESS = "Map edited successfully!";
+	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File %s does not exist.%nCreating new map named %s.";
+	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	// Other constants

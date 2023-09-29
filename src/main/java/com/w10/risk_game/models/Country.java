@@ -83,6 +83,17 @@ public class Country implements Serializable {
 		return d_neighbors.containsKey(p_neighborCountryId);
 	}
 
+	/**
+	 * The function checks if a given country name is a neighbor of the current
+	 * country.
+	 *
+	 * @param p_neighborCountryName
+	 *            The parameter p_neighborCountryName is a String that represents
+	 *            the name of a neighbor country.
+	 * @return The method is returning a boolean value. It returns true if the given
+	 *         neighbor country name is found in the list of neighbor countries, and
+	 *         false otherwise.
+	 */
 	public boolean hasNeighbor(String p_neighborCountryName) {
 		for (var neighborCountry : d_neighbors.values()) {
 			if (neighborCountry.getCountryName().equals(p_neighborCountryName)) {

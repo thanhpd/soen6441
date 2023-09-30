@@ -485,6 +485,8 @@ public class GameEngine {
 					l_playerName.remove(i % l_playerName.size());
 				} else {
 					System.out.println(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName().toString() + ":");
+					System.out.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
+					System.out.println();
 					l_player.issueOrder();
 				}
 				i += 1;

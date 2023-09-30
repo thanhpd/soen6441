@@ -18,6 +18,11 @@ import java.util.List;
  * @author Yajing LIU
  */
 public class Reinforcements {
+
+	private Reinforcements() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	/**
 	 * This method is to calculate the reinforcement armies for each player. To
 	 * calculate basic reinforcement armies, the occupied countries are divided by 3
@@ -34,7 +39,7 @@ public class Reinforcements {
 	 *            this parameter represents a game map object. It is used to access
 	 *            the information of all countries.
 	 */
-	public void reinforcementPhase(Player p_player, GameMap p_gameMap) {
+	public static void reinforcementPhase(Player p_player, GameMap p_gameMap) {
 		int l_armies = p_player.getLeftoverArmies();
 		List<Country> l_playerCountries = p_player.getCountriesOwned();
 		GameMap l_gameMap = p_gameMap;
@@ -70,7 +75,7 @@ public class Reinforcements {
 	 * @return A String list is returned. Each String represents the country ids in
 	 *         a continent.
 	 */
-	public List<String> groupCountries(List<Country> p_countries, GameMap p_gameMap) {
+	public static List<String> groupCountries(List<Country> p_countries, GameMap p_gameMap) {
 		GameMap l_gameMap = p_gameMap;
 		int l_continentNum = l_gameMap.getContinents().size();
 		List<String> l_groupCountries = new ArrayList<>();

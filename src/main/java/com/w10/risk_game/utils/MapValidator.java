@@ -12,6 +12,11 @@ import java.util.*;
  * disconnected continents.
  */
 public class MapValidator {
+
+	private MapValidator() {
+		throw new IllegalStateException("Utility class");
+	}
+
 	/**
 	 * The function isMapCorrect checks if a given game map is valid by checking for
 	 * various conditions such as empty map, non-existent continents or neighbors,

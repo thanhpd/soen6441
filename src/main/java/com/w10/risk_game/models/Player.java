@@ -1,5 +1,7 @@
 package com.w10.risk_game.models;
 
+import com.w10.risk_game.utils.Constants;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -177,7 +179,7 @@ public class Player {
 			boolean l_isValidOrder;
 			boolean l_isValidCountry = false;
 			boolean l_isValidNum = true;
-			System.out.println("Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
 			String l_input = l_scanner.nextLine();
 			String[] l_inputArray = l_input.split(" ");
 			if (l_inputArray[0].contains("done"))
@@ -204,15 +206,6 @@ public class Player {
 				l_again = false;
 			} else {
 				l_again = true;
-				System.out.print("Invalid input! ");
-				if (!l_isValidOrder) {
-					System.out.print("The order type should be \"deploy\". ");
-				} else if (!l_isValidCountry) {
-					System.out.print("The country id should be one of the countries owned by the player. ");
-				} else {
-					System.out.print("The number of leftover armies should be more than the number of armies. ");
-				}
-				System.out.println("Please try again.");
 			}
 		}
 	}
@@ -237,20 +230,20 @@ public class Player {
 	 */
 	public boolean checkValidForm(String[] p_inputArray) {
 		if (p_inputArray.length != 3) {
-			System.out.println("Invalid input! The command should contain three parts. Please try again.");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS);
 			return false;
 		}
 		String l_countryId = p_inputArray[1];
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				System.out.println("Invalid input! The country id should be integers. Please try again.");
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				System.out.println("Invalid input! The number of armies should be integers. Please try again.");
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}
@@ -268,7 +261,7 @@ public class Player {
 	public boolean checkValidOrder(String p_orderType) {
 		String l_orderType = p_orderType;
 		if (!l_orderType.equals("deploy")) {
-			System.out.println("Invalid input! The order type should be \"deploy\". Please try again.");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 			return false;
 		}
 		return true;
@@ -290,6 +283,7 @@ public class Player {
 				return true;
 			}
 		}
+		System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_COUNTRY);
 		return false;
 	}
 
@@ -305,8 +299,7 @@ public class Player {
 	 */
 	public boolean checkValidNum(int p_num, int p_army) {
 		if (p_num > p_army) {
-			System.out.println(
-					"Invalid input! The number of leftover armies should be more than the number of armies. Please try again.");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;
 		}
 		return true;

@@ -36,15 +36,15 @@ public class MapEditorTest {
 		int p_continentId = 1;
 		String p_continentName = "North_Europe1";
 		String error = l_mapEditor.addContinent(p_continentId, p_continentName);
-		assertTrue("Continent id already exists!".equals(error));
-		assertEquals("Continent id already exists!", error);
+		assertTrue(Constants.MAP_EDITOR_CONTINENT_ID_EXIST.equals(error));
+		assertEquals(Constants.MAP_EDITOR_CONTINENT_ID_EXIST, error);
 		p_continentId = 2;
 		p_continentName = "North_Europe1";
 		l_mapDisplay.formatMap(l_gameMap, false);
 	}
 
 	/*
-	 * Test cases for each validation senarios to add a country to the map that was
+	 * Test cases for each validation scenarios to add a country to the map that was
 	 * handled in the method
 	 */
 	@Test
@@ -54,25 +54,25 @@ public class MapEditorTest {
 		String p_countryName = "England";
 		int p_continentId = 1;
 		String l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Country name already exists!".equals(l_error));
+		assertTrue(Constants.MAP_EDITOR_COUNTRY_NAME_EXIST.equals(l_error));
 
 		p_countryId = 1;
 		p_countryName = "England1";
 		p_continentId = 1;
 		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Country ID already exists!".equals(l_error));
+		assertTrue(Constants.MAP_EDITOR_COUNTRY_ID_EXIST.equals(l_error));
 
 		p_countryId = 25;
 		p_countryName = "England1";
 		p_continentId = 1;
 		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Continent Name is emplty!".equals(l_error));
+		assertTrue("Continent Name is empty!".equals(l_error));
 
 		p_countryId = 25;
 		p_countryName = "England1";
 		p_continentId = 1;
 		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Continent doesnot exists!".equals(l_error));
+		assertTrue(Constants.MAP_EDITOR_CONTINENT_NOT_EXIST.equals(l_error));
 
 		p_countryId = 25;
 		p_countryName = "England1";

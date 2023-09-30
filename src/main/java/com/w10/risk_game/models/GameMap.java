@@ -118,7 +118,7 @@ public class GameMap {
 				}
 				l_printWriter.close();
 			} catch (IOException e) {
-				System.out.format("Error - Unable to save file. Please try again.%n%s", e.getMessage());
+				System.out.format(Constants.GAME_MAP_ERROR_MESSAGE, e.getMessage());
 			}
 	}
 }

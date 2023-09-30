@@ -31,7 +31,7 @@ public class Order {
 		return d_num;
 	}
 	// Setter
-	public void setDlayer(Player d_player) {
+	public void setPlayer(Player d_player) {
 		this.d_player = d_player;
 	}
 

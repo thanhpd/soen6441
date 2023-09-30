@@ -27,32 +27,32 @@ public class MapValidator {
 	 */
 	public static boolean isMapCorrect(GameMap p_gameMap) {
 		if (isMapEmpty(p_gameMap)) {
-			System.out.println("MapValidator: The map is empty!");
+			System.out.println(Constants.MAP_VALIDATOR_EMPTY_MAP);
 			return false;
 		}
 
 		if (hasNonExistentContinent(p_gameMap)) {
-			System.out.println("MapValidator: The continent(s) of some countries are not declared!");
+			System.out.println(Constants.MAP_VALIDATOR_CONTINENT_NOT_DECLARED);
 			return false;
 		}
 
 		if (hasNonExistentNeighbor(p_gameMap)) {
-			System.out.println("MapValidator: The neighbor(s) of some countries are not declared!");
+			System.out.println(Constants.MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED);
 			return false;
 		}
 
 		if (hasSelfReferencingNeighbor(p_gameMap)) {
-			System.out.println("MapValidator: Some countries are referring to itself as a neighbor");
+			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR);
 			return false;
 		}
 
 		if (!areCountriesConnected(p_gameMap.getCountries())) {
-			System.out.println("MapValidator: Some countries are inaccessible");
+			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_INACCESSIBLE);
 			return false;
 		}
 
 		if (!areContinentsConnected(p_gameMap)) {
-			System.out.println("MapValidator: Some continents are not fully-connected");
+			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED);
 			return false;
 		}
 

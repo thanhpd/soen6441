@@ -27,7 +27,6 @@ public class GameEngine {
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
-	private Reinforcements d_reinforcements;
 
 	/**
 	 * Game Engine constructor
@@ -38,7 +37,6 @@ public class GameEngine {
 		this.d_isCountriesAssigned = false;
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
-		this.d_reinforcements = new Reinforcements();
 	}
 
 	/**
@@ -135,9 +133,7 @@ public class GameEngine {
 					i += 1;
 				}
 
-				for (Player l_player : this.d_players.values()) {
-					this.d_reinforcements.reinforcementPhase(l_player, this.d_gameMap);
-				}
+				assignPlayersReinforcements();
 			}
 			this.d_players.remove(p_playerName.trim());
 			System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
@@ -193,14 +189,18 @@ public class GameEngine {
 				i += 1;
 			}
 
-			for (Player l_player : this.d_players.values()) {
-				this.d_reinforcements.reinforcementPhase(l_player, this.d_gameMap);
-			}
+			assignPlayersReinforcements();
 
 			this.d_isCountriesAssigned = true;
 		} catch (Exception e) {
 			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
 					this.d_players.size());
+		}
+	}
+
+	private void assignPlayersReinforcements() {
+		for (Player l_player : this.d_players.values()) {
+			Reinforcements.reinforcementPhase(l_player, this.d_gameMap);
 		}
 	}
 

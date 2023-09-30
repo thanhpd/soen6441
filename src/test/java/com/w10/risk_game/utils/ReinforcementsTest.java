@@ -85,12 +85,10 @@ public class ReinforcementsTest {
 	public void testReinforcementPhase() {
 		GameMap d_gameMap = d_mapReader.loadMapFile("europe.map");
 		// Test bonus
-		Reinforcements l_reinforcement = new Reinforcements();
-		l_reinforcement.reinforcementPhase(d_player, d_gameMap);
+		Reinforcements.reinforcementPhase(d_player, d_gameMap);
 		assertEquals(17, d_player.getLeftoverArmies());
 		// Test basic
-		Reinforcements l_reinforcement1 = new Reinforcements();
-		l_reinforcement1.reinforcementPhase(d_player1, d_gameMap);
+		Reinforcements.reinforcementPhase(d_player1, d_gameMap);
 		assertEquals(12, d_player1.getLeftoverArmies());
 	}
 
@@ -103,16 +101,13 @@ public class ReinforcementsTest {
 	public void testGroupCountry() {
 		GameMap d_gameMap = d_mapReader.loadMapFile("europe.map");
 		// Test all countries belong to one continent
-		Reinforcements l_reinforcement = new Reinforcements();
-		List<String> l_groupCountries = l_reinforcement.groupCountries(d_countries, d_gameMap);
+		List<String> l_groupCountries = Reinforcements.groupCountries(d_countries, d_gameMap);
 		assertEquals("1 2 3 4 5 6 7", l_groupCountries.get(0));
 		// Test not all countries belong to one continent
-		Reinforcements l_reinforcement1 = new Reinforcements();
-		List<String> l_groupCountries1 = l_reinforcement1.groupCountries(d_countries2, d_gameMap);
+		List<String> l_groupCountries1 = Reinforcements.groupCountries(d_countries2, d_gameMap);
 		assertEquals("8 9", l_groupCountries1.get(1));
 		// Test order
-		Reinforcements l_reinforcement2 = new Reinforcements();
-		List<String> l_groupCountries2 = l_reinforcement2.groupCountries(d_countries3, d_gameMap);
+		List<String> l_groupCountries2 = Reinforcements.groupCountries(d_countries3, d_gameMap);
 		assertEquals("1 2", l_groupCountries2.get(0));
 	}
 }

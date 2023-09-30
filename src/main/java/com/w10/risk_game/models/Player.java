@@ -180,8 +180,6 @@ public class Player {
 			System.out.println("Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".");
 			String l_input = l_scanner.nextLine();
 			String[] l_inputArray = l_input.split(" ");
-			if (l_inputArray[0].contains("done"))
-				break;
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
 			if (!l_isValidFormat) {

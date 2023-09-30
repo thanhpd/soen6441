@@ -133,7 +133,7 @@ public class GameEngine {
 					i += 1;
 				}
 
-				assignPlayersReinforcements();
+				this.assignPlayersReinforcements();
 			}
 			this.d_players.remove(p_playerName.trim());
 			System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
@@ -189,7 +189,7 @@ public class GameEngine {
 				i += 1;
 			}
 
-			assignPlayersReinforcements();
+			this.assignPlayersReinforcements();
 
 			this.d_isCountriesAssigned = true;
 		} catch (Exception e) {
@@ -198,6 +198,11 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * The function assigns reinforcements to each player in the game.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
 	private void assignPlayersReinforcements() {
 		for (Player l_player : this.d_players.values()) {
 			Reinforcements.reinforcementPhase(l_player, this.d_gameMap);
@@ -480,6 +485,8 @@ public class GameEngine {
 					l_playerName.remove(i % l_playerName.size());
 				} else {
 					System.out.println(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName().toString() + ":");
+					System.out.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
+					System.out.println();
 					l_player.issueOrder();
 				}
 				i += 1;
@@ -501,6 +508,7 @@ public class GameEngine {
 				l_player.nextOrder().execute();
 			}
 		}
+		this.assignPlayersReinforcements();
 	}
 
 	/**

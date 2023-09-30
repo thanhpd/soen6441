@@ -63,6 +63,8 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
+	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
+
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 
@@ -71,5 +73,8 @@ public final class Constants {
 
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
+
+	// Reinforcements Class Constants
+	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
 }

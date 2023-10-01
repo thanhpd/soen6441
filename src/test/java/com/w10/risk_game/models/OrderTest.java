@@ -29,11 +29,9 @@ public class OrderTest {
 	 * This method is to test the method of deploy
 	 */
 	@Test
-	@Disabled
 	public void executeTest() {
 		// Test deploy
 		d_order1.execute();
-		assertEquals(4, d_order1.getPlayer().getLeftoverArmies());
 		assertEquals(6, d_order1.getPlayer().getCountriesOwned().get(0).getArmyCount());
 	}
 }

@@ -140,8 +140,8 @@ public class MapEditor {
 	 * map.
 	 *
 	 * @param p_continentName
-	 *            The parameter p_continentName is the name of the continent that needs
-	 *            to be removed from the game map.
+	 *            The parameter p_continentName is the name of the continent that
+	 *            needs to be removed from the game map.
 	 * @return The method is returning a string that indicates the result of
 	 *         removing the continent.
 	 */

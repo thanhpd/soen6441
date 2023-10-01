@@ -36,9 +36,9 @@ public class MapReaderTest {
 				1, new Continent(1, "Continent1", 5),
 				2, new Continent(2, "Continent2", 3));
 
-		Map<Integer, Country> countries = d_mapReader.readCountries(l_input, continents);
-		assertNotNull(countries);
-		assertEquals(3, countries.size());
+		Map<Integer, Country> l_countries = d_mapReader.readCountries(l_input, continents);
+		assertNotNull(l_countries);
+		assertEquals(3, l_countries.size());
 	}
 
 	@Test

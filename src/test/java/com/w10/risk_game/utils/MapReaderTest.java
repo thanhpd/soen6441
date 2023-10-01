@@ -40,5 +40,4 @@ public class MapReaderTest {
 		assertNotNull(countries);
 		assertEquals(3, countries.size());
 	}
-
 }

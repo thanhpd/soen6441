@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.w10.risk_game.utils.Constants;
 import java.util.ArrayList;
+import java.util.List;
+
+import com.w10.risk_game.utils.MapReader;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,13 @@ public class GameEngineTest {
 	private GameEngine d_gameEngine;
 	Player d_player1;
 	Player d_player2;
+
+	Player d_player3;
+	Player d_player4;
+	List<Country> d_countries;
+	List<Country> d_countries2;
+	List<Country> d_countries3;
+	MapReader d_mapReader = new MapReader();
 
 	/**
 	 * The function "beforeAllGameEngineTests" initializes a new instance of the
@@ -26,6 +36,46 @@ public class GameEngineTest {
 		d_gameEngine = new GameEngine();
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
+
+		d_countries = new ArrayList<>();
+		d_countries.add(new Country(1, "England", 1, 0));
+		d_countries.add(new Country(2, "Scotland", 1, 0));
+		d_countries.add(new Country(3, "N_Ireland", 1, 0));
+		d_countries.add(new Country(4, "Rep_Ireland", 1, 0));
+		d_countries.add(new Country(5, "Wales", 1, 0));
+		d_countries.add(new Country(6, "Belgum", 1, 0));
+		d_countries.add(new Country(7, "Netherlands", 1, 0));
+		String l_playerName = "Player";
+		List<Order> l_orders = new ArrayList<>();
+		int l_armies = 10;
+		d_player3 = new Player(l_playerName, d_countries, l_orders, l_armies);
+
+		List<Country> l_countries1 = new ArrayList<>();
+		l_countries1.add(new Country(1, "England", 1, 0));
+		l_countries1.add(new Country(2, "Scotland", 1, 0));
+		l_countries1.add(new Country(3, "N_Ireland", 1, 0));
+		l_countries1.add(new Country(4, "Rep_Ireland", 1, 0));
+		l_countries1.add(new Country(5, "Wales", 1, 0));
+		l_countries1.add(new Country(6, "Belgum", 1, 0));
+		String l_playerName1 = "Player1";
+		List<Order> l_orders1 = new ArrayList<>();
+		int l_armies1 = 10;
+		d_player4 = new Player(l_playerName1, l_countries1, l_orders1, l_armies1);
+
+		d_countries2 = new ArrayList<>();
+		d_countries2.add(new Country(1, "England", 1, 0));
+		d_countries2.add(new Country(2, "Scotland", 1, 0));
+		d_countries2.add(new Country(3, "N_Ireland", 1, 0));
+		d_countries2.add(new Country(4, "Rep_Ireland", 1, 0));
+		d_countries2.add(new Country(5, "Wales", 1, 0));
+		d_countries2.add(new Country(6, "Belgum", 1, 0));
+		d_countries2.add(new Country(7, "Netherlands", 1, 0));
+		d_countries2.add(new Country(8, "Denmark", 2, 0));
+		d_countries2.add(new Country(9, "Germany", 2, 0));
+
+		d_countries3 = new ArrayList<>();
+		d_countries3.add(new Country(2, "Scotland", 1, 0));
+		d_countries3.add(new Country(1, "England", 1, 0));
 	}
 
 	/**
@@ -146,5 +196,40 @@ public class GameEngineTest {
 		d_gameEngine.createPlayer(d_player1.getName());
 
 		assertEquals(d_player1.getName(), d_gameEngine.getPlayerDetails(d_player1.getName()).getName());
+	}
+	/**
+	 * This method is to test reinforcementPhase method It tests the following
+	 * cases: 1. Test bonus reinforcement 2. Test basic reinforcement
+	 */
+	@Test
+	public void testReinforcementPhase() {
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		// Test bonus
+		d_gameEngine.reinforcementPhase(d_player3, d_gameMap);
+		assertEquals(17, d_player3.getLeftoverArmies());
+		// Test basic
+		d_gameEngine.reinforcementPhase(d_player4, d_gameMap);
+		assertEquals(12, d_player4.getLeftoverArmies());
+	}
+
+	/**
+	 * This method is to test groupCountries method It tests the following cases: 1.
+	 * Test all countries belong to one continent 2. Test not all countries belong
+	 * to one continent 3. Test order
+	 */
+	@Test
+	public void testGroupCountry() {
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		// Test all countries belong to one continent
+		List<String> l_groupCountries = d_gameEngine.groupCountries(d_countries, d_gameMap);
+		assertEquals("1 2 3 4 5 6 7", l_groupCountries.get(0));
+		// Test not all countries belong to one continent
+		List<String> l_groupCountries1 = d_gameEngine.groupCountries(d_countries2, d_gameMap);
+		assertEquals("8 9", l_groupCountries1.get(1));
+		// Test order
+		List<String> l_groupCountries2 = d_gameEngine.groupCountries(d_countries3, d_gameMap);
+		assertEquals("1 2", l_groupCountries2.get(0));
 	}
 }

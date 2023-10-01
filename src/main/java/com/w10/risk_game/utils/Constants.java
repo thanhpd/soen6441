@@ -75,7 +75,7 @@ public final class Constants {
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
-	// Reinforcements Class Constants
+	// Game Engine Reinforcements Constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
 }

@@ -277,17 +277,17 @@ public class GameEngine {
 	 * The function adds a continent to a map editor and prints the output.
 	 *
 	 * @param p_bonus
-	 *            The p_bonus parameter is an integer that represents the
-	 *            bonus for each continent.
+	 *            The p_bonus parameter is an integer that represents the bonus for
+	 *            each continent.
 	 * @param p_ContinentName
 	 *            The parameter "p_ContinentName" is a String that represents the
 	 *            name of the continent that you want to add.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void addContinent( String p_ContinentName,int p_bonus) {
+	public void addContinent(String p_ContinentName, int p_bonus) {
 		try {
-			String l_output = this.d_mapEditor.addContinent(p_ContinentName,p_bonus);
+			String l_output = this.d_mapEditor.addContinent(p_ContinentName, p_bonus);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);

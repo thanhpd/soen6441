@@ -46,7 +46,8 @@ public class App {
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-							l_gameEngine.addContinent(l_userInputArr[2].toString(),Integer.parseInt(l_userInputArr[3]));
+							l_gameEngine.addContinent(l_userInputArr[2].toString(),
+									Integer.parseInt(l_userInputArr[3]));
 						} else if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 							l_gameEngine.removeContinent(Integer.parseInt(l_userInputArr[2]));
 						}

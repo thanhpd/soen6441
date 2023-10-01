@@ -99,16 +99,16 @@ public class MapEditorTest {
 	 */
 	@Test
 	public void testAddCountryErrorHandle() {
-		l_countryId= 26;
+		l_countryId = 26;
 		l_countryName = "Scotland";
 		l_continentId = 1;
-		l_error = l_mapEditor.addCountry(l_countryId,l_countryName, l_continentId);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentId);
 		assertTrue("Country name already exists!".equals(l_error));
 
-		l_countryId= 27;
+		l_countryId = 27;
 		l_countryName = "England12";
 		l_continentId = 15;
-		l_error = l_mapEditor.addCountry(l_countryId,l_countryName, l_continentId);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentId);
 		assertTrue("Continent does not exists!".equals(l_error));
 	}
 
@@ -117,10 +117,10 @@ public class MapEditorTest {
 	 */
 	@Test
 	public void testAddCountry() {
-		l_countryId= 26;
+		l_countryId = 26;
 		l_countryName = "England1";
 		l_continentId = 1;
-		l_error = l_mapEditor.addCountry(l_countryId,l_countryName, l_continentId);
+		l_error = l_mapEditor.addCountry(l_countryId, l_countryName, l_continentId);
 		assertTrue((l_countryName + " is Added! and to the continent with id: " + l_continentId).equals(l_error));
 		System.out.println("###############After Country added " + l_countryName);
 		l_mapDisplay.formatMap(l_gameMap, false);

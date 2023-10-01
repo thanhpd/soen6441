@@ -72,7 +72,7 @@ public class MapEditor {
 			return "Continent name already exists!";
 		}
 
-		int l_newContinentId=l_gameMap.getContinents().size() + 1;
+		int l_newContinentId = l_gameMap.getContinents().size() + 1;
 		Continent l_continent = new Continent(l_newContinentId, p_continentName, 0);
 		l_gameMap.getContinents().put(l_newContinentId, l_continent);
 

@@ -304,15 +304,15 @@ public class GameEngine {
 	 * @param p_countryName
 	 *            The parameter "p_countryName" is a String that represents the name
 	 *            of the country that you want to add.
-	 * @param p_continentId
-	 *            The p_continentId parameter is an integer that represents the ID
+	 * @param p_continentName
+	 *            The p_continentName parameter is an integer that represents the ID
 	 *            of the continent to which the country belongs.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void addCountry(int p_countryId, String p_countryName, int p_continentId) {
+	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		try {
-			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
+			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentName);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -322,15 +322,15 @@ public class GameEngine {
 	/**
 	 * The function removes a continent from a map in a game editor.
 	 *
-	 * @param p_continentId
+	 * @param p_continentName
 	 *            The parameter "p_continentId" is an integer that represents the ID
 	 *            of the continent that needs to be removed.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void removeContinent(int p_continentId) {
+	public void removeContinent(String p_continentName) {
 		try {
-			String l_output = this.d_mapEditor.removeContinent(p_continentId);
+			String l_output = this.d_mapEditor.removeContinent(p_continentName);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);

@@ -49,13 +49,13 @@ public class App {
 							l_gameEngine.addContinent(Integer.parseInt(l_userInputArr[2]),
 									l_userInputArr[3].toString());
 						} else if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-							l_gameEngine.removeContinent(Integer.parseInt(l_userInputArr[2]));
+							l_gameEngine.removeContinent(l_userInputArr[2].toString());
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
 						if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							l_gameEngine.addCountry(Integer.parseInt(l_userInputArr[2]), l_userInputArr[3].toString(),
-									Integer.parseInt(l_userInputArr[4]));
+									l_userInputArr[4].toString());
 						} else if (l_userInputArr[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 							l_gameEngine.removeCountry(Integer.parseInt(l_userInputArr[2]));
 						}

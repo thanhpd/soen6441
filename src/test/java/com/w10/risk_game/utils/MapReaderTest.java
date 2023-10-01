@@ -18,8 +18,7 @@ public class MapReaderTest {
 
 	/**
 	 * The testLoadMapFile function tests if a map file can be successfully loaded
-	 * and returns a non-null
-	 * GameMap object.
+	 * and returns a non-null GameMap object.
 	 */
 	@Test
 	public void testLoadMapFile() {
@@ -30,9 +29,8 @@ public class MapReaderTest {
 
 	/**
 	 * The testReadCountries function tests the readCountries method by providing a
-	 * sample input stream
-	 * and a map of continents, and then asserts that the returned map of countries
-	 * has the expected size.
+	 * sample input stream and a map of continents, and then asserts that the
+	 * returned map of countries has the expected size.
 	 */
 	@Test
 	public void testReadCountries() {
@@ -52,8 +50,8 @@ public class MapReaderTest {
 
 	/**
 	 * The testReadContinents function tests the readContinents method by providing
-	 * a dummy input and
-	 * asserting that the returned map of continents has the expected size.
+	 * a dummy input and asserting that the returned map of continents has the
+	 * expected size.
 	 */
 	@Test
 	public void testReadContinents() {

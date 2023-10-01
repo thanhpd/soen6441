@@ -109,13 +109,13 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testgetNoOfPlayers() function tests the getNoOfPlayers() method in the
+	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
 	 * d_gameEngine class to ensure that it returns the correct number of players.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
 	@Test
-	void testgetNoOfPlayers() {
+	void testGetNoOfPlayers() {
 		d_gameEngine.createPlayer(d_player1.getName());
 		d_gameEngine.createPlayer(d_player2.getName());
 

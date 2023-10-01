@@ -168,11 +168,14 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
+		// Step 1: Initialize the variables
 		int l_army = this.getLeftoverArmies();
 		List<Country> l_countries = this.getCountriesOwned();
 		boolean l_again = true;
 		Scanner l_scanner = new Scanner(System.in);
+		// Step 2: Enter loop to get the input
 		while (l_again) {
+			// Step 3: Check the input format, order type, country id and number of armies
 			boolean l_isValidFormat;
 			boolean l_isValidOrder;
 			boolean l_isValidCountry;
@@ -180,7 +183,6 @@ public class Player {
 			System.out.println("Please enter your order in the format of \"deploy <CountryId> <No. of armies>\".");
 			String l_input = l_scanner.nextLine();
 			String[] l_inputArray = l_input.split(" ");
-			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
 			if (!l_isValidFormat) {
 				continue;
@@ -188,12 +190,11 @@ public class Player {
 			String l_orderType = l_inputArray[0];
 			String l_countryId = l_inputArray[1];
 			String l_num = l_inputArray[2];
-			// check the order type
 			l_isValidOrder = checkValidOrder(l_orderType);
-			// check the country
 			l_isValidCountry = checkValidCountry(l_countries, l_countryId);
-			// check the num
 			l_isValidNum = checkValidNum(Integer.parseInt(l_num), l_army);
+			// Step 4: If the input is valid, create an order object and add it to the list.
+			// If not, ask the user to enter again
 			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
 				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
 				d_orders.add(order);
@@ -225,10 +226,12 @@ public class Player {
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidForm(String[] p_inputArray) {
+		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
 			System.out.println("Invalid input! The command should contain three parts. Please try again.");
 			return false;
 		}
+		// Step 2: Check whether the country id is integer
 		String l_countryId = p_inputArray[1];
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
@@ -237,12 +240,14 @@ public class Player {
 				return false;
 			}
 		}
+		// Step 3: Check whether the number of armies is integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
 				System.out.println("Invalid input! The number of armies should be integers. Please try again.");
 				return false;
 			}
 		}
+		// Step 4: Return true if the input format is valid
 		return true;
 	}
 
@@ -274,8 +279,8 @@ public class Player {
 	 * @return boolean value to show whether the country id is valid
 	 */
 	public boolean checkValidCountry(List<Country> p_countries, String p_countryId) {
-		for (Country country : p_countries) {
-			if (country.getCountryId() == Integer.parseInt(p_countryId)) {
+		for (Country l_country : p_countries) {
+			if (l_country.getCountryId() == Integer.parseInt(p_countryId)) {
 				return true;
 			}
 		}

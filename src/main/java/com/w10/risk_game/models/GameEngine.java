@@ -205,7 +205,7 @@ public class GameEngine {
 	 */
 	private void assignPlayersReinforcements() {
 		for (Player l_player : this.d_players.values()) {
-			Reinforcements.reinforcementPhase(l_player, this.d_gameMap);
+			Reinforcements.ReinforcementPhase(l_player, this.d_gameMap);
 		}
 	}
 

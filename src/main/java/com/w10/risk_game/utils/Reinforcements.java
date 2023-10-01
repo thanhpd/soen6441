@@ -18,7 +18,9 @@ import java.util.List;
  * @author Yajing LIU
  */
 public class Reinforcements {
-
+	/**
+	 * This is a private constructor of Reinforcements.
+	 */
 	private Reinforcements() {
 		throw new IllegalStateException("Utility class");
 	}
@@ -39,21 +41,22 @@ public class Reinforcements {
 	 *            this parameter represents a game map object. It is used to access
 	 *            the information of all countries.
 	 */
-	public static void reinforcementPhase(Player p_player, GameMap p_gameMap) {
+	public static void ReinforcementPhase(Player p_player, GameMap p_gameMap) {
+		// Step 1: Initialize the variables
 		int l_armies = p_player.getLeftoverArmies();
 		List<Country> l_playerCountries = p_player.getCountriesOwned();
 		GameMap l_gameMap = p_gameMap;
 		List<Country> allCountries = new ArrayList<Country>(l_gameMap.getCountries().values());
-		// Calculate continent bonus armies
-		List<String> l_groupPlayerCountries = groupCountries(l_playerCountries, p_gameMap);
-		List<String> l_groupAllCountries = groupCountries(allCountries, p_gameMap);
+		// Step 2: Calculate bonus armies
+		List<String> l_groupPlayerCountries = GroupCountries(l_playerCountries, p_gameMap);
+		List<String> l_groupAllCountries = GroupCountries(allCountries, p_gameMap);
 		int l_bonus = 0;
 		for (int i = 0; i < l_groupPlayerCountries.size(); i++) {
 			if (l_groupPlayerCountries.get(i).equals(l_groupAllCountries.get(i))) {
 				l_bonus += p_gameMap.getContinents().get(i + 1).getBonus();
 			}
 		}
-		// Calculate the number of reinforcement armies
+		// Step 3: Calculate the total number of reinforcement armies
 		int l_countrySize = l_playerCountries.size();
 		int l_reinforceArmies = (int) (Math.floor(l_countrySize / 3) + l_bonus);;
 		p_player.setLeftoverArmies((l_armies + l_reinforceArmies) < Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
@@ -77,31 +80,34 @@ public class Reinforcements {
 	 * @return A String list is returned. Each String represents the country ids in
 	 *         a continent.
 	 */
-	public static List<String> groupCountries(List<Country> p_countries, GameMap p_gameMap) {
+	public static List<String> GroupCountries(List<Country> p_countries, GameMap p_gameMap) {
+		// Step 1: Initialize the variables
 		GameMap l_gameMap = p_gameMap;
 		int l_continentNum = l_gameMap.getContinents().size();
 		List<String> l_groupCountries = new ArrayList<>();
 		for (int i = 0; i < l_continentNum; i++) {
 			l_groupCountries.add("");
 		}
-		for (Country country : p_countries) {
-			int l_continentId = country.getContinentId();
-			int l_countryId = country.getCountryId();
+		// Step 2: Add the country ids to the corresponding continent string in the list
+		for (Country l_country : p_countries) {
+			int l_continentId = l_country.getContinentId();
+			int l_countryId = l_country.getCountryId();
 			if (l_groupCountries.get(l_continentId - 1) == "") {
 				l_groupCountries.set(l_continentId - 1, l_groupCountries.get(l_continentId - 1) + l_countryId + "");
 			} else {
 				l_groupCountries.set(l_continentId - 1, l_groupCountries.get(l_continentId - 1) + " " + l_countryId);
 			}
 		}
-		// Order the country ids in each continent
+		// Step 3: Sort the country ids in each continent string
 		for (int i = 0; i < l_groupCountries.size(); i++) {
-			List<String> countryIds = new ArrayList<>();
-			for (String countryId : l_groupCountries.get(i).split(" ")) {
-				countryIds.add(countryId);
+			List<String> l_countryIds = new ArrayList<>();
+			for (String l_countryId : l_groupCountries.get(i).split(" ")) {
+				l_countryIds.add(l_countryId);
 			}
-			Collections.sort(countryIds);
-			l_groupCountries.set(i, String.join(" ", countryIds));
+			Collections.sort(l_countryIds);
+			l_groupCountries.set(i, String.join(" ", l_countryIds));
 		}
+		// Step 4: Return the list
 		return l_groupCountries;
 	}
 }

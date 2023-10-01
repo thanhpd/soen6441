@@ -8,8 +8,8 @@ public final class Constants {
 
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> editmap <filename>\n" + "-> validatemap\n"
+			+ "You can enter any of the below commands:\n" + "-> loadmap <filepath>\n" + "-> savemap <filepath>\n"
+			+ "-> showmap\n" + "-> editmap <filepath>\n" + "-> validatemap\n"
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
@@ -68,7 +68,8 @@ public final class Constants {
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 
 	// Maps Folder Path
-	public static final String GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
 
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";

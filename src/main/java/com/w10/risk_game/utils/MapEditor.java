@@ -59,9 +59,8 @@ public class MapEditor {
 	 * The function adds a new continent to the game map if the continent name and
 	 * id do not already exist.
 	 *
-	 * @param p_continentId
-	 *            The continent ID is an integer value that uniquely identifies a
-	 *            continent.
+	 * @param p_bonus
+	 *            The bonus of the new continent
 	 * @param p_continentName
 	 *            The name of the continent that you want to add.
 	 * @return The method returns a string message indicating the result of adding a

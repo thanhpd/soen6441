@@ -387,8 +387,8 @@ public class GameEngine {
 	 * @param p_countryId
 	 *            The p_countryId parameter represents the ID of the country from
 	 *            which you want to remove a neighbor.
-	 * @param p_neighbourCountryId
-	 *            The parameter "p_neighbourCountryId" represents the ID of the
+	 * @param p_neighborCountryId
+	 *            The parameter "p_neighborCountryId" represents the ID of the
 	 *            neighbor country that you want to remove from the country with ID
 	 *            "p_countryId".
 	 *

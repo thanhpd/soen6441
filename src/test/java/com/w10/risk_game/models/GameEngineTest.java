@@ -3,6 +3,7 @@ package com.w10.risk_game.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.w10.risk_game.utils.Constants;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,8 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testAssignCountries() {
-		d_gameEngine.loadMap("europe.map");
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		d_gameEngine.loadMap(l_mapFilePath);
 
 		d_gameEngine.createPlayer(d_player1.getName());
 		d_gameEngine.createPlayer(d_player2.getName());
@@ -73,7 +75,8 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testLoadMap() {
-		d_gameEngine.loadMap("europe.map");
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		d_gameEngine.loadMap(l_mapFilePath);
 		assertNotNull(d_gameEngine.getGameMap());
 	}
 
@@ -127,7 +130,8 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testGameMap() {
-		d_gameEngine.loadMap("europe.map");
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
+		d_gameEngine.loadMap(l_mapFilePath);
 		assertNotNull(d_gameEngine.getGameMap());
 	}
 

@@ -1,16 +1,16 @@
 package com.w10.risk_game.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-<<<<<<< Updated upstream
-=======
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
->>>>>>> Stashed changes
 import com.w10.risk_game.models.GameMap;
 
 /**
@@ -21,11 +21,6 @@ import com.w10.risk_game.models.GameMap;
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MapEditorTest {
-<<<<<<< Updated upstream
-	private GameMap l_gameMap;
-	private MapEditor l_mapEditor;
-	private MapDisplay l_mapDisplay = new MapDisplay();
-=======
 	private GameMap d_gameMap;
 	private MapEditor d_mapEditor;
 	private MapDisplay d_mapDisplay = new MapDisplay();
@@ -36,7 +31,6 @@ public class MapEditorTest {
 	String d_countryName;
 	int d_neighborCountryId;
 	int d_bonus;
->>>>>>> Stashed changes
 
 	@BeforeAll
 	public void setUp() {
@@ -47,25 +41,6 @@ public class MapEditorTest {
 	}
 
 	/**
-<<<<<<< Updated upstream
-	 ** Test cases for each validation senarios to add a continent to the map
-	 */
-	@Test
-	public void testAddContinent() {
-		int p_continentId = 1;
-		String p_continentName = "North_Europe1";
-		String error = l_mapEditor.addContinent(p_continentId, p_continentName);
-		assertTrue("Continent id already exists!".equals(error));
-		assertEquals("Continent id already exists!", error);
-		p_continentId = 2;
-		p_continentName = "North_Europe1";
-		l_mapDisplay.formatMap(l_gameMap, false);
-	}
-
-	/*
-	 * Test cases for each validation senarios to add a country to the map that was
-	 * handled in the method
-=======
 	 * Invalid input to add a continent
 	 */
 	@Test
@@ -114,61 +89,10 @@ public class MapEditorTest {
 
 	/**
 	 * Valid input to add a country
->>>>>>> Stashed changes
 	 */
 	@Test
 	@Disabled
 	public void testAddCountry() {
-<<<<<<< Updated upstream
-		int p_countryId = 25;
-		String p_countryName = "England";
-		int p_continentId = 1;
-		String l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Country name already exists!".equals(l_error));
-
-		p_countryId = 1;
-		p_countryName = "England1";
-		p_continentId = 1;
-		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Country ID already exists!".equals(l_error));
-
-		p_countryId = 25;
-		p_countryName = "England1";
-		p_continentId = 1;
-		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Continent Name is emplty!".equals(l_error));
-
-		p_countryId = 25;
-		p_countryName = "England1";
-		p_continentId = 1;
-		l_error = l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		assertTrue("Continent doesnot exists!".equals(l_error));
-
-		p_countryId = 25;
-		p_countryName = "England1";
-		p_continentId = 1;
-		l_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
-		l_mapDisplay.formatMap(l_gameMap, false);
-
-	}
-
-	@Test
-	public void testAddNeighbor() {
-		l_mapEditor.addNeighbor(1, 7);
-		l_mapDisplay.formatMap(l_gameMap, false);
-	}
-
-	@Test
-	public void testRemoveContinent() {
-		l_mapEditor.removeContinent(1);
-		l_mapDisplay.formatMap(l_gameMap, false);
-	}
-
-	@Test
-	public void testRemoveCountry() {
-		l_mapEditor.removeCountry(1);
-		l_mapDisplay.formatMap(l_gameMap, false);
-=======
 		d_countryId = 26;
 		d_countryName = "England1";
 		d_continentName = "North_Europe";
@@ -273,15 +197,9 @@ public class MapEditorTest {
 		assertTrue((d_countryId + "Country removed!").equals(d_error));
 		System.out.println("###############After Removing country");
 		d_mapDisplay.formatMap(d_gameMap, false);
->>>>>>> Stashed changes
 	}
 
 	@Test
-<<<<<<< Updated upstream
-	public void testRemoveNeighbour() {
-		l_mapEditor.removeNeighbour(1, 21);
-		l_mapDisplay.formatMap(l_gameMap, false);
-=======
 	public void testRemoveNeighborWithErrorHandle() {
 		int d_countryId = 27;
 		int d_neighborCountryId = 7;
@@ -309,7 +227,6 @@ public class MapEditorTest {
 		assertTrue((d_countryId + " removed from " + d_neighborCountryId).equals(d_error));
 		System.out.println("###############After Removing neighbor");
 		d_mapDisplay.formatMap(d_gameMap, false);
->>>>>>> Stashed changes
 	}
 
 }

@@ -32,9 +32,8 @@ public class MapReaderTest {
 		Scanner l_input = new Scanner(l_input_stream);
 
 		// Create a map of continents for testing
-		Map<Integer, Continent> continents = Map.of(
-				1, new Continent(1, "Continent1", 5),
-				2, new Continent(2, "Continent2", 3));
+		Map<Integer, Continent> continents = Map.of(1, new Continent(1, "Continent1", 5), 2,
+				new Continent(2, "Continent2", 3));
 
 		Map<Integer, Country> l_countries = d_mapReader.readCountries(l_input, continents);
 		assertNotNull(l_countries);

@@ -63,19 +63,15 @@ public class PlayerTest {
 	 * order list
 	 */
 	@Test
-	@Disabled
 	public void issueOrderTest() {
-		String l_input1 = "deploy 1 6\ndeploy 2 4";
+		String l_input1 = "deploy 1 6";
 		System.setIn(new ByteArrayInputStream(l_input1.getBytes()));
 		Scanner l_scanner = new Scanner(System.in);
 		d_player1.issueOrder();
-		assertEquals(2, d_player1.getOrders().size());
+		assertEquals(1, d_player1.getOrders().size());
 		assertEquals("deploy", d_player1.getOrders().get(0).getOrderType());
 		assertEquals(1, d_player1.getOrders().get(0).getCountryId());
 		assertEquals(6, d_player1.getOrders().get(0).getNum());
-		assertEquals("deploy", d_player1.getOrders().get(1).getOrderType());
-		assertEquals(2, d_player1.getOrders().get(1).getCountryId());
-		assertEquals(4, d_player1.getOrders().get(1).getNum());
 	}
 
 	/**

@@ -175,8 +175,8 @@ public class Player {
 		while (l_again) {
 			boolean l_isValidFormat;
 			boolean l_isValidOrder;
-			boolean l_isValidCountry = false;
-			boolean l_isValidNum = true;
+			boolean l_isValidCountry;
+			boolean l_isValidNum;
 			System.out.println("Please enter your order in the format of \"deploy <CountryId> <No. of armies>\".");
 			String l_input = l_scanner.nextLine();
 			String[] l_inputArray = l_input.split(" ");
@@ -202,16 +202,6 @@ public class Player {
 				l_again = false;
 			} else {
 				l_again = true;
-				System.out.print("Invalid input! ");
-				if (!l_isValidOrder) {
-					System.out.print("The order type should be \"deploy\". ");
-				} else if (!l_isValidCountry) {
-					System.out.print("The country id should be one of the countries owned by the player. ");
-				} else {
-					System.out.format("The number of armies to be deployed should not be more than %d. ",
-							this.getLeftoverArmies());
-				}
-				System.out.println("Please try again.");
 			}
 		}
 	}
@@ -267,6 +257,7 @@ public class Player {
 	public boolean checkValidOrder(String p_orderType) {
 		String l_orderType = p_orderType;
 		if (!l_orderType.equals("deploy")) {
+			System.out.println("Invalid input! The order type should be \"deploy\". Please try again.");
 			return false;
 		}
 		return true;
@@ -288,6 +279,8 @@ public class Player {
 				return true;
 			}
 		}
+		System.out.println(
+				"Invalid input! The country id should be one of the countries owned by the player. Please try again.");
 		return false;
 	}
 
@@ -303,6 +296,8 @@ public class Player {
 	 */
 	public boolean checkValidNum(int p_num, int p_army) {
 		if (p_num > p_army) {
+			System.out.println(
+					"Invalid input! The number of leftover armies should be more than the number of armies. Please try again.");
 			return false;
 		}
 		return true;

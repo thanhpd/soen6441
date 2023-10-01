@@ -42,8 +42,8 @@ public class MapReaderTest {
 	public void testReadCountries() {
 		// Prepare a sample input stream with country data
 		String l_dummy_input = "1 Country1 1 1\n2 Country2 1 2\n3 Country3 2 3";
-		InputStream l_input_stream = new ByteArrayInputStream(l_dummy_input.getBytes());
-		Scanner l_input = new Scanner(l_input_stream);
+		InputStream l_inputStream = new ByteArrayInputStream(l_dummy_input.getBytes());
+		Scanner l_input = new Scanner(l_inputStream);
 
 		// Create a map of continents for testing
 		Map<Integer, Continent> continents = Map.of(1, new Continent(1, "Continent1", 5), 2,
@@ -62,8 +62,8 @@ public class MapReaderTest {
 	@Test
 	public void testReadContinents() {
 		String l_dummy_input = "Continent1 5\nContinent2 3";
-		InputStream l_input_stream = new ByteArrayInputStream(l_dummy_input.getBytes());
-		Scanner l_input = new Scanner(l_input_stream);
+		InputStream l_inputStream = new ByteArrayInputStream(l_dummy_input.getBytes());
+		Scanner l_input = new Scanner(l_inputStream);
 
 		Map<Integer, Continent> l_continents = d_mapReader.readContinents(l_input);
 		assertNotNull(l_continents);

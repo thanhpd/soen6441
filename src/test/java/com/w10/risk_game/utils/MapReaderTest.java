@@ -47,9 +47,9 @@ public class MapReaderTest {
 		InputStream l_input_stream = new ByteArrayInputStream(l_dummy_input.getBytes());
 		Scanner l_input = new Scanner(l_input_stream);
 
-		Map<Integer, Continent> continents = d_mapReader.readContinents(l_input);
-		assertNotNull(continents);
-		assertEquals(2, continents.size());
+		Map<Integer, Continent> l_continents = d_mapReader.readContinents(l_input);
+		assertNotNull(l_continents);
+		assertEquals(2, l_continents.size());
 		// Add more assertions for the expected contents of the continents map here
 	}
 }

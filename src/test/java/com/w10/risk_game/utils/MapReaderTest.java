@@ -40,4 +40,16 @@ public class MapReaderTest {
 		assertNotNull(countries);
 		assertEquals(3, countries.size());
 	}
+
+	@Test
+	public void testReadContinents() {
+		String l_dummy_input = "Continent1 5\nContinent2 3";
+		InputStream l_input_stream = new ByteArrayInputStream(l_dummy_input.getBytes());
+		Scanner l_input = new Scanner(l_input_stream);
+
+		Map<Integer, Continent> continents = d_mapReader.readContinents(l_input);
+		assertNotNull(continents);
+		assertEquals(2, continents.size());
+		// Add more assertions for the expected contents of the continents map here
+	}
 }

@@ -11,7 +11,7 @@ import com.w10.risk_game.utils.Constants;
 
 /**
  * @author Omnia Alam This is test class on the MapEditor There are some test
- *         cases added to fulfile some validation on different methods of the
+ *         cases added to fulfil some validation on different methods of the
  *         class For example: add country, add continent, add neighbor remove
  *         country , continent and neighbor
  */
@@ -31,7 +31,7 @@ public class MapEditorTest {
 	}
 
 	/**
-	 ** Test cases for each validation senarios to add a continent to the map
+	 ** Test cases for each validation scenarios to add a continent to the map
 	 */
 	@Test
 	public void testAddContinent() {

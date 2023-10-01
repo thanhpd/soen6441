@@ -47,7 +47,7 @@ public class MapEditor {
 			return "Country ID already exists!";
 		}
 		if (l_gameMap.containsContinent(p_continentId) == false) {
-			return "Continent doesnot exists!";
+			return "Continent does not exists!";
 		}
 		Continent l_continent = l_gameMap.getContinentById(p_continentId);
 		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
@@ -67,15 +67,14 @@ public class MapEditor {
 	 * @return The method returns a string message indicating the result of adding a
 	 *         continent.
 	 */
-	public String addContinent(int p_continentId, String p_continentName) {
+	public String addContinent(String p_continentName, int p_bonus) {
 		if (l_gameMap.containsContinent(p_continentName)) {
 			return "Continent name already exists!";
 		}
-		if (l_gameMap.containsContinent(p_continentId)) {
-			return "Continent id already exists!";
-		}
-		Continent l_continent = new Continent(p_continentId, p_continentName, 0);
-		l_gameMap.getContinents().put(l_gameMap.getContinents().size() + 1, l_continent);
+
+		int l_newContinentId=l_gameMap.getContinents().size() + 1;
+		Continent l_continent = new Continent(l_newContinentId, p_continentName, 0);
+		l_gameMap.getContinents().put(l_newContinentId, l_continent);
 
 		return p_continentName + " is added!";
 	}
@@ -85,29 +84,29 @@ public class MapEditor {
 	 *
 	 * @param p_countryId
 	 *            The ID of the country to which you want to add a neighbor.
-	 * @param p_neighbourCountryId
+	 * @param p_neighborCountryId
 	 *            An integer that represents the ID of the neighbor country that we
 	 *            want to add to the country with ID p_countryId.
 	 * @return The method is returning a string that indicates the result of adding
 	 *         a neighbor country to a given country.
 	 */
-	public String addNeighbor(int p_countryId, int p_neighbourCountryId) {
+	public String addNeighbor(int p_countryId, int p_neighborCountryId) {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return "Country does not exist! please add first";
 		}
-		if (l_gameMap.containsCountry(p_neighbourCountryId) == false) {
+		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
 			return "Neighbor country does not exist!please add first";
 		}
 		Country l_countryToAdd = l_gameMap.findCountry(p_countryId);
-		if (l_countryToAdd.hasNeighbor(p_neighbourCountryId)) {
+		if (l_countryToAdd.hasNeighbor(p_neighborCountryId)) {
 			return "Connection already exists!";
 		}
-		Country l_negibor = l_gameMap.findCountry(p_neighbourCountryId);
+		Country l_neighbor = l_gameMap.findCountry(p_neighborCountryId);
 		Country l_country = l_gameMap.findCountry(p_countryId);
-		l_country.addNeighbor(l_negibor);
-		l_negibor.addNeighbor(l_country);
+		l_country.addNeighbor(l_neighbor);
+		l_neighbor.addNeighbor(l_country);
 
-		return p_countryId + " added with " + p_neighbourCountryId;
+		return p_countryId + " added with " + p_neighborCountryId;
 	}
 
 	/**
@@ -123,7 +122,7 @@ public class MapEditor {
 	public String removeCountry(int p_countryId) {
 
 		if (l_gameMap.containsCountry(p_countryId) == false) {
-			return "Country id doesnot exists";
+			return "Country id does not exists";
 		}
 		Country l_Country = l_gameMap.findCountry(p_countryId);
 		for (Country l_neighbor : l_Country.getNeighbors().values()) {
@@ -149,7 +148,7 @@ public class MapEditor {
 	public String removeContinent(int p_continentId) {
 
 		if (l_gameMap.containsContinent(p_continentId) == false) {
-			return "Continent doesnot exists";
+			return "Continent does not exists";
 		}
 		Continent l_toRemove = l_gameMap.getContinentById(p_continentId);
 		String l_countriesRemoved = "";
@@ -169,26 +168,26 @@ public class MapEditor {
 	 *
 	 * @param p_countryId
 	 *            The ID of the country from which you want to remove a neighbor.
-	 * @param p_neighbourCountryId
+	 * @param p_neighborCountryId
 	 *            The ID of the country that you want to remove as a neighbor from
 	 *            the country with ID p_countryId.
 	 * @return The method is returning a string indicating the result of the
 	 *         operation.
 	 */
-	public String removeNeighbour(int p_countryId, int p_neighbourCountryId) {
+	public String removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return "Country does not exist! please add first";
 		}
-		if (l_gameMap.containsCountry(p_neighbourCountryId) == false) {
+		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
 			return "Neighbor country does not exist!please add first";
 		}
 		Country l_countryToRemove = l_gameMap.findCountry(p_countryId);
-		if (l_countryToRemove.hasNeighbor(p_neighbourCountryId) == false) {
-			return "Connection doesnot exists!";
+		if (l_countryToRemove.hasNeighbor(p_neighborCountryId) == false) {
+			return "Connection does not exists!";
 		}
-		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighbourCountryId);
-		l_gameMap.findCountry(p_neighbourCountryId).getNeighbors().remove(p_countryId);
+		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighborCountryId);
+		l_gameMap.findCountry(p_neighborCountryId).getNeighbors().remove(p_countryId);
 
-		return p_countryId + " added with " + p_neighbourCountryId;
+		return p_countryId + " removed from " + p_neighborCountryId;
 	}
 }

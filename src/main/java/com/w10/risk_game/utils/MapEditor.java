@@ -159,7 +159,8 @@ public class MapEditor {
 		}
 		// Self remove
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
-		return p_continentId + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved + Constants.MAP_EDITOR_COUNTRIES_REMOVED;
+		return p_continentId + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved
+				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED;
 	}
 
 	/**

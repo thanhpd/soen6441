@@ -182,8 +182,8 @@ public class MapEditorTest {
 			d_countriesRemoved = d_country.getCountryName() + ", ";
 		}
 		d_error = l_mapEditor.removeContinent(d_continentId);
-		assertTrue(
-				(d_continentId + Constants.MAP_EDITOR_REMOVED + d_countriesRemoved + Constants.MAP_EDITOR_COUNTRIES_REMOVED).equals(d_error));
+		assertTrue((d_continentId + Constants.MAP_EDITOR_REMOVED + d_countriesRemoved
+				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_CONTINENT_REMOVE + d_continentId);
 		l_mapDisplay.formatMap(l_gameMap, false);
 	}

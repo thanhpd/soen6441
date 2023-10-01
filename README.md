@@ -3,27 +3,55 @@
 - SOEN 6441 - Advanced Programming Practices, Fall 2023
 - Group Project: W10
 
-## Development Environment Prerequisite
+## Table of Contnent
+* [Group Members](#group-members)
+* [Instructions](#instructions)
+	+ [Development Environment Prerequisite](#development-environment-prerequisite)
+	+ [Development Commands](#development-commands)
+		- [To build and run the project](#to-build-and-run-the-project)
+		- [To run unit tests](#to-run-unit-tests)
+		- [To generate Javadoc documentation](#to-generate-javadoc-documentation)
+	+ [Code formatting](#code-formatting)
+		- [For VSCode Editor](#for-vscode-editor)
+		- [For IntelliJ IDEA](#for-intellij-idea)
+		- [CLI usage](#cli-usage)
+	+ [Main Dependencies](#main-dependencies)
+
+## Group Members
+- Omnia Alam (AlamOmnia)
+- Yajing Liu (YajingLiu2357)
+- Sherwyn D'souza (sherwyn11)
+- Darlene Nazareth (Darlene-Naz)
+- Duy Thanh Phan (thanhpd)
+- Md Tazin Morshed Shad (TazinMorshed)
+
+## Instructions
+### Development Environment Prerequisite
 - JDK 11
 - Maven
 
-## Usage
-### To build the project
+### Development Commands
+All commands are run inside the project folder.
+
+#### To build and run the project
 ```sh
 // This command will build the project and run the unit tests
 // The build and report artifacts are located inside the `target` folder
 
-$ mvn -B package --file pom.xml
+$ mvn -B package
+
+// Run the executable file via Maven
+$ mvn exec:java
 ```
 
-### To run unit tests
+#### To run unit tests
 ```sh
-$ mvn surefire:test
+$ mvn test
 ```
 
-### To generate Javadoc documentation
+#### To generate Javadoc documentation
 ```sh
-// The output folder is located at `apidocs/`
+// The Javadoc folder is located at `docs/apidocs/`
 // Open the index.html file inside the output folder to see the doc
 
 $ mvn javadoc:javadoc
@@ -37,7 +65,7 @@ Install [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?it
 `.editorconfig` support is already built-in for IntelliJ IDEA.
 
 #### CLI usage
-The project uses Spotless with Google Java Format for code layout formatting.
+The project uses Spotless for code layout formatting.
 
 ```sh
 // To check the violations on code formatting
@@ -47,7 +75,7 @@ $ mvn spotless:check
 $ mvn spotless:apply
 ```
 
-## Main Dependencies
+### Main Dependencies
 - Package manager: Maven
 - Unit testing framework: JUnit
 - Code formatting: Spotless, Google Java Format, Editorconfig

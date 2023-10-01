@@ -167,7 +167,8 @@ public class MapEditorTest {
 			d_countriesRemoved = d_country.getCountryName() + ", ";
 		}
 		d_error = d_mapEditor.removeContinent(d_continentName);
-		assertTrue((d_continentName + " removed!" + d_countriesRemoved + "these countries also removed!").equals(d_error));
+		assertTrue(
+				(d_continentName + " removed!" + d_countriesRemoved + "these countries also removed!").equals(d_error));
 		System.out.println("###############After Removing Continent " + d_continentName);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}

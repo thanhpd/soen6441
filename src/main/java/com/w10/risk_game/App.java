@@ -2,7 +2,7 @@ package com.w10.risk_game;
 
 import java.util.Scanner;
 
-import com.w10.risk_game.models.GameEngine;
+import com.w10.risk_game.controllers.GameEngine;
 import com.w10.risk_game.utils.Constants;
 
 /**

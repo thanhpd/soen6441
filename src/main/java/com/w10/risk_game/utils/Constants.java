@@ -13,8 +13,7 @@ public final class Constants {
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
-			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> start\n"
-			+ "-> quit\n";
+			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
@@ -31,7 +30,6 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
-	public static final String USER_INPUT_COMMAND_BEGIN_GAME = "start";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
@@ -64,6 +62,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
+	public static final String GAME_ENGINE_ISSUE_ORDER_CURRENT_MAP_LOOK = "The current map looks like this";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";

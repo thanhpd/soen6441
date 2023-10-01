@@ -192,6 +192,8 @@ public class GameEngine {
 			this.assignPlayersReinforcements();
 
 			this.d_isCountriesAssigned = true;
+
+			this.startGameLoop();
 		} catch (Exception e) {
 			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
 					this.d_players.size());
@@ -479,12 +481,14 @@ public class GameEngine {
 		} else {
 			List<String> l_playerName = new ArrayList<>(this.d_players.keySet());
 			int i = 0;
-			while (l_playerName.size() > 0) {
+			while (!l_playerName.isEmpty()) {
 				Player l_player = this.d_players.get(l_playerName.get(i % l_playerName.size()));
 				if (l_player.getLeftoverArmies() == 0) {
 					l_playerName.remove(i % l_playerName.size());
 				} else {
 					System.out.println(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName().toString() + ":");
+					System.out.println(Constants.GAME_ENGINE_ISSUE_ORDER_CURRENT_MAP_LOOK);
+					this.showMap();
 					System.out.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
 					System.out.println();
 					l_player.issueOrder();
@@ -492,7 +496,7 @@ public class GameEngine {
 				i += 1;
 			}
 			System.out.println(Constants.GAME_ENGINE_EXECUTING_ORDERS);
-			startExecution();
+			this.startExecution();
 		}
 	}
 
@@ -504,11 +508,12 @@ public class GameEngine {
 	 */
 	private void startExecution() {
 		for (Player l_player : this.d_players.values()) {
-			while (l_player.getOrders().size() != 0) {
+			while (l_player.getOrders().isEmpty()) {
 				l_player.nextOrder().execute();
 			}
 		}
 		this.assignPlayersReinforcements();
+		this.startGameLoop();
 	}
 
 	/**

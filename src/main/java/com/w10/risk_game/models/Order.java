@@ -60,8 +60,6 @@ public class Order {
 		Player l_player = this.d_player;
 		int l_countryId = this.d_countryId;
 		int l_num = this.d_num;
-		// int l_armies = l_player.getLeftoverArmies();
-		// l_player.setLeftoverArmies(l_armies - l_num);
 		List<Country> l_countries = l_player.getCountriesOwned();
 		for (Country l_country : l_countries) {
 			if (l_country.getCountryId() == l_countryId) {

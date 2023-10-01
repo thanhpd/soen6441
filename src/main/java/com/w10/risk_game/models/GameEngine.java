@@ -27,7 +27,6 @@ public class GameEngine {
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
-	private Reinforcements d_reinforcements;
 
 	/**
 	 * Game Engine constructor
@@ -38,21 +37,20 @@ public class GameEngine {
 		this.d_isCountriesAssigned = false;
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
-		this.d_reinforcements = new Reinforcements();
 	}
 
 	/**
 	 * The function "loadMap" loads a map file, creates a game map object, and
 	 * checks if the map is valid.
 	 *
-	 * @param p_fileName
-	 *            The parameter `p_fileName` is a String that represents the name of
-	 *            the file from which the map will be loaded.
+	 * @param p_filePath
+	 *            The parameter `p_filePath` is a String that represents the full
+	 *            path of the file from which the map will be loaded.
 	 */
-	public void loadMap(String p_fileName) {
+	public void loadMap(String p_filePath) {
 		try {
 			this.d_mapReader = new MapReader();
-			this.d_gameMap = d_mapReader.loadMapFile(p_fileName);
+			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
 			if (this.d_gameMap.isMapCreated()) {
 				if (!checkIfMapIsValid()) {
@@ -135,9 +133,7 @@ public class GameEngine {
 					i += 1;
 				}
 
-				for (Player l_player : this.d_players.values()) {
-					this.d_reinforcements.reinforcementPhase(l_player, this.d_gameMap);
-				}
+				this.assignPlayersReinforcements();
 			}
 			this.d_players.remove(p_playerName.trim());
 			System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
@@ -193,14 +189,23 @@ public class GameEngine {
 				i += 1;
 			}
 
-			for (Player l_player : this.d_players.values()) {
-				this.d_reinforcements.reinforcementPhase(l_player, this.d_gameMap);
-			}
+			this.assignPlayersReinforcements();
 
 			this.d_isCountriesAssigned = true;
 		} catch (Exception e) {
 			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
 					this.d_players.size());
+		}
+	}
+
+	/**
+	 * The function assigns reinforcements to each player in the game.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	private void assignPlayersReinforcements() {
+		for (Player l_player : this.d_players.values()) {
+			Reinforcements.reinforcementPhase(l_player, this.d_gameMap);
 		}
 	}
 
@@ -244,26 +249,25 @@ public class GameEngine {
 	 * creates a new file if it doesn't, and returns a boolean indicating success or
 	 * failure.
 	 *
-	 * @param p_mapFileName
+	 * @param p_mapFilePath
 	 *            The parameter `p_mapFileName` is a String that represents the file
 	 *            name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
 	 */
-	public boolean editMap(String p_mapFileName) {
-		File l_file = new File(p_mapFileName);
+	public boolean editMap(String p_mapFilePath) {
+		File l_file = new File(p_mapFilePath);
 		if (l_file.exists()) {
-			this.d_mapReader.loadMapFile(p_mapFileName);
+			this.d_mapReader.loadMapFile(p_mapFilePath);
 			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {
-			String[] l_filePathSplit = p_mapFileName.split("/");
+			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
-				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFileName,
+				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
-				return new File(Constants.GAME_MAP_FOLDER_PATH + l_filePathSplit[l_filePathSplit.length - 1])
-						.createNewFile();
+				return new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
 			} catch (IOException e) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFileName, e.getMessage());
+				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
 			}
 		}
 		return false;
@@ -272,18 +276,18 @@ public class GameEngine {
 	/**
 	 * The function adds a continent to a map editor and prints the output.
 	 *
-	 * @param p_continentId
-	 *            The p_continentId parameter is an integer that represents the
-	 *            unique identifier for the continent.
-	 * @param p_ContinentName
-	 *            The parameter "p_ContinentName" is a String that represents the
+	 * @param p_continentName
+	 *            The parameter "p_continentName" is a String that represents the
 	 *            name of the continent that you want to add.
 	 *
+	 * @param p_bonus
+	 *            The p_bonus parameter is an integer that represents the bonus for
+	 *            each continent.
 	 * @author Sherwyn Dsouza
 	 */
-	public void addContinent(int p_continentId, String p_ContinentName) {
+	public void addContinent(String p_continentName, int p_bonus) {
 		try {
-			String l_output = this.d_mapEditor.addContinent(p_continentId, p_ContinentName);
+			String l_output = this.d_mapEditor.addContinent(p_continentName, p_bonus);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -383,16 +387,16 @@ public class GameEngine {
 	 * @param p_countryId
 	 *            The p_countryId parameter represents the ID of the country from
 	 *            which you want to remove a neighbor.
-	 * @param p_neighbourCountryId
-	 *            The parameter "p_neighbourCountryId" represents the ID of the
+	 * @param p_neighborCountryId
+	 *            The parameter "p_neighborCountryId" represents the ID of the
 	 *            neighbor country that you want to remove from the country with ID
 	 *            "p_countryId".
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void removeNeighbor(int p_countryId, int p_neighbourCountryId) {
+	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		try {
-			String l_output = this.d_mapEditor.removeNeighbour(p_countryId, p_neighbourCountryId);
+			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighborCountryId);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -480,6 +484,8 @@ public class GameEngine {
 					l_playerName.remove(i % l_playerName.size());
 				} else {
 					System.out.println(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName().toString() + ":");
+					System.out.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
+					System.out.println();
 					l_player.issueOrder();
 				}
 				i += 1;
@@ -501,20 +507,21 @@ public class GameEngine {
 				l_player.nextOrder().execute();
 			}
 		}
+		this.assignPlayersReinforcements();
 	}
 
 	/**
 	 * The function saves the game map to a file if it is valid, otherwise it prints
 	 * an error message.
 	 *
-	 * @param p_mapFileName
-	 *            The name of the file where the map will be saved.
+	 * @param p_mapFilePath
+	 *            The full path of the file where the map will be saved.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void saveMap(String p_mapFileName) {
+	public void saveMap(String p_mapFilePath) {
 		if (checkIfMapIsValid()) {
-			this.d_gameMap.saveMap(p_mapFileName);
+			this.d_gameMap.saveMap(p_mapFilePath);
 		} else {
 			System.out.println(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}

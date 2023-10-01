@@ -1,9 +1,9 @@
 package com.w10.risk_game.models;
 
-import com.w10.risk_game.utils.Constants;
-
 import java.util.List;
 import java.util.Scanner;
+
+import com.w10.risk_game.utils.Constants;
 
 /**
  * The Player class represents a player in this game, with properties such as
@@ -177,13 +177,11 @@ public class Player {
 		while (l_again) {
 			boolean l_isValidFormat;
 			boolean l_isValidOrder;
-			boolean l_isValidCountry = false;
-			boolean l_isValidNum = true;
+			boolean l_isValidCountry;
+			boolean l_isValidNum;
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
 			String l_input = l_scanner.nextLine();
 			String[] l_inputArray = l_input.split(" ");
-			if (l_inputArray[0].contains("done"))
-				break;
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
 			if (!l_isValidFormat) {

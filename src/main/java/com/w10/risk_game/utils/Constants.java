@@ -8,8 +8,8 @@ public final class Constants {
 
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You can enter any of the below commands:\n" + "-> loadmap <filename>\n" + "-> savemap <filename>\n"
-			+ "-> showmap\n" + "-> editmap <filename>\n" + "-> validatemap\n"
+			+ "You can enter any of the below commands:\n" + "-> loadmap <filepath>\n" + "-> savemap <filepath>\n"
+			+ "-> showmap\n" + "-> editmap <filepath>\n" + "-> validatemap\n"
 			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
@@ -63,11 +63,14 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
+	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
+
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 
 	// Maps Folder Path
-	public static final String GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
 
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
@@ -88,8 +91,8 @@ public final class Constants {
 	public static final String MAP_EDITOR_CONTINENT_NAME_EXIST = "Continent name already exists!";
 	public static final String MAP_EDITOR_CONTINENT_ID_EXIST = "Continent id already exists!";
 	public static final String MAP_EDITOR_ADD_CONTINENT = " is added!";
-	public static final String MAP_EDITOR_COUNTRY_NOT_EXIST = "Country does not exist! please add first";
-	public static final String MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST = "Neighbor country does not exist!please add first";
+	public static final String MAP_EDITOR_COUNTRY_NOT_EXIST = "Country does not exist! Please add first";
+	public static final String MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST = "Neighbor country does not exist! Please add first";
 	public static final String MAP_EDITOR_CONNECTION_EXIST = "Connection already exists!";
 	public static final String MAP_EDITOR_ADD_NEIGHBOR = " added with ";
 	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country id does not exist";
@@ -97,6 +100,13 @@ public final class Constants {
 	public static final String MAP_EDITOR_REMOVED = " is removed!";
 	public static final String MAP_EDITOR_COUNTRIES_REMOVED = "these countries are also removed!";
 	public static final String MAP_EDITOR_CONNECTION_NOT_EXIST = "Connection does not exist!";
+	public static final String MAP_EDITOR_NEIGHBOR_REMOVED = " removed from ";
+	public static final String MAP_EDITOR_AFTER_CONTINENT_ADDED = "###############After Continent added";
+	public static final String MAP_EDITOR_AFTER_COUNTRY_ADDED = "###############After Country added ";
+	public static final String MAP_EDITOR_AFTER_NEIGHBOR_ADDED = "###############After Neighbor added";
+	public static final String MAP_EDITOR_AFTER_CONTINENT_REMOVE = "###############After Removing Continent ";
+	public static final String MAP_EDITOR_AFTER_COUNTRY_REMOVE = "###############After Removing country";
+	public static final String MAP_EDITOR_AFTER_NEIGHBOR_REMOVE = "###############After Removing neighbor";
 	// Map Validator Constants
 	public static final String MAP_VALIDATOR_EMPTY_MAP = "MapValidator: The map is empty!";
 	public static final String MAP_VALIDATOR_CONTINENT_NOT_DECLARED = "MapValidator: The continent(s) of some countries are not declared!";
@@ -118,5 +128,8 @@ public final class Constants {
 	public static final String MAP_READER_CONTINENTS = "[continents]";
 	public static final String MAP_READER_COUNTRIES = "[countries]";
 	public static final String MAP_READER_BORDERS = "[borders]";
+
+	// Reinforcements Class Constants
+	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
 }

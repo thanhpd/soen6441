@@ -276,18 +276,18 @@ public class GameEngine {
 	/**
 	 * The function adds a continent to a map editor and prints the output.
 	 *
-	 * @param p_continentId
-	 *            The p_continentId parameter is an integer that represents the
-	 *            unique identifier for the continent.
-	 * @param p_ContinentName
-	 *            The parameter "p_ContinentName" is a String that represents the
+	 * @param p_continentName
+	 *            The parameter "p_continentName" is a String that represents the
 	 *            name of the continent that you want to add.
 	 *
+	 * @param p_bonus
+	 *            The p_bonus parameter is an integer that represents the bonus for
+	 *            each continent.
 	 * @author Sherwyn Dsouza
 	 */
-	public void addContinent(int p_continentId, String p_ContinentName) {
+	public void addContinent(String p_continentName, int p_bonus) {
 		try {
-			String l_output = this.d_mapEditor.addContinent(p_continentId, p_ContinentName);
+			String l_output = this.d_mapEditor.addContinent(p_continentName, p_bonus);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -387,16 +387,16 @@ public class GameEngine {
 	 * @param p_countryId
 	 *            The p_countryId parameter represents the ID of the country from
 	 *            which you want to remove a neighbor.
-	 * @param p_neighbourCountryId
-	 *            The parameter "p_neighbourCountryId" represents the ID of the
+	 * @param p_neighborCountryId
+	 *            The parameter "p_neighborCountryId" represents the ID of the
 	 *            neighbor country that you want to remove from the country with ID
 	 *            "p_countryId".
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void removeNeighbor(int p_countryId, int p_neighbourCountryId) {
+	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		try {
-			String l_output = this.d_mapEditor.removeNeighbour(p_countryId, p_neighbourCountryId);
+			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighborCountryId);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);

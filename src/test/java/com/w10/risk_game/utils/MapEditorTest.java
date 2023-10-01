@@ -34,8 +34,9 @@ public class MapEditorTest {
 
 	@BeforeAll
 	public void setUp() {
+		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map";
 		MapReader l_mapReader = new MapReader();
-		d_gameMap = l_mapReader.loadMapFile("test.map");
+		d_gameMap = l_mapReader.loadMapFile(l_mapFilePath);
 		d_mapEditor = new MapEditor(d_gameMap);
 
 	}
@@ -158,7 +159,7 @@ public class MapEditorTest {
 	 */
 	@Test
 	public void testRemoveContinent() {
-		d_continentName="North_Europe";
+		d_continentName = "South_Europe";
 		String d_countriesRemoved = "";
 		Continent l_toRemove = d_gameMap.getContinentByName(d_continentName);
 		ArrayList<Country> d_countriesToRemove = d_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
@@ -166,9 +167,8 @@ public class MapEditorTest {
 			d_countriesRemoved = d_country.getCountryName() + ", ";
 		}
 		d_error = d_mapEditor.removeContinent(d_continentName);
-		assertTrue(
-				(d_continentId + " removed!" + d_countriesRemoved + "these countries also removed!").equals(d_error));
-		System.out.println("###############After Removing Continent " + d_continentId);
+		assertTrue((d_continentName + " removed!" + d_countriesRemoved + "these countries also removed!").equals(d_error));
+		System.out.println("###############After Removing Continent " + d_continentName);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 
@@ -221,8 +221,8 @@ public class MapEditorTest {
 	 */
 	@Test
 	public void testRemoveNeighbor() {
-		d_countryId = 1;
-		d_neighborCountryId = 7;
+		d_countryId = 9;
+		d_neighborCountryId = 15;
 		d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
 		assertTrue((d_countryId + " removed from " + d_neighborCountryId).equals(d_error));
 		System.out.println("###############After Removing neighbor");

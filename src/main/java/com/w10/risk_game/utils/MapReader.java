@@ -158,24 +158,23 @@ public class MapReader {
 	 * continents, countries, and borders, and returns a `GameMap` object containing
 	 * this information.
 	 *
-	 * @param mapFilename
-	 *            The mapFilename parameter is a String that represents the name of
-	 *            the map file that needs to be loaded.
+	 * @param p_mapFilePath
+	 *            A String that represents the path of the map file that needs to be
+	 *            loaded.
 	 * @return The method is returning a GameMap object.
 	 */
-	public GameMap loadMapFile(String mapFilename) {
+	public GameMap loadMapFile(String p_mapFilePath) {
 		Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
 		Map<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
 		GameMap l_gameMap = new GameMap();
 
-		String l_path = getMapFolderPath() + "" + mapFilename;
 		try {
-			FileReader l_reader = new FileReader(l_path);
+			FileReader l_reader = new FileReader(p_mapFilePath);
 
 			Scanner l_scanner = new Scanner(l_reader);
 			String l_line;
 
-			// read unitl continents
+			// read until continents
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
 				if (l_line.equals("[continents]")) {

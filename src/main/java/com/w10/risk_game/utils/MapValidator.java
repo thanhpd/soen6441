@@ -13,6 +13,9 @@ import java.util.*;
  */
 public class MapValidator {
 
+	/**
+	 * Private constructor to prevent unexpected instance initialization
+	 */
 	private MapValidator() {
 		throw new IllegalStateException("Utility class");
 	}
@@ -30,33 +33,39 @@ public class MapValidator {
 	 * @return The method isMapCorrect is returning a boolean value indicating if
 	 *         the map satisfies all conditions.
 	 */
-	public static boolean isMapCorrect(GameMap p_gameMap) {
-		if (isMapEmpty(p_gameMap)) {
+	public static boolean IsMapCorrect(GameMap p_gameMap) {
+		// Check if the map is empty
+		if (IsMapEmpty(p_gameMap)) {
 			System.out.println(Constants.MAP_VALIDATOR_EMPTY_MAP);
 			return false;
 		}
 
-		if (hasNonExistentContinent(p_gameMap)) {
+		// Check if the country is referring to a non-declared continent
+		if (HasNonExistentContinent(p_gameMap)) {
 			System.out.println(Constants.MAP_VALIDATOR_CONTINENT_NOT_DECLARED);
 			return false;
 		}
 
-		if (hasNonExistentNeighbor(p_gameMap)) {
+		// Check if the country is referring to a non-existent country as a neighbor
+		if (HasNonExistentNeighbor(p_gameMap)) {
 			System.out.println(Constants.MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED);
 			return false;
 		}
 
-		if (hasSelfReferencingNeighbor(p_gameMap)) {
+		// Check if the country is referring to itself as a neighbor
+		if (HasSelfReferencingNeighbor(p_gameMap)) {
 			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR);
 			return false;
 		}
 
-		if (!areCountriesConnected(p_gameMap.getCountries())) {
+		// Check if all countries are connected using DFS
+		if (!AreCountriesConnected(p_gameMap.getCountries())) {
 			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_INACCESSIBLE);
 			return false;
 		}
 
-		if (!areContinentsConnected(p_gameMap)) {
+		// Check if each continent is a connected subgraph
+		if (!AreContinentsConnected(p_gameMap)) {
 			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED);
 			return false;
 		}
@@ -75,7 +84,7 @@ public class MapValidator {
 	 * @return The method is returning a boolean value, which indicates whether the
 	 *         given game map is empty or not.
 	 */
-	protected static boolean isMapEmpty(GameMap p_gameMap) {
+	protected static boolean IsMapEmpty(GameMap p_gameMap) {
 		return p_gameMap.getCountries().isEmpty() || p_gameMap.getContinents().isEmpty();
 	}
 
@@ -89,7 +98,7 @@ public class MapValidator {
 	 *            countries and continents in the game.
 	 * @return The method is returning a boolean value.
 	 */
-	protected static boolean hasNonExistentContinent(GameMap p_gameMap) {
+	protected static boolean HasNonExistentContinent(GameMap p_gameMap) {
 		Collection<Country> l_countries = p_gameMap.getCountries().values();
 
 		return l_countries.stream()
@@ -106,7 +115,7 @@ public class MapValidator {
 	 *            and their connections in the game.
 	 * @return The method is returning a boolean value.
 	 */
-	protected static boolean hasNonExistentNeighbor(GameMap p_gameMap) {
+	protected static boolean HasNonExistentNeighbor(GameMap p_gameMap) {
 		Collection<Country> l_countries = p_gameMap.getCountries().values();
 
 		return l_countries.stream().anyMatch(country -> country.getNeighbors().keySet().stream()
@@ -123,7 +132,7 @@ public class MapValidator {
 	 *            and their connections in the game.
 	 * @return The method is returning a boolean value.
 	 */
-	protected static boolean hasSelfReferencingNeighbor(GameMap p_gameMap) {
+	protected static boolean HasSelfReferencingNeighbor(GameMap p_gameMap) {
 		Collection<Country> l_countries = p_gameMap.getCountries().values();
 
 		return l_countries.stream().anyMatch(country -> country.getNeighbors().values().stream()
@@ -140,7 +149,7 @@ public class MapValidator {
 	 * @return The method is returning a boolean value. It returns true if all the
 	 *         countries in the given map are connected, and false otherwise.
 	 */
-	protected static boolean areCountriesConnected(Map<Integer, Country> p_countryMap) {
+	protected static boolean AreCountriesConnected(Map<Integer, Country> p_countryMap) {
 		// Initialize the visited and to be visited list
 		Set<Integer> l_visitedCountryIds = new HashSet<>();
 		LinkedList<Integer> l_queuedCountryIds = new LinkedList<>();
@@ -189,10 +198,10 @@ public class MapValidator {
 	 *            and their connections in the game.
 	 * @return The method is returning a boolean value.
 	 */
-	protected static boolean areContinentsConnected(GameMap p_gameMap) {
-		Map<Integer, Map<Integer, Country>> continentIdToCountryIdsMap = getContinentIdToCountryIdsMap(p_gameMap);
+	protected static boolean AreContinentsConnected(GameMap p_gameMap) {
+		Map<Integer, Map<Integer, Country>> continentIdToCountryIdsMap = GetContinentIdToCountryIdsMap(p_gameMap);
 
-		return continentIdToCountryIdsMap.entrySet().stream().allMatch(entry -> areCountriesConnected(entry.getValue()))
+		return continentIdToCountryIdsMap.entrySet().stream().allMatch(entry -> AreCountriesConnected(entry.getValue()))
 				&& p_gameMap.getContinents().size() == continentIdToCountryIdsMap.size();
 	}
 
@@ -207,21 +216,26 @@ public class MapValidator {
 	 * @return The method is returning a map that maps continent IDs to maps of
 	 *         country IDs to countries.
 	 */
-	protected static Map<Integer, Map<Integer, Country>> getContinentIdToCountryIdsMap(GameMap p_gameMap) {
-		Map<Integer, Map<Integer, Country>> l_continentIdToCountryIdsMap = new HashMap<>();
+	protected static Map<Integer, Map<Integer, Country>> GetContinentIdToCountryIdsMap(GameMap p_gameMap) {
+		Map<Integer, Map<Integer, Country>> l_continentIdToCountriesMap = new HashMap<>();
 
+		// Loop over the country map to create a map of integer continentId to the map
+		// of country and countryId
 		for (Map.Entry<Integer, Country> l_entry : p_gameMap.getCountries().entrySet()) {
 			Country l_country = l_entry.getValue();
-			Map<Integer, Country> l_countryMap = l_continentIdToCountryIdsMap.get(l_country.getContinentId());
+			Map<Integer, Country> l_countryMap = l_continentIdToCountriesMap.get(l_country.getContinentId());
+
+			// Create a new map if this is the first access, else put the new country entry
+			// in the map
 			if (l_countryMap != null) {
 				l_countryMap.put(l_entry.getKey(), l_entry.getValue());
 			} else {
 				Map<Integer, Country> l_newCountryMap = new HashMap<>();
 				l_newCountryMap.put(l_entry.getKey(), l_entry.getValue());
-				l_continentIdToCountryIdsMap.put(l_country.getContinentId(), l_newCountryMap);
+				l_continentIdToCountriesMap.put(l_country.getContinentId(), l_newCountryMap);
 			}
 		}
 
-		return l_continentIdToCountryIdsMap;
+		return l_continentIdToCountriesMap;
 	}
 }

@@ -12,7 +12,7 @@ public class GameUI {
 	private GameEngine d_gameEngine;
 	private boolean d_startGamePhase;
 
-	public static String d_Command = "";
+	public static String Command = "";
 
 	public GameUI() {
 		this.d_gameEngine = new GameEngine();
@@ -33,9 +33,9 @@ public class GameUI {
 			try {
 				System.out.print(Constants.USER_INPUT_REQUEST);
 				Scanner l_scanner = new Scanner(System.in);
-				d_Command = l_scanner.nextLine();
-				String l_mainCommand = CommandInterpreter.getMainCommand(d_Command);
-				String[] l_argList = CommandInterpreter.getArgumentList(d_Command);
+				Command = l_scanner.nextLine();
+				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
+				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 
 				switch (l_mainCommand) {
 					// Map editor phase
@@ -146,9 +146,9 @@ public class GameUI {
 			try {
 				System.out.print(Constants.USER_INPUT_REQUEST);
 				Scanner l_scanner = new Scanner(System.in);
-				d_Command = l_scanner.nextLine();
-				String l_mainCommand = CommandInterpreter.getMainCommand(d_Command);
-				String[] l_argList = CommandInterpreter.getArgumentList(d_Command);
+				Command = l_scanner.nextLine();
+				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
+				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 
 				switch (l_mainCommand) {
 					// Show Map Command

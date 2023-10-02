@@ -3,7 +3,6 @@ package com.w10.risk_game.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +60,8 @@ public class GameEngine {
 			this.d_mapReader = new MapReader();
 			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
+
+			// Check if map is created and is valid
 			if (this.d_gameMap.isMapCreated()) {
 				if (!checkIfMapIsValid()) {
 					this.d_gameMap = null;
@@ -127,6 +128,8 @@ public class GameEngine {
 			}
 			p_playerName = p_playerName.trim();
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
+
+			// Assign countries of removed player to remaining players
 			if (l_playerNames.size() > 1) {
 				List<Country> l_ownedCountriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
 				Collections.shuffle(l_ownedCountriesOfPlayer);
@@ -220,7 +223,7 @@ public class GameEngine {
 	 */
 	private void assignPlayersReinforcements() {
 		for (Player l_player : this.d_players.values()) {
-			Reinforcements.reinforcementPhase(l_player, this.d_gameMap);
+			Reinforcements.ReinforcementPhase(l_player, this.d_gameMap);
 		}
 	}
 
@@ -268,11 +271,16 @@ public class GameEngine {
 	 *            The parameter `p_mapFileName` is a String that represents the file
 	 *            name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public boolean editMap(String p_mapFilePath) {
 		File l_file = new File(p_mapFilePath);
+
+		// If file with the input filename exists then load that map else create a new
+		// map file
 		if (l_file.exists()) {
-			this.d_mapReader.loadMapFile(p_mapFilePath);
+			this.loadMap(p_mapFilePath);
 			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {
@@ -451,8 +459,10 @@ public class GameEngine {
 	 */
 	public boolean checkIfMapIsValid() {
 		try {
+			// First check if the map is created, then if map is valid it will return true
+			// else false
 			if (this.d_gameMap.isMapCreated()) {
-				if (MapValidator.isMapCorrect(this.d_gameMap)) {
+				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
 					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
 					return true;
 				} else {
@@ -534,7 +544,9 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function checks if there are any players in the player list.
+	 * The function checks if there are any players in the player list. If empty, it
+	 * returs True so that no more players have to issue orders and order execution
+	 * can begin by the game engine
 	 *
 	 * @return The method is returning a boolean value.
 	 *
@@ -556,11 +568,13 @@ public class GameEngine {
 	 */
 	public boolean executePlayerOrders() {
 		try {
+			// Execute the orders of the players
 			for (Player l_player : this.d_players.values()) {
 				while (!l_player.getOrders().isEmpty()) {
 					l_player.nextOrder().execute();
 				}
 			}
+			// Reset the reinforcements of the players and start the Issue Order phase again
 			this.assignPlayersReinforcements();
 			this.d_currentPlayerIndex = 0;
 			this.d_playerList = new ArrayList<>(this.d_players.values());

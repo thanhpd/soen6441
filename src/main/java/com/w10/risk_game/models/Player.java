@@ -188,7 +188,7 @@ public class Player {
 				System.out.print(Constants.USER_INPUT_REQUEST);
 				l_input = l_scanner.nextLine();
 			} else {
-				l_input = GameUI.d_Command;
+				l_input = GameUI.Command;
 			}
 			String[] l_inputArray = l_input.split(" ");
 			// check the input format

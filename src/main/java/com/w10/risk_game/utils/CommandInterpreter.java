@@ -9,12 +9,7 @@ import com.w10.risk_game.exceptions.ApplicationException;
 public class CommandInterpreter {
 
 	// The `private CommandInterpreter()` is a private constructor of the
-	// `CommandInterpreter` class. By
-	// making the constructor private, it prevents the class from being instantiated
-	// from outside the class
-	// itself. This is often done in utility classes where you only want to provide
-	// static methods and
-	// don't want the class to be instantiated.
+	// `CommandInterpreter` class.
 	private CommandInterpreter() {
 	}
 
@@ -28,7 +23,7 @@ public class CommandInterpreter {
 	 * @return The method is returning the main command from the given input
 	 *         command.
 	 */
-	public static String getMainCommand(String p_command) throws ApplicationException {
+	public static String GetMainCommand(String p_command) throws ApplicationException {
 		if (p_command.isBlank())
 			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
 		return p_command.split(Constants.REGEX_SPLIT_ON_SPACE)[0];
@@ -42,7 +37,7 @@ public class CommandInterpreter {
 	 *            The parameter `p_command` is a string that represents a command.
 	 * @return The method is returning a String array.
 	 */
-	public static String[] getArgumentList(String p_command) throws ApplicationException {
+	public static String[] GetArgumentList(String p_command) throws ApplicationException {
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 		if (l_argumentList.length == 0)
 			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);

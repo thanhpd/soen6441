@@ -462,7 +462,7 @@ public class GameEngine {
 			// First check if the map is created, then if map is valid it will return true
 			// else false
 			if (this.d_gameMap.isMapCreated()) {
-				if (MapValidator.isMapCorrect(this.d_gameMap)) {
+				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
 					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
 					return true;
 				} else {

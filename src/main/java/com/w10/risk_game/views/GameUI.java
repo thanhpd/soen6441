@@ -57,13 +57,13 @@ public class GameUI {
 						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							this.d_gameEngine.addContinent(l_argList[2].toString(), Integer.parseInt(l_argList[3]));
 						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-							this.d_gameEngine.removeContinent(Integer.parseInt(l_argList[2]));
+							this.d_gameEngine.removeContinent(l_argList[2]);
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
 						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							this.d_gameEngine.addCountry(Integer.parseInt(l_argList[2]), l_argList[3].toString(),
-									Integer.parseInt(l_argList[4]));
+									l_argList[4]);
 						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 							this.d_gameEngine.removeCountry(Integer.parseInt(l_argList[2]));
 						}

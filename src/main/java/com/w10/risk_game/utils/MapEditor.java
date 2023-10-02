@@ -1,6 +1,6 @@
 package com.w10.risk_game.utils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -153,7 +153,7 @@ public class MapEditor {
 		}
 		Continent l_toRemove = l_gameMap.getContinentByName(p_continentName);
 		String l_countriesRemoved = "";
-		ArrayList<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
+		List<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
 		for (Country l_country : l_countriesToRemove) {
 			removeCountry(l_country.getCountryId());
 			l_countriesRemoved = l_country.getCountryName() + ", ";

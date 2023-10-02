@@ -2,7 +2,7 @@ package com.w10.risk_game.utils;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -51,6 +51,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.addContinent(d_continentName, d_bonus);
 		assertTrue("Continent name already exists!".equals(d_error));
 	}
+
 	/**
 	 * Valid input to add a continent to the map
 	 */
@@ -126,6 +127,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.addNeighbor(d_countryId, d_neighborCountryId);
 		assertTrue(("Connection already exists!").equals(d_error));
 	}
+
 	/**
 	 * Valid inputs to add a neighbor
 	 */
@@ -154,6 +156,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.removeContinent(d_continentName);
 		assertTrue("Continent does not exists".equals(d_error));
 	}
+
 	/**
 	 * Valid inputs to remove a continent
 	 */
@@ -162,7 +165,7 @@ public class MapEditorTest {
 		d_continentName = "South_Europe";
 		String d_countriesRemoved = "";
 		Continent l_toRemove = d_gameMap.getContinentByName(d_continentName);
-		ArrayList<Country> d_countriesToRemove = d_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
+		List<Country> d_countriesToRemove = d_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
 		for (Country d_country : d_countriesToRemove) {
 			d_countriesRemoved = d_country.getCountryName() + ", ";
 		}
@@ -188,6 +191,7 @@ public class MapEditorTest {
 		String d_error = d_mapEditor.removeCountry(d_countryId);
 		assertTrue("Country id does not exists".equals(d_error));
 	}
+
 	/**
 	 * Valid inputs to remove a country
 	 */
@@ -217,6 +221,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
 		assertTrue(("Neighbor country does not exist!please add first").equals(d_error));
 	}
+
 	/**
 	 * Valid input to remove a neighbor
 	 */

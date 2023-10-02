@@ -26,7 +26,7 @@ public class MapReader {
 	 *         "maps" folder in the project's resources directory.
 	 */
 	public String getMapFolderPath() {
-		return System.getProperty("user.dir") + "/src/main/resources/maps/";
+		return System.getProperty("user.dir") + Constants.MAP_READER_MAP_FOLDER_PATH;
 	}
 
 	/**
@@ -45,10 +45,11 @@ public class MapReader {
 	public Map<Integer, Country> readCountries(Scanner p_scanner, Map<Integer, Continent> p_continents) {
 
 		String l_line;
-		HashMap<Integer, Country> l_countries = new HashMap<Integer, Country>();
+		HashMap<Integer, Country> l_countries = new HashMap<>();
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
-			if (l_line.equals("[continents]") || l_line.equals("[borders]") || l_line.isEmpty()) {
+			if (l_line.equals(Constants.MAP_READER_CONTINENTS) || l_line.equals(Constants.MAP_READER_BORDERS)
+					|| l_line.isEmpty()) {
 				break;
 			}
 
@@ -77,10 +78,11 @@ public class MapReader {
 		String l_line;
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
-			if (l_line.equals("[continents]") || l_line.equals("[countries]") || l_line.isEmpty()) {
+			if (l_line.equals(Constants.MAP_READER_CONTINENTS) || l_line.equals(Constants.MAP_READER_COUNTRIES)
+					|| l_line.isEmpty()) {
 				break;
 			}
-			String[] l_splitted = l_line.split(" ");
+			String[] l_splitted = l_line.split(Constants.SPACE);
 			Country d_country = p_countries.get(Integer.parseInt(l_splitted[0]));
 			for (int i = 1; i < l_splitted.length; i++) {
 				Country l_neighbor = p_countries.get(Integer.parseInt(l_splitted[i]));
@@ -105,12 +107,13 @@ public class MapReader {
 	public Map<Integer, Continent> readContinents(Scanner p_scanner) {
 
 		String l_line;
-		HashMap<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
+		HashMap<Integer, Continent> l_continents = new HashMap<>();
 		int l_continentId = 1;
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
 
-			if (l_line.equals("[countries]") || l_line.equals("[borders]") || l_line.isEmpty()) {
+			if (l_line.equals(Constants.MAP_READER_COUNTRIES) || l_line.equals(Constants.MAP_READER_BORDERS)
+					|| l_line.isEmpty()) {
 				break;
 			}
 
@@ -131,7 +134,7 @@ public class MapReader {
 	 * @return The method is returning a Country object.
 	 */
 	public Country mapCountry(String p_line) {
-		String[] l_splitted = p_line.split(" ");
+		String[] l_splitted = p_line.split(Constants.SPACE);
 		return new Country(Integer.parseInt(l_splitted[0]), l_splitted[1], Integer.parseInt(l_splitted[2]), 0);
 	}
 
@@ -149,7 +152,7 @@ public class MapReader {
 	 * @return The method is returning a Continent object.
 	 */
 	public Continent mapContinent(String p_line, int p_continentId) {
-		String[] l_splitted = p_line.split(" ");
+		String[] l_splitted = p_line.split(Constants.SPACE);
 		return new Continent(p_continentId, l_splitted[0], Integer.parseInt(l_splitted[1]));
 	}
 
@@ -164,8 +167,8 @@ public class MapReader {
 	 * @return The method is returning a GameMap object.
 	 */
 	public GameMap loadMapFile(String p_mapFilePath) {
-		Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
-		Map<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
+		Map<Integer, Country> l_countries = new HashMap<>();
+		Map<Integer, Continent> l_continents = new HashMap<>();
 		GameMap l_gameMap = new GameMap();
 
 		try {
@@ -177,7 +180,7 @@ public class MapReader {
 			// read until continents
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
-				if (l_line.equals("[continents]")) {
+				if (l_line.equals(Constants.MAP_READER_CONTINENTS)) {
 					l_continents = readContinents(l_scanner);
 					break;
 				}
@@ -186,7 +189,7 @@ public class MapReader {
 			// read until countries
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
-				if (l_line.equals("[countries]")) {
+				if (l_line.equals(Constants.MAP_READER_COUNTRIES)) {
 					l_countries = readCountries(l_scanner, l_continents);
 					break;
 				}
@@ -195,7 +198,7 @@ public class MapReader {
 			// read until border
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
-				if (l_line.equals("[borders]")) {
+				if (l_line.equals(Constants.MAP_READER_BORDERS)) {
 					parseBorders(l_countries, l_scanner);
 					break;
 				}
@@ -207,7 +210,6 @@ public class MapReader {
 		} catch (FileNotFoundException e) {
 			System.out.println(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
-
 		return l_gameMap;
 	}
 }

@@ -184,7 +184,7 @@ public class Player {
 			boolean l_isValidNum;
 			String l_input = "";
 			if (l_failed) {
-				System.out.println("Please enter your order in the format of \"deploy <CountryId> <No. of armies>\".");
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
 				System.out.print(Constants.USER_INPUT_REQUEST);
 				l_input = l_scanner.nextLine();
 			} else {
@@ -240,20 +240,20 @@ public class Player {
 	 */
 	public boolean checkValidForm(String[] p_inputArray) {
 		if (p_inputArray.length != 3) {
-			System.out.println("Invalid input! The command should contain three parts. Please try again.");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS);
 			return false;
 		}
 		String l_countryId = p_inputArray[1];
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				System.out.println("Invalid input! The country id should be integers. Please try again.");
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				System.out.println("Invalid input! The number of armies should be integers. Please try again.");
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}
@@ -271,7 +271,7 @@ public class Player {
 	public boolean checkValidOrder(String p_orderType) {
 		String l_orderType = p_orderType;
 		if (!l_orderType.equals("deploy")) {
-			System.out.println("Invalid input! The order type should be \"deploy\". Please try again.");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 			return false;
 		}
 		return true;
@@ -293,8 +293,7 @@ public class Player {
 				return true;
 			}
 		}
-		System.out.println(
-				"Invalid input! The country id should be one of the countries owned by the player. Please try again.");
+		System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_COUNTRY);
 		return false;
 	}
 
@@ -310,8 +309,7 @@ public class Player {
 	 */
 	public boolean checkValidNum(int p_num, int p_army) {
 		if (p_num > p_army) {
-			System.out.println(
-					"Invalid input! The number of leftover armies should be more than the number of armies. Please try again.");
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;
 		}
 		return true;

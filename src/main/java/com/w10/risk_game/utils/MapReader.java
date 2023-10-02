@@ -34,18 +34,21 @@ public class MapReader {
 	 * countries, associating each country with its corresponding continent.
 	 *
 	 * @param p_scanner
-	 *            The scanner object used to read the input file line by line.
+	 *                     The scanner object used to read the input file line by
+	 *                     line.
 	 * @param p_continents
-	 *            p_continents is a map that contains the continents of the world.
-	 *            The key is an Integer representing the continent ID, and the value
-	 *            is a Continent object representing the continent.
+	 *                     p_continents is a map that contains the continents of the
+	 *                     world.
+	 *                     The key is an Integer representing the continent ID, and
+	 *                     the value
+	 *                     is a Continent object representing the continent.
 	 * @return The method is returning a object containing continentID as key and
 	 *         Continent object as value.
 	 */
 	public Map<Integer, Country> readCountries(Scanner p_scanner, Map<Integer, Continent> p_continents) {
 
 		String l_line;
-		HashMap<Integer, Country> l_countries = new HashMap<Integer, Country>();
+		HashMap<Integer, Country> l_countries = new HashMap<>();
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
 			if (l_line.equals(Constants.MAP_READER_CONTINENTS) || l_line.equals(Constants.MAP_READER_BORDERS)
@@ -68,11 +71,15 @@ public class MapReader {
 	 * neighboring countries to each country object in a map.
 	 *
 	 * @param p_countries
-	 *            p_countries is a map object which stores the countries in the
-	 *            game. The keys are integers representing the country IDs, and the
-	 *            values are Country objects representing the countries themselves.
+	 *                    p_countries is a map object which stores the countries in
+	 *                    the
+	 *                    game. The keys are integers representing the country IDs,
+	 *                    and the
+	 *                    values are Country objects representing the countries
+	 *                    themselves.
 	 * @param p_scanner
-	 *            A Scanner object used to read input from a file or other source.
+	 *                    A Scanner object used to read input from a file or other
+	 *                    source.
 	 */
 	public void parseBorders(Map<Integer, Country> p_countries, Scanner p_scanner) {
 		String l_line;
@@ -82,10 +89,10 @@ public class MapReader {
 					|| l_line.isEmpty()) {
 				break;
 			}
-			String[] l_split = l_line.split(" ");
-			Country d_country = p_countries.get(Integer.parseInt(l_split[0]));
-			for (int i = 1; i < l_split.length; i++) {
-				Country l_neighbor = p_countries.get(Integer.parseInt(l_split[i]));
+			String[] l_splitted = l_line.split(Constants.SPACE);
+			Country d_country = p_countries.get(Integer.parseInt(l_splitted[0]));
+			for (int i = 1; i < l_splitted.length; i++) {
+				Country l_neighbor = p_countries.get(Integer.parseInt(l_splitted[i]));
 				if (d_country != null && l_neighbor != null) {
 					d_country.addNeighbor(l_neighbor);
 				}
@@ -98,16 +105,18 @@ public class MapReader {
 	 * continent objects.
 	 *
 	 * @param p_scanner
-	 *            The parameter `p_scanner` is of type `Scanner`. It is used to read
-	 *            input from a source, such as a file or user input. In this method,
-	 *            it is used to read lines of text from the input source.
+	 *                  The parameter `p_scanner` is of type `Scanner`. It is used
+	 *                  to read
+	 *                  input from a source, such as a file or user input. In this
+	 *                  method,
+	 *                  it is used to read lines of text from the input source.
 	 * @return The method is returning a object containing continentID as key and
 	 *         Continent object as value.
 	 */
 	public Map<Integer, Continent> readContinents(Scanner p_scanner) {
 
 		String l_line;
-		HashMap<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
+		HashMap<Integer, Continent> l_continents = new HashMap<>();
 		int l_continentId = 1;
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
@@ -129,13 +138,14 @@ public class MapReader {
 	 * and uses the substrings to create and return a new Country object.
 	 *
 	 * @param p_line
-	 *            The parameter `p_line` is a string that represents a line of data
-	 *            containing information about a country.
+	 *               The parameter `p_line` is a string that represents a line of
+	 *               data
+	 *               containing information about a country.
 	 * @return The method is returning a Country object.
 	 */
 	public Country mapCountry(String p_line) {
-		String[] l_split = p_line.split(" ");
-		return new Country(Integer.parseInt(l_split[0]), l_split[1], Integer.parseInt(l_split[2]), 0);
+		String[] l_splitted = p_line.split(Constants.SPACE);
+		return new Country(Integer.parseInt(l_splitted[0]), l_splitted[1], Integer.parseInt(l_splitted[2]), 0);
 	}
 
 	/**
@@ -144,16 +154,18 @@ public class MapReader {
 	 * population extracted from the string.
 	 *
 	 * @param p_line
-	 *            The p_line parameter is a string that represents a line of data
-	 *            containing information about a continent.
+	 *                      The p_line parameter is a string that represents a line
+	 *                      of data
+	 *                      containing information about a continent.
 	 * @param p_continentId
-	 *            The p_continentId parameter is an integer that represents the
-	 *            unique identifier for the continent.
+	 *                      The p_continentId parameter is an integer that
+	 *                      represents the
+	 *                      unique identifier for the continent.
 	 * @return The method is returning a Continent object.
 	 */
 	public Continent mapContinent(String p_line, int p_continentId) {
-		String[] l_split = p_line.split(" ");
-		return new Continent(p_continentId, l_split[0], Integer.parseInt(l_split[1]));
+		String[] l_splitted = p_line.split(Constants.SPACE);
+		return new Continent(p_continentId, l_splitted[0], Integer.parseInt(l_splitted[1]));
 	}
 
 	/**
@@ -162,13 +174,14 @@ public class MapReader {
 	 * this information.
 	 *
 	 * @param p_mapFilePath
-	 *            A String that represents the path of the map file that needs to be
-	 *            loaded.
+	 *                      A String that represents the path of the map file that
+	 *                      needs to be
+	 *                      loaded.
 	 * @return The method is returning a GameMap object.
 	 */
 	public GameMap loadMapFile(String p_mapFilePath) {
-		Map<Integer, Country> l_countries = new HashMap<Integer, Country>();
-		Map<Integer, Continent> l_continents = new HashMap<Integer, Continent>();
+		Map<Integer, Country> l_countries = new HashMap<>();
+		Map<Integer, Continent> l_continents = new HashMap<>();
 		GameMap l_gameMap = new GameMap();
 
 		try {
@@ -210,7 +223,6 @@ public class MapReader {
 		} catch (FileNotFoundException e) {
 			System.out.println(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
-
 		return l_gameMap;
 	}
 }

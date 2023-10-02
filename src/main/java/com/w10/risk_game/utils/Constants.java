@@ -67,6 +67,8 @@ public final class Constants {
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
+	public static final String SPACE = " ";
+	public static final String NEW_LINE = "\n";
 
 	// Maps Folder Path
 	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
@@ -125,9 +127,11 @@ public final class Constants {
 	public static final String MAP_DISPLAY_ARMIES = "Armies";
 	// Map Reader
 	public static final String MAP_READER_MAP_FOLDER_PATH = "/src/main/resources/maps/";
+	public static final String MAP_READER_MAP = "[map]";
 	public static final String MAP_READER_CONTINENTS = "[continents]";
 	public static final String MAP_READER_COUNTRIES = "[countries]";
 	public static final String MAP_READER_BORDERS = "[borders]";
+	public static final String MAP_SAVE_ERROR = "Unable to save file. Please try again.";
 
 	// Reinforcements Class Constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;

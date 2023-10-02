@@ -37,8 +37,7 @@ public class GameUI {
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 				String[] l_mapName = l_argList[1].split("/");
-				
-
+	
 				switch (l_mainCommand) {
 					// Map editor phase
 					case Constants.USER_INPUT_COMMAND_LOADMAP:
@@ -118,7 +117,8 @@ public class GameUI {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
+			
+
 			}
 		}
 	}

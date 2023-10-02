@@ -219,12 +219,14 @@ public class MapValidator {
 	protected static Map<Integer, Map<Integer, Country>> GetContinentIdToCountryIdsMap(GameMap p_gameMap) {
 		Map<Integer, Map<Integer, Country>> l_continentIdToCountriesMap = new HashMap<>();
 
-		// Loop over the country map to create a map of integer continentId to the map of country and countryId
+		// Loop over the country map to create a map of integer continentId to the map
+		// of country and countryId
 		for (Map.Entry<Integer, Country> l_entry : p_gameMap.getCountries().entrySet()) {
 			Country l_country = l_entry.getValue();
 			Map<Integer, Country> l_countryMap = l_continentIdToCountriesMap.get(l_country.getContinentId());
 
-			// Create a new map if this is the first access, else put the new country entry in the map
+			// Create a new map if this is the first access, else put the new country entry
+			// in the map
 			if (l_countryMap != null) {
 				l_countryMap.put(l_entry.getKey(), l_entry.getValue());
 			} else {

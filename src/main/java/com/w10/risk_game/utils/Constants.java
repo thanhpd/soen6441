@@ -8,12 +8,15 @@ public final class Constants {
 
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You can enter any of the below commands:\n" + "-> loadmap <filepath>\n" + "-> savemap <filepath>\n"
-			+ "-> showmap\n" + "-> editmap <filepath>\n" + "-> validatemap\n"
-			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
-			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
+			+ "You are in the Startup phase:\n" + "You can enter any of the below commands:\n"
+			+ "-> loadmap <filepath>\n" + "-> savemap <filepath>\n" + "-> showmap\n" + "-> editmap <filepath>\n"
+			+ "-> validatemap\n" + "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
+			+ "-> editcountry -add <countryID> <countryName> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
-			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> start\n"
+			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
+
+	public static final String GAMEPLAY_PHASE_ENTRY_STRING = "You are now in the Gameplay phase:\n"
+			+ "You can enter any of the below commands:\n" + "-> showmap\n" + "-> deploy <CountryId> <No. of armies>\n"
 			+ "-> quit\n";
 
 	// User input command constants
@@ -31,7 +34,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
-	public static final String USER_INPUT_COMMAND_BEGIN_GAME = "start";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY = "deploy";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
@@ -64,6 +67,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
+	public static final String GAME_ENGINE_ISSUE_ORDER_CURRENT_MAP_LOOK = "The current map looks like this";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
@@ -76,6 +80,7 @@ public final class Constants {
 
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
+
 	// Player Class Constants
 	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".";
 	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
@@ -84,6 +89,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The number of leftover armies should be more than the number of armies. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of armies should be greater than zero. Please try again.";
+
 	// Map Editor Constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country Name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
@@ -109,6 +116,7 @@ public final class Constants {
 	public static final String MAP_EDITOR_AFTER_CONTINENT_REMOVE = "###############After Removing Continent ";
 	public static final String MAP_EDITOR_AFTER_COUNTRY_REMOVE = "###############After Removing country";
 	public static final String MAP_EDITOR_AFTER_NEIGHBOR_REMOVE = "###############After Removing neighbor";
+
 	// Map Validator Constants
 	public static final String MAP_VALIDATOR_EMPTY_MAP = "MapValidator: The map is empty!";
 	public static final String MAP_VALIDATOR_CONTINENT_NOT_DECLARED = "MapValidator: The continent(s) of some countries are not declared!";
@@ -116,6 +124,7 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR = "MapValidator: Some countries are referring to itself as a neighbor";
 	public static final String MAP_VALIDATOR_COUNTRY_INACCESSIBLE = "MapValidator: Some countries are inaccessible";
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
+
 	// Game Map
 	public static final String GAME_MAP_ERROR_MESSAGE = "Error - Unable to save file. Please try again.%n%s";
 	public static final String MAP_DISPLAY_ID = "ID(Continent Name)";

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.views.GameUI;
 
 /**
  * The Player class represents a player in this game, with properties such as
@@ -173,18 +174,28 @@ public class Player {
 		int l_army = this.getLeftoverArmies();
 		List<Country> l_countries = this.getCountriesOwned();
 		boolean l_again = true;
+		boolean l_failed = false;
 		Scanner l_scanner = new Scanner(System.in);
+
 		while (l_again) {
 			boolean l_isValidFormat;
 			boolean l_isValidOrder;
 			boolean l_isValidCountry;
 			boolean l_isValidNum;
-			System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
-			String l_input = l_scanner.nextLine();
+			String l_input = "";
+			if (l_failed) {
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
+				System.out.print(Constants.USER_INPUT_REQUEST);
+				l_input = l_scanner.nextLine();
+			} else {
+				l_input = GameUI.d_Command;
+			}
+
 			String[] l_inputArray = l_input.split(" ");
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
 			if (!l_isValidFormat) {
+				l_failed = true;
 				continue;
 			}
 			String l_orderType = l_inputArray[0];
@@ -202,8 +213,10 @@ public class Player {
 				l_army = l_army - Integer.parseInt(l_num);
 				this.setLeftoverArmies(l_army);
 				l_again = false;
+				l_failed = false;
 			} else {
 				l_again = true;
+				l_failed = true;
 			}
 		}
 	}
@@ -296,6 +309,10 @@ public class Player {
 	 * @return boolean value to show whether the number of armies is valid
 	 */
 	public boolean checkValidNum(int p_num, int p_army) {
+		if (p_num <= 0) {
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
+			return false;
+		}
 		if (p_num > p_army) {
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;

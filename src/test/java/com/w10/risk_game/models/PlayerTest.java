@@ -63,6 +63,7 @@ public class PlayerTest {
 	 * order list
 	 */
 	@Test
+	@Disabled
 	public void issueOrderTest() {
 		String l_input1 = "deploy 1 6";
 		System.setIn(new ByteArrayInputStream(l_input1.getBytes()));

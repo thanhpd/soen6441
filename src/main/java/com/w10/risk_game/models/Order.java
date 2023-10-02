@@ -30,6 +30,7 @@ public class Order {
 	public int getNum() {
 		return d_num;
 	}
+
 	// Setter
 	public void setPlayer(Player d_player) {
 		this.d_player = d_player;
@@ -46,12 +47,14 @@ public class Order {
 	public void setNum(int d_num) {
 		this.d_num = d_num;
 	}
+
 	public Order(Player p_player, String p_orderType, int p_countryId, int p_num) {
 		this.d_player = p_player;
 		this.d_orderType = p_orderType;
 		this.d_countryId = p_countryId;
 		this.d_num = p_num;
 	}
+
 	/**
 	 * This method is used to deploy the armies This method gets the number of
 	 * armies to deploy from the player and deploys them to the country

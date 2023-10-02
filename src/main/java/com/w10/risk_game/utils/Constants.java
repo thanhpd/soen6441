@@ -8,12 +8,16 @@ public final class Constants {
 
 	// Menu
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You can enter any of the below commands:\n" + "-> loadmap <filepath>\n" + "-> savemap <filepath>\n"
-			+ "-> showmap\n" + "-> editmap <filepath>\n" + "-> validatemap\n"
-			+ "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
+			+ "You are in the Startup phase:\n" + "You can enter any of the below commands:\n"
+			+ "-> loadmap <filepath>\n" + "-> savemap <filepath>\n" + "-> showmap\n" + "-> editmap <filepath>\n"
+			+ "-> validatemap\n" + "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
 			+ "-> editcountry -add <countryID> <countryvalue> <continentID> -remove <countryID>\n"
 			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
 			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
+
+	public static final String GAMEPLAY_PHASE_ENTRY_STRING = "You are now in the Gameplay phase:\n"
+			+ "You can enter any of the below commands:\n" + "-> showmap\n" + "-> deploy <CountryId> <No. of armies>\n"
+			+ "-> quit\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
@@ -30,6 +34,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY = "deploy";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";

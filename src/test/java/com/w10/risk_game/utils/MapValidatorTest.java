@@ -3,18 +3,16 @@ package com.w10.risk_game.utils;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.utils.Constants;
 
 /**
  * The MapValidatorTest class contains multiple test cases to validate the
  * correctness of a game map.
  */
 public class MapValidatorTest {
-	private MapReader d_mapReader = new MapReader();
+	private final MapReader d_mapReader = new MapReader();
 
 	/**
 	 * The testMapCorrectness function tests whether the loaded map file is correct
@@ -24,7 +22,7 @@ public class MapValidatorTest {
 	public void testMapCorrectness() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertTrue(MapValidator.isMapCorrect(l_gameMap));
+		assertTrue(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
 	/**
@@ -35,7 +33,7 @@ public class MapValidatorTest {
 	public void testMapWithIsolatedCountries() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-connected.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
 	/**
@@ -46,7 +44,7 @@ public class MapValidatorTest {
 	public void testMapWithContinents() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-continents-no-country.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
 	/**
@@ -57,11 +55,11 @@ public class MapValidatorTest {
 	public void testMapEmpty() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-empty.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 
 		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-empty2.map";
 		GameMap l_gameMap2 = d_mapReader.loadMapFile(l_mapFilePath2);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap2));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
 	/**
@@ -72,7 +70,7 @@ public class MapValidatorTest {
 	public void testMapHasNonExistentContinent() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-continents-exist.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
 	/**
@@ -83,7 +81,7 @@ public class MapValidatorTest {
 	public void testMapHasNonExistentCountry() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-countries-exist.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
 	/**
@@ -94,7 +92,7 @@ public class MapValidatorTest {
 	public void testMapHasSelfReferencingNeighbor() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-self-referencing.map";
 		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
-		assertFalse(MapValidator.isMapCorrect(l_gameMap));
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
 }

@@ -38,12 +38,12 @@ public class CommandInterpreter {
 	 * The function takes a command as input and splits it into an array of
 	 * arguments, throwing an exception if the command is invalid.
 	 *
-	 * @param p_Command
-	 *            The parameter `p_Command` is a string that represents a command.
+	 * @param p_command
+	 *            The parameter `p_command` is a string that represents a command.
 	 * @return The method is returning a String array.
 	 */
-	public static String[] getArgumentList(String p_Command) throws ApplicationException {
-		String[] l_argumentList = p_Command.split(Constants.REGEX_SPLIT_ON_SPACE);
+	public static String[] getArgumentList(String p_command) throws ApplicationException {
+		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 		if (l_argumentList.length == 0)
 			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
 		return l_argumentList;

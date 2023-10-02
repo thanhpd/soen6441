@@ -272,7 +272,7 @@ public class GameEngine {
 	public boolean editMap(String p_mapFilePath) {
 		File l_file = new File(p_mapFilePath);
 		if (l_file.exists()) {
-			this.d_mapReader.loadMapFile(p_mapFilePath);
+			this.loadMap(p_mapFilePath);
 			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {

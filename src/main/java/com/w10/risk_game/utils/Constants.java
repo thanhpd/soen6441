@@ -80,6 +80,7 @@ public final class Constants {
 
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
+
 	// Player Class Constants
 	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".";
 	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
@@ -88,6 +89,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The number of leftover armies should be more than the number of armies. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of armies should be greater than zero. Please try again.";
+
 	// Map Editor Constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country Name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
@@ -113,6 +116,7 @@ public final class Constants {
 	public static final String MAP_EDITOR_AFTER_CONTINENT_REMOVE = "###############After Removing Continent ";
 	public static final String MAP_EDITOR_AFTER_COUNTRY_REMOVE = "###############After Removing country";
 	public static final String MAP_EDITOR_AFTER_NEIGHBOR_REMOVE = "###############After Removing neighbor";
+
 	// Map Validator Constants
 	public static final String MAP_VALIDATOR_EMPTY_MAP = "MapValidator: The map is empty!";
 	public static final String MAP_VALIDATOR_CONTINENT_NOT_DECLARED = "MapValidator: The continent(s) of some countries are not declared!";
@@ -120,6 +124,7 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR = "MapValidator: Some countries are referring to itself as a neighbor";
 	public static final String MAP_VALIDATOR_COUNTRY_INACCESSIBLE = "MapValidator: Some countries are inaccessible";
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
+
 	// Game Map
 	public static final String GAME_MAP_ERROR_MESSAGE = "Error - Unable to save file. Please try again.%n%s";
 	public static final String MAP_DISPLAY_ID = "ID(Continent Name)";

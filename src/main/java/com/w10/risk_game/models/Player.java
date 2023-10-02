@@ -195,6 +195,7 @@ public class Player {
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
 			if (!l_isValidFormat) {
+				l_failed = true;
 				continue;
 			}
 			String l_orderType = l_inputArray[0];
@@ -308,6 +309,10 @@ public class Player {
 	 * @return boolean value to show whether the number of armies is valid
 	 */
 	public boolean checkValidNum(int p_num, int p_army) {
+		if (p_num <= 0) {
+			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
+			return false;
+		}
 		if (p_num > p_army) {
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;

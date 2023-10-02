@@ -54,6 +54,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
 	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST = "Player doesn't exist!";
 	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS = "Player already exists!";
+	public static final String GAME_ENGINE_LOAD_MAP = "Map Loaded!";
 	public static final String GAME_ENGINE_CANNOT_LOAD_MAP = "Cannot load map!";
 	public static final String GAME_ENGINE_FAILED_TO_EDIT_MAP = "Error in editing map!";
 	public static final String GAME_ENGINE_FAILED_TO_VALIDATE_MAP = "Error in validating map!";

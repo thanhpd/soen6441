@@ -173,7 +173,9 @@ public class GameEngine {
 
 	/**
 	 * The function assigns countries to players in a game, ensuring that each
-	 * player receives at least one country.
+	 * player owns a certain number of countries.
+	 *
+	 * @return The method is returning a boolean value.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
@@ -497,11 +499,8 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function issuePlayerOrder() selects the current player, checks if they
-	 * have any leftover armies, prompts them to issue an order, and updates the
-	 * current player index.
-	 *
-	 * @return The method is returning a boolean value of true.
+	 * The function "issuePlayerOrder" updates the current player and calls the
+	 * "issueOrder" method for the current player.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
@@ -547,7 +546,11 @@ public class GameEngine {
 
 	/**
 	 * The function executes orders for each player, assigns reinforcements, and
-	 * resets the current player related data.
+	 * updates the current player.
+	 *
+	 * @return The method is returning a boolean value. If the execution of player
+	 *         orders is successful, it returns true. If an exception occurs during
+	 *         execution, it returns false.
 	 *
 	 * @author Sherwyn Dsouza
 	 */

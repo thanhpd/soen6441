@@ -18,6 +18,10 @@ public class App {
 	 *            different actions based on the input.
 	 */
 
+	/**
+	 * The main function creates a GameUI object and runs the startup phase of the
+	 * game.
+	 */
 	public static void main(String[] args) {
 		GameUI l_gameUI = new GameUI();
 		l_gameUI.runStartUpPhase();

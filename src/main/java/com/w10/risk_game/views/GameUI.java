@@ -36,31 +36,33 @@ public class GameUI {
 				Command = l_scanner.nextLine();
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
+				
 
 				switch (l_mainCommand) {
 					// Map editor phase
-					case Constants.USER_INPUT_COMMAND_LOADMAP :
-						System.out.println(Constants.CLI_LOAD_MAP + l_argList[1]);
+					case Constants.USER_INPUT_COMMAND_LOADMAP:
+					 	String[] l_mapName = l_argList[1].split("/");
+						System.out.println(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length -1]);
 						this.d_gameEngine.loadMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_SAVEMAP :
+					case Constants.USER_INPUT_COMMAND_SAVEMAP:
 						this.d_gameEngine.saveMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					case Constants.USER_INPUT_COMMAND_SHOWMAP:
 						System.out.println(Constants.CLI_SHOW_MAP);
 						this.d_gameEngine.showMap();
 						break;
-					case Constants.USER_INPUT_COMMAND_EDITMAP :
+					case Constants.USER_INPUT_COMMAND_EDITMAP:
 						this.d_gameEngine.editMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
+					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT:
 						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							this.d_gameEngine.addContinent(l_argList[2].toString(), Integer.parseInt(l_argList[3]));
 						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
 							this.d_gameEngine.removeContinent(l_argList[2]);
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
+					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY:
 						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							this.d_gameEngine.addCountry(Integer.parseInt(l_argList[2]), l_argList[3].toString(),
 									l_argList[4]);
@@ -68,7 +70,7 @@ public class GameUI {
 							this.d_gameEngine.removeCountry(Integer.parseInt(l_argList[2]));
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
+					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR:
 						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							this.d_gameEngine.addNeighbor(Integer.parseInt(l_argList[2]),
 									Integer.parseInt(l_argList[3]));
@@ -77,12 +79,12 @@ public class GameUI {
 									Integer.parseInt(l_argList[3]));
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
+					case Constants.USER_INPUT_COMMAND_VALIDATEMAP:
 						this.d_gameEngine.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up phase
-					case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
+					case Constants.USER_INPUT_COMMAND_GAMEPLAYER:
 						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
 							this.d_gameEngine.createPlayer(l_argList[2].toString());
 						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
@@ -91,7 +93,7 @@ public class GameUI {
 							this.d_gameEngine.showAllPlayers();
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
+					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES:
 						System.out.println(Constants.CLI_ASSIGN_COUNTRIES);
 						if (this.d_gameEngine.assignCountries() && this.d_gameEngine.checkIfGameCanBegin()) {
 							l_exit = true;
@@ -100,11 +102,11 @@ public class GameUI {
 						break;
 
 					// Others
-					case Constants.USER_INPUT_COMMAND_QUIT :
+					case Constants.USER_INPUT_COMMAND_QUIT:
 						l_scanner.close();
 						l_exit = true;
 						break;
-					default :
+					default:
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 				}
 				System.out.println();
@@ -152,20 +154,20 @@ public class GameUI {
 
 				switch (l_mainCommand) {
 					// Show Map Command
-					case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					case Constants.USER_INPUT_COMMAND_SHOWMAP:
 						System.out.println(Constants.CLI_SHOW_MAP);
 						this.d_gameEngine.showMap();
 						break;
 					// Issue Order Command
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
 						d_gameEngine.issuePlayerOrder();
 						break;
 					// Others
-					case Constants.USER_INPUT_COMMAND_QUIT :
+					case Constants.USER_INPUT_COMMAND_QUIT:
 						l_scanner.close();
 						l_exit = true;
 						break;
-					default :
+					default:
 						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
 				}
 				if (l_exit) {

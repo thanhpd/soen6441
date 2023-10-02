@@ -280,7 +280,7 @@ public class GameEngine {
 		// If file with the input filename exists then load that map else create a new
 		// map file
 		if (l_file.exists()) {
-			this.d_mapReader.loadMapFile(p_mapFilePath);
+			this.loadMap(p_mapFilePath);
 			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {

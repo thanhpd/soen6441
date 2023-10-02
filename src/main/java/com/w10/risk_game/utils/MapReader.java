@@ -26,7 +26,7 @@ public class MapReader {
 	 *         "maps" folder in the project's resources directory.
 	 */
 	public String getMapFolderPath() {
-		return System.getProperty("user.dir") + "/src/main/resources/maps/";
+		return System.getProperty("user.dir") + Constants.MAP_READER_MAP_FOLDER_PATH;
 	}
 
 	/**

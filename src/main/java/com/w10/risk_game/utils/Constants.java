@@ -76,6 +76,57 @@ public final class Constants {
 
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
+	// Player Class Constants
+	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".";
+	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be integer. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be integers. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The number of leftover armies should be more than the number of armies. Please try again.";
+	// Map Editor Constants
+	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country Name is empty!";
+	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
+	public static final String MAP_EDITOR_COUNTRY_ID_EXIST = "Country ID already exists!";
+	public static final String MAP_EDITOR_CONTINENT_NOT_EXIST = "Continent does not exist!";
+	public static final String MAP_EDITOR_ADD_COUNTRY = " is added, and to the continent with id: ";
+	public static final String MAP_EDITOR_CONTINENT_NAME_EXIST = "Continent name already exists!";
+	public static final String MAP_EDITOR_CONTINENT_ID_EXIST = "Continent id already exists!";
+	public static final String MAP_EDITOR_ADD_CONTINENT = " is added!";
+	public static final String MAP_EDITOR_COUNTRY_NOT_EXIST = "Country does not exist! Please add first";
+	public static final String MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST = "Neighbor country does not exist! Please add first";
+	public static final String MAP_EDITOR_CONNECTION_EXIST = "Connection already exists!";
+	public static final String MAP_EDITOR_ADD_NEIGHBOR = " added with ";
+	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country id does not exist";
+	public static final String MAP_EDITOR_COUNTRY_REMOVED = "Country is removed!";
+	public static final String MAP_EDITOR_REMOVED = " is removed!";
+	public static final String MAP_EDITOR_COUNTRIES_REMOVED = "these countries are also removed!";
+	public static final String MAP_EDITOR_CONNECTION_NOT_EXIST = "Connection does not exist!";
+	public static final String MAP_EDITOR_NEIGHBOR_REMOVED = " removed from ";
+	public static final String MAP_EDITOR_AFTER_CONTINENT_ADDED = "###############After Continent added";
+	public static final String MAP_EDITOR_AFTER_COUNTRY_ADDED = "###############After Country added ";
+	public static final String MAP_EDITOR_AFTER_NEIGHBOR_ADDED = "###############After Neighbor added";
+	public static final String MAP_EDITOR_AFTER_CONTINENT_REMOVE = "###############After Removing Continent ";
+	public static final String MAP_EDITOR_AFTER_COUNTRY_REMOVE = "###############After Removing country";
+	public static final String MAP_EDITOR_AFTER_NEIGHBOR_REMOVE = "###############After Removing neighbor";
+	// Map Validator Constants
+	public static final String MAP_VALIDATOR_EMPTY_MAP = "MapValidator: The map is empty!";
+	public static final String MAP_VALIDATOR_CONTINENT_NOT_DECLARED = "MapValidator: The continent(s) of some countries are not declared!";
+	public static final String MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED = "MapValidator: The neighbor(s) of some countries are not declared!";
+	public static final String MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR = "MapValidator: Some countries are referring to itself as a neighbor";
+	public static final String MAP_VALIDATOR_COUNTRY_INACCESSIBLE = "MapValidator: Some countries are inaccessible";
+	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
+	// Game Map
+	public static final String GAME_MAP_ERROR_MESSAGE = "Error - Unable to save file. Please try again.%n%s";
+	public static final String MAP_DISPLAY_ID = "ID(Continent Name)";
+	public static final String MAP_DISPLAY_BONUS = "Bonus";
+	public static final String MAP_DISPLAY_COUNTRY_ID = "CountryID";
+	public static final String MAP_DISPLAY_COUNTRY_NAME = "CountryName";
+	public static final String MAP_DISPLAY_NEIGHBOR_ID = "ID(Neighbors)";
+	public static final String MAP_DISPLAY_PLAYER = "Player";
+	public static final String MAP_DISPLAY_ARMIES = "Armies";
+	// Map Reader
+	public static final String MAP_READER_MAP_FOLDER_PATH = "/src/main/resources/maps/";
 	public static final String MAP_READER_MAP = "[map]";
 	public static final String MAP_READER_CONTINENTS = "[continents]";
 	public static final String MAP_READER_COUNTRIES = "[countries]";

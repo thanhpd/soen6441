@@ -49,7 +49,7 @@ public class MapEditorTest {
 		d_continentName = "North_Europe";
 		d_bonus = 3;
 		d_error = d_mapEditor.addContinent(d_continentName, d_bonus);
-		assertTrue("Continent name already exists!".equals(d_error));
+		assertTrue(Constants.MAP_EDITOR_CONTINENT_NAME_EXIST.equals(d_error));
 	}
 
 	/**
@@ -60,8 +60,8 @@ public class MapEditorTest {
 		d_continentName = "North_Europe1";
 		d_bonus = 3;
 		d_error = d_mapEditor.addContinent(d_continentName, d_bonus);
-		assertTrue((d_continentName + " is added!").equals(d_error));
-		System.out.println("###############After Continent added" + d_continentName);
+		assertTrue((d_continentName + Constants.MAP_EDITOR_ADD_CONTINENT).equals(d_error));
+		System.out.println(Constants.MAP_EDITOR_AFTER_CONTINENT_ADDED + d_continentName);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 
@@ -80,27 +80,26 @@ public class MapEditorTest {
 		d_countryName = "Scotland";
 		d_continentName = "North_Europe";
 		d_error = d_mapEditor.addCountry(d_countryId, d_countryName, d_continentName);
-		assertTrue("Country name already exists!".equals(d_error));
+		assertTrue(Constants.MAP_EDITOR_COUNTRY_NAME_EXIST.equals(d_error));
 
 		d_countryId = 27;
 		d_countryName = "England12";
 		d_continentName = "North_Europe12";
 		d_error = d_mapEditor.addCountry(d_countryId, d_countryName, d_continentName);
-		assertTrue("Continent does not exists!".equals(d_error));
+		assertTrue(Constants.MAP_EDITOR_CONTINENT_NOT_EXIST.equals(d_error));
 	}
 
 	/**
 	 * Valid input to add a country
 	 */
 	@Test
-	@Disabled
 	public void testAddCountry() {
 		d_countryId = 26;
 		d_countryName = "England1";
 		d_continentName = "North_Europe";
 		d_error = d_mapEditor.addCountry(d_countryId, d_countryName, d_continentName);
-		assertTrue((d_countryName + " is Added! and to the continent with id: " + d_continentName).equals(d_error));
-		System.out.println("###############After Country added " + d_countryName);
+		assertTrue((d_countryName + Constants.MAP_EDITOR_ADD_COUNTRY + d_continentName).equals(d_error));
+		System.out.println(Constants.MAP_EDITOR_AFTER_COUNTRY_ADDED + d_countryName);
 		d_mapDisplay.formatMap(d_gameMap, false);
 
 	}
@@ -120,12 +119,12 @@ public class MapEditorTest {
 		d_countryId = 30;
 		d_neighborCountryId = 7;
 		d_error = d_mapEditor.addNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue("Country does not exist! please add first".equals(d_error));
+		assertTrue(Constants.MAP_EDITOR_COUNTRY_NOT_EXIST.equals(d_error));
 
 		d_countryId = 13;
 		d_neighborCountryId = 14;
 		d_error = d_mapEditor.addNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue(("Connection already exists!").equals(d_error));
+		assertTrue((Constants.MAP_EDITOR_CONNECTION_EXIST).equals(d_error));
 	}
 
 	/**
@@ -137,8 +136,8 @@ public class MapEditorTest {
 		d_countryId = 1;
 		d_neighborCountryId = 12;
 		d_error = d_mapEditor.addNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue((d_countryId + " added with " + d_neighborCountryId).equals(d_error));
-		System.out.println("###############After Neighbor added");
+		assertTrue((d_countryId + Constants.MAP_EDITOR_ADD_NEIGHBOR + d_neighborCountryId).equals(d_error));
+		System.out.println(Constants.MAP_EDITOR_AFTER_NEIGHBOR_ADDED);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 
@@ -154,7 +153,7 @@ public class MapEditorTest {
 	public void testRemoveContinentWithErrorHandle() {
 		d_continentName = "North_Europe21";
 		d_error = d_mapEditor.removeContinent(d_continentName);
-		assertTrue("Continent does not exists".equals(d_error));
+		assertTrue(Constants.MAP_EDITOR_CONTINENT_NOT_EXIST.equals(d_error));
 	}
 
 	/**
@@ -170,9 +169,9 @@ public class MapEditorTest {
 			d_countriesRemoved = d_country.getCountryName() + ", ";
 		}
 		d_error = d_mapEditor.removeContinent(d_continentName);
-		assertTrue(
-				(d_continentName + " removed!" + d_countriesRemoved + "these countries also removed!").equals(d_error));
-		System.out.println("###############After Removing Continent " + d_continentName);
+		assertTrue((d_continentName + Constants.MAP_EDITOR_REMOVED + d_countriesRemoved
+				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED).equals(d_error));
+		System.out.println(Constants.MAP_EDITOR_AFTER_CONTINENT_REMOVE + d_continentName);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 
@@ -189,7 +188,7 @@ public class MapEditorTest {
 	public void testRemoveCountryWithErrorHandle() {
 		int d_countryId = 30;
 		String d_error = d_mapEditor.removeCountry(d_countryId);
-		assertTrue("Country id does not exists".equals(d_error));
+		assertTrue(Constants.MAP_EDITOR_COUNTRY_ID_NOT_EXIST.equals(d_error));
 	}
 
 	/**
@@ -199,8 +198,8 @@ public class MapEditorTest {
 	public void testRemoveCountry() {
 		d_countryId = 1;
 		d_error = d_mapEditor.removeCountry(d_countryId);
-		assertTrue((d_countryId + "Country removed!").equals(d_error));
-		System.out.println("###############After Removing country");
+		assertTrue((d_countryId + Constants.MAP_EDITOR_COUNTRY_REMOVED).equals(d_error));
+		System.out.println(Constants.MAP_EDITOR_AFTER_COUNTRY_REMOVE);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 
@@ -209,17 +208,17 @@ public class MapEditorTest {
 		int d_countryId = 27;
 		int d_neighborCountryId = 7;
 		String d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue(("Country does not exist! please add first").equals(d_error));
+		assertTrue((Constants.MAP_EDITOR_COUNTRY_NOT_EXIST).equals(d_error));
 
 		d_countryId = 11;
 		d_neighborCountryId = 1;
 		d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue(("Connection does not exists!").equals(d_error));
+		assertTrue((Constants.MAP_EDITOR_CONNECTION_NOT_EXIST).equals(d_error));
 
 		d_countryId = 11;
 		d_neighborCountryId = 27;
 		d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue(("Neighbor country does not exist!please add first").equals(d_error));
+		assertTrue((Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST).equals(d_error));
 	}
 
 	/**
@@ -230,8 +229,8 @@ public class MapEditorTest {
 		d_countryId = 9;
 		d_neighborCountryId = 15;
 		d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
-		assertTrue((d_countryId + " removed from " + d_neighborCountryId).equals(d_error));
-		System.out.println("###############After Removing neighbor");
+		assertTrue((d_countryId + Constants.MAP_EDITOR_NEIGHBOR_REMOVED + d_neighborCountryId).equals(d_error));
+		System.out.println(Constants.MAP_EDITOR_AFTER_NEIGHBOR_REMOVE);
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 

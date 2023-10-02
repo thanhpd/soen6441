@@ -33,7 +33,7 @@ replay_pid*
 target
 
 # API docs folder
-apidocs/
+docs/apidocs/
 .
 
 .DS_Store

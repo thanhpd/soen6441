@@ -93,7 +93,6 @@ public class MapEditorTest {
 	 * Valid input to add a country
 	 */
 	@Test
-	@Disabled
 	public void testAddCountry() {
 		d_countryId = 26;
 		d_countryName = "England1";

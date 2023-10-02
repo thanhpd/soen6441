@@ -26,13 +26,12 @@ public class MapEditor {
 	 * and returns a message indicating whether the addition was successful or not.
 	 *
 	 * @param p_countryId
-	 *                        The unique identifier for the country.
+	 *            The unique identifier for the country.
 	 * @param p_countryName
-	 *                        The name of the country you want to add.
+	 *            The name of the country you want to add.
 	 * @param p_continentName
-	 *                        The parameter p_continentName represents the ID of the
-	 *                        continent
-	 *                        to which the country will be added.
+	 *            The parameter p_continentName represents the ID of the continent
+	 *            to which the country will be added.
 	 * @return The method returns a string message indicating the result of adding a
 	 *         country.
 	 */
@@ -63,9 +62,9 @@ public class MapEditor {
 	 * id do not already exist.
 	 *
 	 * @param p_continentName
-	 *                        The name of the continent that you want to add.
+	 *            The name of the continent that you want to add.
 	 * @param p_bonus
-	 *                        The bonus of the new continent
+	 *            The bonus of the new continent
 	 * @return The method returns a string message indicating the result of adding a
 	 *         continent.
 	 */
@@ -85,12 +84,10 @@ public class MapEditor {
 	 * The function adds a neighbor country to a given country in a game map.
 	 *
 	 * @param p_countryId
-	 *                            The ID of the country to which you want to add a
-	 *                            neighbor.
+	 *            The ID of the country to which you want to add a neighbor.
 	 * @param p_neighborCountryId
-	 *                            An integer that represents the ID of the neighbor
-	 *                            country that we
-	 *                            want to add to the country with ID p_countryId.
+	 *            An integer that represents the ID of the neighbor country that we
+	 *            want to add to the country with ID p_countryId.
 	 * @return The method is returning a string that indicates the result of adding
 	 *         a neighbor country to a given country.
 	 */
@@ -118,9 +115,8 @@ public class MapEditor {
 	 * countries accordingly.
 	 *
 	 * @param p_countryId
-	 *                    The parameter p_countryId is an integer representing the
-	 *                    ID of the
-	 *                    country that needs to be removed.
+	 *            The parameter p_countryId is an integer representing the ID of the
+	 *            country that needs to be removed.
 	 * @return The method is returning a string that indicates the result of
 	 *         removing the country.
 	 */
@@ -145,9 +141,8 @@ public class MapEditor {
 	 * map.
 	 *
 	 * @param p_continentName
-	 *                        The parameter p_continentName is the name of the
-	 *                        continent that
-	 *                        needs to be removed from the game map.
+	 *            The parameter p_continentName is the name of the continent that
+	 *            needs to be removed from the game map.
 	 * @return The method is returning a string that indicates the result of
 	 *         removing the continent.
 	 */
@@ -165,7 +160,8 @@ public class MapEditor {
 		}
 		// Self remove
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
-		return p_continentName + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved + Constants.MAP_EDITOR_COUNTRIES_REMOVED;
+		return p_continentName + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved
+				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED;
 	}
 
 	/**
@@ -173,12 +169,10 @@ public class MapEditor {
 	 * map.
 	 *
 	 * @param p_countryId
-	 *                            The ID of the country from which you want to
-	 *                            remove a neighbor.
+	 *            The ID of the country from which you want to remove a neighbor.
 	 * @param p_neighborCountryId
-	 *                            The ID of the country that you want to remove as a
-	 *                            neighbor from
-	 *                            the country with ID p_countryId.
+	 *            The ID of the country that you want to remove as a neighbor from
+	 *            the country with ID p_countryId.
 	 * @return The method is returning a string indicating the result of the
 	 *         operation.
 	 */

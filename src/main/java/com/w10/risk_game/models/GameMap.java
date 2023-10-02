@@ -102,7 +102,7 @@ public class GameMap {
 	 * The saveMap function saves the game map to a file in a specific format.
 	 *
 	 * @param p_filePath
-	 *                   The file path where the map will be saved.
+	 *            The file path where the map will be saved.
 	 */
 	public void saveMap(String p_filePath) {
 		if (MapValidator.isMapCorrect(this))

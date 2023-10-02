@@ -220,7 +220,7 @@ public class GameEngine {
 	 */
 	private void assignPlayersReinforcements() {
 		for (Player l_player : this.d_players.values()) {
-			Reinforcements.reinforcementPhase(l_player, this.d_gameMap);
+			Reinforcements.ReinforcementPhase(l_player, this.d_gameMap);
 		}
 	}
 
@@ -534,7 +534,9 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function checks if there are any players in the player list.
+	 * The function checks if there are any players in the player list. If empty, it
+	 * returs True so that no more players have to issue orders and order execution
+	 * can begin by the game engine
 	 *
 	 * @return The method is returning a boolean value.
 	 *

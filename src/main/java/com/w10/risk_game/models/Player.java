@@ -190,7 +190,6 @@ public class Player {
 			} else {
 				l_input = GameUI.d_Command;
 			}
-
 			String[] l_inputArray = l_input.split(" ");
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);

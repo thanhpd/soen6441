@@ -84,8 +84,8 @@ public final class Constants {
 	// Player Class Constants
 	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the format of \"<OrderType> <CountryId> <No. of armies>\".";
 	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be integer. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be integers. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be positive integer. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The number of leftover armies should be more than the number of armies. Please try again.";

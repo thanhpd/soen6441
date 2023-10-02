@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.ByteArrayInputStream;
 
+import com.w10.risk_game.views.GameUI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -55,24 +56,6 @@ public class PlayerTest {
 	public void testDeployArmies() {
 		d_player.deployArmies(3);
 		assertEquals(7, d_player.getLeftoverArmies());
-	}
-
-	/**
-	 * The issueOrderTest function tests the issueOrder method of the player object.
-	 * It sets the input, and test whether the orders are added to the player's
-	 * order list
-	 */
-	@Test
-	@Disabled
-	public void issueOrderTest() {
-		String l_input1 = "deploy 1 6";
-		System.setIn(new ByteArrayInputStream(l_input1.getBytes()));
-		Scanner l_scanner = new Scanner(System.in);
-		d_player1.issueOrder();
-		assertEquals(1, d_player1.getOrders().size());
-		assertEquals("deploy", d_player1.getOrders().get(0).getOrderType());
-		assertEquals(1, d_player1.getOrders().get(0).getCountryId());
-		assertEquals(6, d_player1.getOrders().get(0).getNum());
 	}
 
 	/**

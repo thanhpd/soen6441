@@ -41,7 +41,7 @@ public final class Constants {
 
 	// CLI output command constants
 	public static final String CLI_LOAD_MAP = "Loading Map: ";
-	public static final String CLI_SHOW_MAP = "Show Map...";
+	public static final String CLI_SHOW_MAP = "Displaying Map";
 	public static final String CLI_GAME_PLAYER_REMOVE = "Removed Player: ";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";

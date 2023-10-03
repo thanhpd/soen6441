@@ -105,8 +105,7 @@ public class Order {
 	}
 
 	/**
-	 * This function deploys the armies this method gets the number of armies to
-	 * deploy from the player and deploys them to the country
+	 * This function gets the number of armies and deploys them to the country
 	 */
 	public void execute() {
 		Player l_player = this.d_player;

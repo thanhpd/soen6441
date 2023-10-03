@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The GameEngineTest class contains unit tests for various methods in the
+ * GameEngine class.
+ */
 public class GameEngineTest {
 	private GameEngine d_gameEngine;
 	Player d_player1;

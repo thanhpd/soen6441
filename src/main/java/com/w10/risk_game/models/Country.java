@@ -20,6 +20,7 @@ public class Country implements Serializable {
 
 	/**
 	 * This is a constructor of the country class
+	 * 
 	 * @param p_countryId
 	 * @param p_countryName
 	 * @param p_continentId
@@ -35,17 +36,13 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function for the countryId
-	 * 
-	 * @return Country Id
 	 */
 	public int getCountryId() {
 		return d_countryId;
 	}
 
 	/**
-	 * Setter function
-	 * 
-	 * @param p_countryId
+	 * Setter function to set the country id
 	 */
 	public void setCountryId(int p_countryId) {
 		this.d_countryId = p_countryId;
@@ -53,8 +50,6 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function get country name
-	 * 
-	 * @return d_countryName
 	 */
 	public String getCountryName() {
 		return d_countryName;
@@ -62,8 +57,6 @@ public class Country implements Serializable {
 
 	/**
 	 * Setter function to set country name
-	 * 
-	 * @param p_countryName
 	 */
 	public void setCountryName(String p_countryName) {
 		this.d_countryName = p_countryName;
@@ -71,8 +64,6 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function to get continent id
-	 * 
-	 * @return d_continentId
 	 */
 	public int getContinentId() {
 		return d_continentId;
@@ -80,8 +71,6 @@ public class Country implements Serializable {
 
 	/**
 	 * Setter function to set the continent id
-	 * 
-	 * @param p_continentId
 	 */
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
@@ -89,16 +78,12 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function to get the army count
-	 * 
-	 * @return d_armyCount
 	 */
 	public int getArmyCount() {
 		return d_armyCount;
 	}
 	/**
 	 * Setter function to set armies
-	 * 
-	 * @param d_armyCount
 	 */
 	public void setArmyCount(int d_armyCount) {
 		this.d_armyCount = d_armyCount;
@@ -120,8 +105,7 @@ public class Country implements Serializable {
 
 	/**
 	 * @param takes
-	 *            country id API: Checks for different parameters if the neighbor
-	 *            exists
+	 *            country id Checks for different parameters if the neighbor exists
 	 */
 	public boolean hasNeighbor(int p_neighborCountryId) {
 		return d_neighbors.containsKey(p_neighborCountryId);
@@ -130,7 +114,7 @@ public class Country implements Serializable {
 	/**
 	 * The function checks if a given country name is a neighbor of the current
 	 * country.
-	 * 
+	 *
 	 * @param p_neighborCountryName
 	 *            The parameter p_neighborCountryName is a String that represents
 	 *            the name of a neighbor country.
@@ -148,18 +132,13 @@ public class Country implements Serializable {
 	}
 	/**
 	 * API: Checks for different parameters if the neighbor exists
-	 * 
-	 * @param takes
-	 *            country object
 	 */
 
 	public boolean hasNeighbor(Country p_country) {
 		return d_neighbors.containsKey(p_country.getCountryId());
 	}
 	/**
-	 * addNeighbor function addes neighbor to the country
-	 * 
-	 * @param p_neighborCountry
+	 * addNeighbor function adds neighbor to the country
 	 */
 	public void addNeighbor(Country p_neighborCountry) {
 		d_neighbors.put(p_neighborCountry.d_countryId, p_neighborCountry);
@@ -167,24 +146,18 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter to get the neighbor countries
-	 * 
-	 * @return d_neighbors
 	 */
 	public Map<Integer, Country> getNeighbors() {
 		return d_neighbors;
 	}
 	/**
 	 * Getter for the owner of the country
-	 * 
-	 * @return d_owner
 	 */
 	public Player getOwner() {
 		return this.d_owner;
 	}
 	/**
 	 * Setter for the player name
-	 * 
-	 * @param p_owner
 	 */
 	public void setOwner(Player p_owner) {
 		this.d_owner = p_owner;

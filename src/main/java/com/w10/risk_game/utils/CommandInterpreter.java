@@ -14,12 +14,17 @@ public class CommandInterpreter {
 	}
 
 	/**
-	 * The function `getMainCommand` takes a command as input and returns the main
-	 * command by splitting it on spaces.
+	 * The function takes a command as input and returns the main command by
+	 * splitting it on spaces.
 	 *
 	 * @param p_command
 	 *            The parameter `p_command` is a string that represents a command
 	 *            input from the user.
+	 *
+	 * @throws ApplicationException
+	 *             If the user enters an invalid command, show 'Please enter a valid
+	 *             command!' to the user
+	 *
 	 * @return The method is returning the main command from the given input
 	 *         command.
 	 */
@@ -35,6 +40,10 @@ public class CommandInterpreter {
 	 *
 	 * @param p_command
 	 *            The parameter `p_command` is a string that represents a command.
+	 * @throws ApplicationException
+	 *             If the user enters an invalid command, show 'Please enter a valid
+	 *             command!' to the user
+	 *
 	 * @return The method is returning a String array.
 	 */
 	public static String[] GetArgumentList(String p_command) throws ApplicationException {

@@ -12,7 +12,7 @@ public class GameUI {
 	private GameEngine d_gameEngine;
 	private boolean d_startGamePhase;
 
-	public static String d_Command = "";
+	public static String Command = "";
 
 	public GameUI() {
 		this.d_gameEngine = new GameEngine();
@@ -33,14 +33,15 @@ public class GameUI {
 			try {
 				System.out.print(Constants.USER_INPUT_REQUEST);
 				Scanner l_scanner = new Scanner(System.in);
-				d_Command = l_scanner.nextLine();
-				String l_mainCommand = CommandInterpreter.getMainCommand(d_Command);
-				String[] l_argList = CommandInterpreter.getArgumentList(d_Command);
+				Command = l_scanner.nextLine();
+				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
+				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 
 				switch (l_mainCommand) {
 					// Map editor phase
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
-						System.out.println(Constants.CLI_LOAD_MAP + l_argList[1]);
+						String[] l_mapName = l_argList[1].split("/");
+						System.out.println(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						this.d_gameEngine.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
@@ -146,9 +147,9 @@ public class GameUI {
 			try {
 				System.out.print(Constants.USER_INPUT_REQUEST);
 				Scanner l_scanner = new Scanner(System.in);
-				d_Command = l_scanner.nextLine();
-				String l_mainCommand = CommandInterpreter.getMainCommand(d_Command);
-				String[] l_argList = CommandInterpreter.getArgumentList(d_Command);
+				Command = l_scanner.nextLine();
+				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
+				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 
 				switch (l_mainCommand) {
 					// Show Map Command

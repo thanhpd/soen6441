@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapValidator;
-import com.w10.risk_game.utils.Constants;
 
 /**
  * @author Omnia Alam
@@ -105,7 +104,7 @@ public class GameMap {
 	 *            The file path where the map will be saved.
 	 */
 	public void saveMap(String p_filePath) {
-		if (MapValidator.isMapCorrect(this))
+		if (MapValidator.IsMapCorrect(this))
 			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
 				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);

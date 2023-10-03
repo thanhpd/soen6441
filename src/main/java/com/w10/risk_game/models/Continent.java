@@ -17,7 +17,7 @@ public class Continent {
 	private int d_bonus;
 	/**
 	 * This is a constructor of the Continent class
-	 * 
+	 *
 	 * @param p_continentId
 	 * @param p_continentName
 	 * @param p_bonus
@@ -32,7 +32,7 @@ public class Continent {
 
 	/**
 	 * getContinentId function returns the id of a continent
-	 * 
+	 *
 	 * @return d_continentId
 	 */
 	public int getContinentId() {
@@ -41,7 +41,7 @@ public class Continent {
 
 	/**
 	 * setContinentId function assigns the id of the continent
-	 * 
+	 *
 	 * @param p_continentId
 	 */
 	public void setContinentId(int p_continentId) {
@@ -50,7 +50,7 @@ public class Continent {
 
 	/**
 	 * Getter function to get the continent name
-	 * 
+	 *
 	 * @return
 	 */
 	public String getContinentName() {
@@ -59,7 +59,7 @@ public class Continent {
 
 	/**
 	 * Getter functions to get the list of countries of a continent
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Country> getCountries() {
@@ -68,7 +68,7 @@ public class Continent {
 
 	/**
 	 * This function is used to add a country to a continent
-	 * 
+	 *
 	 * @param d_country
 	 */
 	public void addCountry(Country d_country) {
@@ -77,7 +77,7 @@ public class Continent {
 
 	/**
 	 * Getter function for the list of countries for the continent
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Country> getNeighborCountries() {
@@ -87,7 +87,7 @@ public class Continent {
 	/**
 	 * Setter function for the neighboring country This function sets the countries
 	 * for the continent
-	 * 
+	 *
 	 * @param d_neighborCountries
 	 */
 	public void setNeighborCountries(List<Country> d_neighborCountries) {
@@ -96,7 +96,7 @@ public class Continent {
 
 	/**
 	 * Setter function for Continent name
-	 * 
+	 *
 	 * @param p_continentName
 	 */
 	public void setContinentName(String p_continentName) {
@@ -105,7 +105,7 @@ public class Continent {
 
 	/**
 	 * Getter function for bonus
-	 * 
+	 *
 	 * @return
 	 */
 	public int getBonus() {
@@ -114,7 +114,7 @@ public class Continent {
 
 	/**
 	 * Setter function for bonus
-	 * 
+	 *
 	 * @param p_bonus
 	 */
 	public void setBonus(int p_bonus) {

@@ -36,14 +36,13 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY = "deploy";
 	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
-	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some error occurred!";
+	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some errors occurred!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants
 	public static final String CLI_LOAD_MAP = "Loading Map: ";
 	public static final String CLI_SHOW_MAP = "Show Map...";
-	public static final String CLI_GAME_PLAYER_ADD = "Adding Player: ";
-	public static final String CLI_GAME_PLAYER_REMOVE = "Removing Player: ";
+	public static final String CLI_GAME_PLAYER_REMOVE = "Removed Player: ";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 
@@ -60,14 +59,12 @@ public final class Constants {
 	public static final String GAME_ENGINE_MAP_NOT_CREATED = "Map is not created!";
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
-	public static final String GAME_ENGINE_CANNOT_START_GAME = "Game cannot begin!";
-	public static final String GAME_ENGINE_MAP_EDIT_SUCCESS = "Map edited successfully!";
+	public static final String GAME_ENGINE_MAP_EDIT_SUCCESS = "Map loaded successfully, please start editing..!";
 	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File %s does not exist.%nCreating new map named %s.";
 	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
-	public static final String GAME_ENGINE_ISSUE_ORDER_CURRENT_MAP_LOOK = "The current map looks like this";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
@@ -75,7 +72,6 @@ public final class Constants {
 	public static final String NEW_LINE = "\n";
 
 	// Maps Folder Path
-	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
 	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
 
 	// Map Reader Constants
@@ -84,30 +80,29 @@ public final class Constants {
 	// Player Class Constants
 	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the format of \"deploy <CountryId> <No. of armies>\".";
 	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be integer. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be integers. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The number of leftover armies should be more than the number of armies. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of armies should be greater than zero. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The entered number should be less than the number of reinforcement soldiers. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";
 
 	// Map Editor Constants
-	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country Name is empty!";
+	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
 	public static final String MAP_EDITOR_COUNTRY_ID_EXIST = "Country ID already exists!";
 	public static final String MAP_EDITOR_CONTINENT_NOT_EXIST = "Continent does not exist!";
 	public static final String MAP_EDITOR_ADD_COUNTRY = " is added, and to the continent with id: ";
 	public static final String MAP_EDITOR_CONTINENT_NAME_EXIST = "Continent name already exists!";
-	public static final String MAP_EDITOR_CONTINENT_ID_EXIST = "Continent id already exists!";
 	public static final String MAP_EDITOR_ADD_CONTINENT = " is added!";
-	public static final String MAP_EDITOR_COUNTRY_NOT_EXIST = "Country does not exist! Please add first";
-	public static final String MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST = "Neighbor country does not exist! Please add first";
+	public static final String MAP_EDITOR_COUNTRY_NOT_EXIST = "Country does not exist! Please add it to the map first";
+	public static final String MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST = "Neighbor country does not exist! Please add it to the map first";
 	public static final String MAP_EDITOR_CONNECTION_EXIST = "Connection already exists!";
-	public static final String MAP_EDITOR_ADD_NEIGHBOR = " added with ";
-	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country id does not exist";
+	public static final String MAP_EDITOR_ADD_NEIGHBOR = " added to ";
+	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country ID does not exist";
 	public static final String MAP_EDITOR_COUNTRY_REMOVED = "Country is removed!";
 	public static final String MAP_EDITOR_REMOVED = " is removed!";
-	public static final String MAP_EDITOR_COUNTRIES_REMOVED = "these countries are also removed!";
+	public static final String MAP_EDITOR_COUNTRIES_REMOVED = "Linked countries were also removed!";
 	public static final String MAP_EDITOR_CONNECTION_NOT_EXIST = "Connection does not exist!";
 	public static final String MAP_EDITOR_NEIGHBOR_REMOVED = " removed from ";
 	public static final String MAP_EDITOR_AFTER_CONTINENT_ADDED = "###############After Continent added";
@@ -126,7 +121,6 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
 
 	// Game Map
-	public static final String GAME_MAP_ERROR_MESSAGE = "Error - Unable to save file. Please try again.%n%s";
 	public static final String MAP_DISPLAY_ID = "ID(Continent Name)";
 	public static final String MAP_DISPLAY_BONUS = "Bonus";
 	public static final String MAP_DISPLAY_COUNTRY_ID = "CountryID";
@@ -135,7 +129,6 @@ public final class Constants {
 	public static final String MAP_DISPLAY_PLAYER = "Player";
 	public static final String MAP_DISPLAY_ARMIES = "Armies";
 	// Map Reader
-	public static final String MAP_READER_MAP_FOLDER_PATH = "/src/main/resources/maps/";
 	public static final String MAP_READER_MAP = "[map]";
 	public static final String MAP_READER_CONTINENTS = "[continents]";
 	public static final String MAP_READER_COUNTRIES = "[countries]";

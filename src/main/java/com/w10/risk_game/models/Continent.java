@@ -42,8 +42,7 @@ public class Continent {
 	/**
 	 * setContinentId function assigns the id of the continent
 	 *
-	 * @param continent
-	 *            id
+	 * @param continentid
 	 */
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
@@ -71,6 +70,7 @@ public class Continent {
 	 * This function is used to add a country to a continent
 	 *
 	 * @param country
+	 *            object
 	 */
 	public void addCountry(Country d_country) {
 		this.d_countries.add(d_country);
@@ -89,7 +89,8 @@ public class Continent {
 	 * Setter function for the neighboring country This function sets the countries
 	 * for the continent
 	 *
-	 * @param d_neighborCountries
+	 * @param takes
+	 *            list of countries
 	 */
 	public void setNeighborCountries(List<Country> d_neighborCountries) {
 		this.d_neighborCountries = d_neighborCountries;
@@ -98,7 +99,8 @@ public class Continent {
 	/**
 	 * Setter function for Continent name
 	 *
-	 * @param p_continentName
+	 * @param takes
+	 *            continent name
 	 */
 	public void setContinentName(String p_continentName) {
 		this.d_continentName = p_continentName;
@@ -116,7 +118,8 @@ public class Continent {
 	/**
 	 * Setter function for bonus
 	 *
-	 * @param p_bonus
+	 * @param takes
+	 *            bonus
 	 */
 	public void setBonus(int p_bonus) {
 		this.d_bonus = p_bonus;

@@ -19,17 +19,6 @@ import com.w10.risk_game.models.GameMap;
 public class MapReader {
 
 	/**
-	 * The function returns the file path of the "maps" folder in the project's
-	 * resources directory.
-	 *
-	 * @return The method is returning a string that represents the file path of the
-	 *         "maps" folder in the project's resources directory.
-	 */
-	public String getMapFolderPath() {
-		return System.getProperty("user.dir") + Constants.MAP_READER_MAP_FOLDER_PATH;
-	}
-
-	/**
 	 * The function reads country data from a scanner and maps it to a collection of
 	 * countries, associating each country with its corresponding continent.
 	 *

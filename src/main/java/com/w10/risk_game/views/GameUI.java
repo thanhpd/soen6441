@@ -40,7 +40,8 @@ public class GameUI {
 				switch (l_mainCommand) {
 					// Map editor phase
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
-						System.out.println(Constants.CLI_LOAD_MAP + l_argList[1]);
+						String[] l_mapName = l_argList[1].split("/");
+						System.out.println(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						this.d_gameEngine.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :

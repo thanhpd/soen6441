@@ -110,7 +110,7 @@ public class GameMap {
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
 				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);
 				for (Continent continent : this.d_continents.values()) {
-					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getCountries().size());
+					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
 				for (Country country : this.d_countries.values()) {

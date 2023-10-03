@@ -106,18 +106,18 @@ public class PlayerTest {
 	}
 
 	/**
-	 * This method is to test the method of checkValidNum. It will provide one
+	 * This method is to test the method of checkValidArmy. It will provide one
 	 * invalid input and check whether the method can return false. The invalid
 	 * input is the third part of the input is more than the number of leftover
 	 * armies.
 	 */
 	@Test
-	public void checkValidNumTest() {
+	public void checkValidArmy() {
+		// d_player1 has 10 armies in total
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");
 		String l_num = l_inputArray[2];
-		int l_army = d_player1.getLeftoverArmies();
-		boolean l_isValidNum = d_player1.checkValidNum(Integer.parseInt(l_num), l_army);
+		boolean l_isValidNum = d_player1.checkValidArmy(Integer.parseInt(l_num));
 		assertEquals(false, l_isValidNum);
 	}
 }

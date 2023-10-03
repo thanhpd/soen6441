@@ -4,16 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Omnia Alam
+ * @author Omnia Alam The Continent is a model class The Continent class
+ *         represents a continent in a game, with properties such as continent
+ *         ID, name, list of countries, list of neighboring countries, and bonus
+ *         points.
  */
-
 public class Continent {
 	private int d_continentId;
 	private String d_continentName;
 	private List<Country> d_countries;
 	private List<Country> d_neighborCountries;
 	private int d_bonus;
-
+	/**
+	 * This is a constructor of the Continent class
+	 * 
+	 * @param p_continentId
+	 * @param p_continentName
+	 * @param p_bonus
+	 */
 	public Continent(int p_continentId, String p_continentName, int p_bonus) {
 		this.d_continentId = p_continentId;
 		this.d_continentName = p_continentName;
@@ -22,51 +30,99 @@ public class Continent {
 		this.d_neighborCountries = new ArrayList<>();
 	}
 
-	// Getter
+	/**
+	 * getContinentId function returns the id of a continent
+	 * 
+	 * @return d_continentId
+	 */
 	public int getContinentId() {
 		return d_continentId;
 	}
 
-	// Setter
+	/**
+	 * setContinentId function assigns the id of the continent
+	 * 
+	 * @param p_continentId
+	 */
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
 	}
 
+	/**
+	 * Getter function to get the continent name
+	 * 
+	 * @return
+	 */
 	public String getContinentName() {
 		return d_continentName;
 	}
 
+	/**
+	 * Getter functions to get the list of countries of a continent
+	 * 
+	 * @return
+	 */
 	public List<Country> getCountries() {
 		return d_countries;
 	}
 
+	/**
+	 * This function is used to add a country to a continent
+	 * 
+	 * @param d_country
+	 */
 	public void addCountry(Country d_country) {
 		this.d_countries.add(d_country);
 	}
 
+	/**
+	 * Getter function for the list of countries for the continent
+	 * 
+	 * @return
+	 */
 	public List<Country> getNeighborCountries() {
 		return d_neighborCountries;
 	}
 
+	/**
+	 * Setter function for the neighboring country This function sets the countries
+	 * for the continent
+	 * 
+	 * @param d_neighborCountries
+	 */
 	public void setNeighborCountries(List<Country> d_neighborCountries) {
 		this.d_neighborCountries = d_neighborCountries;
 	}
 
-	// Setter
+	/**
+	 * Setter function for Continent name
+	 * 
+	 * @param p_continentName
+	 */
 	public void setContinentName(String p_continentName) {
 		this.d_continentName = p_continentName;
 	}
 
-	// Getter
+	/**
+	 * Getter function for bonus
+	 * 
+	 * @return
+	 */
 	public int getBonus() {
 		return d_bonus;
 	}
 
-	// Setter
-	public void setBonus(int p_bouns) {
-		this.d_bonus = p_bouns;
+	/**
+	 * Setter function for bonus
+	 * 
+	 * @param p_bonus
+	 */
+	public void setBonus(int p_bonus) {
+		this.d_bonus = p_bonus;
 	}
-
+	/**
+	 * Overriding the to String method for custom printing
+	 */
 	public String toString() {
 		return d_continentId + " " + d_continentName + " " + d_bonus;
 	}

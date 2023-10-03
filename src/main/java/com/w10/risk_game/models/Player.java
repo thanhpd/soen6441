@@ -175,7 +175,6 @@ public class Player {
 		boolean l_again = true;
 		boolean l_failed = false;
 		Scanner l_scanner = new Scanner(System.in);
-
 		while (l_again) {
 			boolean l_isValidFormat;
 			boolean l_isValidOrder;
@@ -189,7 +188,6 @@ public class Player {
 			} else {
 				l_input = GameUI.Command;
 			}
-
 			String[] l_inputArray = l_input.split(" ");
 			// check the input format
 			l_isValidFormat = checkValidForm(l_inputArray);
@@ -205,11 +203,11 @@ public class Player {
 			// check the country
 			l_isValidCountry = checkValidCountry(l_countries, l_countryId);
 			// check the num
-			l_isValidNum = checkValidNum(Integer.parseInt(l_num));
+			l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
 			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
 				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
 				d_orders.add(order);
-				this.deployArmies(Integer.parseInt(l_num));
+				deployArmies(Integer.parseInt(l_num));
 				l_again = false;
 				l_failed = false;
 			} else {
@@ -304,12 +302,12 @@ public class Player {
 	 *            the number of armies
 	 * @return boolean value to show whether the number of armies is valid
 	 */
-	public boolean checkValidNum(int p_num) {
+	public boolean checkValidArmy(int p_num) {
 		if (p_num <= 0) {
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
 			return false;
 		}
-		if (p_num > this.d_leftoverArmies) {
+		if (p_num > d_leftoverArmies) {
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;
 		}

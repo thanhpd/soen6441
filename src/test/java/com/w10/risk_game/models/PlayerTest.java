@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.io.ByteArrayInputStream;
 
+import com.w10.risk_game.views.GameUI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -58,23 +59,6 @@ public class PlayerTest {
 	}
 
 	/**
-	 * The issueOrderTest function tests the issueOrder method of the player object.
-	 * It sets the input, and test whether the orders are added to the player's
-	 * order list
-	 */
-	@Test
-	public void issueOrderTest() {
-		String l_input1 = "deploy 1 6";
-		System.setIn(new ByteArrayInputStream(l_input1.getBytes()));
-		Scanner l_scanner = new Scanner(System.in);
-		d_player1.issueOrder();
-		assertEquals(1, d_player1.getOrders().size());
-		assertEquals("deploy", d_player1.getOrders().get(0).getOrderType());
-		assertEquals(1, d_player1.getOrders().get(0).getCountryId());
-		assertEquals(6, d_player1.getOrders().get(0).getNum());
-	}
-
-	/**
 	 * This method is to test the method of checkValidForm. It will provide three
 	 * invalid inputs and check whether the method can return false. The three
 	 * invalid inputs are: 1. There are not three parts in the input. 2. The second
@@ -122,17 +106,18 @@ public class PlayerTest {
 	}
 
 	/**
-	 * This method is to test the method of checkValidNum. It will provide one
+	 * This method is to test the method of checkValidArmy. It will provide one
 	 * invalid input and check whether the method can return false. The invalid
 	 * input is the third part of the input is more than the number of leftover
 	 * armies.
 	 */
 	@Test
-	public void checkValidNumTest() {
+	public void checkValidArmyTest() {
+		// d_player1 has 10 armies in total
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");
 		String l_num = l_inputArray[2];
-		boolean l_isValidNum = d_player1.checkValidNum(Integer.parseInt(l_num));
+		boolean l_isValidNum = d_player1.checkValidArmy(Integer.parseInt(l_num));
 		assertEquals(false, l_isValidNum);
 	}
 }

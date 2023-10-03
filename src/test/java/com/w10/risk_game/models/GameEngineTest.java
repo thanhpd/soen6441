@@ -112,6 +112,10 @@ public class GameEngineTest {
 		assertEquals(0, d_gameEngine.getNoOfPlayers());
 	}
 
+	/**
+	 * The testShowAllPlayers function tests the showAllPlayers method by
+	 * capturing the output and comparing it to an expected output.
+	 */
 	@Test
 	void testShowAllPlayers() {
 		d_gameEngine.showAllPlayers();
@@ -121,6 +125,9 @@ public class GameEngineTest {
 		assertEquals(l_expectedOutput, l_actualOutput);
 	}
 
+	/**
+	 * The testShowMap function tests if the game engine can display the map
+	 */
 	@Test
 	void testShowMap() {
 		d_gameEngine.showMap();

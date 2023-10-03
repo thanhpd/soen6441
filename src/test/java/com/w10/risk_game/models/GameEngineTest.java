@@ -109,6 +109,15 @@ public class GameEngineTest {
 	}
 
 	@Test
+	void testShowAllPlayers() {
+		d_gameEngine.showAllPlayers();
+		// Capture the actual output
+		String l_actualOutput = outputStream.toString().trim();
+		String l_expectedOutput = "";
+		assertEquals(l_expectedOutput, l_actualOutput);
+	}
+
+	@Test
 	void testShowMap() {
 		d_gameEngine.showMap();
 		assertTrue(d_gameEngine.checkIfGameCanBegin() == d_gameEngine.checkIfMapIsValid());

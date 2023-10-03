@@ -17,10 +17,15 @@ import com.w10.risk_game.models.GameMap;
  * @author Omnia Alam This is test class on the MapEditor There are some test
  *         cases added to fulfile some validation on different methods of the
  *         class For example: add country, add continent, add neighbor remove
- *         country , continent and neighbor
+ *         country , continent and neighbor. Delcaring all the instancs for the
+ *         test
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MapEditorTest {
+
+	/**
+	 * Setting up all the local variables.
+	 */
 	private GameMap d_gameMap;
 	private MapEditor d_mapEditor;
 	private MapDisplay d_mapDisplay = new MapDisplay();
@@ -32,6 +37,9 @@ public class MapEditorTest {
 	int d_neighborCountryId;
 	int d_bonus;
 
+	/**
+	 * Setting up all the common variable for the test scenarios
+	 */
 	@BeforeAll
 	public void setUp() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map";
@@ -42,7 +50,8 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Invalid input to add a continent
+	 * Test scenarios to add a continent into the Game Map.
+	 * testAddContinentErrorHandle function to test all the invalid commands.
 	 */
 	@Test
 	public void testAddContinentErrorHandle() {
@@ -53,7 +62,8 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Valid input to add a continent to the map
+	 * Test scenarios to add a continent into the Game Map. testAddContinent
+	 * function to test a valid input and add a continent
 	 */
 	@Test
 	public void testAddContinent() {
@@ -68,11 +78,8 @@ public class MapEditorTest {
 	/**
 	 * The testAddCountry function tests the addCountry method in a MapEditor class
 	 * by checking for various error conditions and asserting the expected error
-	 * messages.
-	 */
-
-	/**
-	 * Invalid input to add a country
+	 * messages. testAddCountryErrorHandle function test all the invalid input for
+	 * adding a country
 	 */
 	@Test
 	public void testAddCountryErrorHandle() {
@@ -90,7 +97,9 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Valid input to add a country
+	 * The testAddCountry function tests the addCountry method in a MapEditor class
+	 * by checking for various error conditions and asserting the expected error
+	 * messages. testAddCountry function test valid input to add a country into the
 	 */
 	@Test
 	public void testAddCountry() {
@@ -109,10 +118,8 @@ public class MapEditorTest {
 	 * class by checking if the correct error message is returned when trying to add
 	 * a neighbor to a non-existent country and if the correct success message is
 	 * returned when adding a neighbor to an existing country.
-	 */
-
-	/**
-	 * Invalid inputs to remove a neighbor
+	 * testAddNeighborWithErrorHandle test all the invalid inputs to remove a
+	 * neighbor
 	 */
 	@Test
 	public void testAddNeighborWithErrorHandle() {
@@ -128,7 +135,11 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Valid inputs to add a neighbor
+	 * The testAddNeighbor function tests the addNeighbor method in the MapEditor
+	 * class by checking if the correct error message is returned when trying to add
+	 * a neighbor to a non-existent country and if the correct success message is
+	 * returned when adding a neighbor to an existing country. testAddNeighbor test
+	 * the valid inputs to remove a neighbor to the Game Map
 	 */
 
 	@Test
@@ -142,12 +153,8 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * The testRemoveContinent function tests the functionality of removing a
-	 * continent from a game map.
-	 */
-
-	/**
-	 * Invalid input to remove a continent
+	 * testRemoveContinentWithErrorHandle test all the invalid input to remove a
+	 * continent
 	 */
 	@Test
 	public void testRemoveContinentWithErrorHandle() {
@@ -157,7 +164,9 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Valid inputs to remove a continent
+	 * The testRemoveContinent function tests the functionality of removing a
+	 * continent from a game map. testRemoveContinent test the valid input to remove
+	 * a continent
 	 */
 	@Test
 	public void testRemoveContinent() {
@@ -176,13 +185,8 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * The testRemoveCountry function tests the removeCountry method in the
-	 * MapEditor class by checking if the country ID exists and if the country is
-	 * successfully removed.
-	 */
-
-	/**
-	 * Invalid inputs to remove a country
+	 * testRemoveCountryWithErrorHandle function to test all the invalid inputs to
+	 * remove a country
 	 */
 	@Test
 	public void testRemoveCountryWithErrorHandle() {
@@ -192,7 +196,10 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Valid inputs to remove a country
+	 * The testRemoveCountry function tests the removeCountry method in the
+	 * MapEditor class by checking if the country ID exists and if the country is
+	 * successfully removed. testRemoveCountry function to test a valid inputs to
+	 * remove a country
 	 */
 	@Test
 	public void testRemoveCountry() {
@@ -203,6 +210,10 @@ public class MapEditorTest {
 		d_mapDisplay.formatMap(d_gameMap, false);
 	}
 
+	/**
+	 * testRemoveNeighborWithErrorHandle functions to test invalid inputs to remove
+	 * the neighbour for the Game Map
+	 */
 	@Test
 	public void testRemoveNeighborWithErrorHandle() {
 		int d_countryId = 27;
@@ -222,7 +233,8 @@ public class MapEditorTest {
 	}
 
 	/**
-	 * Valid input to remove a neighbor
+	 * testRemoveNeighbor functions to test valid inputs to remove the neighbour for
+	 * the Game Map
 	 */
 	@Test
 	public void testRemoveNeighbor() {

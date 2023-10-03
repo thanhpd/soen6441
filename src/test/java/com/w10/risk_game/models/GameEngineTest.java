@@ -109,8 +109,8 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testShowAllPlayers function tests the showAllPlayers method by
-	 * capturing the output and comparing it to an expected output.
+	 * The testShowAllPlayers function tests the showAllPlayers method by capturing
+	 * the output and comparing it to an expected output.
 	 */
 	@Test
 	void testShowAllPlayers() {

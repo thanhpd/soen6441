@@ -32,7 +32,7 @@ public class Continent {
 
 	/**
 	 * getContinentId function returns the id of a continent
-	 * 
+	 *
 	 * @return continent id
 	 */
 	public int getContinentId() {
@@ -41,7 +41,7 @@ public class Continent {
 
 	/**
 	 * setContinentId function assigns the id of the continent
-	 * 
+	 *
 	 * @param continent
 	 *            id
 	 */

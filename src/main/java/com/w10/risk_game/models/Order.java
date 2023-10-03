@@ -14,36 +14,85 @@ public class Order {
 	private int d_countryId;
 	private int d_num;
 
-	// Getter
+	/**
+	 * The function returns the player object.
+	 *
+	 * @return The method is returning the object of type Player.
+	 */
 	public Player getPlayer() {
 		return d_player;
 	}
 
+	/**
+	 * The function getOrderType() returns the order type.
+	 *
+	 * @return The method is returning a String value.
+	 */
 	public String getOrderType() {
 		return d_orderType;
 	}
 
+	/**
+	 * The function returns the country ID.
+	 *
+	 * @return The method returns an integer value, specifically the value of the
+	 *         variable "d_countryId".
+	 */
 	public int getCountryId() {
 		return d_countryId;
 	}
 
+	/**
+	 * The function returns the value of the variable d_num.
+	 *
+	 * @return The method is returning the value of the variable "d_num".
+	 */
 	public int getNum() {
 		return d_num;
 	}
 
-	// Setter
+	/**
+	 * The function sets the value of the "d_player" variable to the provided
+	 * "Player" object.
+	 *
+	 * @param d_player
+	 *            The parameter "d_player" is of type "Player" and is used to set
+	 *            the value of the instance variable "d_player" in the current
+	 *            class.
+	 */
 	public void setPlayer(Player d_player) {
 		this.d_player = d_player;
 	}
 
+	/**
+	 * The function sets the order type for a specific object.
+	 *
+	 * @param d_orderType
+	 *            The parameter "d_orderType" is a string that represents the type
+	 *            of order.
+	 */
 	public void setOrderType(String d_orderType) {
 		this.d_orderType = d_orderType;
 	}
 
+	/**
+	 * The function sets the value of the countryId variable.
+	 *
+	 * @param d_countryId
+	 *            The parameter "d_countryId" is an integer that represents the
+	 *            country ID.
+	 */
 	public void setCountryId(int d_countryId) {
 		this.d_countryId = d_countryId;
 	}
 
+	/**
+	 * The function sets the value of the variable "d_num" to the provided input.
+	 *
+	 * @param d_num
+	 *            The parameter "d_num" is an integer that is used to set the value
+	 *            of the variable "d_num" in the current object.
+	 */
 	public void setNum(int d_num) {
 		this.d_num = d_num;
 	}
@@ -56,8 +105,7 @@ public class Order {
 	}
 
 	/**
-	 * This method is used to deploy the armies This method gets the number of
-	 * armies to deploy from the player and deploys them to the country
+	 * This function gets the number of armies and deploys them to the country
 	 */
 	public void execute() {
 		Player l_player = this.d_player;

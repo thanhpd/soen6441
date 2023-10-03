@@ -35,8 +35,8 @@ public class Order {
 	/**
 	 * The function returns the country ID.
 	 *
-	 * @return The method is returning an integer value, specifically the value of
-	 *         the variable "d_countryId".
+	 * @return The method returns an integer value, specifically the value of the
+	 *         variable "d_countryId".
 	 */
 	public int getCountryId() {
 		return d_countryId;
@@ -97,11 +97,6 @@ public class Order {
 		this.d_num = d_num;
 	}
 
-	// The code snippet you provided is a constructor for the `Order` class. It
-	// takes four parameters:
-	// `p_player` of type `Player`, `p_orderType` of type `String`, `p_countryId` of
-	// type `int`, and
-	// `p_num` of type `int`.
 	public Order(Player p_player, String p_orderType, int p_countryId, int p_num) {
 		this.d_player = p_player;
 		this.d_orderType = p_orderType;
@@ -110,8 +105,8 @@ public class Order {
 	}
 
 	/**
-	 * This method is used to deploy the armies This method gets the number of
-	 * armies to deploy from the player and deploys them to the country
+	 * This function deploys the armies this method gets the number of armies to
+	 * deploy from the player and deploys them to the country
 	 */
 	public void execute() {
 		Player l_player = this.d_player;

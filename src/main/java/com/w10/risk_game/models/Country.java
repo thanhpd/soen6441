@@ -36,6 +36,8 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function for the countryId
+	 *
+	 * @return country id
 	 */
 	public int getCountryId() {
 		return d_countryId;
@@ -43,6 +45,9 @@ public class Country implements Serializable {
 
 	/**
 	 * Setter function to set the country id
+	 *
+	 * @param country
+	 *            id
 	 */
 	public void setCountryId(int p_countryId) {
 		this.d_countryId = p_countryId;
@@ -50,6 +55,8 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function get country name
+	 *
+	 * @return country name
 	 */
 	public String getCountryName() {
 		return d_countryName;
@@ -57,6 +64,9 @@ public class Country implements Serializable {
 
 	/**
 	 * Setter function to set country name
+	 *
+	 * @param country
+	 *            name
 	 */
 	public void setCountryName(String p_countryName) {
 		this.d_countryName = p_countryName;
@@ -64,6 +74,8 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function to get continent id
+	 *
+	 * @return country id
 	 */
 	public int getContinentId() {
 		return d_continentId;
@@ -71,6 +83,9 @@ public class Country implements Serializable {
 
 	/**
 	 * Setter function to set the continent id
+	 *
+	 * @param continent
+	 *            id
 	 */
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
@@ -78,12 +93,17 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter function to get the army count
+	 *
+	 * @return army count
 	 */
 	public int getArmyCount() {
 		return d_armyCount;
 	}
 	/**
 	 * Setter function to set armies
+	 *
+	 * @param army
+	 *            count
 	 */
 	public void setArmyCount(int d_armyCount) {
 		this.d_armyCount = d_armyCount;
@@ -146,18 +166,25 @@ public class Country implements Serializable {
 
 	/**
 	 * Getter to get the neighbor countries
+	 *
+	 * @return list of neighbor countries
 	 */
 	public Map<Integer, Country> getNeighbors() {
 		return d_neighbors;
 	}
 	/**
 	 * Getter for the owner of the country
+	 *
+	 * @return the owner
 	 */
 	public Player getOwner() {
 		return this.d_owner;
 	}
 	/**
 	 * Setter for the player name
+	 *
+	 * @param player
+	 *            object
 	 */
 	public void setOwner(Player p_owner) {
 		this.d_owner = p_owner;

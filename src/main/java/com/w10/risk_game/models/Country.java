@@ -20,7 +20,7 @@ public class Country implements Serializable {
 
 	/**
 	 * This is a constructor of the country class
-	 * 
+	 *
 	 * @param p_countryId
 	 * @param p_countryName
 	 * @param p_continentId

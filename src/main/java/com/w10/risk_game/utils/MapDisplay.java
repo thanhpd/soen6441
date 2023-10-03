@@ -70,7 +70,7 @@ public class MapDisplay {
 					l_values[6] = " ";
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+
 				e.printStackTrace();
 			}
 

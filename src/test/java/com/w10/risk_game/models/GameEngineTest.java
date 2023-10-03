@@ -3,6 +3,7 @@ package com.w10.risk_game.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import com.w10.risk_game.controllers.GameEngine;
 import com.w10.risk_game.utils.Constants;
 import java.util.ArrayList;
 

@@ -15,97 +15,97 @@ public class Order {
 	private int d_num;
 
 	/**
-	 * Player Getter
+	 * The function returns the player object.
 	 *
-	 * @return the player who issues the order
+	 * @return The method is returning the object of type Player.
 	 */
 	public Player getPlayer() {
 		return d_player;
 	}
+
 	/**
-	 * OrderType Getter
+	 * The function getOrderType() returns the order type.
 	 *
-	 * @return the type of the order
+	 * @return The method is returning a String value.
 	 */
 	public String getOrderType() {
 		return d_orderType;
 	}
+
 	/**
-	 * CountryId Getter
+	 * The function returns the country ID.
 	 *
-	 * @return the country id that the order is issued to
+	 * @return The method returns an integer value, specifically the value of the
+	 *         variable "d_countryId".
 	 */
 	public int getCountryId() {
 		return d_countryId;
 	}
+
 	/**
-	 * Num Getter
+	 * The function returns the value of the variable d_num.
 	 *
-	 * @return the number of armies that the order is issued to
+	 * @return The method is returning the value of the variable "d_num".
 	 */
 	public int getNum() {
 		return d_num;
 	}
 
 	/**
-	 * Player Setter
+	 * The function sets the value of the "d_player" variable to the provided
+	 * "Player" object.
 	 *
 	 * @param d_player
-	 *            the player who issues the order
+	 *            The parameter "d_player" is of type "Player" and is used to set
+	 *            the value of the instance variable "d_player" in the current
+	 *            class.
 	 */
 	public void setPlayer(Player d_player) {
 		this.d_player = d_player;
 	}
+
 	/**
-	 * OrderType Setter
+	 * The function sets the order type for a specific object.
 	 *
 	 * @param d_orderType
-	 *            the type of the order
+	 *            The parameter "d_orderType" is a string that represents the type
+	 *            of order.
 	 */
 	public void setOrderType(String d_orderType) {
 		this.d_orderType = d_orderType;
 	}
 
 	/**
-	 * CountryId Setter
+	 * The function sets the value of the countryId variable.
 	 *
 	 * @param d_countryId
-	 *            the country id that the order is issued to
+	 *            The parameter "d_countryId" is an integer that represents the
+	 *            country ID.
 	 */
 	public void setCountryId(int d_countryId) {
 		this.d_countryId = d_countryId;
 	}
+
 	/**
-	 * Num Setter
+	 * The function sets the value of the variable "d_num" to the provided input.
 	 *
 	 * @param d_num
-	 *            the number of armies that the order is issued to
+	 *            The parameter "d_num" is an integer that is used to set the value
+	 *            of the variable "d_num" in the current object.
 	 */
 	public void setNum(int d_num) {
 		this.d_num = d_num;
 	}
 
-	/**
-	 * This is the constructor of the Order class
-	 *
-	 * @param p_player
-	 *            the player who issues the order
-	 * @param p_orderType
-	 *            the type of the order
-	 * @param p_countryId
-	 *            the country id that the order is issued to
-	 * @param p_num
-	 *            the number of armies that the order is issued to
-	 */
 	public Order(Player p_player, String p_orderType, int p_countryId, int p_num) {
 		this.d_player = p_player;
 		this.d_orderType = p_orderType;
 		this.d_countryId = p_countryId;
 		this.d_num = p_num;
 	}
+
 	/**
-	 * This method is used to deploy the armies This method gets the number of
-	 * armies to deploy from the player and deploys them to the country
+	 * This function gets the number of armies and deploys them to the country
 	 */
 	public void execute() {
 		Player l_player = this.d_player;

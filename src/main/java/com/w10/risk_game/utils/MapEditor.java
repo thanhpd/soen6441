@@ -1,6 +1,6 @@
 package com.w10.risk_game.utils;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -29,30 +29,32 @@ public class MapEditor {
 	 *            The unique identifier for the country.
 	 * @param p_countryName
 	 *            The name of the country you want to add.
-	 * @param p_continentId
-	 *            The parameter p_continentId represents the ID of the continent to
-	 *            which the country will be added.
+	 * @param p_continentName
+	 *            The parameter p_continentName represents the ID of the continent
+	 *            to which the country will be added.
 	 * @return The method returns a string message indicating the result of adding a
 	 *         country.
 	 */
-	public String addCountry(int p_countryId, String p_countryName, int p_continentId) {
+	public String addCountry(int p_countryId, String p_countryName, String p_continentName) {
 
 		if (StringUtils.isBlank(p_countryName)) {
-			return "Country Name is empty!";
+			return Constants.MAP_EDITOR_EMPTY_COUNTRY_NAME;
+
 		}
 		if (l_gameMap.containsCountry(p_countryName)) {
-			return "Country name already exists!";
+			return Constants.MAP_EDITOR_COUNTRY_NAME_EXIST;
 		}
 		if (l_gameMap.containsCountry(p_countryId)) {
-			return "Country ID already exists!";
+			return Constants.MAP_EDITOR_COUNTRY_ID_EXIST;
 		}
-		if (l_gameMap.containsContinent(p_continentId) == false) {
-			return "Continent does not exists!";
+
+		if (l_gameMap.containsContinent(p_continentName) == false) {
+			return Constants.MAP_EDITOR_CONTINENT_NOT_EXIST;
 		}
-		Continent l_continent = l_gameMap.getContinentById(p_continentId);
+		Continent l_continent = l_gameMap.getContinentByName(p_continentName);
 		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
 		l_gameMap.getCountries().put(p_countryId, l_country);
-		return p_countryName + " is Added! and to the continent with id: " + p_continentId;
+		return p_countryName + Constants.MAP_EDITOR_ADD_COUNTRY + p_continentName;
 	}
 
 	/**
@@ -68,14 +70,14 @@ public class MapEditor {
 	 */
 	public String addContinent(String p_continentName, int p_bonus) {
 		if (l_gameMap.containsContinent(p_continentName)) {
-			return "Continent name already exists!";
+			return Constants.MAP_EDITOR_CONTINENT_NAME_EXIST;
 		}
 
 		int l_newContinentId = l_gameMap.getContinents().size() + 1;
 		Continent l_continent = new Continent(l_newContinentId, p_continentName, 0);
 		l_gameMap.getContinents().put(l_newContinentId, l_continent);
 
-		return p_continentName + " is added!";
+		return p_continentName + Constants.MAP_EDITOR_ADD_CONTINENT;
 	}
 
 	/**
@@ -91,21 +93,21 @@ public class MapEditor {
 	 */
 	public String addNeighbor(int p_countryId, int p_neighborCountryId) {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
-			return "Country does not exist! please add first";
+			return Constants.MAP_EDITOR_COUNTRY_NOT_EXIST;
 		}
 		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
-			return "Neighbor country does not exist!please add first";
+			return Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST;
 		}
 		Country l_countryToAdd = l_gameMap.findCountry(p_countryId);
 		if (l_countryToAdd.hasNeighbor(p_neighborCountryId)) {
-			return "Connection already exists!";
+			return Constants.MAP_EDITOR_CONNECTION_EXIST;
 		}
 		Country l_neighbor = l_gameMap.findCountry(p_neighborCountryId);
 		Country l_country = l_gameMap.findCountry(p_countryId);
 		l_country.addNeighbor(l_neighbor);
 		l_neighbor.addNeighbor(l_country);
 
-		return p_countryId + " added with " + p_neighborCountryId;
+		return p_countryId + Constants.MAP_EDITOR_ADD_NEIGHBOR + p_neighborCountryId;
 	}
 
 	/**
@@ -121,7 +123,7 @@ public class MapEditor {
 	public String removeCountry(int p_countryId) {
 
 		if (l_gameMap.containsCountry(p_countryId) == false) {
-			return "Country id does not exists";
+			return Constants.MAP_EDITOR_COUNTRY_ID_NOT_EXIST;
 		}
 		Country l_Country = l_gameMap.findCountry(p_countryId);
 		for (Country l_neighbor : l_Country.getNeighbors().values()) {
@@ -131,34 +133,35 @@ public class MapEditor {
 
 		// delete self from gameMap
 		l_gameMap.getCountries().remove(l_Country.getCountryId());
-		return p_countryId + "Country removed!";
+		return p_countryId + Constants.MAP_EDITOR_COUNTRY_REMOVED;
 	}
 
 	/**
 	 * The function removes a continent and all its associated countries from a game
 	 * map.
 	 *
-	 * @param p_continentId
-	 *            The parameter p_continentId is the ID of the continent that needs
-	 *            to be removed from the game map.
+	 * @param p_continentName
+	 *            The parameter p_continentName is the name of the continent that
+	 *            needs to be removed from the game map.
 	 * @return The method is returning a string that indicates the result of
 	 *         removing the continent.
 	 */
-	public String removeContinent(int p_continentId) {
+	public String removeContinent(String p_continentName) {
 
-		if (l_gameMap.containsContinent(p_continentId) == false) {
-			return "Continent does not exists";
+		if (l_gameMap.containsContinent(p_continentName) == false) {
+			return Constants.MAP_EDITOR_CONTINENT_NOT_EXIST;
 		}
-		Continent l_toRemove = l_gameMap.getContinentById(p_continentId);
+		Continent l_toRemove = l_gameMap.getContinentByName(p_continentName);
 		String l_countriesRemoved = "";
-		ArrayList<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
+		List<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
 		for (Country l_country : l_countriesToRemove) {
 			removeCountry(l_country.getCountryId());
 			l_countriesRemoved = l_country.getCountryName() + ", ";
 		}
 		// Self remove
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
-		return p_continentId + " removed!" + l_countriesRemoved + "these countries also removed!";
+		return p_continentName + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved
+				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED;
 	}
 
 	/**
@@ -175,18 +178,18 @@ public class MapEditor {
 	 */
 	public String removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
-			return "Country does not exist! please add first";
+			return Constants.MAP_EDITOR_COUNTRY_NOT_EXIST;
 		}
 		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
-			return "Neighbor country does not exist!please add first";
+			return Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST;
 		}
 		Country l_countryToRemove = l_gameMap.findCountry(p_countryId);
 		if (l_countryToRemove.hasNeighbor(p_neighborCountryId) == false) {
-			return "Connection does not exists!";
+			return Constants.MAP_EDITOR_CONNECTION_NOT_EXIST;
 		}
 		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighborCountryId);
 		l_gameMap.findCountry(p_neighborCountryId).getNeighbors().remove(p_countryId);
 
-		return p_countryId + " removed from " + p_neighborCountryId;
+		return p_countryId + Constants.MAP_EDITOR_NEIGHBOR_REMOVED + p_neighborCountryId;
 	}
 }

@@ -96,10 +96,13 @@ public class MapDisplay {
 	public void formatMap(GameMap p_map, boolean p_showArmies) {
 		String[] l_columnNames;
 		if (p_showArmies) {
-			l_columnNames = new String[]{"ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)",
-					"Player", "Armies"};
+			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
+					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
+					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES};
 		} else {
-			l_columnNames = new String[]{"ID(Continent Name)", "Bonus", "CountryID", "CountryName", "ID(Neighbors)"};
+			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
+					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
+					Constants.MAP_DISPLAY_NEIGHBOR_ID};
 		}
 
 		Map<Integer, Country> l_countries = p_map.getCountries();

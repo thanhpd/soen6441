@@ -3,11 +3,12 @@ package com.w10.risk_game.models;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapValidator;
 
 /**
@@ -29,7 +30,6 @@ public class GameMap {
 		return this.d_continents.size() != 0 && this.d_countries.size() != 0;
 	}
 
-	// Getter
 	public Map<Integer, Country> getCountries() {
 		return d_countries;
 	}
@@ -38,7 +38,7 @@ public class GameMap {
 		return d_countries.get(p_countryId);
 	}
 
-	public Player getPlayerbyCountry(int p_countryId) {
+	public Player getPlayerByCountry(int p_countryId) {
 		return d_player.get(p_countryId);
 	}
 
@@ -64,8 +64,7 @@ public class GameMap {
 	 * Method overloading- polymorphism
 	 */
 	public boolean containsCountry(String p_countryName) {
-		return d_countries.values().stream().filter(counrty -> counrty.getCountryName().equals(p_countryName))
-				.findFirst().isPresent();
+		return d_countries.values().stream().anyMatch(l_country -> l_country.getCountryName().equals(p_countryName));
 	}
 
 	public boolean containsContinent(int p_id) {
@@ -77,17 +76,17 @@ public class GameMap {
 	 *
 	 */
 	public boolean containsContinent(String p_continentName) {
-		return d_continents.values().stream().filter(continent -> continent.getContinentName().equals(p_continentName))
-				.findFirst().isPresent();
+		return d_continents.values().stream()
+				.anyMatch(l_continent -> l_continent.getContinentName().equals(p_continentName));
 	}
 
 	public Continent getContinentById(int p_continentId) {
 		return d_continents.get(p_continentId);
 	}
 
-	public ArrayList<Country> getCountriesOfContinent(int p_continentId) {
+	public List<Country> getCountriesOfContinent(int p_continentId) {
 		return d_countries.values().stream().filter(country -> country.getContinentId() == p_continentId)
-				.collect(Collectors.toCollection(ArrayList::new));
+				.collect(Collectors.toList());
 	}
 
 	public void addCountries(Map<Integer, Country> p_countries) {
@@ -98,26 +97,33 @@ public class GameMap {
 		this.d_continents.putAll(p_continents);
 	}
 
+	/**
+	 * The saveMap function saves the game map to a file in a specific format.
+	 *
+	 * @param p_filePath
+	 *            The file path where the map will be saved.
+	 */
 	public void saveMap(String p_filePath) {
-		if (MapValidator.isMapCorrect(this))
+		if (MapValidator.IsMapCorrect(this))
 			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
-				l_printWriter.println("[continents]");
+				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);
 				for (Continent continent : this.d_continents.values()) {
-					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getCountries().size());
+					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
-				l_printWriter.println("\n[countries]");
+				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
 				for (Country country : this.d_countries.values()) {
 					l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
 							country.getContinentId());
 				}
-				l_printWriter.println("\n[borders]");
+				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_BORDERS);
 				for (Country country : this.d_countries.values()) {
-					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet());
+					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
+							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
 				}
 				l_printWriter.close();
 			} catch (IOException e) {
-				System.out.format("Error - Unable to save file. Please try again.%n%s", e.getMessage());
+				System.out.format(Constants.MAP_SAVE_ERROR);
 			}
 	}
 }

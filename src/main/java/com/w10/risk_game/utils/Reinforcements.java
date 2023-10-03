@@ -18,9 +18,7 @@ import java.util.List;
  * @author Yajing LIU
  */
 public class Reinforcements {
-	/**
-	 * This is a private constructor of Reinforcements.
-	 */
+
 	private Reinforcements() {
 		throw new IllegalStateException("Utility class");
 	}
@@ -89,9 +87,9 @@ public class Reinforcements {
 			l_groupCountries.add("");
 		}
 		// Step 2: Add the country ids to the corresponding continent string in the list
-		for (Country l_country : p_countries) {
-			int l_continentId = l_country.getContinentId();
-			int l_countryId = l_country.getCountryId();
+		for (Country country : p_countries) {
+			int l_continentId = country.getContinentId();
+			int l_countryId = country.getCountryId();
 			if (l_groupCountries.get(l_continentId - 1) == "") {
 				l_groupCountries.set(l_continentId - 1, l_groupCountries.get(l_continentId - 1) + l_countryId + "");
 			} else {
@@ -100,12 +98,12 @@ public class Reinforcements {
 		}
 		// Step 3: Sort the country ids in each continent string
 		for (int i = 0; i < l_groupCountries.size(); i++) {
-			List<String> l_countryIds = new ArrayList<>();
-			for (String l_countryId : l_groupCountries.get(i).split(" ")) {
-				l_countryIds.add(l_countryId);
+			List<String> countryIds = new ArrayList<>();
+			for (String countryId : l_groupCountries.get(i).split(" ")) {
+				countryIds.add(countryId);
 			}
-			Collections.sort(l_countryIds);
-			l_groupCountries.set(i, String.join(" ", l_countryIds));
+			Collections.sort(countryIds);
+			l_groupCountries.set(i, String.join(" ", countryIds));
 		}
 		// Step 4: Return the list
 		return l_groupCountries;

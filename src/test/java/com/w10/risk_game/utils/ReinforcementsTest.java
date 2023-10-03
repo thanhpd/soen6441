@@ -102,15 +102,15 @@ public class ReinforcementsTest {
 	@Test
 	public void testGroupCountry() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
 		// Test all countries belong to one continent
-		List<String> l_groupCountries = Reinforcements.GroupCountries(d_countries, l_gameMap);
+		List<String> l_groupCountries = Reinforcements.GroupCountries(d_countries, d_gameMap);
 		assertEquals("1 2 3 4 5 6 7", l_groupCountries.get(0));
 		// Test not all countries belong to one continent
-		List<String> l_groupCountries1 = Reinforcements.GroupCountries(d_countries2, l_gameMap);
+		List<String> l_groupCountries1 = Reinforcements.GroupCountries(d_countries2, d_gameMap);
 		assertEquals("8 9", l_groupCountries1.get(1));
 		// Test order
-		List<String> l_groupCountries2 = Reinforcements.GroupCountries(d_countries3, l_gameMap);
+		List<String> l_groupCountries2 = Reinforcements.GroupCountries(d_countries3, d_gameMap);
 		assertEquals("1 2", l_groupCountries2.get(0));
 	}
 }

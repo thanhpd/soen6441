@@ -1,4 +1,4 @@
-package com.w10.risk_game.models;
+package com.w10.risk_game.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import com.w10.risk_game.models.Country;
+import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.models.Order;
+import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
@@ -27,6 +31,9 @@ public class GameEngine {
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
+	private Player d_currentPlayer;
+	private int d_currentPlayerIndex;
+	private List<Player> d_playerList;
 
 	/**
 	 * Game Engine constructor
@@ -37,6 +44,7 @@ public class GameEngine {
 		this.d_isCountriesAssigned = false;
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
+		this.d_currentPlayerIndex = 0;
 	}
 
 	/**
@@ -52,6 +60,8 @@ public class GameEngine {
 			this.d_mapReader = new MapReader();
 			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
+
+			// Check if map is created and is valid
 			if (this.d_gameMap.isMapCreated()) {
 				if (!checkIfMapIsValid()) {
 					this.d_gameMap = null;
@@ -118,6 +128,8 @@ public class GameEngine {
 			}
 			p_playerName = p_playerName.trim();
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
+
+			// Assign countries of removed player to remaining players
 			if (l_playerNames.size() > 1) {
 				List<Country> l_ownedCountriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
 				Collections.shuffle(l_ownedCountriesOfPlayer);
@@ -164,11 +176,13 @@ public class GameEngine {
 
 	/**
 	 * The function assigns countries to players in a game, ensuring that each
-	 * player receives at least one country.
+	 * player owns a certain number of countries.
+	 *
+	 * @return The method is returning a boolean value.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void assignCountries() {
+	public boolean assignCountries() {
 		try {
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			int l_noOfPlayers = this.d_players.size();
@@ -178,7 +192,7 @@ public class GameEngine {
 			if (l_noOfPlayers > this.d_gameMap.getCountries().size()) {
 				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
 						l_noOfPlayers);
-				return;
+				return false;
 			}
 
 			int i = 0;
@@ -190,11 +204,15 @@ public class GameEngine {
 			}
 
 			this.assignPlayersReinforcements();
-
 			this.d_isCountriesAssigned = true;
+			this.d_playerList = new ArrayList<>(this.d_players.values());
+			this.d_currentPlayer = this.d_playerList.get(0);
+
+			return true;
 		} catch (Exception e) {
 			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
 					this.d_players.size());
+			return false;
 		}
 	}
 
@@ -253,11 +271,16 @@ public class GameEngine {
 	 *            The parameter `p_mapFileName` is a String that represents the file
 	 *            name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
+	 *
+	 * @author Sherwyn Dsouza
 	 */
 	public boolean editMap(String p_mapFilePath) {
 		File l_file = new File(p_mapFilePath);
+
+		// If file with the input filename exists then load that map else create a new
+		// map file
 		if (l_file.exists()) {
-			this.d_mapReader.loadMapFile(p_mapFilePath);
+			this.loadMap(p_mapFilePath);
 			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {
@@ -303,15 +326,15 @@ public class GameEngine {
 	 * @param p_countryName
 	 *            The parameter "p_countryName" is a String that represents the name
 	 *            of the country that you want to add.
-	 * @param p_continentId
-	 *            The p_continentId parameter is an integer that represents the ID
+	 * @param p_continentName
+	 *            The p_continentName parameter is an integer that represents the ID
 	 *            of the continent to which the country belongs.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void addCountry(int p_countryId, String p_countryName, int p_continentId) {
+	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		try {
-			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentId);
+			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentName);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -321,15 +344,15 @@ public class GameEngine {
 	/**
 	 * The function removes a continent from a map in a game editor.
 	 *
-	 * @param p_continentId
+	 * @param p_continentName
 	 *            The parameter "p_continentId" is an integer that represents the ID
 	 *            of the continent that needs to be removed.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	public void removeContinent(int p_continentId) {
+	public void removeContinent(String p_continentName) {
 		try {
-			String l_output = this.d_mapEditor.removeContinent(p_continentId);
+			String l_output = this.d_mapEditor.removeContinent(p_continentName);
 			System.out.println(l_output);
 		} catch (Exception e) {
 			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -436,8 +459,10 @@ public class GameEngine {
 	 */
 	public boolean checkIfMapIsValid() {
 		try {
+			// First check if the map is created, then if map is valid it will return true
+			// else false
 			if (this.d_gameMap.isMapCreated()) {
-				if (MapValidator.isMapCorrect(this.d_gameMap)) {
+				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
 					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
 					return true;
 				} else {
@@ -462,52 +487,8 @@ public class GameEngine {
 	 *
 	 * @author Sherwyn Dsouza
 	 */
-	private boolean checkIfGameCanBegin() {
+	public boolean checkIfGameCanBegin() {
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
-	}
-
-	/**
-	 * The startGameLoop function checks if the game can begin and then iterates
-	 * through the players, allowing each player to issue an order.
-	 *
-	 * @author Sherwyn Dsouza
-	 */
-	public void startGameLoop() {
-		if (!checkIfGameCanBegin()) {
-			System.out.println(Constants.GAME_ENGINE_CANNOT_START_GAME);
-		} else {
-			List<String> l_playerName = new ArrayList<>(this.d_players.keySet());
-			int i = 0;
-			while (l_playerName.size() > 0) {
-				Player l_player = this.d_players.get(l_playerName.get(i % l_playerName.size()));
-				if (l_player.getLeftoverArmies() == 0) {
-					l_playerName.remove(i % l_playerName.size());
-				} else {
-					System.out.println(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName().toString() + ":");
-					System.out.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
-					System.out.println();
-					l_player.issueOrder();
-				}
-				i += 1;
-			}
-			System.out.println(Constants.GAME_ENGINE_EXECUTING_ORDERS);
-			startExecution();
-		}
-	}
-
-	/**
-	 * The startExecution function iterates through each player and executes their
-	 * orders.
-	 *
-	 * @author Sherwyn Dsouza
-	 */
-	private void startExecution() {
-		for (Player l_player : this.d_players.values()) {
-			while (l_player.getOrders().size() != 0) {
-				l_player.nextOrder().execute();
-			}
-		}
-		this.assignPlayersReinforcements();
 	}
 
 	/**
@@ -525,5 +506,93 @@ public class GameEngine {
 		} else {
 			System.out.println(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
+	}
+
+	/**
+	 * The function "issuePlayerOrder" updates the current player and calls the
+	 * "issueOrder" method for the current player.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public void issuePlayerOrder() {
+		this.d_currentPlayer.issueOrder();
+		this.d_currentPlayerIndex += 1;
+		this.d_currentPlayer = this.d_playerList.get(d_currentPlayerIndex % this.d_playerList.size());
+	}
+
+	/**
+	 * The function checks if the current player has any leftover armies and removes
+	 * them from the player list if they don't, then returns true if there are
+	 * leftover armies and false otherwise.
+	 *
+	 * @return The method is returning a boolean value.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public boolean checkIfOrdersCanBeIssued() {
+
+		if (this.d_currentPlayer.getLeftoverArmies() == 0) {
+			this.d_playerList.remove(d_currentPlayerIndex % this.d_playerList.size());
+			if (this.d_playerList.isEmpty()) {
+				this.d_currentPlayer = null;
+				return false;
+			}
+			this.d_currentPlayer = this.d_playerList.get(d_currentPlayerIndex % this.d_playerList.size());
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * The function checks if there are any players in the player list. If empty, it
+	 * returs True so that no more players have to issue orders and order execution
+	 * can begin by the game engine
+	 *
+	 * @return The method is returning a boolean value.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public boolean checkIfOrdersCanBeExecuted() {
+		return this.d_playerList.isEmpty();
+	}
+
+	/**
+	 * The function executes orders for each player, assigns reinforcements, and
+	 * updates the current player.
+	 *
+	 * @return The method is returning a boolean value. If the execution of player
+	 *         orders is successful, it returns true. If an exception occurs during
+	 *         execution, it returns false.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public boolean executePlayerOrders() {
+		try {
+			// Execute the orders of the players
+			for (Player l_player : this.d_players.values()) {
+				while (!l_player.getOrders().isEmpty()) {
+					l_player.nextOrder().execute();
+				}
+			}
+			// Reset the reinforcements of the players and start the Issue Order phase again
+			this.assignPlayersReinforcements();
+			this.d_currentPlayerIndex = 0;
+			this.d_playerList = new ArrayList<>(this.d_players.values());
+			this.d_currentPlayer = this.d_playerList.get(0);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/**
+	 * The function getCurrentPlayer() returns the current player.
+	 *
+	 * @return The method is returning the current player.
+	 *
+	 * @author Sherwyn Dsouza
+	 */
+	public Player getCurrentPlayer() {
+		return this.d_currentPlayer;
 	}
 }

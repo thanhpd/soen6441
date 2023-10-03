@@ -112,7 +112,7 @@ public class PlayerTest {
 	 * armies.
 	 */
 	@Test
-	public void checkValidArmy() {
+	public void checkValidArmyTest() {
 		// d_player1 has 10 armies in total
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");

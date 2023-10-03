@@ -35,75 +35,56 @@ public class Country implements Serializable {
 	}
 
 	/**
-	 * Getter function for the countryId
-	 *
-	 * @return country id
+	 * @return d_countryId
 	 */
 	public int getCountryId() {
 		return d_countryId;
 	}
 
 	/**
-	 * Setter function to set the country id
-	 *
-	 * @param country
-	 *            id
+	 * @param p_countryId
 	 */
 	public void setCountryId(int p_countryId) {
 		this.d_countryId = p_countryId;
 	}
 
 	/**
-	 * Getter function get country name
-	 *
-	 * @return country name
+	 * @return d_countryName
 	 */
 	public String getCountryName() {
 		return d_countryName;
 	}
 
 	/**
-	 * Setter function to set country name
-	 *
-	 * @param country
-	 *            name
+	 * @param p_countryName
 	 */
 	public void setCountryName(String p_countryName) {
 		this.d_countryName = p_countryName;
 	}
 
 	/**
-	 * Getter function to get continent id
-	 *
-	 * @return country id
+	 * @return d_continentId
 	 */
 	public int getContinentId() {
 		return d_continentId;
 	}
 
 	/**
-	 * Setter function to set the continent id
-	 *
-	 * @param continent
-	 *            id
+	 * @param p_continentId
 	 */
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
 	}
 
 	/**
-	 * Getter function to get the army count
-	 *
-	 * @return army count
+	 * @return d_armyCount
 	 */
 	public int getArmyCount() {
 		return d_armyCount;
 	}
+
 	/**
-	 * Setter function to set armies
-	 *
-	 * @param army
-	 *            count
+	 * @param d_armyCount
 	 */
 	public void setArmyCount(int d_armyCount) {
 		this.d_armyCount = d_armyCount;
@@ -111,7 +92,6 @@ public class Country implements Serializable {
 	/**
 	 * Overriding the to string methods to custom print
 	 */
-
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(d_countryId + " " + d_countryName + " " + d_continentId);
@@ -124,8 +104,8 @@ public class Country implements Serializable {
 	}
 
 	/**
-	 * @param takes
-	 *            country id Checks for different parameters if the neighbor exists
+	 * @param p_neighborCountryId
+	 * @return boolean
 	 */
 	public boolean hasNeighbor(int p_neighborCountryId) {
 		return d_neighbors.containsKey(p_neighborCountryId);
@@ -165,26 +145,21 @@ public class Country implements Serializable {
 	}
 
 	/**
-	 * Getter to get the neighbor countries
-	 *
-	 * @return list of neighbor countries
+	 * @return d_neighbors
 	 */
 	public Map<Integer, Country> getNeighbors() {
 		return d_neighbors;
 	}
+
 	/**
-	 * Getter for the owner of the country
-	 *
-	 * @return the owner
+	 * @return Player
 	 */
 	public Player getOwner() {
 		return this.d_owner;
 	}
+
 	/**
-	 * Setter for the player name
-	 *
-	 * @param player
-	 *            object
+	 * @param p_owner
 	 */
 	public void setOwner(Player p_owner) {
 		this.d_owner = p_owner;

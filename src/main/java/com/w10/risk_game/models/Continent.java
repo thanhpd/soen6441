@@ -31,99 +31,75 @@ public class Continent {
 	}
 
 	/**
-	 * getContinentId function returns the id of a continent
-	 *
-	 * @return continent id
+	 * @return d_continentId
 	 */
 	public int getContinentId() {
 		return d_continentId;
 	}
 
 	/**
-	 * setContinentId function assigns the id of the continent
-	 *
-	 * @param continentid
+	 * @param p_continentId
 	 */
 	public void setContinentId(int p_continentId) {
 		this.d_continentId = p_continentId;
 	}
 
 	/**
-	 * Getter function to get the continent name
-	 *
-	 * @return continent name
+	 * @return d_continentName
 	 */
 	public String getContinentName() {
 		return d_continentName;
 	}
 
 	/**
-	 * Getter functions to get the list of countries of a continent
-	 *
-	 * @return countries
+	 * @return d_countries
 	 */
 	public List<Country> getCountries() {
 		return d_countries;
 	}
 
 	/**
-	 * This function is used to add a country to a continent
-	 *
-	 * @param country
-	 *            object
+	 * @param d_country
 	 */
 	public void addCountry(Country d_country) {
 		this.d_countries.add(d_country);
 	}
 
 	/**
-	 * Getter function for the list of countries for the continent
-	 *
-	 * @return list of neighbor
+	 * @return d_neighborCountries
 	 */
 	public List<Country> getNeighborCountries() {
 		return d_neighborCountries;
 	}
 
 	/**
-	 * Setter function for the neighboring country This function sets the countries
-	 * for the continent
-	 *
-	 * @param takes
-	 *            list of countries
+	 * @param d_neighborCountries
 	 */
 	public void setNeighborCountries(List<Country> d_neighborCountries) {
 		this.d_neighborCountries = d_neighborCountries;
 	}
 
 	/**
-	 * Setter function for Continent name
-	 *
-	 * @param takes
-	 *            continent name
+	 * @param p_continentName
 	 */
 	public void setContinentName(String p_continentName) {
 		this.d_continentName = p_continentName;
 	}
 
 	/**
-	 * Getter function for bonus
-	 *
-	 * @return bonus
+	 * @return d_bonus
 	 */
 	public int getBonus() {
 		return d_bonus;
 	}
 
 	/**
-	 * Setter function for bonus
-	 *
-	 * @param takes
-	 *            bonus
+	 * @param p_bonus
 	 */
 	public void setBonus(int p_bonus) {
 		this.d_bonus = p_bonus;
 	}
+
 	/**
 	 * Overriding the to String method for custom printing
 	 */

@@ -171,7 +171,6 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
-		int l_army = this.getLeftoverArmies();
 		List<Country> l_countries = this.getCountriesOwned();
 		boolean l_again = true;
 		boolean l_failed = false;
@@ -206,12 +205,11 @@ public class Player {
 			// check the country
 			l_isValidCountry = checkValidCountry(l_countries, l_countryId);
 			// check the num
-			l_isValidNum = checkValidNum(Integer.parseInt(l_num), l_army);
+			l_isValidNum = checkValidNum(Integer.parseInt(l_num));
 			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
 				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
 				d_orders.add(order);
-				l_army = l_army - Integer.parseInt(l_num);
-				this.setLeftoverArmies(l_army);
+				this.deployArmies(Integer.parseInt(l_num));
 				l_again = false;
 				l_failed = false;
 			} else {
@@ -304,16 +302,14 @@ public class Player {
 	 *
 	 * @param p_num
 	 *            the number of armies
-	 * @param p_army
-	 *            the number of leftover armies
 	 * @return boolean value to show whether the number of armies is valid
 	 */
-	public boolean checkValidNum(int p_num, int p_army) {
+	public boolean checkValidNum(int p_num) {
 		if (p_num <= 0) {
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
 			return false;
 		}
-		if (p_num > p_army) {
+		if (p_num > this.d_leftoverArmies) {
 			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;
 		}

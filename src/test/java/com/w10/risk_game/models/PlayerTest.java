@@ -63,7 +63,6 @@ public class PlayerTest {
 	 * order list
 	 */
 	@Test
-	@Disabled
 	public void issueOrderTest() {
 		String l_input1 = "deploy 1 6";
 		System.setIn(new ByteArrayInputStream(l_input1.getBytes()));
@@ -133,8 +132,7 @@ public class PlayerTest {
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");
 		String l_num = l_inputArray[2];
-		int l_army = d_player1.getLeftoverArmies();
-		boolean l_isValidNum = d_player1.checkValidNum(Integer.parseInt(l_num), l_army);
+		boolean l_isValidNum = d_player1.checkValidNum(Integer.parseInt(l_num));
 		assertEquals(false, l_isValidNum);
 	}
 }

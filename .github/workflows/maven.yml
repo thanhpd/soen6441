@@ -40,7 +40,7 @@ jobs:
     - name: Build and run unit tests
       run: mvn -B package --file pom.xml
     - name: Generate Javadoc
-      run: mvn -B javadoc:javadoc
+      run: mvn -B javadoc:javadoc javadoc:test-javadoc
     - name: Store as artifact for downloading
       uses: actions/upload-artifact@v3
       with:

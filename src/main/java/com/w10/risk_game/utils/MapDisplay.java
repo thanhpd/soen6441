@@ -25,15 +25,19 @@ public class MapDisplay {
 	 * neighboring countries.
 	 *
 	 * @param p_country
-	 *            The p_country parameter represents a specific country object.
+	 *                     The p_country parameter represents a specific country
+	 *                     object.
 	 * @param p_continent
-	 *            The p_continent parameter is an object of the Continent class.
+	 *                     The p_continent parameter is an object of the Continent
+	 *                     class.
 	 * @param p_player
-	 *            The parameter "p_player" is of type Player and represents a player
-	 *            in the game.
+	 *                     The parameter "p_player" is of type Player and represents
+	 *                     a player
+	 *                     in the game.
 	 * @param p_showArmies
-	 *            A boolean value indicating whether to show the number of armies in
-	 *            the row or not.
+	 *                     A boolean value indicating whether to show the number of
+	 *                     armies in
+	 *                     the row or not.
 	 * @return The method is returning an array of strings.
 	 */
 	public String[] populateRow(Country p_country, Continent p_continent, Player p_player, boolean p_showArmies) {
@@ -81,27 +85,33 @@ public class MapDisplay {
 	 * information.
 	 *
 	 * @param p_map
-	 *            An instance of the GameMap class, which represents the game map
-	 *            containing countries and continents.
+	 *                     An instance of the GameMap class, which represents the
+	 *                     game map
+	 *                     containing countries and continents.
 	 * @param p_showArmies
-	 *            A boolean value that determines whether or not to display the
-	 *            number of armies in each country. If it is set to true, the table
-	 *            will include a column for the number of armies. If it is set to
-	 *            false, the table will not include this column
+	 *                     A boolean value that determines whether or not to display
+	 *                     the
+	 *                     number of armies in each country. If it is set to true,
+	 *                     the table
+	 *                     will include a column for the number of armies. If it is
+	 *                     set to
+	 *                     false, the table will not include this column
 	 */
 	public void formatMap(GameMap p_map, boolean p_showArmies) {
 		String[] l_columnNames;
 
 		if (p_showArmies) {
-			// If true, create an array of column names with number of armies
-			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
+			// If true, create an array of column names that also have player name and the
+			// number of armies.
+			l_columnNames = new String[] { Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
-					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES};
+					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES };
 		} else {
-			// else create an array of column names without number of armines
-			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
+			// else create an array of column names that also have player name and the
+			// number of armies.
+			l_columnNames = new String[] { Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
-					Constants.MAP_DISPLAY_NEIGHBOR_ID};
+					Constants.MAP_DISPLAY_NEIGHBOR_ID };
 		}
 
 		Map<Integer, Country> l_countries = p_map.getCountries();

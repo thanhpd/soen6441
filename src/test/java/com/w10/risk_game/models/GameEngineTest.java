@@ -10,10 +10,15 @@ import com.w10.risk_game.utils.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The GameEngineTest class contains unit tests for various methods in the
+ * GameEngine class.
+ */
 public class GameEngineTest {
 	private GameEngine d_gameEngine;
 	private ByteArrayOutputStream d_outputStream;
@@ -130,13 +135,13 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testgetNoOfPlayers() function tests the getNoOfPlayers() method in the
+	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
 	 * d_gameEngine class to ensure that it returns the correct number of players.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
 	@Test
-	void testgetNoOfPlayers() {
+	void testGetNoOfPlayers() {
 		d_gameEngine.createPlayer(d_player1.getName());
 		d_gameEngine.createPlayer(d_player2.getName());
 

@@ -10,6 +10,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * This is a test class for Order
+ *
+ * @author Yajing Liu
  */
 public class OrderTest {
 	Order d_order1;

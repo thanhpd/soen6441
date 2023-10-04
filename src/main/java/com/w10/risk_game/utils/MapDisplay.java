@@ -70,14 +70,10 @@ public class MapDisplay {
 					l_values[6] = " ";
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
+				System.out.println(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
 			}
-
 		}
-
 		return l_values;
-
 	}
 
 	/**

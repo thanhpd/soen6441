@@ -96,7 +96,7 @@
 					<version>3.6.0</version>
 					<configuration>
 						<show>private</show>
-						<reportOutputDirectory>${project.build.directory}/docs/apidocs</reportOutputDirectory>
+						<reportOutputDirectory>docs/apidocs</reportOutputDirectory>
 					</configuration>
 				</plugin>
 				<plugin>

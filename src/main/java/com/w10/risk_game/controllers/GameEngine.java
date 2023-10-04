@@ -179,19 +179,23 @@ public class GameEngine {
 	 */
 	public boolean assignCountries() {
 		try {
+			// Check if number of players is greater than 1
 			if (this.d_players.size() <= 1)
 				throw new Exception(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
+
+			// If there are more players than countries throw error
+			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
+				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
+						this.d_players.size());
+				return false;
+			}
+
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			int l_noOfPlayers = this.d_players.size();
 			List<Country> l_countries = new ArrayList<>(this.d_gameMap.getCountries().values());
 			Collections.shuffle(l_countries);
 
-			if (l_noOfPlayers > this.d_gameMap.getCountries().size()) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-						l_noOfPlayers);
-				return false;
-			}
-
+			// Randomly assign countries to players
 			int i = 0;
 			while (i < l_countries.size()) {
 				String l_playerName = l_playerNames.get(i % l_noOfPlayers);
@@ -200,6 +204,7 @@ public class GameEngine {
 				i += 1;
 			}
 
+			// Assign reinforcements to the players based on countries
 			this.assignPlayersReinforcements();
 			this.d_isCountriesAssigned = true;
 			this.d_playerList = new ArrayList<>(this.d_players.values());

@@ -47,4 +47,4 @@ jobs:
         name: target-artifact
         path: |
           target/
-          apidocs/
+          docs/apidocs/

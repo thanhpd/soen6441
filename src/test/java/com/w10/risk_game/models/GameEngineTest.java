@@ -2,20 +2,26 @@ package com.w10.risk_game.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.w10.risk_game.controllers.GameEngine;
 import com.w10.risk_game.utils.Constants;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The GameEngineTest class contains unit tests for various methods in the
+ * The GameEngineTest class contains unit test for various methods in the
  * GameEngine class.
  */
 public class GameEngineTest {
 	private GameEngine d_gameEngine;
+	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
 	Player d_player2;
 
@@ -31,6 +37,9 @@ public class GameEngineTest {
 		d_gameEngine = new GameEngine();
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
+
+		d_outputStream = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(d_outputStream));
 	}
 
 	/**
@@ -103,14 +112,26 @@ public class GameEngineTest {
 		assertEquals(0, d_gameEngine.getNoOfPlayers());
 	}
 
+	/**
+	 * The testShowAllPlayers function tests the showAllPlayers method by capturing
+	 * the output and comparing it to an expected output.
+	 */
 	@Test
 	void testShowAllPlayers() {
-
+		d_gameEngine.showAllPlayers();
+		// Capture the actual output
+		String l_actualOutput = d_outputStream.toString().trim();
+		String l_expectedOutput = "";
+		assertEquals(l_expectedOutput, l_actualOutput);
 	}
 
+	/**
+	 * The testShowMap function tests if the game engine can display the map
+	 */
 	@Test
 	void testShowMap() {
-
+		d_gameEngine.showMap();
+		assertTrue(d_gameEngine.checkIfGameCanBegin() == d_gameEngine.checkIfMapIsValid());
 	}
 
 	/**

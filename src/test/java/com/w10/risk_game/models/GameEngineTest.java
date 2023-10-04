@@ -10,14 +10,13 @@ import com.w10.risk_game.utils.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class GameEngineTest {
 	private GameEngine d_gameEngine;
-	private ByteArrayOutputStream outputStream;
+	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
 	Player d_player2;
 
@@ -34,8 +33,8 @@ public class GameEngineTest {
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 
-		outputStream = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outputStream));
+		d_outputStream = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(d_outputStream));
 	}
 
 	/**
@@ -116,7 +115,7 @@ public class GameEngineTest {
 	void testShowAllPlayers() {
 		d_gameEngine.showAllPlayers();
 		// Capture the actual output
-		String l_actualOutput = outputStream.toString().trim();
+		String l_actualOutput = d_outputStream.toString().trim();
 		String l_expectedOutput = "";
 		assertEquals(l_expectedOutput, l_actualOutput);
 	}

@@ -50,3 +50,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         message: 'doc: auto-publish javadoc'
         branch: ${{ github.head_ref }}
+        force: true

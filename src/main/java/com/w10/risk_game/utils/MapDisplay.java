@@ -99,7 +99,7 @@ public class MapDisplay {
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
 					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES};
 		} else {
-			// else create an array of column names that also have player name and the
+			// else create an array of column names that doesn't have player name and the
 			// number of armies.
 			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,

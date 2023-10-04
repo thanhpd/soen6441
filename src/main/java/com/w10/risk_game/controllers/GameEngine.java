@@ -19,8 +19,8 @@ import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.Reinforcements;
 
 /**
- * The GameEngine class is responsible for managing the game map, players, and
- * their interactions in a game.
+ * The GameEngine class is responsible for managing the game map, players,
+ * issuing orders, executing orders and their interactions in a game.
  *
  * @author Sherwyn Dsouza
  */
@@ -77,14 +77,13 @@ public class GameEngine {
 	}
 
 	/**
+	 * The function "showMap" checks if the map is valid and then formats and
+	 * displays the map if it is.
 	 *
-	 * The function "showMap" displays the map in a tabular form with info such as
-	 * continent id, country, bonus, etc.
-	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void showMap() {
-		this.d_displayMap.formatMap(this.d_gameMap, this.d_players.size() > 0 && this.d_isCountriesAssigned);
+		if (checkIfMapIsValid())
+			this.d_displayMap.formatMap(this.d_gameMap, this.d_players.size() > 0 && this.d_isCountriesAssigned);
 	}
 
 	/**
@@ -94,7 +93,6 @@ public class GameEngine {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player being created.
-	 * @author Sherwyn Dsouza
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
@@ -118,7 +116,6 @@ public class GameEngine {
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that needs to be removed.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void removePlayer(String p_playerName) {
 		try {
@@ -158,7 +155,6 @@ public class GameEngine {
 	 * The function "showAllPlayers" prints the names of all players and the
 	 * countries they own.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void showAllPlayers() {
 		this.d_players.forEach((p_playerName, p_player) -> {
@@ -180,10 +176,11 @@ public class GameEngine {
 	 *
 	 * @return The method is returning a boolean value.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean assignCountries() {
 		try {
+			if (this.d_players.size() <= 1)
+				throw new Exception(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
 			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
 			int l_noOfPlayers = this.d_players.size();
 			List<Country> l_countries = new ArrayList<>(this.d_gameMap.getCountries().values());
@@ -219,7 +216,6 @@ public class GameEngine {
 	/**
 	 * The function assigns reinforcements to each player in the game.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	private void assignPlayersReinforcements() {
 		for (Player l_player : this.d_players.values()) {
@@ -232,7 +228,6 @@ public class GameEngine {
 	 *
 	 * @return The number of players in the list "this.d_players".
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public Integer getNoOfPlayers() {
 		return this.d_players.size();
@@ -243,7 +238,6 @@ public class GameEngine {
 	 *
 	 * @return The method is returning an object of type GameMap.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public GameMap getGameMap() {
 		return this.d_gameMap;
@@ -256,7 +250,6 @@ public class GameEngine {
 	 *            The name of the player for which you want to retrieve the details.
 	 * @return The method is returning a Player object.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public Player getPlayerDetails(String p_playerName) {
 		return this.d_players.get(p_playerName);
@@ -272,7 +265,6 @@ public class GameEngine {
 	 *            name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean editMap(String p_mapFilePath) {
 		File l_file = new File(p_mapFilePath);
@@ -306,7 +298,6 @@ public class GameEngine {
 	 * @param p_bonus
 	 *            The p_bonus parameter is an integer that represents the bonus for
 	 *            each continent.
-	 * @author Sherwyn Dsouza
 	 */
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
@@ -330,7 +321,6 @@ public class GameEngine {
 	 *            The p_continentName parameter is an integer that represents the ID
 	 *            of the continent to which the country belongs.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		try {
@@ -348,7 +338,6 @@ public class GameEngine {
 	 *            The parameter "p_continentId" is an integer that represents the ID
 	 *            of the continent that needs to be removed.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void removeContinent(String p_continentName) {
 		try {
@@ -367,7 +356,6 @@ public class GameEngine {
 	 *            The parameter `p_countryId` is an integer representing the ID of
 	 *            the country that needs to be removed.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void removeCountry(int p_countryId) {
 		try {
@@ -393,7 +381,6 @@ public class GameEngine {
 	 *            neighboring country that you want to add to the country with the
 	 *            ID "p_countryId".
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
@@ -415,7 +402,6 @@ public class GameEngine {
 	 *            neighbor country that you want to remove from the country with ID
 	 *            "p_countryId".
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		try {
@@ -437,7 +423,6 @@ public class GameEngine {
 	 *            The parameter "p_player" is of type Player and represents the
 	 *            player from whom the country needs to be removed.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	private void removeCountryFromPlayer(int p_countryId, Player p_player) {
 		try {
@@ -455,7 +440,6 @@ public class GameEngine {
 	 *
 	 * @return a boolean value indicate if the game map is valid
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean checkIfMapIsValid() {
 		try {
@@ -485,7 +469,6 @@ public class GameEngine {
 	 *
 	 * @return The method is returning a boolean value.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean checkIfGameCanBegin() {
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
@@ -498,7 +481,6 @@ public class GameEngine {
 	 * @param p_mapFilePath
 	 *            The full path of the file where the map will be saved.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void saveMap(String p_mapFilePath) {
 		if (checkIfMapIsValid()) {
@@ -512,7 +494,6 @@ public class GameEngine {
 	 * The function "issuePlayerOrder" updates the current player and calls the
 	 * "issueOrder" method for the current player.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void issuePlayerOrder() {
 		this.d_currentPlayer.issueOrder();
@@ -527,7 +508,6 @@ public class GameEngine {
 	 *
 	 * @return The method is returning a boolean value.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean checkIfOrdersCanBeIssued() {
 
@@ -550,7 +530,6 @@ public class GameEngine {
 	 *
 	 * @return The method is returning a boolean value.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean checkIfOrdersCanBeExecuted() {
 		return this.d_playerList.isEmpty();
@@ -564,7 +543,6 @@ public class GameEngine {
 	 *         orders is successful, it returns true. If an exception occurs during
 	 *         execution, it returns false.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public boolean executePlayerOrders() {
 		try {
@@ -590,7 +568,6 @@ public class GameEngine {
 	 *
 	 * @return The method is returning the current player.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public Player getCurrentPlayer() {
 		return this.d_currentPlayer;

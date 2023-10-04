@@ -7,6 +7,12 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 
+/**
+ * The GameUI class handles the command line user interface for the game,
+ * including the map editor, start-up phase and gameplay phase.
+ *
+ * @author Sherwyn Dsouza
+ */
 public class GameUI {
 
 	private GameEngine d_gameEngine;
@@ -14,6 +20,11 @@ public class GameUI {
 
 	public static String Command = "";
 
+	/**
+	 * The `GameUI` constructor initializes a new instance of the `GameEngine` class
+	 * and sets the `d_gameEngine` variable to refer to it. It also sets the
+	 * `d_startGamePhase` variable to `false`.
+	 */
 	public GameUI() {
 		this.d_gameEngine = new GameEngine();
 		this.d_startGamePhase = false;
@@ -21,9 +32,8 @@ public class GameUI {
 
 	/**
 	 * The function "runStartUpPhase" handles the start-up phase of a game, taking
-	 * user input and executing corresponding commands.
+	 * user input and executing corresponding commands through the Game Engine.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void runStartUpPhase() {
 		System.out.println(Constants.STARTUP_PHASE_ENTRY_STRING);
@@ -115,7 +125,6 @@ public class GameUI {
 					break;
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
 			}
 		}
@@ -123,9 +132,8 @@ public class GameUI {
 
 	/**
 	 * The function "runGamePlayPhase" runs the gameplay phase of a game, taking
-	 * user input and executing commands accordingly.
+	 * user input and executing commands accordingly through the Game Engine.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	public void runGamePlayPhase() {
 		System.out.println(Constants.GAMEPLAY_PHASE_ENTRY_STRING);
@@ -174,7 +182,6 @@ public class GameUI {
 				}
 				System.out.println();
 			} catch (Exception e) {
-				e.printStackTrace();
 				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
 			}
 		}

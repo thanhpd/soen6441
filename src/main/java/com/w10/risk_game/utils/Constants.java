@@ -1,5 +1,9 @@
 package com.w10.risk_game.utils;
 
+/**
+ * The Constants class contains various constant values used throughout the
+ * code.
+ */
 public final class Constants {
 
 	private Constants() {
@@ -46,7 +50,7 @@ public final class Constants {
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 
-	// Game Engine Class Constants
+	// Game Engine Class constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
 	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
 	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
@@ -77,7 +81,7 @@ public final class Constants {
 	// Map Reader Constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
-	// Player Class Constants
+	// Player Class constants
 	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the format of \"deploy <CountryId> <No. of armies>\".";
 	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
@@ -87,7 +91,7 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The entered number should be less than the number of reinforcement soldiers. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";
 
-	// Map Editor Constants
+	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
 	public static final String MAP_EDITOR_COUNTRY_ID_EXIST = "Country ID already exists!";
@@ -112,7 +116,7 @@ public final class Constants {
 	public static final String MAP_EDITOR_AFTER_COUNTRY_REMOVE = "###############After Removing country";
 	public static final String MAP_EDITOR_AFTER_NEIGHBOR_REMOVE = "###############After Removing neighbor";
 
-	// Map Validator Constants
+	// Map Validator constants
 	public static final String MAP_VALIDATOR_EMPTY_MAP = "MapValidator: The map is empty!";
 	public static final String MAP_VALIDATOR_CONTINENT_NOT_DECLARED = "MapValidator: The continent(s) of some countries are not declared!";
 	public static final String MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED = "MapValidator: The neighbor(s) of some countries are not declared!";
@@ -120,7 +124,7 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_INACCESSIBLE = "MapValidator: Some countries are inaccessible";
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
 
-	// Game Map
+	// Map Display constants
 	public static final String MAP_DISPLAY_ID = "ID(Continent Name)";
 	public static final String MAP_DISPLAY_BONUS = "Bonus";
 	public static final String MAP_DISPLAY_COUNTRY_ID = "CountryID";
@@ -128,14 +132,16 @@ public final class Constants {
 	public static final String MAP_DISPLAY_NEIGHBOR_ID = "ID(Neighbors)";
 	public static final String MAP_DISPLAY_PLAYER = "Player";
 	public static final String MAP_DISPLAY_ARMIES = "Armies";
-	// Map Reader
+	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
+
+	// Map Reader constants
 	public static final String MAP_READER_MAP = "[map]";
 	public static final String MAP_READER_CONTINENTS = "[continents]";
 	public static final String MAP_READER_COUNTRIES = "[countries]";
 	public static final String MAP_READER_BORDERS = "[borders]";
 	public static final String MAP_SAVE_ERROR = "Unable to save file. Please try again.";
 
-	// Reinforcements Class Constants
+	// Reinforcements Class constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
 }

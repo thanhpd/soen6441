@@ -36,6 +36,7 @@ public class ReinforcementsTest {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
+		// Step 1: Initialize the variables for bonus calculation
 		d_countries = new ArrayList<>();
 		d_countries.add(new Country(1, "England", 1, 0));
 		d_countries.add(new Country(2, "Scotland", 1, 0));
@@ -48,7 +49,7 @@ public class ReinforcementsTest {
 		List<Order> l_orders = new ArrayList<>();
 		int l_armies = 10;
 		d_player = new Player(l_playerName, d_countries, l_orders, l_armies);
-
+		// Step 2: Initialize the variables for basic calculation
 		List<Country> l_countries1 = new ArrayList<>();
 		l_countries1.add(new Country(1, "England", 1, 0));
 		l_countries1.add(new Country(2, "Scotland", 1, 0));
@@ -60,7 +61,7 @@ public class ReinforcementsTest {
 		List<Order> l_orders1 = new ArrayList<>();
 		int l_armies1 = 10;
 		d_player1 = new Player(l_playerName1, l_countries1, l_orders1, l_armies1);
-
+		// Step 3: Initialize the variables for group countries
 		d_countries2 = new ArrayList<>();
 		d_countries2.add(new Country(1, "England", 1, 0));
 		d_countries2.add(new Country(2, "Scotland", 1, 0));
@@ -71,7 +72,7 @@ public class ReinforcementsTest {
 		d_countries2.add(new Country(7, "Netherlands", 1, 0));
 		d_countries2.add(new Country(8, "Denmark", 2, 0));
 		d_countries2.add(new Country(9, "Germany", 2, 0));
-
+		// Step 4: Initialize the variables for order
 		d_countries3 = new ArrayList<>();
 		d_countries3.add(new Country(2, "Scotland", 1, 0));
 		d_countries3.add(new Country(1, "England", 1, 0));

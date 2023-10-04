@@ -21,8 +21,12 @@ public class Continent {
 	 * This is a constructor of the Continent class
 	 *
 	 * @param p_continentId
+	 *            The Continent's unique identifier
 	 * @param p_continentName
+	 *            The Continent's name
 	 * @param p_bonus
+	 *            The Continent's army bonus value given to a player owning all
+	 *            countries of this Continent
 	 */
 	public Continent(int p_continentId, String p_continentName, int p_bonus) {
 		this.d_continentId = p_continentId;

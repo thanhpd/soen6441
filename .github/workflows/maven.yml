@@ -41,10 +41,9 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Generate Javadoc
       run: mvn -B javadoc:javadoc javadoc:test-javadoc
-    - name: Store as artifact for downloading
-      uses: actions/upload-artifact@v3
+    - name: Push Javadoc to the main branch
+#      if: github.ref == 'refs/heads/main'
+      uses: actions-js/push@master
       with:
-        name: target-artifact
-        path: |
-          target/
-          apidocs/
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        message: 'doc: auto-publish javadoc'

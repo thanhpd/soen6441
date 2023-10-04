@@ -26,12 +26,13 @@ public class MapEditor {
 	 * and returns a message indicating whether the addition was successful or not.
 	 *
 	 * @param p_countryId
-	 *            The unique identifier for the country.
+	 *                        The unique identifier for the country.
 	 * @param p_countryName
-	 *            The name of the country you want to add.
+	 *                        The name of the country you want to add.
 	 * @param p_continentName
-	 *            The parameter p_continentName represents the ID of the continent
-	 *            to which the country will be added.
+	 *                        The parameter p_continentName represents the ID of the
+	 *                        continent
+	 *                        to which the country will be added.
 	 * @return The method returns a string message indicating the result of adding a
 	 *         country.
 	 */
@@ -62,9 +63,9 @@ public class MapEditor {
 	 * id do not already exist.
 	 *
 	 * @param p_continentName
-	 *            The name of the continent that you want to add.
+	 *                        The name of the continent that you want to add.
 	 * @param p_bonus
-	 *            The bonus of the new continent
+	 *                        The bonus of the new continent
 	 * @return The method returns a string message indicating the result of adding a
 	 *         continent.
 	 */
@@ -84,26 +85,32 @@ public class MapEditor {
 	 * The function adds a neighbor country to a given country in a game map.
 	 *
 	 * @param p_countryId
-	 *            The ID of the country to which you want to add a neighbor.
+	 *                            The ID of the country to which you want to add a
+	 *                            neighbor.
 	 * @param p_neighborCountryId
-	 *            An integer that represents the ID of the neighbor country that we
-	 *            want to add to the country with ID p_countryId.
+	 *                            An integer that represents the ID of the neighbor
+	 *                            country that we
+	 *                            want to add to the country with ID p_countryId.
 	 * @return The method is returning a string that indicates the result of adding
 	 *         a neighbor country to a given country.
 	 */
 	public String addNeighbor(int p_countryId, int p_neighborCountryId) {
+		// Check if the first country exists in the game map.
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return Constants.MAP_EDITOR_COUNTRY_NOT_EXIST;
 		}
+		// Check if the neighbor country exists in the game map.
 		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
 			return Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST;
 		}
 		Country l_countryToAdd = l_gameMap.findCountry(p_countryId);
+		// Check if the neighbor relationship already exists.
 		if (l_countryToAdd.hasNeighbor(p_neighborCountryId)) {
 			return Constants.MAP_EDITOR_CONNECTION_EXIST;
 		}
 		Country l_neighbor = l_gameMap.findCountry(p_neighborCountryId);
 		Country l_country = l_gameMap.findCountry(p_countryId);
+		// Add the neighbor relationship between both countries.
 		l_country.addNeighbor(l_neighbor);
 		l_neighbor.addNeighbor(l_country);
 
@@ -115,8 +122,9 @@ public class MapEditor {
 	 * countries accordingly.
 	 *
 	 * @param p_countryId
-	 *            The parameter p_countryId is an integer representing the ID of the
-	 *            country that needs to be removed.
+	 *                    The parameter p_countryId is an integer representing the
+	 *                    ID of the
+	 *                    country that needs to be removed.
 	 * @return The method is returning a string that indicates the result of
 	 *         removing the country.
 	 */
@@ -125,13 +133,13 @@ public class MapEditor {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return Constants.MAP_EDITOR_COUNTRY_ID_NOT_EXIST;
 		}
+		// Find the country to be removed.
 		Country l_Country = l_gameMap.findCountry(p_countryId);
 		for (Country l_neighbor : l_Country.getNeighbors().values()) {
-			//
 			l_neighbor.getNeighbors().remove(p_countryId);
 		}
 
-		// delete self from gameMap
+		// Remove the country from the game map.
 		l_gameMap.getCountries().remove(l_Country.getCountryId());
 		return p_countryId + Constants.MAP_EDITOR_COUNTRY_REMOVED;
 	}
@@ -141,16 +149,20 @@ public class MapEditor {
 	 * map.
 	 *
 	 * @param p_continentName
-	 *            The parameter p_continentName is the name of the continent that
-	 *            needs to be removed from the game map.
+	 *                        The parameter p_continentName is the name of the
+	 *                        continent that
+	 *                        needs to be removed from the game map.
 	 * @return The method is returning a string that indicates the result of
 	 *         removing the continent.
 	 */
 	public String removeContinent(String p_continentName) {
 
+		// Check if the continent exists in the game map.
+
 		if (l_gameMap.containsContinent(p_continentName) == false) {
 			return Constants.MAP_EDITOR_CONTINENT_NOT_EXIST;
 		}
+		// Get the continent object to be removed.
 		Continent l_toRemove = l_gameMap.getContinentByName(p_continentName);
 		String l_countriesRemoved = "";
 		List<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
@@ -158,7 +170,7 @@ public class MapEditor {
 			removeCountry(l_country.getCountryId());
 			l_countriesRemoved = l_country.getCountryName() + ", ";
 		}
-		// Self remove
+		// Remove the continent itself.
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
 		return p_continentName + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved
 				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED;
@@ -169,10 +181,12 @@ public class MapEditor {
 	 * map.
 	 *
 	 * @param p_countryId
-	 *            The ID of the country from which you want to remove a neighbor.
+	 *                            The ID of the country from which you want to
+	 *                            remove a neighbor.
 	 * @param p_neighborCountryId
-	 *            The ID of the country that you want to remove as a neighbor from
-	 *            the country with ID p_countryId.
+	 *                            The ID of the country that you want to remove as a
+	 *                            neighbor from
+	 *                            the country with ID p_countryId.
 	 * @return The method is returning a string indicating the result of the
 	 *         operation.
 	 */
@@ -183,10 +197,12 @@ public class MapEditor {
 		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
 			return Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST;
 		}
+		// Find the first country to remove the neighbor from.
 		Country l_countryToRemove = l_gameMap.findCountry(p_countryId);
 		if (l_countryToRemove.hasNeighbor(p_neighborCountryId) == false) {
 			return Constants.MAP_EDITOR_CONNECTION_NOT_EXIST;
 		}
+		// Remove the neighbor relationship from both countries.
 		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighborCountryId);
 		l_gameMap.findCountry(p_neighborCountryId).getNeighbors().remove(p_countryId);
 

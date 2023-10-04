@@ -3,7 +3,7 @@
 - SOEN 6441 - Advanced Programming Practices, Fall 2023
 - Group Project: W10
 
-## Table of Contnent
+## Table of Content
 * [Group Members](#group-members)
 * [Instructions](#instructions)
 	+ [Development Environment Prerequisite](#development-environment-prerequisite)

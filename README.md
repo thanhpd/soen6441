@@ -51,10 +51,11 @@ $ mvn test
 
 #### To generate Javadoc documentation
 ```sh
-// The Javadoc folder is located at `docs/apidocs/`
-// Open the index.html file inside the output folder to see the doc
+// The Javadoc folder for the tested code is located at `docs/apidocs/`
+// The Javadoc folder for the test code is located at `docs/apidocs/testapidocs`
+// Open the index.html file inside the output folder to see the document
 
-$ mvn javadoc:javadoc
+$ mvn javadoc:javadoc javadoc:test-javadoc
 ```
 
 ### Code formatting

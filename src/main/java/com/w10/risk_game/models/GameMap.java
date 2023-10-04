@@ -227,14 +227,17 @@ public class GameMap {
 			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
 				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);
+				// Writes continents details to new map file
 				for (Continent continent : this.d_continents.values()) {
 					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
+				// Writes country details to new map file
 				for (Country country : this.d_countries.values()) {
 					l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
 							country.getContinentId());
 				}
+				// Writes border details to new map file
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_BORDERS);
 				for (Country country : this.d_countries.values()) {
 					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()

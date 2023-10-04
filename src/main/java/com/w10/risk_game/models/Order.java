@@ -56,10 +56,9 @@ public class Order {
 	 * "Player" object.
 	 *
 	 * @param d_player
-	 *                 The parameter "d_player" is of type "Player" and is used to
-	 *                 set
-	 *                 the value of the instance variable "d_player" in the current
-	 *                 class.
+	 *            The parameter "d_player" is of type "Player" and is used to set
+	 *            the value of the instance variable "d_player" in the current
+	 *            class.
 	 */
 	public void setPlayer(Player d_player) {
 		this.d_player = d_player;
@@ -69,9 +68,8 @@ public class Order {
 	 * The function sets the order type for a specific object.
 	 *
 	 * @param d_orderType
-	 *                    The parameter "d_orderType" is a string that represents
-	 *                    the type
-	 *                    of order.
+	 *            The parameter "d_orderType" is a string that represents the type
+	 *            of order.
 	 */
 	public void setOrderType(String d_orderType) {
 		this.d_orderType = d_orderType;
@@ -81,9 +79,8 @@ public class Order {
 	 * The function sets the value of the countryId variable.
 	 *
 	 * @param d_countryId
-	 *                    The parameter "d_countryId" is an integer that represents
-	 *                    the
-	 *                    country ID.
+	 *            The parameter "d_countryId" is an integer that represents the
+	 *            country ID.
 	 */
 	public void setCountryId(int d_countryId) {
 		this.d_countryId = d_countryId;
@@ -93,9 +90,8 @@ public class Order {
 	 * The function sets the value of the variable "d_num" to the provided input.
 	 *
 	 * @param d_num
-	 *              The parameter "d_num" is an integer that is used to set the
-	 *              value
-	 *              of the variable "d_num" in the current object.
+	 *            The parameter "d_num" is an integer that is used to set the value
+	 *            of the variable "d_num" in the current object.
 	 */
 	public void setNum(int d_num) {
 		this.d_num = d_num;

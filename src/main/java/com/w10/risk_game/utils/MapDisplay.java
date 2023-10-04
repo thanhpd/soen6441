@@ -93,12 +93,12 @@ public class MapDisplay {
 		String[] l_columnNames;
 
 		if (p_showArmies) {
-			// If true, create an array of column names with "MAP_DISPLAY_ARMIES"
+			// If true, create an array of column names with number of armies
 			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
 					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES};
 		} else {
-			// else create an array of column names without "MAP_DISPLAY_ARMIES"
+			// else create an array of column names without number of armines
 			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
 					Constants.MAP_DISPLAY_NEIGHBOR_ID};

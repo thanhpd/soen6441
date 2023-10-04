@@ -151,9 +151,7 @@ public class MapEditor {
 	 *         removing the continent.
 	 */
 	public String removeContinent(String p_continentName) {
-
 		// Check if the continent exists in the game map.
-
 		if (l_gameMap.containsContinent(p_continentName) == false) {
 			return Constants.MAP_EDITOR_CONTINENT_NOT_EXIST;
 		}

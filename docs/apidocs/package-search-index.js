@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.w10.risk_game"},{"l":"com.w10.risk_game.controllers"},{"l":"com.w10.risk_game.exceptions"},{"l":"com.w10.risk_game.models"},{"l":"com.w10.risk_game.utils"},{"l":"com.w10.risk_game.views"}]

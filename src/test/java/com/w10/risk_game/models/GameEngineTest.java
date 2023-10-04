@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The GameEngineTest class contains unit tests for various methods in the
+ * The GameEngineTest class contains unit test for various methods in the
  * GameEngine class.
  */
 public class GameEngineTest {

@@ -23,9 +23,13 @@ public class Country implements Serializable {
 	 * the provided parameters.
 	 *
 	 * @param p_countryId
+	 *            The Country's unique identifier
 	 * @param p_countryName
+	 *            The Country's name
 	 * @param p_continentId
+	 *            The Continent's ID in which this Country lies
 	 * @param p_armyCount
+	 *            The number of armies deployed on this Country
 	 */
 	public Country(int p_countryId, String p_countryName, int p_continentId, int p_armyCount) {
 		this.d_countryId = p_countryId;

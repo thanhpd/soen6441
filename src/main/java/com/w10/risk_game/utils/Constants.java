@@ -1,8 +1,8 @@
 package com.w10.risk_game.utils;
 
 /**
- * The Constants class contains various Game Map constant values used throughout
- * the code.
+ * The Constants class contains various constant values used throughout the
+ * code.
  */
 public final class Constants {
 

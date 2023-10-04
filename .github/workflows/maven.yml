@@ -42,8 +42,9 @@ jobs:
     - name: Generate Javadoc
       run: mvn -B javadoc:javadoc javadoc:test-javadoc
     - name: Push Javadoc to the main branch
-      if: github.ref == 'refs/heads/main'
+      if: github.ref != 'refs/heads/main'
       uses: actions-js/push@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         message: 'doc: auto-publish javadoc'
+        branch: ${{ github.head_ref }}

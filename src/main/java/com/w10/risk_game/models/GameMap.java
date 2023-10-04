@@ -245,8 +245,6 @@ public class GameMap {
 					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
-				// formatting and writing the country's ID, name, and continent ID to the
-				// `l_printWriter` object.
 				for (Country country : this.d_countries.values()) {
 					l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
 							country.getContinentId());

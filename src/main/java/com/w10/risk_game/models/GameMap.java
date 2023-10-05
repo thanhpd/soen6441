@@ -225,6 +225,7 @@ public class GameMap {
 	public void saveMap(String p_filePath) {
 		if (MapValidator.IsMapCorrect(this))
 			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
+				// Initialize PrintWriter object
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
 				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);
 				// Writes continents details to new map file

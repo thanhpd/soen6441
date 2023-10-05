@@ -37,13 +37,17 @@ public class MapReader {
 		HashMap<Integer, Country> l_countries = new HashMap<>();
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
+			// If the line indicates the start of continents, borders, or is empty, stop
+			// reading.
 			if (l_line.equals(Constants.MAP_READER_CONTINENTS) || l_line.equals(Constants.MAP_READER_BORDERS)
 					|| l_line.isEmpty()) {
 				break;
 			}
-
+			// Parse the line to create a Country object and add it to the map of countries.
 			Country l_country = mapCountry(l_line);
 			l_countries.put(l_country.getCountryId(), l_country);
+
+			// Associate the country with its continent if applicable.
 			Continent p_continent = p_continents.get(l_country.getContinentId());
 			if (p_continent != null) {
 				p_continent.addCountry(l_country);
@@ -71,10 +75,16 @@ public class MapReader {
 					|| l_line.isEmpty()) {
 				break;
 			}
+
+			// Split the line into individual elements based on spaces.
 			String[] l_splitted = l_line.split(Constants.SPACE);
 			Country d_country = p_countries.get(Integer.parseInt(l_splitted[0]));
+			// Iterate through the elements in the line, which represent neighbor country
+			// IDs.
 			for (int i = 1; i < l_splitted.length; i++) {
 				Country l_neighbor = p_countries.get(Integer.parseInt(l_splitted[i]));
+				// If both the current country and neighbor exist, establish a neighbor
+				// relationship.
 				if (d_country != null && l_neighbor != null) {
 					d_country.addNeighbor(l_neighbor);
 				}
@@ -105,7 +115,7 @@ public class MapReader {
 					|| l_line.isEmpty()) {
 				break;
 			}
-
+			// Parse the line to create a Continent object with the current continent ID.
 			Continent l_continent = mapContinent(l_line, l_continentId);
 			l_continents.put(l_continent.getContinentId(), l_continent);
 			l_continentId++;
@@ -193,6 +203,7 @@ public class MapReader {
 				}
 			}
 
+			// Add the loaded countries and continents to the GameMap.
 			l_gameMap.addCountries(l_countries);
 			l_gameMap.addContinents(l_continents);
 

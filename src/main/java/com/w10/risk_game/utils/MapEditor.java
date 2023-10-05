@@ -92,18 +92,22 @@ public class MapEditor {
 	 *         a neighbor country to a given country.
 	 */
 	public String addNeighbor(int p_countryId, int p_neighborCountryId) {
+		// Check if the first country exists in the game map.
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return Constants.MAP_EDITOR_COUNTRY_NOT_EXIST;
 		}
+		// Check if the neighbor country exists in the game map.
 		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
 			return Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST;
 		}
 		Country l_countryToAdd = l_gameMap.findCountry(p_countryId);
+		// Check if the neighbor relationship already exists.
 		if (l_countryToAdd.hasNeighbor(p_neighborCountryId)) {
 			return Constants.MAP_EDITOR_CONNECTION_EXIST;
 		}
 		Country l_neighbor = l_gameMap.findCountry(p_neighborCountryId);
 		Country l_country = l_gameMap.findCountry(p_countryId);
+		// Add the neighbor relationship between both countries.
 		l_country.addNeighbor(l_neighbor);
 		l_neighbor.addNeighbor(l_country);
 
@@ -125,13 +129,13 @@ public class MapEditor {
 		if (l_gameMap.containsCountry(p_countryId) == false) {
 			return Constants.MAP_EDITOR_COUNTRY_ID_NOT_EXIST;
 		}
+		// Find the country to be removed.
 		Country l_Country = l_gameMap.findCountry(p_countryId);
 		for (Country l_neighbor : l_Country.getNeighbors().values()) {
-			//
 			l_neighbor.getNeighbors().remove(p_countryId);
 		}
 
-		// delete self from gameMap
+		// Remove the country from the game map.
 		l_gameMap.getCountries().remove(l_Country.getCountryId());
 		return p_countryId + Constants.MAP_EDITOR_COUNTRY_REMOVED;
 	}
@@ -147,10 +151,11 @@ public class MapEditor {
 	 *         removing the continent.
 	 */
 	public String removeContinent(String p_continentName) {
-
+		// Check if the continent exists in the game map.
 		if (l_gameMap.containsContinent(p_continentName) == false) {
 			return Constants.MAP_EDITOR_CONTINENT_NOT_EXIST;
 		}
+		// Get the continent object to be removed.
 		Continent l_toRemove = l_gameMap.getContinentByName(p_continentName);
 		String l_countriesRemoved = "";
 		List<Country> l_countriesToRemove = l_gameMap.getCountriesOfContinent(l_toRemove.getContinentId());
@@ -158,7 +163,7 @@ public class MapEditor {
 			removeCountry(l_country.getCountryId());
 			l_countriesRemoved = l_country.getCountryName() + ", ";
 		}
-		// Self remove
+		// Remove the continent itself.
 		l_gameMap.getContinents().remove(l_toRemove.getContinentId());
 		return p_continentName + Constants.MAP_EDITOR_REMOVED + l_countriesRemoved
 				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED;
@@ -183,10 +188,12 @@ public class MapEditor {
 		if (l_gameMap.containsCountry(p_neighborCountryId) == false) {
 			return Constants.MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST;
 		}
+		// Find the first country to remove the neighbor from.
 		Country l_countryToRemove = l_gameMap.findCountry(p_countryId);
 		if (l_countryToRemove.hasNeighbor(p_neighborCountryId) == false) {
 			return Constants.MAP_EDITOR_CONNECTION_NOT_EXIST;
 		}
+		// Remove the neighbor relationship from both countries.
 		l_gameMap.findCountry(p_countryId).getNeighbors().remove(p_neighborCountryId);
 		l_gameMap.findCountry(p_neighborCountryId).getNeighbors().remove(p_countryId);
 

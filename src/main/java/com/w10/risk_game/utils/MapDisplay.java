@@ -91,11 +91,16 @@ public class MapDisplay {
 	 */
 	public void formatMap(GameMap p_map, boolean p_showArmies) {
 		String[] l_columnNames;
+
 		if (p_showArmies) {
+			// If true, create an array of column names that also have player name and the
+			// number of armies.
 			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
 					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES};
 		} else {
+			// else create an array of column names that doesn't have player name and the
+			// number of armies.
 			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
 					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
 					Constants.MAP_DISPLAY_NEIGHBOR_ID};
@@ -108,9 +113,9 @@ public class MapDisplay {
 			l_data[d_count] = populateRow(l_country, p_map.getContinentById(l_country.getContinentId()),
 					l_country.getOwner(), p_showArmies);
 			d_count++;
-
 		}
 
+		// Creating an instance of the `TextTable` class and initializing it
 		TextTable l_mapTable = new TextTable(l_columnNames, l_data);
 		l_mapTable.setAddRowNumbering(true);
 		l_mapTable.setSort(0);

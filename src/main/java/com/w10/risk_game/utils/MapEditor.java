@@ -130,13 +130,15 @@ public class MapEditor {
 			return Constants.MAP_EDITOR_COUNTRY_ID_NOT_EXIST;
 		}
 		// Find the country to be removed.
-		Country l_Country = l_gameMap.findCountry(p_countryId);
-		for (Country l_neighbor : l_Country.getNeighbors().values()) {
+		Country l_country = l_gameMap.findCountry(p_countryId);
+		for (Country l_neighbor : l_country.getNeighbors().values()) {
 			l_neighbor.getNeighbors().remove(p_countryId);
 		}
+		// removed country from continent's country list
+		l_gameMap.getContinentById(l_country.getContinentId()).getCountries().remove(l_country);
 
 		// Remove the country from the game map.
-		l_gameMap.getCountries().remove(l_Country.getCountryId());
+		l_gameMap.getCountries().remove(l_country.getCountryId());
 		return p_countryId + Constants.MAP_EDITOR_COUNTRY_REMOVED;
 	}
 

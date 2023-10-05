@@ -3,7 +3,9 @@ package com.w10.risk_game.models;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -233,10 +235,15 @@ public class GameMap {
 					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
-				// Writes country details to new map file
-				for (Country country : this.d_countries.values()) {
-					l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
-							country.getContinentId());
+				// Assigns new continent id
+				int l_continentNumber = 1;
+				for (Continent l_continent : this.d_continents.values()) {
+					// Writes country details to new map file
+					for (Country country : l_continent.getCountries()) {
+						l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
+								l_continentNumber);
+					}
+					l_continentNumber++;
 				}
 				// Writes border details to new map file
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_BORDERS);
@@ -244,9 +251,11 @@ public class GameMap {
 					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
 							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
 				}
+				System.out.println(Constants.MAP_SAVE_SUCCESS);
 				l_printWriter.close();
 			} catch (IOException e) {
-				System.out.format(Constants.MAP_SAVE_ERROR);
+				System.out.println(Constants.MAP_SAVE_ERROR);
 			}
 	}
+
 }

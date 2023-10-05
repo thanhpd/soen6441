@@ -235,19 +235,16 @@ public class GameMap {
 					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
-
+				// Assigns new continent id
 				int l_continentNumber = 1;
-				for (var l_continent : this.d_continents.values()) {
-
+				for (Continent l_continent : this.d_continents.values()) {
 					// Writes country details to new map file
 					for (Country country : l_continent.getCountries()) {
 						l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
 								l_continentNumber);
-
 					}
 					l_continentNumber++;
 				}
-
 				// Writes border details to new map file
 				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_BORDERS);
 				for (Country country : this.d_countries.values()) {

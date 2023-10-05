@@ -44,7 +44,7 @@ public class Reinforcements {
 		int l_armies = p_player.getLeftoverArmies();
 		List<Country> l_playerCountries = p_player.getCountriesOwned();
 		GameMap l_gameMap = p_gameMap;
-		List<Country> allCountries = new ArrayList<Country>(l_gameMap.getCountries().values());
+		List<Country> allCountries = new ArrayList<>(l_gameMap.getCountries().values());
 		// Step 2: Calculate bonus armies
 		List<String> l_groupPlayerCountries = GroupCountries(l_playerCountries, p_gameMap);
 		List<String> l_groupAllCountries = GroupCountries(allCountries, p_gameMap);
@@ -56,7 +56,7 @@ public class Reinforcements {
 		}
 		// Step 3: Calculate the total number of reinforcement armies
 		int l_countrySize = l_playerCountries.size();
-		int l_reinforceArmies = (int) (Math.floor(l_countrySize / 3) + l_bonus);;
+		int l_reinforceArmies = (int) (Math.floor(l_countrySize / 3) + l_bonus);
 		p_player.setLeftoverArmies((l_armies + l_reinforceArmies) < Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
 				? Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
 				: (l_armies + l_reinforceArmies));

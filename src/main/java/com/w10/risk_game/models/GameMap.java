@@ -251,9 +251,10 @@ public class GameMap {
 					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
 							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
 				}
+				System.out.println(Constants.MAP_SAVE_SUCCESS);
 				l_printWriter.close();
 			} catch (IOException e) {
-				System.out.format(Constants.MAP_SAVE_ERROR);
+				System.out.println(Constants.MAP_SAVE_ERROR);
 			}
 	}
 

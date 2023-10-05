@@ -224,6 +224,7 @@ public class GameEngine {
 	 */
 	private void assignPlayersReinforcements() {
 		for (Player l_player : this.d_players.values()) {
+			l_player.setLeftoverArmies(0);
 			Reinforcements.ReinforcementPhase(l_player, this.d_gameMap);
 		}
 	}

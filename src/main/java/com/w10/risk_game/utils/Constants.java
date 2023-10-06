@@ -1,8 +1,8 @@
 package com.w10.risk_game.utils;
 
 /**
- * The Constants class contains various Game Map constant values used throughout
- * the code.
+ * The Constants class contains various constant values used throughout the
+ * code.
  */
 public final class Constants {
 
@@ -104,7 +104,7 @@ public final class Constants {
 	public static final String MAP_EDITOR_CONNECTION_EXIST = "Connection already exists!";
 	public static final String MAP_EDITOR_ADD_NEIGHBOR = " added to ";
 	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country ID does not exist";
-	public static final String MAP_EDITOR_COUNTRY_REMOVED = "Country is removed!";
+	public static final String MAP_EDITOR_COUNTRY_REMOVED = " Country is removed!";
 	public static final String MAP_EDITOR_REMOVED = " is removed!";
 	public static final String MAP_EDITOR_COUNTRIES_REMOVED = "Linked countries were also removed!";
 	public static final String MAP_EDITOR_CONNECTION_NOT_EXIST = "Connection does not exist!";
@@ -140,6 +140,7 @@ public final class Constants {
 	public static final String MAP_READER_COUNTRIES = "[countries]";
 	public static final String MAP_READER_BORDERS = "[borders]";
 	public static final String MAP_SAVE_ERROR = "Unable to save file. Please try again.";
+	public static final String MAP_SAVE_SUCCESS = "Map Saved Successfully";
 
 	// Reinforcements Class constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;

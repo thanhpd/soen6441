@@ -18,10 +18,9 @@ public class OrderTest {
 	/**
 	 * This method is to set up the test environment
 	 *
-	 * @throws Exception
 	 */
 	@BeforeEach
-	public void setUp() throws Exception {
+	public void setUp() {
 		List<Country> l_countries = new ArrayList<>();
 		l_countries.add(new Country(1, "England", 1, 0));
 		Player l_player1 = new Player("Player1", l_countries, new ArrayList<>(), 10);

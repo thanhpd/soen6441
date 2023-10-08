@@ -32,10 +32,9 @@ public class ReinforcementsTest {
 	/**
 	 * This method is to set up the test environment
 	 *
-	 * @throws Exception
 	 */
 	@BeforeEach
-	public void setUp() throws Exception {
+	public void setUp() {
 		// Step 1: Initialize the variables for bonus calculation
 		d_countries = new ArrayList<>();
 		d_countries.add(new Country(1, "England", 1, 0));

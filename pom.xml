@@ -97,6 +97,7 @@
 					<configuration>
 						<show>private</show>
 						<reportOutputDirectory>docs/apidocs</reportOutputDirectory>
+						<doclint>all</doclint>
 					</configuration>
 				</plugin>
 				<plugin>

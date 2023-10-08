@@ -57,6 +57,9 @@ $ mvn test
 
 $ mvn javadoc:javadoc javadoc:test-javadoc
 ```
+The doclint option is enabled by default via `maven-javadoc-plugin`. See
+- https://maven.apache.org/plugins/maven-javadoc-plugin/javadoc-mojo.html#doclint
+- https://docs.oracle.com/en/java/javase/11/tools/javadoc.html
 
 ### Code formatting
 #### For VSCode Editor

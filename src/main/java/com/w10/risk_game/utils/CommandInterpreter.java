@@ -1,6 +1,7 @@
 package com.w10.risk_game.utils;
 
 import com.w10.risk_game.exceptions.ApplicationException;
+import java.util.ArrayList;
 
 /**
  * The CommandInterpreter class provides methods to extract the main command and
@@ -51,5 +52,27 @@ public class CommandInterpreter {
 		if (l_argumentList.length == 0)
 			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
 		return l_argumentList;
+	}
+
+	public static ArrayList<ArrayList<String>> GetCommandOptions(String p_command) throws ApplicationException {
+		ArrayList<ArrayList<String>> l_listOfOptions = new ArrayList<>();
+		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
+
+		if (l_argumentList.length == 0)
+			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+
+		for (String l_arg : l_argumentList) {
+			if (l_arg.startsWith("-")) {
+				ArrayList<String> l_optionKeyAndValues = new ArrayList<>();
+				l_optionKeyAndValues.add(l_arg);
+				l_listOfOptions.add(l_optionKeyAndValues);
+			} else if (!l_listOfOptions.isEmpty()) {
+				ArrayList<String> l_latestOptionKeyAndValues =
+						l_listOfOptions.get(l_listOfOptions.size() - 1);
+				l_latestOptionKeyAndValues.add(l_arg);
+			}
+		}
+
+		return l_listOfOptions;
 	}
 }

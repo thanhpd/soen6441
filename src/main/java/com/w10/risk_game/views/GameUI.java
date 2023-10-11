@@ -1,5 +1,6 @@
 package com.w10.risk_game.views;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.w10.risk_game.controllers.GameEngine;
@@ -46,6 +47,8 @@ public class GameUI {
 				Command = l_scanner.nextLine();
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
+				ArrayList<ArrayList<String>> l_listOfOptions = CommandInterpreter.GetCommandOptions(Command);
+				System.out.println(l_listOfOptions);
 
 				switch (l_mainCommand) {
 					// Map editor phase
@@ -65,27 +68,39 @@ public class GameUI {
 						this.d_gameEngine.editMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
-						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-							this.d_gameEngine.addContinent(l_argList[2].toString(), Integer.parseInt(l_argList[3]));
-						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-							this.d_gameEngine.removeContinent(l_argList[2]);
+						// TODO:
+						for (ArrayList<String> l_options : l_listOfOptions) {
+							String optionName = l_options.get(0);
+							if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
+								this.d_gameEngine.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
+							} else if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
+								this.d_gameEngine.removeContinent(l_options.get(1));
+							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
-						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-							this.d_gameEngine.addCountry(Integer.parseInt(l_argList[2]), l_argList[3].toString(),
-									l_argList[4]);
-						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-							this.d_gameEngine.removeCountry(Integer.parseInt(l_argList[2]));
+						// TODO:
+						for (ArrayList<String> l_options : l_listOfOptions) {
+							String optionName = l_options.get(0);
+							if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
+								this.d_gameEngine.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
+									l_options.get(3));
+							} else if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
+								this.d_gameEngine.removeCountry(Integer.parseInt(l_options.get(1)));
+							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
-						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-							this.d_gameEngine.addNeighbor(Integer.parseInt(l_argList[2]),
-									Integer.parseInt(l_argList[3]));
-						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-							this.d_gameEngine.removeNeighbor(Integer.parseInt(l_argList[2]),
-									Integer.parseInt(l_argList[3]));
+						// TODO:
+						for (ArrayList<String> l_options : l_listOfOptions) {
+							String optionName = l_options.get(0);
+							if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
+								this.d_gameEngine.addNeighbor(Integer.parseInt(l_options.get(1)),
+										Integer.parseInt(l_options.get(2)));
+							} else if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
+								this.d_gameEngine.removeNeighbor(Integer.parseInt(l_options.get(1)),
+										Integer.parseInt(l_options.get(2)));
+							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
@@ -94,12 +109,20 @@ public class GameUI {
 
 					// Gameplay: Start up phase
 					case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
-						if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-							this.d_gameEngine.createPlayer(l_argList[2].toString());
-						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-							this.d_gameEngine.removePlayer(l_argList[2].toString());
-						} else if (l_argList[1].equals(Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL)) {
-							this.d_gameEngine.showAllPlayers();
+						// TODO:
+						for (ArrayList<String> l_options : l_listOfOptions) {
+							String optionName = l_options.get(0);
+							switch (optionName) {
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
+									this.d_gameEngine.createPlayer(l_options.get(1));
+									break;
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
+									this.d_gameEngine.removePlayer(l_options.get(1));
+									break;
+								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL:
+									this.d_gameEngine.showAllPlayers();
+									break;
+							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :

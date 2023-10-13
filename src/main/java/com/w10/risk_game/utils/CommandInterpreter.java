@@ -54,21 +54,37 @@ public class CommandInterpreter {
 		return l_argumentList;
 	}
 
+	/**
+	 * The function takes a command as input and returns a list of command options
+	 * and their corresponding values.
+	 *
+	 * @param p_command
+	 *            A string representing a command.
+	 * @return The method is returning an ArrayList of ArrayLists of Strings. Each
+	 *         ArrayList of Strings contains the option key as the first item, with
+	 *         the remaining items being the corresponding values.
+	 */
 	public static ArrayList<ArrayList<String>> GetCommandOptions(String p_command) throws ApplicationException {
 		ArrayList<ArrayList<String>> l_listOfOptions = new ArrayList<>();
+		// Get all arguments from the command by splitting the string on spaces.
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 
 		if (l_argumentList.length == 0)
 			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
 
+		// Loop through the arguments
 		for (String l_arg : l_argumentList) {
 			if (l_arg.startsWith("-")) {
+				// If the argument starts with a dash, it is an option key, create a new
+				// ArrayList for it.
 				ArrayList<String> l_optionKeyAndValues = new ArrayList<>();
 				l_optionKeyAndValues.add(l_arg);
 				l_listOfOptions.add(l_optionKeyAndValues);
 			} else if (!l_listOfOptions.isEmpty()) {
-				ArrayList<String> l_latestOptionKeyAndValues =
-						l_listOfOptions.get(l_listOfOptions.size() - 1);
+				// If the argument does not start with a dash, it is a value for the latest
+				// option key.
+				// Add it to the latest option key ArrayList.
+				ArrayList<String> l_latestOptionKeyAndValues = l_listOfOptions.get(l_listOfOptions.size() - 1);
 				l_latestOptionKeyAndValues.add(l_arg);
 			}
 		}

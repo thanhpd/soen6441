@@ -47,8 +47,10 @@ public final class Constants {
 	public static final String CLI_LOAD_MAP = "Loading Map: ";
 	public static final String CLI_SHOW_MAP = "Displaying Map";
 	public static final String CLI_GAME_PLAYER_REMOVE = "Removed Player: ";
+	public static final String CLI_GAME_PLAYER_CREATE = "Created Player: %s";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
+	public static final String CLI_ITERATION_OPTION = "===========%nRunning the %s option with the parameters %s.%n";
 
 	// Game Engine Class constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";

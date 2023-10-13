@@ -16,7 +16,7 @@ import com.w10.risk_game.utils.Constants;
  */
 public class GameUI {
 
-	private GameEngine d_gameEngine;
+	private final GameEngine d_gameEngine;
 	private boolean d_startGamePhase;
 
 	public static String Command = "";
@@ -48,7 +48,6 @@ public class GameUI {
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 				ArrayList<ArrayList<String>> l_listOfOptions = CommandInterpreter.GetCommandOptions(Command);
-				System.out.println(l_listOfOptions);
 
 				switch (l_mainCommand) {
 					// Map editor phase
@@ -68,38 +67,51 @@ public class GameUI {
 						this.d_gameEngine.editMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
-						// TODO:
+						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
+							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
-							if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-								this.d_gameEngine.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
-							} else if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-								this.d_gameEngine.removeContinent(l_options.get(1));
+							switch (optionName) {
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+									this.d_gameEngine.addContinent(l_options.get(1),
+											Integer.parseInt(l_options.get(2)));
+									break;
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+									this.d_gameEngine.removeContinent(l_options.get(1));
+									break;
 							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
-						// TODO:
+						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
+							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
-							if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-								this.d_gameEngine.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
-									l_options.get(3));
-							} else if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-								this.d_gameEngine.removeCountry(Integer.parseInt(l_options.get(1)));
+							switch (optionName) {
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+									this.d_gameEngine.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
+											l_options.get(3));
+									break;
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+									this.d_gameEngine.removeCountry(Integer.parseInt(l_options.get(1)));
+									break;
 							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
-						// TODO:
+						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
+							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
-							if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_ADD)) {
-								this.d_gameEngine.addNeighbor(Integer.parseInt(l_options.get(1)),
-										Integer.parseInt(l_options.get(2)));
-							} else if (optionName.equals(Constants.USER_INPUT_COMMAND_OPTION_REMOVE)) {
-								this.d_gameEngine.removeNeighbor(Integer.parseInt(l_options.get(1)),
-										Integer.parseInt(l_options.get(2)));
+							switch (optionName) {
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+									this.d_gameEngine.addNeighbor(Integer.parseInt(l_options.get(1)),
+											Integer.parseInt(l_options.get(2)));
+									break;
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+									this.d_gameEngine.removeNeighbor(Integer.parseInt(l_options.get(1)),
+											Integer.parseInt(l_options.get(2)));
+									break;
 							}
 						}
 						break;
@@ -109,17 +121,18 @@ public class GameUI {
 
 					// Gameplay: Start up phase
 					case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
-						// TODO:
+						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
+							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
 									this.d_gameEngine.createPlayer(l_options.get(1));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									this.d_gameEngine.removePlayer(l_options.get(1));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL:
+								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL :
 									this.d_gameEngine.showAllPlayers();
 									break;
 							}
@@ -208,5 +221,16 @@ public class GameUI {
 				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
 			}
 		}
+	}
+
+	/**
+	 * The function displays a message with loop iteration options.
+	 *
+	 * @param p_options
+	 *            An ArrayList of Strings containing the options for the loop
+	 *            iteration.
+	 */
+	private void displayLoopIterationMessage(ArrayList<String> p_options) {
+		System.out.format(Constants.CLI_ITERATION_OPTION, p_options.get(0), p_options.subList(1, p_options.size()));
 	}
 }

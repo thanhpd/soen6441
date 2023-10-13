@@ -99,6 +99,7 @@ public class GameEngine {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
+				System.out.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
 			} else {
 				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}

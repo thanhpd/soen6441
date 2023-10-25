@@ -1,5 +1,6 @@
 package com.w10.risk_game;
 
+import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.views.GameUI;
 
 /**
@@ -18,6 +19,11 @@ public class App {
 	 */
 	public static void main(String[] args) {
 		GameUI l_gameUI = new GameUI();
-		l_gameUI.runStartUpPhase();
+		try {
+			l_gameUI.runStartUpPhase();
+		} catch (Exception e) {
+			System.out.println(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+			System.out.println(e.getMessage());
+		}
 	}
 }

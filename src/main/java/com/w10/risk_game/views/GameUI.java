@@ -1,6 +1,8 @@
 package com.w10.risk_game.views;
 
+import com.w10.risk_game.exceptions.ApplicationException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import com.w10.risk_game.controllers.GameEngine;
@@ -49,14 +51,20 @@ public class GameUI {
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 				ArrayList<ArrayList<String>> l_listOfOptions = CommandInterpreter.GetCommandOptions(Command);
 
+				checkValidArgumentOptions(l_argList, l_mainCommand);
+
 				switch (l_mainCommand) {
 					// Map editor phase
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
+						if (l_argList.length < 2)
+							throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 						String[] l_mapName = l_argList[1].split("/");
 						System.out.println(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						this.d_gameEngine.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
+						if (l_argList.length < 2)
+							throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 						this.d_gameEngine.saveMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
@@ -67,6 +75,8 @@ public class GameUI {
 						this.d_gameEngine.editMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
+						if (l_argList.length < 2)
+							throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
@@ -83,6 +93,8 @@ public class GameUI {
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
+						if (l_argList.length < 2)
+							throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
@@ -99,6 +111,8 @@ public class GameUI {
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
+						if (l_argList.length < 2)
+							throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
@@ -152,7 +166,7 @@ public class GameUI {
 						l_exit = true;
 						break;
 					default :
-						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
+						System.out.println(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
 				System.out.println();
 				if (l_exit) {
@@ -161,7 +175,9 @@ public class GameUI {
 					break;
 				}
 			} catch (Exception e) {
-				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
+				System.out.println(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+				System.out.println(e.getMessage());
+				System.out.println();
 			}
 		}
 	}
@@ -195,6 +211,8 @@ public class GameUI {
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 
+				checkValidArgumentOptions(l_argList, l_mainCommand);
+
 				switch (l_mainCommand) {
 					// Show Map Command
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
@@ -211,14 +229,16 @@ public class GameUI {
 						l_exit = true;
 						break;
 					default :
-						System.out.println(Constants.USER_INPUT_COMMAND_INVALID);
+						System.out.println(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
 				if (l_exit) {
 					break;
 				}
 				System.out.println();
 			} catch (Exception e) {
-				System.out.println(Constants.USER_INPUT_SOME_ERROR_OCCURRED);
+				System.out.println(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+				System.out.println(e.getMessage());
+				System.out.println();
 			}
 		}
 	}
@@ -232,5 +252,13 @@ public class GameUI {
 	 */
 	private void displayLoopIterationMessage(ArrayList<String> p_options) {
 		System.out.format(Constants.CLI_ITERATION_OPTION, p_options.get(0), p_options.subList(1, p_options.size()));
+	}
+
+	private void checkValidArgumentOptions(String[] p_argList, String p_command) throws ApplicationException {
+		String[] l_commandsToCheck = new String[]{Constants.USER_INPUT_COMMAND_LOADMAP, Constants.USER_INPUT_COMMAND_SAVEMAP, Constants.USER_INPUT_COMMAND_EDITMAP, Constants.USER_INPUT_COMMAND_EDIT_CONTINENT,
+			Constants.USER_INPUT_COMMAND_EDIT_COUNTRY, Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR, Constants.USER_INPUT_COMMAND_GAMEPLAYER, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY};
+		if (Arrays.asList(l_commandsToCheck).contains(p_command) && p_argList.length < 2) {
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
+		}
 	}
 }

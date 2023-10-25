@@ -39,8 +39,10 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY = "deploy";
-	public static final String USER_INPUT_COMMAND_INVALID = "Please enter a valid command!";
-	public static final String USER_INPUT_SOME_ERROR_OCCURRED = "Some errors occurred!";
+	public static final String USER_INPUT_ERROR_COMMAND_EMPTY = "The command cannot be empty!";
+	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
+	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";
+	public static final String USER_INPUT_ERROR_ARG_LIST_INVALID = "The provided command option(s) is invalid!";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants
@@ -50,7 +52,7 @@ public final class Constants {
 	public static final String CLI_GAME_PLAYER_CREATE = "Created Player: %s";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
-	public static final String CLI_ITERATION_OPTION = "===========%nRunning the %s option with the parameters %s.%n";
+	public static final String CLI_ITERATION_OPTION = "%n===========%nRunning the %s option with the parameters %s.%n";
 
 	// Game Engine Class constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";

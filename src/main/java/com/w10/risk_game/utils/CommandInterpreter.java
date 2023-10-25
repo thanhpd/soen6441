@@ -31,7 +31,7 @@ public class CommandInterpreter {
 	 */
 	public static String GetMainCommand(String p_command) throws ApplicationException {
 		if (p_command.isBlank())
-			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_EMPTY);
 		return p_command.split(Constants.REGEX_SPLIT_ON_SPACE)[0];
 	}
 
@@ -50,7 +50,7 @@ public class CommandInterpreter {
 	public static String[] GetArgumentList(String p_command) throws ApplicationException {
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 		if (l_argumentList.length == 0)
-			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_EMPTY);
 		return l_argumentList;
 	}
 
@@ -70,7 +70,7 @@ public class CommandInterpreter {
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 
 		if (l_argumentList.length == 0)
-			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 
 		// Loop through the arguments
 		for (String l_arg : l_argumentList) {

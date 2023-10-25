@@ -255,8 +255,11 @@ public class GameUI {
 	}
 
 	private void checkValidArgumentOptions(String[] p_argList, String p_command) throws ApplicationException {
-		String[] l_commandsToCheck = new String[]{Constants.USER_INPUT_COMMAND_LOADMAP, Constants.USER_INPUT_COMMAND_SAVEMAP, Constants.USER_INPUT_COMMAND_EDITMAP, Constants.USER_INPUT_COMMAND_EDIT_CONTINENT,
-			Constants.USER_INPUT_COMMAND_EDIT_COUNTRY, Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR, Constants.USER_INPUT_COMMAND_GAMEPLAYER, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY};
+		String[] l_commandsToCheck = new String[]{Constants.USER_INPUT_COMMAND_LOADMAP,
+				Constants.USER_INPUT_COMMAND_SAVEMAP, Constants.USER_INPUT_COMMAND_EDITMAP,
+				Constants.USER_INPUT_COMMAND_EDIT_CONTINENT, Constants.USER_INPUT_COMMAND_EDIT_COUNTRY,
+				Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR, Constants.USER_INPUT_COMMAND_GAMEPLAYER,
+				Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY};
 		if (Arrays.asList(l_commandsToCheck).contains(p_command) && p_argList.length < 2) {
 			throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 		}

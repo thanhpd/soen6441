@@ -11,11 +11,14 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Order;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.models.phases.MapEditorPhase;
+import com.w10.risk_game.models.phases.StartupPhase;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
 import com.w10.risk_game.utils.MapValidator;
+import com.w10.risk_game.utils.Phase;
 import com.w10.risk_game.utils.Reinforcements;
 
 /**
@@ -35,6 +38,8 @@ public class GameEngine {
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
 
+	private Phase phase;
+
 	/**
 	 * Game Engine constructor
 	 */
@@ -45,6 +50,7 @@ public class GameEngine {
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
 		this.d_currentPlayerIndex = 0;
+		this.phase = new StartupPhase();
 	}
 
 	/**
@@ -274,6 +280,10 @@ public class GameEngine {
 	 *
 	 */
 	public boolean editMap(String p_mapFilePath) {
+		//phase.doAcitin();
+		// or phase.editMap
+		//changePhase(new MapEditorPhase());
+
 		File l_file = new File(p_mapFilePath);
 
 		// If file with the input filename exists then load that map else create a new
@@ -578,5 +588,19 @@ public class GameEngine {
 	 */
 	public Player getCurrentPlayer() {
 		return this.d_currentPlayer;
+	}
+
+	private void changePhase(Phase phase){
+
+		// Check condition before setting the phase
+		setPhase( phase);
+	}
+
+	public void setPhase(Phase phase){
+		this.phase = phase;
+	}
+
+	public void getPhase(){
+
 	}
 }

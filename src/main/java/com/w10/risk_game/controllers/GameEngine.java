@@ -10,6 +10,7 @@ import java.util.List;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Order;
+import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.MapEditorPhase;
 import com.w10.risk_game.models.phases.StartupPhase;
@@ -18,7 +19,6 @@ import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
 import com.w10.risk_game.utils.MapValidator;
-import com.w10.risk_game.utils.Phase;
 import com.w10.risk_game.utils.Reinforcements;
 
 /**
@@ -30,7 +30,10 @@ import com.w10.risk_game.utils.Reinforcements;
 public class GameEngine {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
-	private MapEditor d_mapEditor;
+	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
+	// type. The code is also using the pound sign (#) to create a comment, which means
+	// that the line "
+	d_mapEditor;
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
@@ -62,6 +65,8 @@ public class GameEngine {
 	 *            path of the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_filePath) {
+		//one whay?
+		//setPhase(new MapEditorPhase());
 		try {
 			this.d_mapReader = new MapReader();
 			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);

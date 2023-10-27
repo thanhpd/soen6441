@@ -1,10 +1,11 @@
 package com.w10.risk_game.models.phases;
 
-import com.w10.risk_game.utils.Phase;
+import com.w10.risk_game.controllers.GameEngine;
 
-public class ExecuteOrderPhase implements Phase{
-    @Override 
-    public void type(){
-        
+public class ExecuteOrderPhase extends GamePlayPhase{
+//one way
+    @Override
+    void performAction(GameEngine p_engine) {
+      p_engine.executePlayerOrders();
     }
 }

@@ -1,7 +1,8 @@
 package com.w10.risk_game.models;
 
+import com.w10.risk_game.command.Deploy;
+import com.w10.risk_game.command.Order;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class OrderTest {
 	Order d_order1;
+	Player d_player1;
 	/**
 	 * This method is to set up the test environment
 	 *
@@ -23,8 +25,8 @@ public class OrderTest {
 	public void setUp() {
 		List<Country> l_countries = new ArrayList<>();
 		l_countries.add(new Country(1, "England", 1, 0));
-		Player l_player1 = new Player("Player1", l_countries, new ArrayList<>(), 10);
-		d_order1 = new Order(l_player1, "deploy", 1, 6);
+		d_player1 = new Player("Player1", l_countries, new ArrayList<>(), 10);
+		d_order1 = new Deploy(d_player1, 1, 6);
 	}
 	/**
 	 * This method is to test the method of deploy
@@ -33,6 +35,6 @@ public class OrderTest {
 	public void executeTest() {
 		// Test deploy
 		d_order1.execute();
-		assertEquals(6, d_order1.getPlayer().getCountriesOwned().get(0).getArmyCount());
+		assertEquals(6, d_player1.getCountriesOwned().get(0).getArmyCount());
 	}
 }

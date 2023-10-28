@@ -2,10 +2,9 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.models.Order;
+import com.w10.risk_game.command.Order;
 import com.w10.risk_game.models.Player;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

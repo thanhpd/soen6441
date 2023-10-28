@@ -3,6 +3,8 @@ package com.w10.risk_game.models;
 import java.util.List;
 import java.util.Scanner;
 
+import com.w10.risk_game.command.Deploy;
+import com.w10.risk_game.command.Order;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.views.GameUI;
 
@@ -207,7 +209,7 @@ public class Player {
 			// Step 4: If the input is valid, create an order object and add it to the list.
 			// If not, ask the user to enter again
 			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
-				Order order = new Order(this, l_orderType, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
+				Order order = new Deploy(this, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
 				d_orders.add(order);
 				deployArmies(Integer.parseInt(l_num));
 				l_again = false;

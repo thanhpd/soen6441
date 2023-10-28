@@ -287,7 +287,10 @@ public class GameEngine {
 			try {
 				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
-				return new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
+				boolean l_isFileCreated = new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
+				if (l_isFileCreated)
+					this.loadMap(p_mapFilePath);
+				return l_isFileCreated;
 			} catch (IOException e) {
 				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
 			}

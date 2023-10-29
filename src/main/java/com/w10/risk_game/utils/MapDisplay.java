@@ -7,6 +7,7 @@ import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import dnl.utils.text.table.TextTable;
 
@@ -18,6 +19,7 @@ import dnl.utils.text.table.TextTable;
  * @author Omnia Alam
  */
 public class MapDisplay {
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * The function "populateRow" takes in various parameters and returns an array
@@ -70,7 +72,7 @@ public class MapDisplay {
 					l_values[6] = " ";
 				}
 			} catch (Exception e) {
-				System.out.println(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
+				d_logger.log(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
 			}
 		}
 		return l_values;

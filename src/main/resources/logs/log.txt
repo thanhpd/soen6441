@@ -1,0 +1,108 @@
+!!!   Hi Welcome to Risk Game   !!!
+You are in the Startup phase:
+You can enter any of the below commands:
+-> loadmap <filepath>
+-> savemap <filepath>
+-> showmap
+-> editmap <filepath>
+-> validatemap
+-> editcontinent -add <continentID> <continentvalue> -remove <continentID>
+-> editcountry -add <countryID> <countryName> <continentID> -remove <countryID>
+-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>
+-> gameplayer -add <playername> -remove <playername>
+-> assigncountries
+-> quit
+
+Please enter an input: 
+Loading Map: europe.map
+Map is valid
+
+
+Please enter an input: 
+Displaying Map
+Map is valid
+
+
+Please enter an input: 
+
+
+Please enter an input: 
+
+
+Please enter an input: 
+
+
+Please enter an input: 
+Removed Player: Omnia
+
+
+Please enter an input: 
+
+
+Please enter an input: 
+Assigning Countries...
+
+
+You are now in the Gameplay phase:
+You can enter any of the below commands:
+-> showmap
+-> deploy <CountryId> <No. of armies>
+-> quit
+
+Issuing orders for player Darlene:
+
+
+Please enter an input: 
+Displaying Map
+Map is valid
+
+
+Issuing orders for player Darlene:
+
+
+Please enter an input: 
+Invalid input! The country id should be one of the countries owned by the player. Please try again.
+Please enter your order in the format of "deploy <CountryId> <No. of armies>".
+Please enter an input: 
+
+
+Issuing orders for player Yajing:
+
+
+Please enter an input: 
+
+
+Issuing orders for player Sherwyn:
+
+
+Please enter an input: 
+
+
+Issuing orders for player Yajing:
+
+
+Please enter an input: 
+Invalid input! The entered number should be less than the number of reinforcement soldiers. Please try again.
+Please enter your order in the format of "deploy <CountryId> <No. of armies>".
+Please enter an input: 
+
+
+Issuing orders for player Yajing:
+
+
+Please enter an input: 
+
+
+Executing orders now...
+Issuing orders for player Darlene:
+
+
+Please enter an input: 
+Displaying Map
+Map is valid
+
+
+Issuing orders for player Darlene:
+
+
+Please enter an input: 

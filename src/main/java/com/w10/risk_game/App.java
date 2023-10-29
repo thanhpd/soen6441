@@ -1,29 +1,35 @@
 package com.w10.risk_game;
 
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.loggers.ConsoleLogger;
+import com.w10.risk_game.utils.loggers.FileLogger;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import com.w10.risk_game.views.GameUI;
 
 /**
  * Initialize the Application
  */
 public class App {
-	/**
-	 * The main function creates a GameUI object and runs the startup phase of the
-	 * game.
-	 *
-	 * @param args
-	 *            - passed in arguments for the application. The code is the main
-	 *            method of the application. It initializes a GameEngine object and
-	 *            starts a loop that prompts the user for input and performs
-	 *            different actions based on the input.
-	 */
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
+	public App() {
+		d_logger.attach(new ConsoleLogger());
+		d_logger.attach(new FileLogger());
+	}
+
 	public static void main(String[] args) {
+		App d_app = new App();
+		d_app.startGame();
+	}
+
+	public void startGame() {
 		GameUI l_gameUI = new GameUI();
 		try {
 			l_gameUI.runStartUpPhase();
 		} catch (Exception e) {
-			System.out.println(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
-			System.out.println(e.getMessage());
+			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+			d_logger.log(e.getMessage());
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.w10.risk_game.command;
+package com.w10.risk_game.commands;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;

@@ -3,8 +3,8 @@ package com.w10.risk_game.models;
 import java.util.List;
 import java.util.Scanner;
 
-import com.w10.risk_game.command.Deploy;
-import com.w10.risk_game.command.Order;
+import com.w10.risk_game.commands.Deploy;
+import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.views.GameUI;
 
@@ -172,55 +172,93 @@ public class Player {
 	 * This method is used to issue an order This method gets the command input,
 	 * creates an order object and adds it to the list of orders
 	 */
-	public void issueOrder() {
-		// Step 1: Initialize the variables
-		List<Country> l_countries = this.getCountriesOwned();
-		boolean l_again = true;
-		boolean l_failed = false;
-		Scanner l_scanner = new Scanner(System.in);
-		// Step 2: Enter loop to get the input
-		while (l_again) {
-			// Step 3: Check the input format, order
-			boolean l_isValidFormat;
-			boolean l_isValidOrder;
-			boolean l_isValidCountry;
-			boolean l_isValidNum;
-			String l_input = "";
-			if (l_failed) {
-				System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
-				System.out.print(Constants.USER_INPUT_REQUEST);
-				l_input = l_scanner.nextLine();
-			} else {
-				l_input = GameUI.Command;
-			}
-			String[] l_inputArray = l_input.split(" ");
-			// check the input format
-			l_isValidFormat = checkValidForm(l_inputArray);
-			if (!l_isValidFormat) {
-				l_failed = true;
-				continue;
-			}
-			String l_orderType = l_inputArray[0];
-			String l_countryId = l_inputArray[1];
-			String l_num = l_inputArray[2];
-			l_isValidOrder = checkValidOrder(l_orderType);
-			l_isValidCountry = checkValidCountry(l_countries, l_countryId);
-			l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
-			// Step 4: If the input is valid, create an order object and add it to the list.
-			// If not, ask the user to enter again
-			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
-				Order order = new Deploy(this, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
-				d_orders.add(order);
-				deployArmies(Integer.parseInt(l_num));
-				l_again = false;
-				l_failed = false;
-			} else {
-				l_again = true;
-				l_failed = true;
-			}
+//	public void issueOrder() {
+//		// Step 1: Initialize the variables
+//		List<Country> l_countries = this.getCountriesOwned();
+//		boolean l_again = true;
+//		boolean l_failed = false;
+//		Scanner l_scanner = new Scanner(System.in);
+//		// Step 2: Enter loop to get the input
+//		while (l_again) {
+//			// Step 3: Check the input format, order
+//			boolean l_isValidFormat;
+//			boolean l_isValidOrder;
+//			boolean l_isValidCountry;
+//			boolean l_isValidNum;
+//			String l_input = "";
+//			if (l_failed) {
+//				System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
+//				System.out.print(Constants.USER_INPUT_REQUEST);
+//				l_input = l_scanner.nextLine();
+//			} else {
+//				l_input = GameUI.Command;
+//			}
+//			String[] l_inputArray = l_input.split(" ");
+//			// check the input format
+//			l_isValidFormat = checkValidForm(l_inputArray);
+//			if (!l_isValidFormat) {
+//				l_failed = true;
+//				continue;
+//			}
+//			String l_orderType = l_inputArray[0];
+//			String l_countryId = l_inputArray[1];
+//			String l_num = l_inputArray[2];
+//			l_isValidOrder = checkValidOrder(l_orderType);
+//			l_isValidCountry = checkValidCountry(l_countries, l_countryId);
+//			l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
+//			// Step 4: If the input is valid, create an order object and add it to the list.
+//			// If not, ask the user to enter again
+//			if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
+//				Order order = new Deploy(this, Integer.parseInt(l_countryId), Integer.parseInt(l_num));
+//				d_orders.add(order);
+//				deployArmies(Integer.parseInt(l_num));
+//				l_again = false;
+//				l_failed = false;
+//			} else {
+//				l_again = true;
+//				l_failed = true;
+//			}
+//		}
+//	}
+	public void issueOrder(){
+		String l_input = GameUI.Command;
+		String[] l_inputArray = l_input.split(" ");
+		String l_orderType = l_inputArray[0];
+		switch(l_orderType){
+			case "deploy":
+				String l_countryId = l_inputArray[1];
+				String l_num = l_inputArray[2];
+				boolean l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
+				boolean l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
+				System.out.println("Enter deploy order");
+				if (l_isValidCountry && l_isValidNum){
+					Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]), Integer.parseInt(l_inputArray[2]));
+					d_orders.add(order);
+					deployArmies(Integer.parseInt(l_inputArray[2]));
+				}else{
+					System.out.println("This deploy order is invalid. It will not be added to the list of orders.");
+				}
+				break;
+			case "advance":
+				// TODO: add advance object to d_orders
+				break;
+			case "bomb":
+				// TODO: add bomb object to d_orders
+				break;
+			case "blockade":
+				// TODO: add blockade object to d_orders
+				break;
+			case "airlift":
+				// TODO add airlift object to d_orders
+				break;
+			case "negotiate":
+				// TODO add negotiate object to d_orders
+				break;
+			default:
+				System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+				break;
 		}
 	}
-
 	/**
 	 * The function "nextOrder" returns and removes the first element from a list of
 	 * player's orders.

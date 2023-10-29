@@ -1,4 +1,4 @@
-package com.w10.risk_game.command;
+package com.w10.risk_game.commands;
 
 /**
  * This class is an abstract class for order. It defines the basic behavior

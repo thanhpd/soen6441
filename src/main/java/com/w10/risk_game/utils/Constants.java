@@ -90,7 +90,7 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", or \"negotiate\". Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The entered number should be less than the number of reinforcement soldiers. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";

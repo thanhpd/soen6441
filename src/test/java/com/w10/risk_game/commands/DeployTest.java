@@ -1,7 +1,7 @@
-package com.w10.risk_game.models;
+package com.w10.risk_game.commands;
 
-import com.w10.risk_game.command.Deploy;
-import com.w10.risk_game.command.Order;
+import com.w10.risk_game.models.Country;
+import com.w10.risk_game.models.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,16 +10,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
- * This is a test class for Order
+ * This is a test class for deploy order
  *
  * @author Yajing Liu
  */
-public class OrderTest {
+public class DeployTest {
 	Order d_order1;
 	Player d_player1;
 	/**
 	 * This method is to set up the test environment
-	 *
 	 */
 	@BeforeEach
 	public void setUp() {

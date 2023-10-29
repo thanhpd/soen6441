@@ -52,6 +52,7 @@ public class GameUI {
 				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
 
 				switch (l_mainCommand) {
+
 					// Map editor phase
 					case Constants.USER_INPUT_COMMAND_LOADMAP:
 						String[] l_mapName = l_argList[1].split("/");
@@ -210,7 +211,6 @@ public class GameUI {
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
 						d_gameEngine.issuePlayerOrder();
-						System.out.println(l_mainCommand);
 						if (l_player.getLeftoverArmies() == 0) {
 							d_gameEngine.conquerCount();
 						}

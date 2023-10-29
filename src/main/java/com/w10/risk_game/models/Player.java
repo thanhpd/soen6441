@@ -175,7 +175,6 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
-		System.out.println("okoko");
 		// Step 1: Initialize the variables
 		List<Country> l_countries = this.getCountriesOwned();
 		System.out.println(this.d_name + l_countries);

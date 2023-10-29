@@ -602,6 +602,16 @@ public class GameEngine {
 
 	public void conquerCount() {
 		System.out.println("Conquer phase begins!");
-		System.out.println(getCurrentPlayer() + " owns ");
+		int l_countryId = 2;
+		List<List<Country>> allCountries = new ArrayList<>(); // List to store all countries
+
+		System.out.println(this.d_players.values());
+		for (Player l_player : this.d_players.values()) {
+			List<Country> l_countries = l_player.getCountriesOwned();
+			allCountries.add(l_countries); // Adding all countries from this player to the main list
+
+		}
+		System.out.println(allCountries.size());
+
 	}
 }

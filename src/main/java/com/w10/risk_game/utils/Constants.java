@@ -79,7 +79,7 @@ public final class Constants {
 	public static final String SPACE = " ";
 	public static final String NEW_LINE = "\n";
 
-	// Maps Folder Path
+	// Maps Folder Pathx
 	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
 
 	// Map Reader Constants

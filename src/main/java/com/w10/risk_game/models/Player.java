@@ -27,13 +27,13 @@ public class Player {
 	 * (`d_leftoverArmies`).
 	 *
 	 * @param p_name
-	 *            the player name
+	 *                         the player name
 	 * @param p_countriesOwned
-	 *            the list of countries owned by the player
+	 *                         the list of countries owned by the player
 	 * @param p_orders
-	 *            the list of orders to issue
+	 *                         the list of orders to issue
 	 * @param p_leftoverArmies
-	 *            the number of current army in possess by the player
+	 *                         the number of current army in possess by the player
 	 */
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
 		this.d_name = p_name;
@@ -55,8 +55,9 @@ public class Player {
 	 * The function sets the name of the player.
 	 *
 	 * @param p_name
-	 *            The parameter "p_name" is a String that represents the name of the
-	 *            player.
+	 *               The parameter "p_name" is a String that represents the name of
+	 *               the
+	 *               player.
 	 */
 	public void setName(String p_name) {
 		this.d_name = p_name;
@@ -76,8 +77,9 @@ public class Player {
 	 * The function sets the list of countries owned by a player.
 	 *
 	 * @param p_countriesOwned
-	 *            This parameter is a List of objects of type Country. It represents
-	 *            the countries that are owned by a player.
+	 *                         This parameter is a List of objects of type Country.
+	 *                         It represents
+	 *                         the countries that are owned by a player.
 	 */
 	public void setCountriesOwned(List<Country> p_countriesOwned) {
 		this.d_countriesOwned = p_countriesOwned;
@@ -97,7 +99,7 @@ public class Player {
 	 * countries.
 	 *
 	 * @param p_CountryId
-	 *            An integer representing the ID of a country.
+	 *                    An integer representing the ID of a country.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean hasCountry(int p_CountryId) {
@@ -116,7 +118,7 @@ public class Player {
 	 * The function sets the list of orders for a given player.
 	 *
 	 * @param p_orders
-	 *            The parameter "p_orders" is a List of Order of a player.
+	 *                 The parameter "p_orders" is a List of Order of a player.
 	 */
 	public void setOrders(List<Order> p_orders) {
 		this.d_orders = p_orders;
@@ -136,8 +138,9 @@ public class Player {
 	 * The function sets the value of the "leftoverArmies" variable.
 	 *
 	 * @param p_leftoverArmies
-	 *            The parameter "p_leftoverArmies" is an integer that represents the
-	 *            number of leftover armies.
+	 *                         The parameter "p_leftoverArmies" is an integer that
+	 *                         represents the
+	 *                         number of leftover armies.
 	 */
 	public void setLeftoverArmies(int p_leftoverArmies) {
 		this.d_leftoverArmies = p_leftoverArmies;
@@ -148,8 +151,8 @@ public class Player {
 	 * leftover armies.
 	 *
 	 * @param p_num
-	 *            The parameter "p_num" represents the number of armies that are
-	 *            being deployed.
+	 *              The parameter "p_num" represents the number of armies that are
+	 *              being deployed.
 	 */
 	public void deployArmies(int p_num) {
 		this.d_leftoverArmies -= p_num;
@@ -159,8 +162,9 @@ public class Player {
 	 * The function adds a specified number of armies to a player's leftoverArmies.
 	 *
 	 * @param p_num
-	 *            The parameter "p_num" represents the number of armies that will be
-	 *            added to the existing number of leftover armies.
+	 *              The parameter "p_num" represents the number of armies that will
+	 *              be
+	 *              added to the existing number of leftover armies.
 	 */
 	public void addArmies(int p_num) {
 		this.d_leftoverArmies += p_num;
@@ -171,8 +175,10 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
+		System.out.println("okoko");
 		// Step 1: Initialize the variables
 		List<Country> l_countries = this.getCountriesOwned();
+		System.out.println(this.d_name + l_countries);
 		boolean l_again = true;
 		boolean l_failed = false;
 		Scanner l_scanner = new Scanner(System.in);
@@ -234,7 +240,7 @@ public class Player {
 	 * parts (one string and two integers)
 	 *
 	 * @param p_inputArray
-	 *            the input string
+	 *                     the input string
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidForm(String[] p_inputArray) {
@@ -268,7 +274,7 @@ public class Player {
 	 * "deploy"
 	 *
 	 * @param p_orderType
-	 *            the order type
+	 *                    the order type
 	 * @return boolean value to show whether the order type is valid
 	 */
 	public boolean checkValidOrder(String p_orderType) {
@@ -285,9 +291,9 @@ public class Player {
 	 * of the countries owned by the player
 	 *
 	 * @param p_countries
-	 *            the list of countries owned by the player
+	 *                    the list of countries owned by the player
 	 * @param p_countryId
-	 *            the country id
+	 *                    the country id
 	 * @return boolean value to show whether the country id is valid
 	 */
 	public boolean checkValidCountry(List<Country> p_countries, String p_countryId) {
@@ -305,7 +311,7 @@ public class Player {
 	 * should be less than the number of leftover armies
 	 *
 	 * @param p_num
-	 *            the number of armies
+	 *              the number of armies
 	 * @return boolean value to show whether the number of armies is valid
 	 */
 	public boolean checkValidArmy(int p_num) {

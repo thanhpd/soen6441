@@ -32,5 +32,4 @@ public class FileLogger implements Observer {
 			e.printStackTrace();
 		}
 	}
-
 }

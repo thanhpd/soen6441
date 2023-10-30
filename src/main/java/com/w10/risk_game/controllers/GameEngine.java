@@ -527,7 +527,8 @@ public class GameEngine {
 	public void issuePlayerOrder() {
 		this.d_currentPlayer.issueOrder();
 		this.d_currentPlayerIndex += 1;
-		this.d_currentPlayer = this.d_playerList.get(d_currentPlayerIndex % this.d_playerList.size());
+		this.d_currentPlayer = this.d_playerList.get(d_currentPlayerIndex %
+				this.d_playerList.size());
 	}
 
 	/**
@@ -603,7 +604,13 @@ public class GameEngine {
 	}
 
 	public void conquerCount() {
+
+		this.d_playerList.get(0);
+		System.out.println("The current player is " + this.d_playerList.get(0).getName());
+		System.out.println("The second player is " + this.d_playerList.get(1).getName());
+
 		int p1_countryArmies = 0;
+
 		int p2_countryArmies = 0;
 		int new_army = 0;
 		System.out.println("Conquer phase begins!");
@@ -616,19 +623,24 @@ public class GameEngine {
 		System.out.println("Enter id of enemy country: ");
 		int e_countryId = scanner.nextInt();
 
+		System.out.println("You have a total of " + this.d_gameMap.findCountry(my_countryId).getArmyCount() + " armies");
 		System.out.println("Enter how many army you want to deploy: ");
 		int f_army = scanner.nextInt();
 
 		System.out.println(this.d_gameMap.findCountry(my_countryId).getCountryName());
 
 		if (this.d_gameMap.findCountry(my_countryId).hasNeighbor(this.d_gameMap.findCountry(e_countryId))) {
-			// p1_countryArmies =
 			this.d_gameMap.findCountry(my_countryId).getArmyCount();
 			p2_countryArmies = this.d_gameMap.findCountry(e_countryId).getArmyCount();
 			new_army = p2_countryArmies - f_army;
 			System.out.println("new army count -> " + new_army);
 			this.d_gameMap.findCountry(e_countryId).setArmyCount(new_army);
-
+			if (this.d_gameMap.findCountry(e_countryId).getArmyCount() == 0) {
+				this.d_gameMap.findCountry(e_countryId).setOwner(d_currentPlayer);
+				System.out.println(this.d_gameMap.findCountry(e_countryId).getCountryName() + "Conquered! ");
+				System.out.println("Card");
+			}
 		}
+
 	}
 }

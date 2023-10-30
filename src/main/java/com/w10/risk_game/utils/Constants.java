@@ -152,6 +152,6 @@ public final class Constants {
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
 	// Logger
-	public static final String LOGGER_FILE_NAME = "/Users/sherwyndsouza/Desktop/GitHub/soen6441/src/main/resources/logs/log.txt";
+	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
 
 }

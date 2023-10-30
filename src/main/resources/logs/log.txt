@@ -48,14 +48,6 @@ Running the -add option with the parameters [Omnia].
 Created Player: Omnia
 
 Please enter a command: 
-Command entered is: gameplayer -add Yajing
-
-===========
-Running the -add option with the parameters [Yajing].
-
-Created Player: Yajing
-
-Please enter a command: 
 Command entered is: gameplayer -remove Omnia
 
 ===========
@@ -64,8 +56,12 @@ Running the -remove option with the parameters [Omnia].
 Removed Player: Omnia
 
 Please enter a command: 
-Command entered is: assigncountires
-Please enter a valid command!
+Command entered is: gameplayer -add Yajing
+
+===========
+Running the -add option with the parameters [Yajing].
+
+Created Player: Yajing
 
 Please enter a command: 
 Command entered is: assigncountries
@@ -89,25 +85,43 @@ Issuing orders for player Darlene:
 You can issue orders for 3 armies
 
 Please enter a command: 
-Command entered is: deploy 23 3
+Command entered is: deploy 23 2
+Invalid input! The country id should be one of the countries owned by the player.
+This deploy order is invalid. It will not be added to the list of orders.
 
 Issuing orders for player Yajing:
 You can issue orders for 3 armies
 
 Please enter a command: 
-Command entered is: deploy 19 1
+Command entered is: deploy 24 3
+Invalid input! The country id should be one of the countries owned by the player.
+This deploy order is invalid. It will not be added to the list of orders.
 
 Issuing orders for player Sherwyn:
 You can issue orders for 3 armies
 
 Please enter a command: 
-Command entered is: deploy 24 3
+Command entered is: deploy 23 3
 
-Issuing orders for player Yajing:
-You can issue orders for 2 armies
+Issuing orders for player Darlene:
+You can issue orders for 3 armies
 
 Please enter a command: 
-Command entered is: deploy 16 2
+Command entered is: deploy 24 5
+Invalid input! The entered number should be less than the number of reinforcement soldiers.
+This deploy order is invalid. It will not be added to the list of orders.
+
+Issuing orders for player Yajing:
+You can issue orders for 3 armies
+
+Please enter a command: 
+Command entered is: deploy 19 3
+
+Issuing orders for player Darlene:
+You can issue orders for 3 armies
+
+Please enter a command: 
+Command entered is: deploy 24 3
 
 Executing orders now...
 Issuing orders for player Darlene:

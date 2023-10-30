@@ -605,51 +605,30 @@ public class GameEngine {
 	public void conquerCount() {
 		int p1_countryArmies = 0;
 		int p2_countryArmies = 0;
+		int new_army = 0;
 		System.out.println("Conquer phase begins!");
 
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Enter id of your country: ");
-		String my_country_id = scanner.nextLine(); // Reads a line of input
+		int my_countryId = scanner.nextInt();
 
 		System.out.println("Enter id of enemy country: ");
-		String enemy_country_id = scanner.nextLine(); // Reads a line of input
+		int e_countryId = scanner.nextInt();
 
 		System.out.println("Enter how many army you want to deploy: ");
-		String deploy_army = scanner.nextLine(); // Reads a line of input
+		int f_army = scanner.nextInt();
 
-		List<List<Country>> allCountries = new ArrayList<>(); // List to store all countries
-		for (Player l_player : this.d_players.values()) {
-			List<Country> l_countries = l_player.getCountriesOwned();
-			allCountries.add(l_countries); // Adding all countries from this player to the main list
+		System.out.println(this.d_gameMap.findCountry(my_countryId).getCountryName());
+
+		if (this.d_gameMap.findCountry(my_countryId).hasNeighbor(this.d_gameMap.findCountry(e_countryId))) {
+			// p1_countryArmies =
+			this.d_gameMap.findCountry(my_countryId).getArmyCount();
+			p2_countryArmies = this.d_gameMap.findCountry(e_countryId).getArmyCount();
+			new_army = p2_countryArmies - f_army;
+			System.out.println("new army count -> " + new_army);
+			this.d_gameMap.findCountry(e_countryId).setArmyCount(new_army);
 
 		}
-		List<Country> p1_countryOwned = allCountries.get(0);
-		List<Country> p2_countryOwned = allCountries.get(1);
-
-		for (Country l_country : p1_countryOwned) {
-
-			if (l_country.hasNeighbor(Integer.parseInt(enemy_country_id))) {
-				if (l_country.getCountryId() == Integer.parseInt(my_country_id)) {
-
-					p1_countryArmies = l_country.getArmyCount();
-
-				}
-			} else {
-				System.out.println("Not a neighbouring country");
-			}
-		}
-
-		for (Country l_country : p2_countryOwned) {
-
-			if (l_country.getCountryId() == Integer.parseInt(enemy_country_id)) {
-				p2_countryArmies = l_country.getArmyCount();
-
-			}
-		}
-
-		int new_army = Integer.parseInt(deploy_army) - p2_countryArmies;
-
-		System.out.println(new_army);
 	}
 }

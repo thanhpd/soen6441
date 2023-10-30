@@ -232,7 +232,6 @@ public class Player {
 				String l_num = l_inputArray[2];
 				boolean l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
 				boolean l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
-				System.out.println("Enter deploy order");
 				if (l_isValidCountry && l_isValidNum) {
 					Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
 							Integer.parseInt(l_inputArray[2]));

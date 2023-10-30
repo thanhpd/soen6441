@@ -13,35 +13,63 @@ You can enter any of the below commands:
 -> assigncountries
 -> quit
 
-Please enter an input: 
+Please enter a command: 
+Command entered is: loadmap src/main/resources/maps/europe.map
 Loading Map: europe.map
 Map is valid
 
-
-Please enter an input: 
+Please enter a command: 
+Command entered is: showmap
 Displaying Map
 Map is valid
 
+Please enter a command: 
+Command entered is: gameplayer -add Sherwyn
 
-Please enter an input: 
+===========
+Running the -add option with the parameters [Sherwyn].
 
+Created Player: Sherwyn
 
-Please enter an input: 
+Please enter a command: 
+Command entered is: gameplayer -add Darlene
 
+===========
+Running the -add option with the parameters [Darlene].
 
-Please enter an input: 
+Created Player: Darlene
 
+Please enter a command: 
+Command entered is: gameplayer -add Omnia
 
-Please enter an input: 
+===========
+Running the -add option with the parameters [Omnia].
+
+Created Player: Omnia
+
+Please enter a command: 
+Command entered is: gameplayer -add Yajing
+
+===========
+Running the -add option with the parameters [Yajing].
+
+Created Player: Yajing
+
+Please enter a command: 
+Command entered is: gameplayer -remove Omnia
+
+===========
+Running the -remove option with the parameters [Omnia].
+
 Removed Player: Omnia
 
+Please enter a command: 
+Command entered is: assigncountires
+Please enter a valid command!
 
-Please enter an input: 
-
-
-Please enter an input: 
+Please enter a command: 
+Command entered is: assigncountries
 Assigning Countries...
-
 
 You are now in the Gameplay phase:
 You can enter any of the below commands:
@@ -50,59 +78,48 @@ You can enter any of the below commands:
 -> quit
 
 Issuing orders for player Darlene:
+You can issue orders for 3 armies
 
-
-Please enter an input: 
+Please enter a command: 
+Command entered is: showmap
 Displaying Map
 Map is valid
 
-
 Issuing orders for player Darlene:
+You can issue orders for 3 armies
 
-
-Please enter an input: 
-Invalid input! The country id should be one of the countries owned by the player. Please try again.
-Please enter your order in the format of "deploy <CountryId> <No. of armies>".
-Please enter an input: 
-
+Please enter a command: 
+Command entered is: deploy 23 3
 
 Issuing orders for player Yajing:
+You can issue orders for 3 armies
 
-
-Please enter an input: 
-
+Please enter a command: 
+Command entered is: deploy 19 1
 
 Issuing orders for player Sherwyn:
+You can issue orders for 3 armies
 
-
-Please enter an input: 
-
-
-Issuing orders for player Yajing:
-
-
-Please enter an input: 
-Invalid input! The entered number should be less than the number of reinforcement soldiers. Please try again.
-Please enter your order in the format of "deploy <CountryId> <No. of armies>".
-Please enter an input: 
-
+Please enter a command: 
+Command entered is: deploy 24 3
 
 Issuing orders for player Yajing:
+You can issue orders for 2 armies
 
-
-Please enter an input: 
-
+Please enter a command: 
+Command entered is: deploy 16 2
 
 Executing orders now...
 Issuing orders for player Darlene:
+You can issue orders for 3 armies
 
-
-Please enter an input: 
+Please enter a command: 
+Command entered is: showmap
 Displaying Map
 Map is valid
 
-
 Issuing orders for player Darlene:
+You can issue orders for 3 armies
 
-
-Please enter an input: 
+Please enter a command: 
+Command entered is: quit

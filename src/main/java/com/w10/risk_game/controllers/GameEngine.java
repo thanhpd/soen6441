@@ -4,12 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.models.Order;
+import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
@@ -35,6 +36,7 @@ public class GameEngine {
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
+	private Formatter d_formatter;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -99,10 +101,14 @@ public class GameEngine {
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
+
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
-				System.out.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
+				this.d_formatter = new Formatter();
+				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
+				d_logger.log(this.d_formatter.toString());
+				this.d_formatter.close();
 			} else {
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
@@ -170,7 +176,7 @@ public class GameEngine {
 					d_logger.log(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
 				}
 			}
-			d_logger.log("\n");
+			d_logger.log("");
 		});
 	}
 
@@ -189,8 +195,13 @@ public class GameEngine {
 
 			// If there are more players than countries throw error
 			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-						this.d_players.size());
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+						this.d_gameMap.getCountries().size(), this.d_players.size());
+				d_logger.log(this.d_formatter.toString());
+				this.d_formatter.close();;
+
 				return false;
 			}
 
@@ -216,8 +227,12 @@ public class GameEngine {
 
 			return true;
 		} catch (Exception e) {
-			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-					this.d_players.size());
+			this.d_formatter = new Formatter();
+
+			this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+					this.d_gameMap.getCountries().size(), this.d_players.size());
+			d_logger.log(this.d_formatter.toString());
+			this.d_formatter.close();
 			return false;
 		}
 	}
@@ -288,11 +303,19 @@ public class GameEngine {
 		} else {
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
-				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
+				d_logger.log(this.d_formatter.toString());
+				this.d_formatter.close();
 				return new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
 			} catch (IOException e) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
+				d_logger.log(this.d_formatter.toString());
+				this.d_formatter.close();
 			}
 		}
 		return false;

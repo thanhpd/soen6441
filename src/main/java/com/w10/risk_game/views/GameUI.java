@@ -1,6 +1,7 @@
 package com.w10.risk_game.views;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 
 import com.w10.risk_game.controllers.GameEngine;
@@ -19,6 +20,7 @@ public class GameUI {
 
 	private final GameEngine d_gameEngine;
 	private boolean d_startGamePhase;
+	private Formatter d_formatter;
 
 	public static String Command = "";
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
@@ -47,6 +49,7 @@ public class GameUI {
 				d_logger.log(Constants.USER_INPUT_REQUEST);
 				Scanner l_scanner = new Scanner(System.in);
 				Command = l_scanner.nextLine();
+				d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 				ArrayList<ArrayList<String>> l_listOfOptions = CommandInterpreter.GetCommandOptions(Command);
@@ -158,7 +161,7 @@ public class GameUI {
 					default :
 						d_logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
-				d_logger.log("\n");
+				d_logger.log("");
 				if (l_exit) {
 					if (this.d_startGamePhase)
 						this.runGamePlayPhase();
@@ -167,7 +170,7 @@ public class GameUI {
 			} catch (Exception e) {
 				d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 				d_logger.log(e.getMessage());
-				d_logger.log("\n");
+				d_logger.log("");
 			}
 		}
 	}
@@ -192,12 +195,19 @@ public class GameUI {
 			}
 			l_player = d_gameEngine.getCurrentPlayer();
 			d_logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
-			System.out.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
-			d_logger.log("\n");
+
+			this.d_formatter = new Formatter();
+			this.d_formatter.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES, l_player.getLeftoverArmies());
+			d_logger.log(this.d_formatter.toString());
+			this.d_formatter.close();
+			d_logger.log("");
+
 			try {
 				d_logger.log(Constants.USER_INPUT_REQUEST);
 				Scanner l_scanner = new Scanner(System.in);
 				Command = l_scanner.nextLine();
+				d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
+
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
 
@@ -224,11 +234,11 @@ public class GameUI {
 				if (l_exit) {
 					break;
 				}
-				d_logger.log("\n");
+				d_logger.log("");
 			} catch (Exception e) {
 				d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 				d_logger.log(e.getMessage());
-				d_logger.log("\n");
+				d_logger.log("");
 			}
 		}
 	}
@@ -241,6 +251,10 @@ public class GameUI {
 	 *            iteration.
 	 */
 	private void displayLoopIterationMessage(ArrayList<String> p_options) {
-		System.out.format(Constants.CLI_ITERATION_OPTION, p_options.get(0), p_options.subList(1, p_options.size()));
+		this.d_formatter = new Formatter();
+		this.d_formatter.format(Constants.CLI_ITERATION_OPTION, p_options.get(0),
+				p_options.subList(1, p_options.size()));
+		d_logger.log(this.d_formatter.toString());
+		this.d_formatter.close();
 	}
 }

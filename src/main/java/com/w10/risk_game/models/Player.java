@@ -213,7 +213,6 @@ public class Player {
 				break;
 		}
 	}
-
 	/**
 	 * The function "nextOrder" returns and removes the first element from a list of
 	 * player's orders.

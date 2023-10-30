@@ -8,18 +8,9 @@ public abstract class MapEditorPhase extends Phase {
     public MapEditorPhase(GameEngine p_GameEngine){
         this.d_GameEngine=p_GameEngine;
     }
-
+    
     @Override
-    public void attack() {
-        super.printInvalidCommandMessage();
-    } @Override
     public void printInvalidCommandMessage() {
-        // TODO Auto-generated method stub
-        super.printInvalidCommandMessage();
-    }
-
-    @Override
-    public void loadMap(String p_filePath) {
         // TODO Auto-generated method stub
         super.printInvalidCommandMessage();
     }
@@ -47,7 +38,7 @@ public abstract class MapEditorPhase extends Phase {
     @Override
     public boolean assignCountries() {
         // TODO Auto-generated method stub
-        super.printInvalidCommandMessage();
+       super.printInvalidCommandMessage(); 
         return false;
     }
 

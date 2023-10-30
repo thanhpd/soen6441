@@ -7,11 +7,6 @@ public class PostLoad extends MapEditorPhase {
     public PostLoad(GameEngine p_GameEngine) {
         super(p_GameEngine);
     }
-
-    public void loadMap() {
-
-        System.out.println("map has already been loaded");
-    }
          @Override
         public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
            super.d_GameEngine.addCountry(p_countryId, p_countryName, p_continentName);
@@ -45,5 +40,9 @@ public class PostLoad extends MapEditorPhase {
         public void showMap() {
             // TODO Auto-generated method stub
             super.d_GameEngine.showMap();
+        }
+        @Override
+        public void loadMap(String p_filePath) {
+           System.out.println("map has already been loaded");
         }
 }

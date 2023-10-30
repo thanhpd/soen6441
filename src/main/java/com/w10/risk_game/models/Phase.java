@@ -13,7 +13,6 @@ public abstract class Phase {
     public abstract void removeContinent(String p_continentName);
     public abstract void removeNeighbor(int p_countryId, int p_neighborCountryId);
     public abstract void saveMap(String p_mapFilePath);
-    public abstract void attack();
     public abstract void showMap();
     public abstract void createPlayer(String p_playerName);
     public abstract void removePlayer(String p_playerName);

@@ -12,8 +12,6 @@ import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Order;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.models.phases.MapEditorPhase;
-import com.w10.risk_game.models.phases.StartupPhase;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;

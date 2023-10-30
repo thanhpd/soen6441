@@ -53,7 +53,7 @@ public class GameEngine {
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
 		this.d_currentPlayerIndex = 0;
-		this.phase = new StartupPhase();
+		//this.phase = new StartupPhase();
 	}
 
 	/**

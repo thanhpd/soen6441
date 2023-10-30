@@ -172,56 +172,6 @@ public class Player {
 	 * This method is used to issue an order This method gets the command input,
 	 * creates an order object and adds it to the list of orders
 	 */
-	// public void issueOrder() {
-	// // Step 1: Initialize the variables
-	// List<Country> l_countries = this.getCountriesOwned();
-	// boolean l_again = true;
-	// boolean l_failed = false;
-	// Scanner l_scanner = new Scanner(System.in);
-	// // Step 2: Enter loop to get the input
-	// while (l_again) {
-	// // Step 3: Check the input format, order
-	// boolean l_isValidFormat;
-	// boolean l_isValidOrder;
-	// boolean l_isValidCountry;
-	// boolean l_isValidNum;
-	// String l_input = "";
-	// if (l_failed) {
-	// System.out.println(Constants.PLAYER_ISSUE_ORDER_START);
-	// System.out.print(Constants.USER_INPUT_REQUEST);
-	// l_input = l_scanner.nextLine();
-	// } else {
-	// l_input = GameUI.Command;
-	// }
-	// String[] l_inputArray = l_input.split(" ");
-	// // check the input format
-	// l_isValidFormat = checkValidForm(l_inputArray);
-	// if (!l_isValidFormat) {
-	// l_failed = true;
-	// continue;
-	// }
-	// String l_orderType = l_inputArray[0];
-	// String l_countryId = l_inputArray[1];
-	// String l_num = l_inputArray[2];
-	// l_isValidOrder = checkValidOrder(l_orderType);
-	// l_isValidCountry = checkValidCountry(l_countries, l_countryId);
-	// l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
-	// // Step 4: If the input is valid, create an order object and add it to the
-	// list.
-	// // If not, ask the user to enter again
-	// if (l_isValidFormat && l_isValidOrder && l_isValidCountry && l_isValidNum) {
-	// Order order = new Deploy(this, Integer.parseInt(l_countryId),
-	// Integer.parseInt(l_num));
-	// d_orders.add(order);
-	// deployArmies(Integer.parseInt(l_num));
-	// l_again = false;
-	// l_failed = false;
-	// } else {
-	// l_again = true;
-	// l_failed = true;
-	// }
-	// }
-	// }
 	public void issueOrder() {
 		String l_input = GameUI.Command;
 		String[] l_inputArray = l_input.split(" ");

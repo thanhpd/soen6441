@@ -7,7 +7,10 @@ package com.w10.risk_game.commands;
  * @author Yajing Liu
  */
 public abstract class Order {
-	public Order() {
+	/**
+	 * This is the constructor of Order class
+	 */
+	protected Order() {
 	}
 	/**
 	 * This is an abstract method to execute the order

@@ -13,6 +13,8 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Order;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.models.Card;
+import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
@@ -636,9 +638,12 @@ public class GameEngine {
 			System.out.println("new army count -> " + new_army);
 			this.d_gameMap.findCountry(e_countryId).setArmyCount(new_army);
 			if (this.d_gameMap.findCountry(e_countryId).getArmyCount() == 0) {
+				// not working set owner
 				this.d_gameMap.findCountry(e_countryId).setOwner(d_currentPlayer);
 				System.out.println(this.d_gameMap.findCountry(e_countryId).getCountryName() + "Conquered! ");
-				System.out.println("Card");
+				Card myCard = new Card();
+				CardType cardType = myCard.getCardType();
+				System.out.println("Card --> " + cardType);
 			}
 		}
 

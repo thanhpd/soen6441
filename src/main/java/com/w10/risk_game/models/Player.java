@@ -18,6 +18,7 @@ public class Player {
 	private List<Country> d_countriesOwned;
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
+	
 
 	/**
 	 * The `Player` constructor is initializing a new instance of the `Player` class
@@ -95,8 +96,9 @@ public class Player {
 	}
 
 	/**
-	 * The function checks if a given country ID exists in a list of owned
-	 * countries.
+	 * The function checks
+		
+
 	 *
 	 * @param p_CountryId
 	 *                    An integer representing the ID of a country.

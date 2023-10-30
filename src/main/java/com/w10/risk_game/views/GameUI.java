@@ -186,6 +186,7 @@ public class GameUI {
 				if (d_gameEngine.checkIfOrdersCanBeExecuted()) {
 					System.out.println(Constants.GAME_ENGINE_EXECUTING_ORDERS);
 					d_gameEngine.executePlayerOrders();
+					d_gameEngine.conquerCount();
 				} else
 					continue;
 			}
@@ -211,9 +212,6 @@ public class GameUI {
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
 						d_gameEngine.issuePlayerOrder();
-						if (l_player.getLeftoverArmies() == 0) {
-							d_gameEngine.conquerCount();
-						}
 						break;
 					// Others
 					case Constants.USER_INPUT_COMMAND_QUIT:

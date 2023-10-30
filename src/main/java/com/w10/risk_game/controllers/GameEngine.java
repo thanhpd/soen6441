@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
@@ -601,17 +603,53 @@ public class GameEngine {
 	}
 
 	public void conquerCount() {
+		int p1_countryArmies = 0;
+		int p2_countryArmies = 0;
 		System.out.println("Conquer phase begins!");
-		int l_countryId = 2;
-		List<List<Country>> allCountries = new ArrayList<>(); // List to store all countries
 
-		System.out.println(this.d_players.values());
+		Scanner scanner = new Scanner(System.in);
+
+		System.out.println("Enter id of your country: ");
+		String my_country_id = scanner.nextLine(); // Reads a line of input
+
+		System.out.println("Enter id of enemy country: ");
+		String enemy_country_id = scanner.nextLine(); // Reads a line of input
+
+		System.out.println("Enter how many army you want to deploy: ");
+		String deploy_army = scanner.nextLine(); // Reads a line of input
+
+		List<List<Country>> allCountries = new ArrayList<>(); // List to store all countries
 		for (Player l_player : this.d_players.values()) {
 			List<Country> l_countries = l_player.getCountriesOwned();
 			allCountries.add(l_countries); // Adding all countries from this player to the main list
 
 		}
-		System.out.println(allCountries.size());
+		List<Country> p1_countryOwned = allCountries.get(0);
+		List<Country> p2_countryOwned = allCountries.get(1);
 
+		for (Country l_country : p1_countryOwned) {
+
+			if (l_country.hasNeighbor(Integer.parseInt(enemy_country_id))) {
+				if (l_country.getCountryId() == Integer.parseInt(my_country_id)) {
+
+					p1_countryArmies = l_country.getArmyCount();
+
+				}
+			} else {
+				System.out.println("Not a neighbouring country");
+			}
+		}
+
+		for (Country l_country : p2_countryOwned) {
+
+			if (l_country.getCountryId() == Integer.parseInt(enemy_country_id)) {
+				p2_countryArmies = l_country.getArmyCount();
+
+			}
+		}
+
+		int new_army = Integer.parseInt(deploy_army) - p2_countryArmies;
+
+		System.out.println(new_army);
 	}
 }

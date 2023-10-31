@@ -200,7 +200,7 @@ public class GameUI {
 					// Show Map Command
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						System.out.println(Constants.CLI_SHOW_MAP);
-						this.d_gameEngine.showMap();
+						this.phase.showMap();
 						break;
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :

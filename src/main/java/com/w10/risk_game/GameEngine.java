@@ -73,95 +73,95 @@ public class GameEngine {
 
 				switch (l_mainCommand) {
 					// Map editor phase
-					case Constants.USER_INPUT_COMMAND_LOADMAP :
+					case Constants.USER_INPUT_COMMAND_LOADMAP:
 						String[] l_mapName = l_argList[1].split("/");
 						d_logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						// this.d_riskGame.loadMap(l_argList[1]);
 						// setPhase(new PreLoad(this));
 						this.phase.loadMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_SAVEMAP :
+					case Constants.USER_INPUT_COMMAND_SAVEMAP:
 						this.phase.saveMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					case Constants.USER_INPUT_COMMAND_SHOWMAP:
 						d_logger.log(Constants.CLI_SHOW_MAP);
 						this.phase.showMap();
 						break;
-					case Constants.USER_INPUT_COMMAND_EDITMAP :
+					case Constants.USER_INPUT_COMMAND_EDITMAP:
 						this.phase.editMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
+					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT:
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
 									this.phase.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
 									this.phase.removeContinent(l_options.get(1));
 									break;
 							}
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
+					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY:
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
 									this.phase.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
 											l_options.get(3));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
 									this.phase.removeCountry(Integer.parseInt(l_options.get(1)));
 									break;
 							}
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
+					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR:
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
 									this.phase.addNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
 									this.phase.removeNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 							}
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
+					case Constants.USER_INPUT_COMMAND_VALIDATEMAP:
 						this.phase.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up phase
-					case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
+					case Constants.USER_INPUT_COMMAND_GAMEPLAYER:
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
 									this.phase.createPlayer(l_options.get(1));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
 									this.phase.removePlayer(l_options.get(1));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL :
+								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL:
 									this.phase.showAllPlayers();
 									break;
 							}
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
+					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES:
 						d_logger.log(Constants.CLI_ASSIGN_COUNTRIES);
 						if (this.phase.assignCountries() && this.phase.checkIfGameCanBegin()) {
 							l_exit = true;
@@ -170,11 +170,11 @@ public class GameEngine {
 						break;
 
 					// Others
-					case Constants.USER_INPUT_COMMAND_QUIT :
+					case Constants.USER_INPUT_COMMAND_QUIT:
 						l_scanner.close();
 						l_exit = true;
 						break;
-					default :
+					default:
 						d_logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
 				d_logger.log("");
@@ -231,21 +231,23 @@ public class GameEngine {
 
 				switch (l_mainCommand) {
 					// Show Map Command
-					case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					case Constants.USER_INPUT_COMMAND_SHOWMAP:
 						System.out.println(Constants.CLI_SHOW_MAP);
 						this.phase.showMap();
 						break;
 					// Issue Order Command
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB:
 						d_riskGame.issuePlayerOrder();
 						break;
 					// Others
-					case Constants.USER_INPUT_COMMAND_QUIT :
+					case Constants.USER_INPUT_COMMAND_QUIT:
 						l_scanner.close();
 						l_exit = true;
 						break;
-					default :
+					default:
 						d_logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
+						d_logger.log("ah");
 				}
 				if (l_exit) {
 					break;
@@ -263,8 +265,8 @@ public class GameEngine {
 	 * The function displays a message with loop iteration options.
 	 *
 	 * @param p_options
-	 *            An ArrayList of Strings containing the options for the loop
-	 *            iteration.
+	 *                  An ArrayList of Strings containing the options for the loop
+	 *                  iteration.
 	 */
 	private void displayLoopIterationMessage(ArrayList<String> p_options) {
 		this.d_formatter = new Formatter();

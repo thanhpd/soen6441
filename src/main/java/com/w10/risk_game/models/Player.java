@@ -1,6 +1,7 @@
 package com.w10.risk_game.models;
 
 import java.util.ArrayList;
+import com.w10.risk_game.commands.Bomb;
 import java.util.List;
 
 import com.w10.risk_game.GameEngine;
@@ -220,7 +221,13 @@ public class Player {
 				// TODO: add advance object to d_orders
 				break;
 			case "bomb" :
-				// TODO: add bomb object to d_orders
+				String l_countryIdToBomb = l_inputArray[1];
+				if (l_countryIdToBomb != null) {
+					Order order = new Bomb(this, Integer.parseInt(l_inputArray[1]));
+					d_orders.add(order);
+				} else {
+					d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+				}
 				break;
 			case "blockade" :
 				// TODO: add blockade object to d_orders

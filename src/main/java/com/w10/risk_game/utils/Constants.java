@@ -40,6 +40,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY = "deploy";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_BOMB = "bomb";
 	public static final String USER_INPUT_ERROR_COMMAND_EMPTY = "The command cannot be empty!";
 	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";

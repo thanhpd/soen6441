@@ -70,8 +70,8 @@ public class CommandInterpreter {
 		// Get all arguments from the command by splitting the string on spaces.
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 
-		if (l_argumentList.length == 0)
-			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
+//		if (l_argumentList.length == 0)
+//			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 
 		// Loop through the arguments
 		for (String l_arg : l_argumentList) {

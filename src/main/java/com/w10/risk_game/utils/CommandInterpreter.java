@@ -2,6 +2,7 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.exceptions.ApplicationException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The CommandInterpreter class provides methods to extract the main command and
@@ -31,7 +32,7 @@ public class CommandInterpreter {
 	 */
 	public static String GetMainCommand(String p_command) throws ApplicationException {
 		if (p_command.isBlank())
-			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_EMPTY);
 		return p_command.split(Constants.REGEX_SPLIT_ON_SPACE)[0];
 	}
 
@@ -50,7 +51,7 @@ public class CommandInterpreter {
 	public static String[] GetArgumentList(String p_command) throws ApplicationException {
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 		if (l_argumentList.length == 0)
-			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_EMPTY);
 		return l_argumentList;
 	}
 
@@ -70,7 +71,7 @@ public class CommandInterpreter {
 		String[] l_argumentList = p_command.split(Constants.REGEX_SPLIT_ON_SPACE);
 
 		if (l_argumentList.length == 0)
-			throw new ApplicationException(Constants.USER_INPUT_COMMAND_INVALID);
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 
 		// Loop through the arguments
 		for (String l_arg : l_argumentList) {
@@ -90,5 +91,78 @@ public class CommandInterpreter {
 		}
 
 		return l_listOfOptions;
+	}
+
+	/**
+	 * The function checks if the given command and its arguments/options are valid
+	 * based on predefined rules.
+	 *
+	 * @param p_argList
+	 *            An array of strings representing the arguments passed to the
+	 *            command.
+	 * @param p_command
+	 *            The command that the user has entered.
+	 * @param p_listOfOptions
+	 *            An ArrayList of ArrayLists of Strings. Each inner ArrayList
+	 *            represents a set of options for a command.
+	 */
+	public static void CheckValidArgumentOptions(String[] p_argList, String p_command,
+			ArrayList<ArrayList<String>> p_listOfOptions) throws ApplicationException {
+		// Define commands that require arguments
+		String[] l_commandsWithArgToCheck = new String[]{Constants.USER_INPUT_COMMAND_LOADMAP,
+				Constants.USER_INPUT_COMMAND_SAVEMAP, Constants.USER_INPUT_COMMAND_EDITMAP,
+				Constants.USER_INPUT_COMMAND_EDIT_CONTINENT, Constants.USER_INPUT_COMMAND_EDIT_COUNTRY,
+				Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR, Constants.USER_INPUT_COMMAND_GAMEPLAYER,
+				Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY};
+		// Check if the command requires arguments and if there's at least one argument
+		// for the command
+		if (Arrays.asList(l_commandsWithArgToCheck).contains(p_command) && p_argList.length < 2) {
+			throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
+		}
+
+		// Define commands that require options
+		String[] l_commandsWithOptionsToCheck = new String[]{Constants.USER_INPUT_COMMAND_EDIT_CONTINENT,
+				Constants.USER_INPUT_COMMAND_EDIT_COUNTRY, Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR,
+				Constants.USER_INPUT_COMMAND_GAMEPLAYER};
+		// Check if the command requires options and if there's at least one option for
+		// the command
+		if (Arrays.asList(l_commandsWithOptionsToCheck).contains(p_command)) {
+			for (ArrayList<String> l_options : p_listOfOptions) {
+				int l_minOptionsLength = GetMinOptionsLength(p_command, l_options);
+
+				if (l_options.size() < l_minOptionsLength) {
+					throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
+				}
+			}
+		}
+	}
+
+	/**
+	 * The function returns the minimum length of options required based on the
+	 * given command and options.
+	 *
+	 * @param p_command
+	 *            The command that the user has entered. It is a string value.
+	 * @param l_options
+	 *            An ArrayList of strings containing the options provided by the
+	 *            user.
+	 * @return The method is returning the minimum length of options required for a
+	 *         given command and options list.
+	 */
+	private static int GetMinOptionsLength(String p_command, ArrayList<String> l_options) {
+		int l_minOptionsLength = 2;
+
+		// For adding continent, there should be 2 values
+		if (p_command.equals(Constants.USER_INPUT_COMMAND_EDIT_CONTINENT)
+				&& l_options.get(0).equals(Constants.USER_INPUT_COMMAND_OPTION_ADD))
+			l_minOptionsLength = 3;
+		// For editing neighbor, there should be 2 values
+		else if (p_command.equals(Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR))
+			l_minOptionsLength = 3;
+		// For adding a country, there should be 3 values
+		else if (p_command.equals(Constants.USER_INPUT_COMMAND_EDIT_COUNTRY)
+				&& l_options.get(0).equals(Constants.USER_INPUT_COMMAND_OPTION_ADD))
+			l_minOptionsLength = 4;
+		return l_minOptionsLength;
 	}
 }

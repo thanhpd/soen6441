@@ -24,7 +24,8 @@ public final class Constants {
 			+ "-> quit\n";
 
 	// User input command constants
-	public static final String USER_INPUT_REQUEST = "Please enter an input: ";
+	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
+	public static final String USER_INPUT_COMMAND_ENTERED = "Command entered is: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
 	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
@@ -94,6 +95,7 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The entered number should be less than the number of reinforcement soldiers.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero.";
+	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT = "This deploy order is invalid. It will not be added to the list of orders.";
 
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";
@@ -148,5 +150,8 @@ public final class Constants {
 
 	// Reinforcements Class constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
+
+	// Logger
+	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
 
 }

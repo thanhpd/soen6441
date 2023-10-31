@@ -2,6 +2,7 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.util.*;
 
@@ -34,39 +35,40 @@ public class MapValidator {
 	 *         the map satisfies all conditions.
 	 */
 	public static boolean IsMapCorrect(GameMap p_gameMap) {
+		LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 		// Check if the map is empty
 		if (IsMapEmpty(p_gameMap)) {
-			System.out.println(Constants.MAP_VALIDATOR_EMPTY_MAP);
+			d_logger.log(Constants.MAP_VALIDATOR_EMPTY_MAP);
 			return false;
 		}
 
 		// Check if the country is referring to a non-declared continent
 		if (HasNonExistentContinent(p_gameMap)) {
-			System.out.println(Constants.MAP_VALIDATOR_CONTINENT_NOT_DECLARED);
+			d_logger.log(Constants.MAP_VALIDATOR_CONTINENT_NOT_DECLARED);
 			return false;
 		}
 
 		// Check if the country is referring to a non-existent country as a neighbor
 		if (HasNonExistentNeighbor(p_gameMap)) {
-			System.out.println(Constants.MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED);
+			d_logger.log(Constants.MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED);
 			return false;
 		}
 
 		// Check if the country is referring to itself as a neighbor
 		if (HasSelfReferencingNeighbor(p_gameMap)) {
-			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR);
+			d_logger.log(Constants.MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR);
 			return false;
 		}
 
 		// Check if all countries are connected using DFS
 		if (!AreCountriesConnected(p_gameMap.getCountries())) {
-			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_INACCESSIBLE);
+			d_logger.log(Constants.MAP_VALIDATOR_COUNTRY_INACCESSIBLE);
 			return false;
 		}
 
 		// Check if each continent is a connected subgraph
 		if (!AreContinentsConnected(p_gameMap)) {
-			System.out.println(Constants.MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED);
+			d_logger.log(Constants.MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED);
 			return false;
 		}
 

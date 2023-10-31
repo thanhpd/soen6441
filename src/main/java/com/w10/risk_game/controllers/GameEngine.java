@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
 import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.Reinforcements;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
  * The GameEngine class is responsible for managing the game map, players,
@@ -34,6 +36,9 @@ public class GameEngine {
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
+	private Formatter d_formatter;
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * Game Engine constructor
@@ -65,14 +70,14 @@ public class GameEngine {
 			if (this.d_gameMap.isMapCreated()) {
 				if (!checkIfMapIsValid()) {
 					this.d_gameMap = null;
-					System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+					d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 				}
 			} else {
-				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+				d_logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
 			}
 
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+			d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 		}
 	}
 
@@ -96,15 +101,20 @@ public class GameEngine {
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
+
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
-				System.out.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
+				this.d_formatter = new Formatter();
+				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
+				d_logger.log(this.d_formatter.toString());
 			} else {
-				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
+				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
+			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
+		} finally {
+			this.d_formatter.close();
 		}
 	}
 
@@ -121,7 +131,7 @@ public class GameEngine {
 	public void removePlayer(String p_playerName) {
 		try {
 			if (!this.d_players.containsKey(p_playerName)) {
-				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
+				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
 				return;
 			}
 			p_playerName = p_playerName.trim();
@@ -146,9 +156,9 @@ public class GameEngine {
 				this.assignPlayersReinforcements();
 			}
 			this.d_players.remove(p_playerName.trim());
-			System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
+			d_logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
+			d_logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
 	}
 
@@ -159,15 +169,15 @@ public class GameEngine {
 	 */
 	public void showAllPlayers() {
 		this.d_players.forEach((p_playerName, p_player) -> {
-			System.out.println(p_playerName);
+			d_logger.log(p_playerName);
 			for (Country c : p_player.getCountriesOwned()) {
 				try {
-					System.out.println(c.getCountryName());
+					d_logger.log(c.getCountryName());
 				} catch (Exception e) {
-					System.out.println(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
+					d_logger.log(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
 				}
 			}
-			System.out.println();
+			d_logger.log("");
 		});
 	}
 
@@ -186,8 +196,12 @@ public class GameEngine {
 
 			// If there are more players than countries throw error
 			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-						this.d_players.size());
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+						this.d_gameMap.getCountries().size(), this.d_players.size());
+				d_logger.log(this.d_formatter.toString());
+				this.d_formatter.close();
 				return false;
 			}
 
@@ -213,9 +227,14 @@ public class GameEngine {
 
 			return true;
 		} catch (Exception e) {
-			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-					this.d_players.size());
+			this.d_formatter = new Formatter();
+
+			this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+					this.d_gameMap.getCountries().size(), this.d_players.size());
+			d_logger.log(this.d_formatter.toString());
 			return false;
+		} finally {
+			this.d_formatter.close();
 		}
 	}
 
@@ -280,16 +299,23 @@ public class GameEngine {
 		// map file
 		if (l_file.exists()) {
 			this.loadMap(p_mapFilePath);
-			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
+			d_logger.log(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
-				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
+				d_logger.log(this.d_formatter.toString());
 				return new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
 			} catch (IOException e) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
+				this.d_formatter = new Formatter();
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
+				d_logger.log(this.d_formatter.toString());
+			} finally {
+				this.d_formatter.close();
 			}
 		}
 		return false;
@@ -309,9 +335,9 @@ public class GameEngine {
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
 			String l_output = this.d_mapEditor.addContinent(p_continentName, p_bonus);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -332,9 +358,9 @@ public class GameEngine {
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		try {
 			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentName);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -349,9 +375,9 @@ public class GameEngine {
 	public void removeContinent(String p_continentName) {
 		try {
 			String l_output = this.d_mapEditor.removeContinent(p_continentName);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -371,9 +397,9 @@ public class GameEngine {
 			if (this.d_isCountriesAssigned) {
 				removeCountryFromPlayer(p_countryId, l_player);
 			}
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -392,9 +418,9 @@ public class GameEngine {
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
 			String l_output = this.d_mapEditor.addNeighbor(p_countryId, p_neighbourCountryId);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -413,9 +439,9 @@ public class GameEngine {
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		try {
 			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighborCountryId);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -437,7 +463,7 @@ public class GameEngine {
 			l_playerCountries.removeIf(p_country -> p_country.getCountryId() == p_countryId);
 			this.d_players.get(p_player.getName()).setCountriesOwned(l_playerCountries);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -454,18 +480,18 @@ public class GameEngine {
 			// else false
 			if (this.d_gameMap.isMapCreated()) {
 				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
-					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
+					d_logger.log(Constants.GAME_ENGINE_MAP_VALID);
 					return true;
 				} else {
-					System.out.println(Constants.GAME_ENGINE_MAP_INVALID);
+					d_logger.log(Constants.GAME_ENGINE_MAP_INVALID);
 					return false;
 				}
 			} else {
-				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+				d_logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
 				return false;
 			}
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
 			return false;
 		}
 	}
@@ -493,7 +519,7 @@ public class GameEngine {
 		if (checkIfMapIsValid()) {
 			this.d_gameMap.saveMap(p_mapFilePath);
 		} else {
-			System.out.println(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
+			d_logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
 	}
 

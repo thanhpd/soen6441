@@ -4,10 +4,7 @@ import java.util.Random;
 
 public enum CardType {
 
-	BOMB,
-	BLOCKADE,
-	AIRLIFT,
-	DIPLOMACY;
+	BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;
 
 	public static CardType getRandomCard() {
 		Random d_Random = new Random();

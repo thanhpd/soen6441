@@ -108,12 +108,13 @@ public class GameEngine {
 				this.d_formatter = new Formatter();
 				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
 				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();
 			} else {
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
 			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
+		} finally {
+			this.d_formatter.close();
 		}
 	}
 
@@ -200,8 +201,7 @@ public class GameEngine {
 				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
 						this.d_gameMap.getCountries().size(), this.d_players.size());
 				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();;
-
+				this.d_formatter.close();
 				return false;
 			}
 
@@ -232,8 +232,9 @@ public class GameEngine {
 			this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
 					this.d_gameMap.getCountries().size(), this.d_players.size());
 			d_logger.log(this.d_formatter.toString());
-			this.d_formatter.close();
 			return false;
+		} finally {
+			this.d_formatter.close();
 		}
 	}
 
@@ -308,13 +309,12 @@ public class GameEngine {
 				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
 				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();
 				return new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
 			} catch (IOException e) {
 				this.d_formatter = new Formatter();
-
 				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
 				d_logger.log(this.d_formatter.toString());
+			} finally {
 				this.d_formatter.close();
 			}
 		}

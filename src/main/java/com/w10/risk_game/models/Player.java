@@ -1,11 +1,11 @@
 package com.w10.risk_game.models;
 
 import java.util.List;
-import java.util.Scanner;
 
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import com.w10.risk_game.views.GameUI;
 
 /**
@@ -20,6 +20,8 @@ public class Player {
 	private List<Country> d_countriesOwned;
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * The `Player` constructor is initializing a new instance of the `Player` class
@@ -188,7 +190,7 @@ public class Player {
 					d_orders.add(order);
 					deployArmies(Integer.parseInt(l_inputArray[2]));
 				} else {
-					System.out.println("This deploy order is invalid. It will not be added to the list of orders.");
+					d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
 				}
 				break;
 			case "advance" :
@@ -207,7 +209,7 @@ public class Player {
 				// TODO add negotiate object to d_orders
 				break;
 			default :
-				System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 				break;
 		}
 	}
@@ -232,7 +234,7 @@ public class Player {
 	public boolean checkValidForm(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
-			System.out.println(Constants.PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS);
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer
@@ -240,14 +242,14 @@ public class Player {
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				System.out.println(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		// Step 3: Check whether the number of armies is positive integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				System.out.println(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}
@@ -266,7 +268,7 @@ public class Player {
 	public boolean checkValidOrder(String p_orderType) {
 		String l_orderType = p_orderType;
 		if (!l_orderType.equals("deploy")) {
-			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 			return false;
 		}
 		return true;
@@ -288,7 +290,7 @@ public class Player {
 				return true;
 			}
 		}
-		System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_COUNTRY);
+		d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_COUNTRY);
 		return false;
 	}
 
@@ -302,11 +304,11 @@ public class Player {
 	 */
 	public boolean checkValidArmy(int p_num) {
 		if (p_num <= 0) {
-			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
 			return false;
 		}
 		if (p_num > d_leftoverArmies) {
-			System.out.println(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
 			return false;
 		}
 		return true;

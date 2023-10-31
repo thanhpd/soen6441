@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.w10.risk_game.utils.MapEditor;
 import com.w10.risk_game.utils.MapReader;
 import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.Reinforcements;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
  * The GameEngine class is responsible for managing the game map, players,
@@ -34,6 +36,9 @@ public class GameEngine {
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
+	private Formatter d_formatter;
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * Game Engine constructor
@@ -52,8 +57,9 @@ public class GameEngine {
 	 * checks if the map is valid.
 	 *
 	 * @param p_filePath
-	 *            The parameter `p_filePath` is a String that represents the full
-	 *            path of the file from which the map will be loaded.
+	 *                   The parameter `p_filePath` is a String that represents the
+	 *                   full
+	 *                   path of the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_filePath) {
 		try {
@@ -65,14 +71,14 @@ public class GameEngine {
 			if (this.d_gameMap.isMapCreated()) {
 				if (!checkIfMapIsValid()) {
 					this.d_gameMap = null;
-					System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+					d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 				}
 			} else {
-				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+				d_logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
 			}
 
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+			d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 		}
 	}
 
@@ -91,20 +97,26 @@ public class GameEngine {
 	 * players, checking for duplicate names.
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player being created.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
+
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
-				System.out.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
+				this.d_formatter = new Formatter();
+				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
+				d_logger.log(this.d_formatter.toString());
 			} else {
-				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
+				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
+			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
+		} finally {
+			this.d_formatter.close();
 		}
 	}
 
@@ -114,14 +126,15 @@ public class GameEngine {
 	 * players
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player that needs to be removed.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player that needs to be removed.
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
 		try {
 			if (!this.d_players.containsKey(p_playerName)) {
-				System.out.println(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
+				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
 				return;
 			}
 			p_playerName = p_playerName.trim();
@@ -146,9 +159,9 @@ public class GameEngine {
 				this.assignPlayersReinforcements();
 			}
 			this.d_players.remove(p_playerName.trim());
-			System.out.println(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
+			d_logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
+			d_logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
 	}
 
@@ -159,15 +172,15 @@ public class GameEngine {
 	 */
 	public void showAllPlayers() {
 		this.d_players.forEach((p_playerName, p_player) -> {
-			System.out.println(p_playerName);
+			d_logger.log(p_playerName);
 			for (Country c : p_player.getCountriesOwned()) {
 				try {
-					System.out.println(c.getCountryName());
+					d_logger.log(c.getCountryName());
 				} catch (Exception e) {
-					System.out.println(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
+					d_logger.log(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
 				}
 			}
-			System.out.println();
+			d_logger.log("");
 		});
 	}
 
@@ -186,8 +199,12 @@ public class GameEngine {
 
 			// If there are more players than countries throw error
 			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-						this.d_players.size());
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+						this.d_gameMap.getCountries().size(), this.d_players.size());
+				d_logger.log(this.d_formatter.toString());
+				this.d_formatter.close();
 				return false;
 			}
 
@@ -213,9 +230,14 @@ public class GameEngine {
 
 			return true;
 		} catch (Exception e) {
-			System.out.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES, this.d_gameMap.getCountries().size(),
-					this.d_players.size());
+			this.d_formatter = new Formatter();
+
+			this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+					this.d_gameMap.getCountries().size(), this.d_players.size());
+			d_logger.log(this.d_formatter.toString());
 			return false;
+		} finally {
+			this.d_formatter.close();
 		}
 	}
 
@@ -254,7 +276,8 @@ public class GameEngine {
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *            The name of the player for which you want to retrieve the details.
+	 *                     The name of the player for which you want to retrieve the
+	 *                     details.
 	 * @return The method is returning a Player object.
 	 *
 	 */
@@ -268,8 +291,9 @@ public class GameEngine {
 	 * failure.
 	 *
 	 * @param p_mapFilePath
-	 *            The parameter `p_mapFileName` is a String that represents the file
-	 *            name or path of the map file that needs to be edited.
+	 *                      The parameter `p_mapFileName` is a String that
+	 *                      represents the file
+	 *                      name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
 	 *
 	 */
@@ -280,19 +304,26 @@ public class GameEngine {
 		// map file
 		if (l_file.exists()) {
 			this.loadMap(p_mapFilePath);
-			System.out.println(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
+			d_logger.log(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
-				System.out.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
+				this.d_formatter = new Formatter();
+
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
 				boolean l_isFileCreated = new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
 				if (l_isFileCreated)
 					this.loadMap(p_mapFilePath);
+				d_logger.log(this.d_formatter.toString());
 				return l_isFileCreated;
 			} catch (IOException e) {
-				System.out.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
+				this.d_formatter = new Formatter();
+				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());
+				d_logger.log(this.d_formatter.toString());
+			} finally {
+				this.d_formatter.close();
 			}
 		}
 		return false;
@@ -302,19 +333,21 @@ public class GameEngine {
 	 * The function adds a continent to a map editor and prints the output.
 	 *
 	 * @param p_continentName
-	 *            The parameter "p_continentName" is a String that represents the
-	 *            name of the continent that you want to add.
+	 *                        The parameter "p_continentName" is a String that
+	 *                        represents the
+	 *                        name of the continent that you want to add.
 	 *
 	 * @param p_bonus
-	 *            The p_bonus parameter is an integer that represents the bonus for
-	 *            each continent.
+	 *                        The p_bonus parameter is an integer that represents
+	 *                        the bonus for
+	 *                        each continent.
 	 */
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
 			String l_output = this.d_mapEditor.addContinent(p_continentName, p_bonus);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -322,22 +355,25 @@ public class GameEngine {
 	 * The function adds a country to a map editor and prints the output.
 	 *
 	 * @param p_countryId
-	 *            The p_countryId parameter is an integer that represents the unique
-	 *            identifier for the country being added.
+	 *                        The p_countryId parameter is an integer that
+	 *                        represents the unique
+	 *                        identifier for the country being added.
 	 * @param p_countryName
-	 *            The parameter "p_countryName" is a String that represents the name
-	 *            of the country that you want to add.
+	 *                        The parameter "p_countryName" is a String that
+	 *                        represents the name
+	 *                        of the country that you want to add.
 	 * @param p_continentName
-	 *            The p_continentName parameter is an integer that represents the ID
-	 *            of the continent to which the country belongs.
+	 *                        The p_continentName parameter is an integer that
+	 *                        represents the ID
+	 *                        of the continent to which the country belongs.
 	 *
 	 */
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		try {
 			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentName);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -345,16 +381,17 @@ public class GameEngine {
 	 * The function removes a continent from a map in a game editor.
 	 *
 	 * @param p_continentName
-	 *            The parameter "p_continentId" is an integer that represents the ID
-	 *            of the continent that needs to be removed.
+	 *                        The parameter "p_continentId" is an integer that
+	 *                        represents the ID
+	 *                        of the continent that needs to be removed.
 	 *
 	 */
 	public void removeContinent(String p_continentName) {
 		try {
 			String l_output = this.d_mapEditor.removeContinent(p_continentName);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -363,8 +400,9 @@ public class GameEngine {
 	 * ownership if necessary.
 	 *
 	 * @param p_countryId
-	 *            The parameter `p_countryId` is an integer representing the ID of
-	 *            the country that needs to be removed.
+	 *                    The parameter `p_countryId` is an integer representing the
+	 *                    ID of
+	 *                    the country that needs to be removed.
 	 *
 	 */
 	public void removeCountry(int p_countryId) {
@@ -374,9 +412,9 @@ public class GameEngine {
 			if (this.d_isCountriesAssigned) {
 				removeCountryFromPlayer(p_countryId, l_player);
 			}
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -384,20 +422,23 @@ public class GameEngine {
 	 * The function adds a neighbor country to a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *            The p_countryId parameter represents the ID of the country to
-	 *            which you want to add a neighbor.
+	 *                             The p_countryId parameter represents the ID of
+	 *                             the country to
+	 *                             which you want to add a neighbor.
 	 * @param p_neighbourCountryId
-	 *            The parameter "p_neighbourCountryId" represents the ID of the
-	 *            neighboring country that you want to add to the country with the
-	 *            ID "p_countryId".
+	 *                             The parameter "p_neighbourCountryId" represents
+	 *                             the ID of the
+	 *                             neighboring country that you want to add to the
+	 *                             country with the
+	 *                             ID "p_countryId".
 	 *
 	 */
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
 			String l_output = this.d_mapEditor.addNeighbor(p_countryId, p_neighbourCountryId);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -405,20 +446,23 @@ public class GameEngine {
 	 * The function removes a neighbor country from a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *            The p_countryId parameter represents the ID of the country from
-	 *            which you want to remove a neighbor.
+	 *                            The p_countryId parameter represents the ID of the
+	 *                            country from
+	 *                            which you want to remove a neighbor.
 	 * @param p_neighborCountryId
-	 *            The parameter "p_neighborCountryId" represents the ID of the
-	 *            neighbor country that you want to remove from the country with ID
-	 *            "p_countryId".
+	 *                            The parameter "p_neighborCountryId" represents the
+	 *                            ID of the
+	 *                            neighbor country that you want to remove from the
+	 *                            country with ID
+	 *                            "p_countryId".
 	 *
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		try {
 			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighborCountryId);
-			System.out.println(l_output);
+			d_logger.log(l_output);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -427,11 +471,13 @@ public class GameEngine {
 	 * countries.
 	 *
 	 * @param p_countryId
-	 *            The ID of the country that needs to be removed from the player's
-	 *            list of owned countries.
+	 *                    The ID of the country that needs to be removed from the
+	 *                    player's
+	 *                    list of owned countries.
 	 * @param p_player
-	 *            The parameter "p_player" is of type Player and represents the
-	 *            player from whom the country needs to be removed.
+	 *                    The parameter "p_player" is of type Player and represents
+	 *                    the
+	 *                    player from whom the country needs to be removed.
 	 *
 	 */
 	private void removeCountryFromPlayer(int p_countryId, Player p_player) {
@@ -440,7 +486,7 @@ public class GameEngine {
 			l_playerCountries.removeIf(p_country -> p_country.getCountryId() == p_countryId);
 			this.d_players.get(p_player.getName()).setCountriesOwned(l_playerCountries);
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -457,18 +503,18 @@ public class GameEngine {
 			// else false
 			if (this.d_gameMap.isMapCreated()) {
 				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
-					System.out.println(Constants.GAME_ENGINE_MAP_VALID);
+					d_logger.log(Constants.GAME_ENGINE_MAP_VALID);
 					return true;
 				} else {
-					System.out.println(Constants.GAME_ENGINE_MAP_INVALID);
+					d_logger.log(Constants.GAME_ENGINE_MAP_INVALID);
 					return false;
 				}
 			} else {
-				System.out.println(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+				d_logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
 				return false;
 			}
 		} catch (Exception e) {
-			System.out.println(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
+			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
 			return false;
 		}
 	}
@@ -489,14 +535,14 @@ public class GameEngine {
 	 * an error message.
 	 *
 	 * @param p_mapFilePath
-	 *            The full path of the file where the map will be saved.
+	 *                      The full path of the file where the map will be saved.
 	 *
 	 */
 	public void saveMap(String p_mapFilePath) {
 		if (checkIfMapIsValid()) {
 			this.d_gameMap.saveMap(p_mapFilePath);
 		} else {
-			System.out.println(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
+			d_logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
 	}
 

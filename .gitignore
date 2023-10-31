@@ -34,3 +34,5 @@ replay_pid*
 target
 .DS_Store
 
+docs
+src/main/resources/logs/log.txt

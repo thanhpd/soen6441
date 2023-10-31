@@ -1,6 +1,7 @@
 package com.w10.risk_game.utils.loggers;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,7 +13,8 @@ public class FileLogger implements Observer {
 
 	public FileLogger() {
 		try {
-			this.writer = new BufferedWriter(new FileWriter(Constants.LOGGER_FILE_NAME));
+			File l_file = new File(Constants.LOGGER_FILE_NAME);
+			this.writer = new BufferedWriter(new FileWriter(l_file));
 			this.writer.write("");
 			this.writer.flush();
 			this.writer.close();

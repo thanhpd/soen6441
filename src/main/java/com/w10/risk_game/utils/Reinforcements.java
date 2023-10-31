@@ -29,8 +29,7 @@ public class Reinforcements {
 	 * and rounded down. To calculate bonus armies, it needs two steps: 1. Group the
 	 * countries owned by the player and all countries by continent. This step is
 	 * finished by groupCountries method. 2. Compare the two groups and calculate
-	 * the bonus armies. Notes! The bonus armies are not added to the leftover
-	 * armies because it is missing in Continent class.
+	 * the bonus armies.
 	 *
 	 * @param p_player
 	 *            this parameter represents a player object. It is used to access

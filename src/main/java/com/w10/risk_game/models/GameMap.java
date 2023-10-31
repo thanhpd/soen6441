@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapValidator;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
  * The GameMap class represents a game map that contains countries, continents,
@@ -24,6 +25,8 @@ public class GameMap {
 	private Map<Integer, Country> d_countries;
 	private Map<Integer, Continent> d_continents;
 	private Map<Integer, Player> d_player;
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * This constructor initializes the `d_countries`, `d_continents`, and
@@ -251,10 +254,10 @@ public class GameMap {
 					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
 							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
 				}
-				System.out.println(Constants.MAP_SAVE_SUCCESS);
+				d_logger.log(Constants.MAP_SAVE_SUCCESS);
 				l_printWriter.close();
 			} catch (IOException e) {
-				System.out.println(Constants.MAP_SAVE_ERROR);
+				d_logger.log(Constants.MAP_SAVE_ERROR);
 			}
 	}
 

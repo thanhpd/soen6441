@@ -2,10 +2,8 @@ package com.w10.risk_game.utils;
 
 import java.util.ArrayList;
 import java.util.Formatter;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Logger;
 
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
@@ -23,8 +21,9 @@ public class MapDisplay {
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
-	 * The function displays a game map, including continent, country, and neighbor
-	 * information, with the option to show armies.
+	 * The function `displayMap` takes a `GameMap` object and a boolean flag as
+	 * input and displays the map information, including continent, country, and
+	 * neighbor details, either with or without army counts depending on the flag.
 	 *
 	 * @param p_map
 	 *            The `p_map` parameter is an instance of the `GameMap` class, which

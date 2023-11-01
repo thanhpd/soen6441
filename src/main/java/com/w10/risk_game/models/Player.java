@@ -1,5 +1,6 @@
 package com.w10.risk_game.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.w10.risk_game.commands.Advance;
@@ -21,6 +22,7 @@ public class Player {
 	private List<Country> d_countriesOwned;
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
+	private List<CardType> d_playerCards = new ArrayList<>();
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -95,6 +97,27 @@ public class Player {
 	 */
 	public List<Order> getOrders() {
 		return d_orders;
+	}
+
+	/**
+	 * The function returns a list of CardType objects representing the cards held
+	 * by a player.
+	 *
+	 * @return The method is returning a List of CardType objects.
+	 */
+	public List<CardType> getPlayerCards() {
+		return d_playerCards;
+	}
+
+	/**
+	 * The function sets the player's cards to the given list of card types.
+	 *
+	 * @param playerCards
+	 *            The parameter "playerCards" is a List of objects of type
+	 *            "CardType".
+	 */
+	public void setPlayerCards(List<CardType> playerCards) {
+		this.d_playerCards = playerCards;
 	}
 
 	/**

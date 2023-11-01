@@ -1,127 +1,105 @@
 package com.w10.risk_game.utils;
 
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
-import dnl.utils.text.table.TextTable;
-
 /**
- * The MapDisplay class contains methods to populate and format a table
- * displaying information about countries, continents, players, and neighboring
- * countries on a game map.
+ * The MapDisplay class is responsible for displaying the game map, including
+ * continent and country information, and optionally showing the number of
+ * armies in each country.
  *
- * @author Omnia Alam
+ * @author Sherwyn Dsouza
  */
 public class MapDisplay {
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
-	 * The function "populateRow" takes in various parameters and returns an array
-	 * of strings containing information about a country, continent, player, and
-	 * neighboring countries.
-	 *
-	 * @param p_country
-	 *            The p_country parameter represents a specific country object.
-	 * @param p_continent
-	 *            The p_continent parameter is an object of the Continent class.
-	 * @param p_player
-	 *            The parameter "p_player" is of type Player and represents a player
-	 *            in the game.
-	 * @param p_showArmies
-	 *            A boolean value indicating whether to show the number of armies in
-	 *            the row or not.
-	 * @return The method is returning an array of strings.
-	 */
-	public String[] populateRow(Country p_country, Continent p_continent, Player p_player, boolean p_showArmies) {
-
-		ArrayList<String> l_neighborNames = new ArrayList<>();
-		for (Country neighbor : p_country.getNeighbors().values()) {
-			l_neighborNames.add(neighbor.getCountryId() + "-" + neighbor.getCountryName());
-		}
-
-		String l_neighborValue = String.join(", ", l_neighborNames);
-		String[] l_values = new String[3];
-		if (p_showArmies == false) {
-			l_values = new String[5];
-			l_values[0] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
-			l_values[1] = "" + p_continent.getBonus();
-			l_values[2] = "" + p_country.getCountryId();
-			l_values[3] = p_country.getCountryName();
-			l_values[4] = l_neighborValue;
-		} else {
-			try {
-
-				l_values = new String[7];
-				l_values[0] = (p_country.getContinentId() + "(" + p_continent.getContinentName() + ")");
-				l_values[1] = "" + p_continent.getBonus();
-				l_values[2] = "" + p_country.getCountryId();
-				l_values[3] = p_country.getCountryName();
-				l_values[4] = l_neighborValue;
-
-				if (p_player != null && p_player.hasCountry(p_country.getCountryId())) {
-					l_values[5] = p_player.getName();
-					l_values[6] = "" + p_country.getArmyCount();
-				} else {
-					l_values[5] = " ";
-					l_values[6] = " ";
-				}
-			} catch (Exception e) {
-				d_logger.log(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
-			}
-		}
-		return l_values;
-	}
-
-	/**
-	 * The function prints a formatted table of the map's countries and their
-	 * information.
+	 * The function displays a game map, including continent, country, and neighbor
+	 * information, with the option to show armies.
 	 *
 	 * @param p_map
-	 *            An instance of the GameMap class, which represents the game map
-	 *            containing countries and continents.
+	 *            The `p_map` parameter is an instance of the `GameMap` class, which
+	 *            represents the game map containing continents, countries, and
+	 *            their connections.
 	 * @param p_showArmies
-	 *            A boolean value that determines whether or not to display the
-	 *            number of armies in each country. If it is set to true, the table
-	 *            will include a column for the number of armies. If it is set to
-	 *            false, the table will not include this column
+	 *            The parameter "p_showArmies" is a boolean value that determines
+	 *            whether or not to display the number of armies in each country on
+	 *            the map. If it is set to true, the number of armies will be
+	 *            displayed. If it is set to false, the number of armies will not be
+	 *            displayed
 	 */
-	public void formatMap(GameMap p_map, boolean p_showArmies) {
-		String[] l_columnNames;
+	public void displayMap(GameMap p_map, boolean p_showArmies) {
+		Formatter l_formatter = new Formatter();
+
+		Iterator<Map.Entry<Integer, Continent>> l_iteratorForContinent = p_map.getContinents().entrySet().iterator();
+
+		String l_table1 = Constants.MAP_DISPLAY_TABLE1_FORMAT_PATTERN;
+		String l_table2 = Constants.MAP_DISPLAY_TABLE2_FORMAT_PATTERN;
 
 		if (p_showArmies) {
-			// If true, create an array of column names that also have player name and the
-			// number of armies.
-			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
-					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
-					Constants.MAP_DISPLAY_NEIGHBOR_ID, Constants.MAP_DISPLAY_PLAYER, Constants.MAP_DISPLAY_ARMIES};
+			l_formatter.format(Constants.MAP_DISPLAY_TABLE2_LINE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+
+			l_formatter = new Formatter();
+			l_formatter.format(Constants.MAP_DISPLAY_TABLE2_COLUMN_NAMES);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+
+			l_formatter = new Formatter();
+			l_formatter.format(Constants.MAP_DISPLAY_TABLE2_LINE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
 		} else {
-			// else create an array of column names that doesn't have player name and the
-			// number of armies.
-			l_columnNames = new String[]{Constants.MAP_DISPLAY_ID, Constants.MAP_DISPLAY_BONUS,
-					Constants.MAP_DISPLAY_COUNTRY_ID, Constants.MAP_DISPLAY_COUNTRY_NAME,
-					Constants.MAP_DISPLAY_NEIGHBOR_ID};
+			l_formatter.format(Constants.MAP_DISPLAY_TABLE1_LINE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+
+			l_formatter = new Formatter();
+			l_formatter.format(Constants.MAP_DISPLAY_TABLE1_COLUMN_NAMES);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+
+			l_formatter = new Formatter();
+			l_formatter.format(Constants.MAP_DISPLAY_TABLE1_LINE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
 		}
 
-		Map<Integer, Country> l_countries = p_map.getCountries();
-		Object[][] l_data = new Object[l_countries.size()][l_columnNames.length];
-		int d_count = 0;
-		for (Country l_country : l_countries.values()) {
-			l_data[d_count] = populateRow(l_country, p_map.getContinentById(l_country.getContinentId()),
-					l_country.getOwner(), p_showArmies);
-			d_count++;
+		while (l_iteratorForContinent.hasNext()) {
+			Map.Entry<Integer, Continent> l_continentMap = (Map.Entry<Integer, Continent>) l_iteratorForContinent
+					.next();
+			Integer l_continentId = l_continentMap.getKey();
+			Continent l_continent = p_map.getContinents().get(l_continentId);
+			Iterator<Country> l_listIterator = l_continent.getCountries().iterator();
+
+			while (l_listIterator.hasNext()) {
+				Country l_country = (Country) l_listIterator.next();
+				ArrayList<String> l_neighborNames = new ArrayList<>();
+				for (Country neighbor : l_country.getNeighbors().values()) {
+					l_neighborNames.add(neighbor.getCountryId() + "-" + neighbor.getCountryName());
+				}
+				String l_neighborValue = String.join(", ", l_neighborNames);
+				l_formatter = new Formatter();
+				if (p_showArmies) {
+					l_formatter.format(l_table2, l_country.getCountryName(), l_country.getCountryId(),
+							l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue,
+							l_country.getOwner().getName(), l_country.getArmyCount());
+				} else {
+					l_formatter.format(l_table1, l_country.getCountryName(), l_country.getCountryId(),
+							l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue);
+				}
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+			}
 		}
-
-		// Creating an instance of the `TextTable` class and initializing it
-		TextTable l_mapTable = new TextTable(l_columnNames, l_data);
-		l_mapTable.setAddRowNumbering(true);
-		l_mapTable.setSort(0);
-		l_mapTable.printTable();
-
 	}
 }

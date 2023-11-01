@@ -71,7 +71,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.addContinent(d_continentName, d_bonus);
 		assertTrue((d_continentName + Constants.MAP_EDITOR_ADD_CONTINENT).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_CONTINENT_ADDED + d_continentName);
-		d_mapDisplay.formatMap(d_gameMap, false);
+		d_mapDisplay.displayMap(d_gameMap, false);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.addCountry(d_countryId, d_countryName, d_continentName);
 		assertTrue((d_countryName + Constants.MAP_EDITOR_ADD_COUNTRY + d_continentName).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_COUNTRY_ADDED + d_countryName);
-		d_mapDisplay.formatMap(d_gameMap, false);
+		d_mapDisplay.displayMap(d_gameMap, false);
 
 	}
 
@@ -148,7 +148,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.addNeighbor(d_countryId, d_neighborCountryId);
 		assertTrue((d_countryId + Constants.MAP_EDITOR_ADD_NEIGHBOR + d_neighborCountryId).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_NEIGHBOR_ADDED);
-		d_mapDisplay.formatMap(d_gameMap, false);
+		d_mapDisplay.displayMap(d_gameMap, false);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class MapEditorTest {
 		assertTrue((d_continentName + Constants.MAP_EDITOR_REMOVED + d_countriesRemoved
 				+ Constants.MAP_EDITOR_COUNTRIES_REMOVED).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_CONTINENT_REMOVE + d_continentName);
-		d_mapDisplay.formatMap(d_gameMap, false);
+		d_mapDisplay.displayMap(d_gameMap, false);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.removeCountry(d_countryId);
 		assertTrue((d_countryId + Constants.MAP_EDITOR_COUNTRY_REMOVED).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_COUNTRY_REMOVE);
-		d_mapDisplay.formatMap(d_gameMap, false);
+		d_mapDisplay.displayMap(d_gameMap, false);
 	}
 
 	/**
@@ -242,7 +242,7 @@ public class MapEditorTest {
 		d_error = d_mapEditor.removeNeighbor(d_countryId, d_neighborCountryId);
 		assertTrue((d_countryId + Constants.MAP_EDITOR_NEIGHBOR_REMOVED + d_neighborCountryId).equals(d_error));
 		System.out.println(Constants.MAP_EDITOR_AFTER_NEIGHBOR_REMOVE);
-		d_mapDisplay.formatMap(d_gameMap, false);
+		d_mapDisplay.displayMap(d_gameMap, false);
 	}
 
 }

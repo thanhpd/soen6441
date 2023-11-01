@@ -3,10 +3,10 @@ package com.w10.risk_game.models.phases;
 import java.util.Set;
 
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.GameEngine;
+import com.w10.risk_game.controllers.RiskGame;
 
 public class PlaySetupPhase extends GamePlayPhase{
-    public PlaySetupPhase(GameEngine p_GameEngine){
+    public PlaySetupPhase(RiskGame p_GameEngine){
         super(p_GameEngine);
     }
 

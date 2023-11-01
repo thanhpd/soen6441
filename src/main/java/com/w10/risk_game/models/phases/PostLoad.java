@@ -2,8 +2,9 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
+import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.GameEngine;
+import com.w10.risk_game.controllers.RiskGame;
 
 public class PostLoad extends MapEditorPhase {
 

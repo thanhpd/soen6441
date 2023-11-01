@@ -1,12 +1,14 @@
-package com.w10.risk_game.views;
+package com.w10.risk_game;
 
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
-import com.w10.risk_game.controllers.GameEngine;
+import com.w10.risk_game.controllers.RiskGame;
+import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.MapEditorPhase;
+import com.w10.risk_game.models.phases.PreLoad;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -17,22 +19,29 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  *
  * @author Sherwyn Dsouza
  */
-public class GameUI {
+public class GameEngine {
 
-	private final GameEngine d_gameEngine;
+	private final RiskGame d_riskGame;
 	private boolean d_startGamePhase;
 	private Formatter d_formatter;
 
 	public static String Command = "";
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance(); 
+
+
+	private Phase phase;
+
+	public void setPhase(Phase phase) {
+		this.phase = phase;
+	}
 
 	/**
 	 * The `GameUI` constructor initializes a new instance of the `GameEngine` class
 	 * and sets the `d_gameEngine` variable to refer to it. It also sets the
 	 * `d_startGamePhase` variable to `false`.
 	 */
-	public GameUI() {
-		this.d_gameEngine = new GameEngine();
+	public GameEngine() {
+		this.d_riskGame = new RiskGame();
 		this.d_startGamePhase = false;
 	}
 
@@ -41,7 +50,13 @@ public class GameUI {
 	 * user input and executing corresponding commands through the Game Engine.
 	 *
 	 */
-	public void runStartUpPhase() {
+	public void start() {
+				setPhase(new PreLoad(this));
+
+		// while loop
+		// if load map command
+		// 1. sePhaseLoadMpa
+		// 2. this.phase.loadMap();
 		d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
 		boolean l_exit = false;
 
@@ -62,17 +77,19 @@ public class GameUI {
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
 						String[] l_mapName = l_argList[1].split("/");
 						d_logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
-						this.d_gameEngine.loadMap(l_argList[1]);
+						//this.d_riskGame.loadMap(l_argList[1]);
+						setPhase(new PreLoad(this));
+						this.phase.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
-						this.d_gameEngine.saveMap(l_argList[1]);
+						this.d_riskGame.saveMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						d_logger.log(Constants.CLI_SHOW_MAP);
-						this.d_gameEngine.showMap();
+						this.d_riskGame.showMap();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
-						this.d_gameEngine.editMap(l_argList[1]);
+						this.d_riskGame.editMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop
@@ -81,11 +98,11 @@ public class GameUI {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_gameEngine.addContinent(l_options.get(1),
+									this.d_riskGame.addContinent(l_options.get(1),
 											Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_gameEngine.removeContinent(l_options.get(1));
+									this.d_riskGame.removeContinent(l_options.get(1));
 									break;
 							}
 						}
@@ -97,11 +114,11 @@ public class GameUI {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_gameEngine.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
+									this.d_riskGame.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
 											l_options.get(3));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_gameEngine.removeCountry(Integer.parseInt(l_options.get(1)));
+									this.d_riskGame.removeCountry(Integer.parseInt(l_options.get(1)));
 									break;
 							}
 						}
@@ -113,18 +130,18 @@ public class GameUI {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_gameEngine.addNeighbor(Integer.parseInt(l_options.get(1)),
+									this.d_riskGame.addNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_gameEngine.removeNeighbor(Integer.parseInt(l_options.get(1)),
+									this.d_riskGame.removeNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
-						this.d_gameEngine.checkIfMapIsValid();
+						this.d_riskGame.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up phase
@@ -135,20 +152,20 @@ public class GameUI {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_gameEngine.createPlayer(l_options.get(1));
+									this.d_riskGame.createPlayer(l_options.get(1));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_gameEngine.removePlayer(l_options.get(1));
+									this.d_riskGame.removePlayer(l_options.get(1));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL :
-									this.d_gameEngine.showAllPlayers();
+									this.d_riskGame.showAllPlayers();
 									break;
 							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 						d_logger.log(Constants.CLI_ASSIGN_COUNTRIES);
-						if (this.d_gameEngine.assignCountries() && this.d_gameEngine.checkIfGameCanBegin()) {
+						if (this.d_riskGame.assignCountries() && this.d_riskGame.checkIfGameCanBegin()) {
 							l_exit = true;
 							this.d_startGamePhase = true;
 						}
@@ -187,14 +204,14 @@ public class GameUI {
 		Player l_player;
 
 		while (!l_exit) {
-			if (!d_gameEngine.checkIfOrdersCanBeIssued()) {
-				if (d_gameEngine.checkIfOrdersCanBeExecuted()) {
+			if (!d_riskGame.checkIfOrdersCanBeIssued()) {
+				if (d_riskGame.checkIfOrdersCanBeExecuted()) {
 					d_logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
-					d_gameEngine.executePlayerOrders();
+					d_riskGame.executePlayerOrders();
 				} else
 					continue;
 			}
-			l_player = d_gameEngine.getCurrentPlayer();
+			l_player = d_riskGame.getCurrentPlayer();
 			d_logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
 
 			this.d_formatter = new Formatter();
@@ -218,11 +235,11 @@ public class GameUI {
 					// Show Map Command
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						System.out.println(Constants.CLI_SHOW_MAP);
-						this.d_gameEngine.showMap();
+						this.d_riskGame.showMap();
 						break;
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
-						d_gameEngine.issuePlayerOrder();
+						d_riskGame.issuePlayerOrder();
 						break;
 					// Others
 					case Constants.USER_INPUT_COMMAND_QUIT :
@@ -257,5 +274,9 @@ public class GameUI {
 				p_options.subList(1, p_options.size()));
 		d_logger.log(this.d_formatter.toString());
 		this.d_formatter.close();
+	}
+
+	public RiskGame getGame(){
+		return this.d_riskGame;
 	}
 }

@@ -2,14 +2,16 @@ package com.w10.risk_game.models;
 
 import java.util.Set;
 
+import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.GameEngine;
+import com.w10.risk_game.controllers.RiskGame;
 
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
-
+	protected RiskGame d_Game;
 	public Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
+		this.d_Game=p_gameEngine.getGame();
 	}
 
 	// map commands

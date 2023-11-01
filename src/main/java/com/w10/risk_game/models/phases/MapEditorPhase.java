@@ -1,6 +1,7 @@
 package com.w10.risk_game.models.phases;
 
-import com.w10.risk_game.controllers.GameEngine;
+import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.controllers.RiskGame;
 import com.w10.risk_game.models.Phase;
 
 public abstract class MapEditorPhase extends Phase {

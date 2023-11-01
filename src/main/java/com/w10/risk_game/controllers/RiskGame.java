@@ -13,6 +13,7 @@ import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.models.phases.PreLoad;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
@@ -27,7 +28,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  *
  * @author Sherwyn Dsouza
  */
-public class GameEngine {
+public class RiskGame {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
 	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
@@ -45,12 +46,10 @@ public class GameEngine {
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
-	private Phase phase;
-
 	/**
 	 * Game Engine constructor
 	 */
-	public GameEngine() {
+	public RiskGame() {
 		this.d_gameMap = new GameMap();
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
@@ -59,6 +58,7 @@ public class GameEngine {
 		this.d_currentPlayerIndex = 0;
 		// this.phase = new StartupPhase();
 	}
+
 
 	/**
 	 * The function "loadMap" loads a map file, creates a game map object, and
@@ -638,18 +638,5 @@ public class GameEngine {
 	 */
 	public Player getCurrentPlayer() {
 		return this.d_currentPlayer;
-	}
-
-	private void changePhase(Phase phase) {
-		// Check condition before setting the phase
-		setPhase(phase);
-	}
-
-	public void setPhase(Phase phase) {
-		this.phase = phase;
-	}
-
-	public void getPhase() {
-		// TODO: discuss with team
 	}
 }

@@ -72,6 +72,7 @@ public class PlayerTest {
 		boolean l_isValidForm3 = d_player1.checkValidForm(l_input3.split(" "));
 		assertEquals(false, l_isValidForm3);
 	}
+
 	/**
 	 * This method is to test the method of checkValidOrder. It will provide one
 	 * invalid input and check whether the method can return false. The invalid
@@ -96,8 +97,8 @@ public class PlayerTest {
 	public void checkValidCountryTest() {
 		String l_input = "deploy 0 6";
 		String[] l_inputArray = l_input.split(" ");
-		String l_countryId = l_inputArray[1];
-		boolean l_isValidCountry = d_player1.checkValidCountry(d_countries, l_countryId);
+		Integer l_countryId = Integer.parseInt(l_inputArray[1]);
+		boolean l_isValidCountry = d_player1.checkValidOwnedCountry(l_countryId);
 		assertEquals(false, l_isValidCountry);
 	}
 

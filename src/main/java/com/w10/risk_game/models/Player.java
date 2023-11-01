@@ -193,14 +193,16 @@ public class Player {
 			case "advance" :
 				Country l_countryFrom = this.d_countriesOwned.stream()
 						.filter(l_c -> l_c.getCountryName().equals(l_inputArray[1])).findAny().orElse(null);
-				Country l_countryTo = l_countryFrom.getNeighbors().values().stream()
-						.filter(c -> c.getCountryName().equals(l_inputArray[2])).findAny().orElse(null);
+				Country l_countryTo = l_countryFrom != null
+						? l_countryFrom.getNeighbors().values().stream()
+								.filter(c -> c.getCountryName().equals(l_inputArray[2])).findAny().orElse(null)
+						: null;
 				if (l_countryFrom != null && l_countryTo != null && Integer.parseInt(l_inputArray[3]) > 0) {
 					Order l_order = new Advance(l_countryFrom, l_countryTo, Integer.parseInt(l_inputArray[3]));
 					d_orders.add(l_order);
 					deployArmies(Integer.parseInt(l_inputArray[3]));
 				} else {
-					System.out.println("This advance order is invalid. It will not be added to the list of orders.");
+					d_logger.log(Constants.PLAYER_ISSUE_ORDER_ADVANCE_INCORRECT);
 				}
 				break;
 			case "bomb" :

@@ -1,5 +1,8 @@
 package com.w10.risk_game.models.phases;
 
+import java.util.Set;
+
+import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GameEngine;
 
 public class PlaySetupPhase extends GamePlayPhase{
@@ -43,5 +46,17 @@ public class PlaySetupPhase extends GamePlayPhase{
 	public boolean checkIfGameCanBegin() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'checkIfGameCanBegin'");
+	}
+
+	@Override
+	public void next() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'next'");
+	}
+
+	@Override
+	public Set<Command> getAvaliableCommands() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getAvaliableCommands'");
 	}
 }

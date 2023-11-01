@@ -1,5 +1,8 @@
 package com.w10.risk_game.models;
 
+import java.util.Set;
+
+import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GameEngine;
 
 public abstract class Phase {
@@ -63,10 +66,20 @@ public abstract class Phase {
 	// // end command
 	// abstract public void endGame();
 
-	// // go to next phase
-	// abstract public void next();
+	abstract public void next();
+
+	public abstract Set<Command> getAvaliableCommands();
+	
+	public String getPhaseName(){
+		return this.getClass().getName();
+	}
 
 	public void printInvalidCommandMessage() {
 		System.out.println("Invalid command in state " + this.getClass().getSimpleName());
+	}
+
+	public void printAvailableCommand(){
+		String avaliableCommandsText= getAvaliableCommands().toString();////String.join('-', getAvaliableCommands().to);
+		System.out.println("You are in "+getPhaseName()+" Phase. Command avaliable "+avaliableCommandsText);
 	}
 }

@@ -1,5 +1,8 @@
 package com.w10.risk_game.models.phases;
 
+import java.util.Set;
+
+import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GameEngine;
 
 public class PostLoad extends MapEditorPhase {
@@ -41,22 +44,31 @@ public class PostLoad extends MapEditorPhase {
 	@Override
 	public void saveMap(String p_mapFilePath) {
 		this.d_gameEngine.saveMap(p_mapFilePath);
+		next();
 	}
 
 	@Override
 	public void showMap() {
-		// TODO Auto-generated method stub
 		this.d_gameEngine.showMap();
 	}
 
 	@Override
 	public void loadMap(String p_filePath) {
-		System.out.println("map has already been loaded");
+		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public boolean checkIfGameCanBegin() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'checkIfGameCanBegin'");
+		return d_gameEngine.checkIfGameCanBegin();
+	}
+
+	@Override
+	public void next() {
+		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
+	}
+
+	@Override
+	public Set<Command> getAvaliableCommands() {
+		return Set.of(Command.EDIT_CONTINENT,Command.EDIT_COUNTRY,Command.EDIT_NEIGHBOR,Command.SHOW_MAP);
 	}
 }

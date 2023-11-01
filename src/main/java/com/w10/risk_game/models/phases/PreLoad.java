@@ -1,5 +1,9 @@
 package com.w10.risk_game.models.phases;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GameEngine;
 
 // In Preload, all commands except LoadMap Is available
@@ -12,11 +16,11 @@ public class PreLoad extends MapEditorPhase {
 	@Override
 	public void loadMap(String p_filePath) {
 		d_gameEngine.loadMap(p_filePath);
-		d_gameEngine.setPhase(new PostLoad(d_gameEngine));
+		next();
 	}
 
 	public void next() {
-		System.out.println("must load map");
+		d_gameEngine.setPhase(new PostLoad(d_gameEngine));
 	}
 
 	@Override
@@ -63,13 +67,17 @@ public class PreLoad extends MapEditorPhase {
 
 	@Override
 	public void showMap() {
-		// TODO Auto-generated method stub
-		this.printInvalidCommandMessage();
+		d_gameEngine.showMap();
 	}
 
 	@Override
 	public boolean checkIfGameCanBegin() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'checkIfGameCanBegin'");
+	}
+
+	@Override
+	public Set<Command> getAvaliableCommands() {
+		return Set.of(Command.LOAD_MAP);
 	}
 }

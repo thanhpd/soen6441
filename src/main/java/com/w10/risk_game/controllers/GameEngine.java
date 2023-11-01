@@ -57,9 +57,8 @@ public class GameEngine {
 	 * checks if the map is valid.
 	 *
 	 * @param p_filePath
-	 *                   The parameter `p_filePath` is a String that represents the
-	 *                   full
-	 *                   path of the file from which the map will be loaded.
+	 *            The parameter `p_filePath` is a String that represents the full
+	 *            path of the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_filePath) {
 		try {
@@ -97,9 +96,8 @@ public class GameEngine {
 	 * players, checking for duplicate names.
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player being created.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
@@ -126,9 +124,8 @@ public class GameEngine {
 	 * players
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player that needs to be removed.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player that needs to be removed.
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
@@ -276,8 +273,7 @@ public class GameEngine {
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *                     The name of the player for which you want to retrieve the
-	 *                     details.
+	 *            The name of the player for which you want to retrieve the details.
 	 * @return The method is returning a Player object.
 	 *
 	 */
@@ -291,9 +287,8 @@ public class GameEngine {
 	 * failure.
 	 *
 	 * @param p_mapFilePath
-	 *                      The parameter `p_mapFileName` is a String that
-	 *                      represents the file
-	 *                      name or path of the map file that needs to be edited.
+	 *            The parameter `p_mapFileName` is a String that represents the file
+	 *            name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
 	 *
 	 */
@@ -333,14 +328,12 @@ public class GameEngine {
 	 * The function adds a continent to a map editor and prints the output.
 	 *
 	 * @param p_continentName
-	 *                        The parameter "p_continentName" is a String that
-	 *                        represents the
-	 *                        name of the continent that you want to add.
+	 *            The parameter "p_continentName" is a String that represents the
+	 *            name of the continent that you want to add.
 	 *
 	 * @param p_bonus
-	 *                        The p_bonus parameter is an integer that represents
-	 *                        the bonus for
-	 *                        each continent.
+	 *            The p_bonus parameter is an integer that represents the bonus for
+	 *            each continent.
 	 */
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
@@ -355,17 +348,14 @@ public class GameEngine {
 	 * The function adds a country to a map editor and prints the output.
 	 *
 	 * @param p_countryId
-	 *                        The p_countryId parameter is an integer that
-	 *                        represents the unique
-	 *                        identifier for the country being added.
+	 *            The p_countryId parameter is an integer that represents the unique
+	 *            identifier for the country being added.
 	 * @param p_countryName
-	 *                        The parameter "p_countryName" is a String that
-	 *                        represents the name
-	 *                        of the country that you want to add.
+	 *            The parameter "p_countryName" is a String that represents the name
+	 *            of the country that you want to add.
 	 * @param p_continentName
-	 *                        The p_continentName parameter is an integer that
-	 *                        represents the ID
-	 *                        of the continent to which the country belongs.
+	 *            The p_continentName parameter is an integer that represents the ID
+	 *            of the continent to which the country belongs.
 	 *
 	 */
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
@@ -381,9 +371,8 @@ public class GameEngine {
 	 * The function removes a continent from a map in a game editor.
 	 *
 	 * @param p_continentName
-	 *                        The parameter "p_continentId" is an integer that
-	 *                        represents the ID
-	 *                        of the continent that needs to be removed.
+	 *            The parameter "p_continentId" is an integer that represents the ID
+	 *            of the continent that needs to be removed.
 	 *
 	 */
 	public void removeContinent(String p_continentName) {
@@ -400,9 +389,8 @@ public class GameEngine {
 	 * ownership if necessary.
 	 *
 	 * @param p_countryId
-	 *                    The parameter `p_countryId` is an integer representing the
-	 *                    ID of
-	 *                    the country that needs to be removed.
+	 *            The parameter `p_countryId` is an integer representing the ID of
+	 *            the country that needs to be removed.
 	 *
 	 */
 	public void removeCountry(int p_countryId) {
@@ -422,15 +410,12 @@ public class GameEngine {
 	 * The function adds a neighbor country to a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *                             The p_countryId parameter represents the ID of
-	 *                             the country to
-	 *                             which you want to add a neighbor.
+	 *            The p_countryId parameter represents the ID of the country to
+	 *            which you want to add a neighbor.
 	 * @param p_neighbourCountryId
-	 *                             The parameter "p_neighbourCountryId" represents
-	 *                             the ID of the
-	 *                             neighboring country that you want to add to the
-	 *                             country with the
-	 *                             ID "p_countryId".
+	 *            The parameter "p_neighbourCountryId" represents the ID of the
+	 *            neighboring country that you want to add to the country with the
+	 *            ID "p_countryId".
 	 *
 	 */
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
@@ -446,15 +431,12 @@ public class GameEngine {
 	 * The function removes a neighbor country from a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *                            The p_countryId parameter represents the ID of the
-	 *                            country from
-	 *                            which you want to remove a neighbor.
+	 *            The p_countryId parameter represents the ID of the country from
+	 *            which you want to remove a neighbor.
 	 * @param p_neighborCountryId
-	 *                            The parameter "p_neighborCountryId" represents the
-	 *                            ID of the
-	 *                            neighbor country that you want to remove from the
-	 *                            country with ID
-	 *                            "p_countryId".
+	 *            The parameter "p_neighborCountryId" represents the ID of the
+	 *            neighbor country that you want to remove from the country with ID
+	 *            "p_countryId".
 	 *
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -471,13 +453,11 @@ public class GameEngine {
 	 * countries.
 	 *
 	 * @param p_countryId
-	 *                    The ID of the country that needs to be removed from the
-	 *                    player's
-	 *                    list of owned countries.
+	 *            The ID of the country that needs to be removed from the player's
+	 *            list of owned countries.
 	 * @param p_player
-	 *                    The parameter "p_player" is of type Player and represents
-	 *                    the
-	 *                    player from whom the country needs to be removed.
+	 *            The parameter "p_player" is of type Player and represents the
+	 *            player from whom the country needs to be removed.
 	 *
 	 */
 	private void removeCountryFromPlayer(int p_countryId, Player p_player) {
@@ -535,7 +515,7 @@ public class GameEngine {
 	 * an error message.
 	 *
 	 * @param p_mapFilePath
-	 *                      The full path of the file where the map will be saved.
+	 *            The full path of the file where the map will be saved.
 	 *
 	 */
 	public void saveMap(String p_mapFilePath) {

@@ -2,6 +2,7 @@ package com.w10.risk_game.models;
 
 import java.util.List;
 
+import com.w10.risk_game.commands.Advance;
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.utils.Constants;
@@ -177,14 +178,10 @@ public class Player {
 	public void issueOrder() {
 		String l_input = GameUI.Command;
 		String[] l_inputArray = l_input.split(" ");
-		String l_orderType = l_inputArray[0];
-		switch (l_orderType) {
+		switch (l_inputArray[0]) {// order type
 			case "deploy" :
-				String l_countryId = l_inputArray[1];
-				String l_num = l_inputArray[2];
-				boolean l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
-				boolean l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
-				if (l_isValidCountry && l_isValidNum) {
+				if (checkValidOwnedCountry(Integer.parseInt(l_inputArray[1]))
+						&& checkValidArmy(Integer.parseInt(l_inputArray[2]))) {
 					Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
 							Integer.parseInt(l_inputArray[2]));
 					d_orders.add(order);
@@ -194,7 +191,17 @@ public class Player {
 				}
 				break;
 			case "advance" :
-				// TODO: add advance object to d_orders
+				Country l_countryFrom = this.d_countriesOwned.stream()
+						.filter(l_c -> l_c.getCountryName().equals(l_inputArray[1])).findAny().orElse(null);
+				Country l_countryTo = l_countryFrom.getNeighbors().values().stream()
+						.filter(c -> c.getCountryName().equals(l_inputArray[2])).findAny().orElse(null);
+				if (l_countryFrom != null && l_countryTo != null && Integer.parseInt(l_inputArray[3]) > 0) {
+					Order l_order = new Advance(l_countryFrom, l_countryTo, Integer.parseInt(l_inputArray[3]));
+					d_orders.add(l_order);
+					deployArmies(Integer.parseInt(l_inputArray[3]));
+				} else {
+					System.out.println("This advance order is invalid. It will not be added to the list of orders.");
+				}
 				break;
 			case "bomb" :
 				// TODO: add bomb object to d_orders
@@ -213,6 +220,7 @@ public class Player {
 				break;
 		}
 	}
+
 	/**
 	 * The function "nextOrder" returns and removes the first element from a list of
 	 * player's orders.
@@ -284,9 +292,9 @@ public class Player {
 	 *            the country id
 	 * @return boolean value to show whether the country id is valid
 	 */
-	public boolean checkValidCountry(List<Country> p_countries, String p_countryId) {
-		for (Country country : p_countries) {
-			if (country.getCountryId() == Integer.parseInt(p_countryId)) {
+	public boolean checkValidOwnedCountry(Integer p_countryId) {
+		for (Country l_country : this.d_countriesOwned) {
+			if (l_country.getCountryId() == p_countryId) {
 				return true;
 			}
 		}

@@ -24,8 +24,7 @@ public class GameEngine {
 	private Formatter d_formatter;
 
 	public static String Command = "";
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance(); 
-
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	private Phase phase;
 
@@ -51,13 +50,13 @@ public class GameEngine {
 	 *
 	 */
 	public void start() {
-	setPhase(new PreLoad(this));
+		setPhase(new PreLoad(this));
 
 		// while loop
 		// if load map command
 		// 1. sePhaseLoadMpa
 		// 2. this.phase.loadMap();
-		//d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
+		// d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
 		boolean l_exit = false;
 
 		while (!l_exit) {
@@ -77,8 +76,8 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
 						String[] l_mapName = l_argList[1].split("/");
 						d_logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
-						//this.d_riskGame.loadMap(l_argList[1]);
-						//setPhase(new PreLoad(this));
+						// this.d_riskGame.loadMap(l_argList[1]);
+						// setPhase(new PreLoad(this));
 						this.phase.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
@@ -98,8 +97,7 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.phase.addContinent(l_options.get(1),
-											Integer.parseInt(l_options.get(2)));
+									this.phase.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									this.phase.removeContinent(l_options.get(1));
@@ -276,7 +274,7 @@ public class GameEngine {
 		this.d_formatter.close();
 	}
 
-	public RiskGame getGame(){
+	public RiskGame getGame() {
 		return this.d_riskGame;
 	}
 }

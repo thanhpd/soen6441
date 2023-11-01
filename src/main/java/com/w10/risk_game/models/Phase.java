@@ -11,7 +11,7 @@ public abstract class Phase {
 	protected RiskGame d_Game;
 	public Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_Game=p_gameEngine.getGame();
+		this.d_Game = p_gameEngine.getGame();
 	}
 
 	// map commands
@@ -71,8 +71,8 @@ public abstract class Phase {
 	abstract public void next();
 
 	public abstract Set<Command> getAvailableCommands();
-	
-	public String getPhaseName(){
+
+	public String getPhaseName() {
 		return getClassName();
 	}
 
@@ -80,13 +80,14 @@ public abstract class Phase {
 		System.out.println("Invalid command in state " + getPhaseName());
 	}
 
-	private String getClassName(){
+	private String getClassName() {
 		var name = this.getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1, name.length());
 	}
 
-	public void printAvailableCommand(){
-		String avaliableCommandsText= getAvailableCommands().toString();////String.join('-', getAvaliableCommands().to);
-		System.out.println("You are in "+getPhaseName()+" Phase. Command avaliable "+avaliableCommandsText);
+	public void printAvailableCommand() {
+		String avaliableCommandsText = getAvailableCommands().toString();//// String.join('-',
+																			//// getAvaliableCommands().to);
+		System.out.println("You are in " + getPhaseName() + " Phase. Command avaliable " + avaliableCommandsText);
 	}
 }

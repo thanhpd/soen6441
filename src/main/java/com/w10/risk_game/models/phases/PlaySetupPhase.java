@@ -5,10 +5,10 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
-public class PlaySetupPhase extends GamePlayPhase{
-    public PlaySetupPhase(GameEngine d_gameEngine){
-        super(d_gameEngine);
-    }
+public class PlaySetupPhase extends GamePlayPhase {
+	public PlaySetupPhase(GameEngine d_gameEngine) {
+		super(d_gameEngine);
+	}
 	@Override
 	public void showMap() {
 		this.d_Game.showMap();
@@ -42,10 +42,10 @@ public class PlaySetupPhase extends GamePlayPhase{
 
 	@Override
 	public boolean assignCountries() {
-		
-		if(this.d_Game.assignCountries()){
-		next();
-		return true;
+
+		if (this.d_Game.assignCountries()) {
+			next();
+			return true;
 		}
 		return false;
 	}
@@ -63,6 +63,7 @@ public class PlaySetupPhase extends GamePlayPhase{
 
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.ASSIGN_COUNTRIES,Command.GAME_PLAYER_CREATE,Command.GAME_PLAYER_REMOVE,Command.SHOW_MAP);
+		return Set.of(Command.ASSIGN_COUNTRIES, Command.GAME_PLAYER_CREATE, Command.GAME_PLAYER_REMOVE,
+				Command.SHOW_MAP);
 	}
 }

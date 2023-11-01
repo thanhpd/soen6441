@@ -7,7 +7,6 @@ import java.util.Scanner;
 import com.w10.risk_game.controllers.RiskGame;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.models.phases.MapEditorPhase;
 import com.w10.risk_game.models.phases.PreLoad;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
@@ -17,7 +16,6 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * The GameUI class handles the command line user interface for the game,
  * including the map editor, start-up phase and gameplay phase.
  *
- * @author Sherwyn Dsouza
  */
 public class GameEngine {
 
@@ -86,7 +84,7 @@ public class GameEngine {
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						d_logger.log(Constants.CLI_SHOW_MAP);
-						this.d_riskGame.showMap();
+						this.phase.showMap();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						this.d_riskGame.editMap(l_argList[1]);

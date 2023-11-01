@@ -6,7 +6,7 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
-// In Preload, all commands except LoadMap Is available
+// In Preload, only load map is a avaliable.
 public class PreLoad extends MapEditorPhase {
 
 	public PreLoad(GameEngine p_GameEngine) {
@@ -25,43 +25,36 @@ public class PreLoad extends MapEditorPhase {
 
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removeCountry(int p_countryId) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removeContinent(String p_continentName) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void saveMap(String p_mapFilePath) {
-		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();
 	}
 

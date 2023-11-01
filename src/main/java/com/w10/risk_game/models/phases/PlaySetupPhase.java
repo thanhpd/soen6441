@@ -2,11 +2,12 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
+import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.RiskGame;
 
 public class PlaySetupPhase extends GamePlayPhase{
-    public PlaySetupPhase(RiskGame p_GameEngine){
+    public PlaySetupPhase(GameEngine p_GameEngine){
         super(p_GameEngine);
     }
 
@@ -24,22 +25,23 @@ public class PlaySetupPhase extends GamePlayPhase{
 
 	@Override
 	public void createPlayer(String p_playerName) {
-		this.d_gameEngine.createPlayer(p_playerName);
+		//this.d_gameEngine.createPlayer(p_playerName);
 	}
 
 	@Override
 	public void removePlayer(String p_playerName) {
-		this.d_gameEngine.removePlayer(p_playerName);
+		//this.d_gameEngine.removePlayer(p_playerName);
 	}
 
 	@Override
 	public void showAllPlayers() {
-		this.d_gameEngine.showAllPlayers();
+		//this.d_gameEngine.showAllPlayers();
 	}
 
 	@Override
 	public boolean assignCountries() {
-		return this.d_gameEngine.assignCountries();
+		//return this.d_gameEngine.assignCountries();
+		return false;
 	}
 
 	@Override

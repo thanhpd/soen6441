@@ -11,46 +11,44 @@ public class PostLoad extends MapEditorPhase {
 	public PostLoad(GameEngine p_GameEngine) {
 		super(p_GameEngine);
 	}
-
+	@Override
+	public void showMap() {
+		this.d_Game.showMap();
+	}
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
-		this.d_gameEngine.addCountry(p_countryId, p_countryName, p_continentName);
+		this.d_Game.addCountry(p_countryId, p_countryName, p_continentName);
 	}
 
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
-		this.d_gameEngine.addContinent(p_continentName, p_bonus);
+	this.d_Game.addContinent(p_continentName, p_bonus);
 	}
 
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.d_gameEngine.addNeighbor(p_countryId, p_neighborCountryId);
+	this.d_Game.addNeighbor(p_countryId, p_neighborCountryId);
 	}
 
 	@Override
 	public void removeCountry(int p_countryId) {
-		this.d_gameEngine.removeCountry(p_countryId);
+	this.d_Game.removeCountry(p_countryId);
 	}
 
 	@Override
 	public void removeContinent(String p_continentName) {
-		this.d_gameEngine.removeContinent(p_continentName);
+	this.d_Game.removeContinent(p_continentName);
 	}
 
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.d_gameEngine.removeNeighbor(p_countryId, p_neighborCountryId);
+	this.d_Game.removeNeighbor(p_countryId, p_neighborCountryId);
 	}
 
 	@Override
 	public void saveMap(String p_mapFilePath) {
-		this.d_gameEngine.saveMap(p_mapFilePath);
+	this.d_Game.saveMap(p_mapFilePath);
 		next();
-	}
-
-	@Override
-	public void showMap() {
-		this.d_gameEngine.showMap();
 	}
 
 	@Override
@@ -60,12 +58,12 @@ public class PostLoad extends MapEditorPhase {
 
 	@Override
 	public boolean checkIfGameCanBegin() {
-		return d_gameEngine.checkIfGameCanBegin();
+		return this.d_Game.checkIfGameCanBegin();
 	}
 
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
+	d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
 	}
 
 	@Override

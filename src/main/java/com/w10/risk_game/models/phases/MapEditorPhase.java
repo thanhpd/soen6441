@@ -11,12 +11,6 @@ public abstract class MapEditorPhase extends Phase {
 	}
 
 	@Override
-	public void printInvalidCommandMessage() {
-		// TODO Auto-generated method stub
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
 	public void createPlayer(String p_playerName) {
 		// TODO Auto-generated method stub
 		this.printInvalidCommandMessage();

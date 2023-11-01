@@ -4,13 +4,15 @@ import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.RiskGame;
 
 public class PlaySetupPhase extends GamePlayPhase{
-    public PlaySetupPhase(GameEngine p_GameEngine){
-        super(p_GameEngine);
+    public PlaySetupPhase(GameEngine d_gameEngine){
+        super(d_gameEngine);
     }
-
+	@Override
+	public void showMap() {
+		this.d_Game.showMap();
+	}
 	@Override
 	public boolean executePlayerOrders() {
 		this.printInvalidCommandMessage();
@@ -25,40 +27,42 @@ public class PlaySetupPhase extends GamePlayPhase{
 
 	@Override
 	public void createPlayer(String p_playerName) {
-		//this.d_gameEngine.createPlayer(p_playerName);
+		this.d_Game.createPlayer(p_playerName);
 	}
 
 	@Override
 	public void removePlayer(String p_playerName) {
-		//this.d_gameEngine.removePlayer(p_playerName);
+		this.d_Game.removePlayer(p_playerName);
 	}
 
 	@Override
 	public void showAllPlayers() {
-		//this.d_gameEngine.showAllPlayers();
+		this.d_Game.showAllPlayers();
 	}
 
 	@Override
 	public boolean assignCountries() {
-		//return this.d_gameEngine.assignCountries();
+		
+		if(this.d_Game.assignCountries()){
+		next();
+		return true;
+		}
 		return false;
 	}
 
 	@Override
 	public boolean checkIfGameCanBegin() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'checkIfGameCanBegin'");
+		// Not sure what to do
+		return false;
 	}
 
 	@Override
 	public void next() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'next'");
+		d_gameEngine.setPhase(new MainPlayPhase(d_gameEngine));
 	}
 
 	@Override
-	public Set<Command> getAvaliableCommands() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getAvaliableCommands'");
+	public Set<Command> getAvailableCommands() {
+		return Set.of(Command.ASSIGN_COUNTRIES,Command.GAME_PLAYER_CREATE,Command.GAME_PLAYER_REMOVE,Command.SHOW_MAP);
 	}
 }

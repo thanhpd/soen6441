@@ -25,52 +25,52 @@ public class PreLoad extends MapEditorPhase {
 
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removeCountry(int p_countryId) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removeContinent(String p_continentName) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void saveMap(String p_mapFilePath) {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void showMap() {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public boolean checkIfGameCanBegin() {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
-	public Set<Command> getAvaliableCommands() {
+	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.LOAD_MAP);
 	}
 }

@@ -4,7 +4,6 @@ import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.RiskGame;
 
 public class PostLoad extends MapEditorPhase {
 
@@ -48,7 +47,7 @@ public class PostLoad extends MapEditorPhase {
 	@Override
 	public void saveMap(String p_mapFilePath) {
 	this.d_Game.saveMap(p_mapFilePath);
-		next();
+	next();
 	}
 
 	@Override
@@ -58,7 +57,8 @@ public class PostLoad extends MapEditorPhase {
 
 	@Override
 	public boolean checkIfGameCanBegin() {
-		return this.d_Game.checkIfGameCanBegin();
+		this.printInvalidCommandMessage();
+		return false;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class PostLoad extends MapEditorPhase {
 	}
 
 	@Override
-	public Set<Command> getAvaliableCommands() {
+	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.EDIT_CONTINENT,Command.EDIT_COUNTRY,Command.EDIT_NEIGHBOR,Command.SHOW_MAP);
 	}
 }

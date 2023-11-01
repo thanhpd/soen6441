@@ -70,18 +70,23 @@ public abstract class Phase {
 
 	abstract public void next();
 
-	public abstract Set<Command> getAvaliableCommands();
+	public abstract Set<Command> getAvailableCommands();
 	
 	public String getPhaseName(){
-		return this.getClass().getName();
+		return getClassName();
 	}
 
 	public void printInvalidCommandMessage() {
-		System.out.println("Invalid command in state " + this.getClass().getSimpleName());
+		System.out.println("Invalid command in state " + getPhaseName());
+	}
+
+	private String getClassName(){
+		var name = this.getClass().getName();
+		return name.substring(name.lastIndexOf('.') + 1, name.length());
 	}
 
 	public void printAvailableCommand(){
-		String avaliableCommandsText= getAvaliableCommands().toString();////String.join('-', getAvaliableCommands().to);
+		String avaliableCommandsText= getAvailableCommands().toString();////String.join('-', getAvaliableCommands().to);
 		System.out.println("You are in "+getPhaseName()+" Phase. Command avaliable "+avaliableCommandsText);
 	}
 }

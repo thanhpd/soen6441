@@ -30,7 +30,9 @@ public class GameEngine {
 	private Phase phase;
 
 	public void setPhase(Phase phase) {
+
 		this.phase = phase;
+		phase.printAvailableCommand();
 	}
 
 	/**
@@ -49,13 +51,13 @@ public class GameEngine {
 	 *
 	 */
 	public void start() {
-				setPhase(new PreLoad(this));
+	setPhase(new PreLoad(this));
 
 		// while loop
 		// if load map command
 		// 1. sePhaseLoadMpa
 		// 2. this.phase.loadMap();
-		d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
+		//d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
 		boolean l_exit = false;
 
 		while (!l_exit) {
@@ -76,18 +78,18 @@ public class GameEngine {
 						String[] l_mapName = l_argList[1].split("/");
 						d_logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						//this.d_riskGame.loadMap(l_argList[1]);
-						setPhase(new PreLoad(this));
+						//setPhase(new PreLoad(this));
 						this.phase.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
-						this.d_riskGame.saveMap(l_argList[1]);
+						this.phase.saveMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						d_logger.log(Constants.CLI_SHOW_MAP);
 						this.phase.showMap();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
-						this.d_riskGame.editMap(l_argList[1]);
+						this.phase.editMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop
@@ -96,11 +98,11 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_riskGame.addContinent(l_options.get(1),
+									this.phase.addContinent(l_options.get(1),
 											Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_riskGame.removeContinent(l_options.get(1));
+									this.phase.removeContinent(l_options.get(1));
 									break;
 							}
 						}
@@ -112,11 +114,11 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_riskGame.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
+									this.phase.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
 											l_options.get(3));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_riskGame.removeCountry(Integer.parseInt(l_options.get(1)));
+									this.phase.removeCountry(Integer.parseInt(l_options.get(1)));
 									break;
 							}
 						}
@@ -128,18 +130,18 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_riskGame.addNeighbor(Integer.parseInt(l_options.get(1)),
+									this.phase.addNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_riskGame.removeNeighbor(Integer.parseInt(l_options.get(1)),
+									this.phase.removeNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
-						this.d_riskGame.checkIfMapIsValid();
+						this.phase.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up phase
@@ -150,20 +152,20 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_riskGame.createPlayer(l_options.get(1));
+									this.phase.createPlayer(l_options.get(1));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_riskGame.removePlayer(l_options.get(1));
+									this.phase.removePlayer(l_options.get(1));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL :
-									this.d_riskGame.showAllPlayers();
+									this.phase.showAllPlayers();
 									break;
 							}
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 						d_logger.log(Constants.CLI_ASSIGN_COUNTRIES);
-						if (this.d_riskGame.assignCountries() && this.d_riskGame.checkIfGameCanBegin()) {
+						if (this.phase.assignCountries() && this.phase.checkIfGameCanBegin()) {
 							l_exit = true;
 							this.d_startGamePhase = true;
 						}
@@ -233,7 +235,7 @@ public class GameEngine {
 					// Show Map Command
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						System.out.println(Constants.CLI_SHOW_MAP);
-						this.d_riskGame.showMap();
+						this.phase.showMap();
 						break;
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :

@@ -5,6 +5,7 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
@@ -37,69 +38,74 @@ public class MapDisplay {
 	 *            displayed
 	 */
 	public void displayMap(GameMap p_map, boolean p_showArmies) {
-		Formatter l_formatter = new Formatter();
+		try {
+			Formatter l_formatter = new Formatter();
 
-		Iterator<Map.Entry<Integer, Continent>> l_iteratorForContinent = p_map.getContinents().entrySet().iterator();
+			Iterator<Map.Entry<Integer, Continent>> l_iteratorForContinent = p_map.getContinents().entrySet()
+					.iterator();
 
-		String l_table1 = Constants.MAP_DISPLAY_TABLE1_FORMAT_PATTERN;
-		String l_table2 = Constants.MAP_DISPLAY_TABLE2_FORMAT_PATTERN;
+			String l_table1 = Constants.MAP_DISPLAY_TABLE1_FORMAT_PATTERN;
+			String l_table2 = Constants.MAP_DISPLAY_TABLE2_FORMAT_PATTERN;
 
-		if (p_showArmies) {
-			l_formatter.format(Constants.MAP_DISPLAY_TABLE2_LINE);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			if (p_showArmies) {
+				l_formatter.format(Constants.MAP_DISPLAY_TABLE2_LINE);
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
 
-			l_formatter = new Formatter();
-			l_formatter.format(Constants.MAP_DISPLAY_TABLE2_COLUMN_NAMES);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-
-			l_formatter = new Formatter();
-			l_formatter.format(Constants.MAP_DISPLAY_TABLE2_LINE);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-		} else {
-			l_formatter.format(Constants.MAP_DISPLAY_TABLE1_LINE);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-
-			l_formatter = new Formatter();
-			l_formatter.format(Constants.MAP_DISPLAY_TABLE1_COLUMN_NAMES);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-
-			l_formatter = new Formatter();
-			l_formatter.format(Constants.MAP_DISPLAY_TABLE1_LINE);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-		}
-
-		while (l_iteratorForContinent.hasNext()) {
-			Map.Entry<Integer, Continent> l_continentMap = (Map.Entry<Integer, Continent>) l_iteratorForContinent
-					.next();
-			Integer l_continentId = l_continentMap.getKey();
-			Continent l_continent = p_map.getContinents().get(l_continentId);
-			Iterator<Country> l_listIterator = l_continent.getCountries().iterator();
-
-			while (l_listIterator.hasNext()) {
-				Country l_country = (Country) l_listIterator.next();
-				ArrayList<String> l_neighborNames = new ArrayList<>();
-				for (Country neighbor : l_country.getNeighbors().values()) {
-					l_neighborNames.add(neighbor.getCountryId() + "-" + neighbor.getCountryName());
-				}
-				String l_neighborValue = String.join(", ", l_neighborNames);
 				l_formatter = new Formatter();
-				if (p_showArmies) {
-					l_formatter.format(l_table2, l_country.getCountryName(), l_country.getCountryId(),
-							l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue,
-							l_country.getOwner().getName(), l_country.getArmyCount());
-				} else {
-					l_formatter.format(l_table1, l_country.getCountryName(), l_country.getCountryId(),
-							l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue);
-				}
+				l_formatter.format(Constants.MAP_DISPLAY_TABLE2_COLUMN_NAMES);
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+
+				l_formatter = new Formatter();
+				l_formatter.format(Constants.MAP_DISPLAY_TABLE2_LINE);
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+			} else {
+				l_formatter.format(Constants.MAP_DISPLAY_TABLE1_LINE);
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+
+				l_formatter = new Formatter();
+				l_formatter.format(Constants.MAP_DISPLAY_TABLE1_COLUMN_NAMES);
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+
+				l_formatter = new Formatter();
+				l_formatter.format(Constants.MAP_DISPLAY_TABLE1_LINE);
 				d_logger.log(l_formatter.toString());
 				l_formatter.close();
 			}
+
+			while (l_iteratorForContinent.hasNext()) {
+				Map.Entry<Integer, Continent> l_continentMap = (Map.Entry<Integer, Continent>) l_iteratorForContinent
+						.next();
+				Integer l_continentId = l_continentMap.getKey();
+				Continent l_continent = p_map.getContinents().get(l_continentId);
+				Iterator<Country> l_listIterator = l_continent.getCountries().iterator();
+
+				while (l_listIterator.hasNext()) {
+					Country l_country = (Country) l_listIterator.next();
+					ArrayList<String> l_neighborNames = new ArrayList<>();
+					for (Country neighbor : l_country.getNeighbors().values()) {
+						l_neighborNames.add(neighbor.getCountryId() + "-" + neighbor.getCountryName());
+					}
+					String l_neighborValue = String.join(", ", l_neighborNames);
+					l_formatter = new Formatter();
+					if (p_showArmies) {
+						l_formatter.format(l_table2, l_country.getCountryName(), l_country.getCountryId(),
+								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue,
+								l_country.getOwner().getName(), l_country.getArmyCount());
+					} else {
+						l_formatter.format(l_table1, l_country.getCountryName(), l_country.getCountryId(),
+								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue);
+					}
+					d_logger.log(l_formatter.toString());
+					l_formatter.close();
+				}
+			}
+		} catch (Exception e) {
+			d_logger.log(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
 		}
 	}
 }

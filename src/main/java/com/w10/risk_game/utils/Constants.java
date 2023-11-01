@@ -131,20 +131,13 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
 
 	// Map Display constants
-	public static final String MAP_DISPLAY_ID = "ID(Continent Name)";
-	public static final String MAP_DISPLAY_BONUS = "Bonus";
-	public static final String MAP_DISPLAY_COUNTRY_ID = "CountryID";
-	public static final String MAP_DISPLAY_COUNTRY_NAME = "CountryName";
-	public static final String MAP_DISPLAY_NEIGHBOR_ID = "ID(Neighbors)";
-	public static final String MAP_DISPLAY_PLAYER = "Player";
-	public static final String MAP_DISPLAY_ARMIES = "Armies";
-	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
 	public static final String MAP_DISPLAY_TABLE1_LINE = "+---------------+-----+---------------+-----+---------------------------------------------------------------------------------------------------------+%n";
 	public static final String MAP_DISPLAY_TABLE1_COLUMN_NAMES = "| Country       | ID  | Continent     |Bonus| Neighbor Countries                                                                                      |%n";
 	public static final String MAP_DISPLAY_TABLE1_FORMAT_PATTERN = "|%-15s|%-5s|%-15s|%-5s|%-105s|%n";
 	public static final String MAP_DISPLAY_TABLE2_LINE = "+---------------+-----+---------------+-----+---------------------------------------------------------------------------------------------------------+------------------+------------------+%n";
 	public static final String MAP_DISPLAY_TABLE2_COLUMN_NAMES = "| Country       | ID  | Continent     |Bonus| Neighbor Countries                                                                                      |     Owner        |   No. of Armies  |%n";
 	public static final String MAP_DISPLAY_TABLE2_FORMAT_PATTERN = "|%-15s|%-5s|%-15s|%-5s|%-105s|%-18s|%-18s|%n";
+	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
 
 	// Map Reader constants
 	public static final String MAP_READER_MAP = "[map]";

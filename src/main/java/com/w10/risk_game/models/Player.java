@@ -2,6 +2,7 @@ package com.w10.risk_game.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Order;
@@ -203,17 +204,41 @@ public class Player {
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
 			case "deploy" :
-				String l_countryId = l_inputArray[1];
-				String l_num = l_inputArray[2];
-				boolean l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
-				boolean l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
-				if (l_isValidCountry && l_isValidNum) {
-					Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
-							Integer.parseInt(l_inputArray[2]));
-					d_orders.add(order);
-					deployArmies(Integer.parseInt(l_inputArray[2]));
-				} else {
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+				boolean l_again = true;
+				boolean l_failed = false;
+				while (l_again) {
+					boolean l_isValidForm;
+					boolean l_isValidOrder;
+					boolean l_isValidCountry;
+					boolean l_isValidNum;
+					Scanner l_scanner = new Scanner(System.in);
+					if (l_failed) {
+						d_logger.log(Constants.PLAYER_ISSUE_ORDER_START);
+						d_logger.log(Constants.USER_INPUT_REQUEST);
+						l_input = l_scanner.nextLine();
+						l_inputArray = l_input.split(" ");
+					}
+					l_isValidForm = checkValidForm(l_inputArray);
+					if (!l_isValidForm) {
+						l_failed = true;
+						continue;
+					}
+					String l_countryId = l_inputArray[1];
+					String l_num = l_inputArray[2];
+					l_isValidOrder = checkValidOrder(l_orderType);
+					l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
+					l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
+					if (l_isValidOrder && l_isValidCountry && l_isValidNum) {
+						Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
+								Integer.parseInt(l_inputArray[2]));
+						d_orders.add(order);
+						deployArmies(Integer.parseInt(l_inputArray[2]));
+						l_again = false;
+						l_failed = false;
+					} else {
+						l_again = true;
+						l_failed = true;
+					}
 				}
 				break;
 			case "advance" :
@@ -292,7 +317,7 @@ public class Player {
 	public boolean checkValidOrder(String p_orderType) {
 		String l_orderType = p_orderType;
 		if (!l_orderType.equals("deploy")) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_DEPLOY_ORDER_TYPE);
 			return false;
 		}
 		return true;

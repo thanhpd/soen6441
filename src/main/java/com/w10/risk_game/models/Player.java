@@ -3,11 +3,11 @@ package com.w10.risk_game.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
-import com.w10.risk_game.views.GameUI;
 
 /**
  * The Player class represents a player in this game, with properties such as
@@ -198,7 +198,7 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
-		String l_input = GameUI.Command;
+		String l_input = GameEngine.Command;
 		String[] l_inputArray = l_input.split(" ");
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {

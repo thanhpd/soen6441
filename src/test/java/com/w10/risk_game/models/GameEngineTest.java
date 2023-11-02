@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.w10.risk_game.controllers.GameEngine;
+import com.w10.risk_game.controllers.RiskGame;
 import com.w10.risk_game.utils.Constants;
 
 import java.io.ByteArrayOutputStream;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * GameEngine class.
  */
 public class GameEngineTest {
-	private GameEngine d_gameEngine;
+	private RiskGame d_RiskGame;
 	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
 	Player d_player2;
@@ -34,7 +34,7 @@ public class GameEngineTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-		d_gameEngine = new GameEngine();
+		d_RiskGame = new RiskGame();
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 
@@ -51,18 +51,18 @@ public class GameEngineTest {
 	@Test
 	void testAssignCountries() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_gameEngine.loadMap(l_mapFilePath);
+		d_RiskGame.loadMap(l_mapFilePath);
 
-		d_gameEngine.createPlayer(d_player1.getName());
-		d_gameEngine.createPlayer(d_player2.getName());
+		d_RiskGame.createPlayer(d_player1.getName());
+		d_RiskGame.createPlayer(d_player2.getName());
 
-		assertEquals(0, d_gameEngine.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(0, d_gameEngine.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGame.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGame.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 
-		d_gameEngine.assignCountries();
+		d_RiskGame.assignCountries();
 
-		assertEquals(12, d_gameEngine.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(12, d_gameEngine.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(12, d_RiskGame.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(12, d_RiskGame.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 	}
 
 	/**
@@ -73,25 +73,25 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testCreatePlayer() {
-		d_gameEngine.createPlayer(d_player1.getName());
-		d_gameEngine.createPlayer(d_player2.getName());
-		assertEquals(2, d_gameEngine.getNoOfPlayers());
+		d_RiskGame.createPlayer(d_player1.getName());
+		d_RiskGame.createPlayer(d_player2.getName());
+		assertEquals(2, d_RiskGame.getNoOfPlayers());
 
-		d_gameEngine.createPlayer(d_player2.getName());
-		assertEquals(2, d_gameEngine.getNoOfPlayers());
+		d_RiskGame.createPlayer(d_player2.getName());
+		assertEquals(2, d_RiskGame.getNoOfPlayers());
 	}
 
 	/**
-	 * The testLoadMap function tests whether the d_gameEngine successfully loads
-	 * the "europe.map" file.
+	 * The testLoadMap function tests whether the d_RiskGame successfully loads the
+	 * "europe.map" file.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
 	@Test
 	void testLoadMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_gameEngine.loadMap(l_mapFilePath);
-		assertNotNull(d_gameEngine.getGameMap());
+		d_RiskGame.loadMap(l_mapFilePath);
+		assertNotNull(d_RiskGame.getGameMap());
 	}
 
 	/**
@@ -102,14 +102,14 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testRemovePlayer() {
-		d_gameEngine.createPlayer(d_player1.getName());
-		d_gameEngine.createPlayer(d_player2.getName());
+		d_RiskGame.createPlayer(d_player1.getName());
+		d_RiskGame.createPlayer(d_player2.getName());
 
-		d_gameEngine.removePlayer(d_player2.getName());
-		assertEquals(1, d_gameEngine.getNoOfPlayers());
+		d_RiskGame.removePlayer(d_player2.getName());
+		assertEquals(1, d_RiskGame.getNoOfPlayers());
 
-		d_gameEngine.removePlayer(d_player1.getName());
-		assertEquals(0, d_gameEngine.getNoOfPlayers());
+		d_RiskGame.removePlayer(d_player1.getName());
+		assertEquals(0, d_RiskGame.getNoOfPlayers());
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testShowAllPlayers() {
-		d_gameEngine.showAllPlayers();
+		d_RiskGame.showAllPlayers();
 		// Capture the actual output
 		String l_actualOutput = d_outputStream.toString().trim();
 		String l_expectedOutput = "";
@@ -130,22 +130,22 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testShowMap() {
-		d_gameEngine.showMap();
-		assertTrue(d_gameEngine.checkIfGameCanBegin() == d_gameEngine.checkIfMapIsValid());
+		d_RiskGame.showMap();
+		assertTrue(d_RiskGame.checkIfGameCanBegin() == d_RiskGame.checkIfMapIsValid());
 	}
 
 	/**
 	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
-	 * d_gameEngine class to ensure that it returns the correct number of players.
+	 * d_RiskGame class to ensure that it returns the correct number of players.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
 	@Test
 	void testGetNoOfPlayers() {
-		d_gameEngine.createPlayer(d_player1.getName());
-		d_gameEngine.createPlayer(d_player2.getName());
+		d_RiskGame.createPlayer(d_player1.getName());
+		d_RiskGame.createPlayer(d_player2.getName());
 
-		assertEquals(2, d_gameEngine.getNoOfPlayers());
+		assertEquals(2, d_RiskGame.getNoOfPlayers());
 	}
 
 	/**
@@ -157,8 +157,8 @@ public class GameEngineTest {
 	@Test
 	void testGameMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_gameEngine.loadMap(l_mapFilePath);
-		assertNotNull(d_gameEngine.getGameMap());
+		d_RiskGame.loadMap(l_mapFilePath);
+		assertNotNull(d_RiskGame.getGameMap());
 	}
 
 	/**
@@ -169,8 +169,8 @@ public class GameEngineTest {
 	 */
 	@Test
 	void getPlayerDetailsTest() {
-		d_gameEngine.createPlayer(d_player1.getName());
+		d_RiskGame.createPlayer(d_player1.getName());
 
-		assertEquals(d_player1.getName(), d_gameEngine.getPlayerDetails(d_player1.getName()).getName());
+		assertEquals(d_player1.getName(), d_RiskGame.getPlayerDetails(d_player1.getName()).getName());
 	}
 }

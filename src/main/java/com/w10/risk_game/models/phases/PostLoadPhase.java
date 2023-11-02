@@ -5,6 +5,11 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
+/**
+ * The PostLoadPhase class is a subclass of MapEditorPhase that represents the
+ * phase after loading a map in a game editor, allowing for editing and saving
+ * of the map.
+ */
 public class PostLoadPhase extends MapEditorPhase {
 
 	public PostLoadPhase(GameEngine p_GameEngine) {

@@ -4,6 +4,11 @@ import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.controllers.RiskGame;
 import com.w10.risk_game.models.Phase;
 
+/**
+ * The MapEditorPhase class is an abstract class that extends the Phase class
+ * and provides default implementations for various methods related to map
+ * editing in a game.
+ */
 public abstract class MapEditorPhase extends Phase {
 
 	public MapEditorPhase(GameEngine p_gameEngine) {
@@ -12,53 +17,53 @@ public abstract class MapEditorPhase extends Phase {
 
 	@Override
 	public void createPlayer(String p_playerName) {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void removePlayer(String p_playerName) {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public void showAllPlayers() {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public boolean assignCountries() {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
 	public boolean editMap(String p_mapFilePath) {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
 	public boolean checkIfMapIsValid() {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
 	public boolean executePlayerOrders() {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
 	public boolean checkIfOrdersCanBeExecuted() {
-		// TODO Auto-generated method stub
+
 		this.printInvalidCommandMessage();
 		return false;
 	}

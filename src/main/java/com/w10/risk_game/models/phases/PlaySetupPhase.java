@@ -5,6 +5,11 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
+/**
+ * The PlaySetupPhase class is a subclass of GamePlayPhase that handles the
+ * setup phase of the game, including creating and removing players, assigning
+ * countries, and transitioning to the main play phase.
+ */
 public class PlaySetupPhase extends GamePlayPhase {
 	public PlaySetupPhase(GameEngine d_gameEngine) {
 		super(d_gameEngine);

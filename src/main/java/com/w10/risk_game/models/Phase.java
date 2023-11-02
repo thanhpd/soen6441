@@ -6,6 +6,10 @@ import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.RiskGame;
 
+/**
+ * The `Phase` class is an abstract class that represents a phase in a Risk game
+ * and provides methods for various game commands.
+ */
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
 	protected RiskGame d_Game;
@@ -86,8 +90,7 @@ public abstract class Phase {
 	}
 
 	public void printAvailableCommand() {
-		String avaliableCommandsText = getAvailableCommands().toString();//// String.join('-',
-																			//// getAvaliableCommands().to);
+		String avaliableCommandsText = getAvailableCommands().toString();
 		System.out.println("You are in " + getPhaseName() + " Phase. Command avaliable " + avaliableCommandsText);
 	}
 }

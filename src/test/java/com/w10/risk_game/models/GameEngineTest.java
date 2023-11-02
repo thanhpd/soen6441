@@ -82,8 +82,8 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testLoadMap function tests whether the d_RiskGame successfully loads
-	 * the "europe.map" file.
+	 * The testLoadMap function tests whether the d_RiskGame successfully loads the
+	 * "europe.map" file.
 	 *
 	 * @author Sherwyn Dsouza
 	 */

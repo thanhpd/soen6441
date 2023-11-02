@@ -16,7 +16,6 @@ import com.w10.risk_game.models.GameMap;
  */
 public class MapEditor {
 	private GameMap l_gameMap;
-
 	public MapEditor(GameMap originalMap) {
 		this.l_gameMap = originalMap;
 	}

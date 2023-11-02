@@ -10,8 +10,10 @@ import java.util.List;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
@@ -26,10 +28,14 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  *
  * @author Sherwyn Dsouza
  */
-public class GameEngine {
+public class RiskGame {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
-	private MapEditor d_mapEditor;
+	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
+	// type. The code is also using the pound sign (#) to create a comment, which
+	// means
+	// that the line "
+	d_mapEditor;
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
@@ -43,13 +49,14 @@ public class GameEngine {
 	/**
 	 * Game Engine constructor
 	 */
-	public GameEngine() {
+	public RiskGame() {
 		this.d_gameMap = new GameMap();
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
 		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
 		this.d_currentPlayerIndex = 0;
+		// this.phase = new StartupPhase();
 	}
 
 	/**
@@ -61,6 +68,8 @@ public class GameEngine {
 	 *            path of the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_filePath) {
+		// one whay?
+		// setPhase(new MapEditorPhase());
 		try {
 			this.d_mapReader = new MapReader();
 			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);
@@ -294,6 +303,10 @@ public class GameEngine {
 	 *
 	 */
 	public boolean editMap(String p_mapFilePath) {
+		// phase.doAcitin();
+		// or phase.editMap
+		// changePhase(new MapEditorPhase());
+
 		File l_file = new File(p_mapFilePath);
 
 		// If file with the input filename exists then load that map else create a new

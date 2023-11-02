@@ -247,7 +247,6 @@ public class GameEngine {
 						break;
 					default:
 						d_logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
-						d_logger.log("ah");
 				}
 				if (l_exit) {
 					break;

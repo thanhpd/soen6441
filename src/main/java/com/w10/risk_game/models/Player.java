@@ -22,7 +22,7 @@ public class Player {
 	private List<Country> d_countriesOwned;
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
-	private List<CardType> d_playerCards = new ArrayList<>(){};
+	private List<CardType> d_playerCards = new ArrayList<>();
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 

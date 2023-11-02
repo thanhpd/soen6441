@@ -39,6 +39,7 @@ public class Advance extends Order {
 	 */
 	public void execute() {
 		if (this.d_countryNameFrom.getOwner().getName().equals(this.d_countryNameTo.getOwner().getName())) {
+			this.d_countryNameFrom.setArmyCount(this.d_countryNameFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryNameTo.setArmyCount(this.d_numOfArmies + this.d_countryNameTo.getArmyCount());
 		} else {
 			// attack

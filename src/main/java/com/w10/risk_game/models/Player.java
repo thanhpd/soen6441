@@ -224,10 +224,11 @@ public class Player {
 						? l_countryFrom.getNeighbors().values().stream()
 								.filter(c -> c.getCountryName().equals(l_inputArray[2])).findAny().orElse(null)
 						: null;
-				if (l_countryFrom != null && l_countryTo != null && Integer.parseInt(l_inputArray[3]) > 0) {
+				// TODO : check if deploy order assigns no. of armies to countryFrom
+				if (this.d_leftoverArmies == 0 && l_countryFrom != null && l_countryTo != null
+						&& Integer.parseInt(l_inputArray[3]) > 0) {
 					Order l_order = new Advance(l_countryFrom, l_countryTo, Integer.parseInt(l_inputArray[3]));
 					d_orders.add(l_order);
-					deployArmies(Integer.parseInt(l_inputArray[3]));
 				} else {
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_ADVANCE_INCORRECT);
 				}

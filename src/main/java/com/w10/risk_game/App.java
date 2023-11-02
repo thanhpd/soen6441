@@ -4,7 +4,6 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.ConsoleLogger;
 import com.w10.risk_game.utils.loggers.FileLogger;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
-import com.w10.risk_game.views.GameUI;
 
 /**
  * Initialize the Application
@@ -24,9 +23,9 @@ public class App {
 	}
 
 	public void startGame() {
-		GameUI l_gameUI = new GameUI();
+		GameEngine l_gameEngine = new GameEngine();
 		try {
-			l_gameUI.runStartUpPhase();
+			l_gameEngine.start();
 		} catch (Exception e) {
 			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 			d_logger.log(e.getMessage());

@@ -23,9 +23,9 @@ public class App {
 	}
 
 	public void startGame() {
-		GameEngine l_gameUI = new GameEngine();
+		GameEngine l_gameEngine = new GameEngine();
 		try {
-			l_gameUI.start();
+			l_gameEngine.start();
 		} catch (Exception e) {
 			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 			d_logger.log(e.getMessage());

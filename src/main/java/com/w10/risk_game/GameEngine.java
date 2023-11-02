@@ -7,7 +7,7 @@ import java.util.Scanner;
 import com.w10.risk_game.controllers.RiskGame;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.models.phases.PreLoad;
+import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -50,7 +50,7 @@ public class GameEngine {
 	 *
 	 */
 	public void start() {
-		setPhase(new PreLoad(this));
+		setPhase(new PreLoadPhase(this));
 
 		// while loop
 		// if load map command

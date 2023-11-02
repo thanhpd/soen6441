@@ -1,73 +1,76 @@
 package com.w10.risk_game.models.phases;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
-public class PostLoad extends MapEditorPhase {
+// In Preload, only load map is a avaliable.
+public class PreLoadPhase extends MapEditorPhase {
 
-	public PostLoad(GameEngine p_GameEngine) {
+	public PreLoadPhase(GameEngine p_GameEngine) {
 		super(p_GameEngine);
-	}
-	@Override
-	public void showMap() {
-		this.d_Game.showMap();
-	}
-	@Override
-	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
-		this.d_Game.addCountry(p_countryId, p_countryName, p_continentName);
-	}
-
-	@Override
-	public void addContinent(String p_continentName, int p_bonus) {
-		this.d_Game.addContinent(p_continentName, p_bonus);
-	}
-
-	@Override
-	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.d_Game.addNeighbor(p_countryId, p_neighborCountryId);
-	}
-
-	@Override
-	public void removeCountry(int p_countryId) {
-		this.d_Game.removeCountry(p_countryId);
-	}
-
-	@Override
-	public void removeContinent(String p_continentName) {
-		this.d_Game.removeContinent(p_continentName);
-	}
-
-	@Override
-	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.d_Game.removeNeighbor(p_countryId, p_neighborCountryId);
-	}
-
-	@Override
-	public void saveMap(String p_mapFilePath) {
-		this.d_Game.saveMap(p_mapFilePath);
-		next();
 	}
 
 	@Override
 	public void loadMap(String p_filePath) {
-		this.printInvalidCommandMessage();
+		this.d_Game.loadMap(p_filePath);
+		next();
+	}
+
+	public void next() {
+		d_gameEngine.setPhase(new PostLoadPhase(d_gameEngine));
+	}
+
+	@Override
+	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void addContinent(String p_continentName, int p_bonus) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void removeCountry(int p_countryId) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void removeContinent(String p_continentName) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void saveMap(String p_mapFilePath) {
+		super.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void showMap() {
+		super.printInvalidCommandMessage();
 	}
 
 	@Override
 	public boolean checkIfGameCanBegin() {
-		this.printInvalidCommandMessage();
+		super.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
-	public void next() {
-		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
-	}
-
-	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP);
+		return Set.of(Command.LOAD_MAP);
 	}
 }

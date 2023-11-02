@@ -96,8 +96,9 @@ public class RiskGame {
 	 *
 	 */
 	public void showMap() {
-		if (checkIfMapIsValid())
-			this.d_displayMap.formatMap(this.d_gameMap, this.d_players.size() > 0 && this.d_isCountriesAssigned);
+		if (checkIfMapIsValid()) {
+			this.d_displayMap.displayMap(this.d_gameMap, this.d_players.size() > 0 && this.d_isCountriesAssigned);
+		}
 	}
 
 	/**

@@ -22,7 +22,7 @@ public class Player {
 	private List<Country> d_countriesOwned;
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
-	private List<CardType> d_playerCards = new ArrayList<>();
+	private List<CardType> d_playerCards = new ArrayList<>(){};
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -221,12 +221,13 @@ public class Player {
 				// TODO: add advance object to d_orders
 				break;
 			case "bomb" :
-				String l_countryIdToBomb = l_inputArray[1];
-				if (l_countryIdToBomb != null) {
-					Order order = new Bomb(this, Integer.parseInt(l_inputArray[1]));
-					d_orders.add(order);
-				} else {
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+				if (hasCard(CardType.BOMB)) {
+					String l_countryIdToBomb = l_inputArray[1];
+					if (Bomb.validateOrder(this, l_countryIdToBomb)) {
+						Order order = new Bomb(this, l_countryIdToBomb);
+						d_orders.add(order);
+						removeCard(CardType.BOMB);
+					}
 				}
 				break;
 			case "blockade" :
@@ -343,5 +344,18 @@ public class Player {
 			return false;
 		}
 		return true;
+	}
+
+	private boolean hasCard(CardType p_cardType) {
+		if (d_playerCards.contains(p_cardType)) {
+			return true;
+		}
+
+		d_logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
+		return false;
+	}
+
+	private void removeCard(CardType p_cardType) {
+		d_playerCards.remove(p_cardType);
 	}
 }

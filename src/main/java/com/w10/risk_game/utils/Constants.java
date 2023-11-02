@@ -97,6 +97,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES = "Invalid input! The entered number should be less than the number of reinforcement soldiers.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero.";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT = "This deploy order is invalid. It will not be added to the list of orders.";
+	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
+	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";

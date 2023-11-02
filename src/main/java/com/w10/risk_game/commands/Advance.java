@@ -1,5 +1,6 @@
 package com.w10.risk_game.commands;
 
+import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 
@@ -42,7 +43,21 @@ public class Advance extends Order {
 			this.d_countryNameFrom.setArmyCount(this.d_countryNameFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryNameTo.setArmyCount(this.d_numOfArmies + this.d_countryNameTo.getArmyCount());
 		} else {
+			this.d_countryNameFrom.setArmyCount(this.d_countryNameFrom.getArmyCount() - this.d_numOfArmies);
 			// attack
+			int l_noOfAttackingArmies = this.d_numOfArmies;
+			int l_noOfDefendingArmies = this.d_countryNameTo.getArmyCount();
+			int l_leftoverAttackingArmies = (int) Math
+					.max(Math.floor(l_noOfAttackingArmies - 0.7 * l_noOfDefendingArmies), 0);
+			int l_leftoverDefendingArmies = (int) Math
+					.max(Math.floor(l_noOfDefendingArmies - 0.6 * l_noOfAttackingArmies), 0);
+			if (l_leftoverDefendingArmies == 0) {
+				this.d_countryNameTo.setArmyCount(l_leftoverAttackingArmies);
+				this.d_countryNameTo.setOwner(this.d_countryNameFrom.getOwner());
+				this.d_countryNameFrom.getOwner().addCard(CardType.getRandomCard());
+			} else {
+				this.d_countryNameTo.setArmyCount(l_leftoverDefendingArmies);
+			}
 		}
 	}
 

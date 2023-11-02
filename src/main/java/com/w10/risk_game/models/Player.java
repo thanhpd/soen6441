@@ -224,9 +224,10 @@ public class Player {
 						? l_countryFrom.getNeighbors().values().stream()
 								.filter(c -> c.getCountryName().equals(l_inputArray[2])).findAny().orElse(null)
 						: null;
-				// TODO : check if deploy order assigns no. of armies to countryFrom
-				if (this.d_leftoverArmies == 0 && l_countryFrom != null && l_countryTo != null
-						&& Integer.parseInt(l_inputArray[3]) > 0) {
+				int d_advanceArmies = Integer.parseInt(l_inputArray[3]);
+				if (this.d_leftoverArmies == 0 && l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0
+						&& checkValidAdvanceOrder(d_advanceArmies, l_countryFrom.getArmyCount(),
+								l_countryFrom.getCountryId())) {
 					Order l_order = new Advance(l_countryFrom, l_countryTo, Integer.parseInt(l_inputArray[3]));
 					d_orders.add(l_order);
 				} else {
@@ -350,5 +351,16 @@ public class Player {
 			return false;
 		}
 		return true;
+	}
+
+	public boolean checkValidAdvanceOrder(int p_noOfArmiesToAdvance, int p_currentArmiesOnCountry,
+			int p_advanceFromCountryId) {
+		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
+		for (Order l_order : this.getOrders()) {
+			if ((l_order instanceof Deploy) && ((Deploy) l_order).getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Deploy) l_order).getNum();
+			}
+		}
+		return l_totalArmiesDeployed >= p_noOfArmiesToAdvance;
 	}
 }

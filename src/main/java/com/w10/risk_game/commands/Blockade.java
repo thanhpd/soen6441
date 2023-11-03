@@ -43,9 +43,13 @@ public class Blockade extends Order {
 		if (l_countryToBlock != null) {
 			int l_initArmyCount = l_countryToBlock.getArmyCount();
 			int l_newArmyCount = l_initArmyCount * 3;
+			// Triple the army count of the country to block
 			l_countryToBlock.setArmyCount(l_newArmyCount);
+
+			// Remove the owner of the country to block
 			l_countryToBlock.setOwner(null);
 
+			// Remove the country from the player's list of owned countries
 			List<Country> l_newCountriesOwned = d_player.getCountriesOwned().stream()
 					.filter(country -> country.getCountryId() != l_countryToBlock.getCountryId())
 					.collect(Collectors.toList());
@@ -96,6 +100,7 @@ public class Blockade extends Order {
 		try {
 			int l_countryId = Integer.parseInt(p_countryId);
 
+			// Find country with the given ID in the player's list of owned countries
 			l_countryToBlock = p_player.getCountriesOwned().stream().filter(c -> c.getCountryId() == l_countryId)
 					.findFirst().orElse(null);
 

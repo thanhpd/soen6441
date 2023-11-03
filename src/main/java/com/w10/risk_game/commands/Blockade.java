@@ -11,8 +11,8 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
  * The Blockade class represents a blockade order in a game, where a player
- * blocks a country and
- * triples its army count while removing it from their owned countries.
+ * blocks a country and triples its army count while removing it from their
+ * owned countries.
  */
 public class Blockade extends Order {
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
@@ -21,9 +21,11 @@ public class Blockade extends Order {
 
 	/**
 	 * Constructor for Blockade class.
-	 * 
-	 * @param p_player    The player who is issuing the order.
-	 * @param p_countryId The country id of the country to set up blockade.
+	 *
+	 * @param p_player
+	 *            The player who is issuing the order.
+	 * @param p_countryId
+	 *            The country id of the country to set up blockade.
 	 */
 	public Blockade(Player p_player, String p_countryId) {
 		this.d_player = p_player;
@@ -32,8 +34,7 @@ public class Blockade extends Order {
 
 	/**
 	 * The function executes a block action on a country, tripling its army count,
-	 * removing its owner, and
-	 * updating the player's list of owned countries.
+	 * removing its owner, and updating the player's list of owned countries.
 	 */
 	@Override
 	public void execute() {
@@ -46,7 +47,8 @@ public class Blockade extends Order {
 			l_countryToBlock.setOwner(null);
 
 			List<Country> l_newCountriesOwned = d_player.getCountriesOwned().stream()
-					.filter(country -> country.getCountryId() != l_countryToBlock.getCountryId()).collect(Collectors.toList());
+					.filter(country -> country.getCountryId() != l_countryToBlock.getCountryId())
+					.collect(Collectors.toList());
 			d_player.setCountriesOwned(l_newCountriesOwned);
 		}
 	}
@@ -55,10 +57,11 @@ public class Blockade extends Order {
 	 * The function "validateOrder" checks if a player can block a specific country
 	 * in a game.
 	 *
-	 * @param p_player    The player object that represents the player making the
-	 *                    order.
-	 * @param p_countryId The p_countryId parameter is a String that represents the
-	 *                    ID of a country.
+	 * @param p_player
+	 *            The player object that represents the player making the order.
+	 * @param p_countryId
+	 *            The p_countryId parameter is a String that represents the ID of a
+	 *            country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean validateOrder(Player p_player, String p_countryId) {
@@ -69,12 +72,14 @@ public class Blockade extends Order {
 
 	/**
 	 * The function "getCountryToBlock" checks if a provided country ID is valid and
-	 * belongs to a player,
-	 * and returns the corresponding Country object if it exists.
+	 * belongs to a player, and returns the corresponding Country object if it
+	 * exists.
 	 *
-	 * @param p_player    The player object that represents the player who wants to
-	 *                    block a country.
-	 * @param p_countryId The country ID that needs to be checked and blocked.
+	 * @param p_player
+	 *            The player object that represents the player who wants to block a
+	 *            country.
+	 * @param p_countryId
+	 *            The country ID that needs to be checked and blocked.
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryToBlock(Player p_player, String p_countryId) {
@@ -91,8 +96,8 @@ public class Blockade extends Order {
 		try {
 			int l_countryId = Integer.parseInt(p_countryId);
 
-			l_countryToBlock = p_player.getCountriesOwned().stream().filter(c -> c.getCountryId() == l_countryId).findFirst()
-					.orElse(null);
+			l_countryToBlock = p_player.getCountriesOwned().stream().filter(c -> c.getCountryId() == l_countryId)
+					.findFirst().orElse(null);
 
 			if (l_countryToBlock == null) {
 				l_formatter.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId);

@@ -28,9 +28,8 @@ public class BlockadeTest {
 
 	/**
 	 * The setUp function initializes two countries (England and France) with their
-	 * respective army counts
-	 * and adds each other as neighbors, and also initializes two players (Player1
-	 * and Player2).
+	 * respective army counts and adds each other as neighbors, and also initializes
+	 * two players (Player1 and Player2).
 	 */
 	@BeforeEach
 	public void setUp() {
@@ -94,8 +93,7 @@ public class BlockadeTest {
 
 	/**
 	 * The function sets up ownership of countries by assigning players as owners
-	 * and assigning the
-	 * countries to the players' list of owned countries.
+	 * and assigning the countries to the players' list of owned countries.
 	 */
 	private void setUpOwnership() {
 		// Set up list of countries

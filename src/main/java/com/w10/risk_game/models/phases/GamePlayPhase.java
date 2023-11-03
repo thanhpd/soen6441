@@ -1,7 +1,6 @@
 package com.w10.risk_game.models.phases;
 
 import com.w10.risk_game.GameEngine;
-import com.w10.risk_game.controllers.RiskGameController;
 import com.w10.risk_game.models.Phase;
 
 public abstract class GamePlayPhase extends Phase {

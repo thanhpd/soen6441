@@ -28,7 +28,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  *
  * @author Sherwyn Dsouza
  */
-public class RiskGame {
+public class RiskGameController {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
 	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
@@ -49,7 +49,7 @@ public class RiskGame {
 	/**
 	 * Game Engine constructor
 	 */
-	public RiskGame() {
+	public RiskGameController() {
 		this.d_gameMap = new GameMap();
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;

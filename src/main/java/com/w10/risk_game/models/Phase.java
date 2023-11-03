@@ -4,7 +4,8 @@ import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.RiskGame;
+import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.controllers.RiskGameController;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game
@@ -12,10 +13,12 @@ import com.w10.risk_game.controllers.RiskGame;
  */
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
-	protected RiskGame d_Game;
+	protected RiskGameController d_Game;
+	protected MapEditorController d_EditorController;
 	public Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
 		this.d_Game = p_gameEngine.getGame();
+		this.d_EditorController=p_gameEngine.getMapEditorController();
 	}
 
 	// map commands

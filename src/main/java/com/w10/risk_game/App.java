@@ -14,7 +14,7 @@ public class App {
 
 	public App() {
 		d_logger.attach(new ConsoleLogger());
-		d_logger.attach(new FileLogger());
+		//d_logger.attach(new FileLogger());
 	}
 
 	public static void main(String[] args) {

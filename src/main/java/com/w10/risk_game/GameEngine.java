@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
+import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.controllers.RiskGame;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
@@ -20,6 +21,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public class GameEngine {
 
 	private final RiskGame d_riskGame;
+	private final MapEditorController d_EditorController;
 	private boolean d_startGamePhase;
 	private Formatter d_formatter;
 
@@ -41,6 +43,7 @@ public class GameEngine {
 	 */
 	public GameEngine() {
 		this.d_riskGame = new RiskGame();
+		this.d_EditorController=new MapEditorController();
 		this.d_startGamePhase = false;
 	}
 
@@ -89,6 +92,9 @@ public class GameEngine {
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						this.phase.editMap(l_argList[1]);
+						break;
+					case Constants.USER_INPUT_COMMAND_OPTION_NEXT:
+						this.phase.next();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop
@@ -276,5 +282,9 @@ public class GameEngine {
 
 	public RiskGame getGame() {
 		return this.d_riskGame;
+	}
+
+	public MapEditorController getMapEditorController(){
+		return this.d_EditorController;
 	}
 }

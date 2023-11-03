@@ -1,6 +1,9 @@
 package com.w10.risk_game.models;
 
 import java.util.ArrayList;
+
+import com.w10.risk_game.commands.Blockade;
+import com.w10.risk_game.commands.Bomb;
 import java.util.List;
 
 import com.w10.risk_game.GameEngine;
@@ -220,10 +223,24 @@ public class Player {
 				// TODO: add advance object to d_orders
 				break;
 			case "bomb" :
-				// TODO: add bomb object to d_orders
+				if (hasCard(CardType.BOMB)) {
+					String l_countryIdToBomb = l_inputArray[1];
+					if (Bomb.validateOrder(this, l_countryIdToBomb)) {
+						Order order = new Bomb(this, l_countryIdToBomb);
+						d_orders.add(order);
+						removeCard(CardType.BOMB);
+					}
+				}
 				break;
 			case "blockade" :
-				// TODO: add blockade object to d_orders
+				if (hasCard(CardType.BLOCKADE)) {
+					String l_countryIdToBlockade = l_inputArray[1];
+					if (Blockade.validateOrder(this, l_countryIdToBlockade)) {
+						Order order = new Blockade(this, l_countryIdToBlockade);
+						d_orders.add(order);
+						removeCard(CardType.BLOCKADE);
+					}
+				}
 				break;
 			case "airlift" :
 				// TODO add airlift object to d_orders
@@ -336,5 +353,18 @@ public class Player {
 			return false;
 		}
 		return true;
+	}
+
+	private boolean hasCard(CardType p_cardType) {
+		if (d_playerCards.contains(p_cardType)) {
+			return true;
+		}
+
+		d_logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
+		return false;
+	}
+
+	private void removeCard(CardType p_cardType) {
+		d_playerCards.remove(p_cardType);
 	}
 }

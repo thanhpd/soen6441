@@ -75,15 +75,18 @@ public class Bomb extends Order {
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryToBomb(Player p_player, String p_countryId) {
+		Formatter l_formatter = new Formatter();
+		l_formatter.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId);
+
 		// Check country ID validity
 		if (p_countryId == null) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
 			return null;
 		}
 
 		// Check if there exists a foreign neighbor country with the given ID
 		Country l_countryToBomb = null;
-		Formatter l_formatter = new Formatter();
 
 		try {
 			int l_countryId = Integer.parseInt(p_countryId);
@@ -93,10 +96,10 @@ public class Bomb extends Order {
 					.findFirst().orElse(null);
 
 			if (l_countryToBomb == null) {
-				d_logger.log(Constants.BOMB_CARD_NO_VALID_COUNTRY);
+				d_logger.log(l_formatter.toString());
 			}
 		} catch (Exception e) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+			d_logger.log(l_formatter.toString());
 		} finally {
 			l_formatter.close();
 		}

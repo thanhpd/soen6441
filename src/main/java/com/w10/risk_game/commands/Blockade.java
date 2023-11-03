@@ -87,15 +87,18 @@ public class Blockade extends Order {
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryToBlock(Player p_player, String p_countryId) {
+		Formatter l_formatter = new Formatter();
+		l_formatter.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId);
+
 		// Check country ID validity
 		if (p_countryId == null) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
 			return null;
 		}
 
 		// Check if the provided country ID is valid and belongs to the player
 		Country l_countryToBlock = null;
-		Formatter l_formatter = new Formatter();
 
 		try {
 			int l_countryId = Integer.parseInt(p_countryId);
@@ -105,11 +108,10 @@ public class Blockade extends Order {
 					.findFirst().orElse(null);
 
 			if (l_countryToBlock == null) {
-				l_formatter.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId);
 				d_logger.log(l_formatter.toString());
 			}
 		} catch (Exception e) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+			d_logger.log(l_formatter.toString());
 		} finally {
 			l_formatter.close();
 		}

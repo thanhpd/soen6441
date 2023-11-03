@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.RiskGame;
+import com.w10.risk_game.controllers.GameEngineController;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game
@@ -12,10 +12,11 @@ import com.w10.risk_game.controllers.RiskGame;
  */
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
-	protected RiskGame d_Game;
+	protected GameEngineController d_gameEngineController;
+
 	public Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_Game = p_gameEngine.getGame();
+		this.d_gameEngineController = p_gameEngine.getGame();
 	}
 
 	// map commands
@@ -50,34 +51,24 @@ public abstract class Phase {
 	// startup phase commands
 	public abstract boolean assignCountries();
 
-	// TODO: remove?
-	public abstract boolean checkIfMapIsValid();
+	// reinforcement commands
+	public abstract void issueReinforcementOrders(String p_orderType);
 
-	public abstract boolean checkIfGameCanBegin();
+	// attack commands
+	public abstract void issueAttackOrders(String p_orderType);
 
-	public abstract boolean executePlayerOrders();
+	// fortify commands
+	public abstract void issueFortifyOrders(String p_orderType);
 
-	public abstract boolean checkIfOrdersCanBeExecuted();
+	// end command
+	public abstract void endGame();
 
-	// TODO: Decide if the following methods needs to be used
-	// // reinforcement commands
-	// abstract public void reinforce();
-
-	// // attack commands
-	// abstract public void attack();
-
-	// // fortify commands
-	// abstract public void fortify();
-
-	// // end command
-	// abstract public void endGame();
-
-	abstract public void next();
+	public abstract void next();
 
 	public abstract Set<Command> getAvailableCommands();
 
 	public String getPhaseName() {
-		return getClassName();
+		return getClassName().substring(0, getClassName().length() - 5) + " PHASE";
 	}
 
 	public void printInvalidCommandMessage() {
@@ -85,12 +76,13 @@ public abstract class Phase {
 	}
 
 	private String getClassName() {
-		var name = this.getClass().getName();
+		String name = this.getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1, name.length());
 	}
 
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();
-		System.out.println("You are in " + getPhaseName() + " Phase. Command avaliable " + avaliableCommandsText);
+		System.out.println("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
+				+ avaliableCommandsText);
 	}
 }

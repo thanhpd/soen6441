@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.w10.risk_game.controllers.RiskGame;
+import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.utils.Constants;
 
 import java.io.ByteArrayOutputStream;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * GameEngine class.
  */
 public class GameEngineTest {
-	private RiskGame d_RiskGame;
+	private GameEngineController d_RiskGame;
 	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
 	Player d_player2;
@@ -34,7 +34,7 @@ public class GameEngineTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-		d_RiskGame = new RiskGame();
+		d_RiskGame = new GameEngineController();
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 

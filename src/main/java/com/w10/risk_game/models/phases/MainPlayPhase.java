@@ -8,4 +8,24 @@ public class MainPlayPhase extends PlaySetupPhase {
 		super(p_gameEngine);
 	}
 
+	@Override
+	public void issueReinforcementOrders(String p_orderType) {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void issueAttackOrders(String p_orderType) {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void issueFortifyOrders(String p_orderType) {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void endGame() {
+		this.printInvalidCommandMessage();
+	}
+
 }

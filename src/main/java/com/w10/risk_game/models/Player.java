@@ -202,7 +202,7 @@ public class Player {
 		String[] l_inputArray = l_input.split(" ");
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
-			case "deploy" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 				String l_countryId = l_inputArray[1];
 				String l_num = l_inputArray[2];
 				boolean l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
@@ -216,19 +216,19 @@ public class Player {
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
 				}
 				break;
-			case "advance" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 				// TODO: add advance object to d_orders
 				break;
-			case "bomb" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 				// TODO: add bomb object to d_orders
 				break;
-			case "blockade" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 				// TODO: add blockade object to d_orders
 				break;
-			case "airlift" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 				// TODO add airlift object to d_orders
 				break;
-			case "negotiate" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				// TODO add negotiate object to d_orders
 				break;
 			default :

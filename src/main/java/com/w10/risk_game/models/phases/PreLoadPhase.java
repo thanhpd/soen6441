@@ -19,7 +19,7 @@ public class PreLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void loadMap(String p_filePath) {
-		this.d_Game.loadMap(p_filePath);
+		this.d_gameEngineController.loadMap(p_filePath);
 		next();
 	}
 
@@ -68,9 +68,23 @@ public class PreLoadPhase extends MapEditorPhase {
 	}
 
 	@Override
-	public boolean checkIfGameCanBegin() {
-		super.printInvalidCommandMessage();
-		return false;
+	public void issueReinforcementOrders(String p_orderType) {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void issueAttackOrders(String p_orderType) {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void issueFortifyOrders(String p_orderType) {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void endGame() {
+		this.printInvalidCommandMessage();
 	}
 
 	@Override

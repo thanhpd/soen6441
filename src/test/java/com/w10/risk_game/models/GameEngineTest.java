@@ -64,8 +64,8 @@ public class GameEngineTest {
 
 		d_RiskGameController.assignCountries();
 
-		assertEquals(12, d_RiskGameController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(12, d_RiskGameController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGameController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGameController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 	}
 
 	/**

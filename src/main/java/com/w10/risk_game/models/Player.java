@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.w10.risk_game.commands.Blockade;
 import com.w10.risk_game.commands.Bomb;
 import java.util.List;
+import java.util.Scanner;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Deploy;
@@ -206,17 +207,41 @@ public class Player {
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
 			case "deploy" :
-				String l_countryId = l_inputArray[1];
-				String l_num = l_inputArray[2];
-				boolean l_isValidCountry = checkValidCountry(this.getCountriesOwned(), l_countryId);
-				boolean l_isValidNum = checkValidArmy(Integer.parseInt(l_num));
-				if (l_isValidCountry && l_isValidNum) {
-					Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
-							Integer.parseInt(l_inputArray[2]));
-					d_orders.add(order);
-					deployArmies(Integer.parseInt(l_inputArray[2]));
-				} else {
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+				boolean l_again = true;
+				boolean l_failed = false;
+				while (l_again) {
+					boolean l_isValidForm;
+					boolean l_isValidOrder;
+					boolean l_isValidCountry;
+					boolean l_isValidArmy;
+					Scanner l_scanner = new Scanner(System.in);
+					if (l_failed) {
+						d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_START);
+						d_logger.log(Constants.USER_INPUT_REQUEST);
+						l_input = l_scanner.nextLine();
+						l_inputArray = l_input.split(" ");
+					}
+					l_isValidForm = checkValidDeployInput(l_inputArray);
+					if (!l_isValidForm) {
+						l_failed = true;
+						continue;
+					}
+					String l_countryId = l_inputArray[1];
+					String l_num = l_inputArray[2];
+					l_isValidOrder = checkValidDeployOrder(l_orderType);
+					l_isValidCountry = checkValidDeployCountry(this.getCountriesOwned(), l_countryId);
+					l_isValidArmy = checkValidDeployArmy(Integer.parseInt(l_num));
+					if (l_isValidOrder && l_isValidCountry && l_isValidArmy) {
+						Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
+								Integer.parseInt(l_inputArray[2]));
+						d_orders.add(order);
+						deployArmies(Integer.parseInt(l_inputArray[2]));
+						l_again = false;
+						l_failed = false;
+					} else {
+						l_again = true;
+						l_failed = true;
+					}
 				}
 				break;
 			case "advance" :
@@ -265,17 +290,17 @@ public class Player {
 	}
 
 	/**
-	 * This function is used to check the input format. The input should have three
-	 * parts (one string and two integers)
+	 * This function is used to check the input format for deploy command. The input
+	 * should have three parts (one string and two positive integers)
 	 *
 	 * @param p_inputArray
 	 *            the input string
 	 * @return boolean value to show whether the input format is valid
 	 */
-	public boolean checkValidForm(String[] p_inputArray) {
+	public boolean checkValidDeployInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INPUT_NOT_THREE_PARTS);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INPUT_NOT_THREE_PARTS);
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer
@@ -283,14 +308,14 @@ public class Player {
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		// Step 3: Check whether the number of armies is positive integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}
@@ -306,18 +331,18 @@ public class Player {
 	 *            the order type
 	 * @return boolean value to show whether the order type is valid
 	 */
-	public boolean checkValidOrder(String p_orderType) {
+	public boolean checkValidDeployOrder(String p_orderType) {
 		String l_orderType = p_orderType;
 		if (!l_orderType.equals("deploy")) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ORDER_TYPE);
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * This function is used to check the country id. The country id should be one
-	 * of the countries owned by the player
+	 * This function is used to check the country id for deploy command. The country
+	 * id should be one of the countries owned by the player
 	 *
 	 * @param p_countries
 	 *            the list of countries owned by the player
@@ -325,31 +350,31 @@ public class Player {
 	 *            the country id
 	 * @return boolean value to show whether the country id is valid
 	 */
-	public boolean checkValidCountry(List<Country> p_countries, String p_countryId) {
+	public boolean checkValidDeployCountry(List<Country> p_countries, String p_countryId) {
 		for (Country country : p_countries) {
 			if (country.getCountryId() == Integer.parseInt(p_countryId)) {
 				return true;
 			}
 		}
-		d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_COUNTRY);
+		d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY);
 		return false;
 	}
 
 	/**
-	 * This function is used to check the number of armies. The number of armies
-	 * should be less than the number of leftover armies
+	 * This function is used to check the number of armies for deploy command. The
+	 * number of armies should be less than the number of leftover armies
 	 *
 	 * @param p_num
 	 *            the number of armies
 	 * @return boolean value to show whether the number of armies is valid
 	 */
-	public boolean checkValidArmy(int p_num) {
+	public boolean checkValidDeployArmy(int p_num) {
 		if (p_num <= 0) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES_ZERO);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ARMIES_ZERO);
 			return false;
 		}
 		if (p_num > d_leftoverArmies) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ARMIES);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ARMIES);
 			return false;
 		}
 		return true;

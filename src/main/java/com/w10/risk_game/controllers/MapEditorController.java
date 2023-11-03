@@ -88,8 +88,6 @@ public class MapEditorController {
 		}
 	}
 
-	
-
 	/**
 	 * The function returns the game map.
 	 *
@@ -334,5 +332,4 @@ public class MapEditorController {
 		}
 	}
 
-	
 }

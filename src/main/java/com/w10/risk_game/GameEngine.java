@@ -43,7 +43,7 @@ public class GameEngine {
 	 */
 	public GameEngine() {
 		this.d_riskGame = new RiskGame();
-		this.d_EditorController=new MapEditorController();
+		this.d_EditorController = new MapEditorController();
 		this.d_startGamePhase = false;
 	}
 
@@ -93,7 +93,7 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						this.phase.editMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_OPTION_NEXT:
+					case Constants.USER_INPUT_COMMAND_OPTION_NEXT :
 						this.phase.next();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
@@ -284,7 +284,7 @@ public class GameEngine {
 		return this.d_riskGame;
 	}
 
-	public MapEditorController getMapEditorController(){
+	public MapEditorController getMapEditorController() {
 		return this.d_EditorController;
 	}
 }

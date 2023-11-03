@@ -18,7 +18,7 @@ public abstract class Phase {
 	public Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
 		this.d_Game = p_gameEngine.getGame();
-		this.d_EditorController=p_gameEngine.getMapEditorController();
+		this.d_EditorController = p_gameEngine.getMapEditorController();
 	}
 
 	// map commands

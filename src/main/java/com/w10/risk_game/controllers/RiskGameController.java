@@ -59,7 +59,6 @@ public class RiskGameController {
 		// this.phase = new StartupPhase();
 	}
 
-	
 	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
@@ -250,8 +249,6 @@ public class RiskGameController {
 		return this.d_players.get(p_playerName);
 	}
 
-	
-
 	/**
 	 * The function checks if the game can begin by verifying if the map is created,
 	 * there are at least two players, and countries have been assigned.
@@ -262,8 +259,6 @@ public class RiskGameController {
 	public boolean checkIfGameCanBegin() {
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
 	}
-
-	
 
 	/**
 	 * The function "issuePlayerOrder" updates the current player and calls the

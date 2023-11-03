@@ -1,6 +1,8 @@
 package com.w10.risk_game.models;
 
 import java.util.ArrayList;
+
+import com.w10.risk_game.commands.Blockade;
 import com.w10.risk_game.commands.Bomb;
 import java.util.List;
 
@@ -231,7 +233,14 @@ public class Player {
 				}
 				break;
 			case "blockade" :
-				// TODO: add blockade object to d_orders
+				if (hasCard(CardType.BLOCKADE)) {
+					String l_countryIdToBlockade = l_inputArray[1];
+					if (Blockade.validateOrder(this, l_countryIdToBlockade)) {
+						Order order = new Blockade(this, l_countryIdToBlockade);
+						d_orders.add(order);
+						removeCard(CardType.BLOCKADE);
+					}
+				}
 				break;
 			case "airlift" :
 				// TODO add airlift object to d_orders

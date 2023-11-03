@@ -6,6 +6,7 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
 
 /**
@@ -81,14 +82,23 @@ public class Bomb extends Order {
 		}
 
 		// Check if there exists a foreign neighbor country with the given ID
-		int l_countryId = Integer.parseInt(p_countryId);
-		List<Country> l_neighbors = getForeignNeighbors(p_player);
+		Country l_countryToBomb = null;
+		Formatter l_formatter = new Formatter();
 
-		Country l_countryToBomb = l_neighbors.stream().filter(neighbor -> neighbor.getCountryId() == l_countryId)
-				.findFirst().orElse(null);
+		try {
+			int l_countryId = Integer.parseInt(p_countryId);
+			List<Country> l_neighbors = getForeignNeighbors(p_player);
 
-		if (l_countryToBomb == null) {
-			d_logger.log(Constants.BOMB_CARD_NO_VALID_COUNTRY);
+			l_countryToBomb = l_neighbors.stream().filter(neighbor -> neighbor.getCountryId() == l_countryId)
+					.findFirst().orElse(null);
+
+			if (l_countryToBomb == null) {
+				d_logger.log(Constants.BOMB_CARD_NO_VALID_COUNTRY);
+			}
+		} catch (Exception e) {
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INCORRECT);
+		} finally {
+			l_formatter.close();
 		}
 
 		return l_countryToBomb;

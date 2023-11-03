@@ -231,7 +231,7 @@ public class GameEngine {
 				switch (l_mainCommand) {
 					// Show Map Command
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
-						System.out.println(Constants.CLI_SHOW_MAP);
+						d_logger.log(Constants.CLI_SHOW_MAP);
 						this.phase.showMap();
 						break;
 					// Issue Order Command

@@ -5,6 +5,7 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game
@@ -13,6 +14,8 @@ import com.w10.risk_game.controllers.GameEngineController;
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
 	protected GameEngineController d_gameEngineController;
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	public Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
@@ -72,7 +75,7 @@ public abstract class Phase {
 	}
 
 	public void printInvalidCommandMessage() {
-		System.out.println("Invalid command in state " + getPhaseName());
+		d_logger.log("Invalid command in state " + getPhaseName());
 	}
 
 	private String getClassName() {
@@ -82,7 +85,7 @@ public abstract class Phase {
 
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();
-		System.out.println("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
+		d_logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
 				+ avaliableCommandsText);
 	}
 }

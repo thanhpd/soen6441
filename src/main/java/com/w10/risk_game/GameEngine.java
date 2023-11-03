@@ -237,6 +237,7 @@ public class GameEngine {
 						break;
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 						d_riskGame.issuePlayerOrder();
 						break;
 					// Others

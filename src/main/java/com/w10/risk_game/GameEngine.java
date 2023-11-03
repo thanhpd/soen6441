@@ -5,7 +5,7 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 import com.w10.risk_game.controllers.MapEditorController;
-import com.w10.risk_game.controllers.RiskGame;
+import com.w10.risk_game.controllers.RiskGameController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
@@ -20,7 +20,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  */
 public class GameEngine {
 
-	private final RiskGame d_riskGame;
+	private final RiskGameController d_riskGame;
 	private final MapEditorController d_EditorController;
 	private boolean d_startGamePhase;
 	private Formatter d_formatter;
@@ -42,8 +42,8 @@ public class GameEngine {
 	 * `d_startGamePhase` variable to `false`.
 	 */
 	public GameEngine() {
-		this.d_riskGame = new RiskGame();
-		this.d_EditorController = new MapEditorController();
+		this.d_riskGame = new RiskGameController();
+		this.d_EditorController=new MapEditorController();
 		this.d_startGamePhase = false;
 	}
 
@@ -93,7 +93,7 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						this.phase.editMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_OPTION_NEXT :
+					case Constants.USER_INPUT_COMMAND_OPTION_NEXT:
 						this.phase.next();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
@@ -243,7 +243,7 @@ public class GameEngine {
 						break;
 					// Issue Order Command
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
+					//case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 						d_riskGame.issuePlayerOrder();
 						break;
 					// Others
@@ -281,11 +281,11 @@ public class GameEngine {
 		this.d_formatter.close();
 	}
 
-	public RiskGame getGame() {
+	public RiskGameController getGame() {
 		return this.d_riskGame;
 	}
 
-	public MapEditorController getMapEditorController() {
+	public MapEditorController getMapEditorController(){
 		return this.d_EditorController;
 	}
 }

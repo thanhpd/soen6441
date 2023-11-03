@@ -14,11 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  *
  */
 public class BombTest {
-	Order d_order1;
-	Country d_country1;
-	Country d_country2;
-	Player d_player1;
-	Player d_player2;
+	private Order d_order1;
+	private Country d_country1;
+	private Country d_country2;
+	private Player d_player1;
+	private Player d_player2;
+
+	private final int d_country1ArmyCount = 13;
+	private final int d_country2ArmyCount = 5;
 
 	/**
 	 * The setUp function initializes two countries and two players, and adds a
@@ -26,8 +29,8 @@ public class BombTest {
 	 */
 	@BeforeEach
 	public void setUp() {
-		d_country1 = new Country(1, "England", 1, 13);
-		d_country2 = new Country(2, "France", 1, 5);
+		d_country1 = new Country(1, "England", 1, d_country1ArmyCount);
+		d_country2 = new Country(2, "France", 1, d_country2ArmyCount);
 		d_country1.addNeighbor(d_country2);
 		d_country2.addNeighbor(d_country1);
 		d_player1 = new Player("Player1", new ArrayList<>(), new ArrayList<>(), 10);
@@ -49,7 +52,7 @@ public class BombTest {
 		d_order1 = new Bomb(d_player1, "2");
 
 		d_order1.execute();
-		assertEquals(2, d_country2.getArmyCount());
+		assertEquals(d_country2ArmyCount / 2, d_country2.getArmyCount());
 	}
 
 	/**
@@ -62,7 +65,7 @@ public class BombTest {
 		d_order1 = new Bomb(d_player2, "1");
 
 		d_order1.execute();
-		assertEquals(6, d_country1.getArmyCount());
+		assertEquals(d_country1ArmyCount / 2, d_country1.getArmyCount());
 	}
 
 	/**

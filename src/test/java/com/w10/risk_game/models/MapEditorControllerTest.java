@@ -37,7 +37,7 @@ public class MapEditorControllerTest {
 	public void beforeAllGameEngineTests() {
 
 		d_EditorController = new MapEditorController();
-		d_RiskGameController= new RiskGameController();
+		d_RiskGameController = new RiskGameController();
 		d_outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(d_outputStream));
 	}

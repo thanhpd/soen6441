@@ -38,7 +38,7 @@ public class Reinforcements {
 	 *            this parameter represents a game map object. It is used to access
 	 *            the information of all countries.
 	 */
-	public static void ReinforcementPhase(Player p_player, GameMap p_gameMap) {
+	public static void AssignPlayerReinforcements(Player p_player, GameMap p_gameMap) {
 		// Step 1: Initialize the variables
 		int l_armies = p_player.getLeftoverArmies();
 		List<Country> l_playerCountries = p_player.getCountriesOwned();

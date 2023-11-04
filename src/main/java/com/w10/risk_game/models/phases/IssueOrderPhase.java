@@ -5,8 +5,9 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
-public class ReinforcementPhase extends GamePlayPhase {
-	protected ReinforcementPhase(GameEngine p_gameEngine) {
+public class IssueOrderPhase extends GamePlayPhase {
+
+	protected IssueOrderPhase(GameEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 
@@ -96,7 +97,7 @@ public class ReinforcementPhase extends GamePlayPhase {
 
 	@Override
 	public void issuePlayerOrder() {
-		this.printInvalidCommandMessage();
+		this.d_gameEngineController.issuePlayerOrder();
 	}
 
 	@Override
@@ -104,22 +105,21 @@ public class ReinforcementPhase extends GamePlayPhase {
 		this.printInvalidCommandMessage();
 	}
 
+	@Override
 	public boolean assignPlayerReinforcements() {
-		if (this.d_gameEngineController.assignPlayersReinforcements()) {
-			next();
-			return true;
-		}
+		this.printInvalidCommandMessage();
 		return false;
 	}
 
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new IssueOrderPhase(d_gameEngine));
+		d_gameEngine.setPhase(new ExecuteOrderPhase(d_gameEngine));
 	}
 
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.NONE);
+		return Set.of(Command.DEPLOY, Command.ADVANCE, Command.BOMB, Command.AIRLIFT, Command.BLOCKADE,
+				Command.NEGOTIATE, Command.SHOW_MAP);
 	}
 
 }

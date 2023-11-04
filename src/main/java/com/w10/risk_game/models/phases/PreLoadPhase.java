@@ -27,7 +27,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void loadMap(String p_filePath) {
-		this.d_EditorController.loadMap(p_filePath);
+		this.d_mapEditorController.loadMap(p_filePath);
 		next();
 	}
 
@@ -109,6 +109,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	/**
 	 * The function nextPhase() prints an invalid command message.
 	 */
+
 	@Override
 	public void nextPhase() {
 		super.printInvalidCommandMessage();
@@ -147,7 +148,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void showMap() {
-		super.printInvalidCommandMessage();
+		this.printInvalidCommandMessage();
 	}
 
 	/**
@@ -157,9 +158,8 @@ public class PreLoadPhase extends MapEditorPhase {
 	 * @return The method is returning a boolean value of false.
 	 */
 	@Override
-	public boolean checkIfGameCanBegin() {
-		super.printInvalidCommandMessage();
-		return false;
+	public void endGame() {
+		this.printInvalidCommandMessage();
 	}
 
 	/**
@@ -171,5 +171,27 @@ public class PreLoadPhase extends MapEditorPhase {
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.loadmap);
+	}
+
+	@Override
+	public boolean checkIfMapIsValid() {
+		this.printInvalidCommandMessage();
+		return false;
+	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
 	}
 }

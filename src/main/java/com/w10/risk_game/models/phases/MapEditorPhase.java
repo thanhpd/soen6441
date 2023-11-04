@@ -1,7 +1,7 @@
 package com.w10.risk_game.models.phases;
 
 import com.w10.risk_game.GameEngine;
-import com.w10.risk_game.controllers.RiskGameController;
+import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.models.Phase;
 
 /**
@@ -42,27 +42,6 @@ public abstract class MapEditorPhase extends Phase {
 
 	@Override
 	public boolean editMap(String p_mapFilePath) {
-
-		this.printInvalidCommandMessage();
-		return false;
-	}
-
-	@Override
-	public boolean checkIfMapIsValid() {
-
-		this.printInvalidCommandMessage();
-		return false;
-	}
-
-	@Override
-	public boolean executePlayerOrders() {
-
-		this.printInvalidCommandMessage();
-		return false;
-	}
-
-	@Override
-	public boolean checkIfOrdersCanBeExecuted() {
 
 		this.printInvalidCommandMessage();
 		return false;

@@ -15,63 +15,14 @@ public class PostLoadPhase extends MapEditorPhase {
 	public PostLoadPhase(GameEngine p_GameEngine) {
 		super(p_GameEngine);
 	}
-	/**
-	 * The showMap() function calls the showMap() function of the d_EditorController
-	 * object.
-	 */
 	@Override
 	public void showMap() {
-		this.d_EditorController.showMap();
+		this.d_mapEditorController.showMap(false);
 	}
 
-	/**
-	 * The function checks if a map is valid by calling a method from the
-	 * d_EditorController object and returns true if it is valid, otherwise it
-	 * returns false.
-	 *
-	 * @return The method is returning a boolean value.
-	 */
-	@Override
-	public boolean checkIfMapIsValid() {
-		if (this.d_EditorController.checkIfMapIsValid()) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * The function "editMap" attempts to edit a map file and returns true if
-	 * successful, otherwise it returns false.
-	 *
-	 * @param p_mapFilePath
-	 *            The parameter "p_mapFilePath" is a String that represents the file
-	 *            path of the map that needs to be edited.
-	 * @return The method is returning a boolean value.
-	 */
-	@Override
-	public boolean editMap(String p_mapFilePath) {
-		if (this.d_EditorController.editMap(p_mapFilePath)) {
-			return true;
-		}
-		return false;
-
-	}
-
-	/**
-	 * The addCountry function adds a country with the specified country ID, country
-	 * name, and continent name to the EditorController.
-	 *
-	 * @param p_countryId
-	 *            The unique identifier for the country.
-	 * @param p_countryName
-	 *            The name of the country that you want to add.
-	 * @param p_continentName
-	 *            The p_continentName parameter is a String that represents the name
-	 *            of the continent where the country belongs to.
-	 */
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
-		this.d_EditorController.addCountry(p_countryId, p_countryName, p_continentName);
+		this.d_mapEditorController.addCountry(p_countryId, p_countryName, p_continentName);
 	}
 
 	/**
@@ -87,7 +38,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
-		this.d_EditorController.addContinent(p_continentName, p_bonus);
+		this.d_mapEditorController.addContinent(p_continentName, p_bonus);
 	}
 	/**
 	 * The addNeighbor function adds a neighbor country to a given country.
@@ -101,7 +52,7 @@ public class PostLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.d_EditorController.addNeighbor(p_countryId, p_neighborCountryId);
+		this.d_mapEditorController.addNeighbor(p_countryId, p_neighborCountryId);
 	}
 
 	/**
@@ -113,7 +64,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void removeCountry(int p_countryId) {
-		this.d_EditorController.removeCountry(p_countryId);
+		this.d_mapEditorController.removeCountry(p_countryId);
 	}
 
 	/**
@@ -125,7 +76,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void removeContinent(String p_continentName) {
-		this.d_EditorController.removeContinent(p_continentName);
+		this.d_mapEditorController.removeContinent(p_continentName);
 	}
 
 	/**
@@ -140,7 +91,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
-		this.d_EditorController.removeNeighbor(p_countryId, p_neighborCountryId);
+		this.d_mapEditorController.removeNeighbor(p_countryId, p_neighborCountryId);
 	}
 	/**
 	 * The function saves a map to a specified file path.
@@ -152,7 +103,7 @@ public class PostLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void saveMap(String p_mapFilePath) {
-		this.d_EditorController.saveMap(p_mapFilePath);
+		this.d_mapEditorController.saveMap(p_mapFilePath);
 	}
 
 	/**
@@ -174,9 +125,8 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 
 	@Override
-	public boolean checkIfGameCanBegin() {
+	public void endGame() {
 		this.printInvalidCommandMessage();
-		return false;
 	}
 	/**
 	 * The nextPhase() function sets the phase of the game engine to a new
@@ -198,11 +148,33 @@ public class PostLoadPhase extends MapEditorPhase {
 		return Set.of(Command.editmap, Command.editcountry, Command.editcontinent, Command.showmap,
 				Command.editneighbor, Command.validatemap, Command.next);
 	}
-	/**
-	 * The "next" function prints an invalid command message.
-	 */
+
+
+	@Override
+	public boolean checkIfMapIsValid() {
+		return this.d_mapEditorController.checkIfMapIsValid();
+	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
+
+	}
+
 	@Override
 	public void next() {
 		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
 	}
 }

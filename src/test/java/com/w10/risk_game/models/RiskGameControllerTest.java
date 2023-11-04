@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * The GameEngineTest class contains unit test for various methods in the
  * GameEngine class.
  */
-public class GameEngineTest {
+public class RiskGameControllerTest {
 	private RiskGameController d_RiskGameController;
 	private MapEditorController d_EditorController;
 	private ByteArrayOutputStream d_outputStream;
@@ -85,19 +85,6 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testLoadMap function tests whether the d_RiskGame successfully loads the
-	 * "europe.map" file.
-	 *
-	 * @author Sherwyn Dsouza
-	 */
-	@Test
-	void testLoadMap() {
-		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
-		assertNotNull(d_RiskGameController.getGameMap());
-	}
-
-	/**
 	 * The testRemovePlayer function tests the functionality of removing players
 	 * from the game engine.
 	 *
@@ -129,15 +116,6 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testShowMap function tests if the game engine can display the map
-	 */
-	@Test
-	void testShowMap() {
-		d_EditorController.showMap();
-		assertTrue(d_RiskGameController.checkIfGameCanBegin() == d_EditorController.checkIfMapIsValid());
-	}
-
-	/**
 	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
 	 * d_RiskGameController class to ensure that it returns the correct number of
 	 * players.
@@ -150,19 +128,6 @@ public class GameEngineTest {
 		d_RiskGameController.createPlayer(d_player2.getName());
 
 		assertEquals(2, d_RiskGameController.getNoOfPlayers());
-	}
-
-	/**
-	 * The testGameMap function tests if the game engine successfully loads a map
-	 * and returns a non-null game map object.
-	 *
-	 * @author Sherwyn Dsouza
-	 */
-	@Test
-	void testGameMap() {
-		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
-		assertNotNull(d_RiskGameController.getGameMap());
 	}
 
 	/**

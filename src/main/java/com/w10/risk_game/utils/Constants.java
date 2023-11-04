@@ -36,7 +36,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_EDIT_NEIGHBOR = "editneighbor";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER = "gameplayer";
 	public static final String USER_INPUT_COMMAND_OPTION_ADD = "-add";
-	public static final String USER_INPUT_COMMAND_OPTION_NEXT = "-next";
+	public static final String USER_INPUT_COMMAND_OPTION_NEXTPHASE = "-next";
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";

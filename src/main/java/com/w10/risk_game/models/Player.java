@@ -500,7 +500,7 @@ public class Player {
 
 	/**
 	 * The function checks whether a player has a card of a given type.
-	 * 
+	 *
 	 * @param p_cardType
 	 *            cart type
 	 * @return boolean value to show whether the player has specific card
@@ -515,7 +515,7 @@ public class Player {
 	}
 	/**
 	 * The function removes a card of a given type from a player's list of cards.
-	 * 
+	 *
 	 * @param p_cardType
 	 *            card type
 	 */

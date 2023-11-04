@@ -290,7 +290,7 @@ public class Player {
 
 	/**
 	 * This function is used to check the input format for order.
-	 * 
+	 *
 	 * @param p_inputArray
 	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
@@ -353,12 +353,13 @@ public class Player {
 
 	/**
 	 * This function is used to check the input format for advance command.
-	 * 
+	 *
 	 * @param p_inputArray
 	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidAdvanceInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
 		if (p_inputArray.length != 4) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance", "four");
@@ -366,6 +367,7 @@ public class Player {
 			l_formatter.close();
 			return false;
 		}
+		// Step 2: Check whether the armies is positive integer
 		String l_num = p_inputArray[3];
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
@@ -377,12 +379,13 @@ public class Player {
 	}
 	/**
 	 * This function is used to check the input format for airlift command.
-	 * 
+	 *
 	 * @param p_inputArray
 	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidBombInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "bomb", "two");
@@ -390,6 +393,7 @@ public class Player {
 			l_formatter.close();
 			return false;
 		}
+		// Step 2: Check whether the country id is positive integer
 		String l_countryId = p_inputArray[1];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
@@ -402,12 +406,13 @@ public class Player {
 
 	/**
 	 * This function is used to check the input format for blockade command.
-	 * 
+	 *
 	 * @param p_inputArray
 	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidBlockadeInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade", "two");
@@ -415,6 +420,7 @@ public class Player {
 			l_formatter.close();
 			return false;
 		}
+		// Step 2: Check whether the country id is positive integer
 		String l_countryId = p_inputArray[1];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
@@ -426,12 +432,13 @@ public class Player {
 	}
 	/**
 	 * This function is used to check the input format for airlift command.
-	 * 
+	 *
 	 * @param p_inputArray
 	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidAirliftInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
 		if (p_inputArray.length != 4) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift", "four");
@@ -439,6 +446,7 @@ public class Player {
 			l_formatter.close();
 			return false;
 		}
+		// Step 2: Check whether the country id is positive integer
 		String l_sourceCountryId = p_inputArray[1];
 		String l_targetCountryId = p_inputArray[2];
 		String l_num = p_inputArray[3];
@@ -454,6 +462,7 @@ public class Player {
 				return false;
 			}
 		}
+		// Step 3: Check whether the number of armies is positive integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
@@ -462,7 +471,15 @@ public class Player {
 		}
 		return true;
 	}
+	/**
+	 * This function is used to check the input format for negotiate command.
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the input format is valid
+	 */
 	public boolean checkValidNegotiateInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "negotiate", "two");
@@ -470,6 +487,7 @@ public class Player {
 			l_formatter.close();
 			return false;
 		}
+		// Step 2: Check whether the player id is positive integer
 		String l_playerID = p_inputArray[1];
 		for (int i = 0; i < l_playerID.length(); i++) {
 			if (!Character.isDigit(l_playerID.charAt(i))) {
@@ -479,6 +497,14 @@ public class Player {
 		}
 		return true;
 	}
+
+	/**
+	 * The function checks whether a player has a card of a given type.
+	 * 
+	 * @param p_cardType
+	 *            cart type
+	 * @return boolean value to show whether the player has specific card
+	 */
 	private boolean hasCard(CardType p_cardType) {
 		if (d_playerCards.contains(p_cardType)) {
 			return true;
@@ -487,7 +513,12 @@ public class Player {
 		d_logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
 		return false;
 	}
-
+	/**
+	 * The function removes a card of a given type from a player's list of cards.
+	 * 
+	 * @param p_cardType
+	 *            card type
+	 */
 	private void removeCard(CardType p_cardType) {
 		d_playerCards.remove(p_cardType);
 	}

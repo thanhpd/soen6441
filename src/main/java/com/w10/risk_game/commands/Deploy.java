@@ -52,7 +52,7 @@ public class Deploy extends Order {
 	/**
 	 * This method is used to validate the order. It checks whether the country id
 	 * and the number of armies are valid
-	 * 
+	 *
 	 * @param p_player
 	 *            The player who issues the order
 	 * @param p_countryId

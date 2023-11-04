@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.w10.risk_game.controllers.MapEditorController;
-import com.w10.risk_game.controllers.RiskGameController;
+import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.utils.Constants;
 
 import java.io.ByteArrayOutputStream;
@@ -21,8 +21,8 @@ import org.junit.jupiter.api.Test;
  * GameEngine class.
  */
 public class MapEditorControllerTest {
-	private RiskGameController d_RiskGameController;
-	private MapEditorController d_EditorController;
+	private GameEngineController d_gameEngineController;
+	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
 	// Player d_player1;
 	// Player d_player2;
@@ -35,9 +35,8 @@ public class MapEditorControllerTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-
-		d_EditorController = new MapEditorController();
-		d_RiskGameController = new RiskGameController();
+		d_mapEditorController = new MapEditorController();
+		d_gameEngineController = new GameEngineController(d_mapEditorController);
 		d_outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(d_outputStream));
 	}
@@ -51,8 +50,8 @@ public class MapEditorControllerTest {
 	@Test
 	void testLoadMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
-		assertNotNull(d_EditorController.getGameMap());
+		d_mapEditorController.loadMap(l_mapFilePath);
+		assertNotNull(d_mapEditorController.getGameMap());
 	}
 
 	/**
@@ -60,8 +59,8 @@ public class MapEditorControllerTest {
 	 */
 	@Test
 	void testShowMap() {
-		d_EditorController.showMap();
-		assertTrue(d_RiskGameController.checkIfGameCanBegin() == d_EditorController.checkIfMapIsValid());
+		d_mapEditorController.showMap(false);
+		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
 	}
 
 	/**
@@ -73,8 +72,8 @@ public class MapEditorControllerTest {
 	@Test
 	void testGameMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
-		assertNotNull(d_RiskGameController.getGameMap());
+		d_mapEditorController.loadMap(l_mapFilePath);
+		assertNotNull(d_mapEditorController.getGameMap());
 	}
 
 }

@@ -49,11 +49,6 @@ public abstract class GamePlayPhase extends Phase {
 	}
 
 	@Override
-	public void showMap() {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
 	public boolean editMap(String p_mapFilePath) {
 		this.printInvalidCommandMessage();
 		return false;

@@ -6,6 +6,7 @@ import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
+import com.w10.risk_game.controllers.MapEditorController;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game
@@ -14,12 +15,14 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
 	protected GameEngineController d_gameEngineController;
+	protected MapEditorController d_EditorController;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
-	public Phase(GameEngine p_gameEngine) {
+	protected Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
 		this.d_gameEngineController = p_gameEngine.getGame();
+		this.d_EditorController = p_gameEngine.getMapEditorController();
 	}
 
 	// map commands

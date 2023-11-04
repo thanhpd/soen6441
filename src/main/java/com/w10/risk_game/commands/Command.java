@@ -15,11 +15,15 @@ public enum Command {
 													Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR), removeplayer(
 															Constants.CLI_GAME_PLAYER_REMOVE), addplayer(
 																	Constants.CLI_GAME_PLAYER_CREATE), assigncountries(
-																			Constants.CLI_ASSIGN_COUNTRIES);
+																			Constants.CLI_ASSIGN_COUNTRIES), deploy(
+																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY), advance(
+																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE), bomb(
+																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), blockade(
+																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), airlift(
+																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
+																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), none(
+																																	"");
 
-	// In this code, `private final String name;` is declaring a private final
-	// instance variable `name` of
-	// type String.
 	private final String name;
 
 	Command(String commandName) {

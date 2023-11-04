@@ -118,8 +118,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.DEPLOY, Command.ADVANCE, Command.BOMB, Command.AIRLIFT, Command.BLOCKADE,
-				Command.NEGOTIATE, Command.SHOW_MAP);
+		return Set.of(Command.deploy, Command.advance, Command.bomb, Command.airlift, Command.blockade,
+				Command.negotiate, Command.showmap);
 	}
 
 }

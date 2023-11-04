@@ -20,26 +20,15 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void showMap() {
-		this.d_EditorController.showMap();
+		this.d_gameEngineController.showMap();
 	}
-	/**
-	 * The function executes player orders and returns false if the command is
-	 * invalid.
-	 *
-	 * @return The method is returning a boolean value of false.
-	 */
-	@Override
-	public boolean executePlayerOrders() {
-		this.printInvalidCommandMessage();
-		return false;
-	}
+
 	/**
 	 * The function "checkIfOrdersCanBeExecuted" prints an invalid command message
 	 * and returns false.
 	 *
 	 * @return The method is returning a boolean value of false.
 	 */
-
 
 	/**
 	 * The function creates a player with the given name.
@@ -127,5 +116,19 @@ public class PlaySetupPhase extends GamePlayPhase {
 	@Override
 	public void nextPhase() {
 		this.printInvalidCommandMessage();
+	}
+	/**
+	 * The issuePlayerOrder() function prints an invalid command message.
+	 */
+	@Override
+	public void issuePlayerOrder() {
+		this.printAvailableCommand();
+	}
+	/**
+	 * The executeAllPlayerOrders() function prints an invalid command message.
+	 */
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printAvailableCommand();;
 	}
 }

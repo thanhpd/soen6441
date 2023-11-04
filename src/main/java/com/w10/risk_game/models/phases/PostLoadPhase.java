@@ -149,7 +149,6 @@ public class PostLoadPhase extends MapEditorPhase {
 				Command.editneighbor, Command.validatemap, Command.next);
 	}
 
-
 	@Override
 	public boolean checkIfMapIsValid() {
 		return this.d_mapEditorController.checkIfMapIsValid();

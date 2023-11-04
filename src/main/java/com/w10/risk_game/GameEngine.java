@@ -111,7 +111,7 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						this.d_phase.editMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_OPTION_NEXT_PHASE :
+					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE :
 						this.d_phase.nextPhase();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :

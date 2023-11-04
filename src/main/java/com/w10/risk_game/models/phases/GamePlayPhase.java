@@ -60,7 +60,7 @@ public abstract class GamePlayPhase extends Phase {
 	 */
 	@Override
 	public void showMap() {
-		this.d_EditorController.showMap();
+		this.d_gameEngineController.showMap();
 	}
 	/**
 	 * The function editMap in Java prints an invalid command message and returns

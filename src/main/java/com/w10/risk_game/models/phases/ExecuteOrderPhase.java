@@ -121,6 +121,6 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.NONE);
+		return Set.of(Command.none);
 	}
 }

@@ -84,8 +84,6 @@ public class RiskGameControllerTest {
 		assertEquals(2, d_RiskGameController.getNoOfPlayers());
 	}
 
-
-
 	/**
 	 * The testRemovePlayer function tests the functionality of removing players
 	 * from the game engine.
@@ -117,8 +115,6 @@ public class RiskGameControllerTest {
 		assertEquals(l_expectedOutput, l_actualOutput);
 	}
 
-	
-
 	/**
 	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
 	 * d_RiskGameController class to ensure that it returns the correct number of
@@ -133,8 +129,6 @@ public class RiskGameControllerTest {
 
 		assertEquals(2, d_RiskGameController.getNoOfPlayers());
 	}
-
-	
 
 	/**
 	 * The getPlayerDetailsTest function tests if the getPlayerDetails method in the

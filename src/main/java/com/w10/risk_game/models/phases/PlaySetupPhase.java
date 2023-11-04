@@ -61,7 +61,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 		return false;
 	}
 	@Override
-	public void nextPhase(){
+	public void nextPhase() {
 		this.printInvalidCommandMessage();
 	}
 

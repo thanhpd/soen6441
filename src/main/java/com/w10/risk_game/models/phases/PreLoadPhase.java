@@ -52,7 +52,7 @@ public class PreLoadPhase extends MapEditorPhase {
 		super.printInvalidCommandMessage();
 	}
 	@Override
-	public void nextPhase(){
+	public void nextPhase() {
 		super.printInvalidCommandMessage();
 	}
 

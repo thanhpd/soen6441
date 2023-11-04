@@ -72,7 +72,8 @@ public class PostLoadPhase extends MapEditorPhase {
 
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP, Command.NEXT);
+		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP,
+				Command.NEXT);
 	}
 	@Override
 	public void next() {

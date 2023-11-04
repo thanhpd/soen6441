@@ -24,8 +24,8 @@ public class MapEditorControllerTest {
 	private RiskGameController d_RiskGameController;
 	private MapEditorController d_EditorController;
 	private ByteArrayOutputStream d_outputStream;
-	//Player d_player1;
-	//Player d_player2;
+	// Player d_player1;
+	// Player d_player2;
 
 	/**
 	 * The function "beforeAllGameEngineTests" initializes a new instance of the
@@ -35,14 +35,12 @@ public class MapEditorControllerTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-		
+
 		d_EditorController = new MapEditorController();
-		
 
 		d_outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(d_outputStream));
 	}
-
 
 	/**
 	 * The testLoadMap function tests whether the d_RiskGame successfully loads the
@@ -56,10 +54,6 @@ public class MapEditorControllerTest {
 		d_EditorController.loadMap(l_mapFilePath);
 		assertNotNull(d_EditorController.getGameMap());
 	}
-
-	
-
-	
 
 	/**
 	 * The testShowMap function tests if the game engine can display the map
@@ -83,5 +77,4 @@ public class MapEditorControllerTest {
 		assertNotNull(d_RiskGameController.getGameMap());
 	}
 
-	
 }

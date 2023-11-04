@@ -152,10 +152,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	}
 
 	/**
-	 * The function checks if the game can begin and prints an invalid command
-	 * message if not.
-	 *
-	 * @return The method is returning a boolean value of false.
+	 * The endGame() function prints an invalid command message.
 	 */
 	@Override
 	public void endGame() {
@@ -184,11 +181,9 @@ public class PreLoadPhase extends MapEditorPhase {
 		this.printInvalidCommandMessage();
 		return false;
 	}
+
 	/**
-	 * The function checks can issue player and prints an invalid command message if
-	 * not.
-	 *
-	 * @return The method is returning a boolean value of false.
+	 * The function "issuePlayerOrder" prints an invalid command message.
 	 */
 	@Override
 	public void issuePlayerOrder() {

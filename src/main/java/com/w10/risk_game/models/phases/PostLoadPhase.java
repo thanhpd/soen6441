@@ -133,13 +133,10 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void loadMap(String p_filePath) {
 		this.printInvalidCommandMessage();
 	}
-	/**
-	 * The function "checkIfGameCanBegin" prints an invalid command message and
-	 * returns false.
-	 *
-	 * @return The method is returning a boolean value of false.
-	 */
 
+	/**
+	 * The endGame() function prints an invalid command message.
+	 */
 	@Override
 	public void endGame() {
 		this.printInvalidCommandMessage();

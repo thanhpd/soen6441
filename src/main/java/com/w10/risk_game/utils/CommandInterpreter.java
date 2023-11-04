@@ -62,7 +62,7 @@ public class CommandInterpreter {
 	 * @param p_command
 	 *            The parameter `p_command` is a string representing a command.
 	 * @return The method is returning an ArrayList of ArrayLists of Strings.
-	 * @throws ApplicationException
+	 * @exception ApplicationException
 	 */
 	public static ArrayList<ArrayList<String>> GetCommandOptions(String p_command) throws ApplicationException {
 		ArrayList<ArrayList<String>> l_listOfOptions = new ArrayList<>();
@@ -105,7 +105,7 @@ public class CommandInterpreter {
 	 * @param p_listOfOptions
 	 *            An ArrayList of ArrayLists of Strings. Each inner ArrayList
 	 *            represents a set of options for a command.
-	 * @throws ApplicationException
+	 * @exception ApplicationException
 	 */
 	public static void CheckValidArgumentOptions(String[] p_argList, String p_command,
 			ArrayList<ArrayList<String>> p_listOfOptions) throws ApplicationException {

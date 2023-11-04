@@ -78,9 +78,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	}
 
 	/**
-	 * The function checkIfGameCanBegin is currently empty and returns false.
-	 *
-	 * @return The method is returning a boolean value of false.
+	 * The endGame() function prints an invalid command message.
 	 */
 	@Override
 	public void endGame() {

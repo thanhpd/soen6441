@@ -19,7 +19,7 @@ public class PreLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void loadMap(String p_filePath) {
-		this.d_EditorController.loadMap(p_filePath);
+		this.d_mapEditorController.loadMap(p_filePath);
 		next();
 	}
 
@@ -51,6 +51,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	public void removeContinent(String p_continentName) {
 		super.printInvalidCommandMessage();
 	}
+
 	@Override
 	public void nextPhase() {
 		super.printInvalidCommandMessage();
@@ -68,17 +69,38 @@ public class PreLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void showMap() {
-		super.printInvalidCommandMessage();
+		this.printInvalidCommandMessage();
 	}
 
 	@Override
-	public boolean checkIfGameCanBegin() {
-		super.printInvalidCommandMessage();
-		return false;
+	public void endGame() {
+		this.printInvalidCommandMessage();
 	}
 
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.LOAD_MAP);
+	}
+
+	@Override
+	public boolean checkIfMapIsValid() {
+		this.printInvalidCommandMessage();
+		return false;
+	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
 	}
 }

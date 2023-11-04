@@ -14,7 +14,7 @@ public class App {
 
 	public App() {
 		d_logger.attach(new ConsoleLogger());
-		// d_logger.attach(new FileLogger());
+		d_logger.attach(new FileLogger());
 	}
 
 	public static void main(String[] args) {
@@ -23,6 +23,7 @@ public class App {
 	}
 
 	public void startGame() {
+		d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
 		GameEngine l_gameEngine = new GameEngine();
 		try {
 			l_gameEngine.start();

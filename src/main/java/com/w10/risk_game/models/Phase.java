@@ -107,7 +107,7 @@ public abstract class Phase {
 	}
 
 	/**
-	 * The function prints the available commands in the current phase.
+	 * The function prints the available commands in the currefnt phase.
 	 */
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();

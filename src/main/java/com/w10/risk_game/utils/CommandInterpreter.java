@@ -56,14 +56,13 @@ public class CommandInterpreter {
 	}
 
 	/**
-	 * The function takes a command as input and returns a list of command options
-	 * and their corresponding values.
+	 * The function `GetCommandOptions` takes a command string as input and returns
+	 * a list of options and their corresponding values.
 	 *
 	 * @param p_command
-	 *            A string representing a command.
-	 * @return The method is returning an ArrayList of ArrayLists of Strings. Each
-	 *         ArrayList of Strings contains the option key as the first item, with
-	 *         the remaining items being the corresponding values.
+	 *            The parameter `p_command` is a string representing a command.
+	 * @return The method is returning an ArrayList of ArrayLists of Strings.
+	 * @throws ApplicationException
 	 */
 	public static ArrayList<ArrayList<String>> GetCommandOptions(String p_command) throws ApplicationException {
 		ArrayList<ArrayList<String>> l_listOfOptions = new ArrayList<>();
@@ -106,6 +105,7 @@ public class CommandInterpreter {
 	 * @param p_listOfOptions
 	 *            An ArrayList of ArrayLists of Strings. Each inner ArrayList
 	 *            represents a set of options for a command.
+	 * @throws ApplicationException
 	 */
 	public static void CheckValidArgumentOptions(String[] p_argList, String p_command,
 			ArrayList<ArrayList<String>> p_listOfOptions) throws ApplicationException {

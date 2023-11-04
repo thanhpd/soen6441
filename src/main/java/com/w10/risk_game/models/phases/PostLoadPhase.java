@@ -15,11 +15,27 @@ public class PostLoadPhase extends MapEditorPhase {
 	public PostLoadPhase(GameEngine p_GameEngine) {
 		super(p_GameEngine);
 	}
+	/**
+	 * The showMap() function calls the showMap() function in the
+	 * d_mapEditorController object with the parameter set to false.
+	 */
 	@Override
 	public void showMap() {
 		this.d_mapEditorController.showMap(false);
 	}
 
+	/**
+	 * The addCountry function adds a country to the map editor controller with the
+	 * specified country ID, country name, and continent name.
+	 *
+	 * @param p_countryId
+	 *            The unique identifier for the country being added.
+	 * @param p_countryName
+	 *            The name of the country that you want to add.
+	 * @param p_continentName
+	 *            The p_continentName parameter is a String that represents the name
+	 *            of the continent where the country belongs to.
+	 */
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		this.d_mapEditorController.addCountry(p_countryId, p_countryName, p_continentName);
@@ -149,28 +165,49 @@ public class PostLoadPhase extends MapEditorPhase {
 				Command.editneighbor, Command.validatemap, Command.next);
 	}
 
+	/**
+	 * The function checks if a map is valid.
+	 *
+	 * @return The method is returning a boolean value.
+	 */
 	@Override
 	public boolean checkIfMapIsValid() {
 		return this.d_mapEditorController.checkIfMapIsValid();
 	}
 
+	/**
+	 * The function "issuePlayerOrder" prints an invalid command message.
+	 */
 	@Override
 	public void issuePlayerOrder() {
 		this.printInvalidCommandMessage();
 
 	}
 
+	/**
+	 * The function executes all player orders and prints an invalid command
+	 * message.
+	 */
 	@Override
 	public void executeAllPlayerOrders() {
 		this.printInvalidCommandMessage();
 
 	}
 
+	/**
+	 * The "next" function prints an invalid command message.
+	 */
 	@Override
 	public void next() {
 		this.printInvalidCommandMessage();
 	}
 
+	/**
+	 * The function "assignPlayerReinforcements" prints an invalid command message
+	 * and returns false.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 	@Override
 	public boolean assignPlayerReinforcements() {
 		this.printInvalidCommandMessage();

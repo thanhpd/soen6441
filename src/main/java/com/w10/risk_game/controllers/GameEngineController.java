@@ -33,7 +33,9 @@ public class GameEngineController {
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
-	 * Game Engine constructor
+	 * GameEngineController constructor
+	 * 
+	 * @param p_mapEditorController
 	 */
 	public GameEngineController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;

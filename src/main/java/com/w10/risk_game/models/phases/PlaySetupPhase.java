@@ -95,6 +95,12 @@ public class PlaySetupPhase extends GamePlayPhase {
 		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
 	}
 
+	/**
+	 * The function "assignPlayerReinforcements" prints an invalid command message
+	 * and returns false.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 	@Override
 	public boolean assignPlayerReinforcements() {
 		this.printInvalidCommandMessage();

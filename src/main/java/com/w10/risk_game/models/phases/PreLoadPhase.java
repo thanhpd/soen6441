@@ -172,23 +172,44 @@ public class PreLoadPhase extends MapEditorPhase {
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.loadmap);
 	}
+	/**
+	 * The function checks if map is valid and prints an invalid command message if
+	 * not.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 
 	@Override
 	public boolean checkIfMapIsValid() {
 		this.printInvalidCommandMessage();
 		return false;
 	}
-
+	/**
+	 * The function checks can issue player and prints an invalid command message if
+	 * not.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 	@Override
 	public void issuePlayerOrder() {
 		this.printInvalidCommandMessage();
 	}
 
+	/**
+	 * The function executes all player orders and prints an invalid command
+	 * message.
+	 */
 	@Override
 	public void executeAllPlayerOrders() {
 		this.printInvalidCommandMessage();
 	}
 
+	/**
+	 * The function "assignPlayerReinforcements" prints an invalid command message
+	 * and returns false.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 	@Override
 	public boolean assignPlayerReinforcements() {
 		this.printInvalidCommandMessage();

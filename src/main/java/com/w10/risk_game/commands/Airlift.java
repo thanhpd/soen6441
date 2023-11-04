@@ -121,7 +121,7 @@ public class Airlift extends Order {
 			// Get the list of countries owned by the player
 			List<Country> l_countries = p_player.getCountriesOwned();
 
-			// Filter the list of countries using the id
+			// Filter the list of countries using the countryId
 			l_countryToAirlift = l_countries.stream().filter(country -> country.getCountryId() == l_countryId)
 					.findFirst().orElse(null);
 

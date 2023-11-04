@@ -25,15 +25,13 @@ public class Airlift extends Order {
 	 * Constructor for Airlift class.
 	 *
 	 * @param p_player
-	 *                             The player who is issuing the order.
+	 *            The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *                             The country id of the country to intiate the
-	 *                             airlift from.
+	 *            The country id of the country to intiate the airlift from.
 	 * @param d_countryIdToAir
-	 *                             The country id of the country to intiate the
-	 *                             airlift to.
+	 *            The country id of the country to intiate the airlift to.
 	 * @param d_ArmyToAirlift
-	 *                             The number to armies to airlift.
+	 *            The number to armies to airlift.
 	 */
 	public Airlift(Player p_player, String d_countryIdToAirFrom, String d_countryIdToAir, String d_ArmyToAirlift) {
 		this.d_player = p_player;
@@ -74,13 +72,11 @@ public class Airlift extends Order {
 	 * on a specific country.
 	 *
 	 * @param p_player
-	 *                    The player object that represents the player who is trying
-	 *                    to
-	 *                    validate the order.
+	 *            The player object that represents the player who is trying to
+	 *            validate the order.
 	 * @param p_countryId
-	 *                    The p_countryId parameter is a String that represents the
-	 *                    ID of a
-	 *                    country.
+	 *            The p_countryId parameter is a String that represents the ID of a
+	 *            country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean validateOrder(Player p_player, String p_countryId) {
@@ -95,12 +91,10 @@ public class Airlift extends Order {
 	 * player's countries.
 	 *
 	 * @param p_player
-	 *                    The player for whom we are finding the country for
-	 *                    airlift.
+	 *            The player for whom we are finding the country for airlift.
 	 * @param p_countryId
-	 *                    The parameter `p_countryId` is a String representing the
-	 *                    ID of the
-	 *                    country for which the airlift is being requested.
+	 *            The parameter `p_countryId` is a String representing the ID of the
+	 *            country for which the airlift is being requested.
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryForAirlift(Player p_player, String p_countryId) {

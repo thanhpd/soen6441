@@ -89,10 +89,9 @@ public final class Constants {
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
 	// Player Class constants
-	public static final String PLAYER_ISSUE_ORDER_DEPLOY_START = "Please enter your order in the format of \"deploy <CountryId> <No. of armies>\".";
-	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INPUT_NOT_THREE_PARTS = "Invalid input! The command should contain three parts. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_DEPLOY_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_DEPLOY_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer.	Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_START = "Please enter your order in the following formats : \"deploy <CountryId> <No. of armies>\", \"advance <CountryNameFrom> <CountryNameTo> <No. of armies>\", \"bomb <CountryId>\", \"blockade <CountryId>\", \"airlift <SourceCountryId> <TargetCountryId> <No. of armies>\" or \"negotiate <PlayerName>\"";
+	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer.	Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", or \"negotiate\".";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ORDER_TYPE = "Invalid input! The order type should be \"deploy\". Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
@@ -101,6 +100,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
+	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The %s command should contain %s parts. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_PLAYER_ID_NOT_INTEGER = "Invalid input! The player id should be a positive integer. Please try again.";
 
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";

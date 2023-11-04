@@ -16,7 +16,8 @@ public enum Command {
 																			Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), BLOCKADE(
 																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), AIRLIFT(
 																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), NEGOTIATE(
-																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
+																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), VALIDATE_MAP(
+																											Constants.USER_INPUT_COMMAND_VALIDATEMAP);
 
 	private final String name;
 

@@ -47,6 +47,8 @@ public abstract class Phase {
 
 	public abstract void saveMap(String p_mapFilePath);
 
+	public abstract boolean checkIfMapIsValid();
+
 	// game play commands
 	public abstract void createPlayer(String p_playerName);
 
@@ -57,14 +59,11 @@ public abstract class Phase {
 	// startup phase commands
 	public abstract boolean assignCountries();
 
-	// reinforcement commands
-	public abstract void issueReinforcementOrders(String p_orderType);
+	// issue order commands
+	public abstract void issuePlayerOrder();
 
-	// attack commands
-	public abstract void issueAttackOrders(String p_orderType);
-
-	// fortify commands
-	public abstract void issueFortifyOrders(String p_orderType);
+	// execute order commands
+	public abstract void executeAllPlayerOrders();
 
 	// end command
 	public abstract void endGame();

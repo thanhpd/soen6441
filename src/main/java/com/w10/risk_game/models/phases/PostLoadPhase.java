@@ -62,22 +62,6 @@ public class PostLoadPhase extends MapEditorPhase {
 	}
 
 	@Override
-	public void issueReinforcementOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueAttackOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueFortifyOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-
-	}
-
-	@Override
 	public void endGame() {
 		this.printInvalidCommandMessage();
 	}
@@ -89,6 +73,24 @@ public class PostLoadPhase extends MapEditorPhase {
 
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP);
+		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP,
+				Command.VALIDATE_MAP);
+	}
+
+	@Override
+	public boolean checkIfMapIsValid() {
+		return this.d_mapEditorController.checkIfMapIsValid();
+	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
+
 	}
 }

@@ -11,17 +11,7 @@ public final class Constants {
 	}
 
 	// Menu
-	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You are in the Startup phase:\n" + "You can enter any of the below commands:\n"
-			+ "-> loadmap <filepath>\n" + "-> savemap <filepath>\n" + "-> showmap\n" + "-> editmap <filepath>\n"
-			+ "-> validatemap\n" + "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
-			+ "-> editcountry -add <countryID> <countryName> <continentID> -remove <countryID>\n"
-			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
-			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
-
-	public static final String GAMEPLAY_PHASE_ENTRY_STRING = "You are now in the Gameplay phase:\n"
-			+ "You can enter any of the below commands:\n" + "-> showmap\n" + "-> deploy <CountryId> <No. of armies>\n"
-			+ "-> quit\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";

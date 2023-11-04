@@ -23,22 +23,15 @@ import com.w10.risk_game.utils.Reinforcements;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngine class is responsible for managing the game map, players,
- * issuing orders, executing orders and their interactions in a game.
+ * The GameEngineController class is responsible for managing players, issuing
+ * orders, executing orders and their interactions in a game.
  *
  * @author Sherwyn Dsouza
  */
 public class GameEngineController {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
-	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
-	// type. The code is also using the pound sign (#) to create a comment, which
-	// means
-	// that the line "
-	d_mapEditor;
 	private boolean d_isCountriesAssigned;
-	private MapReader d_mapReader;
-	private MapDisplay d_displayMap;
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
@@ -53,10 +46,7 @@ public class GameEngineController {
 		this.d_gameMap = new GameMap();
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
-		this.d_mapReader = new MapReader();
-		this.d_displayMap = new MapDisplay();
 		this.d_currentPlayerIndex = 0;
-		// this.phase = new StartupPhase();
 	}
 
 	/**
@@ -69,7 +59,6 @@ public class GameEngineController {
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
-
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);

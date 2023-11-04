@@ -64,21 +64,6 @@ public class PreLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void showMap() {
-		super.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueReinforcementOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueAttackOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueFortifyOrders(String p_orderType) {
 		this.printInvalidCommandMessage();
 	}
 
@@ -90,5 +75,21 @@ public class PreLoadPhase extends MapEditorPhase {
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.LOAD_MAP);
+	}
+
+	@Override
+	public boolean checkIfMapIsValid() {
+		this.printInvalidCommandMessage();
+		return false;
+	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
 	}
 }

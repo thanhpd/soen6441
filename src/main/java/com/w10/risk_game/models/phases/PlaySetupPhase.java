@@ -45,34 +45,28 @@ public class PlaySetupPhase extends GamePlayPhase {
 	}
 
 	@Override
+	public void endGame() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
 	public void next() {
-		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
+		d_gameEngine.setPhase(new IssueOrderPhase(d_gameEngine));
 	}
 
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.ASSIGN_COUNTRIES, Command.GAME_PLAYER_CREATE, Command.GAME_PLAYER_REMOVE,
 				Command.SHOW_MAP);
-	}
-
-	@Override
-	public void issueReinforcementOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueAttackOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-	}
-
-	@Override
-	public void issueFortifyOrders(String p_orderType) {
-		this.printInvalidCommandMessage();
-
-	}
-
-	@Override
-	public void endGame() {
-		this.printInvalidCommandMessage();
 	}
 }

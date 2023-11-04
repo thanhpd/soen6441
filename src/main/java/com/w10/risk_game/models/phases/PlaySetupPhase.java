@@ -112,7 +112,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.assigncountries, Command.addplayer, Command.removeplayer, Command.showmap);
+		return Set.of(Command.assigncountries, Command.gameplayer, Command.showmap);
 	}
 	/**
 	 * The nextPhase() function prints an invalid command message.

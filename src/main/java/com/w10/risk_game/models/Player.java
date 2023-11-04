@@ -38,13 +38,13 @@ public class Player {
 	 * (`d_leftoverArmies`).
 	 *
 	 * @param p_name
-	 *                         the player name
+	 *            the player name
 	 * @param p_countriesOwned
-	 *                         the list of countries owned by the player
+	 *            the list of countries owned by the player
 	 * @param p_orders
-	 *                         the list of orders to issue
+	 *            the list of orders to issue
 	 * @param p_leftoverArmies
-	 *                         the number of current army in possess by the player
+	 *            the number of current army in possess by the player
 	 */
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
 		this.d_name = p_name;
@@ -66,9 +66,8 @@ public class Player {
 	 * The function sets the name of the player.
 	 *
 	 * @param p_name
-	 *               The parameter "p_name" is a String that represents the name of
-	 *               the
-	 *               player.
+	 *            The parameter "p_name" is a String that represents the name of the
+	 *            player.
 	 */
 	public void setName(String p_name) {
 		this.d_name = p_name;
@@ -88,9 +87,8 @@ public class Player {
 	 * The function sets the list of countries owned by a player.
 	 *
 	 * @param p_countriesOwned
-	 *                         This parameter is a List of objects of type Country.
-	 *                         It represents
-	 *                         the countries that are owned by a player.
+	 *            This parameter is a List of objects of type Country. It represents
+	 *            the countries that are owned by a player.
 	 */
 	public void setCountriesOwned(List<Country> p_countriesOwned) {
 		this.d_countriesOwned = p_countriesOwned;
@@ -119,8 +117,8 @@ public class Player {
 	 * The function sets the player's cards to the given list of card types.
 	 *
 	 * @param playerCards
-	 *                    The parameter "playerCards" is a List of objects of type
-	 *                    "CardType".
+	 *            The parameter "playerCards" is a List of objects of type
+	 *            "CardType".
 	 */
 	public void setPlayerCards(List<CardType> playerCards) {
 		this.d_playerCards = playerCards;
@@ -131,7 +129,7 @@ public class Player {
 	 * countries.
 	 *
 	 * @param p_CountryId
-	 *                    An integer representing the ID of a country.
+	 *            An integer representing the ID of a country.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean hasCountry(int p_CountryId) {
@@ -150,7 +148,7 @@ public class Player {
 	 * The function sets the list of orders for a given player.
 	 *
 	 * @param p_orders
-	 *                 The parameter "p_orders" is a List of Order of a player.
+	 *            The parameter "p_orders" is a List of Order of a player.
 	 */
 	public void setOrders(List<Order> p_orders) {
 		this.d_orders = p_orders;
@@ -170,9 +168,8 @@ public class Player {
 	 * The function sets the value of the "leftoverArmies" variable.
 	 *
 	 * @param p_leftoverArmies
-	 *                         The parameter "p_leftoverArmies" is an integer that
-	 *                         represents the
-	 *                         number of leftover armies.
+	 *            The parameter "p_leftoverArmies" is an integer that represents the
+	 *            number of leftover armies.
 	 */
 	public void setLeftoverArmies(int p_leftoverArmies) {
 		this.d_leftoverArmies = p_leftoverArmies;
@@ -183,8 +180,8 @@ public class Player {
 	 * leftover armies.
 	 *
 	 * @param p_num
-	 *              The parameter "p_num" represents the number of armies that are
-	 *              being deployed.
+	 *            The parameter "p_num" represents the number of armies that are
+	 *            being deployed.
 	 */
 	public void deployArmies(int p_num) {
 		this.d_leftoverArmies -= p_num;
@@ -194,9 +191,8 @@ public class Player {
 	 * The function adds a specified number of armies to a player's leftoverArmies.
 	 *
 	 * @param p_num
-	 *              The parameter "p_num" represents the number of armies that will
-	 *              be
-	 *              added to the existing number of leftover armies.
+	 *            The parameter "p_num" represents the number of armies that will be
+	 *            added to the existing number of leftover armies.
 	 */
 	public void addArmies(int p_num) {
 		this.d_leftoverArmies += p_num;
@@ -211,7 +207,7 @@ public class Player {
 		String[] l_inputArray = l_input.split(" ");
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
-			case "deploy":
+			case "deploy" :
 				boolean l_again = true;
 				boolean l_failed = false;
 				while (l_again) {
@@ -249,10 +245,10 @@ public class Player {
 					}
 				}
 				break;
-			case "advance":
+			case "advance" :
 				// TODO: add advance object to d_orders
 				break;
-			case "bomb":
+			case "bomb" :
 				if (hasCard(CardType.BOMB)) {
 					String l_countryIdToBomb = l_inputArray[1];
 					if (Bomb.validateOrder(this, l_countryIdToBomb)) {
@@ -262,7 +258,7 @@ public class Player {
 					}
 				}
 				break;
-			case "blockade":
+			case "blockade" :
 				if (hasCard(CardType.BLOCKADE)) {
 					String l_countryIdToBlockade = l_inputArray[1];
 					if (Blockade.validateOrder(this, l_countryIdToBlockade)) {
@@ -272,7 +268,7 @@ public class Player {
 					}
 				}
 				break;
-			case "airlift":
+			case "airlift" :
 				if (hasCard(CardType.AIRLIFT)) {
 					// airlift countryIdToAirliftFrom countryIdToAirlift NumberOfArmiesToAirlift
 					String l_countryIdToAirliftFrom = l_inputArray[1];
@@ -287,10 +283,10 @@ public class Player {
 				}
 
 				break;
-			case "negotiate":
+			case "negotiate" :
 				// TODO add negotiate object to d_orders
 				break;
-			default:
+			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 				break;
 		}
@@ -308,13 +304,13 @@ public class Player {
 
 	/**
 	 * The function "checkValidDeployInput" checks whether the input array has a
-	 * length of 3, whether the
-	 * country id is a positive integer, and whether the number of armies is a
-	 * positive integer.
-	 * 
-	 * @param p_inputArray An array of strings representing the input for the
-	 *                     method. The expected format
-	 *                     of the input is ["command", "countryId", "numOfArmies"].
+	 * length of 3, whether the country id is a positive integer, and whether the
+	 * number of armies is a positive integer.
+	 *
+	 * @param p_inputArray
+	 *            An array of strings representing the input for the method. The
+	 *            expected format of the input is ["command", "countryId",
+	 *            "numOfArmies"].
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean checkValidDeployInput(String[] p_inputArray) {
@@ -345,12 +341,11 @@ public class Player {
 
 	/**
 	 * The function checks if the given order type is valid for deployment and logs
-	 * an error message if it
-	 * is not.
-	 * 
-	 * @param p_orderType The parameter p_orderType is a String that represents the
-	 *                    type of order being
-	 *                    checked.
+	 * an error message if it is not.
+	 *
+	 * @param p_orderType
+	 *            The parameter p_orderType is a String that represents the type of
+	 *            order being checked.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean checkValidDeployOrder(String p_orderType) {
@@ -364,15 +359,15 @@ public class Player {
 
 	/**
 	 * The function checks if a given country ID is valid by comparing it to a list
-	 * of countries, and
-	 * returns true if it is valid, otherwise it logs an error message and returns
-	 * false.
-	 * 
-	 * @param p_countries A list of Country objects representing the countries
-	 *                    available for deployment.
-	 * @param p_countryId The p_countryId parameter is a String representing the ID
-	 *                    of the country that
-	 *                    needs to be checked for validity.
+	 * of countries, and returns true if it is valid, otherwise it logs an error
+	 * message and returns false.
+	 *
+	 * @param p_countries
+	 *            A list of Country objects representing the countries available for
+	 *            deployment.
+	 * @param p_countryId
+	 *            The p_countryId parameter is a String representing the ID of the
+	 *            country that needs to be checked for validity.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean checkValidDeployCountry(List<Country> p_countries, String p_countryId) {
@@ -387,9 +382,10 @@ public class Player {
 
 	/**
 	 * The function checks if the number of armies to be deployed is valid.
-	 * 
-	 * @param p_num The parameter p_num represents the number of armies that a
-	 *              player wants to deploy.
+	 *
+	 * @param p_num
+	 *            The parameter p_num represents the number of armies that a player
+	 *            wants to deploy.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean checkValidDeployArmy(int p_num) {

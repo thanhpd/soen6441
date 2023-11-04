@@ -34,7 +34,7 @@ public class GameEngineController {
 
 	/**
 	 * GameEngineController constructor
-	 * 
+	 *
 	 * @param p_mapEditorController
 	 */
 	public GameEngineController(MapEditorController p_mapEditorController) {

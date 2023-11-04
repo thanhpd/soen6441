@@ -42,16 +42,35 @@ public abstract class GamePlayPhase extends Phase {
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		this.printInvalidCommandMessage();
 	}
+	/**
+	 * The function "saveMap" prints an invalid command message.
+	 *
+	 * @param p_mapFilePath
+	 *            The file path where the map will be saved.
+	 */
 
 	@Override
 	public void saveMap(String p_mapFilePath) {
 		this.printInvalidCommandMessage();
 	}
 
+	/**
+	 * The showMap() function calls the showMap() function of the d_EditorController
+	 * object.
+	 */
 	@Override
 	public void showMap() {
-		this.printInvalidCommandMessage();
+		this.d_EditorController.showMap();
 	}
+	/**
+	 * The function editMap in Java prints an invalid command message and returns
+	 * false.
+	 *
+	 * @param p_mapFilePath
+	 *            The parameter "p_mapFilePath" is a String that represents the file
+	 *            path of the map that needs to be edited.
+	 * @return The method is returning a boolean value of false.
+	 */
 
 	@Override
 	public boolean editMap(String p_mapFilePath) {
@@ -59,6 +78,11 @@ public abstract class GamePlayPhase extends Phase {
 		return false;
 	}
 
+	/**
+	 * The function checkIfMapIsValid() returns false.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 	@Override
 	public boolean checkIfMapIsValid() {
 		return false;

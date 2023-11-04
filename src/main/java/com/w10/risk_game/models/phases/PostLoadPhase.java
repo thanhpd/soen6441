@@ -15,66 +15,192 @@ public class PostLoadPhase extends MapEditorPhase {
 	public PostLoadPhase(GameEngine p_GameEngine) {
 		super(p_GameEngine);
 	}
+	/**
+	 * The showMap() function calls the showMap() function of the d_EditorController
+	 * object.
+	 */
 	@Override
 	public void showMap() {
 		this.d_EditorController.showMap();
 	}
+
+	/**
+	 * The function checks if a map is valid by calling a method from the
+	 * d_EditorController object and returns true if it is valid, otherwise it
+	 * returns false.
+	 *
+	 * @return The method is returning a boolean value.
+	 */
+	@Override
+	public boolean checkIfMapIsValid() {
+		if (this.d_EditorController.checkIfMapIsValid()) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * The function "editMap" attempts to edit a map file and returns true if
+	 * successful, otherwise it returns false.
+	 *
+	 * @param p_mapFilePath
+	 *            The parameter "p_mapFilePath" is a String that represents the file
+	 *            path of the map that needs to be edited.
+	 * @return The method is returning a boolean value.
+	 */
+	@Override
+	public boolean editMap(String p_mapFilePath) {
+		if (this.d_EditorController.editMap(p_mapFilePath)) {
+			return true;
+		}
+		return false;
+
+	}
+
+	/**
+	 * The addCountry function adds a country with the specified country ID, country
+	 * name, and continent name to the EditorController.
+	 *
+	 * @param p_countryId
+	 *            The unique identifier for the country.
+	 * @param p_countryName
+	 *            The name of the country that you want to add.
+	 * @param p_continentName
+	 *            The p_continentName parameter is a String that represents the name
+	 *            of the continent where the country belongs to.
+	 */
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		this.d_EditorController.addCountry(p_countryId, p_countryName, p_continentName);
 	}
 
+	/**
+	 * The function adds a continent with a given name and bonus to the editor
+	 * controller.
+	 *
+	 * @param p_continentName
+	 *            The name of the continent that you want to add. It should be a
+	 *            String value.
+	 * @param p_bonus
+	 *            The p_bonus parameter is an integer that represents the bonus
+	 *            value for the continent being added.
+	 */
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
 		this.d_EditorController.addContinent(p_continentName, p_bonus);
 	}
+	/**
+	 * The addNeighbor function adds a neighbor country to a given country.
+	 *
+	 * @param p_countryId
+	 *            The ID of the country to which you want to add a neighbor.
+	 * @param p_neighborCountryId
+	 *            The parameter "p_neighborCountryId" represents the ID of the
+	 *            neighboring country that you want to add to the current country.
+	 */
 
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
 		this.d_EditorController.addNeighbor(p_countryId, p_neighborCountryId);
 	}
 
+	/**
+	 * The removeCountry function removes a country based on its ID.
+	 *
+	 * @param p_countryId
+	 *            The parameter p_countryId is an integer that represents the unique
+	 *            identifier of the country that needs to be removed.
+	 */
 	@Override
 	public void removeCountry(int p_countryId) {
 		this.d_EditorController.removeCountry(p_countryId);
 	}
 
+	/**
+	 * The function removes a continent from the editor controller.
+	 *
+	 * @param p_continentName
+	 *            The parameter "p_continentName" is a String that represents the
+	 *            name of the continent that needs to be removed.
+	 */
 	@Override
 	public void removeContinent(String p_continentName) {
 		this.d_EditorController.removeContinent(p_continentName);
 	}
 
+	/**
+	 * The removeNeighbor function removes a neighbor country from a given country.
+	 *
+	 * @param p_countryId
+	 *            The ID of the country from which you want to remove a neighbor.
+	 * @param p_neighborCountryId
+	 *            The parameter "p_neighborCountryId" represents the ID of the
+	 *            neighbor country that you want to remove from the country with the
+	 *            ID "p_countryId".
+	 */
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		this.d_EditorController.removeNeighbor(p_countryId, p_neighborCountryId);
 	}
+	/**
+	 * The function saves a map to a specified file path.
+	 *
+	 * @param p_mapFilePath
+	 *            The parameter "p_mapFilePath" is a String that represents the file
+	 *            path where the map will be saved.
+	 */
 
 	@Override
 	public void saveMap(String p_mapFilePath) {
 		this.d_EditorController.saveMap(p_mapFilePath);
 	}
 
+	/**
+	 * The loadMap function prints an invalid command message.
+	 *
+	 * @param p_filePath
+	 *            The parameter `p_filePath` is a string that represents the file
+	 *            path of the map that needs to be loaded.
+	 */
 	@Override
 	public void loadMap(String p_filePath) {
 		this.printInvalidCommandMessage();
 	}
+	/**
+	 * The function "checkIfGameCanBegin" prints an invalid command message and
+	 * returns false.
+	 *
+	 * @return The method is returning a boolean value of false.
+	 */
 
 	@Override
 	public boolean checkIfGameCanBegin() {
 		this.printInvalidCommandMessage();
 		return false;
 	}
+	/**
+	 * The nextPhase() function sets the phase of the game engine to a new
+	 * PlaySetupPhase.
+	 */
 
 	@Override
 	public void nextPhase() {
 		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
 	}
 
+	/**
+	 * The function returns a set of available commands for a map editing program.
+	 *
+	 * @return A Set of Command objects.
+	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP,
-				Command.NEXT);
+		return Set.of(Command.editmap, Command.editcountry, Command.editcontinent, Command.showmap,
+				Command.editneighbor, Command.validatemap, Command.next);
 	}
+	/**
+	 * The "next" function prints an invalid command message.
+	 */
 	@Override
 	public void next() {
 		this.printInvalidCommandMessage();

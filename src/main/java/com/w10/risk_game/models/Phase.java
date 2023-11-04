@@ -77,23 +77,42 @@ public abstract class Phase {
 	// // end command
 	// abstract public void endGame();
 
-	abstract public void next();
+	public abstract void next();
 
 	public abstract Set<Command> getAvailableCommands();
 
+	/**
+	 * The function returns the name of the class.
+	 *
+	 * @return The method is returning the name of the class.
+	 */
 	public String getPhaseName() {
 		return getClassName();
 	}
 
+	/**
+	 * The function prints an error message indicating an invalid command in the
+	 * current state.
+	 */
 	public void printInvalidCommandMessage() {
 		System.out.println("Invalid command in state " + getPhaseName());
 	}
 
+	/**
+	 * The function "getClassName" returns the name of the class without the package
+	 * name.
+	 *
+	 * @return The method is returning the name of the class without the package
+	 *         name.
+	 */
 	private String getClassName() {
 		var name = this.getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1, name.length());
 	}
 
+	/**
+	 * The function prints the available commands in the current phase.
+	 */
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();
 		System.out.println("You are in " + getPhaseName() + " Phase. Command avaliable " + avaliableCommandsText);

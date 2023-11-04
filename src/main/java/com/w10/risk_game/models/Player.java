@@ -269,7 +269,7 @@ public class Player {
 		if (this.d_leftoverArmies == 0 && l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0
 				&& checkValidAdvanceOrder(d_advanceArmies, l_countryFrom.getArmyCount(),
 						l_countryFrom.getCountryId())) {
-			Order l_order = new Advance(l_countryFrom, l_countryTo, Integer.parseInt(l_inputArray[3]));
+			Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
 			d_orders.add(l_order);
 		} else {
 			d_logger.log(Constants.PLAYER_ISSUE_ORDER_ADVANCE_INCORRECT);

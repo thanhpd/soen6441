@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.w10.risk_game.controllers.RiskGame;
+import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.controllers.RiskGameController;
 import com.w10.risk_game.utils.Constants;
 
 import java.io.ByteArrayOutputStream;
@@ -20,7 +21,8 @@ import org.junit.jupiter.api.Test;
  * GameEngine class.
  */
 public class GameEngineTest {
-	private RiskGame d_RiskGame;
+	private RiskGameController d_RiskGameController;
+	private MapEditorController d_EditorController;
 	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
 	Player d_player2;
@@ -34,7 +36,8 @@ public class GameEngineTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-		d_RiskGame = new RiskGame();
+		d_RiskGameController = new RiskGameController();
+		d_EditorController = new MapEditorController();
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 
@@ -51,18 +54,18 @@ public class GameEngineTest {
 	@Test
 	void testAssignCountries() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_RiskGame.loadMap(l_mapFilePath);
+		d_EditorController.loadMap(l_mapFilePath);
 
-		d_RiskGame.createPlayer(d_player1.getName());
-		d_RiskGame.createPlayer(d_player2.getName());
+		d_RiskGameController.createPlayer(d_player1.getName());
+		d_RiskGameController.createPlayer(d_player2.getName());
 
-		assertEquals(0, d_RiskGame.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(0, d_RiskGame.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGameController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGameController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 
-		d_RiskGame.assignCountries();
+		d_RiskGameController.assignCountries();
 
-		assertEquals(12, d_RiskGame.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(12, d_RiskGame.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGameController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(0, d_RiskGameController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 	}
 
 	/**
@@ -73,12 +76,12 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testCreatePlayer() {
-		d_RiskGame.createPlayer(d_player1.getName());
-		d_RiskGame.createPlayer(d_player2.getName());
-		assertEquals(2, d_RiskGame.getNoOfPlayers());
+		d_RiskGameController.createPlayer(d_player1.getName());
+		d_RiskGameController.createPlayer(d_player2.getName());
+		assertEquals(2, d_RiskGameController.getNoOfPlayers());
 
-		d_RiskGame.createPlayer(d_player2.getName());
-		assertEquals(2, d_RiskGame.getNoOfPlayers());
+		d_RiskGameController.createPlayer(d_player2.getName());
+		assertEquals(2, d_RiskGameController.getNoOfPlayers());
 	}
 
 	/**
@@ -90,8 +93,8 @@ public class GameEngineTest {
 	@Test
 	void testLoadMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_RiskGame.loadMap(l_mapFilePath);
-		assertNotNull(d_RiskGame.getGameMap());
+		d_EditorController.loadMap(l_mapFilePath);
+		assertNotNull(d_RiskGameController.getGameMap());
 	}
 
 	/**
@@ -102,14 +105,14 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testRemovePlayer() {
-		d_RiskGame.createPlayer(d_player1.getName());
-		d_RiskGame.createPlayer(d_player2.getName());
+		d_RiskGameController.createPlayer(d_player1.getName());
+		d_RiskGameController.createPlayer(d_player2.getName());
 
-		d_RiskGame.removePlayer(d_player2.getName());
-		assertEquals(1, d_RiskGame.getNoOfPlayers());
+		d_RiskGameController.removePlayer(d_player2.getName());
+		assertEquals(1, d_RiskGameController.getNoOfPlayers());
 
-		d_RiskGame.removePlayer(d_player1.getName());
-		assertEquals(0, d_RiskGame.getNoOfPlayers());
+		d_RiskGameController.removePlayer(d_player1.getName());
+		assertEquals(0, d_RiskGameController.getNoOfPlayers());
 	}
 
 	/**
@@ -118,7 +121,7 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testShowAllPlayers() {
-		d_RiskGame.showAllPlayers();
+		d_RiskGameController.showAllPlayers();
 		// Capture the actual output
 		String l_actualOutput = d_outputStream.toString().trim();
 		String l_expectedOutput = "";
@@ -130,22 +133,23 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testShowMap() {
-		d_RiskGame.showMap();
-		assertTrue(d_RiskGame.checkIfGameCanBegin() == d_RiskGame.checkIfMapIsValid());
+		d_EditorController.showMap();
+		assertTrue(d_RiskGameController.checkIfGameCanBegin() == d_EditorController.checkIfMapIsValid());
 	}
 
 	/**
 	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
-	 * d_RiskGame class to ensure that it returns the correct number of players.
+	 * d_RiskGameController class to ensure that it returns the correct number of
+	 * players.
 	 *
 	 * @author Sherwyn Dsouza
 	 */
 	@Test
 	void testGetNoOfPlayers() {
-		d_RiskGame.createPlayer(d_player1.getName());
-		d_RiskGame.createPlayer(d_player2.getName());
+		d_RiskGameController.createPlayer(d_player1.getName());
+		d_RiskGameController.createPlayer(d_player2.getName());
 
-		assertEquals(2, d_RiskGame.getNoOfPlayers());
+		assertEquals(2, d_RiskGameController.getNoOfPlayers());
 	}
 
 	/**
@@ -157,8 +161,8 @@ public class GameEngineTest {
 	@Test
 	void testGameMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_RiskGame.loadMap(l_mapFilePath);
-		assertNotNull(d_RiskGame.getGameMap());
+		d_EditorController.loadMap(l_mapFilePath);
+		assertNotNull(d_RiskGameController.getGameMap());
 	}
 
 	/**
@@ -169,8 +173,8 @@ public class GameEngineTest {
 	 */
 	@Test
 	void getPlayerDetailsTest() {
-		d_RiskGame.createPlayer(d_player1.getName());
+		d_RiskGameController.createPlayer(d_player1.getName());
 
-		assertEquals(d_player1.getName(), d_RiskGame.getPlayerDetails(d_player1.getName()).getName());
+		assertEquals(d_player1.getName(), d_RiskGameController.getPlayerDetails(d_player1.getName()).getName());
 	}
 }

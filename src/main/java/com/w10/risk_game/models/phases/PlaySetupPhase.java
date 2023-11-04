@@ -16,7 +16,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	}
 	@Override
 	public void showMap() {
-		this.d_Game.showMap();
+		this.d_EditorController.showMap();
 	}
 	@Override
 	public boolean executePlayerOrders() {

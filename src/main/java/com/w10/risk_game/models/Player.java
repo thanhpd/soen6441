@@ -226,6 +226,7 @@ public class Player {
 						l_failed = true;
 						continue;
 					}
+					l_orderType = l_inputArray[0];
 					String l_countryId = l_inputArray[1];
 					String l_num = l_inputArray[2];
 					l_isValidOrder = checkValidDeployOrder(l_orderType);

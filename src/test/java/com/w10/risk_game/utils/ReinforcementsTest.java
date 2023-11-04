@@ -85,10 +85,10 @@ public class ReinforcementsTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
 		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
 		// Test bonus
-		Reinforcements.ReinforcementPhase(d_player, d_gameMap);
+		Reinforcements.AssignPlayerReinforcements(d_player, d_gameMap);
 		assertEquals(17, d_player.getLeftoverArmies());
 		// Test basic
-		Reinforcements.ReinforcementPhase(d_player1, d_gameMap);
+		Reinforcements.AssignPlayerReinforcements(d_player1, d_gameMap);
 		assertEquals(12, d_player1.getLeftoverArmies());
 	}
 

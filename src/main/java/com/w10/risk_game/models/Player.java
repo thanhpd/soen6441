@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import com.w10.risk_game.commands.Blockade;
 import com.w10.risk_game.commands.Bomb;
-
-import java.util.Formatter;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Formatter;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Deploy;
@@ -20,7 +19,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * name, countries owned, orders, and leftover armies, as well as methods to
  * manipulate these properties.
  *
- * @author Darlene-Naz, Omnia Alam
+ * @author Darlene-Naz, Omnia Alam, Yajing Liu
  */
 public class Player {
 	private String d_name;
@@ -210,12 +209,14 @@ public class Player {
 		boolean l_failed = false;
 		while (l_again) {
 			Scanner l_scanner = new Scanner(System.in);
+			// Step 1: Handle invalid input
 			if (l_failed) {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_START);
 				d_logger.log(Constants.USER_INPUT_REQUEST);
 				l_input = l_scanner.nextLine();
 				l_inputArray = l_input.split(" ");
 			}
+			// Step 2: Check the input format
 			boolean isValidOrderInput = checkValidOrderInput(l_inputArray);
 			if (!isValidOrderInput) {
 				l_failed = true;
@@ -223,10 +224,11 @@ public class Player {
 			}
 			String l_orderType = l_inputArray[0];
 			switch (l_orderType) {
-				case "deploy" :
+				// Step 3: Create order object and add it to the list of orders
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 					String l_countryId = l_inputArray[1];
 					String l_num = l_inputArray[2];
-					if (Deploy.validateOrder(this, l_countryId, l_num)) {
+					if (Deploy.ValidateOrder(this, l_countryId, l_num)) {
 						Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
 								Integer.parseInt(l_inputArray[2]));
 						d_orders.add(order);
@@ -236,10 +238,10 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				case "advance" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 					// TODO: add advance object to d_orders
 					break;
-				case "bomb" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 					String l_countryIdToBomb = l_inputArray[1];
 					if (hasCard(CardType.BOMB) && Bomb.validateOrder(this, l_countryIdToBomb)) {
 						Order order = new Bomb(this, l_countryIdToBomb);
@@ -250,7 +252,7 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				case "blockade" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 					String l_countryIdToBlockade = l_inputArray[1];
 					if (hasCard(CardType.BLOCKADE) && Blockade.validateOrder(this, l_countryIdToBlockade)) {
 						Order order = new Blockade(this, l_countryIdToBlockade);
@@ -261,10 +263,10 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				case "airlift" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 					// TODO add airlift object to d_orders
 					break;
-				case "negotiate" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					// TODO add negotiate object to d_orders
 					break;
 				default :
@@ -278,6 +280,7 @@ public class Player {
 			}
 		}
 	}
+
 	/**
 	 * The function "nextOrder" returns and removes the first element from a list of
 	 * player's orders.
@@ -287,7 +290,6 @@ public class Player {
 	public Order nextOrder() {
 		return d_orders.remove(0);
 	}
-
 	/**
 	 * This function is used to check the input format for order.
 	 *
@@ -298,17 +300,17 @@ public class Player {
 	public boolean checkValidOrderInput(String[] p_inputArray) {
 		String l_orderType = p_inputArray[0];
 		switch (l_orderType) {
-			case "deploy" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 				return checkValidDeployInput(p_inputArray);
-			case "advance" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 				return checkValidAdvanceInput(p_inputArray);
-			case "bomb" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 				return checkValidBombInput(p_inputArray);
-			case "blockade" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 				return checkValidBlockadeInput(p_inputArray);
-			case "airlift" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 				return checkValidAirliftInput(p_inputArray);
-			case "negotiate" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return checkValidNegotiateInput(p_inputArray);
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
@@ -316,7 +318,8 @@ public class Player {
 		}
 	}
 	/**
-	 * This function is used to check the input format for deploy command.
+	 * This function is used to check the input format for deploy command. The input
+	 * should have three parts (one string and two positive integers)
 	 *
 	 * @param p_inputArray
 	 *            the input string
@@ -350,7 +353,6 @@ public class Player {
 		// Step 4: Return true if the input format is valid
 		return true;
 	}
-
 	/**
 	 * This function is used to check the input format for advance command.
 	 *
@@ -403,7 +405,6 @@ public class Player {
 		}
 		return true;
 	}
-
 	/**
 	 * This function is used to check the input format for blockade command.
 	 *
@@ -497,7 +498,6 @@ public class Player {
 		}
 		return true;
 	}
-
 	/**
 	 * The function checks whether a player has a card of a given type.
 	 *

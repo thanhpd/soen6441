@@ -48,7 +48,7 @@ public class DeployTest {
 		String[] l_inputArray = l_input.split(" ");
 		String l_countryId = l_inputArray[1];
 		List<Country> l_countries = d_player1.getCountriesOwned();
-		boolean l_isValidCountry = Deploy.checkValidCountry(l_countries, l_countryId);
+		boolean l_isValidCountry = Deploy.CheckValidCountry(l_countries, l_countryId);
 		assertEquals(false, l_isValidCountry);
 	}
 	/**
@@ -63,7 +63,7 @@ public class DeployTest {
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");
 		String l_num = l_inputArray[2];
-		boolean l_isValidNum = Deploy.checkValidArmy(d_player1, Integer.parseInt(l_num));
+		boolean l_isValidNum = Deploy.CheckValidArmy(d_player1, Integer.parseInt(l_num));
 		assertEquals(false, l_isValidNum);
 	}
 }

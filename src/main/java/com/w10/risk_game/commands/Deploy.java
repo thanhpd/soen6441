@@ -5,6 +5,7 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
+import java.util.Formatter;
 import java.util.List;
 
 /**
@@ -45,6 +46,8 @@ public class Deploy extends Order {
 			if (l_country.getCountryId() == d_countryId) {
 				int l_countryArmies = l_country.getArmyCount();
 				l_country.setArmyCount(l_countryArmies + d_num);
+				Formatter l_formatter = new Formatter();
+				l_formatter.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_countryId, d_num);
 			}
 		}
 	}
@@ -61,11 +64,11 @@ public class Deploy extends Order {
 	 *            The number of armies that the order is issued to
 	 * @return boolean value to show whether the order is valid
 	 */
-	public static boolean validateOrder(Player p_player, String p_countryId, String p_num) {
+	public static boolean ValidateOrder(Player p_player, String p_countryId, String p_num) {
 		List<Country> l_countries = p_player.getCountriesOwned();
-		boolean l_validCountry = checkValidCountry(l_countries, p_countryId);
+		boolean l_validCountry = CheckValidCountry(l_countries, p_countryId);
 		int l_num = Integer.parseInt(p_num);
-		boolean l_validNum = checkValidArmy(p_player, l_num);
+		boolean l_validNum = CheckValidArmy(p_player, l_num);
 		if (l_validCountry && l_validNum) {
 			return true;
 		} else {
@@ -83,7 +86,7 @@ public class Deploy extends Order {
 	 *            the country id
 	 * @return boolean value to show whether the country id is valid
 	 */
-	public static boolean checkValidCountry(List<Country> p_countries, String p_countryId) {
+	public static boolean CheckValidCountry(List<Country> p_countries, String p_countryId) {
 		for (Country country : p_countries) {
 			if (country.getCountryId() == Integer.parseInt(p_countryId)) {
 				return true;
@@ -101,13 +104,13 @@ public class Deploy extends Order {
 	 *            the number of armies
 	 * @return boolean value to show whether the number of armies is valid
 	 */
-	public static boolean checkValidArmy(Player p_player, int p_num) {
+	public static boolean CheckValidArmy(Player p_player, int p_num) {
 		if (p_num <= 0) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ARMIES_ZERO);
+			d_logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
 			return false;
 		}
 		if (p_num > p_player.getLeftoverArmies()) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ARMIES);
+			d_logger.log(Constants.DEPLOY_INVALID_ARMIES);
 			return false;
 		}
 		return true;

@@ -14,41 +14,30 @@ public class PlaySetupPhase extends GamePlayPhase {
 	public PlaySetupPhase(GameEngine d_gameEngine) {
 		super(d_gameEngine);
 	}
-	@Override
-	public void showMap() {
-		this.d_EditorController.showMap();
-	}
-	@Override
-	public boolean executePlayerOrders() {
-		this.printInvalidCommandMessage();
-		return false;
-	}
 
 	@Override
-	public boolean checkIfOrdersCanBeExecuted() {
-		this.printInvalidCommandMessage();
-		return false;
+	public void showMap() {
+		this.d_mapEditorController.showMap(false);
 	}
 
 	@Override
 	public void createPlayer(String p_playerName) {
-		this.d_Game.createPlayer(p_playerName);
+		this.d_gameEngineController.createPlayer(p_playerName);
 	}
 
 	@Override
 	public void removePlayer(String p_playerName) {
-		this.d_Game.removePlayer(p_playerName);
+		this.d_gameEngineController.removePlayer(p_playerName);
 	}
 
 	@Override
 	public void showAllPlayers() {
-		this.d_Game.showAllPlayers();
+		this.d_gameEngineController.showAllPlayers();
 	}
 
 	@Override
 	public boolean assignCountries() {
-
-		if (this.d_Game.assignCountries()) {
+		if (this.d_gameEngineController.assignCountries()) {
 			next();
 			return true;
 		}
@@ -56,10 +45,20 @@ public class PlaySetupPhase extends GamePlayPhase {
 	}
 
 	@Override
-	public boolean checkIfGameCanBegin() {
-		// Not sure what to do
-		return false;
+	public void endGame() {
+		this.printInvalidCommandMessage();
 	}
+
+	@Override
+	public void issuePlayerOrder() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public void executeAllPlayerOrders() {
+		this.printInvalidCommandMessage();
+	}
+
 	@Override
 	public void nextPhase() {
 		this.printInvalidCommandMessage();
@@ -67,7 +66,13 @@ public class PlaySetupPhase extends GamePlayPhase {
 
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new MainPlayPhase(d_gameEngine));
+		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
+	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
 	}
 
 	@Override

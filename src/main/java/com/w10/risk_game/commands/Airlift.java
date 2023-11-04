@@ -68,6 +68,22 @@ public class Airlift extends Order {
 	}
 
 	/**
+	 * The function "validateOrder" checks if a player can perform an airlift order
+	 * on a specific country.
+	 * 
+	 * @param p_player    The player object that represents the player who is trying
+	 *                    to validate the order.
+	 * @param p_countryId The p_countryId parameter is a String that represents the
+	 *                    ID of a country.
+	 * @return The method is returning a boolean value.
+	 */
+	public static boolean validateOrder(Player p_player, String p_countryId) {
+		Country l_countryToBomb = getCountryForAirlift(p_player, p_countryId);
+
+		return l_countryToBomb != null;
+	}
+
+	/**
 	 * The function "getCountryForAirlift" takes a player and a country ID as input
 	 * and returns the corresponding country object if it is a valid neighbor of the
 	 * player's countries.

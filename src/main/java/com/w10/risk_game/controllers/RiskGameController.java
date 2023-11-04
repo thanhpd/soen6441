@@ -64,9 +64,8 @@ public class RiskGameController {
 	 * players, checking for duplicate names.
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player being created.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
@@ -93,9 +92,8 @@ public class RiskGameController {
 	 * players
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player that needs to be removed.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player that needs to be removed.
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
@@ -243,8 +241,7 @@ public class RiskGameController {
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *                     The name of the player for which you want to retrieve the
-	 *                     details.
+	 *            The name of the player for which you want to retrieve the details.
 	 * @return The method is returning a Player object.
 	 *
 	 */

@@ -250,7 +250,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 				if (hasCard(CardType.BOMB)) {
 					String l_countryIdToBomb = l_inputArray[1];
-					if (Bomb.validateOrder(this, l_countryIdToBomb)) {
+					if (Bomb.ValidateOrder(this, l_countryIdToBomb)) {
 						Order order = new Bomb(this, l_countryIdToBomb);
 						d_orders.add(order);
 						removeCard(CardType.BOMB);
@@ -260,7 +260,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 				if (hasCard(CardType.BLOCKADE)) {
 					String l_countryIdToBlockade = l_inputArray[1];
-					if (Blockade.validateOrder(this, l_countryIdToBlockade)) {
+					if (Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
 						Order order = new Blockade(this, l_countryIdToBlockade);
 						d_orders.add(order);
 						removeCard(CardType.BLOCKADE);

@@ -48,6 +48,7 @@ public final class Constants {
 	public static final String CLI_GAME_PLAYER_REMOVE = "Removed Player: ";
 	public static final String CLI_GAME_PLAYER_CREATE = "Created Player: %s";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
+	public static final String CLI_ASSIGN_REINFORCEMENTS = "Reinforcements have been assigned to the players.";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 	public static final String CLI_ITERATION_OPTION = "%n===========%nRunning the %s option with the parameters %s.%n";
 

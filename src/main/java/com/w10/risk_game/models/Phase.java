@@ -61,6 +61,9 @@ public abstract class Phase {
 	// startup phase commands
 	public abstract boolean assignCountries();
 
+	// reinforcement phase commands
+	public abstract boolean assignPlayerReinforcements();
+
 	// issue order commands
 	public abstract void issuePlayerOrder();
 

@@ -106,6 +106,12 @@ public class IssueOrderPhase extends GamePlayPhase {
 	}
 
 	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
+	}
+
+	@Override
 	public void next() {
 		d_gameEngine.setPhase(new ExecuteOrderPhase(d_gameEngine));
 	}

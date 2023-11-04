@@ -5,9 +5,8 @@ import java.util.Set;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 
-public class ExecuteOrderPhase extends GamePlayPhase {
-
-	protected ExecuteOrderPhase(GameEngine p_gameEngine) {
+public class ReinforcementPhase extends GamePlayPhase {
+	protected ReinforcementPhase(GameEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 
@@ -18,7 +17,7 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 
 	@Override
 	public void showMap() {
-		this.printInvalidCommandMessage();
+		this.d_gameEngineController.showMap();
 	}
 
 	@Override
@@ -30,13 +29,11 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		this.printInvalidCommandMessage();
-
 	}
 
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
 		this.printInvalidCommandMessage();
-
 	}
 
 	@Override
@@ -104,23 +101,25 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 
 	@Override
 	public void executeAllPlayerOrders() {
-		this.d_gameEngineController.executePlayerOrders();
-		next();
+		this.printInvalidCommandMessage();
 	}
 
-	@Override
 	public boolean assignPlayerReinforcements() {
-		this.printInvalidCommandMessage();
+		if (this.d_gameEngineController.assignPlayersReinforcements()) {
+			next();
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
+		d_gameEngine.setPhase(new IssueOrderPhase(d_gameEngine));
 	}
 
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.NONE);
 	}
+
 }

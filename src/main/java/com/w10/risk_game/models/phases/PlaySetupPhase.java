@@ -58,6 +58,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	public void executeAllPlayerOrders() {
 		this.printInvalidCommandMessage();
 	}
+
 	@Override
 	public void nextPhase() {
 		this.printInvalidCommandMessage();
@@ -65,7 +66,13 @@ public class PlaySetupPhase extends GamePlayPhase {
 
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new IssueOrderPhase(d_gameEngine));
+		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
+	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
 	}
 
 	@Override

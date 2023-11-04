@@ -65,8 +65,10 @@ public class GameEngine {
 			if (this.d_phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
 				if (!d_gameEngineController.checkIfOrdersCanBeIssued()) {
 					if (d_gameEngineController.checkIfOrdersCanBeExecuted()) {
+						this.d_phase.next();
 						d_logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
-						d_gameEngineController.executePlayerOrders();
+						this.d_phase.executeAllPlayerOrders();
+						this.d_phase.assignPlayerReinforcements();
 					} else
 						continue;
 				}
@@ -189,29 +191,20 @@ public class GameEngine {
 
 					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 						d_logger.log(Constants.CLI_ASSIGN_COUNTRIES);
-						this.d_phase.assignCountries();
+						if (this.d_phase.assignCountries())
+							this.d_phase.assignPlayerReinforcements();
 						break;
 
 					// Issue Order Commands
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
-						this.d_phase.issuePlayerOrder();
-						break;
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
-						this.d_phase.issuePlayerOrder();
-						break;
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
-						this.d_phase.issuePlayerOrder();
-						break;
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
-						this.d_phase.issuePlayerOrder();
-						break;
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
-						this.d_phase.issuePlayerOrder();
-						break;
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 						this.d_phase.issuePlayerOrder();

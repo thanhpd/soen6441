@@ -151,8 +151,6 @@ public class GameEngineController {
 			}
 
 			// Assign reinforcements to the players based on countries
-			this.assignPlayersReinforcements();
-			this.d_isCountriesAssigned = true;
 			this.d_playerList = new ArrayList<>(this.d_players.values());
 			this.d_currentPlayer = this.d_playerList.get(0);
 
@@ -170,14 +168,24 @@ public class GameEngineController {
 	}
 
 	/**
-	 * The function assigns reinforcements to each player in the game.
+	 * The function assigns reinforcements to players in a game, based on the game
+	 * map.
 	 *
+	 * @return The method is returning a boolean value.
 	 */
-	private void assignPlayersReinforcements() {
-		this.d_gameMap = this.d_mapEditorController.getGameMap();
-		for (Player l_player : this.d_players.values()) {
-			l_player.setLeftoverArmies(0);
-			Reinforcements.AssignPlayerReinforcements(l_player, this.d_gameMap);
+	public boolean assignPlayersReinforcements() {
+		try {
+			this.d_gameMap = this.d_mapEditorController.getGameMap();
+			for (Player l_player : this.d_players.values()) {
+				l_player.setLeftoverArmies(0);
+				Reinforcements.AssignPlayerReinforcements(l_player, this.d_gameMap);
+			}
+			this.d_isCountriesAssigned = true;
+			d_logger.log(Constants.CLI_ASSIGN_REINFORCEMENTS);
+			return true;
+		} catch (Exception e) {
+			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+			return false;
 		}
 	}
 
@@ -277,7 +285,6 @@ public class GameEngineController {
 				}
 			}
 			// Reset the reinforcements of the players and start the Issue Order phase again
-			this.assignPlayersReinforcements();
 			this.d_currentPlayerIndex = 0;
 			this.d_playerList = new ArrayList<>(this.d_players.values());
 			this.d_currentPlayer = this.d_playerList.get(0);

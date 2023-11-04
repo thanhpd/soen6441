@@ -98,4 +98,10 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void next() {
 		this.printInvalidCommandMessage();
 	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
+	}
 }

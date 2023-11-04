@@ -51,6 +51,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	public void removeContinent(String p_continentName) {
 		super.printInvalidCommandMessage();
 	}
+
 	@Override
 	public void nextPhase() {
 		super.printInvalidCommandMessage();
@@ -95,5 +96,11 @@ public class PreLoadPhase extends MapEditorPhase {
 	@Override
 	public void executeAllPlayerOrders() {
 		this.printInvalidCommandMessage();
+	}
+
+	@Override
+	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
 	}
 }

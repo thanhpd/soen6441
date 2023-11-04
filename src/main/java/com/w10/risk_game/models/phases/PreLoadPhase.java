@@ -19,7 +19,7 @@ public class PreLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void loadMap(String p_filePath) {
-		this.d_Game.loadMap(p_filePath);
+		this.d_EditorController.loadMap(p_filePath);
 		next();
 	}
 

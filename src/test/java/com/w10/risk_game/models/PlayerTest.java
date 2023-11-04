@@ -63,13 +63,13 @@ public class PlayerTest {
 	@Test
 	public void checkValidFormTest() {
 		String l_input1 = "invalid input";
-		boolean l_isValidForm = d_player1.checkValidForm(l_input1.split(" "));
+		boolean l_isValidForm = d_player1.checkValidDeployInput(l_input1.split(" "));
 		assertEquals(false, l_isValidForm);
 		String l_input2 = "invalid input 1";
-		boolean l_isValidForm2 = d_player1.checkValidForm(l_input2.split(" "));
+		boolean l_isValidForm2 = d_player1.checkValidDeployInput(l_input2.split(" "));
 		assertEquals(false, l_isValidForm2);
 		String l_input3 = "invalid 1 input";
-		boolean l_isValidForm3 = d_player1.checkValidForm(l_input3.split(" "));
+		boolean l_isValidForm3 = d_player1.checkValidDeployInput(l_input3.split(" "));
 		assertEquals(false, l_isValidForm3);
 	}
 
@@ -83,7 +83,7 @@ public class PlayerTest {
 		String l_input = "notDeploy 1 6";
 		String[] l_inputArray = l_input.split(" ");
 		String l_orderType = l_inputArray[0];
-		boolean l_isValidOrder = d_player1.checkValidOrder(l_orderType);
+		boolean l_isValidOrder = d_player1.checkValidDeployOrder(l_orderType);
 		assertEquals(false, l_isValidOrder);
 	}
 
@@ -114,7 +114,7 @@ public class PlayerTest {
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");
 		String l_num = l_inputArray[2];
-		boolean l_isValidNum = d_player1.checkValidArmy(Integer.parseInt(l_num));
+		boolean l_isValidNum = d_player1.checkValidDeployArmy(Integer.parseInt(l_num));
 		assertEquals(false, l_isValidNum);
 	}
 }

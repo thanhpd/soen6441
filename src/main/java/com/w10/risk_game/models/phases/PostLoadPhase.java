@@ -67,14 +67,14 @@ public class PostLoadPhase extends MapEditorPhase {
 	}
 
 	@Override
-	public void next() {
+	public void nextPhase() {
 		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
 	}
 
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.EDIT_CONTINENT, Command.EDIT_COUNTRY, Command.EDIT_NEIGHBOR, Command.SHOW_MAP,
-				Command.VALIDATE_MAP);
+				Command.VALIDATE_MAP, Command.NEXT);
 	}
 
 	@Override
@@ -92,5 +92,10 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void executeAllPlayerOrders() {
 		this.printInvalidCommandMessage();
 
+	}
+
+	@Override
+	public void next() {
+		this.printInvalidCommandMessage();
 	}
 }

@@ -49,6 +49,8 @@ public abstract class Phase {
 
 	public abstract boolean checkIfMapIsValid();
 
+	public abstract void nextPhase();
+
 	// game play commands
 	public abstract void createPlayer(String p_playerName);
 

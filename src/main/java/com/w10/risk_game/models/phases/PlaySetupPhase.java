@@ -58,6 +58,10 @@ public class PlaySetupPhase extends GamePlayPhase {
 	public void executeAllPlayerOrders() {
 		this.printInvalidCommandMessage();
 	}
+	@Override
+	public void nextPhase() {
+		this.printInvalidCommandMessage();
+	}
 
 	@Override
 	public void next() {

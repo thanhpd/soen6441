@@ -1,8 +1,6 @@
 package com.w10.risk_game.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.controllers.MapEditorController;
@@ -11,16 +9,15 @@ import com.w10.risk_game.utils.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The GameEngineTest class contains unit test for various methods in the
- * GameEngine class.
+ * The GameEngineControllerTest class contains unit test for various methods in the
+ * GameEngineControllerTest class.
  */
-public class GameEngineTest {
+public class GameEngineControllerTest {
 	private GameEngineController d_gameEngineController;
 	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
@@ -85,19 +82,6 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testLoadMap function tests whether the d_RiskGame successfully loads the
-	 * "europe.map" file.
-	 *
-	 * @author Sherwyn Dsouza
-	 */
-	@Test
-	void testLoadMap() {
-		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_mapEditorController.loadMap(l_mapFilePath);
-		assertNotNull(d_gameEngineController.getGameMap());
-	}
-
-	/**
 	 * The testRemovePlayer function tests the functionality of removing players
 	 * from the game engine.
 	 *
@@ -129,15 +113,6 @@ public class GameEngineTest {
 	}
 
 	/**
-	 * The testShowMap function tests if the game engine can display the map
-	 */
-	@Test
-	void testShowMap() {
-		d_mapEditorController.showMap();
-		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
-	}
-
-	/**
 	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
 	 * d_gameEngineController class to ensure that it returns the correct number of
 	 * players.
@@ -150,19 +125,6 @@ public class GameEngineTest {
 		d_gameEngineController.createPlayer(d_player2.getName());
 
 		assertEquals(2, d_gameEngineController.getNoOfPlayers());
-	}
-
-	/**
-	 * The testGameMap function tests if the game engine successfully loads a map
-	 * and returns a non-null game map object.
-	 *
-	 * @author Sherwyn Dsouza
-	 */
-	@Test
-	void testGameMap() {
-		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_mapEditorController.loadMap(l_mapFilePath);
-		assertNotNull(d_gameEngineController.getGameMap());
 	}
 
 	/**

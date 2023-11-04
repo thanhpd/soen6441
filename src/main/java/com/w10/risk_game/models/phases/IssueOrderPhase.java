@@ -91,6 +91,11 @@ public class IssueOrderPhase extends GamePlayPhase {
 	}
 
 	@Override
+	public void nextPhase() {
+		this.printInvalidCommandMessage();
+	}
+
+	@Override
 	public void issuePlayerOrder() {
 		this.d_gameEngineController.issuePlayerOrder();
 	}

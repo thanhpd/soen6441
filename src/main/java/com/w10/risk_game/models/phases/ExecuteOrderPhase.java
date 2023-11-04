@@ -92,7 +92,11 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	@Override
 	public void endGame() {
 		this.printInvalidCommandMessage();
+	}
 
+	@Override
+	public void nextPhase() {
+		this.printInvalidCommandMessage();
 	}
 
 	@Override

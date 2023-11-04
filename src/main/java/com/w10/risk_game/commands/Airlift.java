@@ -25,15 +25,13 @@ public class Airlift extends Order {
 	 * Constructor for Airlift class.
 	 *
 	 * @param p_player
-	 *                             The player who is issuing the order.
+	 *            The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *                             The country id of the country to intiate the
-	 *                             airlift from.
+	 *            The country id of the country to intiate the airlift from.
 	 * @param d_countryIdToAir
-	 *                             The country id of the country to intiate the
-	 *                             airlift to.
+	 *            The country id of the country to intiate the airlift to.
 	 * @param d_ArmyToAirlift
-	 *                             The number to armies to airlift.
+	 *            The number to armies to airlift.
 	 */
 	public Airlift(Player p_player, String d_countryIdToAirFrom, String d_countryIdToAir, String d_ArmyToAirlift) {
 		this.d_player = p_player;
@@ -44,8 +42,8 @@ public class Airlift extends Order {
 
 	/**
 	 * The function executes an airlift card action by transferring a specified
-	 * number of armies from one
-	 * country to another, if there are enough armies in the source country.
+	 * number of armies from one country to another, if there are enough armies in
+	 * the source country.
 	 */
 	@Override
 	public void execute() {
@@ -70,11 +68,13 @@ public class Airlift extends Order {
 	/**
 	 * The function "validateOrder" checks if a player can perform an airlift order
 	 * on a specific country.
-	 * 
-	 * @param p_player    The player object that represents the player who is trying
-	 *                    to validate the order.
-	 * @param p_countryId The p_countryId parameter is a String that represents the
-	 *                    ID of a country.
+	 *
+	 * @param p_player
+	 *            The player object that represents the player who is trying to
+	 *            validate the order.
+	 * @param p_countryId
+	 *            The p_countryId parameter is a String that represents the ID of a
+	 *            country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean validateOrder(Player p_player, String p_countryId) {
@@ -87,12 +87,12 @@ public class Airlift extends Order {
 	 * The function "getCountryForAirlift" takes a player and a country ID as input
 	 * and returns the corresponding country object if it is a valid neighbor of the
 	 * player's countries.
-	 * 
-	 * @param p_player    The player for whom we are finding the country for
-	 *                    airlift.
-	 * @param p_countryId The parameter `p_countryId` is a String representing the
-	 *                    ID of the country for
-	 *                    which the airlift is being requested.
+	 *
+	 * @param p_player
+	 *            The player for whom we are finding the country for airlift.
+	 * @param p_countryId
+	 *            The parameter `p_countryId` is a String representing the ID of the
+	 *            country for which the airlift is being requested.
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryForAirlift(Player p_player, String p_countryId) {
@@ -132,15 +132,14 @@ public class Airlift extends Order {
 
 	/**
 	 * The function "getCountryNeighbors" returns a list of countries that are owned
-	 * by a given player and
-	 * are neighbors to any of the countries owned by the player.
-	 * 
-	 * @param p_player The parameter "p_player" represents the player for whom we
-	 *                 want to find the
-	 *                 neighboring countries.
+	 * by a given player and are neighbors to any of the countries owned by the
+	 * player.
+	 *
+	 * @param p_player
+	 *            The parameter "p_player" represents the player for whom we want to
+	 *            find the neighboring countries.
 	 * @return The method is returning a list of countries that are neighbors of the
-	 *         countries owned by the
-	 *         player.
+	 *         countries owned by the player.
 	 */
 	private static List<Country> getCountryNeighbors(Player p_player) {
 		List<Country> l_countries = p_player.getCountriesOwned();

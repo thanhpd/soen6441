@@ -93,8 +93,8 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
 						this.phase.editMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_OPTION_NEXT :
-						this.phase.next();
+					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE :
+						this.phase.nextPhase();;
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop

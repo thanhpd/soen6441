@@ -51,6 +51,10 @@ public class PreLoadPhase extends MapEditorPhase {
 	public void removeContinent(String p_continentName) {
 		super.printInvalidCommandMessage();
 	}
+	@Override
+	public void nextPhase(){
+		super.printInvalidCommandMessage();
+	}
 
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {

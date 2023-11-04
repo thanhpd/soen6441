@@ -71,48 +71,4 @@ public class PlayerTest {
 		boolean l_isValidForm3 = d_player1.checkValidDeployInput(l_input3.split(" "));
 		assertEquals(false, l_isValidForm3);
 	}
-	/**
-	 * This method is to test the method of checkValidOrder. It will provide one
-	 * invalid input and check whether the method can return false. The invalid
-	 * input is the first part of the input is not "deploy".
-	 */
-	@Test
-	public void checkValidOrderTest() {
-		String l_input = "notDeploy 1 6";
-		String[] l_inputArray = l_input.split(" ");
-		String l_orderType = l_inputArray[0];
-		boolean l_isValidOrder = d_player1.checkValidDeployOrder(l_orderType);
-		assertEquals(false, l_isValidOrder);
-	}
-
-	/**
-	 * This method is to test the method of checkValidCountry. It will provide one
-	 * invalid input and check whether the method can return false. The invalid
-	 * input is the second part of the input is not contained in the countries owned
-	 * by the player.
-	 */
-	@Test
-	public void checkValidCountryTest() {
-		String l_input = "deploy 0 6";
-		String[] l_inputArray = l_input.split(" ");
-		String l_countryId = l_inputArray[1];
-		boolean l_isValidCountry = d_player1.checkValidDeployCountry(d_countries, l_countryId);
-		assertEquals(false, l_isValidCountry);
-	}
-
-	/**
-	 * This method is to test the method of checkValidArmy. It will provide one
-	 * invalid input and check whether the method can return false. The invalid
-	 * input is the third part of the input is more than the number of leftover
-	 * armies.
-	 */
-	@Test
-	public void checkValidArmyTest() {
-		// d_player1 has 10 armies in total
-		String l_input = "deploy 1 20";
-		String[] l_inputArray = l_input.split(" ");
-		String l_num = l_inputArray[2];
-		boolean l_isValidNum = d_player1.checkValidDeployArmy(Integer.parseInt(l_num));
-		assertEquals(false, l_isValidNum);
-	}
 }

@@ -206,10 +206,9 @@ public class Player {
 	public void issueOrder() {
 		String l_input = GameEngine.Command;
 		String[] l_inputArray = l_input.split(" ");
-		String l_orderType = l_inputArray[0];
 		boolean l_again = true;
 		boolean l_failed = false;
-		while (l_again){
+		while (l_again) {
 			Scanner l_scanner = new Scanner(System.in);
 			if (l_failed) {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_START);
@@ -222,16 +221,14 @@ public class Player {
 				l_failed = true;
 				continue;
 			}
-			l_orderType = l_inputArray[0];
-			switch(l_orderType){
-				case "deploy":
+			String l_orderType = l_inputArray[0];
+			switch (l_orderType) {
+				case "deploy" :
 					String l_countryId = l_inputArray[1];
 					String l_num = l_inputArray[2];
-					boolean l_isValidCountry = checkValidDeployCountry(this.getCountriesOwned(), l_countryId);
-					boolean l_isValidArmy = checkValidDeployArmy(Integer.parseInt(l_num));
-					if (l_isValidCountry && l_isValidArmy) {
+					if (Deploy.validateOrder(this, l_countryId, l_num)) {
 						Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
-							Integer.parseInt(l_inputArray[2]));
+								Integer.parseInt(l_inputArray[2]));
 						d_orders.add(order);
 						deployArmies(Integer.parseInt(l_inputArray[2]));
 						l_failed = false;
@@ -239,10 +236,10 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				case "advance":
+				case "advance" :
 					// TODO: add advance object to d_orders
 					break;
-				case "bomb":
+				case "bomb" :
 					String l_countryIdToBomb = l_inputArray[1];
 					if (hasCard(CardType.BOMB) && Bomb.validateOrder(this, l_countryIdToBomb)) {
 						Order order = new Bomb(this, l_countryIdToBomb);
@@ -253,7 +250,7 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				case "blockade":
+				case "blockade" :
 					String l_countryIdToBlockade = l_inputArray[1];
 					if (hasCard(CardType.BLOCKADE) && Blockade.validateOrder(this, l_countryIdToBlockade)) {
 						Order order = new Blockade(this, l_countryIdToBlockade);
@@ -264,19 +261,19 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				case "airlift":
+				case "airlift" :
 					// TODO add airlift object to d_orders
 					break;
-				case "negotiate":
+				case "negotiate" :
 					// TODO add negotiate object to d_orders
 					break;
-				default:
+				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 					l_failed = true;
 			}
 			if (l_failed) {
 				l_again = true;
-			}else{
+			} else {
 				l_again = false;
 			}
 		}
@@ -293,10 +290,12 @@ public class Player {
 
 	/**
 	 * This function is used to check the input format for order.
-	 * @param p_inputArray the input string split by space
+	 * 
+	 * @param p_inputArray
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
-	public boolean checkValidOrderInput(String [] p_inputArray){
+	public boolean checkValidOrderInput(String[] p_inputArray) {
 		String l_orderType = p_inputArray[0];
 		switch (l_orderType) {
 			case "deploy" :
@@ -354,10 +353,12 @@ public class Player {
 
 	/**
 	 * This function is used to check the input format for advance command.
-	 * @param p_inputArray the input string split by space
+	 * 
+	 * @param p_inputArray
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
-	public boolean checkValidAdvanceInput(String [] p_inputArray){
+	public boolean checkValidAdvanceInput(String[] p_inputArray) {
 		if (p_inputArray.length != 4) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance", "four");
@@ -376,10 +377,12 @@ public class Player {
 	}
 	/**
 	 * This function is used to check the input format for airlift command.
-	 * @param p_inputArray the input string split by space
+	 * 
+	 * @param p_inputArray
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
-	public boolean checkValidBombInput(String [] p_inputArray){
+	public boolean checkValidBombInput(String[] p_inputArray) {
 		if (p_inputArray.length != 2) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "bomb", "two");
@@ -399,10 +402,12 @@ public class Player {
 
 	/**
 	 * This function is used to check the input format for blockade command.
-	 * @param p_inputArray the input string split by space
+	 * 
+	 * @param p_inputArray
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
-	public boolean checkValidBlockadeInput(String [] p_inputArray){
+	public boolean checkValidBlockadeInput(String[] p_inputArray) {
 		if (p_inputArray.length != 2) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade", "two");
@@ -421,10 +426,12 @@ public class Player {
 	}
 	/**
 	 * This function is used to check the input format for airlift command.
-	 * @param p_inputArray the input string split by space
+	 * 
+	 * @param p_inputArray
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
-	public boolean checkValidAirliftInput(String [] p_inputArray){
+	public boolean checkValidAirliftInput(String[] p_inputArray) {
 		if (p_inputArray.length != 4) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift", "four");
@@ -455,7 +462,7 @@ public class Player {
 		}
 		return true;
 	}
-	public boolean checkValidNegotiateInput(String [] p_inputArray){
+	public boolean checkValidNegotiateInput(String[] p_inputArray) {
 		if (p_inputArray.length != 2) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "negotiate", "two");
@@ -472,64 +479,6 @@ public class Player {
 		}
 		return true;
 	}
-
-	/**
-	 * This function is used to check the order type. The order type should be
-	 * "deploy"
-	 *
-	 * @param p_orderType
-	 *            the order type
-	 * @return boolean value to show whether the order type is valid
-	 */
-	public boolean checkValidDeployOrder(String p_orderType) {
-		String l_orderType = p_orderType;
-		if (!l_orderType.equals("deploy")) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ORDER_TYPE);
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * This function is used to check the country id for deploy command. The country
-	 * id should be one of the countries owned by the player
-	 *
-	 * @param p_countries
-	 *            the list of countries owned by the player
-	 * @param p_countryId
-	 *            the country id
-	 * @return boolean value to show whether the country id is valid
-	 */
-	public boolean checkValidDeployCountry(List<Country> p_countries, String p_countryId) {
-		for (Country country : p_countries) {
-			if (country.getCountryId() == Integer.parseInt(p_countryId)) {
-				return true;
-			}
-		}
-		d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY);
-		return false;
-	}
-
-	/**
-	 * This function is used to check the number of armies for deploy command. The
-	 * number of armies should be less than the number of leftover armies
-	 *
-	 * @param p_num
-	 *            the number of armies
-	 * @return boolean value to show whether the number of armies is valid
-	 */
-	public boolean checkValidDeployArmy(int p_num) {
-		if (p_num <= 0) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ARMIES_ZERO);
-			return false;
-		}
-		if (p_num > d_leftoverArmies) {
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_ARMIES);
-			return false;
-		}
-		return true;
-	}
-
 	private boolean hasCard(CardType p_cardType) {
 		if (d_playerCards.contains(p_cardType)) {
 			return true;

@@ -43,6 +43,8 @@ public abstract class Phase {
 
 	public abstract void saveMap(String p_mapFilePath);
 
+	public abstract void nextPhase();
+
 	// game play commands
 	public abstract void createPlayer(String p_playerName);
 

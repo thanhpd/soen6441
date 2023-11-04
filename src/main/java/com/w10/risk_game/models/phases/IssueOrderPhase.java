@@ -18,7 +18,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 
 	@Override
 	public void showMap() {
-		this.printInvalidCommandMessage();
+		this.d_gameEngineController.showMap();
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.DEPLOY, Command.ADVANCE, Command.BOMB, Command.AIRLIFT, Command.BLOCKADE,
-				Command.NEGOTIATE);
+				Command.NEGOTIATE, Command.SHOW_MAP);
 	}
 
 }

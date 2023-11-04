@@ -206,7 +206,7 @@ public class Player {
 		String[] l_inputArray = l_input.split(" ");
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
-			case "deploy" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 				boolean l_again = true;
 				boolean l_failed = false;
 				while (l_again) {
@@ -247,7 +247,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 				// TODO: add advance object to d_orders
 				break;
-			case "bomb" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 				if (hasCard(CardType.BOMB)) {
 					String l_countryIdToBomb = l_inputArray[1];
 					if (Bomb.validateOrder(this, l_countryIdToBomb)) {
@@ -257,7 +257,7 @@ public class Player {
 					}
 				}
 				break;
-			case "blockade" :
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 				if (hasCard(CardType.BLOCKADE)) {
 					String l_countryIdToBlockade = l_inputArray[1];
 					if (Blockade.validateOrder(this, l_countryIdToBlockade)) {

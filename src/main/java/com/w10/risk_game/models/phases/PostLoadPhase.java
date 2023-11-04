@@ -18,7 +18,7 @@ public class PostLoadPhase extends MapEditorPhase {
 
 	@Override
 	public void showMap() {
-		this.d_mapEditorController.showMap();
+		this.d_mapEditorController.showMap(false);
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
  */
 public class MapEditorControllerTest {
 	private GameEngineController d_gameEngineController;
-	private MapEditorController d_editorController;
+	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
 	// Player d_player1;
 	// Player d_player2;
@@ -35,9 +35,8 @@ public class MapEditorControllerTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-
-		d_editorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController();
+		d_mapEditorController = new MapEditorController();
+		d_gameEngineController = new GameEngineController(d_mapEditorController);
 		d_outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(d_outputStream));
 	}
@@ -51,8 +50,8 @@ public class MapEditorControllerTest {
 	@Test
 	void testLoadMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_editorController.loadMap(l_mapFilePath);
-		assertNotNull(d_editorController.getGameMap());
+		d_mapEditorController.loadMap(l_mapFilePath);
+		assertNotNull(d_mapEditorController.getGameMap());
 	}
 
 	/**
@@ -60,8 +59,8 @@ public class MapEditorControllerTest {
 	 */
 	@Test
 	void testShowMap() {
-		d_editorController.showMap();
-		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_editorController.checkIfMapIsValid());
+		d_mapEditorController.showMap(false);
+		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
 	}
 
 	/**
@@ -73,8 +72,8 @@ public class MapEditorControllerTest {
 	@Test
 	void testGameMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_editorController.loadMap(l_mapFilePath);
-		assertNotNull(d_gameEngineController.getGameMap());
+		d_mapEditorController.loadMap(l_mapFilePath);
+		assertNotNull(d_mapEditorController.getGameMap());
 	}
 
 }

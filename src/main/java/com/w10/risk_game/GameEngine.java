@@ -46,8 +46,8 @@ public class GameEngine {
 	 * `d_startGamePhase` variable to `false`.
 	 */
 	public GameEngine() {
-		this.d_gameEngineController = new GameEngineController();
 		this.d_mapEditorController = new MapEditorController();
+		this.d_gameEngineController = new GameEngineController(d_mapEditorController);
 	}
 
 	/**
@@ -58,22 +58,19 @@ public class GameEngine {
 	public void start() {
 		setPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
-		d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
 		Player l_player;
 
 		while (!l_exit) {
 
-			if (!d_gameEngineController.checkIfOrdersCanBeIssued()) {
-				if (d_gameEngineController.checkIfOrdersCanBeExecuted()) {
-					this.d_phase.next();
-					d_logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
-					this.d_phase.executeAllPlayerOrders();
-				} else
-					continue;
-			}
-
-			if (this.d_phase.getPhaseName().equals("ISSUEORDER PHASE")) {
-				l_player = d_gameEngineController.getCurrentPlayer();
+			if (this.d_phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
+				if (!d_gameEngineController.checkIfOrdersCanBeIssued()) {
+					if (d_gameEngineController.checkIfOrdersCanBeExecuted()) {
+						d_logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
+						d_gameEngineController.executePlayerOrders();
+					} else
+						continue;
+				}
+				l_player = this.d_gameEngineController.getCurrentPlayer();
 				d_logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
 
 				this.d_formatter = new Formatter();

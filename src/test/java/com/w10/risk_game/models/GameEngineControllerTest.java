@@ -33,8 +33,8 @@ public class GameEngineControllerTest {
 	 */
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
-		d_gameEngineController = new GameEngineController();
 		d_mapEditorController = new MapEditorController();
+		d_gameEngineController = new GameEngineController(d_mapEditorController);
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 
@@ -61,8 +61,8 @@ public class GameEngineControllerTest {
 
 		d_gameEngineController.assignCountries();
 
-		assertEquals(0, d_gameEngineController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(0, d_gameEngineController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(12, d_gameEngineController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(12, d_gameEngineController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 	}
 
 	/**

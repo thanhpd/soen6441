@@ -1,7 +1,5 @@
 package com.w10.risk_game.controllers;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Formatter;
@@ -10,15 +8,9 @@ import java.util.List;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.MapDisplay;
-import com.w10.risk_game.utils.MapEditor;
-import com.w10.risk_game.utils.MapReader;
-import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.Reinforcements;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -36,14 +28,15 @@ public class GameEngineController {
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
 	private Formatter d_formatter;
+	private MapEditorController d_mapEditorController;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * Game Engine constructor
 	 */
-	public GameEngineController() {
-		this.d_gameMap = new GameMap();
+	public GameEngineController(MapEditorController p_mapEditorController) {
+		this.d_mapEditorController = p_mapEditorController;
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
 		this.d_currentPlayerIndex = 0;
@@ -76,9 +69,7 @@ public class GameEngineController {
 	}
 
 	/**
-	 * The function removes a player from a list of players in a game engine. It
-	 * also randomly assigns the countries of the removed player to the remaining
-	 * players
+	 * The function removes a player from a list of players in a game engine.
 	 *
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
@@ -86,35 +77,16 @@ public class GameEngineController {
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
+		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		try {
 			if (!this.d_players.containsKey(p_playerName)) {
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
 				return;
 			}
-			p_playerName = p_playerName.trim();
-			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
-
-			// Assign countries of removed player to remaining players
-			if (l_playerNames.size() > 1) {
-				List<Country> l_ownedCountriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
-				Collections.shuffle(l_ownedCountriesOfPlayer);
-
-				l_playerNames.remove(p_playerName);
-				int i = 0;
-
-				while (i < l_ownedCountriesOfPlayer.size()) {
-					this.d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
-							.add(l_ownedCountriesOfPlayer.get(i));
-					l_ownedCountriesOfPlayer.get(i)
-							.setOwner(this.d_players.get(l_playerNames.get(i % l_playerNames.size())));
-					i += 1;
-				}
-
-				this.assignPlayersReinforcements();
-			}
 			this.d_players.remove(p_playerName.trim());
 			d_logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
+			e.printStackTrace();
 			d_logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
 	}
@@ -147,6 +119,8 @@ public class GameEngineController {
 	 */
 	public boolean assignCountries() {
 		try {
+			this.d_gameMap = this.d_mapEditorController.getGameMap();
+
 			// Check if number of players is greater than 1
 			if (this.d_players.size() <= 1)
 				throw new Exception(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
@@ -200,9 +174,10 @@ public class GameEngineController {
 	 *
 	 */
 	private void assignPlayersReinforcements() {
+		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		for (Player l_player : this.d_players.values()) {
 			l_player.setLeftoverArmies(0);
-			Reinforcements.ReinforcementPhase(l_player, this.d_gameMap);
+			Reinforcements.AssignPlayerReinforcements(l_player, this.d_gameMap);
 		}
 	}
 
@@ -214,16 +189,6 @@ public class GameEngineController {
 	 */
 	public Integer getNoOfPlayers() {
 		return this.d_players.size();
-	}
-
-	/**
-	 * The function returns the game map.
-	 *
-	 * @return The method is returning an object of type GameMap.
-	 *
-	 */
-	public GameMap getGameMap() {
-		return this.d_gameMap;
 	}
 
 	/**
@@ -246,6 +211,7 @@ public class GameEngineController {
 	 *
 	 */
 	public boolean checkIfGameCanBegin() {
+		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
 	}
 
@@ -269,7 +235,6 @@ public class GameEngineController {
 	 *
 	 */
 	public boolean checkIfOrdersCanBeIssued() {
-
 		if (this.d_currentPlayer.getLeftoverArmies() == 0) {
 			this.d_playerList.remove(d_currentPlayerIndex % this.d_playerList.size());
 			if (this.d_playerList.isEmpty()) {
@@ -330,5 +295,13 @@ public class GameEngineController {
 	 */
 	public Player getCurrentPlayer() {
 		return this.d_currentPlayer;
+	}
+
+	/**
+	 * The function "showMap" calls the "showMap" method of the
+	 * "d_mapEditorController" object.
+	 */
+	public void showMap() {
+		this.d_mapEditorController.showMap(true);
 	}
 }

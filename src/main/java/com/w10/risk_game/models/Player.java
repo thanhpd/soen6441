@@ -209,7 +209,7 @@ public class Player {
 	public void issueOrder() {
 		String l_input = GameEngine.Command;
 		String[] l_inputArray = l_input.split(" "); // The above code is declaring a variable named "l_inputArray" in
-													// Java.
+		// Java.
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
 			case "deploy" :
@@ -380,8 +380,6 @@ public class Player {
 	 * This function is used to check the country id for deploy command. The country
 	 * id should be one of the countries owned by the player
 	 *
-	 * @param p_countries
-	 *            the list of countries owned by the player
 	 * @param p_countryId
 	 *            the country id
 	 * @return boolean value to show whether the country id is valid

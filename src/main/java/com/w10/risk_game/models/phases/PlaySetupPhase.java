@@ -17,7 +17,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 
 	@Override
 	public void showMap() {
-		this.d_gameEngineController.showMap();
+		this.d_mapEditorController.showMap();
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
  */
 public class GameEngineTest {
 	private GameEngineController d_gameEngineController;
-	private MapEditorController d_EditorController;
+	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
 	Player d_player2;
@@ -37,7 +37,7 @@ public class GameEngineTest {
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
 		d_gameEngineController = new GameEngineController();
-		d_EditorController = new MapEditorController();
+		d_mapEditorController = new MapEditorController();
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 
@@ -54,7 +54,7 @@ public class GameEngineTest {
 	@Test
 	void testAssignCountries() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
 
 		d_gameEngineController.createPlayer(d_player1.getName());
 		d_gameEngineController.createPlayer(d_player2.getName());
@@ -93,7 +93,7 @@ public class GameEngineTest {
 	@Test
 	void testLoadMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
 		assertNotNull(d_gameEngineController.getGameMap());
 	}
 
@@ -133,8 +133,8 @@ public class GameEngineTest {
 	 */
 	@Test
 	void testShowMap() {
-		d_EditorController.showMap();
-		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_EditorController.checkIfMapIsValid());
+		d_mapEditorController.showMap();
+		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class GameEngineTest {
 	@Test
 	void testGameMap() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		d_EditorController.loadMap(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
 		assertNotNull(d_gameEngineController.getGameMap());
 	}
 

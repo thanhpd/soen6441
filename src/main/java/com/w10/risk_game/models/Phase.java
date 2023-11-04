@@ -15,14 +15,14 @@ import com.w10.risk_game.controllers.MapEditorController;
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
 	protected GameEngineController d_gameEngineController;
-	protected MapEditorController d_EditorController;
+	protected MapEditorController d_mapEditorController;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	protected Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
 		this.d_gameEngineController = p_gameEngine.getGame();
-		this.d_EditorController = p_gameEngine.getMapEditorController();
+		this.d_mapEditorController = p_gameEngine.getMapEditorController();
 	}
 
 	// map commands

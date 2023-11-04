@@ -40,7 +40,7 @@ public class ReinforcementPhase extends MainPlayPhase {
 
 	@Override
 	public void showMap() {
-		this.d_gameEngineController.showMap();
+		this.d_mapEditorController.showMap();
 	}
 
 	@Override

@@ -21,7 +21,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public class GameEngine {
 
 	private final GameEngineController d_gameEngineController;
-	private final MapEditorController d_EditorController;
+	private final MapEditorController d_mapEditorController;
 	private boolean d_startGamePhase;
 	private Formatter d_formatter;
 
@@ -43,7 +43,7 @@ public class GameEngine {
 	 */
 	public GameEngine() {
 		this.d_gameEngineController = new GameEngineController();
-		this.d_EditorController = new MapEditorController();
+		this.d_mapEditorController = new MapEditorController();
 		this.d_startGamePhase = false;
 	}
 
@@ -145,7 +145,7 @@ public class GameEngine {
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
-						this.d_EditorController.checkIfMapIsValid();
+						this.d_mapEditorController.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up phase
@@ -284,6 +284,6 @@ public class GameEngine {
 	}
 
 	public MapEditorController getMapEditorController() {
-		return this.d_EditorController;
+		return this.d_mapEditorController;
 	}
 }

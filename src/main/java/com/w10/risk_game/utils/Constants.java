@@ -101,6 +101,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
+	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift";
+	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
 
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";

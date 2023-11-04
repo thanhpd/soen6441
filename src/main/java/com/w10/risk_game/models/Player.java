@@ -2,14 +2,12 @@ package com.w10.risk_game.models;
 
 import java.util.ArrayList;
 
-import com.w10.risk_game.commands.Blockade;
-import com.w10.risk_game.commands.Bomb;
+import com.w10.risk_game.commands.*;
+
 import java.util.List;
 import java.util.Scanner;
 
 import com.w10.risk_game.GameEngine;
-import com.w10.risk_game.commands.Deploy;
-import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -21,6 +19,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * @author Darlene-Naz, Omnia Alam
  */
 public class Player {
+	private String d_playerId;
 	private String d_name;
 	private List<Country> d_countriesOwned;
 	private List<Order> d_orders;
@@ -110,6 +109,21 @@ public class Player {
 	 */
 	public List<CardType> getPlayerCards() {
 		return d_playerCards;
+	}
+
+	/**
+	 * The function returns the player's ID.
+	 * @return player's ID
+	 */
+	public String getPlayerId() {
+		return d_playerId;
+	}
+
+	/**
+	 * The function sets the player's ID.
+	 */
+	public void setPlayerId(String p_playerId) {
+		this.d_playerId = p_playerId;
 	}
 
 	/**
@@ -272,6 +286,14 @@ public class Player {
 				break;
 			case "negotiate" :
 				// TODO add negotiate object to d_orders
+				if (hasCard(CardType.DIPLOMACY)) {
+					String l_playerId = l_inputArray[1];
+					if (Negotiate.ValidateOrder(this, l_playerId)) {
+						Order order = new Negotiate(this, l_playerId);
+						d_orders.add(order);
+						removeCard(CardType.DIPLOMACY);
+					}
+				}
 				break;
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);

@@ -41,8 +41,9 @@ public class RiskGameController {
 	private MapDisplay d_displayMap;
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
-	private List<Player> d_playerList;
+	private static List<Player> d_playerList;
 	private Formatter d_formatter;
+	private int d_playerSequence = 1;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -59,6 +60,10 @@ public class RiskGameController {
 		// this.phase = new StartupPhase();
 	}
 
+	public static List<Player> getPlayerList() {
+		return d_playerList;
+	}
+
 	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
@@ -73,6 +78,8 @@ public class RiskGameController {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
+				l_player.setPlayerId(Integer.toString(this.d_playerSequence));
+				this.d_playerSequence += 1;
 				this.d_formatter = new Formatter();
 				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
 				d_logger.log(this.d_formatter.toString());

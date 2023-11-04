@@ -158,4 +158,11 @@ public final class Constants {
 	// Logger
 	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
 
+	// Negotiate constants
+	public static final String NEGOTIATE_CARD_USED = "\"%s is negotiating with %s\"";
+	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from %s to %s";
+	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between %s and %s";
+	public static final String NEGOTIATE_SELF = "Cannot negotiate with yourself";
+	public static final String NEGOTIATE_NO_PLAYER = "No player with id %s";
+
 }

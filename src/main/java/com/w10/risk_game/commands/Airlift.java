@@ -25,15 +25,13 @@ public class Airlift extends Order {
 	 * Constructor for Airlift class.
 	 *
 	 * @param p_player
-	 *                             The player who is issuing the order.
+	 *            The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *                             The country id of the country to intiate th
-	 *                             airlift from.
+	 *            The country id of the country to intiate th airlift from.
 	 * @param d_countryIdToAir
-	 *                             The country id of the country to intiate th
-	 *                             airlift to.
+	 *            The country id of the country to intiate th airlift to.
 	 * @param d_ArmyToAirlift
-	 *                             The number to armies to airlift.
+	 *            The number to armies to airlift.
 	 */
 	public Airlift(Player p_player, String d_countryIdToAirFrom, String d_countryIdToAir, String d_ArmyToAirlift) {
 		this.d_player = p_player;
@@ -69,20 +67,22 @@ public class Airlift extends Order {
 		}
 	}
 
-
-/**
- * The function "ValidateOrder" checks if a player can perform an airlift order by validating the
- * source and target countries, as well as the number of armies to airlift.
- * 
- *                     yer The player object representing the player who is init
-	 *                    ating the order.
- *                     rceCountryId The ID of the country from which the player wants to airlift armies.
- * @param p_targetCountryId The ID of the country where the player wants to airlift their armies to.
- *                     sToAirlift The "armiesToAirlift" parameter is a String t
-	 *                    at represents the number of
- *                     layer wants to airlift from the source country to the target country.
- * @return The method is returning a boolean value.
- */
+	/**
+	 * The function "ValidateOrder" checks if a player can perform an airlift order
+	 * by validating the source and target countries, as well as the number of
+	 * armies to airlift.
+	 *
+	 * yer The player object representing the player who is init ating the order.
+	 * rceCountryId The ID of the country from which the player wants to airlift
+	 * armies.
+	 * 
+	 * @param p_targetCountryId
+	 *            The ID of the country where the player wants to airlift their
+	 *            armies to. sToAirlift The "armiesToAirlift" parameter is a String
+	 *            t at represents the number of layer wants to airlift from the
+	 *            source country to the target country.
+	 * @return The method is returning a boolean value.
+	 */
 	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,
 			String armiesToAirlift) {
 		Country l_sourceCountry = getCountryForAirlift(p_player, p_sourceCountryId);
@@ -99,11 +99,10 @@ public class Airlift extends Order {
 	 * player's countries.
 	 *
 	 * @param p_player
-	 *                    The player for whom we are finding the country fo airlift.
+	 *            The player for whom we are finding the country fo airlift.
 	 * @param p_countryId
-	 *                    The parameter `p_countryId` is a String representing th ID
-	 *                    of the
-	 *                    country for which the airlift is being requested.
+	 *            The parameter `p_countryId` is a String representing th ID of the
+	 *            country for which the airlift is being requested.
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryForAirlift(Player p_player, String p_countryId) {

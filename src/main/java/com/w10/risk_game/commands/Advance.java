@@ -2,12 +2,10 @@ package com.w10.risk_game.commands;
 
 import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
-import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.util.Formatter;
-import java.util.List;
 
 /**
  * This class is the Advance order class. It extends the Order class. It defines
@@ -17,25 +15,43 @@ import java.util.List;
  * @author Darlene-Naz
  */
 public class Advance extends Order {
-	private Country d_countryNameFrom;
-	private Country d_countryNameTo;
+	private Country d_countryFrom;
+	private Country d_countryTo;
 	private int d_numOfArmies;
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * This is a constructor of the Advance class
 	 *
-	 * @param p_countryNameFrom
-	 *            The country name from where the armies are to move
-	 * @param p_countryNameTo
-	 *            The country name to where the armies are to move
+	 * @param p_countryFrom
+	 *            The country from where the armies are to move
+	 * @param p_countryTo
+	 *            The country to where the armies are to move
 	 * @param p_numOfArmies
 	 *            The number of armies that the order is issued to
 	 */
-	public Advance(Country p_countryNameFrom, Country p_countryNameTo, int p_numOfArmies) {
-		this.d_countryNameFrom = p_countryNameFrom;
-		this.d_countryNameTo = p_countryNameTo;
+	public Advance(Country p_countryFrom, Country p_countryTo, int p_numOfArmies) {
+		this.d_countryFrom = p_countryFrom;
+		this.d_countryTo = p_countryTo;
 		this.d_numOfArmies = p_numOfArmies;
+	}
+
+	/**
+	 * This function is used to get country name from
+	 *
+	 * @return country name from
+	 */
+	public Country getCountryNameFrom() {
+		return d_countryFrom;
+	}
+
+	/**
+	 * This function is used to get country name to
+	 *
+	 * @return country name to
+	 */
+	public Country getCountryNameTo() {
+		return d_countryTo;
 	}
 
 	/**
@@ -43,27 +59,28 @@ public class Advance extends Order {
 	 * of armies and advances them to the country
 	 */
 	public void execute() {
-		if (this.d_countryNameFrom.getOwner().getName().equals(this.d_countryNameTo.getOwner().getName())) {
-			this.d_countryNameFrom.setArmyCount(this.d_countryNameFrom.getArmyCount() - this.d_numOfArmies);
-			this.d_countryNameTo.setArmyCount(this.d_numOfArmies + this.d_countryNameTo.getArmyCount());
+		if (this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
+			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
+			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());
 		} else {
-			this.d_countryNameFrom.setArmyCount(this.d_countryNameFrom.getArmyCount() - this.d_numOfArmies);
+			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			// attack
 			int l_noOfAttackingArmies = this.d_numOfArmies;
-			int l_noOfDefendingArmies = this.d_countryNameTo.getArmyCount();
+			int l_noOfDefendingArmies = this.d_countryTo.getArmyCount();
 			int l_leftoverAttackingArmies = (int) Math
 					.max(Math.floor(l_noOfAttackingArmies - 0.7 * l_noOfDefendingArmies), 0);
 			int l_leftoverDefendingArmies = (int) Math
 					.max(Math.floor(l_noOfDefendingArmies - 0.6 * l_noOfAttackingArmies), 0);
 			if (l_leftoverDefendingArmies == 0) {
-				this.d_countryNameTo.setArmyCount(l_leftoverAttackingArmies);
-				this.d_countryNameTo.setOwner(this.d_countryNameFrom.getOwner());
-				this.d_countryNameFrom.getOwner().addCard(CardType.getRandomCard());
+				this.d_countryTo.setArmyCount(l_leftoverAttackingArmies);
+				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
+				this.d_countryFrom.getOwner().addCard(CardType.getRandomCard());
 			} else {
-				this.d_countryNameTo.setArmyCount(l_leftoverDefendingArmies);
+				this.d_countryTo.setArmyCount(l_leftoverDefendingArmies);
 			}
 		}
 	}
+
 	/**
 	 * This function is used to check the input format for advance command.
 	 *

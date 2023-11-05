@@ -207,6 +207,8 @@ public class GameEngine {
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
+
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 						this.d_phase.issuePlayerOrder();
 						break;
 

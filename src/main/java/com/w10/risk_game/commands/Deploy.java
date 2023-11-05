@@ -59,7 +59,7 @@ public class Deploy extends Order {
 				int l_countryArmies = l_country.getArmyCount();
 				l_country.setArmyCount(l_countryArmies + d_num);
 				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_countryId, d_num);
+				l_formatter.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId);
 				d_logger.log(l_formatter.toString());
 				l_formatter.close();
 			}

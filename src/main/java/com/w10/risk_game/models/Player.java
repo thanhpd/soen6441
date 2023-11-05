@@ -238,10 +238,12 @@ public class Player {
 		boolean l_again = true;
 		boolean l_failed = false;
 		while (l_again) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.SHOW_PLAYER_CARDS, d_name, Joiner.on(", ").join(d_playerCards));
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			if (!d_playerCards.isEmpty()) {
+				Formatter l_formatter = new Formatter();
+				l_formatter.format(Constants.SHOW_PLAYER_CARDS, d_name, Joiner.on(", ").join(d_playerCards));
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+			}
 			Scanner l_scanner = new Scanner(System.in);
 			// Step 1: Handle invalid input
 			if (l_failed) {

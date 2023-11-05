@@ -32,6 +32,7 @@ public class Deploy extends Order {
 		this.d_countryId = p_countryId;
 		this.d_num = p_num;
 	}
+
 	/**
 	 * This method extends the execute method in the Order class. It gets the number
 	 * of armies and deploys them to the country
@@ -46,4 +47,11 @@ public class Deploy extends Order {
 		}
 	}
 
+	public int getCountryId() {
+		return d_countryId;
+	}
+
+	public int getNum() {
+		return d_num;
+	}
 }

@@ -78,9 +78,13 @@ public class MapEditorController {
 	}
 
 	/**
-	 * The function "showMap" checks if the map is valid and then formats and
-	 * displays the map if it is.
+	 * The function displays the game map, showing armies if specified.
 	 *
+	 * @param p_showArmies
+	 *            A boolean value indicating whether or not to display the armies on
+	 *            the map. If p_showArmies is true, the armies will be displayed on
+	 *            the map. If p_showArmies is false, the armies will not be
+	 *            displayed on the map.
 	 */
 	public void showMap(boolean p_showArmies) {
 		if (checkIfMapIsValid()) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
+import com.google.common.base.Joiner;
 import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
@@ -80,6 +81,16 @@ public class GameEngine {
 						l_player.getLeftoverArmies());
 				d_logger.log(this.d_formatter.toString());
 				this.d_formatter.close();
+
+				if (!l_player.getPlayerCards().isEmpty()) {
+					Formatter l_formatter = new Formatter();
+					l_formatter.format(Constants.SHOW_PLAYER_CARDS, Joiner.on(", ").join(l_player.getPlayerCards()));
+					d_logger.log(l_formatter.toString());
+					l_formatter.close();
+				} else {
+					d_logger.log(Constants.SHOW_PLAYER_CARDS_EMPTY);
+				}
+
 				d_logger.log("");
 			}
 

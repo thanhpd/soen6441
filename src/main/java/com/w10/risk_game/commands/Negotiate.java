@@ -41,9 +41,11 @@ public class Negotiate extends Order {
 	@Override
 	public void execute() {
 		if (ValidateOrder(d_currentPlayer, d_playerName)) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(), d_playerToNegotiate.getName());
-			d_logger.log(l_formatter.toString());
+			Formatter l_formatter1 = new Formatter();
+			l_formatter1.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(),
+					d_playerToNegotiate.getName());
+			d_logger.log(l_formatter1.toString());
+			l_formatter1.close();
 			List<Order> l_currentPlayerOrders = d_currentPlayer.getOrders();
 			List<Order> l_playerToNegotiateOrders = d_playerToNegotiate.getOrders();
 			List<Order> l_currentPlayerNewOrders = new ArrayList<>();
@@ -55,9 +57,11 @@ public class Negotiate extends Order {
 						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName() == d_currentPlayer.getName()
 								&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_playerToNegotiate
 										.getName())) {
-					l_formatter.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
+					Formatter l_formatter2 = new Formatter();
+					l_formatter2.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
 							d_playerToNegotiate.getName());
-					d_logger.log(l_formatter.toString());
+					d_logger.log(l_formatter2.toString());
+					l_formatter2.close();
 					continue;
 				}
 				l_currentPlayerNewOrders.add(l_order);
@@ -69,9 +73,11 @@ public class Negotiate extends Order {
 				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner()
 						.getName() == d_playerToNegotiate.getName()
 						&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_currentPlayer.getName())) {
-					l_formatter.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_playerToNegotiate.getName(),
+					Formatter l_formatter3 = new Formatter();
+					l_formatter3.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_playerToNegotiate.getName(),
 							d_currentPlayer.getName());
-					d_logger.log(l_formatter.toString());
+					d_logger.log(l_formatter3.toString());
+					l_formatter3.close();
 					continue;
 				}
 				l_playerToNegotiateNewOrders.add(l_order);
@@ -79,11 +85,12 @@ public class Negotiate extends Order {
 			d_playerToNegotiate.setOrders(l_playerToNegotiateNewOrders);
 			if (l_currentPlayerOrders.size() == l_currentPlayerNewOrders.size()
 					&& l_playerToNegotiateOrders.size() == l_playerToNegotiateNewOrders.size()) {
-				l_formatter.format(Constants.NEGOTIATE_NO_EFFECT, d_currentPlayer.getName(),
+				Formatter l_formatter4 = new Formatter();
+				l_formatter4.format(Constants.NEGOTIATE_NO_EFFECT, d_currentPlayer.getName(),
 						d_playerToNegotiate.getName());
-				d_logger.log(l_formatter.toString());
+				d_logger.log(l_formatter4.toString());
+				l_formatter4.close();
 			}
-			l_formatter.close();
 		}
 	}
 

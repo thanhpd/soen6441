@@ -100,7 +100,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_SUCCEED = "This order is added to the list of orders successfully.";
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_INVALID = "You cannot commit before deploying all your armies.";
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_SUCCEED = "All orders are committed successfully.";
-	public static final String SHOW_PLAYER_CARDS = "Player %s has the following cards: %s";
+	public static final String SHOW_PLAYER_CARDS = "You have the following cards: %s";
+	public static final String SHOW_PLAYER_CARDS_EMPTY = "You don't have any cards.";
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
@@ -162,7 +163,7 @@ public final class Constants {
 	public static final String DEPLOY_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";
 	public static final String DEPLOY_INVALID_ARMIES = "Invalid input! The entered number should be less than or equal to the number of reinforcement soldiers. Please try again.";
 	// Negotiate constants
-	public static final String NEGOTIATE_CARD_USED = "\"%s is negotiating with %s\"";
+	public static final String NEGOTIATE_CARD_USED = "%s is negotiating with %s";
 	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from %s to %s";
 	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between %s and %s";
 	public static final String NEGOTIATE_SELF = "Cannot negotiate with yourself";

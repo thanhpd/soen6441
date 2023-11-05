@@ -3,7 +3,10 @@ package com.w10.risk_game.commands;
 import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
+import java.util.Formatter;
 import java.util.List;
 
 /**
@@ -17,6 +20,7 @@ public class Advance extends Order {
 	private Country d_countryNameFrom;
 	private Country d_countryNameTo;
 	private int d_numOfArmies;
+	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * This is a constructor of the Advance class
@@ -60,5 +64,30 @@ public class Advance extends Order {
 			}
 		}
 	}
-
+	/**
+	 * This function is used to check the input format for advance command.
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public static boolean CheckValidAdvanceInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
+		if (p_inputArray.length != 4) {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance", "four");
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+		// Step 2: Check whether the armies is positive integer
+		String l_num = p_inputArray[3];
+		for (int i = 0; i < l_num.length(); i++) {
+			if (!Character.isDigit(l_num.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				return false;
+			}
+		}
+		return true;
+	}
 }

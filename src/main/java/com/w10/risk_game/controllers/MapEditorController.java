@@ -104,9 +104,6 @@ public class MapEditorController {
 	 *
 	 */
 	public boolean editMap(String p_mapFilePath) {
-		// phase.doAcitin();
-		// or phase.editMap
-		// changePhase(new MapEditorPhase());
 
 		File l_file = new File(p_mapFilePath);
 

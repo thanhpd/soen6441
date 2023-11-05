@@ -165,12 +165,8 @@ public class Country implements Serializable {
 	 *         false otherwise.
 	 */
 	public boolean hasNeighbor(String p_neighborCountryName) {
-		for (var neighborCountry : d_neighbors.values()) {
-			if (neighborCountry.getCountryName().equals(p_neighborCountryName)) {
-				return true;
-			}
-		}
-		return false;
+		return d_neighbors.values().stream()
+				.anyMatch(l_country -> l_country.getCountryName().equals(p_neighborCountryName));
 	}
 
 	/**

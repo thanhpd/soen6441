@@ -38,7 +38,7 @@ public class Blockade extends Order {
 	 */
 	@Override
 	public void execute() {
-		Country l_countryToBlock = getCountryToBlock(d_player, d_countryIdToBlock);
+		Country l_countryToBlock = GetCountryToBlock(d_player, d_countryIdToBlock);
 
 		if (l_countryToBlock != null) {
 			int l_initArmyCount = l_countryToBlock.getArmyCount();
@@ -58,8 +58,7 @@ public class Blockade extends Order {
 	}
 
 	/**
-	 * The function "validateOrder" checks if a player can block a specific country
-	 * in a game.
+	 * The function checks if a player can block a specific country in a game.
 	 *
 	 * @param p_player
 	 *            The player object that represents the player making the order.
@@ -68,16 +67,15 @@ public class Blockade extends Order {
 	 *            country.
 	 * @return The method is returning a boolean value.
 	 */
-	public static boolean validateOrder(Player p_player, String p_countryId) {
-		Country l_countryToBlock = getCountryToBlock(p_player, p_countryId);
+	public static boolean ValidateOrder(Player p_player, String p_countryId) {
+		Country l_countryToBlock = GetCountryToBlock(p_player, p_countryId);
 
 		return l_countryToBlock != null;
 	}
 
 	/**
-	 * The function "getCountryToBlock" checks if a provided country ID is valid and
-	 * belongs to a player, and returns the corresponding Country object if it
-	 * exists.
+	 * The function checks if a provided country ID is valid and belongs to a
+	 * player, and returns the corresponding Country object if it exists.
 	 *
 	 * @param p_player
 	 *            The player object that represents the player who wants to block a
@@ -86,7 +84,7 @@ public class Blockade extends Order {
 	 *            The country ID that needs to be checked and blocked.
 	 * @return The method is returning a Country object.
 	 */
-	public static Country getCountryToBlock(Player p_player, String p_countryId) {
+	public static Country GetCountryToBlock(Player p_player, String p_countryId) {
 		Formatter l_formatter = new Formatter();
 		l_formatter.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId);
 

@@ -30,7 +30,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void showMap() {
 		this.d_mapEditorController.showMap(false);
 	}
-	
+
 	/**
 	 * The addCountry function adds a country to the map editor controller with the
 	 * specified country ID, country name, and continent name.
@@ -155,8 +155,8 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void nextPhase() {
-		if(this.d_mapEditorController.checkIfMapIsValid()){
-		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
+		if (this.d_mapEditorController.checkIfMapIsValid()) {
+			d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
 		}
 	}
 
@@ -181,21 +181,21 @@ public class PostLoadPhase extends MapEditorPhase {
 		return this.d_mapEditorController.checkIfMapIsValid();
 	}
 	/**
-     * The function is an overridden method that calls itself recursively, potentially causing an infinite
-     * loop.
-     * 
-     * @param p_mapFilePath The file path of the map that you want to edit.
-     * @return The method is returning a boolean value.
-     */
-    @Override
-    public boolean editMap(String p_mapFilePath ){
-         if(this.d_mapEditorController.editMap(p_mapFilePath)){
+	 * The function is an overridden method that calls itself recursively,
+	 * potentially causing an infinite loop.
+	 *
+	 * @param p_mapFilePath
+	 *            The file path of the map that you want to edit.
+	 * @return The method is returning a boolean value.
+	 */
+	@Override
+	public boolean editMap(String p_mapFilePath) {
+		if (this.d_mapEditorController.editMap(p_mapFilePath)) {
 			return true;
-		 }
-		 return false;
+		}
+		return false;
 
-    }
-
+	}
 
 	/**
 	 * The function "issuePlayerOrder" prints an invalid command message.

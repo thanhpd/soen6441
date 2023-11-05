@@ -66,5 +66,4 @@ public abstract class MapEditorPhase extends Phase {
 		return false;
 	}
 
-
 }

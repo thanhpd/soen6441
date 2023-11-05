@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class Negotiate extends Order {
 	private Player d_currentPlayer;
-	private String d_playerId;
+	private String d_playerName;
 	private static Player d_playerToNegotiate;
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 	/**
@@ -26,12 +26,12 @@ public class Negotiate extends Order {
 	 *
 	 * @param p_player
 	 *            The player who issues the order
-	 * @param p_playerId
-	 *            The player id of the player to negotiate with
+	 * @param p_playerName
+	 *            The player name of the player to negotiate with
 	 */
-	public Negotiate(Player p_player, String p_playerId) {
+	public Negotiate(Player p_player, String p_playerName) {
 		this.d_currentPlayer = p_player;
-		this.d_playerId = p_playerId;
+		this.d_playerName = p_playerName;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Negotiate extends Order {
 	 */
 	@Override
 	public void execute() {
-		if (ValidateOrder(d_currentPlayer, d_playerId)) {
+		if (ValidateOrder(d_currentPlayer, d_playerName)) {
 			Formatter l_formatter = new Formatter();
 			l_formatter.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(), d_playerToNegotiate.getName());
 			d_logger.log(l_formatter.toString());
@@ -98,13 +98,13 @@ public class Negotiate extends Order {
 	 * @return the boolean value to indicate if the order is valid
 	 */
 	public static boolean ValidateOrder(Player p_currentPlayer, String p_playerId) {
-		if (p_currentPlayer.getPlayerId().equals(p_playerId)) {
+		if (p_currentPlayer.getName().equals(p_playerId)) {
 			d_logger.log(Constants.NEGOTIATE_SELF);
 			return false;
 		}
 		List<Player> l_players = GameEngineController.getPlayerListForDiplomacy();
 		for (Player l_player : l_players) {
-			if (l_player.getPlayerId().equals(p_playerId)) {
+			if (l_player.getName().equals(p_playerId)) {
 				d_playerToNegotiate = l_player;
 				return true;
 			}
@@ -114,5 +114,22 @@ public class Negotiate extends Order {
 		d_logger.log(l_formatter.toString());
 		l_formatter.close();
 		return false;
+	}
+	/**
+	 * This function is used to check the input format for negotiate command.
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public static boolean CheckValidNegotiateInput(String[] p_inputArray) {
+		if (p_inputArray.length != 2) {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "negotiate", "two");
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+		return true;
 	}
 }

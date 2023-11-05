@@ -78,7 +78,6 @@ public class GameEngineController {
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
 				this.d_playerListForDiplomacy.add(l_player);
-				l_player.setPlayerId((Integer.toString(d_playerListForDiplomacy.indexOf(l_player) + 1)));
 				this.d_formatter = new Formatter();
 				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
 				d_logger.log(this.d_formatter.toString());

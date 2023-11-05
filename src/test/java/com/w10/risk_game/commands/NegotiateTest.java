@@ -36,9 +36,8 @@ public class NegotiateTest {
 		l_countries1.add(l_country1);
 		List<Order> orderList1 = new ArrayList<>();
 		d_player1 = new Player("Player1", l_countries1, orderList1, 10);
-		d_player1.setPlayerId("1");
 		l_country1.setOwner(d_player1);
-		d_negotiateOrder = new Negotiate(d_player1, "2");
+		d_negotiateOrder = new Negotiate(d_player1, "Player2");
 		Order l_advance1 = new Advance(l_country1, l_country2, 3);
 		orderList1.add(d_negotiateOrder);
 		orderList1.add(l_advance1);
@@ -49,7 +48,6 @@ public class NegotiateTest {
 		l_countries2.add(l_country2);
 		List<Order> orderList2 = new ArrayList<>();
 		d_player2 = new Player("Player2", l_countries2, new ArrayList<>(), 10);
-		d_player2.setPlayerId("2");
 		l_country2.setOwner(d_player2);
 		Order l_order2 = new Advance(l_country2, l_country1, 3);
 		orderList2.add(l_order2);
@@ -79,9 +77,9 @@ public class NegotiateTest {
 	 */
 	@Test
 	public void validateOrderTest() {
-		boolean l_isNotNegotiateSelf = Negotiate.ValidateOrder(d_player1, "1");
+		boolean l_isNotNegotiateSelf = Negotiate.ValidateOrder(d_player1, "Player1");
 		assertEquals(false, l_isNotNegotiateSelf);
-		boolean l_isNotNegotiatePlayerNotExist = Negotiate.ValidateOrder(d_player1, "3");
+		boolean l_isNotNegotiatePlayerNotExist = Negotiate.ValidateOrder(d_player1, "Player3");
 		assertEquals(false, l_isNotNegotiatePlayerNotExist);
 	}
 }

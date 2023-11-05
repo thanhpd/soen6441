@@ -30,7 +30,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void showMap() {
 		this.d_mapEditorController.showMap(false);
 	}
-
+	
 	/**
 	 * The addCountry function adds a country to the map editor controller with the
 	 * specified country ID, country name, and continent name.

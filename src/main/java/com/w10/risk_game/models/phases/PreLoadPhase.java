@@ -218,4 +218,10 @@ public class PreLoadPhase extends MapEditorPhase {
 		this.printInvalidCommandMessage();
 		return false;
 	}
+
+	@Override
+	public boolean editMap(String p_mapFilePath) {
+		this.printInvalidCommandMessage();
+		return false;
+	}
 }

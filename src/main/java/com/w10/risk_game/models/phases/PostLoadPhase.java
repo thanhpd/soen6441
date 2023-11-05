@@ -178,6 +178,22 @@ public class PostLoadPhase extends MapEditorPhase {
 	public boolean checkIfMapIsValid() {
 		return this.d_mapEditorController.checkIfMapIsValid();
 	}
+	/**
+     * The function is an overridden method that calls itself recursively, potentially causing an infinite
+     * loop.
+     * 
+     * @param p_mapFilePath The file path of the map that you want to edit.
+     * @return The method is returning a boolean value.
+     */
+    @Override
+    public boolean editMap(String p_mapFilePath ){
+         if(this.d_mapEditorController.editMap(p_mapFilePath)){
+			return true;
+		 }
+		 return false;
+
+    }
+
 
 	/**
 	 * The function "issuePlayerOrder" prints an invalid command message.

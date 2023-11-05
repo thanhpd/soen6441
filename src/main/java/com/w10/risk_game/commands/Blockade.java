@@ -116,4 +116,30 @@ public class Blockade extends Order {
 
 		return l_countryToBlock;
 	}
+	/**
+	 * This function is used to check the input format for blockade command.
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public static boolean CheckValidBlockadeInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
+		if (p_inputArray.length != 2) {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade", "two");
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+		// Step 2: Check whether the country id is positive integer
+		String l_countryId = p_inputArray[1];
+		for (int i = 0; i < l_countryId.length(); i++) {
+			if (!Character.isDigit(l_countryId.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				return false;
+			}
+		}
+		return true;
+	}
 }

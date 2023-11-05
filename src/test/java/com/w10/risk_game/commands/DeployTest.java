@@ -36,4 +36,52 @@ public class DeployTest {
 		d_order1.execute();
 		assertEquals(6, d_player1.getCountriesOwned().get(0).getArmyCount());
 	}
+	/**
+	 * This method is to test the method of checkValidDeployInput. It will provide
+	 * three invalid inputs and check whether the method can return false. The three
+	 * invalid inputs are: 1. There are not three parts in the input. 2. The second
+	 * part is not an integer. 3. The third part is not an integer.
+	 */
+	@Test
+	public void checkValidDeployInputTest() {
+		String l_input1 = "invalid input";
+		boolean l_isValidForm = Deploy.CheckValidDeployInput(l_input1.split(" "));
+		assertEquals(false, l_isValidForm);
+		String l_input2 = "invalid input 1";
+		boolean l_isValidForm2 = Deploy.CheckValidDeployInput(l_input2.split(" "));
+		assertEquals(false, l_isValidForm2);
+		String l_input3 = "invalid 1 input";
+		boolean l_isValidForm3 = Deploy.CheckValidDeployInput(l_input3.split(" "));
+		assertEquals(false, l_isValidForm3);
+	}
+	/**
+	 * This method is to test the method of checkValidCountry. It will provide one
+	 * invalid input and check whether the method can return false. The invalid
+	 * input is the second part of the input is not contained in the countries owned
+	 * by the player.
+	 */
+	@Test
+	public void checkValidCountryTest() {
+		String l_input = "deploy 0 6";
+		String[] l_inputArray = l_input.split(" ");
+		String l_countryId = l_inputArray[1];
+		List<Country> l_countries = d_player1.getCountriesOwned();
+		boolean l_isValidCountry = Deploy.CheckValidCountry(l_countries, l_countryId);
+		assertEquals(false, l_isValidCountry);
+	}
+	/**
+	 * This method is to test the method of checkValidArmy. It will provide one
+	 * invalid input and check whether the method can return false. The invalid
+	 * input is the third part of the input is more than the number of leftover
+	 * armies.
+	 */
+	@Test
+	public void checkValidArmyTest() {
+		// d_player1 has 10 armies in total
+		String l_input = "deploy 1 20";
+		String[] l_inputArray = l_input.split(" ");
+		String l_num = l_inputArray[2];
+		boolean l_isValidNum = Deploy.CheckValidArmy(d_player1, Integer.parseInt(l_num));
+		assertEquals(false, l_isValidNum);
+	}
 }

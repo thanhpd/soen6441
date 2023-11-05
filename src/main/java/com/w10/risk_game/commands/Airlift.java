@@ -75,7 +75,7 @@ public class Airlift extends Order {
 	 * yer The player object representing the player who is init ating the order.
 	 * rceCountryId The ID of the country from which the player wants to airlift
 	 * armies.
-	 * 
+	 *
 	 * @param p_targetCountryId
 	 *            The ID of the country where the player wants to airlift their
 	 *            armies to. sToAirlift The "armiesToAirlift" parameter is a String

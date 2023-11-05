@@ -92,6 +92,8 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
+	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift";
+	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
 	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The %s command should contain %s parts. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_PLAYER_ID_NOT_INTEGER = "Invalid input! The player id should be a positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This %s order is invalid. It will not be added to the list of orders.";

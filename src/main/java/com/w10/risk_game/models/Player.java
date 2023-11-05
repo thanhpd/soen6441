@@ -121,6 +121,7 @@ public class Player {
 	public void setPlayerCards(List<CardType> playerCards) {
 		this.d_playerCards = playerCards;
 	}
+
 	/**
 	 * The function adds a card to the player's list of cards.
 	 *
@@ -130,6 +131,7 @@ public class Player {
 	public void addCard(CardType card) {
 		this.d_playerCards.add(card);
 	}
+
 	/**
 	 * The function checks if a given country ID exists in a list of owned
 	 * countries.
@@ -244,7 +246,7 @@ public class Player {
 					l_failed = !issueBlockadeOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
-					// TODO add airlift object to d_orders
+					l_failed = !issueAirliftOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					// TODO add negotiate object to d_orders
@@ -270,6 +272,7 @@ public class Player {
 	public Order nextOrder() {
 		return d_orders.remove(0);
 	}
+
 	/**
 	 * This function is used to check the input format for order.
 	 *
@@ -297,6 +300,7 @@ public class Player {
 				return false;
 		}
 	}
+
 	/**
 	 * This function is used to check the input format for airlift command.
 	 *
@@ -338,6 +342,7 @@ public class Player {
 		}
 		return true;
 	}
+
 	/**
 	 * This function is used to check the input format for negotiate command.
 	 *
@@ -447,6 +452,7 @@ public class Player {
 			return false;
 		}
 	}
+
 	/**
 	 * The function try to add bomb order to the player's order list
 	 *
@@ -495,6 +501,40 @@ public class Player {
 			return false;
 		}
 	}
+
+	/**
+	 * The function issueAirliftOrder checks if the player has an airlift card and
+	 * validates the orderb efore creating a new airlift order and adding it to the
+	 * list of orders.
+	 *
+	 * @param p_inputArray
+	 *            An array of strings that represents the input command. The first
+	 *            element is the command itself, and the following elements are the
+	 *            parameters for the command.
+	 * @return The method is returning a boolean value.
+	 */
+	public boolean issueAirliftOrder(String[] p_inputArray) {
+		// airlift countryIdToAirliftFrom countryIdToAirlift NumberOfArmiesToAirlift
+		String l_countryIdToAirliftFrom = p_inputArray[1];
+		String l_countryIdToAirlift = p_inputArray[2];
+		String l_airliftArmies = p_inputArray[3];
+		if (hasCard(CardType.AIRLIFT)
+				&& Airlift.ValidateOrder(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
+			Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
+			d_orders.add(order);
+			removeCard(CardType.AIRLIFT);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+	}
+
 	/**
 	 * The function checks whether a player has a card of a given type.
 	 *
@@ -510,6 +550,7 @@ public class Player {
 		d_logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
 		return false;
 	}
+
 	/**
 	 * The function removes a card of a given type from a player's list of cards.
 	 *

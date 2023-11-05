@@ -25,11 +25,11 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public class MapEditorController {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
-	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
+	private MapEditor d_mapEditor;
+	// The above code is declaring a variable named "d_mapEditor" of an unknown data
 	// type. The code is also using the pound sign (#) to create a comment, which
-	// means
-	// that the line "
-	d_mapEditor;
+	// means that the line "
+
 	private boolean d_isCountriesAssigned;
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
@@ -78,9 +78,13 @@ public class MapEditorController {
 	}
 
 	/**
-	 * The function "showMap" checks if the map is valid and then formats and
-	 * displays the map if it is.
+	 * The function displays the game map, showing armies if specified.
 	 *
+	 * @param p_showArmies
+	 *            A boolean value indicating whether or not to display the armies on
+	 *            the map. If p_showArmies is true, the armies will be displayed on
+	 *            the map. If p_showArmies is false, the armies will not be
+	 *            displayed on the map.
 	 */
 	public void showMap(boolean p_showArmies) {
 		if (checkIfMapIsValid()) {
@@ -126,11 +130,13 @@ public class MapEditorController {
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
 				this.d_formatter = new Formatter();
-
 				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]);
 				d_logger.log(this.d_formatter.toString());
-				return new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
+				boolean l_isFileCreated = new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
+				if (l_isFileCreated)
+					this.loadMap(p_mapFilePath);
+				return l_isFileCreated;
 			} catch (IOException e) {
 				this.d_formatter = new Formatter();
 				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage());

@@ -36,7 +36,7 @@ public class Bomb extends Order {
 	 * army count by half.
 	 */
 	public void execute() {
-		Country l_countryToBomb = getCountryToBomb(d_player, d_countryIdToBomb);
+		Country l_countryToBomb = GetCountryToBomb(d_player, d_countryIdToBomb);
 
 		if (l_countryToBomb != null) {
 			int l_initArmyCount = l_countryToBomb.getArmyCount();
@@ -56,16 +56,15 @@ public class Bomb extends Order {
 	 *            bomb.
 	 * @return The method is returning a boolean value.
 	 */
-	public static boolean validateOrder(Player p_player, String p_countryId) {
-		Country l_countryToBomb = getCountryToBomb(p_player, p_countryId);
+	public static boolean ValidateOrder(Player p_player, String p_countryId) {
+		Country l_countryToBomb = GetCountryToBomb(p_player, p_countryId);
 
 		return l_countryToBomb != null;
 	}
 
 	/**
-	 * The function "getCountryToBomb" takes a player and a country ID as input and
-	 * returns the country object that the player can bomb, based on the given
-	 * country ID.
+	 * The function takes a player and a country ID as input and returns the country
+	 * object that the player can bomb, based on the given country ID.
 	 *
 	 * @param p_player
 	 *            The player object for which we want to find a country to bomb.
@@ -74,7 +73,7 @@ public class Bomb extends Order {
 	 *            country to be bombed.
 	 * @return The method is returning a Country object.
 	 */
-	public static Country getCountryToBomb(Player p_player, String p_countryId) {
+	public static Country GetCountryToBomb(Player p_player, String p_countryId) {
 		Formatter l_formatter = new Formatter();
 		l_formatter.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId);
 
@@ -90,7 +89,7 @@ public class Bomb extends Order {
 
 		try {
 			int l_countryId = Integer.parseInt(p_countryId);
-			List<Country> l_neighbors = getForeignNeighbors(p_player);
+			List<Country> l_neighbors = GetForeignNeighbors(p_player);
 
 			l_countryToBomb = l_neighbors.stream().filter(neighbor -> neighbor.getCountryId() == l_countryId)
 					.findFirst().orElse(null);
@@ -108,9 +107,8 @@ public class Bomb extends Order {
 	}
 
 	/**
-	 * The function "getForeignNeighbors" returns a list of countries that are owned
-	 * by other players and are neighbors of the countries owned by the given
-	 * player.
+	 * The function returns a list of countries that are owned by other players and
+	 * are neighbors of the countries owned by the given player.
 	 *
 	 * @param p_player
 	 *            The parameter "p_player" is of type Player and represents the
@@ -118,7 +116,7 @@ public class Bomb extends Order {
 	 * @return The method is returning a list of countries that are owned by other
 	 *         players and are neighbors of the countries owned by the given player.
 	 */
-	private static List<Country> getForeignNeighbors(Player p_player) {
+	private static List<Country> GetForeignNeighbors(Player p_player) {
 		List<Country> l_countries = p_player.getCountriesOwned();
 		List<Country> l_neighbors = new ArrayList<>();
 
@@ -131,5 +129,31 @@ public class Bomb extends Order {
 		}
 
 		return l_neighbors;
+	}
+	/**
+	 * This function is used to check the input format for airlift command.
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public static boolean CheckValidBombInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
+		if (p_inputArray.length != 2) {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "bomb", "two");
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+		// Step 2: Check whether the country id is positive integer
+		String l_countryId = p_inputArray[1];
+		for (int i = 0; i < l_countryId.length(); i++) {
+			if (!Character.isDigit(l_countryId.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				return false;
+			}
+		}
+		return true;
 	}
 }

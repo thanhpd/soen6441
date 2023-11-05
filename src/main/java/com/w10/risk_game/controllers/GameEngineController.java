@@ -26,15 +26,18 @@ public class GameEngineController {
 	private boolean d_isCountriesAssigned;
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
-	private static List<Player> d_playerList;
+	private List<Player> d_playerList;
+	private static List<Player> d_playerListForDiplomacy = new ArrayList<>();
 	private Formatter d_formatter;
-	private int d_playerSequence = 1;
 	private MapEditorController d_mapEditorController;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
-	 * Game Engine constructor
+	 * The constructor of the GameEngineController class.
+	 *
+	 * @param p_mapEditorController
+	 *            The map editor controller object.
 	 */
 	public GameEngineController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;
@@ -42,9 +45,23 @@ public class GameEngineController {
 		this.d_isCountriesAssigned = false;
 		this.d_currentPlayerIndex = 0;
 	}
+	/**
+	 * The function returns the list of players in a game.
+	 *
+	 * @return a list of players in a game.
+	 */
+	public static List<Player> getPlayerListForDiplomacy() {
+		return d_playerListForDiplomacy;
+	}
 
-	public static List<Player> getPlayerList() {
-		return d_playerList;
+	/**
+	 * The function sets the list of players in a game.
+	 *
+	 * @param p_playerListForDiplomacy
+	 *            a list of players in a game.
+	 */
+	public void setPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
+		this.d_playerListForDiplomacy = p_playerListForDiplomacy;
 	}
 
 	/**
@@ -60,8 +77,8 @@ public class GameEngineController {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
-				l_player.setPlayerId(Integer.toString(this.d_playerSequence));
-				this.d_playerSequence += 1;
+				this.d_playerListForDiplomacy.add(l_player);
+				l_player.setPlayerId((Integer.toString(d_playerListForDiplomacy.indexOf(l_player) + 1)));
 				this.d_formatter = new Formatter();
 				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
 				d_logger.log(this.d_formatter.toString());

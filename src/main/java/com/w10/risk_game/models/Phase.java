@@ -77,19 +77,38 @@ public abstract class Phase {
 
 	public abstract Set<Command> getAvailableCommands();
 
+	/**
+	 * The function returns the name of the class.
+	 *
+	 * @return The method is returning the name of the class.
+	 */
 	public String getPhaseName() {
 		return getClassName().substring(0, getClassName().length() - 5) + " PHASE";
 	}
 
+	/**
+	 * The function prints an error message indicating an invalid command in the
+	 * current state.
+	 */
 	public void printInvalidCommandMessage() {
 		d_logger.log("Invalid command in state " + getPhaseName());
 	}
 
+	/**
+	 * The function "getClassName" returns the name of the class without the package
+	 * name.
+	 *
+	 * @return The method is returning the name of the class without the package
+	 *         name.
+	 */
 	private String getClassName() {
 		String name = this.getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1, name.length());
 	}
 
+	/**
+	 * The function prints the available commands in the currefnt phase.
+	 */
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();
 		d_logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "

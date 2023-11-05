@@ -11,17 +11,7 @@ public final class Constants {
 	}
 
 	// Menu
-	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n"
-			+ "You are in the Startup phase:\n" + "You can enter any of the below commands:\n"
-			+ "-> loadmap <filepath>\n" + "-> savemap <filepath>\n" + "-> showmap\n" + "-> editmap <filepath>\n"
-			+ "-> validatemap\n" + "-> editcontinent -add <continentID> <continentvalue> -remove <continentID>\n"
-			+ "-> editcountry -add <countryID> <countryName> <continentID> -remove <countryID>\n"
-			+ "-> editneighbor -add <countryID> <neighborcountryID> -remove <countryID> <neighborcountryID>\n"
-			+ "-> gameplayer -add <playername> -remove <playername>\n" + "-> assigncountries\n" + "-> quit\n";
-
-	public static final String GAMEPLAY_PHASE_ENTRY_STRING = "You are now in the Gameplay phase:\n"
-			+ "You can enter any of the below commands:\n" + "-> showmap\n" + "-> deploy <CountryId> <No. of armies>\n"
-			+ "-> quit\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
@@ -36,12 +26,16 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_EDIT_NEIGHBOR = "editneighbor";
 	public static final String USER_INPUT_COMMAND_GAMEPLAYER = "gameplayer";
 	public static final String USER_INPUT_COMMAND_OPTION_ADD = "-add";
-	public static final String USER_INPUT_COMMAND_OPTION_NEXT = "-next";
+	public static final String USER_INPUT_COMMAND_OPTION_NEXT_PHASE = "-next";
 	public static final String USER_INPUT_COMMAND_OPTION_REMOVE = "-remove";
 	public static final String USER_INPUT_COMMAND_OPTION_SHOW_ALL = "-showAll";
 	public static final String USER_INPUT_COMMAND_ASSIGN_COUNTRIES = "assigncountries";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY = "deploy";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE = "advance";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_BOMB = "bomb";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE = "blockade";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT = "airlift";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE = "negotiate";
 	public static final String USER_INPUT_ERROR_COMMAND_EMPTY = "The command cannot be empty!";
 	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";
@@ -54,6 +48,7 @@ public final class Constants {
 	public static final String CLI_GAME_PLAYER_REMOVE = "Removed Player: ";
 	public static final String CLI_GAME_PLAYER_CREATE = "Created Player: %s";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
+	public static final String CLI_ASSIGN_REINFORCEMENTS = "Reinforcements have been assigned to the players.";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 	public static final String CLI_ITERATION_OPTION = "%n===========%nRunning the %s option with the parameters %s.%n";
 
@@ -76,7 +71,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
-
+	public static final String GAME_ENGINE_ISSUE_ORDER_PHASE_STRING = "ISSUEORDER PHASE";
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 	public static final String SPACE = " ";

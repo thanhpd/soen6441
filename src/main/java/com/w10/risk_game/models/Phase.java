@@ -4,8 +4,9 @@ import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import com.w10.risk_game.controllers.MapEditorController;
-import com.w10.risk_game.controllers.RiskGameController;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game
@@ -13,12 +14,15 @@ import com.w10.risk_game.controllers.RiskGameController;
  */
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
-	protected RiskGameController d_Game;
-	protected MapEditorController d_EditorController;
-	public Phase(GameEngine p_gameEngine) {
+	protected GameEngineController d_gameEngineController;
+	protected MapEditorController d_mapEditorController;
+
+	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+
+	protected Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_Game = p_gameEngine.getGame();
-		this.d_EditorController = p_gameEngine.getMapEditorController();
+		this.d_gameEngineController = p_gameEngine.getGame();
+		this.d_mapEditorController = p_gameEngine.getMapEditorController();
 	}
 
 	// map commands
@@ -43,6 +47,10 @@ public abstract class Phase {
 
 	public abstract void saveMap(String p_mapFilePath);
 
+	public abstract boolean checkIfMapIsValid();
+
+	public abstract void nextPhase();
+
 	// game play commands
 	public abstract void createPlayer(String p_playerName);
 
@@ -53,47 +61,38 @@ public abstract class Phase {
 	// startup phase commands
 	public abstract boolean assignCountries();
 
-	// TODO: remove?
-	public abstract boolean checkIfMapIsValid();
+	// reinforcement phase commands
+	public abstract boolean assignPlayerReinforcements();
 
-	public abstract boolean checkIfGameCanBegin();
+	// issue order commands
+	public abstract void issuePlayerOrder();
 
-	public abstract boolean executePlayerOrders();
+	// execute order commands
+	public abstract void executeAllPlayerOrders();
 
-	public abstract boolean checkIfOrdersCanBeExecuted();
+	// end command
+	public abstract void endGame();
 
-	// TODO: Decide if the following methods needs to be used
-	// // reinforcement commands
-	// abstract public void reinforce();
-
-	// // attack commands
-	// abstract public void attack();
-
-	// // fortify commands
-	// abstract public void fortify();
-
-	// // end command
-	// abstract public void endGame();
-
-	abstract public void next();
+	public abstract void next();
 
 	public abstract Set<Command> getAvailableCommands();
 
 	public String getPhaseName() {
-		return getClassName();
+		return getClassName().substring(0, getClassName().length() - 5) + " PHASE";
 	}
 
 	public void printInvalidCommandMessage() {
-		System.out.println("Invalid command in state " + getPhaseName());
+		d_logger.log("Invalid command in state " + getPhaseName());
 	}
 
 	private String getClassName() {
-		var name = this.getClass().getName();
+		String name = this.getClass().getName();
 		return name.substring(name.lastIndexOf('.') + 1, name.length());
 	}
 
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();
-		System.out.println("You are in " + getPhaseName() + " Phase. Command avaliable " + avaliableCommandsText);
+		d_logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
+				+ avaliableCommandsText);
 	}
 }

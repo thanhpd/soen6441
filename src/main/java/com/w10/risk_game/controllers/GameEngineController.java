@@ -1,7 +1,5 @@
 package com.w10.risk_game.controllers;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Formatter;
@@ -10,53 +8,38 @@ import java.util.List;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.MapDisplay;
-import com.w10.risk_game.utils.MapEditor;
-import com.w10.risk_game.utils.MapReader;
-import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.Reinforcements;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngine class is responsible for managing the game map, players,
- * issuing orders, executing orders and their interactions in a game.
+ * The GameEngineController class is responsible for managing players, issuing
+ * orders, executing orders and their interactions in a game.
  *
  * @author Sherwyn Dsouza
  */
-public class RiskGameController {
+public class GameEngineController {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
-	private MapEditor // The above code is declaring a variable named "d_mapEditor" of an unknown data
-	// type. The code is also using the pound sign (#) to create a comment, which
-	// means
-	// that the line "
-	d_mapEditor;
 	private boolean d_isCountriesAssigned;
-	private MapReader d_mapReader;
-	private MapDisplay d_displayMap;
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
 	private Formatter d_formatter;
+	private MapEditorController d_mapEditorController;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * Game Engine constructor
 	 */
-	public RiskGameController() {
-		this.d_gameMap = new GameMap();
+	public GameEngineController(MapEditorController p_mapEditorController) {
+		this.d_mapEditorController = p_mapEditorController;
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
-		this.d_mapReader = new MapReader();
-		this.d_displayMap = new MapDisplay();
 		this.d_currentPlayerIndex = 0;
-		// this.phase = new StartupPhase();
 	}
 
 	/**
@@ -69,7 +52,6 @@ public class RiskGameController {
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
-
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
@@ -87,9 +69,7 @@ public class RiskGameController {
 	}
 
 	/**
-	 * The function removes a player from a list of players in a game engine. It
-	 * also randomly assigns the countries of the removed player to the remaining
-	 * players
+	 * The function removes a player from a list of players in a game engine.
 	 *
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
@@ -97,35 +77,16 @@ public class RiskGameController {
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
+		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		try {
 			if (!this.d_players.containsKey(p_playerName)) {
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
 				return;
 			}
-			p_playerName = p_playerName.trim();
-			List<String> l_playerNames = new ArrayList<>(this.d_players.keySet());
-
-			// Assign countries of removed player to remaining players
-			if (l_playerNames.size() > 1) {
-				List<Country> l_ownedCountriesOfPlayer = this.d_players.get(p_playerName).getCountriesOwned();
-				Collections.shuffle(l_ownedCountriesOfPlayer);
-
-				l_playerNames.remove(p_playerName);
-				int i = 0;
-
-				while (i < l_ownedCountriesOfPlayer.size()) {
-					this.d_players.get(l_playerNames.get(i % l_playerNames.size())).getCountriesOwned()
-							.add(l_ownedCountriesOfPlayer.get(i));
-					l_ownedCountriesOfPlayer.get(i)
-							.setOwner(this.d_players.get(l_playerNames.get(i % l_playerNames.size())));
-					i += 1;
-				}
-
-				this.assignPlayersReinforcements();
-			}
 			this.d_players.remove(p_playerName.trim());
 			d_logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
+			e.printStackTrace();
 			d_logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
 	}
@@ -158,6 +119,8 @@ public class RiskGameController {
 	 */
 	public boolean assignCountries() {
 		try {
+			this.d_gameMap = this.d_mapEditorController.getGameMap();
+
 			// Check if number of players is greater than 1
 			if (this.d_players.size() <= 1)
 				throw new Exception(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES);
@@ -188,8 +151,6 @@ public class RiskGameController {
 			}
 
 			// Assign reinforcements to the players based on countries
-			this.assignPlayersReinforcements();
-			this.d_isCountriesAssigned = true;
 			this.d_playerList = new ArrayList<>(this.d_players.values());
 			this.d_currentPlayer = this.d_playerList.get(0);
 
@@ -207,13 +168,24 @@ public class RiskGameController {
 	}
 
 	/**
-	 * The function assigns reinforcements to each player in the game.
+	 * The function assigns reinforcements to players in a game, based on the game
+	 * map.
 	 *
+	 * @return The method is returning a boolean value.
 	 */
-	private void assignPlayersReinforcements() {
-		for (Player l_player : this.d_players.values()) {
-			l_player.setLeftoverArmies(0);
-			Reinforcements.ReinforcementPhase(l_player, this.d_gameMap);
+	public boolean assignPlayersReinforcements() {
+		try {
+			this.d_gameMap = this.d_mapEditorController.getGameMap();
+			for (Player l_player : this.d_players.values()) {
+				l_player.setLeftoverArmies(0);
+				Reinforcements.AssignPlayerReinforcements(l_player, this.d_gameMap);
+			}
+			this.d_isCountriesAssigned = true;
+			d_logger.log(Constants.CLI_ASSIGN_REINFORCEMENTS);
+			return true;
+		} catch (Exception e) {
+			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+			return false;
 		}
 	}
 
@@ -225,16 +197,6 @@ public class RiskGameController {
 	 */
 	public Integer getNoOfPlayers() {
 		return this.d_players.size();
-	}
-
-	/**
-	 * The function returns the game map.
-	 *
-	 * @return The method is returning an object of type GameMap.
-	 *
-	 */
-	public GameMap getGameMap() {
-		return this.d_gameMap;
 	}
 
 	/**
@@ -257,6 +219,7 @@ public class RiskGameController {
 	 *
 	 */
 	public boolean checkIfGameCanBegin() {
+		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		return this.d_gameMap.isMapCreated() && this.d_players.size() > 1 && this.d_isCountriesAssigned;
 	}
 
@@ -280,7 +243,6 @@ public class RiskGameController {
 	 *
 	 */
 	public boolean checkIfOrdersCanBeIssued() {
-
 		if (this.d_currentPlayer.getLeftoverArmies() == 0) {
 			this.d_playerList.remove(d_currentPlayerIndex % this.d_playerList.size());
 			if (this.d_playerList.isEmpty()) {
@@ -323,7 +285,6 @@ public class RiskGameController {
 				}
 			}
 			// Reset the reinforcements of the players and start the Issue Order phase again
-			this.assignPlayersReinforcements();
 			this.d_currentPlayerIndex = 0;
 			this.d_playerList = new ArrayList<>(this.d_players.values());
 			this.d_currentPlayer = this.d_playerList.get(0);
@@ -341,5 +302,13 @@ public class RiskGameController {
 	 */
 	public Player getCurrentPlayer() {
 		return this.d_currentPlayer;
+	}
+
+	/**
+	 * The function "showMap" calls the "showMap" method of the
+	 * "d_mapEditorController" object.
+	 */
+	public void showMap() {
+		this.d_mapEditorController.showMap(true);
 	}
 }

@@ -217,7 +217,7 @@ public class Player {
 		String l_orderType = l_inputArray[0];
 		switch (l_orderType) {
 			case "deploy":
-				deployOrder(l_inputArray, l_orderType);
+				deployOrder(l_input, l_inputArray, l_orderType);
 				break;
 			case "advance":
 				advanceOrder(l_inputArray);
@@ -243,7 +243,7 @@ public class Player {
 	private void blockadeOrder(String[] l_inputArray) {
 		if (hasCard(CardType.BLOCKADE)) {
 			String l_countryIdToBlockade = l_inputArray[1];
-			if (Blockade.validateOrder(this, l_countryIdToBlockade)) {
+			if (Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
 				Order order = new Blockade(this, l_countryIdToBlockade);
 				d_orders.add(order);
 				removeCard(CardType.BLOCKADE);
@@ -254,7 +254,7 @@ public class Player {
 	private void bombOrder(String[] l_inputArray) {
 		if (hasCard(CardType.BOMB)) {
 			String l_countryIdToBomb = l_inputArray[1];
-			if (Bomb.validateOrder(this, l_countryIdToBomb)) {
+			if (Bomb.ValidateOrder(this, l_countryIdToBomb)) {
 				Order order = new Bomb(this, l_countryIdToBomb);
 				d_orders.add(order);
 				removeCard(CardType.BOMB);
@@ -280,8 +280,7 @@ public class Player {
 		}
 	}
 
-	private void deployOrder(String[] l_inputArray, String l_orderType) {
-		String l_input;
+	private void deployOrder(String l_input, String[] l_inputArray, String l_orderType) {
 		boolean l_again = true;
 		boolean l_failed = false;
 		while (l_again) {
@@ -307,7 +306,8 @@ public class Player {
 			l_isValidCountry = checkValidOwnedCountry(l_countryId);
 			l_isValidArmy = checkValidDeployArmy(Integer.parseInt(l_num));
 			if (l_isValidOrder && l_isValidCountry && l_isValidArmy) {
-				Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]), Integer.parseInt(l_inputArray[2]));
+				Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
+						Integer.parseInt(l_inputArray[2]));
 				d_orders.add(order);
 				deployArmies(Integer.parseInt(l_inputArray[2]));
 				l_again = false;

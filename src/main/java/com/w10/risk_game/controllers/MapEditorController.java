@@ -82,9 +82,9 @@ public class MapEditorController {
 	 * displays the map if it is.
 	 *
 	 */
-	public void showMap() {
+	public void showMap(boolean p_showArmies) {
 		if (checkIfMapIsValid()) {
-			this.d_displayMap.displayMap(this.d_gameMap, this.d_players.size() > 0 && this.d_isCountriesAssigned);
+			this.d_displayMap.displayMap(this.d_gameMap, p_showArmies);
 		}
 	}
 
@@ -334,5 +334,4 @@ public class MapEditorController {
 			d_logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
 	}
-
 }

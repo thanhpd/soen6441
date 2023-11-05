@@ -155,7 +155,9 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public void nextPhase() {
+		if(this.d_mapEditorController.checkIfMapIsValid()){
 		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
+		}
 	}
 
 	/**

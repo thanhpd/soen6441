@@ -2,23 +2,25 @@ package com.w10.risk_game.commands;
 
 import com.w10.risk_game.utils.Constants;
 
+// The code snippet is defining an enum called `Command`. An enum is a special type in Java that
+// represents a fixed set of constants.
 public enum Command {
 
-	LOAD_MAP(Constants.USER_INPUT_COMMAND_LOADMAP), SHOW_MAP(Constants.USER_INPUT_COMMAND_SHOWMAP), EDIT_CONTINENT(
-			Constants.USER_INPUT_COMMAND_EDIT_CONTINENT), NEXT(
-					Constants.USER_INPUT_COMMAND_OPTION_NEXT_PHASE), EDIT_COUNTRY(
-							Constants.USER_INPUT_COMMAND_EDIT_COUNTRY), EDIT_NEIGHBOR(
-									Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR), GAME_PLAYER_REMOVE(
-											Constants.CLI_GAME_PLAYER_REMOVE), GAME_PLAYER_CREATE(
-													Constants.CLI_GAME_PLAYER_CREATE), ASSIGN_COUNTRIES(
-															Constants.CLI_ASSIGN_COUNTRIES), DEPLOY(
-																	Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY), ADVANCE(
-																			Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE), BOMB(
-																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), BLOCKADE(
-																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), AIRLIFT(
-																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), NEGOTIATE(
-																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), VALIDATE_MAP(
-																													Constants.USER_INPUT_COMMAND_VALIDATEMAP), NONE(
+	loadmap(Constants.USER_INPUT_COMMAND_LOADMAP), showmap(Constants.USER_INPUT_COMMAND_SHOWMAP), editmap(
+			Constants.USER_INPUT_COMMAND_EDITMAP), savemap(Constants.USER_INPUT_COMMAND_SAVEMAP), validatemap(
+					Constants.USER_INPUT_COMMAND_VALIDATEMAP), editcontinent(
+							Constants.USER_INPUT_COMMAND_EDIT_CONTINENT), next(
+									Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE), editcountry(
+											Constants.USER_INPUT_COMMAND_EDIT_COUNTRY), editneighbor(
+													Constants.CLI_GAME_PLAYER_REMOVE), gameplayer(
+															Constants.USER_INPUT_COMMAND_GAMEPLAYER), assigncountries(
+																	Constants.CLI_ASSIGN_COUNTRIES), deploy(
+																			Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY), advance(
+																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE), bomb(
+																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), blockade(
+																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), airlift(
+																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
+																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), none(
 																															"");
 
 	private final String name;
@@ -27,6 +29,11 @@ public enum Command {
 		this.name = commandName;
 	}
 
+	/**
+	 * The getName() function returns the name of an object.
+	 *
+	 * @return The method is returning the value of the variable "name".
+	 */
 	public String getName() {
 		return name;
 	}

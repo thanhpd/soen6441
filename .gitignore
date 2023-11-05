@@ -3,6 +3,7 @@
 .vscode/
 soen6441.iml
 risk_game.iml
+Domination-Game.code-workspace
 
 # Compiled class file
 *.class
@@ -32,5 +33,6 @@ replay_pid*
 # Files in Target
 target
 .DS_Store
+
 docs
 src/main/resources/logs/log.txt

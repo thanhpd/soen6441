@@ -94,7 +94,8 @@ public final class Constants {
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
 	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The %s command should contain %s parts. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_PLAYER_ID_NOT_INTEGER = "Invalid input! The player id should be a positive integer. Please try again.";
-
+	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This %s order is invalid. It will not be added to the list of orders.";
+	public static final String PLAYER_ISSUE_ORDER_SUCCEED = "This order is added to the list of orders successfully.";
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";

@@ -37,6 +37,18 @@ public class Deploy extends Order {
 		this.d_num = p_num;
 	}
 	/**
+	 * This method is used to get the country id
+	 */
+	public int getCountryId() {
+		return d_countryId;
+	}
+	/**
+	 * This method is used to get the number of armies
+	 */
+	public int getNum() {
+		return d_num;
+	}
+	/**
 	 * This method extends the execute method in the Order class. It gets the number
 	 * of armies and deploys them to the country
 	 */

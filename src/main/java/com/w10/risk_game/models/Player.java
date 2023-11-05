@@ -2,15 +2,13 @@ package com.w10.risk_game.models;
 
 import java.util.ArrayList;
 
-import com.w10.risk_game.commands.Blockade;
-import com.w10.risk_game.commands.Bomb;
+import com.w10.risk_game.commands.*;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.Formatter;
 
 import com.w10.risk_game.GameEngine;
-import com.w10.risk_game.commands.Deploy;
-import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -123,7 +121,15 @@ public class Player {
 	public void setPlayerCards(List<CardType> playerCards) {
 		this.d_playerCards = playerCards;
 	}
-
+	/**
+	 * The function adds a card to the player's list of cards.
+	 *
+	 * @param card
+	 *            The parameter "card" is an object of type CardType.
+	 */
+	public void addCard(CardType card) {
+		this.d_playerCards.add(card);
+	}
 	/**
 	 * The function checks if a given country ID exists in a list of owned
 	 * countries.
@@ -226,42 +232,16 @@ public class Player {
 			switch (l_orderType) {
 				// Step 3: Create order object and add it to the list of orders
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
-					String l_countryId = l_inputArray[1];
-					String l_num = l_inputArray[2];
-					if (Deploy.ValidateOrder(this, l_countryId, l_num)) {
-						Order order = new Deploy(this, Integer.parseInt(l_inputArray[1]),
-								Integer.parseInt(l_inputArray[2]));
-						d_orders.add(order);
-						deployArmies(Integer.parseInt(l_inputArray[2]));
-						l_failed = false;
-					} else {
-						l_failed = true;
-					}
+					l_failed = !issueDeployOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
-					// TODO: add advance object to d_orders
+					l_failed = !issueAdvanceOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
-					String l_countryIdToBomb = l_inputArray[1];
-					if (hasCard(CardType.BOMB) && Bomb.ValidateOrder(this, l_countryIdToBomb)) {
-						Order order = new Bomb(this, l_countryIdToBomb);
-						d_orders.add(order);
-						removeCard(CardType.BOMB);
-						l_failed = false;
-					} else {
-						l_failed = true;
-					}
+					l_failed = !issueBombOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
-					String l_countryIdToBlockade = l_inputArray[1];
-					if (hasCard(CardType.BLOCKADE) && Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
-						Order order = new Blockade(this, l_countryIdToBlockade);
-						d_orders.add(order);
-						removeCard(CardType.BLOCKADE);
-						l_failed = false;
-					} else {
-						l_failed = true;
-					}
+					l_failed = !issueBlockadeOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 					// TODO add airlift object to d_orders
@@ -497,6 +477,137 @@ public class Player {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * The function checks whether a player can advance or not
+	 *
+	 * @param p_noOfArmiesToAdvance
+	 *            number of armies to advance
+	 * @param p_currentArmiesOnCountry
+	 *            current armies on country
+	 * @param p_advanceFromCountryId
+	 *            country id to advance from
+	 * @return boolean value to show whether the player can advance
+	 */
+	public boolean checkValidAdvanceOrder(int p_noOfArmiesToAdvance, int p_currentArmiesOnCountry,
+			int p_advanceFromCountryId) {
+		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
+		for (Order l_order : this.getOrders()) {
+			if ((l_order instanceof Deploy) && ((Deploy) l_order).getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Deploy) l_order).getNum();
+			}
+		}
+		return l_totalArmiesDeployed >= p_noOfArmiesToAdvance;
+	}
+
+	/**
+	 * The function try to add deploy order to the player's order list
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public boolean issueDeployOrder(String[] p_inputArray) {
+		String l_countryId = p_inputArray[1];
+		String l_num = p_inputArray[2];
+		if (Deploy.ValidateOrder(this, l_countryId, l_num)) {
+			Order order = new Deploy(this, Integer.parseInt(p_inputArray[1]), Integer.parseInt(p_inputArray[2]));
+			d_orders.add(order);
+			deployArmies(Integer.parseInt(p_inputArray[2]));
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+	}
+
+	/**
+	 * The function try to add advance order to the player's order list
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public boolean issueAdvanceOrder(String[] p_inputArray) {
+		// Step 1: Get the variables needed to create an advance order
+		String l_countryNameFrom = p_inputArray[1];
+		String l_countryNameTo = p_inputArray[2];
+		Country l_countryFrom = this.d_countriesOwned.stream()
+				.filter(l_c -> l_c.getCountryName().equals(l_countryNameFrom)).findAny().orElse(null);
+		Country l_countryTo = l_countryFrom != null
+				? l_countryFrom.getNeighbors().values().stream().filter(c -> c.getCountryName().equals(l_countryNameTo))
+						.findAny().orElse(null)
+				: null;
+		int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
+		// Step 2: Check whether the order is valid
+		if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0
+				&& (l_countryFrom.getArmyCount() >= d_advanceArmies || checkValidAdvanceOrder(d_advanceArmies,
+						l_countryFrom.getArmyCount(), l_countryFrom.getCountryId()))) {
+			Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
+			d_orders.add(l_order);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+	}
+	/**
+	 * The function try to add bomb order to the player's order list
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public boolean issueBombOrder(String[] p_inputArray) {
+		String l_countryIdToBomb = p_inputArray[1];
+		if (hasCard(CardType.BOMB) && Bomb.ValidateOrder(this, l_countryIdToBomb)) {
+			Order order = new Bomb(this, l_countryIdToBomb);
+			d_orders.add(order);
+			removeCard(CardType.BOMB);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+	}
+
+	/**
+	 * The function try to add blockade order to the player's order list
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public boolean issueBlockadeOrder(String[] p_inputArray) {
+		String l_countryIdToBlockade = p_inputArray[1];
+		if (hasCard(CardType.BLOCKADE) && Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
+			Order order = new Blockade(this, l_countryIdToBlockade);
+			d_orders.add(order);
+			removeCard(CardType.BLOCKADE);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
 	}
 	/**
 	 * The function checks whether a player has a card of a given type.

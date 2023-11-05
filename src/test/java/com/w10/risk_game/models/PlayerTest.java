@@ -54,13 +54,13 @@ public class PlayerTest {
 		assertEquals(7, d_player.getLeftoverArmies());
 	}
 	/**
-	 * This method is to test the method of checkValidForm. It will provide three
-	 * invalid inputs and check whether the method can return false. The three
+	 * This method is to test the method of checkValidDeployInput. It will provide
+	 * three invalid inputs and check whether the method can return false. The three
 	 * invalid inputs are: 1. There are not three parts in the input. 2. The second
 	 * part is not an integer. 3. The third part is not an integer.
 	 */
 	@Test
-	public void checkValidFormTest() {
+	public void checkValidDeployInputTest() {
 		String l_input1 = "invalid input";
 		boolean l_isValidForm = d_player1.checkValidDeployInput(l_input1.split(" "));
 		assertEquals(false, l_isValidForm);

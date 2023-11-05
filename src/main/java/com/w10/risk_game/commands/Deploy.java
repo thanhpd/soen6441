@@ -129,4 +129,40 @@ public class Deploy extends Order {
 		}
 		return true;
 	}
+	/**
+	 * This function is used to check the input format for deploy command. The input
+	 * should have three parts (one string and two positive integers)
+	 *
+	 * @param p_inputArray
+	 *            the input string
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public static boolean CheckValidDeployInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
+		if (p_inputArray.length != 3) {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy", "three");
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+		// Step 2: Check whether the country id is positive integer
+		String l_countryId = p_inputArray[1];
+		String l_num = p_inputArray[2];
+		for (int i = 0; i < l_countryId.length(); i++) {
+			if (!Character.isDigit(l_countryId.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				return false;
+			}
+		}
+		// Step 3: Check whether the number of armies is positive integer
+		for (int i = 0; i < l_num.length(); i++) {
+			if (!Character.isDigit(l_num.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				return false;
+			}
+		}
+		// Step 4: Return true if the input format is valid
+		return true;
+	}
 }

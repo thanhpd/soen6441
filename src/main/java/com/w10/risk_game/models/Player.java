@@ -25,7 +25,7 @@ public class Player {
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
 	private List<CardType> d_playerCards = new ArrayList<>();
-	private boolean hasCommitted = false;
+	private boolean d_hasCommitted = false;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -128,7 +128,7 @@ public class Player {
 	 * @return boolean value indicating whether a player has committed
 	 */
 	public boolean getHasCommitted() {
-		return hasCommitted;
+		return d_hasCommitted;
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class Player {
 	 * @param hasCommitted boolean value indicating whether a player has committed
 	 */
 	public void setHasCommitted(boolean hasCommitted) {
-		this.hasCommitted = hasCommitted;
+		this.d_hasCommitted = hasCommitted;
 	}
 
 	/**
@@ -148,6 +148,7 @@ public class Player {
 	public void addCard(CardType card) {
 		this.d_playerCards.add(card);
 	}
+
 	/**
 	 * The function checks if a given country ID exists in a list of owned
 	 * countries.
@@ -262,13 +263,14 @@ public class Player {
 					l_failed = !issueBlockadeOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
-					// TODO add airlift object to d_orders
+					l_failed = !issueAirliftOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
-					// TODO add negotiate object to d_orders
+					l_failed = !issueDiplomacyOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 					setHasCommitted(true);
+					l_failed = false;
 					break;
 				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
@@ -291,6 +293,7 @@ public class Player {
 	public Order nextOrder() {
 		return d_orders.remove(0);
 	}
+
 	/**
 	 * This function is used to check the input format for order.
 	 *
@@ -312,7 +315,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 				return checkValidAirliftInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
-				return checkValidNegotiateInput(p_inputArray);
+				return Negotiate.CheckValidNegotiateInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 				return true;
 			default :
@@ -320,6 +323,7 @@ public class Player {
 				return false;
 		}
 	}
+
 	/**
 	 * This function is used to check the input format for airlift command.
 	 *
@@ -356,32 +360,6 @@ public class Player {
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
-				return false;
-			}
-		}
-		return true;
-	}
-	/**
-	 * This function is used to check the input format for negotiate command.
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the input format is valid
-	 */
-	public boolean checkValidNegotiateInput(String[] p_inputArray) {
-		// Step 1: Check the length of the input
-		if (p_inputArray.length != 2) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "negotiate", "two");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-			return false;
-		}
-		// Step 2: Check whether the player id is positive integer
-		String l_playerID = p_inputArray[1];
-		for (int i = 0; i < l_playerID.length(); i++) {
-			if (!Character.isDigit(l_playerID.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_PLAYER_ID_NOT_INTEGER);
 				return false;
 			}
 		}
@@ -470,6 +448,7 @@ public class Player {
 			return false;
 		}
 	}
+
 	/**
 	 * The function try to add bomb order to the player's order list
 	 *
@@ -518,6 +497,66 @@ public class Player {
 			return false;
 		}
 	}
+
+	/**
+	 * The function try to add diplomacy order to the player's order list
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public boolean issueDiplomacyOrder(String[] p_inputArray) {
+		String l_playerId = p_inputArray[1];
+		String l_playerName = l_playerId;
+		if (hasCard(CardType.DIPLOMACY) && Negotiate.ValidateOrder(this, l_playerName)) {
+			Order order = new Negotiate(this, l_playerId);
+			d_orders.add(order);
+			removeCard(CardType.DIPLOMACY);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+	}
+
+	/**
+	 * The function issueAirliftOrder checks if the player has an airlift card and
+	 * validates the orderb efore creating a new airlift order and adding it to the
+	 * list of orders.
+	 *
+	 * @param p_inputArray
+	 *            An array of strings that represents the input command. The first
+	 *            element is the command itself, and the following elements are the
+	 *            parameters for the command.
+	 * @return The method is returning a boolean value.
+	 */
+	public boolean issueAirliftOrder(String[] p_inputArray) {
+		// airlift countryIdToAirliftFrom countryIdToAirlift NumberOfArmiesToAirlift
+		String l_countryIdToAirliftFrom = p_inputArray[1];
+		String l_countryIdToAirlift = p_inputArray[2];
+		String l_airliftArmies = p_inputArray[3];
+		if (hasCard(CardType.AIRLIFT)
+				&& Airlift.ValidateOrder(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
+			Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
+			d_orders.add(order);
+			removeCard(CardType.AIRLIFT);
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			return true;
+		} else {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+	}
+
 	/**
 	 * The function checks whether a player has a card of a given type.
 	 *
@@ -533,6 +572,7 @@ public class Player {
 		d_logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
 		return false;
 	}
+
 	/**
 	 * The function removes a card of a given type from a player's list of cards.
 	 *

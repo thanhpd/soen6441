@@ -27,6 +27,7 @@ public class GameEngineController {
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
+	private static List<Player> d_playerListForDiplomacy = new ArrayList<>();
 	private Formatter d_formatter;
 	private MapEditorController d_mapEditorController;
 
@@ -45,6 +46,25 @@ public class GameEngineController {
 		this.d_currentPlayerIndex = 0;
 	}
 	/**
+	 * The function returns the list of players in a game.
+	 *
+	 * @return a list of players in a game.
+	 */
+	public static List<Player> getPlayerListForDiplomacy() {
+		return d_playerListForDiplomacy;
+	}
+
+	/**
+	 * The function sets the list of players in a game.
+	 *
+	 * @param p_playerListForDiplomacy
+	 *            a list of players in a game.
+	 */
+	public void setPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
+		this.d_playerListForDiplomacy = p_playerListForDiplomacy;
+	}
+
+	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
 	 *
@@ -57,6 +77,7 @@ public class GameEngineController {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
+				this.d_playerListForDiplomacy.add(l_player);
 				this.d_formatter = new Formatter();
 				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
 				d_logger.log(this.d_formatter.toString());

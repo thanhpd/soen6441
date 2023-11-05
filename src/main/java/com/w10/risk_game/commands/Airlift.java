@@ -17,26 +17,28 @@ public class Airlift extends Order {
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	private final Player d_player;
-	private final String d_countryIdToAirFrom;
-	private final String d_countryIdToAir;
+	private final String d_sourceCountryId;
+	private final String d_targetCountryId;
 	private String d_ArmyToAirlift;
 
 	/**
 	 * Constructor for Airlift class.
 	 *
 	 * @param p_player
-	 *            The player who is issuing the order.
+	 *                             The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *            The country id of the country to intiate the airlift from.
+	 *                             The country id of the country to intiate the
+	 *                             airlift from.
 	 * @param d_countryIdToAir
-	 *            The country id of the country to intiate the airlift to.
+	 *                             The country id of the country to intiate the
+	 *                             airlift to.
 	 * @param d_ArmyToAirlift
-	 *            The number to armies to airlift.
+	 *                             The number to armies to airlift.
 	 */
 	public Airlift(Player p_player, String d_countryIdToAirFrom, String d_countryIdToAir, String d_ArmyToAirlift) {
 		this.d_player = p_player;
-		this.d_countryIdToAirFrom = d_countryIdToAirFrom;
-		this.d_countryIdToAir = d_countryIdToAir;
+		this.d_sourceCountryId = d_countryIdToAirFrom;
+		this.d_targetCountryId = d_countryIdToAir;
 		this.d_ArmyToAirlift = d_ArmyToAirlift;
 	}
 
@@ -48,19 +50,19 @@ public class Airlift extends Order {
 	@Override
 	public void execute() {
 		Formatter l_formatter = new Formatter();
-		l_formatter.format(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
 
-		Country l_countryToAirlift = getCountryForAirlift(d_player, d_countryIdToAir);
-		Country l_countryToAirliftFrom = getCountryForAirlift(d_player, d_countryIdToAirFrom);
+		Country l_targetCountry = getCountryForAirlift(d_player, d_targetCountryId);
+		Country l_sourceCountry = getCountryForAirlift(d_player, d_sourceCountryId);
 
-		if (l_countryToAirlift != null && l_countryToAirliftFrom != null) {
-			int l_airliftCountryFromArmy = l_countryToAirliftFrom.getArmyCount();
-			if (l_airliftCountryFromArmy > Integer.parseInt(d_ArmyToAirlift)) {
-				int l_airliftCountryArmy = l_countryToAirlift.getArmyCount();
+		if (l_targetCountry != null && l_sourceCountry != null) {
+			int l_airliftCountryFromArmy = l_sourceCountry.getArmyCount();
+			if (l_airliftCountryFromArmy >= Integer.parseInt(d_ArmyToAirlift)) {
+				int l_airliftCountryArmy = l_targetCountry.getArmyCount();
 				// adjust the army count in countries
-				l_countryToAirliftFrom.setArmyCount(l_airliftCountryFromArmy - Integer.parseInt(d_ArmyToAirlift));
-				l_countryToAirlift.setArmyCount(Integer.parseInt(d_ArmyToAirlift) + l_airliftCountryArmy);
+				l_sourceCountry.setArmyCount(l_airliftCountryFromArmy - Integer.parseInt(d_ArmyToAirlift));
+				l_targetCountry.setArmyCount(Integer.parseInt(d_ArmyToAirlift) + l_airliftCountryArmy);
 			} else {
+				l_formatter.format(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
 				d_logger.log(l_formatter.toString());
 				l_formatter.close();
 			}
@@ -72,17 +74,23 @@ public class Airlift extends Order {
 	 * on a specific country.
 	 *
 	 * @param p_player
-	 *            The player object that represents the player who is trying to
-	 *            validate the order.
+	 *                    The player object that represents the player who is trying
+	 *                    to
+	 *                    validate the order.
 	 * @param p_countryId
-	 *            The p_countryId parameter is a String that represents the ID of a
-	 *            country.
+	 *                    The p_countryId parameter is a String that represents the
+	 *                    ID of a
+	 *                    country.
 	 * @return The method is returning a boolean value.
 	 */
-	public static boolean validateOrder(Player p_player, String p_countryId) {
-		Country l_countryToAirlift = getCountryForAirlift(p_player, p_countryId);
+	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,
+			String armiesToAirlift) {
+		Country l_sourceCountry = getCountryForAirlift(p_player, p_sourceCountryId);
+		Country l_targetCountry = getCountryForAirlift(p_player, p_targetCountryId);
+		int l_armyToAirlift = Integer.parseInt(armiesToAirlift);
 
-		return l_countryToAirlift != null;
+		return l_sourceCountry != null && l_targetCountry != null && l_armyToAirlift > 0
+				&& l_armyToAirlift <= l_sourceCountry.getArmyCount();
 	}
 
 	/**
@@ -91,18 +99,20 @@ public class Airlift extends Order {
 	 * player's countries.
 	 *
 	 * @param p_player
-	 *            The player for whom we are finding the country for airlift.
+	 *                    The player for whom we are finding the country for
+	 *                    airlift.
 	 * @param p_countryId
-	 *            The parameter `p_countryId` is a String representing the ID of the
-	 *            country for which the airlift is being requested.
+	 *                    The parameter `p_countryId` is a String representing the
+	 *                    ID of the
+	 *                    country for which the airlift is being requested.
 	 * @return The method is returning a Country object.
 	 */
 	public static Country getCountryForAirlift(Player p_player, String p_countryId) {
 		Formatter l_formatter = new Formatter();
-		l_formatter.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId);
 
 		if (p_countryId == null) {
 			// Log a message if the country ID is null
+			l_formatter.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId);
 			d_logger.log(l_formatter.toString());
 			l_formatter.close();
 			return null;

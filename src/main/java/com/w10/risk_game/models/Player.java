@@ -25,6 +25,7 @@ public class Player {
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
 	private List<CardType> d_playerCards = new ArrayList<>();
+	private boolean hasCommitted = false;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -121,6 +122,23 @@ public class Player {
 	public void setPlayerCards(List<CardType> playerCards) {
 		this.d_playerCards = playerCards;
 	}
+
+	/**
+	 * The function returns a boolean value indicating whether a player has committed
+	 * @return boolean value indicating whether a player has committed
+	 */
+	public boolean getHasCommitted() {
+		return hasCommitted;
+	}
+
+	/**
+	 * The function sets the boolean value indicating whether a player has committed
+	 * @param hasCommitted boolean value indicating whether a player has committed
+	 */
+	public void setHasCommitted(boolean hasCommitted) {
+		this.hasCommitted = hasCommitted;
+	}
+
 	/**
 	 * The function adds a card to the player's list of cards.
 	 *
@@ -249,6 +267,9 @@ public class Player {
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					// TODO add negotiate object to d_orders
 					break;
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+					setHasCommitted(true);
+					break;
 				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 					l_failed = true;
@@ -292,6 +313,8 @@ public class Player {
 				return checkValidAirliftInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return checkValidNegotiateInput(p_inputArray);
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+				return true;
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
 				return false;

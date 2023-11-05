@@ -44,7 +44,6 @@ public class GameEngineController {
 		this.d_isCountriesAssigned = false;
 		this.d_currentPlayerIndex = 0;
 	}
-
 	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
@@ -246,7 +245,7 @@ public class GameEngineController {
 	 *
 	 */
 	public boolean checkIfOrdersCanBeIssued() {
-		if (this.d_currentPlayer.getLeftoverArmies() == 0) {
+		if (this.d_currentPlayer.getLeftoverArmies() == 0 && this.d_currentPlayer.getHasCommitted()) {
 			this.d_playerList.remove(d_currentPlayerIndex % this.d_playerList.size());
 			if (this.d_playerList.isEmpty()) {
 				this.d_currentPlayer = null;

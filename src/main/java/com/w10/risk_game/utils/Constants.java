@@ -36,6 +36,7 @@ public final class Constants {
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE = "blockade";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT = "airlift";
 	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE = "negotiate";
+	public static final String USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT = "commit";
 	public static final String USER_INPUT_ERROR_COMMAND_EMPTY = "The command cannot be empty!";
 	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";

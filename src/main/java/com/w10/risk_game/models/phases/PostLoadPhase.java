@@ -12,9 +12,16 @@ import com.w10.risk_game.commands.Command;
  */
 public class PostLoadPhase extends MapEditorPhase {
 
+	/**
+	 * The constructor for the PostLoadPhase class.
+	 *
+	 * @param p_GameEngine
+	 *            The parameter p_GameEngine is a GameEngine object.
+	 */
 	public PostLoadPhase(GameEngine p_GameEngine) {
 		super(p_GameEngine);
 	}
+
 	/**
 	 * The showMap() function calls the showMap() function in the
 	 * d_mapEditorController object with the parameter set to false.
@@ -56,6 +63,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void addContinent(String p_continentName, int p_bonus) {
 		this.d_mapEditorController.addContinent(p_continentName, p_bonus);
 	}
+
 	/**
 	 * The addNeighbor function adds a neighbor country to a given country.
 	 *
@@ -65,7 +73,6 @@ public class PostLoadPhase extends MapEditorPhase {
 	 *            The parameter "p_neighborCountryId" represents the ID of the
 	 *            neighboring country that you want to add to the current country.
 	 */
-
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
 		this.d_mapEditorController.addNeighbor(p_countryId, p_neighborCountryId);
@@ -109,6 +116,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		this.d_mapEditorController.removeNeighbor(p_countryId, p_neighborCountryId);
 	}
+
 	/**
 	 * The function saves a map to a specified file path.
 	 *
@@ -116,7 +124,6 @@ public class PostLoadPhase extends MapEditorPhase {
 	 *            The parameter "p_mapFilePath" is a String that represents the file
 	 *            path where the map will be saved.
 	 */
-
 	@Override
 	public void saveMap(String p_mapFilePath) {
 		this.d_mapEditorController.saveMap(p_mapFilePath);
@@ -141,11 +148,11 @@ public class PostLoadPhase extends MapEditorPhase {
 	public void endGame() {
 		this.printInvalidCommandMessage();
 	}
+
 	/**
 	 * The nextPhase() function sets the phase of the game engine to a new
 	 * PlaySetupPhase.
 	 */
-
 	@Override
 	public void nextPhase() {
 		d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));

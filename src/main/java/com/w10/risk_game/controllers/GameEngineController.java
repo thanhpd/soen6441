@@ -33,16 +33,10 @@ public class GameEngineController {
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
-	 * The code snippet is the constructor of the `GameEngineController` class. It
-	 * initializes the instance variables `d_mapEditorController`, `d_players`,
-	 * `d_isCountriesAssigned`, and `d_currentPlayerIndex`. The
-	 * `p_mapEditorController` parameter is used to assign a value to the
-	 * `d_mapEditorController` variable. The `d_players` variable is initialized as
-	 * an empty `HashMap`. The `d_isCountriesAssigned` variable is set to `false`,
-	 * indicating that countries have not been assigned yet. The
-	 * `d_currentPlayerIndex` is set to `0`, indicating that the first player in the
-	 * list will be the current player.
+	 * The constructor of the GameEngineController class.
 	 *
+	 * @param p_mapEditorController
+	 *            The map editor controller object.
 	 */
 	public GameEngineController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;

@@ -11,9 +11,17 @@ import com.w10.risk_game.commands.Command;
  * countries, and transitioning to the main play phase.
  */
 public class PlaySetupPhase extends GamePlayPhase {
+
+	/**
+	 * The constructor for the PlaySetupPhase class.
+	 *
+	 * @param d_gameEngine
+	 *            The parameter d_gameEngine is a GameEngine object.
+	 */
 	public PlaySetupPhase(GameEngine d_gameEngine) {
 		super(d_gameEngine);
 	}
+
 	/**
 	 * The showMap() function calls the showMap() function of the d_EditorController
 	 * object.
@@ -54,8 +62,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	}
 
 	/**
-	 * The function "showAllPlayers" calls the "showAllPlayers" function of the
-	 * "d_Game" object.
+	 * The function show all players by calling the game engine controller
 	 */
 	@Override
 	public void showAllPlayers() {
@@ -114,6 +121,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.assigncountries, Command.gameplayer, Command.showmap);
 	}
+
 	/**
 	 * The nextPhase() function prints an invalid command message.
 	 */
@@ -121,6 +129,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	public void nextPhase() {
 		this.printInvalidCommandMessage();
 	}
+
 	/**
 	 * The issuePlayerOrder() function prints an invalid command message.
 	 */
@@ -128,6 +137,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	public void issuePlayerOrder() {
 		this.printAvailableCommand();
 	}
+
 	/**
 	 * The executeAllPlayerOrders() function prints an invalid command message.
 	 */

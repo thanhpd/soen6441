@@ -1,6 +1,5 @@
 package com.w10.risk_game.models.phases;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
@@ -13,6 +12,12 @@ import com.w10.risk_game.commands.Command;
  */
 public class PreLoadPhase extends MapEditorPhase {
 
+	/**
+	 * The constructor for the PreLoadPhase class.
+	 *
+	 * @param p_GameEngine
+	 *            The parameter p_GameEngine is a GameEngine object.
+	 */
 	public PreLoadPhase(GameEngine p_GameEngine) {
 		super(p_GameEngine);
 	}
@@ -68,6 +73,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	public void addContinent(String p_continentName, int p_bonus) {
 		super.printInvalidCommandMessage();
 	}
+
 	/**
 	 * The addNeighbor function prints an invalid command message.
 	 *
@@ -77,7 +83,6 @@ public class PreLoadPhase extends MapEditorPhase {
 	 *            The parameter "p_neighborCountryId" is an integer that represents
 	 *            the ID of a neighboring country.
 	 */
-
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
 		super.printInvalidCommandMessage();
@@ -106,10 +111,10 @@ public class PreLoadPhase extends MapEditorPhase {
 	public void removeContinent(String p_continentName) {
 		super.printInvalidCommandMessage();
 	}
+
 	/**
 	 * The function nextPhase() prints an invalid command message.
 	 */
-
 	@Override
 	public void nextPhase() {
 		super.printInvalidCommandMessage();
@@ -169,13 +174,13 @@ public class PreLoadPhase extends MapEditorPhase {
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.loadmap);
 	}
+
 	/**
 	 * The function checks if map is valid and prints an invalid command message if
 	 * not.
 	 *
 	 * @return The method is returning a boolean value of false.
 	 */
-
 	@Override
 	public boolean checkIfMapIsValid() {
 		this.printInvalidCommandMessage();

@@ -27,9 +27,9 @@ public class Airlift extends Order {
 	 * @param p_player
 	 *            The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *            The country id of the country to intiate the airlift from.
+	 *            The country id of the country to intiate th airlift from.
 	 * @param d_countryIdToAir
-	 *            The country id of the country to intiate the airlift to.
+	 *            The country id of the country to intiate th airlift to.
 	 * @param d_ArmyToAirlift
 	 *            The number to armies to airlift.
 	 */
@@ -72,10 +72,10 @@ public class Airlift extends Order {
 	 * on a specific country.
 	 *
 	 * @param p_player
-	 *            The player object that represents the player who is trying to
+	 *            The player object that represents the player who is tryin to
 	 *            validate the order.
 	 * @param p_countryId
-	 *            The p_countryId parameter is a String that represents the ID of a
+	 *            The p_countryId parameter is a String that represents th ID of a
 	 *            country.
 	 * @return The method is returning a boolean value.
 	 */
@@ -95,9 +95,9 @@ public class Airlift extends Order {
 	 * player's countries.
 	 *
 	 * @param p_player
-	 *            The player for whom we are finding the country for airlift.
+	 *            The player for whom we are finding the country fo airlift.
 	 * @param p_countryId
-	 *            The parameter `p_countryId` is a String representing the ID of the
+	 *            The parameter `p_countryId` is a String representing th ID of the
 	 *            country for which the airlift is being requested.
 	 * @return The method is returning a Country object.
 	 */
@@ -133,7 +133,6 @@ public class Airlift extends Order {
 		} finally {
 			l_formatter.close();
 		}
-
 		return l_countryToAirlift;
 	}
 }

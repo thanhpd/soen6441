@@ -36,34 +36,4 @@ public class DeployTest {
 		d_order1.execute();
 		assertEquals(6, d_player1.getCountriesOwned().get(0).getArmyCount());
 	}
-	/**
-	 * This method is to test the method of checkValidCountry. It will provide one
-	 * invalid input and check whether the method can return false. The invalid
-	 * input is the second part of the input is not contained in the countries owned
-	 * by the player.
-	 */
-	@Test
-	public void checkValidCountryTest() {
-		String l_input = "deploy 0 6";
-		String[] l_inputArray = l_input.split(" ");
-		String l_countryId = l_inputArray[1];
-		List<Country> l_countries = d_player1.getCountriesOwned();
-		boolean l_isValidCountry = Deploy.CheckValidCountry(l_countries, l_countryId);
-		assertEquals(false, l_isValidCountry);
-	}
-	/**
-	 * This method is to test the method of checkValidArmy. It will provide one
-	 * invalid input and check whether the method can return false. The invalid
-	 * input is the third part of the input is more than the number of leftover
-	 * armies.
-	 */
-	@Test
-	public void checkValidArmyTest() {
-		// d_player1 has 10 armies in total
-		String l_input = "deploy 1 20";
-		String[] l_inputArray = l_input.split(" ");
-		String l_num = l_inputArray[2];
-		boolean l_isValidNum = Deploy.CheckValidArmy(d_player1, Integer.parseInt(l_num));
-		assertEquals(false, l_isValidNum);
-	}
 }

@@ -245,6 +245,13 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_RESTART);
 				d_logger.log(Constants.USER_INPUT_REQUEST);
 				l_input = l_scanner.nextLine();
+				d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
+
+				// Check if user enters quit after an invalid order
+				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_QUIT)) {
+					GameEngine.Command = Constants.USER_INPUT_COMMAND_QUIT;
+					break;
+				}
 				l_inputArray = l_input.split(" ");
 			}
 			// Step 2: Check the input format

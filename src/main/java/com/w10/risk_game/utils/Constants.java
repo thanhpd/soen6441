@@ -6,11 +6,15 @@ package com.w10.risk_game.utils;
  */
 public final class Constants {
 
+	/**
+	 * This is private constructor for a class called Constants. This constructor
+	 * throws an IllegalStateException with the message "Constants class"
+	 */
 	private Constants() {
 		throw new IllegalStateException("Constants class");
 	}
 
-	// Menu
+	// Menu constants
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n";
 
 	// User input command constants
@@ -53,7 +57,7 @@ public final class Constants {
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 	public static final String CLI_ITERATION_OPTION = "%n===========%nRunning the %s option with the parameters %s.%n";
 
-	// Game Engine Class constants
+	// Game Engine constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
 	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
 	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
@@ -73,6 +77,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
 	public static final String GAME_ENGINE_ISSUE_ORDER_PHASE_STRING = "ISSUEORDER PHASE";
+
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 	public static final String SPACE = " ";
@@ -81,19 +86,19 @@ public final class Constants {
 	// Maps Folder Path
 	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
 
-	// Map Reader Constants
+	// Map Reader constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
-	// Player Class constants
-	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\" or \"commit\"";
+	// Player constants
+	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer.	Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\" or \"commit\".";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
-	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift";
+	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift!";
 	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
 	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The %s command should contain %s parts. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This %s order is invalid. It will not be added to the list of orders.";
@@ -102,6 +107,7 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_SUCCEED = "All orders are committed successfully.";
 	public static final String SHOW_PLAYER_CARDS = "You have the following cards: %s";
 	public static final String SHOW_PLAYER_CARDS_EMPTY = "You don't have any cards.";
+
 	// Map Editor constants
 	public static final String MAP_EDITOR_EMPTY_COUNTRY_NAME = "Country name is empty!";
 	public static final String MAP_EDITOR_COUNTRY_NAME_EXIST = "Country name already exists!";
@@ -152,22 +158,24 @@ public final class Constants {
 	public static final String MAP_SAVE_ERROR = "Unable to save file. Please try again.";
 	public static final String MAP_SAVE_SUCCESS = "Map Saved Successfully";
 
-	// Reinforcements Class constants
+	// Reinforcements constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
-	// Logger
+	// Logger constants
 	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
 
 	// Deploy constants
 	public static final String DEPLOY_SUCCEED = "Player %s deployed %d armies to country %s";
 	public static final String DEPLOY_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";
 	public static final String DEPLOY_INVALID_ARMIES = "Invalid input! The entered number should be less than or equal to the number of reinforcement soldiers. Please try again.";
+
 	// Negotiate constants
 	public static final String NEGOTIATE_CARD_USED = "%s is negotiating with %s";
 	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from %s to %s";
 	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between %s and %s";
 	public static final String NEGOTIATE_SELF = "Cannot negotiate with yourself";
 	public static final String NEGOTIATE_NO_PLAYER = "No player with id %s";
+
 	// Advance constants
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";
 	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You''ve conquered {1}. Keep the conquest going!";

@@ -196,21 +196,16 @@ public class MapEditorController {
 	}
 
 	/**
-	 * The function removes a country from the game map and updates the player's
-	 * ownership if necessary.
+	 * The function removes a country from the map editor and logs the output or an
+	 * error message if an exception occurs.
 	 *
 	 * @param p_countryId
-	 *            The parameter `p_countryId` is an integer representing the ID of
-	 *            the country that needs to be removed.
-	 *
+	 *            The parameter "p_countryId" is an integer that represents the ID
+	 *            of the country that needs to be removed.
 	 */
 	public void removeCountry(int p_countryId) {
 		try {
-			Player l_player = this.d_gameMap.getCountries().get(p_countryId).getOwner();
 			String l_output = this.d_mapEditor.removeCountry(p_countryId);
-			if (this.d_isCountriesAssigned) {
-				removeCountryFromPlayer(p_countryId, l_player);
-			}
 			d_logger.log(l_output);
 		} catch (Exception e) {
 			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
@@ -254,28 +249,6 @@ public class MapEditorController {
 		try {
 			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighborCountryId);
 			d_logger.log(l_output);
-		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
-		}
-	}
-
-	/**
-	 * The function removes a specific country from a player's list of owned
-	 * countries.
-	 *
-	 * @param p_countryId
-	 *            The ID of the country that needs to be removed from the player's
-	 *            list of owned countries.
-	 * @param p_player
-	 *            The parameter "p_player" is of type Player and represents the
-	 *            player from whom the country needs to be removed.
-	 *
-	 */
-	private void removeCountryFromPlayer(int p_countryId, Player p_player) {
-		try {
-			List<Country> l_playerCountries = this.d_players.get(p_player.getName()).getCountriesOwned();
-			l_playerCountries.removeIf(p_country -> p_country.getCountryId() == p_countryId);
-			this.d_players.get(p_player.getName()).setCountriesOwned(l_playerCountries);
 		} catch (Exception e) {
 			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}

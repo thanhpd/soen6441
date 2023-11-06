@@ -71,7 +71,7 @@ public final class Constants {
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
 	public static final String GAME_ENGINE_MAP_EDIT_SUCCESS = "Map loaded successfully, please start editing..!";
-	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File %s does not exist.%nCreating new map named %s.";
+	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File %s does not exist!%nCreating new map named %s.";
 	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
@@ -122,7 +122,7 @@ public final class Constants {
 	public static final String MAP_EDITOR_NEIGHBOR_COUNTRY_NOT_EXIST = "Neighbor country does not exist! Please add it to the map first";
 	public static final String MAP_EDITOR_CONNECTION_EXIST = "Connection already exists!";
 	public static final String MAP_EDITOR_ADD_NEIGHBOR = " added to ";
-	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country ID does not exist";
+	public static final String MAP_EDITOR_COUNTRY_ID_NOT_EXIST = "Country ID does not exist!";
 	public static final String MAP_EDITOR_COUNTRY_REMOVED = " Country is removed!";
 	public static final String MAP_EDITOR_REMOVED = " is removed!";
 	public static final String MAP_EDITOR_COUNTRIES_REMOVED = "Linked countries were also removed!";

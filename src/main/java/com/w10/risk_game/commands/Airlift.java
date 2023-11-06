@@ -137,4 +137,45 @@ public class Airlift extends Order {
 		}
 		return l_countryToAirlift;
 	}
+	/**
+	 * This function is used to check the input format for airlift command.
+	 *
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the input format is valid
+	 */
+	public static boolean CheckValidAirliftInput(String[] p_inputArray) {
+		// Step 1: Check the length of the input
+		if (p_inputArray.length != 4) {
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift", "four");
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
+			return false;
+		}
+		// Step 2: Check whether the country id is positive integer
+		String l_sourceCountryId = p_inputArray[1];
+		String l_targetCountryId = p_inputArray[2];
+		String l_num = p_inputArray[3];
+		for (int i = 0; i < l_sourceCountryId.length(); i++) {
+			if (!Character.isDigit(l_sourceCountryId.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				return false;
+			}
+		}
+		for (int i = 0; i < l_targetCountryId.length(); i++) {
+			if (!Character.isDigit(l_targetCountryId.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				return false;
+			}
+		}
+		// Step 3: Check whether the number of armies is positive integer
+		for (int i = 0; i < l_num.length(); i++) {
+			if (!Character.isDigit(l_num.charAt(i))) {
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				return false;
+			}
+		}
+		return true;
+	}
 }

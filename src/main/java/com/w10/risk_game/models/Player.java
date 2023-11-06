@@ -2,6 +2,7 @@ package com.w10.risk_game.models;
 
 import java.util.ArrayList;
 
+import com.google.common.base.Joiner;
 import com.w10.risk_game.commands.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class Player {
 	private List<Order> d_orders;
 	private int d_leftoverArmies;
 	private List<CardType> d_playerCards = new ArrayList<>();
+	private boolean d_hasCommitted = false;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -123,6 +125,26 @@ public class Player {
 	}
 
 	/**
+	 * The function returns a boolean value indicating whether a player has
+	 * committed
+	 *
+	 * @return boolean value indicating whether a player has committed
+	 */
+	public boolean getHasCommitted() {
+		return d_hasCommitted;
+	}
+
+	/**
+	 * The function sets the boolean value indicating whether a player has committed
+	 *
+	 * @param hasCommitted
+	 *            boolean value indicating whether a player has committed
+	 */
+	public void setHasCommitted(boolean hasCommitted) {
+		this.d_hasCommitted = hasCommitted;
+	}
+
+	/**
 	 * The function adds a card to the player's list of cards.
 	 *
 	 * @param card
@@ -216,10 +238,16 @@ public class Player {
 		boolean l_again = true;
 		boolean l_failed = false;
 		while (l_again) {
+			if (!d_playerCards.isEmpty()) {
+				Formatter l_formatter = new Formatter();
+				l_formatter.format(Constants.SHOW_PLAYER_CARDS, d_name, Joiner.on(", ").join(d_playerCards));
+				d_logger.log(l_formatter.toString());
+				l_formatter.close();
+			}
 			Scanner l_scanner = new Scanner(System.in);
 			// Step 1: Handle invalid input
 			if (l_failed) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_START);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_RESTART);
 				d_logger.log(Constants.USER_INPUT_REQUEST);
 				l_input = l_scanner.nextLine();
 				l_inputArray = l_input.split(" ");
@@ -251,8 +279,13 @@ public class Player {
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					l_failed = !issueDiplomacyOrder(l_inputArray);
 					break;
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+					setHasCommitted(true);
+					d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
+					l_failed = false;
+					break;
 				default :
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 					l_failed = true;
 			}
 			if (l_failed) {
@@ -292,55 +325,20 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 				return Blockade.CheckValidBlockadeInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
-				return checkValidAirliftInput(p_inputArray);
+				return Airlift.CheckValidAirliftInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+				if (d_leftoverArmies == 0) {
+					return true;
+				} else {
+					d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
+					return false;
+				}
 			default :
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_ORDER_TYPE);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 				return false;
 		}
-	}
-
-	/**
-	 * This function is used to check the input format for airlift command.
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the input format is valid
-	 */
-	public boolean checkValidAirliftInput(String[] p_inputArray) {
-		// Step 1: Check the length of the input
-		if (p_inputArray.length != 4) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift", "four");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
-			return false;
-		}
-		// Step 2: Check whether the country id is positive integer
-		String l_sourceCountryId = p_inputArray[1];
-		String l_targetCountryId = p_inputArray[2];
-		String l_num = p_inputArray[3];
-		for (int i = 0; i < l_sourceCountryId.length(); i++) {
-			if (!Character.isDigit(l_sourceCountryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
-				return false;
-			}
-		}
-		for (int i = 0; i < l_targetCountryId.length(); i++) {
-			if (!Character.isDigit(l_targetCountryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
-				return false;
-			}
-		}
-		// Step 3: Check whether the number of armies is positive integer
-		for (int i = 0; i < l_num.length(); i++) {
-			if (!Character.isDigit(l_num.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
-				return false;
-			}
-		}
-		return true;
 	}
 
 	/**

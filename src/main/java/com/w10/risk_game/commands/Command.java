@@ -20,8 +20,9 @@ public enum Command {
 																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), blockade(
 																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), airlift(
 																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
-																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), none(
-																															"");
+																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), commit(
+																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), none(
+																																	"");
 
 	private final String name;
 

@@ -7,6 +7,8 @@ import com.w10.risk_game.models.Phase;
  * The MapEditorPhase class is an abstract class that extends the Phase class
  * and provides default implementations for various methods related to map
  * editing in a game.
+ *
+ * @author Omnia Alam
  */
 public abstract class MapEditorPhase extends Phase {
 

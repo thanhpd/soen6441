@@ -9,6 +9,8 @@ import com.w10.risk_game.commands.Command;
  * The PreLoadPhase class is a subclass of MapEditorPhase that handles the
  * pre-loading phase of a game, allowing the user to load a map file and
  * transition to the next phase.
+ *
+ * @author Omnia Alam
  */
 public class PreLoadPhase extends MapEditorPhase {
 

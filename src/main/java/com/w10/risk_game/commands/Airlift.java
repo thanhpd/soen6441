@@ -137,6 +137,7 @@ public class Airlift extends Order {
 		}
 		return l_countryToAirlift;
 	}
+
 	/**
 	 * This function is used to check the input format for airlift command.
 	 *
@@ -177,5 +178,13 @@ public class Airlift extends Order {
 			}
 		}
 		return true;
+	}
+
+	public int getTargetCountryId() {
+		return Integer.parseInt(this.d_targetCountryId);
+	}
+
+	public int getArmyToAirlift() {
+		return Integer.parseInt(this.d_armyToAirlift);
 	}
 }

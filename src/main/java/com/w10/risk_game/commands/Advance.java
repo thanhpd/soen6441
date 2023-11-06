@@ -19,6 +19,7 @@ public class Advance extends Order {
 	private Country d_countryFrom;
 	private Country d_countryTo;
 	private int d_numOfArmies;
+
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
@@ -53,6 +54,15 @@ public class Advance extends Order {
 	 */
 	public Country getCountryNameTo() {
 		return d_countryTo;
+	}
+
+	/**
+	 * The function returns the number of armies.
+	 *
+	 * @return The method is returning the value of the variable "d_numOfArmies".
+	 */
+	public int getNumOfArmies() {
+		return d_numOfArmies;
 	}
 
 	/**

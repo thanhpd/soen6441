@@ -77,6 +77,8 @@ public final class Constants {
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
 	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
 	public static final String GAME_ENGINE_ISSUE_ORDER_PHASE_STRING = "ISSUEORDER PHASE";
+	public static final String GAME_ENGINE_GAME_OVER = "GAME OVER!!! ";
+	public static final String GAME_ENGINE_END_GAME = " is the winner of the game!!!";
 
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";

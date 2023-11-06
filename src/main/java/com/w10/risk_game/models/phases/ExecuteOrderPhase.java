@@ -234,7 +234,6 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	@Override
 	public void executeAllPlayerOrders() {
 		this.d_gameEngineController.executePlayerOrders();
-		next();
 	}
 
 	/**

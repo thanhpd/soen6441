@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import com.w10.risk_game.commands.Airlift;
@@ -33,6 +34,7 @@ public class GameEngineController {
 	private static List<Player> d_playerListForDiplomacy = new ArrayList<>();
 	private Formatter d_formatter;
 	private MapEditorController d_mapEditorController;
+	private String d_winner;
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -47,6 +49,7 @@ public class GameEngineController {
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
 		this.d_currentPlayerIndex = 0;
+		this.d_winner = null;
 	}
 
 	/**
@@ -364,5 +367,32 @@ public class GameEngineController {
 	 */
 	public void showMap() {
 		this.d_mapEditorController.showMap(true);
+	}
+
+	/**
+	 * The function checks if the game is over by iterating through all countries
+	 * and checking if they have the same owner.
+	 *
+	 * @return The method is returning a boolean value.
+	 */
+	public boolean checkIfGameIsOver() {
+		String l_player = "";
+		for (Country l_country : this.d_mapEditorController.getGameMap().getCountries().values()) {
+			if (l_player.equals(""))
+				l_player = l_country.getOwner().getName();
+			else if (!l_player.equals(l_country.getOwner().getName()))
+				return false;
+		}
+		this.d_winner = l_player;
+		return true;
+	}
+
+	/**
+	 * The function "getWinner" returns the winner of a game.
+	 *
+	 * @return The method is returning the value of the variable "d_winner".
+	 */
+	public String getWinner() {
+		return this.d_winner;
 	}
 }

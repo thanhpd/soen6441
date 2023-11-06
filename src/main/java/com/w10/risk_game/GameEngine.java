@@ -62,13 +62,24 @@ public class GameEngine {
 		Player l_player;
 
 		while (!l_exit) {
-			// First check if Issue Order Phase
+
+			// Check if in issue order phase
 			if (this.d_phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
 				if (!d_gameEngineController.checkIfOrdersCanBeIssued()) {
 					if (d_gameEngineController.checkIfOrdersCanBeExecuted()) {
 						this.d_phase.next();
 						d_logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
 						this.d_phase.executeAllPlayerOrders();
+
+						// Check if the game is over after executing the orders
+						if (this.d_gameEngineController.checkIfGameIsOver()) {
+							d_logger.log(Constants.GAME_ENGINE_GAME_OVER + this.d_gameEngineController.getWinner()
+									+ Constants.GAME_ENGINE_END_GAME);
+							break;
+						} else
+							this.d_phase.next();
+
+						// Reassign reinforcements to players
 						this.d_phase.assignPlayerReinforcements();
 					} else
 						continue;

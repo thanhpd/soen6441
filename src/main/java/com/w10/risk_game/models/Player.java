@@ -338,7 +338,8 @@ public class Player {
 	}
 
 	/**
-	 * The function checks whether a player can advance or not
+	 * The function checks whether a player can advance X armies from a country Y
+	 * onto a country Z or not
 	 *
 	 * @param p_noOfArmiesToAdvance
 	 *            number of armies to advance
@@ -348,12 +349,18 @@ public class Player {
 	 *            country id to advance from
 	 * @return boolean value to show whether the player can advance
 	 */
-	public boolean checkValidAdvanceOrder(int p_noOfArmiesToAdvance, int p_currentArmiesOnCountry,
+	private boolean checkValidAdvanceOrder(int p_noOfArmiesToAdvance, int p_currentArmiesOnCountry,
 			int p_advanceFromCountryId) {
 		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
 		for (Order l_order : this.getOrders()) {
 			if ((l_order instanceof Deploy) && ((Deploy) l_order).getCountryId() == p_advanceFromCountryId) {
 				l_totalArmiesDeployed += ((Deploy) l_order).getNum();
+			} else if ((l_order instanceof Airlift)
+					&& ((Airlift) l_order).getTargetCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Airlift) l_order).getArmyToAirlift();
+			} else if ((l_order instanceof Advance)
+					&& ((Advance) l_order).getCountryNameTo().getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Advance) l_order).getNumOfArmies();
 			}
 		}
 		return l_totalArmiesDeployed >= p_noOfArmiesToAdvance;

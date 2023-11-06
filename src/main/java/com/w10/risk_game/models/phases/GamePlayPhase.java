@@ -78,8 +78,7 @@ public abstract class GamePlayPhase extends Phase {
 	}
 
 	/**
-	 * The function editMap in Java prints an invalid command message and returns
-	 * false.
+	 * The function editMap prints an invalid command message and returns false.
 	 *
 	 * @param p_mapFilePath
 	 *            The parameter "p_mapFilePath" is a String that represents the file

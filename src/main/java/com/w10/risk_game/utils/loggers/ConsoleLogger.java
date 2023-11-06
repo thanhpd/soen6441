@@ -11,7 +11,7 @@ import com.w10.risk_game.utils.Observer;
 public class ConsoleLogger implements Observer {
 
 	/**
-	 * The update function in Java prints the given data.
+	 * The update function prints the given data.
 	 *
 	 * @param p_data
 	 *            The parameter "p_data" is a String that represents the data that

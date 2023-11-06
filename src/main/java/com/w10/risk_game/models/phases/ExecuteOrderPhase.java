@@ -44,8 +44,7 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	}
 
 	/**
-	 * The function editMap in Java prints an invalid command message and returns
-	 * false.
+	 * The function editMap prints an invalid command message and returns false.
 	 *
 	 * @param p_mapFilePath
 	 *            The file path of the map that needs to be edited.

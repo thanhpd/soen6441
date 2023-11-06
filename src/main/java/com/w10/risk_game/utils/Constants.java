@@ -168,4 +168,12 @@ public final class Constants {
 	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between %s and %s";
 	public static final String NEGOTIATE_SELF = "Cannot negotiate with yourself";
 	public static final String NEGOTIATE_NO_PLAYER = "No player with id %s";
+	// Advance constants
+	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on! 🚀🌍⚔️";
+	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You've conquered {1}. Keep the conquest going! 🌍🏆💥";
+	public static final String ADVANCE_BATTLE_LOST = "{0}'s forces have been defeated in the battle for {1}, owned by {2}. 🛡️🔥";
+	public static final String ADVANCE_DEPLOY_SUCCEED = "{0} deployed {1} armies to {2}.";
+	public static final String ADVANCE_INVALID_COUNTRY_NAME = "Invalid input! Country name {0} does not exist.";
+	public static final String ADVANCE_INVALID_ARMY_LESS = "Invalid input! Number of armies must be greater than 0.";
+	public static final String ADVANCE_INVALID_ARMY_MORE = "Invalid input! Number of armies to advance cannot be greater than those deployed on the country.";
 }

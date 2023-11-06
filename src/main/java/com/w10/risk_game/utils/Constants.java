@@ -98,7 +98,6 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
-	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
 	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift!";
 	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
@@ -186,4 +185,8 @@ public final class Constants {
 	public static final String ADVANCE_INVALID_COUNTRY_NAME = "Invalid input! Country name {0} does not exist.";
 	public static final String ADVANCE_INVALID_ARMY_LESS = "Invalid input! Number of armies must be greater than 0.";
 	public static final String ADVANCE_INVALID_ARMY_MORE = "Invalid input! Number of armies to advance cannot be greater than those deployed on the country.";
+
+	// Bomb constants
+	public static final String BOMB_SUCCEED = "Player %s bombed country %s. %s lost half of their armies.";
+	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
 }

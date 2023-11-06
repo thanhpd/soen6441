@@ -5,6 +5,8 @@ import com.w10.risk_game.models.Player;
 
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
+
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
@@ -42,6 +44,8 @@ public class Bomb extends Order {
 			int l_initArmyCount = l_countryToBomb.getArmyCount();
 			int l_newArmyCount = l_initArmyCount / 2;
 			l_countryToBomb.setArmyCount(l_newArmyCount);
+			d_logger.log(MessageFormat.format(Constants.BOMB_SUCCEED, d_player.getName(),
+					l_countryToBomb.getCountryName(), l_countryToBomb.getCountryName()));
 		}
 	}
 
@@ -74,13 +78,9 @@ public class Bomb extends Order {
 	 * @return The method is returning a Country object.
 	 */
 	public static Country GetCountryToBomb(Player p_player, String p_countryId) {
-		Formatter l_formatter = new Formatter();
-		l_formatter.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId);
-
 		// Check country ID validity
 		if (p_countryId == null) {
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -95,12 +95,10 @@ public class Bomb extends Order {
 					.findFirst().orElse(null);
 
 			if (l_countryToBomb == null) {
-				d_logger.log(l_formatter.toString());
+				d_logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
-			d_logger.log(l_formatter.toString());
-		} finally {
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 
 		return l_countryToBomb;
@@ -130,6 +128,7 @@ public class Bomb extends Order {
 
 		return l_neighbors;
 	}
+
 	/**
 	 * This function is used to check the input format for airlift command.
 	 *

@@ -1,6 +1,5 @@
 package com.w10.risk_game.commands;
 
-import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 
@@ -12,6 +11,8 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 /**
  * The Airlift class represents an order to move armies from one country to
  * another in a game.
+ *
+ * @author Tazin Morshed
  */
 public class Airlift extends Order {
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();

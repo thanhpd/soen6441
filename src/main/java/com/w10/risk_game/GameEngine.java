@@ -15,9 +15,10 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngine class handles the command line user interface for the game,
- * including the map editor, start-up d_phase and gameplay d_phase.
+ * The GameEngine class is responsible for managing the game flow, handling user
+ * input, and executing commands in the Risk game.
  *
+ * @author Sherwyn Dsouza
  */
 public class GameEngine {
 
@@ -42,9 +43,8 @@ public class GameEngine {
 	}
 
 	/**
-	 * The `GameUI` constructor initializes a new instance of the `GameEngine` class
-	 * and sets the `d_gameEngine` variable to refer to it. It also sets the
-	 * `d_startGamePhase` variable to `false`.
+	 * The `GameEngine` constructor initializes a new instance of the
+	 * `MapEditorController` class and `GameEngineController` class.
 	 */
 	public GameEngine() {
 		this.d_mapEditorController = new MapEditorController();
@@ -52,9 +52,9 @@ public class GameEngine {
 	}
 
 	/**
-	 * The function "runStartUpPhase" handles the start-up d_phase of a game, taking
-	 * user input and executing corresponding commands through the Game Engine.
-	 *
+	 * The start() function is the main loop of the game engine, where it handles
+	 * user input and executes the corresponding commands based on the current game
+	 * phase.
 	 */
 	public void start() {
 		setPhase(new PreLoadPhase(this));
@@ -93,6 +93,7 @@ public class GameEngine {
 				d_logger.log(this.d_formatter.toString());
 				this.d_formatter.close();
 
+				// Display Player Cards
 				if (!l_player.getPlayerCards().isEmpty()) {
 					Formatter l_formatter = new Formatter();
 					l_formatter.format(Constants.SHOW_PLAYER_CARDS, Joiner.on(", ").join(l_player.getPlayerCards()));
@@ -232,6 +233,8 @@ public class GameEngine {
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 						this.d_phase.issuePlayerOrder();
+						if (Command.equals(Constants.USER_INPUT_COMMAND_QUIT))
+							l_exit = true;
 						break;
 
 					// Other commands
@@ -269,10 +272,20 @@ public class GameEngine {
 		this.d_formatter.close();
 	}
 
+	/**
+	 * The function returns the game engine controller object.
+	 *
+	 * @return The method is returning an object of type GameEngineController.
+	 */
 	public GameEngineController getGame() {
 		return this.d_gameEngineController;
 	}
 
+	/**
+	 * The function returns the MapEditorController object.
+	 *
+	 * @return The method is returning an object of type MapEditorController.
+	 */
 	public MapEditorController getMapEditorController() {
 		return this.d_mapEditorController;
 	}

@@ -9,6 +9,8 @@ import com.w10.risk_game.commands.Command;
  * The PlaySetupPhase class is a subclass of GamePlayPhase that handles the
  * setup phase of the game, including creating and removing players, assigning
  * countries, and transitioning to the main play phase.
+ *
+ * @author Sherwyn Dsouza
  */
 public class PlaySetupPhase extends GamePlayPhase {
 

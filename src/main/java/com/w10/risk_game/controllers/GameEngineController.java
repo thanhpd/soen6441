@@ -298,13 +298,12 @@ public class GameEngineController {
 	}
 
 	/**
-	 * The function executes orders for each player, assigns reinforcements, and
-	 * updates the current player.
+	 * The function executes the orders of the players in a specific order and then
+	 * re-initializes variables for the next turn.
 	 *
-	 * @return The method is returning a boolean value. If the execution of player
-	 *         orders is successful, it returns true. If an exception occurs during
-	 *         execution, it returns false.
-	 *
+	 * @return The method is returning a boolean value. If the execution of the
+	 *         player orders is successful, it returns true. If there is an
+	 *         exception during the execution, it returns false.
 	 */
 	public boolean executePlayerOrders() {
 		try {
@@ -312,6 +311,7 @@ public class GameEngineController {
 			List<Order> l_airliftOrders = new ArrayList<>();
 			List<Order> l_negotiateOrders = new ArrayList<>();
 			List<Order> l_otherOrders = new ArrayList<>();
+
 			// Execute the orders of the players
 			for (Player l_player : this.d_players.values()) {
 				while (!l_player.getOrders().isEmpty()) {
@@ -327,6 +327,7 @@ public class GameEngineController {
 					}
 				}
 			}
+
 			for (Order l_order : l_deployOrders) {
 				l_order.execute();
 			}
@@ -339,7 +340,8 @@ public class GameEngineController {
 			for (Order l_order : l_otherOrders) {
 				l_order.execute();
 			}
-			// Reset the reinforcements of the players and start the Issue Order phase again
+
+			// Re-initialize variables used in the Issue Order phase again
 			this.d_currentPlayerIndex = 0;
 			this.d_playerList = new ArrayList<>(this.d_players.values());
 			this.d_currentPlayer = this.d_playerList.get(0);

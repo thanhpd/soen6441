@@ -2,8 +2,7 @@ package com.w10.risk_game.commands;
 
 import com.w10.risk_game.utils.Constants;
 
-// The code snippet is defining an enum called `Command`. An enum is a special type in Java that
-// represents a fixed set of constants.
+// The code snippet is defining an enum called `Command`.
 public enum Command {
 
 	loadmap(Constants.USER_INPUT_COMMAND_LOADMAP), showmap(Constants.USER_INPUT_COMMAND_SHOWMAP), editmap(
@@ -22,7 +21,8 @@ public enum Command {
 																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
 																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), commit(
 																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), none(
-																																	"");
+																																	""), quit(
+																																			Constants.USER_INPUT_COMMAND_QUIT);
 
 	private final String name;
 

@@ -28,7 +28,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void showMap() {
-		this.d_gameEngineController.showMap();
+		this.printInvalidCommandMessage();
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.assigncountries, Command.gameplayer, Command.showmap);
+		return Set.of(Command.assigncountries, Command.gameplayer);
 	}
 
 	/**

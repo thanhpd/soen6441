@@ -40,7 +40,10 @@ public class PreLoadPhase extends MapEditorPhase {
 	 * The next() function sets the phase of the game engine to the PostLoadPhase.
 	 */
 	public void next() {
-		d_gameEngine.setPhase(new PostLoadPhase(d_gameEngine));
+		if (this.d_mapEditorController.checkIfMapIsValid()) {
+			d_gameEngine.setPhase(new PostLoadPhase(d_gameEngine));
+		}
+
 	}
 
 	/**
@@ -212,6 +215,12 @@ public class PreLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public boolean assignPlayerReinforcements() {
+		this.printInvalidCommandMessage();
+		return false;
+	}
+
+	@Override
+	public boolean editMap(String p_mapFilePath) {
 		this.printInvalidCommandMessage();
 		return false;
 	}

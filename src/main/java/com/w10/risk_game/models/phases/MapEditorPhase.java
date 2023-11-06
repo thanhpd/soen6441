@@ -66,17 +66,4 @@ public abstract class MapEditorPhase extends Phase {
 		return false;
 	}
 
-	/**
-	 * The function returns false and prints an invalid command message because it
-	 * isn't in a correct phase.
-	 *
-	 * @param p_mapFilePath
-	 *            The file path of the map that needs to be edited.
-	 * @return The method is returning false.
-	 */
-	@Override
-	public boolean editMap(String p_mapFilePath) {
-		this.printInvalidCommandMessage();
-		return false;
-	}
 }

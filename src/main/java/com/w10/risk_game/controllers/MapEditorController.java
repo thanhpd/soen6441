@@ -62,16 +62,6 @@ public class MapEditorController {
 			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
 
-			// Check if map is created and is valid
-			if (this.d_gameMap.isMapCreated()) {
-				if (!checkIfMapIsValid()) {
-					this.d_gameMap = null;
-					d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
-				}
-			} else {
-				d_logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
-			}
-
 		} catch (Exception e) {
 			d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 		}
@@ -114,9 +104,6 @@ public class MapEditorController {
 	 *
 	 */
 	public boolean editMap(String p_mapFilePath) {
-		// phase.doAcitin();
-		// or phase.editMap
-		// changePhase(new MapEditorPhase());
 
 		File l_file = new File(p_mapFilePath);
 

@@ -53,6 +53,7 @@ public class MapEditor {
 		Continent l_continent = l_gameMap.getContinentByName(p_continentName);
 		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
 		l_gameMap.getCountries().put(p_countryId, l_country);
+		l_continent.addCountry(l_country);
 		return p_countryName + Constants.MAP_EDITOR_ADD_COUNTRY + p_continentName;
 	}
 

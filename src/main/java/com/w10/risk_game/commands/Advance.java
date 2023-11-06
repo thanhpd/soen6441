@@ -80,7 +80,9 @@ public class Advance extends Order {
 				d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_WON, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName()));
 				this.d_countryTo.setArmyCount(l_leftoverAttackingArmies);
+				this.d_countryTo.getOwner().removeCountry(d_countryTo);
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
+				this.d_countryFrom.getOwner().addCountry(d_countryTo);
 				this.d_countryFrom.getOwner().addCard(CardType.getRandomCard());
 			} else {
 				d_logger.log(

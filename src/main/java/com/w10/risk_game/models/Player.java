@@ -555,4 +555,26 @@ public class Player {
 	private void removeCard(CardType p_cardType) {
 		d_playerCards.remove(p_cardType);
 	}
+
+	/**
+	 * The function removes a country of a given type from a player's list of
+	 * countries owned.
+	 *
+	 * @param p_country
+	 *            country
+	 */
+	public void removeCountry(Country p_country) {
+		this.d_countriesOwned.remove(p_country);
+	}
+
+	/**
+	 * The function adds a country into a player's list of countries owned.
+	 *
+	 * @param p_country
+	 *            country
+	 */
+	public void addCountry(Country p_country) {
+		this.d_countriesOwned.add(p_country);
+	}
+
 }

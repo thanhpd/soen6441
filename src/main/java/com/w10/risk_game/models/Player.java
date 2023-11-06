@@ -398,34 +398,37 @@ public class Player {
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueAdvanceOrder(String[] p_inputArray) {
-		// Step 1: Get the variables needed to create an advance order
-		String l_countryNameFrom = p_inputArray[1];
-		String l_countryNameTo = p_inputArray[2];
-		Country l_countryFrom = this.d_countriesOwned.stream()
-				.filter(l_c -> l_c.getCountryName().equals(l_countryNameFrom)).findAny().orElse(null);
-		Country l_countryTo = l_countryFrom != null
-				? l_countryFrom.getNeighbors().values().stream().filter(c -> c.getCountryName().equals(l_countryNameTo))
-						.findAny().orElse(null)
-				: null;
-		int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
-		// Step 2: Check whether the order is valid
-		if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0
-				&& (l_countryFrom.getArmyCount() >= d_advanceArmies || checkValidAdvanceOrder(d_advanceArmies,
-						l_countryFrom.getArmyCount(), l_countryFrom.getCountryId()))) {
-			Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
-			d_orders.add(l_order);
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true;
-		} else {
-			if (l_countryFrom == null || l_countryTo == null)
-				d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME,
-						l_countryFrom == null ? l_countryNameFrom : l_countryNameTo));
-			else if (d_advanceArmies <= 0)
-				d_logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
-			else
-				d_logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
-			return false;
+		if (Advance.CheckValidAdvanceInput(p_inputArray)) {
+			// Step 1: Get the variables needed to create an advance order
+			String l_countryNameFrom = p_inputArray[1];
+			String l_countryNameTo = p_inputArray[2];
+			Country l_countryFrom = this.d_countriesOwned.stream()
+					.filter(l_c -> l_c.getCountryName().equals(l_countryNameFrom)).findAny().orElse(null);
+			Country l_countryTo = l_countryFrom != null
+					? l_countryFrom.getNeighbors().values().stream()
+							.filter(c -> c.getCountryName().equals(l_countryNameTo)).findAny().orElse(null)
+					: null;
+			int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
+			// Step 2: Check whether the order is valid
+			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0
+					&& (l_countryFrom.getArmyCount() >= d_advanceArmies || checkValidAdvanceOrder(d_advanceArmies,
+							l_countryFrom.getArmyCount(), l_countryFrom.getCountryId()))) {
+				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
+				d_orders.add(l_order);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true;
+			} else {
+				if (l_countryFrom == null || l_countryTo == null)
+					d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME,
+							l_countryFrom == null ? l_countryNameFrom : l_countryNameTo));
+				else if (d_advanceArmies <= 0)
+					d_logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
+				else
+					d_logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
+				return false;
+			}
 		}
+		return false;
 	}
 
 	/**

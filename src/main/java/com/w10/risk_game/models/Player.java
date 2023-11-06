@@ -233,17 +233,12 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
+		setHasCommitted(false);
 		String l_input = GameEngine.Command;
 		String[] l_inputArray = l_input.split(" ");
 		boolean l_again = true;
 		boolean l_failed = false;
 		while (l_again) {
-			if (!d_playerCards.isEmpty()) {
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.SHOW_PLAYER_CARDS, d_name, Joiner.on(", ").join(d_playerCards));
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
-			}
 			Scanner l_scanner = new Scanner(System.in);
 			// Step 1: Handle invalid input
 			if (l_failed) {
@@ -280,9 +275,14 @@ public class Player {
 					l_failed = !issueDiplomacyOrder(l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
-					setHasCommitted(true);
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
-					l_failed = false;
+					if (d_leftoverArmies == 0) {
+						setHasCommitted(true);
+						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
+						l_failed = false;
+					} else {
+						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
+						l_failed = true;
+					}
 					break;
 				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
@@ -329,12 +329,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
-				if (d_leftoverArmies == 0) {
-					return true;
-				} else {
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
-					return false;
-				}
+				return true;
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 				return false;
@@ -501,7 +496,7 @@ public class Player {
 
 	/**
 	 * The function issueAirliftOrder checks if the player has an airlift card and
-	 * validates the orderb efore creating a new airlift order and adding it to the
+	 * validates the order before creating a new airlift order and adding it to the
 	 * list of orders.
 	 *
 	 * @param p_inputArray

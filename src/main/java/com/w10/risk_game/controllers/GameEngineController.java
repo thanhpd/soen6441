@@ -6,6 +6,9 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 
+import com.w10.risk_game.commands.Airlift;
+import com.w10.risk_game.commands.Deploy;
+import com.w10.risk_game.commands.Negotiate;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.commands.Order;
@@ -301,11 +304,36 @@ public class GameEngineController {
 	 */
 	public boolean executePlayerOrders() {
 		try {
+			List<Order> l_deployOrders = new ArrayList<>();
+			List<Order> l_airliftOrders = new ArrayList<>();
+			List<Order> l_negotiateOrders = new ArrayList<>();
+			List<Order> l_otherOrders = new ArrayList<>();
 			// Execute the orders of the players
 			for (Player l_player : this.d_players.values()) {
 				while (!l_player.getOrders().isEmpty()) {
-					l_player.nextOrder().execute();
+					Order l_order = l_player.nextOrder();
+					if (l_order instanceof Deploy) {
+						l_deployOrders.add(l_order);
+					} else if (l_order instanceof Airlift) {
+						l_airliftOrders.add(l_order);
+					} else if (l_order instanceof Negotiate) {
+						l_negotiateOrders.add(l_order);
+					} else {
+						l_otherOrders.add(l_order);
+					}
 				}
+			}
+			for (Order l_order : l_deployOrders) {
+				l_order.execute();
+			}
+			for (Order l_order : l_airliftOrders) {
+				l_order.execute();
+			}
+			for (Order l_order : l_negotiateOrders) {
+				l_order.execute();
+			}
+			for (Order l_order : l_otherOrders) {
+				l_order.execute();
 			}
 			// Reset the reinforcements of the players and start the Issue Order phase again
 			this.d_currentPlayerIndex = 0;

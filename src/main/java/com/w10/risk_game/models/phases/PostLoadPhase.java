@@ -9,6 +9,8 @@ import com.w10.risk_game.commands.Command;
  * The PostLoadPhase class is a subclass of MapEditorPhase that represents the
  * phase after loading a map in a game editor, allowing for editing and saving
  * of the map.
+ *
+ * @author Omnia Alam
  */
 public class PostLoadPhase extends MapEditorPhase {
 

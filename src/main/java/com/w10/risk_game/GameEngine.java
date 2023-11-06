@@ -221,6 +221,8 @@ public class GameEngine {
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 						this.d_phase.issuePlayerOrder();
+						if (Command.equals(Constants.USER_INPUT_COMMAND_QUIT))
+							l_exit = true;
 						break;
 
 					// Other commands

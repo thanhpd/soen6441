@@ -21,7 +21,8 @@ public enum Command {
 																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
 																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), commit(
 																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), none(
-																																	"");
+																																	""), quit(
+																																			Constants.USER_INPUT_COMMAND_QUIT);
 
 	private final String name;
 

@@ -38,13 +38,13 @@ public class Player {
 	 * (`d_leftoverArmies`).
 	 *
 	 * @param p_name
-	 *                         the player name
+	 *            the player name
 	 * @param p_countriesOwned
-	 *                         the list of countries owned by the player
+	 *            the list of countries owned by the player
 	 * @param p_orders
-	 *                         the list of orders to issue
+	 *            the list of orders to issue
 	 * @param p_leftoverArmies
-	 *                         the number of current army in possess by the player
+	 *            the number of current army in possess by the player
 	 */
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
 		this.d_name = p_name;
@@ -66,9 +66,8 @@ public class Player {
 	 * The function sets the name of the player.
 	 *
 	 * @param p_name
-	 *               The parameter "p_name" is a String that represents the name of
-	 *               the
-	 *               player.
+	 *            The parameter "p_name" is a String that represents the name of the
+	 *            player.
 	 */
 	public void setName(String p_name) {
 		this.d_name = p_name;
@@ -88,9 +87,8 @@ public class Player {
 	 * The function sets the list of countries owned by a player.
 	 *
 	 * @param p_countriesOwned
-	 *                         This parameter is a List of objects of type Country.
-	 *                         It represents
-	 *                         the countries that are owned by a player.
+	 *            This parameter is a List of objects of type Country. It represents
+	 *            the countries that are owned by a player.
 	 */
 	public void setCountriesOwned(List<Country> p_countriesOwned) {
 		this.d_countriesOwned = p_countriesOwned;
@@ -119,8 +117,8 @@ public class Player {
 	 * The function sets the player's cards to the given list of card types.
 	 *
 	 * @param playerCards
-	 *                    The parameter "playerCards" is a List of objects of type
-	 *                    "CardType".
+	 *            The parameter "playerCards" is a List of objects of type
+	 *            "CardType".
 	 */
 	public void setPlayerCards(List<CardType> playerCards) {
 		this.d_playerCards = playerCards;
@@ -140,7 +138,7 @@ public class Player {
 	 * The function sets the boolean value indicating whether a player has committed
 	 *
 	 * @param hasCommitted
-	 *                     boolean value indicating whether a player has committed
+	 *            boolean value indicating whether a player has committed
 	 */
 	public void setHasCommitted(boolean hasCommitted) {
 		this.d_hasCommitted = hasCommitted;
@@ -150,7 +148,7 @@ public class Player {
 	 * The function adds a card to the player's list of cards.
 	 *
 	 * @param card
-	 *             The parameter "card" is an object of type CardType.
+	 *            The parameter "card" is an object of type CardType.
 	 */
 	public void addCard(CardType card) {
 		this.d_playerCards.add(card);
@@ -161,7 +159,7 @@ public class Player {
 	 * countries.
 	 *
 	 * @param p_CountryId
-	 *                    An integer representing the ID of a country.
+	 *            An integer representing the ID of a country.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean hasCountry(int p_CountryId) {
@@ -180,7 +178,7 @@ public class Player {
 	 * The function sets the list of orders for a given player.
 	 *
 	 * @param p_orders
-	 *                 The parameter "p_orders" is a List of Order of a player.
+	 *            The parameter "p_orders" is a List of Order of a player.
 	 */
 	public void setOrders(List<Order> p_orders) {
 		this.d_orders = p_orders;
@@ -200,9 +198,8 @@ public class Player {
 	 * The function sets the value of the "leftoverArmies" variable.
 	 *
 	 * @param p_leftoverArmies
-	 *                         The parameter "p_leftoverArmies" is an integer that
-	 *                         represents the
-	 *                         number of leftover armies.
+	 *            The parameter "p_leftoverArmies" is an integer that represents the
+	 *            number of leftover armies.
 	 */
 	public void setLeftoverArmies(int p_leftoverArmies) {
 		this.d_leftoverArmies = p_leftoverArmies;
@@ -213,8 +210,8 @@ public class Player {
 	 * leftover armies.
 	 *
 	 * @param p_num
-	 *              The parameter "p_num" represents the number of armies that are
-	 *              being deployed.
+	 *            The parameter "p_num" represents the number of armies that are
+	 *            being deployed.
 	 */
 	public void deployArmies(int p_num) {
 		this.d_leftoverArmies -= p_num;
@@ -224,9 +221,8 @@ public class Player {
 	 * The function adds a specified number of armies to a player's leftoverArmies.
 	 *
 	 * @param p_num
-	 *              The parameter "p_num" represents the number of armies that will
-	 *              be
-	 *              added to the existing number of leftover armies.
+	 *            The parameter "p_num" represents the number of armies that will be
+	 *            added to the existing number of leftover armies.
 	 */
 	public void addArmies(int p_num) {
 		this.d_leftoverArmies += p_num;
@@ -267,25 +263,25 @@ public class Player {
 			String l_orderType = l_inputArray[0];
 			switch (l_orderType) {
 				// Step 3: Create order object and add it to the list of orders
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 					l_failed = !issueDeployOrder(l_inputArray);
 					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 					l_failed = !issueAdvanceOrder(l_inputArray);
 					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 					l_failed = !issueBombOrder(l_inputArray);
 					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 					l_failed = !issueBlockadeOrder(l_inputArray);
 					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 					l_failed = !issueAirliftOrder(l_inputArray);
 					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					l_failed = !issueDiplomacyOrder(l_inputArray);
 					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT:
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 					if (d_leftoverArmies == 0) {
 						setHasCommitted(true);
 						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
@@ -295,7 +291,7 @@ public class Player {
 						l_failed = true;
 					}
 					break;
-				default:
+				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 					l_failed = true;
 			}
@@ -321,27 +317,27 @@ public class Player {
 	 * This function is used to check the input format for order.
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public boolean checkValidOrderInput(String[] p_inputArray) {
 		String l_orderType = p_inputArray[0];
 		switch (l_orderType) {
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 				return Deploy.CheckValidDeployInput(p_inputArray);
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 				return Advance.CheckValidAdvanceInput(p_inputArray);
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 				return Bomb.CheckValidBombInput(p_inputArray);
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 				return Blockade.CheckValidBlockadeInput(p_inputArray);
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 				return Airlift.CheckValidAirliftInput(p_inputArray);
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
-			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT:
+			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 				return true;
-			default:
+			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 				return false;
 		}
@@ -352,11 +348,11 @@ public class Player {
 	 * onto a country Z or not
 	 *
 	 * @param p_noOfArmiesToAdvance
-	 *                                 number of armies to advance
+	 *            number of armies to advance
 	 * @param p_currentArmiesOnCountry
-	 *                                 current armies on country
+	 *            current armies on country
 	 * @param p_advanceFromCountryId
-	 *                                 country id to advance from
+	 *            country id to advance from
 	 * @return boolean value to show whether the player can advance
 	 */
 	private boolean checkValidAdvanceOrder(int p_noOfArmiesToAdvance, int p_currentArmiesOnCountry,
@@ -380,7 +376,7 @@ public class Player {
 	 * The function try to add deploy order to the player's order list
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueDeployOrder(String[] p_inputArray) {
@@ -405,7 +401,7 @@ public class Player {
 	 * The function try to add advance order to the player's order list
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueAdvanceOrder(String[] p_inputArray) {
@@ -446,7 +442,7 @@ public class Player {
 	 * The function try to add bomb order to the player's order list
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueBombOrder(String[] p_inputArray) {
@@ -460,7 +456,8 @@ public class Player {
 				return true;
 			} else {
 				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
+				l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
 				d_logger.log(l_formatter.toString());
 				l_formatter.close();
 				return false;
@@ -474,7 +471,7 @@ public class Player {
 	 * The function try to add blockade order to the player's order list
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueBlockadeOrder(String[] p_inputArray) {
@@ -503,7 +500,7 @@ public class Player {
 	 * The function try to add diplomacy order to the player's order list
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueDiplomacyOrder(String[] p_inputArray) {
@@ -535,11 +532,9 @@ public class Player {
 	 * list of orders.
 	 *
 	 * @param p_inputArray
-	 *                     An array of strings that represents the input command.
-	 *                     The first
-	 *                     element is the command itself, and the following elements
-	 *                     are the
-	 *                     parameters for the command.
+	 *            An array of strings that represents the input command. The first
+	 *            element is the command itself, and the following elements are the
+	 *            parameters for the command.
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean issueAirliftOrder(String[] p_inputArray) {
@@ -571,7 +566,7 @@ public class Player {
 	 * The function checks whether a player has a card of a given type.
 	 *
 	 * @param p_cardType
-	 *                   cart type
+	 *            cart type
 	 * @return boolean value to show whether the player has specific card
 	 */
 	private boolean hasCard(CardType p_cardType) {
@@ -587,7 +582,7 @@ public class Player {
 	 * The function removes a card of a given type from a player's list of cards.
 	 *
 	 * @param p_cardType
-	 *                   card type
+	 *            card type
 	 */
 	private void removeCard(CardType p_cardType) {
 		d_playerCards.remove(p_cardType);
@@ -598,7 +593,7 @@ public class Player {
 	 * countries owned.
 	 *
 	 * @param p_country
-	 *                  country
+	 *            country
 	 */
 	public void removeCountry(Country p_country) {
 		this.d_countriesOwned.remove(p_country);
@@ -608,7 +603,7 @@ public class Player {
 	 * The function adds a country into a player's list of countries owned.
 	 *
 	 * @param p_country
-	 *                  country
+	 *            country
 	 */
 	public void addCountry(Country p_country) {
 		this.d_countriesOwned.add(p_country);

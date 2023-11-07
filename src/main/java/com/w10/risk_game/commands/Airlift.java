@@ -92,27 +92,37 @@ public class Airlift extends Order {
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,
 			String p_armiesToAirlift) {
+		// Retrieve the source and target countries and the number of armies to be
+		// airlifted
 		Country l_sourceCountry = getCountryForAirlift(p_player, p_sourceCountryId);
 		Country l_targetCountry = getCountryForAirlift(p_player, p_targetCountryId);
 		int l_armyToAirlift = Integer.parseInt(p_armiesToAirlift);
 
+		// Check if the player has the source and target countries
 		if (!p_player.hasCountry(Integer.parseInt(p_sourceCountryId))) {
+			// Log a message if the source country does not belong to the player
 			d_logger.log(MessageFormat.format(Constants.AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER, p_sourceCountryId,
 					p_player.getName()));
 		}
 
 		if (!p_player.hasCountry(Integer.parseInt(p_targetCountryId))) {
+			// Log a message if the target country does not belong to the player
 			d_logger.log(MessageFormat.format(Constants.AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER, p_targetCountryId,
 					p_player.getName()));
 		}
 
+		// Check if both source and target countries exist and if the source country has
+		// enough armies to airlift
 		if (l_sourceCountry != null && l_targetCountry != null) {
 			if (l_armyToAirlift > l_sourceCountry.getArmyCount()) {
+				// Log a message if the source country doesn't have enough armies for airlift
 				d_logger.log(MessageFormat.format(Constants.AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY,
 						l_sourceCountry.getCountryName(), l_sourceCountry.getArmyCount()));
 			}
 		}
 
+		// Return a boolean indicating if the order is valid based on multiple
+		// conditions
 		return l_sourceCountry != null && l_targetCountry != null && l_armyToAirlift > 0
 				&& l_armyToAirlift <= l_sourceCountry.getArmyCount();
 	}

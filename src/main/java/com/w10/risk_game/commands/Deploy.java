@@ -5,6 +5,7 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
+import java.text.MessageFormat;
 import java.util.Formatter;
 import java.util.List;
 
@@ -58,10 +59,7 @@ public class Deploy extends Order {
 			if (l_country.getCountryId() == d_countryId) {
 				int l_countryArmies = l_country.getArmyCount();
 				l_country.setArmyCount(l_countryArmies + d_num);
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
 			}
 		}
 	}
@@ -140,10 +138,8 @@ public class Deploy extends Order {
 	public static boolean CheckValidDeployInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy", "three");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy",
+					"three"));
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer

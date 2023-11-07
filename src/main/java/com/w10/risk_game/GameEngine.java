@@ -1,5 +1,6 @@
 package com.w10.risk_game;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -95,10 +96,7 @@ public class GameEngine {
 
 				// Display Player Cards
 				if (!l_player.getPlayerCards().isEmpty()) {
-					Formatter l_formatter = new Formatter();
-					l_formatter.format(Constants.SHOW_PLAYER_CARDS, Joiner.on(", ").join(l_player.getPlayerCards()));
-					d_logger.log(l_formatter.toString());
-					l_formatter.close();
+					d_logger.log(MessageFormat.format(Constants.SHOW_PLAYER_CARDS, Joiner.on(", ").join(l_player.getPlayerCards())));
 				} else {
 					d_logger.log(Constants.SHOW_PLAYER_CARDS_EMPTY);
 				}

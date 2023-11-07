@@ -102,12 +102,12 @@ public final class Constants {
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
 	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift!";
 	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
-	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The %s command should contain %s parts. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This %s order is invalid. It will not be added to the list of orders.";
+	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The {0} command should contain {1} parts. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This {0} order is invalid. It will not be added to the list of orders.";
 	public static final String PLAYER_ISSUE_ORDER_SUCCEED = "This order is added to the list of orders successfully.";
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_INVALID = "You cannot commit before deploying all your armies.";
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_SUCCEED = "All orders are committed successfully.";
-	public static final String SHOW_PLAYER_CARDS = "You have the following cards: %s";
+	public static final String SHOW_PLAYER_CARDS = "You have the following cards: {0}";
 	public static final String SHOW_PLAYER_CARDS_EMPTY = "You don't have any cards.";
 
 	// Map Editor constants
@@ -167,16 +167,16 @@ public final class Constants {
 	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
 
 	// Deploy constants
-	public static final String DEPLOY_SUCCEED = "Player %s deployed %d armies to country %s";
+	public static final String DEPLOY_SUCCEED = "Player {0} deployed {1} armies to country {2}";
 	public static final String DEPLOY_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";
 	public static final String DEPLOY_INVALID_ARMIES = "Invalid input! The entered number should be less than or equal to the number of reinforcement soldiers. Please try again.";
 
 	// Negotiate constants
-	public static final String NEGOTIATE_CARD_USED = "%s is negotiating with %s";
-	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from %s to %s";
-	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between %s and %s";
+	public static final String NEGOTIATE_CARD_USED = "{0} is negotiating with {1}";
+	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from {0} to {1}";
+	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between {0} and {1}";
 	public static final String NEGOTIATE_SELF = "Cannot negotiate with yourself";
-	public static final String NEGOTIATE_NO_PLAYER = "No player with id %s";
+	public static final String NEGOTIATE_NO_PLAYER = "No player with id {0}";
 
 	// Advance constants
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";

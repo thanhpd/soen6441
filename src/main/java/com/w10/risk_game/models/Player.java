@@ -389,8 +389,10 @@ public class Player {
 			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 			return true;
 		} else {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
+			Formatter l_formatter = new Formatter();
+			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY);
+			d_logger.log(l_formatter.toString());
+			l_formatter.close();
 			return false;
 		}
 	}
@@ -445,15 +447,19 @@ public class Player {
 	 */
 	public boolean issueBombOrder(String[] p_inputArray) {
 		String l_countryIdToBomb = p_inputArray[1];
-		if (hasCard(CardType.BOMB) && Bomb.ValidateOrder(this, l_countryIdToBomb)) {
-			Order order = new Bomb(this, l_countryIdToBomb);
-			d_orders.add(order);
-			removeCard(CardType.BOMB);
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true;
+		if (hasCard(CardType.BOMB)) {
+			if (Bomb.ValidateOrder(this, l_countryIdToBomb)) {
+				Order order = new Bomb(this, l_countryIdToBomb);
+				d_orders.add(order);
+				removeCard(CardType.BOMB);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true;
+			} else {
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB));
+				return false;
+			}
 		} else {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB));
 			return false;
 		}
 	}
@@ -467,15 +473,19 @@ public class Player {
 	 */
 	public boolean issueBlockadeOrder(String[] p_inputArray) {
 		String l_countryIdToBlockade = p_inputArray[1];
-		if (hasCard(CardType.BLOCKADE) && Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
-			Order order = new Blockade(this, l_countryIdToBlockade);
-			d_orders.add(order);
-			removeCard(CardType.BLOCKADE);
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true;
+		if (hasCard(CardType.BLOCKADE)) {
+			if (Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
+				Order order = new Blockade(this, l_countryIdToBlockade);
+				d_orders.add(order);
+				removeCard(CardType.BLOCKADE);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true;
+			} else {
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE));
+				return false;
+			}
 		} else {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE));
 			return false;
 		}
 	}
@@ -490,15 +500,19 @@ public class Player {
 	public boolean issueDiplomacyOrder(String[] p_inputArray) {
 		String l_playerId = p_inputArray[1];
 		String l_playerName = l_playerId;
-		if (hasCard(CardType.DIPLOMACY) && Negotiate.ValidateOrder(this, l_playerName)) {
-			Order order = new Negotiate(this, l_playerId);
-			d_orders.add(order);
-			removeCard(CardType.DIPLOMACY);
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true;
+		if (hasCard(CardType.DIPLOMACY)) {
+			if (Negotiate.ValidateOrder(this, l_playerName)) {
+				Order order = new Negotiate(this, l_playerId);
+				d_orders.add(order);
+				removeCard(CardType.DIPLOMACY);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true;
+			} else {
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE));
+				return false;
+			}
 		} else {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE));
 			return false;
 		}
 	}
@@ -519,16 +533,19 @@ public class Player {
 		String l_countryIdToAirliftFrom = p_inputArray[1];
 		String l_countryIdToAirlift = p_inputArray[2];
 		String l_airliftArmies = p_inputArray[3];
-		if (hasCard(CardType.AIRLIFT)
-				&& Airlift.ValidateOrder(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
-			Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
-			d_orders.add(order);
-			removeCard(CardType.AIRLIFT);
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true;
+		if (hasCard(CardType.AIRLIFT)) {
+			if (Airlift.ValidateOrder(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
+				Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
+				d_orders.add(order);
+				removeCard(CardType.AIRLIFT);
+				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true;
+			} else {
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
+				return false;
+			}
 		} else {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
 			return false;
 		}
 	}

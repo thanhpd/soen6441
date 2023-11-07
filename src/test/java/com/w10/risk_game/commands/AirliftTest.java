@@ -22,36 +22,36 @@ public class AirliftTest {
 	private int country2InitialArmyCount = 12;
 
 	/**
-     * Set up initial test conditions.
-     */
-    @BeforeEach
-    public void setUp() {
-        // Create two countries
-        country1 = new Country(1, "England", 1, country1InitialArmyCount);
-        country2 = new Country(2, "France", 1, country2InitialArmyCount);
+	 * Set up initial test conditions.
+	 */
+	@BeforeEach
+	public void setUp() {
+		// Create two countries
+		country1 = new Country(1, "England", 1, country1InitialArmyCount);
+		country2 = new Country(2, "France", 1, country2InitialArmyCount);
 
-        // Create a player
-        player1 = new Player("Player1", new ArrayList<>(), new ArrayList<>(), 10);
+		// Create a player
+		player1 = new Player("Player1", new ArrayList<>(), new ArrayList<>(), 10);
 
-        // Create a list of countries and assign them to the player
-        ArrayList<Country> countries1 = new ArrayList<>() {
-            {
-                add(country1);
-                add(country2);
-            }
-        };
+		// Create a list of countries and assign them to the player
+		ArrayList<Country> countries1 = new ArrayList<>() {
+			{
+				add(country1);
+				add(country2);
+			}
+		};
 
-        // Set country-1 and country-2 owner as player 1
-        country1.setOwner(player1);
-        player1.setCountriesOwned(countries1);
-    }
+		// Set country-1 and country-2 owner as player 1
+		country1.setOwner(player1);
+		player1.setCountriesOwned(countries1);
+	}
 
-@Test
-    public void testAirliftExecution() {
-        // Create an Airlift order
-        d_order1 = new Airlift(player1, "1", "2", "5");
-        // Execute the Airlift order
-        d_order1.execute();
+	@Test
+	public void testAirliftExecution() {
+		// Create an Airlift order
+		d_order1 = new Airlift(player1, "1", "2", "5");
+		// Execute the Airlift order
+		d_order1.execute();
 
-    }
+	}
 }

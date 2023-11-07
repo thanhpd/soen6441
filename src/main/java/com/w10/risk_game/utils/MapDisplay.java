@@ -87,7 +87,10 @@ public class MapDisplay {
 					if (p_showArmies) {
 						l_formatter.format(l_table, l_country.getCountryName(), l_country.getCountryId(),
 								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue,
-								l_country.getOwner().getName(), l_country.getArmyCount());
+								l_country.getOwner() == null
+										? Constants.MAP_DISPLAY_NEUTRAL_COUNTRY
+										: l_country.getOwner().getName(),
+								l_country.getArmyCount());
 					} else {
 						l_formatter.format(l_table, l_country.getCountryName(), l_country.getCountryId(),
 								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue);

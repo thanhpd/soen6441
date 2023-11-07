@@ -291,6 +291,9 @@ public class Player {
 						l_failed = true;
 					}
 					break;
+				case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					GameEngine.d_phase.showMap();
+					break;
 				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 					l_failed = true;
@@ -336,6 +339,8 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+				return true;
+			case Constants.USER_INPUT_COMMAND_SHOWMAP :
 				return true;
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);

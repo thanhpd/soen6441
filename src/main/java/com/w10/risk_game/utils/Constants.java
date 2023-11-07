@@ -92,10 +92,10 @@ public final class Constants {
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
 	// Player constants
-	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
+	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\", \"showmap\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer.	Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\", \"showmap\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";

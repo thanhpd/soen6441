@@ -197,6 +197,7 @@ public final class Constants {
 
 	// Airlift constants
 	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifed from {1} to {2}";
-	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "{0} doesnt belong to {1}";
+	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} doesnt belong to {1}";
+	public static final String AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY = "Country {0} can airlift at most {1} armies";
 
 }

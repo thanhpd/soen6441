@@ -26,7 +26,7 @@ public class GameEngine {
 	private final GameEngineController d_gameEngineController;
 	private final MapEditorController d_mapEditorController;
 	private Formatter d_formatter;
-	private Phase d_phase;
+	public static Phase d_phase;
 
 	public static String Command = "";
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();

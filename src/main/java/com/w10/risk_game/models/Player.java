@@ -252,6 +252,12 @@ public class Player {
 					GameEngine.Command = Constants.USER_INPUT_COMMAND_QUIT;
 					break;
 				}
+				// Check if user enters showmap after an invalid order
+				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_SHOWMAP)) {
+					GameEngine.d_phase.showMap();
+					l_input = Constants.USER_INPUT_COMMAND_SHOWMAP;
+					l_failed = false;
+				}
 				l_inputArray = l_input.split(" ");
 			}
 			// Step 2: Check the input format
@@ -290,6 +296,11 @@ public class Player {
 						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
 						l_failed = true;
 					}
+					break;
+				case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					d_logger.log(Constants.USER_INPUT_REQUEST);
+					l_input = l_scanner.nextLine();
+					d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
 					break;
 				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
@@ -336,6 +347,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+			case Constants.USER_INPUT_COMMAND_SHOWMAP :
 				return true;
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);

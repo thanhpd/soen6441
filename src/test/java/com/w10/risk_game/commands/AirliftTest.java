@@ -51,6 +51,7 @@ public class AirliftTest {
 		d_order1.execute();
 
 		assertEquals(15, d_country1.getArmyCount());
+		assertEquals(17, d_country2.getArmyCount());
 
 	}
 }

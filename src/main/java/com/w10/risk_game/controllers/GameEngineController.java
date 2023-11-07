@@ -35,6 +35,7 @@ public class GameEngineController {
 	private Formatter d_formatter;
 	private MapEditorController d_mapEditorController;
 	private String d_winner;
+	private static List<Order> d_otherOrders = new ArrayList<>();
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -70,7 +71,18 @@ public class GameEngineController {
 	public void setPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
 		this.d_playerListForDiplomacy = p_playerListForDiplomacy;
 	}
-
+	/**
+	 * This function is used to get the list of other orders
+	 */
+	public static List<Order> getOtherOrders() {
+		return d_otherOrders;
+	}
+	/**
+	 * This function is used to set the list of other orders
+	 */
+	public static void setOtherOrders(List<Order> p_otherOrders) {
+		d_otherOrders = p_otherOrders;
+	}
 	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
@@ -287,7 +299,7 @@ public class GameEngineController {
 
 	/**
 	 * The function checks if there are any players in the player list. If empty, it
-	 * returs True so that no more players have to issue orders and order execution
+	 * returns True so that no more players have to issue orders and order execution
 	 * can begin by the game engine
 	 *
 	 * @return The method is returning a boolean value.
@@ -310,7 +322,6 @@ public class GameEngineController {
 			List<Order> l_deployOrders = new ArrayList<>();
 			List<Order> l_airliftOrders = new ArrayList<>();
 			List<Order> l_negotiateOrders = new ArrayList<>();
-			List<Order> l_otherOrders = new ArrayList<>();
 
 			// Execute the orders of the players
 			for (Player l_player : this.d_players.values()) {
@@ -323,7 +334,7 @@ public class GameEngineController {
 					} else if (l_order instanceof Negotiate) {
 						l_negotiateOrders.add(l_order);
 					} else {
-						l_otherOrders.add(l_order);
+						d_otherOrders.add(l_order);
 					}
 				}
 			}
@@ -337,9 +348,10 @@ public class GameEngineController {
 			for (Order l_order : l_negotiateOrders) {
 				l_order.execute();
 			}
-			for (Order l_order : l_otherOrders) {
+			for (Order l_order : d_otherOrders) {
 				l_order.execute();
 			}
+			d_otherOrders.removeAll(d_otherOrders);
 
 			// Re-initialize variables used in the Issue Order phase again
 			this.d_currentPlayerIndex = 0;

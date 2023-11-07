@@ -437,10 +437,13 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				if (l_countryFrom == null || l_countryTo == null)
-					d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME,
-							l_countryFrom == null ? l_countryNameFrom : l_countryNameTo));
-				else if (d_advanceArmies <= 0)
+				if (l_countryFrom == null || l_countryTo == null) {
+					if (l_countryFrom == null)
+						d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED,
+								l_countryNameFrom, this.getName()));
+					if (l_countryTo == null)
+						d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME, l_countryNameTo));
+				} else if (d_advanceArmies <= 0)
 					d_logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
 				else
 					d_logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);

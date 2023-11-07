@@ -44,39 +44,31 @@ public class Negotiate extends Order {
 		if (ValidateOrder(d_currentPlayer, d_playerName)) {
 			d_logger.log(MessageFormat.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(),
 					d_playerToNegotiate.getName()));
-			List<Order> l_currentPlayerOrders = d_currentPlayer.getOrders();
-			List<Order> l_playerToNegotiateOrders = d_playerToNegotiate.getOrders();
-			List<Order> l_currentPlayerNewOrders = new ArrayList<>();
-			List<Order> l_playerToNegotiateNewOrders = new ArrayList<>();
-			// Step 1: remove all the advance orders between these two players in the
-			// current player's order list
-			for (Order l_order : l_currentPlayerOrders) {
+			List<Order> l_otherOrders = GameEngineController.getOtherOrders();
+			List<Order> l_otherOrdersAfterNegotiate = new ArrayList<>();
+			boolean l_isNegotiate = false;
+			for (Order l_order : l_otherOrders) {
 				if ((l_order instanceof Advance)
 						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName() == d_currentPlayer.getName()
 								&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_playerToNegotiate
 										.getName())) {
 					d_logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
 							d_playerToNegotiate.getName()));
+					l_isNegotiate = true;
 					continue;
 				}
-				l_currentPlayerNewOrders.add(l_order);
-			}
-			d_currentPlayer.setOrders(l_currentPlayerNewOrders);
-			// Step 2: remove all the advance orders between these two players in the order
-			// list of the player to negotiate with
-			for (Order l_order : l_playerToNegotiateOrders) {
 				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner()
 						.getName() == d_playerToNegotiate.getName()
 						&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_currentPlayer.getName())) {
 					d_logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_playerToNegotiate.getName(),
 							d_currentPlayer.getName()));
+					l_isNegotiate = true;
 					continue;
 				}
-				l_playerToNegotiateNewOrders.add(l_order);
+				l_otherOrdersAfterNegotiate.add(l_order);
 			}
-			d_playerToNegotiate.setOrders(l_playerToNegotiateNewOrders);
-			if (l_currentPlayerOrders.size() == l_currentPlayerNewOrders.size()
-					&& l_playerToNegotiateOrders.size() == l_playerToNegotiateNewOrders.size()) {
+			GameEngineController.setOtherOrders(l_otherOrdersAfterNegotiate);
+			if (!l_isNegotiate) {
 				d_logger.log(MessageFormat.format(Constants.NEGOTIATE_NO_EFFECT, d_currentPlayer.getName(),
 						d_playerToNegotiate.getName()));
 			}

@@ -121,6 +121,7 @@ public class PlayerTest {
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
 	}
+
 	/**
 	 * This function tests whether the valid advance order can be issued and whether
 	 * the invalid advance order can be prevented from adding to order list.
@@ -139,7 +140,7 @@ public class PlayerTest {
 		l_command = "advance";
 		String l_countryNameFrom = "England";
 		String l_countryNameTo = "Scotland";
-		String l_numArmies = "3";
+		String l_numArmies = "2";
 		String[] l_inputArray2 = {l_command, l_countryNameFrom, l_countryNameTo, l_numArmies};
 		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
 		assertEquals(true, l_result);
@@ -257,6 +258,7 @@ public class PlayerTest {
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
 	}
+
 	/**
 	 * This function tests whether the valid airlift order can be issued and whether
 	 * the invalid airlift order can be prevented from adding to order list.
@@ -311,6 +313,7 @@ public class PlayerTest {
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
 	}
+
 	/**
 	 * This function tests whether the valid negotiate order can be issued and
 	 * whether the invalid negotiate order can be prevented from adding to order

@@ -6,7 +6,6 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 
 /**
  * This class is the Advance order class. It extends the Order class. It defines

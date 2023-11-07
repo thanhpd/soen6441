@@ -17,11 +17,11 @@ public class PreLoadPhase extends MapEditorPhase {
 	/**
 	 * The constructor for the PreLoadPhase class.
 	 *
-	 * @param p_GameEngine
-	 *            The parameter p_GameEngine is a GameEngine object.
+	 * @param p_gameEngine
+	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	public PreLoadPhase(GameEngine p_GameEngine) {
-		super(p_GameEngine);
+	public PreLoadPhase(GameEngine p_gameEngine) {
+		super(p_gameEngine);
 	}
 
 	/**

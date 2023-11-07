@@ -1,10 +1,9 @@
 package com.w10.risk_game.controllers;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Formatter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import com.w10.risk_game.commands.Airlift;
@@ -32,7 +31,6 @@ public class GameEngineController {
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
 	private static List<Player> d_playerListForDiplomacy = new ArrayList<>();
-	private Formatter d_formatter;
 	private MapEditorController d_mapEditorController;
 	private String d_winner;
 	private static List<Order> d_otherOrders = new ArrayList<>();
@@ -71,18 +69,27 @@ public class GameEngineController {
 	public void setPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
 		this.d_playerListForDiplomacy = p_playerListForDiplomacy;
 	}
+
 	/**
-	 * This function is used to get the list of other orders
+	 * The function returns a list of other orders.
+	 *
+	 * @return The method is returning a List of Order objects.
 	 */
 	public static List<Order> getOtherOrders() {
 		return d_otherOrders;
 	}
+
 	/**
-	 * This function is used to set the list of other orders
+	 * The function sets the value of a static variable called "d_otherOrders" to
+	 * the provided list of Order objects.
+	 *
+	 * @param p_otherOrders
+	 *            The parameter "p_otherOrders" is a List of Order objects.
 	 */
 	public static void setOtherOrders(List<Order> p_otherOrders) {
 		d_otherOrders = p_otherOrders;
 	}
+
 	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
@@ -97,16 +104,12 @@ public class GameEngineController {
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
 				this.d_playerListForDiplomacy.add(l_player);
-				this.d_formatter = new Formatter();
-				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
-				d_logger.log(this.d_formatter.toString());
+				d_logger.log(MessageFormat.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName).toString());
 			} else {
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
 			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
-		} finally {
-			this.d_formatter.close();
 		}
 	}
 
@@ -169,12 +172,8 @@ public class GameEngineController {
 
 			// If there are more players than countries throw error
 			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
-				this.d_formatter = new Formatter();
-
-				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
-						this.d_gameMap.getCountries().size(), this.d_players.size());
-				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+						this.d_gameMap.getCountries().size(), this.d_players.size()));
 				return false;
 			}
 
@@ -198,14 +197,9 @@ public class GameEngineController {
 
 			return true;
 		} catch (Exception e) {
-			this.d_formatter = new Formatter();
-
-			this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
-					this.d_gameMap.getCountries().size(), this.d_players.size());
-			d_logger.log(this.d_formatter.toString());
+			d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+					this.d_gameMap.getCountries().size(), this.d_players.size()));
 			return false;
-		} finally {
-			this.d_formatter.close();
 		}
 	}
 

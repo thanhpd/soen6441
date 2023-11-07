@@ -63,6 +63,8 @@ public class CommandInterpreter {
 	 *            The parameter `p_command` is a string representing a command.
 	 * @return The method is returning an ArrayList of ArrayLists of Strings.
 	 * @exception ApplicationException
+	 *                If the user enters an invalid command, show 'Please enter a
+	 *                valid command!' to the user
 	 */
 	public static ArrayList<ArrayList<String>> GetCommandOptions(String p_command) throws ApplicationException {
 		ArrayList<ArrayList<String>> l_listOfOptions = new ArrayList<>();

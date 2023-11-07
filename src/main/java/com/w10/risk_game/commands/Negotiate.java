@@ -7,7 +7,6 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.List;
 
 /**

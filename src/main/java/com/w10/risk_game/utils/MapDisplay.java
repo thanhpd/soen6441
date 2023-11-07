@@ -26,19 +26,14 @@ public class MapDisplay {
 	 * continents, countries, and their neighbors in the map.
 	 *
 	 * @param p_map
-	 *                     The `p_map` parameter is an instance of the `GameMap`
-	 *                     class, which
-	 *                     represents the game map containing continents, countries,
-	 *                     and
-	 *                     their connections.
+	 *            The `p_map` parameter is an instance of the `GameMap` class, which
+	 *            represents the game map containing continents, countries, and
+	 *            their connections.
 	 * @param p_showArmies
-	 *                     The parameter `p_showArmies` is a boolean value that
-	 *                     determines
-	 *                     whether to display the number of armies in each country
-	 *                     or not. If
-	 *                     `p_showArmies` is `true`, the number of armies will be
-	 *                     displayed.
-	 *                     If `p_showArmies` is `false`, the number of
+	 *            The parameter `p_showArmies` is a boolean value that determines
+	 *            whether to display the number of armies in each country or not. If
+	 *            `p_showArmies` is `true`, the number of armies will be displayed.
+	 *            If `p_showArmies` is `false`, the number of
 	 */
 	public void displayMap(GameMap p_map, boolean p_showArmies) {
 		Formatter l_formatter = new Formatter();

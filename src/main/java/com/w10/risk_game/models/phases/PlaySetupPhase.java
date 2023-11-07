@@ -49,7 +49,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void createPlayer(String p_playerName) {
-		this.d_gameEngineController.createPlayer(p_playerName);
+		this.d_gamePlayController.createPlayer(p_playerName);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void removePlayer(String p_playerName) {
-		this.d_gameEngineController.removePlayer(p_playerName);
+		this.d_gamePlayController.removePlayer(p_playerName);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void showAllPlayers() {
-		this.d_gameEngineController.showAllPlayers();
+		this.d_gamePlayController.showAllPlayers();
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public boolean assignCountries() {
-		if (this.d_gameEngineController.assignCountries()) {
+		if (this.d_gamePlayController.assignCountries()) {
 			next();
 			return true;
 		}
@@ -99,7 +99,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
+		d_gameEngine.SetPhase(new ReinforcementPhase(d_gameEngine));
 	}
 
 	/**

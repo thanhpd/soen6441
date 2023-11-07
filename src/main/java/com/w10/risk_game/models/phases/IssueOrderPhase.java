@@ -37,11 +37,11 @@ public class IssueOrderPhase extends GamePlayPhase {
 
 	/**
 	 * The function "showMap" calls the "showMap" function of the
-	 * "d_gameEngineController" object.
+	 * "d_gamePlayController" object.
 	 */
 	@Override
 	public void showMap() {
-		this.d_gameEngineController.showMap();
+		this.d_gamePlayController.showMap();
 	}
 
 	/**
@@ -218,11 +218,11 @@ public class IssueOrderPhase extends GamePlayPhase {
 
 	/**
 	 * The function issuePlayerOrder() calls the issuePlayerOrder() method of the
-	 * d_gameEngineController object.
+	 * d_gamePlayController object.
 	 */
 	@Override
 	public void issuePlayerOrder() {
-		this.d_gameEngineController.issuePlayerOrder();
+		this.d_gamePlayController.issuePlayerOrder();
 	}
 
 	/**
@@ -252,7 +252,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new ExecuteOrderPhase(d_gameEngine));
+		d_gameEngine.SetPhase(new ExecuteOrderPhase(d_gameEngine));
 	}
 
 	/**

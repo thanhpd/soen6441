@@ -18,32 +18,33 @@ import com.w10.risk_game.utils.Reinforcements;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngineController class is responsible for managing players, issuing
+ * The GamePlayController class is responsible for managing players, issuing
  * orders, executing orders and their interactions in a game.
  *
  * @author Sherwyn Dsouza
  */
-public class GameEngineController {
+public class GamePlayController {
 	private GameMap d_gameMap;
 	private HashMap<String, Player> d_players;
 	private boolean d_isCountriesAssigned;
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
-	private static List<Player> d_playerListForDiplomacy = new ArrayList<>();
 	private MapEditorController d_mapEditorController;
 	private String d_winner;
-	private static List<Order> d_otherOrders = new ArrayList<>();
 
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static List<Order> OtherOrders = new ArrayList<>();
+	private static List<Player> PlayerListForDiplomacy = new ArrayList<>();
+
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
-	 * The constructor of the GameEngineController class.
+	 * The constructor of the GamePlayController class.
 	 *
 	 * @param p_mapEditorController
 	 *            The map editor controller object.
 	 */
-	public GameEngineController(MapEditorController p_mapEditorController) {
+	public GamePlayController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;
@@ -56,8 +57,8 @@ public class GameEngineController {
 	 *
 	 * @return a list of players in a game.
 	 */
-	public static List<Player> getPlayerListForDiplomacy() {
-		return d_playerListForDiplomacy;
+	public static List<Player> GetPlayerListForDiplomacy() {
+		return PlayerListForDiplomacy;
 	}
 
 	/**
@@ -66,8 +67,8 @@ public class GameEngineController {
 	 * @param p_playerListForDiplomacy
 	 *            a list of players in a game.
 	 */
-	public void setPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
-		this.d_playerListForDiplomacy = p_playerListForDiplomacy;
+	public void SetPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
+		PlayerListForDiplomacy = p_playerListForDiplomacy;
 	}
 
 	/**
@@ -75,19 +76,19 @@ public class GameEngineController {
 	 *
 	 * @return The method is returning a List of Order objects.
 	 */
-	public static List<Order> getOtherOrders() {
-		return d_otherOrders;
+	public static List<Order> GetOtherOrders() {
+		return OtherOrders;
 	}
 
 	/**
-	 * The function sets the value of a static variable called "d_otherOrders" to
-	 * the provided list of Order objects.
+	 * The function sets the value of a static variable called "OtherOrders" to the
+	 * provided list of Order objects.
 	 *
 	 * @param p_otherOrders
 	 *            The parameter "p_otherOrders" is a List of Order objects.
 	 */
-	public static void setOtherOrders(List<Order> p_otherOrders) {
-		d_otherOrders = p_otherOrders;
+	public static void SetOtherOrders(List<Order> p_otherOrders) {
+		OtherOrders = p_otherOrders;
 	}
 
 	/**
@@ -103,13 +104,13 @@ public class GameEngineController {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
-				this.d_playerListForDiplomacy.add(l_player);
-				d_logger.log(MessageFormat.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName).toString());
+				PlayerListForDiplomacy.add(l_player);
+				Logger.log(MessageFormat.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName).toString());
 			} else {
-				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
+				Logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
+			Logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
 		}
 	}
 
@@ -125,14 +126,14 @@ public class GameEngineController {
 		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		try {
 			if (!this.d_players.containsKey(p_playerName)) {
-				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
+				Logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST);
 				return;
 			}
 			this.d_players.remove(p_playerName.trim());
-			d_logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
+			Logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
 			e.printStackTrace();
-			d_logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
+			Logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
 	}
 
@@ -143,15 +144,15 @@ public class GameEngineController {
 	 */
 	public void showAllPlayers() {
 		this.d_players.forEach((p_playerName, p_player) -> {
-			d_logger.log(p_playerName);
+			Logger.log(p_playerName);
 			for (Country c : p_player.getCountriesOwned()) {
 				try {
-					d_logger.log(c.getCountryName());
+					Logger.log(c.getCountryName());
 				} catch (Exception e) {
-					d_logger.log(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
+					Logger.log(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
 				}
 			}
-			d_logger.log("");
+			Logger.log("");
 		});
 	}
 
@@ -172,7 +173,7 @@ public class GameEngineController {
 
 			// If there are more players than countries throw error
 			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
-				d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
 						this.d_gameMap.getCountries().size(), this.d_players.size()));
 				return false;
 			}
@@ -197,7 +198,7 @@ public class GameEngineController {
 
 			return true;
 		} catch (Exception e) {
-			d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+			Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
 					this.d_gameMap.getCountries().size(), this.d_players.size()));
 			return false;
 		}
@@ -217,10 +218,10 @@ public class GameEngineController {
 				Reinforcements.AssignPlayerReinforcements(l_player, this.d_gameMap);
 			}
 			this.d_isCountriesAssigned = true;
-			d_logger.log(Constants.CLI_ASSIGN_REINFORCEMENTS);
+			Logger.log(Constants.CLI_ASSIGN_REINFORCEMENTS);
 			return true;
 		} catch (Exception e) {
-			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+			Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 			return false;
 		}
 	}
@@ -328,7 +329,7 @@ public class GameEngineController {
 					} else if (l_order instanceof Negotiate) {
 						l_negotiateOrders.add(l_order);
 					} else {
-						d_otherOrders.add(l_order);
+						OtherOrders.add(l_order);
 					}
 				}
 			}
@@ -342,10 +343,10 @@ public class GameEngineController {
 			for (Order l_order : l_negotiateOrders) {
 				l_order.execute();
 			}
-			for (Order l_order : d_otherOrders) {
+			for (Order l_order : OtherOrders) {
 				l_order.execute();
 			}
-			d_otherOrders.removeAll(d_otherOrders);
+			OtherOrders.removeAll(OtherOrders);
 
 			// Re-initialize variables used in the Issue Order phase again
 			this.d_currentPlayerIndex = 0;

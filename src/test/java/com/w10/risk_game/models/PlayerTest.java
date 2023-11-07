@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ class PlayerTest {
 	private Player d_player;
 	private Player d_player1;
 	private Player d_player2;
-	GameEngineController d_gameEngineController;
+	GamePlayController d_gamePlayController;
 
 	/**
 	 * The function sets up a Player object with a specific name, no territories,
@@ -61,8 +61,8 @@ class PlayerTest {
 		l_players.add(d_player1);
 		l_players.add(d_player2);
 		MapEditorController l_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(l_mapEditorController);
-		d_gameEngineController.setPlayerListForDiplomacy(l_players);
+		d_gamePlayController = new GamePlayController(l_mapEditorController);
+		d_gamePlayController.SetPlayerListForDiplomacy(l_players);
 	}
 
 	/**

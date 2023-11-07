@@ -27,7 +27,7 @@ public class LogEntryBuffer implements Observable {
 	 *
 	 * @return The method is returning an instance of the LogEntryBuffer class.
 	 */
-	public static LogEntryBuffer getInstance() {
+	public static LogEntryBuffer GetInstance() {
 		if (Logger == null)
 			Logger = new LogEntryBuffer();
 		return Logger;

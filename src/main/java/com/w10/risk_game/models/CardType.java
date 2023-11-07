@@ -7,13 +7,12 @@ public enum CardType {
 	BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;
 
 	/**
-	 * The getRandomCard function returns a random CardType value.
+	 * The GetRandomCard function returns a random CardType value.
 	 *
 	 * @return The method is returning a random CardType.
 	 */
-	public static CardType getRandomCard() {
+	public static CardType GetRandomCard() {
 		Random d_Random = new Random();
-		CardType d_Type = values()[d_Random.nextInt(values().length)];
-		return d_Type;
+		return values()[d_Random.nextInt(values().length)];
 	}
 }

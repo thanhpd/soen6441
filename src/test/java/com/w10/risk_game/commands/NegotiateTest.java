@@ -1,6 +1,6 @@
 package com.w10.risk_game.commands;
 
-import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
@@ -22,7 +22,7 @@ class NegotiateTest {
 	Player d_player1;
 	Player d_player2;
 	Order d_negotiateOrder;
-	GameEngineController d_gameEngineController;
+	GamePlayController d_gamePlayController;
 
 	/**
 	 * This method is to set up the test environment
@@ -56,12 +56,12 @@ class NegotiateTest {
 		l_players.add(d_player1);
 		l_players.add(d_player2);
 		MapEditorController l_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(l_mapEditorController);
-		d_gameEngineController.setPlayerListForDiplomacy(l_players);
+		d_gamePlayController = new GamePlayController(l_mapEditorController);
+		d_gamePlayController.SetPlayerListForDiplomacy(l_players);
 		List<Order> l_otherOrders = new ArrayList<>();
 		l_otherOrders.add(l_advance1);
 		l_otherOrders.add(l_order2);
-		d_gameEngineController.setOtherOrders(l_otherOrders);
+		d_gamePlayController.SetOtherOrders(l_otherOrders);
 	}
 
 	/**
@@ -70,7 +70,7 @@ class NegotiateTest {
 	@Test
 	void executeTest() {
 		d_negotiateOrder.execute();
-		assertEquals(0, d_gameEngineController.getOtherOrders().size());
+		assertEquals(0, d_gamePlayController.GetOtherOrders().size());
 	}
 
 	/**

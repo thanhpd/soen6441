@@ -37,11 +37,11 @@ public class ReinforcementPhase extends GamePlayPhase {
 
 	/**
 	 * The function "showMap" calls the "showMap" function of the
-	 * "d_gameEngineController" object.
+	 * "d_gamePlayController" object.
 	 */
 	@Override
 	public void showMap() {
-		this.d_gameEngineController.showMap();
+		this.d_gamePlayController.showMap();
 	}
 
 	/**
@@ -242,7 +242,7 @@ public class ReinforcementPhase extends GamePlayPhase {
 	 */
 	@Override
 	public boolean assignPlayerReinforcements() {
-		if (this.d_gameEngineController.assignPlayersReinforcements()) {
+		if (this.d_gamePlayController.assignPlayersReinforcements()) {
 			next();
 			return true;
 		}
@@ -255,7 +255,7 @@ public class ReinforcementPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new IssueOrderPhase(d_gameEngine));
+		d_gameEngine.SetPhase(new IssueOrderPhase(d_gameEngine));
 	}
 
 	/**

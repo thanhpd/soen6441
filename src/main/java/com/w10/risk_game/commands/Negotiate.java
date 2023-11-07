@@ -26,9 +26,9 @@ public class Negotiate extends Order {
 	 * This is a constructor of the Negotiate class
 	 *
 	 * @param p_player
-	 *                     The player who issues the order
+	 *            The player who issues the order
 	 * @param p_playerName
-	 *                     The player name of the player to negotiate with
+	 *            The player name of the player to negotiate with
 	 */
 	public Negotiate(Player p_player, String p_playerName) {
 		this.d_currentPlayer = p_player;
@@ -49,19 +49,20 @@ public class Negotiate extends Order {
 			boolean l_isNegotiate = false;
 			for (Order l_order : l_otherOrders) {
 				// negotiation prevents the attack initiated by current player
-				if ((l_order instanceof Advance)
-						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName().equals(d_currentPlayer.getName())
-								&& ((Advance) l_order).getCountryNameTo().getOwner().getName().equals(PlayerToNegotiate
-										.getName()))) {
+				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner().getName()
+						.equals(d_currentPlayer.getName())
+						&& ((Advance) l_order).getCountryNameTo().getOwner().getName()
+								.equals(PlayerToNegotiate.getName()))) {
 					Logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
 							PlayerToNegotiate.getName()));
 					l_isNegotiate = true;
 					continue;
 				}
 				// negotiation prevents the attack initiated by negotiating player
-				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner()
-						.getName().equals(PlayerToNegotiate.getName())
-						&& ((Advance) l_order).getCountryNameTo().getOwner().getName().equals(d_currentPlayer.getName()))) {
+				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner().getName()
+						.equals(PlayerToNegotiate.getName())
+						&& ((Advance) l_order).getCountryNameTo().getOwner().getName()
+								.equals(d_currentPlayer.getName()))) {
 					Logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, PlayerToNegotiate.getName(),
 							d_currentPlayer.getName()));
 					l_isNegotiate = true;
@@ -82,9 +83,9 @@ public class Negotiate extends Order {
 	 * with exists.
 	 *
 	 * @param p_currentPlayer
-	 *                        The player who issues the order
+	 *            The player who issues the order
 	 * @param p_playerId
-	 *                        The player id of the player to negotiate with
+	 *            The player id of the player to negotiate with
 	 * @return the boolean value to indicate if the order is valid
 	 */
 	public static boolean ValidateOrder(Player p_currentPlayer, String p_playerId) {
@@ -107,7 +108,7 @@ public class Negotiate extends Order {
 	 * This function is used to check the input format for negotiate command.
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidNegotiateInput(String[] p_inputArray) {

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * This is a test class for bomb card
  *
  */
-public class BombTest {
+class BombTest {
 	private Order d_order1;
 	private Country d_country1;
 	private Country d_country2;
@@ -28,7 +28,7 @@ public class BombTest {
 	 * neighbor relationship between the two countries.
 	 */
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		d_country1 = new Country(1, "England", 1, d_country1ArmyCount);
 		d_country2 = new Country(2, "France", 1, d_country2ArmyCount);
 		d_country1.addNeighbor(d_country2);
@@ -42,7 +42,7 @@ public class BombTest {
 	 * count of a neutral country to correct number.
 	 */
 	@Test
-	public void testBombNeutralCountry() {
+	void testBombNeutralCountry() {
 		ArrayList<Country> l_countries = new ArrayList<>();
 		l_countries.add(d_country1);
 
@@ -60,7 +60,7 @@ public class BombTest {
 	 * reduces the army count of a specific country owned by an enemy player.
 	 */
 	@Test
-	public void testBombEnemyCountry() {
+	void testBombEnemyCountry() {
 		this.setUpOwnership();
 		d_order1 = new Bomb(d_player2, "1");
 
@@ -73,7 +73,7 @@ public class BombTest {
 	 * Bomb order is executed.
 	 */
 	@Test
-	public void testCountryOwnership() {
+	void testCountryOwnership() {
 		this.setUpOwnership();
 		d_country1.setArmyCount(1);
 		d_order1 = new Bomb(d_player2, "1");

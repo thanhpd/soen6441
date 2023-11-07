@@ -92,21 +92,21 @@ public final class Constants {
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
 
 	// Player constants
-	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
+	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\", \"showmap\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER = "Invalid input! The country id should be a positive integer. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER = "Invalid input! The number of armies should be a positive integer.	Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\" or \"quit\".";
+	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\", \"showmap\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
 	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
 	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift!";
 	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
-	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The %s command should contain %s parts. Please try again.";
-	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This %s order is invalid. It will not be added to the list of orders.";
+	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The {0} command should contain {1} parts. Please try again.";
+	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This {0} order is invalid. It will not be added to the list of orders.";
 	public static final String PLAYER_ISSUE_ORDER_SUCCEED = "This order is added to the list of orders successfully.";
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_INVALID = "You cannot commit before deploying all your armies.";
 	public static final String PLAYER_ISSUE_ORDER_COMMIT_SUCCEED = "All orders are committed successfully.";
-	public static final String SHOW_PLAYER_CARDS = "You have the following cards: %s";
+	public static final String SHOW_PLAYER_CARDS = "You have the following cards: {0}";
 	public static final String SHOW_PLAYER_CARDS_EMPTY = "You don't have any cards.";
 
 	// Map Editor constants
@@ -166,16 +166,16 @@ public final class Constants {
 	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
 
 	// Deploy constants
-	public static final String DEPLOY_SUCCEED = "Player %s deployed %d armies to country %s";
+	public static final String DEPLOY_SUCCEED = "Player {0} deployed {1} armies to country {2}";
 	public static final String DEPLOY_INVALID_ARMIES_ZERO = "Invalid input! The number of reinforcement soldiers should be greater than zero. Please try again.";
 	public static final String DEPLOY_INVALID_ARMIES = "Invalid input! The entered number should be less than or equal to the number of reinforcement soldiers. Please try again.";
 
 	// Negotiate constants
-	public static final String NEGOTIATE_CARD_USED = "%s is negotiating with %s";
-	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from %s to %s";
-	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between %s and %s";
+	public static final String NEGOTIATE_CARD_USED = "{0} is negotiating with {1}";
+	public static final String NEGOTIATE_ATTACK_PREVENT = "Prevented attack from {0} to {1}";
+	public static final String NEGOTIATE_NO_EFFECT = "No attack detected between {0} and {1}";
 	public static final String NEGOTIATE_SELF = "Cannot negotiate with yourself";
-	public static final String NEGOTIATE_NO_PLAYER = "No player with id %s";
+	public static final String NEGOTIATE_NO_PLAYER = "No player with id {0}";
 
 	// Advance constants
 	public static final String ADVANCE_NOT_OWNER = "Advance order issued by {0} can no longer be executed as player no longer owns {1}.";
@@ -186,6 +186,7 @@ public final class Constants {
 	public static final String ADVANCE_INVALID_COUNTRY_NAME = "Invalid input! Country name {0} does not exist.";
 	public static final String ADVANCE_INVALID_ARMY_LESS = "Invalid input! Number of armies must be greater than 0.";
 	public static final String ADVANCE_INVALID_ARMY_MORE = "Invalid input! Number of armies to advance cannot be greater than those deployed on the country.";
+	public static final String ADVANCE_INVALID_COUNTRY_NOT_OWNED = "Invalid input! Country {0} is not owned by {1}.";
 
 	// Bomb constants
 	public static final String BOMB_SUCCEED = "Player %s bombed country %s. %s lost half of their armies.";

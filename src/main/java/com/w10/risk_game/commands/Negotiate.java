@@ -5,6 +5,7 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
@@ -41,55 +42,35 @@ public class Negotiate extends Order {
 	@Override
 	public void execute() {
 		if (ValidateOrder(d_currentPlayer, d_playerName)) {
-			Formatter l_formatter1 = new Formatter();
-			l_formatter1.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(),
-					d_playerToNegotiate.getName());
-			d_logger.log(l_formatter1.toString());
-			l_formatter1.close();
-			List<Order> l_currentPlayerOrders = d_currentPlayer.getOrders();
-			List<Order> l_playerToNegotiateOrders = d_playerToNegotiate.getOrders();
-			List<Order> l_currentPlayerNewOrders = new ArrayList<>();
-			List<Order> l_playerToNegotiateNewOrders = new ArrayList<>();
-			// Step 1: remove all the advance orders between these two players in the
-			// current player's order list
-			for (Order l_order : l_currentPlayerOrders) {
+			d_logger.log(MessageFormat.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(),
+					d_playerToNegotiate.getName()));
+			List<Order> l_otherOrders = GameEngineController.getOtherOrders();
+			List<Order> l_otherOrdersAfterNegotiate = new ArrayList<>();
+			boolean l_isNegotiate = false;
+			for (Order l_order : l_otherOrders) {
 				if ((l_order instanceof Advance)
 						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName() == d_currentPlayer.getName()
 								&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_playerToNegotiate
 										.getName())) {
-					Formatter l_formatter2 = new Formatter();
-					l_formatter2.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
-							d_playerToNegotiate.getName());
-					d_logger.log(l_formatter2.toString());
-					l_formatter2.close();
+					d_logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
+							d_playerToNegotiate.getName()));
+					l_isNegotiate = true;
 					continue;
 				}
-				l_currentPlayerNewOrders.add(l_order);
-			}
-			d_currentPlayer.setOrders(l_currentPlayerNewOrders);
-			// Step 2: remove all the advance orders between these two players in the order
-			// list of the player to negotiate with
-			for (Order l_order : l_playerToNegotiateOrders) {
 				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner()
 						.getName() == d_playerToNegotiate.getName()
 						&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_currentPlayer.getName())) {
-					Formatter l_formatter3 = new Formatter();
-					l_formatter3.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_playerToNegotiate.getName(),
-							d_currentPlayer.getName());
-					d_logger.log(l_formatter3.toString());
-					l_formatter3.close();
+					d_logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_playerToNegotiate.getName(),
+							d_currentPlayer.getName()));
+					l_isNegotiate = true;
 					continue;
 				}
-				l_playerToNegotiateNewOrders.add(l_order);
+				l_otherOrdersAfterNegotiate.add(l_order);
 			}
-			d_playerToNegotiate.setOrders(l_playerToNegotiateNewOrders);
-			if (l_currentPlayerOrders.size() == l_currentPlayerNewOrders.size()
-					&& l_playerToNegotiateOrders.size() == l_playerToNegotiateNewOrders.size()) {
-				Formatter l_formatter4 = new Formatter();
-				l_formatter4.format(Constants.NEGOTIATE_NO_EFFECT, d_currentPlayer.getName(),
-						d_playerToNegotiate.getName());
-				d_logger.log(l_formatter4.toString());
-				l_formatter4.close();
+			GameEngineController.setOtherOrders(l_otherOrdersAfterNegotiate);
+			if (!l_isNegotiate) {
+				d_logger.log(MessageFormat.format(Constants.NEGOTIATE_NO_EFFECT, d_currentPlayer.getName(),
+						d_playerToNegotiate.getName()));
 			}
 		}
 	}
@@ -116,10 +97,7 @@ public class Negotiate extends Order {
 				return true;
 			}
 		}
-		Formatter l_formatter = new Formatter();
-		l_formatter.format(Constants.NEGOTIATE_NO_PLAYER, p_playerId);
-		d_logger.log(l_formatter.toString());
-		l_formatter.close();
+		d_logger.log(MessageFormat.format(Constants.NEGOTIATE_NO_PLAYER, p_playerId));
 		return false;
 	}
 	/**
@@ -131,10 +109,7 @@ public class Negotiate extends Order {
 	 */
 	public static boolean CheckValidNegotiateInput(String[] p_inputArray) {
 		if (p_inputArray.length != 2) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "negotiate", "two");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS);
 			return false;
 		}
 		return true;

@@ -27,15 +27,13 @@ public class Airlift extends Order {
 	 * Constructor for Airlift class.
 	 *
 	 * @param p_player
-	 *                             The player who is issuing the order.
+	 *            The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *                             The country id of the country to intiate th
-	 *                             airlift from.
+	 *            The country id of the country to intiate th airlift from.
 	 * @param d_countryIdToAir
-	 *                             The country id of the country to intiate th
-	 *                             airlift to.
+	 *            The country id of the country to intiate th airlift to.
 	 * @param d_armyToAirlift
-	 *                             The number to armies to airlift.
+	 *            The number to armies to airlift.
 	 */
 	public Airlift(Player p_player, String d_countryIdToAirFrom, String d_countryIdToAir, String d_armyToAirlift) {
 		this.d_player = p_player;
@@ -82,13 +80,10 @@ public class Airlift extends Order {
 	 * the source and target countries, as well as the number of armies to airlift.
 	 *
 	 * @param p_targetCountryId
-	 *                          The ID of the country where the player wants to
-	 *                          airlift their
-	 *                          armies to. The "armiesToAirlift" parameter is a
-	 *                          String that
-	 *                          represents the number of layer wants to airlift from
-	 *                          the source
-	 *                          country to the target country.
+	 *            The ID of the country where the player wants to airlift their
+	 *            armies to. The "armiesToAirlift" parameter is a String that
+	 *            represents the number of layer wants to airlift from the source
+	 *            country to the target country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,
@@ -107,9 +102,9 @@ public class Airlift extends Order {
 	 * an appropriate message.
 	 *
 	 * @param p_player
-	 *                    The player for whom the country is being fetched.
+	 *            The player for whom the country is being fetched.
 	 * @param p_countryId
-	 *                    The ID of the country to be retrieved.
+	 *            The ID of the country to be retrieved.
 	 * @return The Country intended for airlift; returns null if the country ID is
 	 *         null or not found.
 	 */
@@ -152,7 +147,7 @@ public class Airlift extends Order {
 	 * This function is used to check the input format for airlift command.
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidAirliftInput(String[] p_inputArray) {

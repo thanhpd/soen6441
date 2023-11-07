@@ -96,7 +96,8 @@ public class GameEngine {
 
 				// Display Player Cards
 				if (!l_player.getPlayerCards().isEmpty()) {
-					d_logger.log(MessageFormat.format(Constants.SHOW_PLAYER_CARDS, Joiner.on(", ").join(l_player.getPlayerCards())));
+					d_logger.log(MessageFormat.format(Constants.SHOW_PLAYER_CARDS,
+							Joiner.on(", ").join(l_player.getPlayerCards())));
 				} else {
 					d_logger.log(Constants.SHOW_PLAYER_CARDS_EMPTY);
 				}

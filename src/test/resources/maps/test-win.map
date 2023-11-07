@@ -1,0 +1,12 @@
+[map]
+
+[continents]
+North_Europe 2 red
+
+[countries]
+1 England 1 164 126
+2 Scotland 1 158 44
+
+[borders]
+1 2
+2 1

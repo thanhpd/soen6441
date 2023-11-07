@@ -16,7 +16,7 @@ import com.w10.risk_game.models.Player;
  * This is a test class for blockade card
  *
  */
-public class BlockadeTest {
+class BlockadeTest {
 	private Order d_order1;
 	private Country d_country1;
 	private Country d_country2;
@@ -32,7 +32,7 @@ public class BlockadeTest {
 	 * two players (Player1 and Player2).
 	 */
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		d_country1 = new Country(1, "England", 1, d_country1ArmyCount);
 		d_country2 = new Country(2, "France", 1, d_country2ArmyCount);
 		d_country1.addNeighbor(d_country2);
@@ -47,7 +47,7 @@ public class BlockadeTest {
 	 * longer owns the country.
 	 */
 	@Test
-	public void testReinforceOwnCountry() {
+	void testReinforceOwnCountry() {
 		this.setUpOwnership();
 		d_order1 = new Blockade(d_player1, "1");
 
@@ -64,7 +64,7 @@ public class BlockadeTest {
 	 *
 	 */
 	@Test
-	public void testReinforceNeutralCountry() {
+	void testReinforceNeutralCountry() {
 		d_order1 = new Blockade(d_player1, "1");
 
 		d_order1.execute();
@@ -80,7 +80,7 @@ public class BlockadeTest {
 	 *
 	 */
 	@Test
-	public void testReinforceEnemyCountry() {
+	void testReinforceEnemyCountry() {
 		this.setUpOwnership();
 		d_order1 = new Blockade(d_player1, "2");
 

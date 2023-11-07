@@ -206,11 +206,30 @@ public class Airlift extends Order {
 		return true;
 	}
 
+	/**
+	 * The function returns the target country ID as an integer.
+	 *
+	 * @return The method is returning an integer value.
+	 */
 	public int getTargetCountryId() {
 		return Integer.parseInt(this.d_targetCountryId);
 	}
 
+	/**
+	 * The function returns the number of armies to be airlifted as an integer.
+	 *
+	 * @return The method is returning an integer value.
+	 */
 	public int getArmyToAirlift() {
 		return Integer.parseInt(this.d_armyToAirlift);
+	}
+
+	/**
+	 * The function returns the value of the variable d_sourceCountryId.
+	 *
+	 * @return The method is returning a String value.
+	 */
+	public int getSourceCountryId() {
+		return Integer.parseInt(d_sourceCountryId);
 	}
 }

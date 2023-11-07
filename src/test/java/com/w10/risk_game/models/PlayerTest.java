@@ -139,7 +139,7 @@ class PlayerTest {
 		l_command = "advance";
 		String l_countryNameFrom = "England";
 		String l_countryNameTo = "Scotland";
-		String l_numArmies = "3";
+		String l_numArmies = "2";
 		String[] l_inputArray2 = {l_command, l_countryNameFrom, l_countryNameTo, l_numArmies};
 		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
 		assertEquals(true, l_result);

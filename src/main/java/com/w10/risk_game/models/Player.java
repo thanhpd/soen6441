@@ -368,9 +368,15 @@ public class Player {
 			} else if ((l_order instanceof Airlift)
 					&& ((Airlift) l_order).getTargetCountryId() == p_advanceFromCountryId) {
 				l_totalArmiesDeployed += ((Airlift) l_order).getArmyToAirlift();
+			} else if ((l_order instanceof Airlift)
+					&& ((Airlift) l_order).getSourceCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed -= ((Airlift) l_order).getArmyToAirlift();
 			} else if ((l_order instanceof Advance)
 					&& ((Advance) l_order).getCountryNameTo().getCountryId() == p_advanceFromCountryId) {
 				l_totalArmiesDeployed += ((Advance) l_order).getNumOfArmies();
+			} else if ((l_order instanceof Advance)
+					&& ((Advance) l_order).getCountryNameFrom().getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed -= ((Advance) l_order).getNumOfArmies();
 			}
 		}
 		return l_totalArmiesDeployed >= p_noOfArmiesToAdvance;
@@ -419,9 +425,8 @@ public class Player {
 					: null;
 			int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
 			// Step 2: Check whether the order is valid
-			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0
-					&& (l_countryFrom.getArmyCount() >= d_advanceArmies || checkValidAdvanceOrder(d_advanceArmies,
-							l_countryFrom.getArmyCount(), l_countryFrom.getCountryId()))) {
+			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && checkValidAdvanceOrder(
+					d_advanceArmies, l_countryFrom.getArmyCount(), l_countryFrom.getCountryId())) {
 				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
 				d_orders.add(l_order);
 				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);

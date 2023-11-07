@@ -40,7 +40,7 @@ public class AirliftTest {
 				add(country2);
 			}
 		};
-
+		// set country-1 and country-2 owner as player 1
 		country1.setOwner(player1);
 		player1.setCountriesOwned(countries1);
 
@@ -53,7 +53,7 @@ public class AirliftTest {
 		d_order1 = new Airlift(player1, "1", "2", "5");
 		d_order1.execute();
 
-		assertEquals(country2.getArmyCount(), country1.getArmyCount());
+		assertEquals(15, country1.getArmyCount());
 
 	}
 }

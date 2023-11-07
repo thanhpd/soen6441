@@ -192,4 +192,9 @@ public final class Constants {
 	// Bomb constants
 	public static final String BOMB_SUCCEED = "Player {0} bombed country {1}. {2} lost half of their armies.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = {0}.";
+
+	// Airlift constants
+	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifed from {1} to {2}";
+	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "{0} doesnt belong to {1}";
+
 }

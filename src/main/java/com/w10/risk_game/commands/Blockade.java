@@ -15,7 +15,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * owned countries.
  */
 public class Blockade extends Order {
-	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	private final Player d_player;
 	private final String d_countryIdToBlock;
 
@@ -86,7 +86,7 @@ public class Blockade extends Order {
 	public static Country GetCountryToBlock(Player p_player, String p_countryId) {
 		// Check country ID validity
 		if (p_countryId == null) {
-			d_logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
+			Logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -101,10 +101,10 @@ public class Blockade extends Order {
 					.findFirst().orElse(null);
 
 			if (l_countryToBlock == null) {
-				d_logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
+				Logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
-			d_logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
+			Logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 
 		return l_countryToBlock;
@@ -120,7 +120,7 @@ public class Blockade extends Order {
 	public static boolean CheckValidBlockadeInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade",
+			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade",
 					"two"));
 			return false;
 		}
@@ -128,7 +128,7 @@ public class Blockade extends Order {
 		String l_countryId = p_inputArray[1];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}

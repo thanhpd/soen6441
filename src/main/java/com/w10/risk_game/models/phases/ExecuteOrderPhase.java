@@ -233,7 +233,7 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void executeAllPlayerOrders() {
-		this.d_gameEngineController.executePlayerOrders();
+		this.d_gamePlayController.executePlayerOrders();
 	}
 
 	/**
@@ -253,7 +253,7 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void next() {
-		d_gameEngine.setPhase(new ReinforcementPhase(d_gameEngine));
+		d_gameEngine.SetPhase(new ReinforcementPhase(d_gameEngine));
 	}
 
 	/**

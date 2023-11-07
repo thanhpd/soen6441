@@ -15,7 +15,7 @@ import java.util.List;
  * reducing its army count by half.
  */
 public class Bomb extends Order {
-	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	private final Player d_player;
 	private final String d_countryIdToBomb;
 
@@ -43,7 +43,7 @@ public class Bomb extends Order {
 			int l_initArmyCount = l_countryToBomb.getArmyCount();
 			int l_newArmyCount = l_initArmyCount / 2;
 			l_countryToBomb.setArmyCount(l_newArmyCount);
-			d_logger.log(MessageFormat.format(Constants.BOMB_SUCCEED, d_player.getName(),
+			Logger.log(MessageFormat.format(Constants.BOMB_SUCCEED, d_player.getName(),
 					l_countryToBomb.getCountryName(), l_countryToBomb.getCountryName()));
 		}
 	}
@@ -79,7 +79,7 @@ public class Bomb extends Order {
 	public static Country GetCountryToBomb(Player p_player, String p_countryId) {
 		// Check country ID validity
 		if (p_countryId == null) {
-			d_logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
+			Logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -94,10 +94,10 @@ public class Bomb extends Order {
 					.findFirst().orElse(null);
 
 			if (l_countryToBomb == null) {
-				d_logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
+				Logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
-			d_logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
+			Logger.log(MessageFormat.format(Constants.BOMB_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 
 		return l_countryToBomb;
@@ -138,7 +138,7 @@ public class Bomb extends Order {
 	public static boolean CheckValidBombInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
-			d_logger.log(
+			Logger.log(
 					MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "bomb", "two"));
 			return false;
 		}
@@ -146,7 +146,7 @@ public class Bomb extends Order {
 		String l_countryId = p_inputArray[1];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}

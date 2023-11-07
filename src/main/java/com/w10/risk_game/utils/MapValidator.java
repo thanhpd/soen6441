@@ -22,7 +22,7 @@ public class MapValidator {
 	}
 
 	/**
-	 * The function isMapCorrect checks if a given game map is valid by checking for
+	 * The function IsMapCorrect checks if a given game map is valid by checking for
 	 * various conditions such as empty map, non-existent continents or neighbors,
 	 * self-referencing neighbors, inaccessible countries, and disconnected
 	 * continents.
@@ -31,44 +31,44 @@ public class MapValidator {
 	 *            The parameter `p_gameMap` is of type `GameMap`, which represents a
 	 *            game map. It contains information about the countries, continents,
 	 *            and their connections in the game.
-	 * @return The method isMapCorrect is returning a boolean value indicating if
+	 * @return The method IsMapCorrect is returning a boolean value indicating if
 	 *         the map satisfies all conditions.
 	 */
 	public static boolean IsMapCorrect(GameMap p_gameMap) {
-		LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+		LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 		// Check if the map is empty
 		if (IsMapEmpty(p_gameMap)) {
-			d_logger.log(Constants.MAP_VALIDATOR_EMPTY_MAP);
+			Logger.log(Constants.MAP_VALIDATOR_EMPTY_MAP);
 			return false;
 		}
 
 		// Check if the country is referring to a non-declared continent
 		if (HasNonExistentContinent(p_gameMap)) {
-			d_logger.log(Constants.MAP_VALIDATOR_CONTINENT_NOT_DECLARED);
+			Logger.log(Constants.MAP_VALIDATOR_CONTINENT_NOT_DECLARED);
 			return false;
 		}
 
 		// Check if the country is referring to a non-existent country as a neighbor
 		if (HasNonExistentNeighbor(p_gameMap)) {
-			d_logger.log(Constants.MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED);
+			Logger.log(Constants.MAP_VALIDATOR_NEIGHBOR_NOT_DECLARED);
 			return false;
 		}
 
 		// Check if the country is referring to itself as a neighbor
 		if (HasSelfReferencingNeighbor(p_gameMap)) {
-			d_logger.log(Constants.MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR);
+			Logger.log(Constants.MAP_VALIDATOR_COUNTRY_AS_ITS_OWN_NEIGHBOR);
 			return false;
 		}
 
 		// Check if all countries are connected using DFS
 		if (!AreCountriesConnected(p_gameMap.getCountries())) {
-			d_logger.log(Constants.MAP_VALIDATOR_COUNTRY_INACCESSIBLE);
+			Logger.log(Constants.MAP_VALIDATOR_COUNTRY_INACCESSIBLE);
 			return false;
 		}
 
 		// Check if each continent is a connected subgraph
 		if (!AreContinentsConnected(p_gameMap)) {
-			d_logger.log(Constants.MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED);
+			Logger.log(Constants.MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED);
 			return false;
 		}
 

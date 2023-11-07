@@ -187,9 +187,15 @@ public final class Constants {
 	public static final String ADVANCE_INVALID_COUNTRY_NAME = "Invalid input! Country name {0} does not exist.";
 	public static final String ADVANCE_INVALID_ARMY_LESS = "Invalid input! Number of armies must be greater than 0.";
 	public static final String ADVANCE_INVALID_ARMY_MORE = "Invalid input! Number of armies to advance cannot be greater than those deployed on the country.";
-	public static final String ADVANCE_INVALID_COUNTRY_NOT_OWNED = "Invalid input! Country {0} is not owned by {1}.";
+	public static final String ADVANCE_INVALID_COUNTRY_NOT_OWNED = "Invalid input! Country {0} is not owned by {1}, or country {0} does not exist.";
+	public static final String ADVANCE_INVALID_COUNTRY_NOT_NEIGHBOR = "Invalid input! Country {0} is not a neighbor of {1}, or country {0} does not exist.";
 
 	// Bomb constants
 	public static final String BOMB_SUCCEED = "Player {0} bombed country {1}. {2} lost half of their armies.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = {0}.";
+
+	// Airlift constants
+	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifed from {1} to {2}";
+	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "{0} doesnt belong to {1}";
+
 }

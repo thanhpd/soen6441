@@ -5,7 +5,7 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
-import java.util.Formatter;
+import java.text.MessageFormat;
 import java.util.List;
 
 /**
@@ -36,18 +36,25 @@ public class Deploy extends Order {
 		this.d_countryId = p_countryId;
 		this.d_num = p_num;
 	}
+
 	/**
-	 * This method is used to get the country id
+	 * The function returns the country ID.
+	 *
+	 * @return The method is returning the value of the variable "d_countryId".
 	 */
 	public int getCountryId() {
 		return d_countryId;
 	}
+
 	/**
-	 * This method is used to get the number of armies
+	 * The function "getNum" returns the value of the variable "d_num".
+	 *
+	 * @return The method is returning the value of the variable "d_num".
 	 */
 	public int getNum() {
 		return d_num;
 	}
+
 	/**
 	 * This method extends the execute method in the Order class. It gets the number
 	 * of armies and deploys them to the country
@@ -58,10 +65,7 @@ public class Deploy extends Order {
 			if (l_country.getCountryId() == d_countryId) {
 				int l_countryArmies = l_country.getArmyCount();
 				l_country.setArmyCount(l_countryArmies + d_num);
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
 			}
 		}
 	}
@@ -111,12 +115,14 @@ public class Deploy extends Order {
 	}
 
 	/**
-	 * This function is used to check the number of armies for deploy command. The
-	 * number of armies should be less than the number of leftover armies
+	 * The function CheckValidArmy checks if the number of armies to be deployed is
+	 * valid for a given player.
 	 *
+	 * @param p_player
+	 *            The player object that represents a player in the game.
 	 * @param p_num
-	 *            the number of armies
-	 * @return boolean value to show whether the number of armies is valid
+	 *            The number of armies that the player wants to deploy.
+	 * @return The method is returning a boolean value.
 	 */
 	public static boolean CheckValidArmy(Player p_player, int p_num) {
 		if (p_num <= 0) {
@@ -129,6 +135,7 @@ public class Deploy extends Order {
 		}
 		return true;
 	}
+
 	/**
 	 * This function is used to check the input format for deploy command. The input
 	 * should have three parts (one string and two positive integers)
@@ -140,10 +147,8 @@ public class Deploy extends Order {
 	public static boolean CheckValidDeployInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy", "three");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy",
+					"three"));
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer

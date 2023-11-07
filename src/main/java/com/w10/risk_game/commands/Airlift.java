@@ -1,7 +1,6 @@
 package com.w10.risk_game.commands;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 import java.util.List;
 
 import com.w10.risk_game.models.Country;
@@ -27,13 +26,15 @@ public class Airlift extends Order {
 	 * Constructor for Airlift class.
 	 *
 	 * @param p_player
-	 *            The player who is issuing the order.
+	 *                             The player who is issuing the order.
 	 * @param d_countryIdToAirFrom
-	 *            The country id of the country to intiate th airlift from.
+	 *                             The country id of the country to intiate th
+	 *                             airlift from.
 	 * @param d_countryIdToAir
-	 *            The country id of the country to intiate th airlift to.
+	 *                             The country id of the country to intiate th
+	 *                             airlift to.
 	 * @param d_armyToAirlift
-	 *            The number to armies to airlift.
+	 *                             The number to armies to airlift.
 	 */
 	public Airlift(Player p_player, String d_countryIdToAirFrom, String d_countryIdToAir, String d_armyToAirlift) {
 		this.d_player = p_player;
@@ -49,8 +50,6 @@ public class Airlift extends Order {
 	 */
 	@Override
 	public void execute() {
-		Formatter l_formatter = new Formatter();
-
 		// Retrieves the country for airlift
 		Country l_targetCountry = getCountryForAirlift(d_player, d_targetCountryId);
 		Country l_sourceCountry = getCountryForAirlift(d_player, d_sourceCountryId);
@@ -69,22 +68,35 @@ public class Airlift extends Order {
 
 			} else {
 				// If source country doesn't have enough armies, log a message
-				l_formatter.format(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
 			}
 		}
 	}
 
 	/**
-	 * The function checks if a player can perform an airlift order by validating
-	 * the source and target countries, as well as the number of armies to airlift.
+	 * The function "ValidateOrder" checks if a player can perform an airlift order
+	 * by validating the source and target countries, as well as the number of
+	 * armies to airlift.
 	 *
+	 * @param p_player
+	 *                          The player object representing the player who is
+	 *                          initiating the
+	 *                          order.
+	 * @param p_sourceCountryId
+	 *                          The ID of the country from which the player wants to
+	 *                          airlift
+	 *                          armies.
 	 * @param p_targetCountryId
-	 *            The ID of the country where the player wants to airlift their
-	 *            armies to. The "armiesToAirlift" parameter is a String that
-	 *            represents the number of layer wants to airlift from the source
-	 *            country to the target country.
+	 *                          The target country ID is a string that represents
+	 *                          the ID of the
+	 *                          country where the player wants to airlift their
+	 *                          armies to.
+	 * @param p_armiesToAirlift
+	 *                          The parameter "p_armiesToAirlift" represents the
+	 *                          number of armies
+	 *                          that the player wants to airlift from the source
+	 *                          country to the
+	 *                          target country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,
@@ -125,13 +137,9 @@ public class Airlift extends Order {
 	 * null or not found.
 	 */
 	public static Country getCountryForAirlift(Player p_player, String p_countryId) {
-		Formatter l_formatter = new Formatter();
-
 		if (p_countryId == null) {
 			// Log a message if the country ID is null
-			l_formatter.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -148,13 +156,11 @@ public class Airlift extends Order {
 
 			if (l_countryToAirlift == null) {
 				// Log a message if the requested country is not a valid neighbor
-				d_logger.log(l_formatter.toString());
+				d_logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
 			// Log a message if an exception occurs while processing
-			d_logger.log(l_formatter.toString());
-		} finally {
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 		return l_countryToAirlift;
 	}
@@ -163,16 +169,14 @@ public class Airlift extends Order {
 	 * This function is used to check the input format for airlift command.
 	 *
 	 * @param p_inputArray
-	 *            the input string split by space
+	 *                     the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidAirliftInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 4) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift", "four");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift",
+					"four"));
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer

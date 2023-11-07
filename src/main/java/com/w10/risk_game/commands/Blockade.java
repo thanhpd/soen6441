@@ -1,6 +1,6 @@
 package com.w10.risk_game.commands;
 
-import java.util.Formatter;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,13 +85,9 @@ public class Blockade extends Order {
 	 * @return The method is returning a Country object.
 	 */
 	public static Country GetCountryToBlock(Player p_player, String p_countryId) {
-		Formatter l_formatter = new Formatter();
-		l_formatter.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId);
-
 		// Check country ID validity
 		if (p_countryId == null) {
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -106,16 +102,15 @@ public class Blockade extends Order {
 					.findFirst().orElse(null);
 
 			if (l_countryToBlock == null) {
-				d_logger.log(l_formatter.toString());
+				d_logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
-			d_logger.log(l_formatter.toString());
-		} finally {
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.BLOCKADE_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 
 		return l_countryToBlock;
 	}
+
 	/**
 	 * This function is used to check the input format for blockade command.
 	 *
@@ -126,10 +121,8 @@ public class Blockade extends Order {
 	public static boolean CheckValidBlockadeInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade", "two");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade",
+					"two"));
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer

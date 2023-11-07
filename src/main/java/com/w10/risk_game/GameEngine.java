@@ -1,7 +1,7 @@
 package com.w10.risk_game;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.Scanner;
 
 import com.google.common.base.Joiner;
@@ -24,21 +24,21 @@ public class GameEngine {
 
 	private final GameEngineController d_gameEngineController;
 	private final MapEditorController d_mapEditorController;
-	private Formatter d_formatter;
-	private Phase d_phase;
 
+	public static Phase d_phase;
 	public static String Command = "";
+
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
 	/**
 	 * The function sets the phase of an object and then prints the available
 	 * commands for that phase.
 	 *
-	 * @param d_phase
-	 *            The parameter "d_phase" is of type "Phase".
+	 * @param p_phase
+	 *            The parameter "p_phase" is of type "Phase".
 	 */
-	public void setPhase(Phase d_phase) {
-		this.d_phase = d_phase;
+	public static void setPhase(Phase p_phase) {
+		d_phase = p_phase;
 		d_phase.printAvailableCommand();
 	}
 
@@ -64,12 +64,12 @@ public class GameEngine {
 		while (!l_exit) {
 
 			// Check if in issue order phase
-			if (this.d_phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
+			if (d_phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
 				if (!d_gameEngineController.checkIfOrdersCanBeIssued()) {
 					if (d_gameEngineController.checkIfOrdersCanBeExecuted()) {
-						this.d_phase.next();
+						d_phase.next();
 						d_logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
-						this.d_phase.executeAllPlayerOrders();
+						d_phase.executeAllPlayerOrders();
 
 						// Check if the game is over after executing the orders
 						if (this.d_gameEngineController.checkIfGameIsOver()) {
@@ -77,28 +77,23 @@ public class GameEngine {
 									+ Constants.GAME_ENGINE_END_GAME);
 							break;
 						} else
-							this.d_phase.next();
+							d_phase.next();
 
 						// Reassign reinforcements to players
-						this.d_phase.assignPlayerReinforcements();
+						d_phase.assignPlayerReinforcements();
 					} else
 						continue;
 				}
 				l_player = this.d_gameEngineController.getCurrentPlayer();
 				d_logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
 
-				this.d_formatter = new Formatter();
-				this.d_formatter.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
-						l_player.getLeftoverArmies());
-				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
+						l_player.getLeftoverArmies()));
 
 				// Display Player Cards
 				if (!l_player.getPlayerCards().isEmpty()) {
-					Formatter l_formatter = new Formatter();
-					l_formatter.format(Constants.SHOW_PLAYER_CARDS, Joiner.on(", ").join(l_player.getPlayerCards()));
-					d_logger.log(l_formatter.toString());
-					l_formatter.close();
+					d_logger.log(MessageFormat.format(Constants.SHOW_PLAYER_CARDS,
+							Joiner.on(", ").join(l_player.getPlayerCards())));
 				} else {
 					d_logger.log(Constants.SHOW_PLAYER_CARDS_EMPTY);
 				}
@@ -122,20 +117,20 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
 						String[] l_mapName = l_argList[1].split("/");
 						d_logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
-						this.d_phase.loadMap(l_argList[1]);
+						d_phase.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
-						this.d_phase.saveMap(l_argList[1]);
+						d_phase.saveMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						d_logger.log(Constants.CLI_SHOW_MAP);
-						this.d_phase.showMap();
+						d_phase.showMap();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
-						this.d_phase.editMap(l_argList[1]);
+						d_phase.editMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE :
-						this.d_phase.nextPhase();
+						d_phase.nextPhase();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop
@@ -144,10 +139,10 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_phase.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
+									d_phase.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_phase.removeContinent(l_options.get(1));
+									d_phase.removeContinent(l_options.get(1));
 									break;
 							}
 						}
@@ -160,11 +155,11 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_phase.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
+									d_phase.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
 											l_options.get(3));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_phase.removeCountry(Integer.parseInt(l_options.get(1)));
+									d_phase.removeCountry(Integer.parseInt(l_options.get(1)));
 									break;
 							}
 						}
@@ -177,11 +172,11 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_phase.addNeighbor(Integer.parseInt(l_options.get(1)),
+									d_phase.addNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_phase.removeNeighbor(Integer.parseInt(l_options.get(1)),
+									d_phase.removeNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
 							}
@@ -200,13 +195,13 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									this.d_phase.createPlayer(l_options.get(1));
+									d_phase.createPlayer(l_options.get(1));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
-									this.d_phase.removePlayer(l_options.get(1));
+									d_phase.removePlayer(l_options.get(1));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL :
-									this.d_phase.showAllPlayers();
+									d_phase.showAllPlayers();
 									break;
 							}
 						}
@@ -214,8 +209,8 @@ public class GameEngine {
 
 					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 						d_logger.log(Constants.CLI_ASSIGN_COUNTRIES);
-						if (this.d_phase.assignCountries())
-							this.d_phase.assignPlayerReinforcements();
+						if (d_phase.assignCountries())
+							d_phase.assignPlayerReinforcements();
 						break;
 
 					// Issue Order Commands
@@ -232,7 +227,7 @@ public class GameEngine {
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
-						this.d_phase.issuePlayerOrder();
+						d_phase.issuePlayerOrder();
 						if (Command.equals(Constants.USER_INPUT_COMMAND_QUIT))
 							l_exit = true;
 						break;
@@ -265,11 +260,8 @@ public class GameEngine {
 	 *            iteration.
 	 */
 	private void displayLoopIterationMessage(ArrayList<String> p_options) {
-		this.d_formatter = new Formatter();
-		this.d_formatter.format(Constants.CLI_ITERATION_OPTION, p_options.get(0),
-				p_options.subList(1, p_options.size()));
-		d_logger.log(this.d_formatter.toString());
-		this.d_formatter.close();
+		d_logger.log(MessageFormat.format(Constants.CLI_ITERATION_OPTION, p_options.get(0),
+				p_options.subList(1, p_options.size())));
 	}
 
 	/**

@@ -1,10 +1,9 @@
 package com.w10.risk_game.controllers;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Formatter;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import com.w10.risk_game.commands.Airlift;
@@ -32,9 +31,9 @@ public class GameEngineController {
 	private int d_currentPlayerIndex;
 	private List<Player> d_playerList;
 	private static List<Player> d_playerListForDiplomacy = new ArrayList<>();
-	private Formatter d_formatter;
 	private MapEditorController d_mapEditorController;
 	private String d_winner;
+	private static List<Order> d_otherOrders = new ArrayList<>();
 
 	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -72,6 +71,26 @@ public class GameEngineController {
 	}
 
 	/**
+	 * The function returns a list of other orders.
+	 *
+	 * @return The method is returning a List of Order objects.
+	 */
+	public static List<Order> getOtherOrders() {
+		return d_otherOrders;
+	}
+
+	/**
+	 * The function sets the value of a static variable called "d_otherOrders" to
+	 * the provided list of Order objects.
+	 *
+	 * @param p_otherOrders
+	 *            The parameter "p_otherOrders" is a List of Order objects.
+	 */
+	public static void setOtherOrders(List<Order> p_otherOrders) {
+		d_otherOrders = p_otherOrders;
+	}
+
+	/**
 	 * The function creates a player with a given name and adds it to a map of
 	 * players, checking for duplicate names.
 	 *
@@ -85,16 +104,12 @@ public class GameEngineController {
 			if (!this.d_players.containsKey(p_playerName.trim())) {
 				this.d_players.put(p_playerName, l_player);
 				this.d_playerListForDiplomacy.add(l_player);
-				this.d_formatter = new Formatter();
-				this.d_formatter.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName);
-				d_logger.log(this.d_formatter.toString());
+				d_logger.log(MessageFormat.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName).toString());
 			} else {
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
 			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
-		} finally {
-			this.d_formatter.close();
 		}
 	}
 
@@ -157,12 +172,8 @@ public class GameEngineController {
 
 			// If there are more players than countries throw error
 			if (this.d_players.size() > this.d_gameMap.getCountries().size()) {
-				this.d_formatter = new Formatter();
-
-				this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
-						this.d_gameMap.getCountries().size(), this.d_players.size());
-				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+						this.d_gameMap.getCountries().size(), this.d_players.size()));
 				return false;
 			}
 
@@ -186,14 +197,9 @@ public class GameEngineController {
 
 			return true;
 		} catch (Exception e) {
-			this.d_formatter = new Formatter();
-
-			this.d_formatter.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
-					this.d_gameMap.getCountries().size(), this.d_players.size());
-			d_logger.log(this.d_formatter.toString());
+			d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES,
+					this.d_gameMap.getCountries().size(), this.d_players.size()));
 			return false;
-		} finally {
-			this.d_formatter.close();
 		}
 	}
 
@@ -287,7 +293,7 @@ public class GameEngineController {
 
 	/**
 	 * The function checks if there are any players in the player list. If empty, it
-	 * returs True so that no more players have to issue orders and order execution
+	 * returns True so that no more players have to issue orders and order execution
 	 * can begin by the game engine
 	 *
 	 * @return The method is returning a boolean value.
@@ -310,7 +316,6 @@ public class GameEngineController {
 			List<Order> l_deployOrders = new ArrayList<>();
 			List<Order> l_airliftOrders = new ArrayList<>();
 			List<Order> l_negotiateOrders = new ArrayList<>();
-			List<Order> l_otherOrders = new ArrayList<>();
 
 			// Execute the orders of the players
 			for (Player l_player : this.d_players.values()) {
@@ -323,7 +328,7 @@ public class GameEngineController {
 					} else if (l_order instanceof Negotiate) {
 						l_negotiateOrders.add(l_order);
 					} else {
-						l_otherOrders.add(l_order);
+						d_otherOrders.add(l_order);
 					}
 				}
 			}
@@ -337,9 +342,10 @@ public class GameEngineController {
 			for (Order l_order : l_negotiateOrders) {
 				l_order.execute();
 			}
-			for (Order l_order : l_otherOrders) {
+			for (Order l_order : d_otherOrders) {
 				l_order.execute();
 			}
+			d_otherOrders.removeAll(d_otherOrders);
 
 			// Re-initialize variables used in the Issue Order phase again
 			this.d_currentPlayerIndex = 0;
@@ -378,8 +384,12 @@ public class GameEngineController {
 	public boolean checkIfGameIsOver() {
 		String l_player = "";
 		for (Country l_country : this.d_mapEditorController.getGameMap().getCountries().values()) {
+			// If no owner that means the country is neutral and the game is not over
+			if (l_country.getOwner() == null)
+				return false;
 			if (l_player.equals(""))
 				l_player = l_country.getOwner().getName();
+			// Check if a country has a different owner
 			else if (!l_player.equals(l_country.getOwner().getName()))
 				return false;
 		}

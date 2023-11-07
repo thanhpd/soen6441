@@ -6,7 +6,6 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 
 /**
  * This class is the Advance order class. It extends the Order class. It defines
@@ -19,6 +18,7 @@ public class Advance extends Order {
 	private Country d_countryFrom;
 	private Country d_countryTo;
 	private int d_numOfArmies;
+	private String d_advancingPlayerName;
 
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -36,6 +36,7 @@ public class Advance extends Order {
 		this.d_countryFrom = p_countryFrom;
 		this.d_countryTo = p_countryTo;
 		this.d_numOfArmies = p_numOfArmies;
+		this.d_advancingPlayerName = p_countryFrom.getOwner().getName();
 	}
 
 	/**
@@ -70,6 +71,11 @@ public class Advance extends Order {
 	 * of armies and advances them to the country
 	 */
 	public void execute() {
+		if (!this.d_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
+			d_logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
+					this.d_countryFrom.getCountryName()));
+			return;
+		}
 		if (this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());
@@ -113,10 +119,8 @@ public class Advance extends Order {
 	public static boolean CheckValidAdvanceInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 4) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance", "four");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance",
+					"four"));
 			return false;
 		}
 		// Step 2: Check whether the armies is positive integer

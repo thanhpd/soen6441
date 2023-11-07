@@ -9,33 +9,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * This is a test class for deploy order
  *
  * @author Yajing Liu
  */
-public class DeployTest {
+class DeployTest {
 	Order d_order1;
 	Player d_player1;
+
 	/**
 	 * This method is to set up the test environment
 	 */
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		List<Country> l_countries = new ArrayList<>();
 		l_countries.add(new Country(1, "England", 1, 0));
 		d_player1 = new Player("Player1", l_countries, new ArrayList<>(), 10);
 		d_order1 = new Deploy(d_player1, 1, 6);
 	}
+
 	/**
 	 * This method is to test the method of deploy
 	 */
 	@Test
-	public void executeTest() {
+	void executeTest() {
 		// Test deploy
 		d_order1.execute();
 		assertEquals(6, d_player1.getCountriesOwned().get(0).getArmyCount());
 	}
+
 	/**
 	 * This method is to test the method of checkValidDeployInput. It will provide
 	 * three invalid inputs and check whether the method can return false. The three
@@ -43,7 +47,7 @@ public class DeployTest {
 	 * part is not an integer. 3. The third part is not an integer.
 	 */
 	@Test
-	public void checkValidDeployInputTest() {
+	void checkValidDeployInputTest() {
 		String l_input1 = "invalid input";
 		boolean l_isValidForm = Deploy.CheckValidDeployInput(l_input1.split(" "));
 		assertEquals(false, l_isValidForm);
@@ -54,6 +58,7 @@ public class DeployTest {
 		boolean l_isValidForm3 = Deploy.CheckValidDeployInput(l_input3.split(" "));
 		assertEquals(false, l_isValidForm3);
 	}
+
 	/**
 	 * This method is to test the method of checkValidCountry. It will provide one
 	 * invalid input and check whether the method can return false. The invalid
@@ -61,7 +66,7 @@ public class DeployTest {
 	 * by the player.
 	 */
 	@Test
-	public void checkValidCountryTest() {
+	void checkValidCountryTest() {
 		String l_input = "deploy 0 6";
 		String[] l_inputArray = l_input.split(" ");
 		String l_countryId = l_inputArray[1];
@@ -69,6 +74,7 @@ public class DeployTest {
 		boolean l_isValidCountry = Deploy.CheckValidCountry(l_countries, l_countryId);
 		assertEquals(false, l_isValidCountry);
 	}
+
 	/**
 	 * This method is to test the method of checkValidArmy. It will provide one
 	 * invalid input and check whether the method can return false. The invalid
@@ -76,7 +82,7 @@ public class DeployTest {
 	 * armies.
 	 */
 	@Test
-	public void checkValidArmyTest() {
+	void checkValidArmyTest() {
 		// d_player1 has 10 armies in total
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");

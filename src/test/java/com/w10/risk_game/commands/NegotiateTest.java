@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see Negotiate
  * @author Yajing Liu
  */
-public class NegotiateTest {
+class NegotiateTest {
 	Player d_player1;
 	Player d_player2;
 	Order d_negotiateOrder;
@@ -28,7 +28,7 @@ public class NegotiateTest {
 	 * This method is to set up the test environment
 	 */
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		// Set for player1
 		Country l_country1 = new Country(1, "England", 1, 10);
 		Country l_country2 = new Country(2, "France", 1, 10);
@@ -68,7 +68,7 @@ public class NegotiateTest {
 	 * This method is to test the method of execute
 	 */
 	@Test
-	public void executeTest() {
+	void executeTest() {
 		d_negotiateOrder.execute();
 		assertEquals(0, d_gameEngineController.getOtherOrders().size());
 	}
@@ -77,7 +77,7 @@ public class NegotiateTest {
 	 * This method is to test the method of validateOrder
 	 */
 	@Test
-	public void validateOrderTest() {
+	void validateOrderTest() {
 		boolean l_isNotNegotiateSelf = Negotiate.ValidateOrder(d_player1, "Player1");
 		assertEquals(false, l_isNotNegotiateSelf);
 		boolean l_isNotNegotiatePlayerNotExist = Negotiate.ValidateOrder(d_player1, "Player3");

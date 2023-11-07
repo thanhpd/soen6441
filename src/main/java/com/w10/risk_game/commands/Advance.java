@@ -26,11 +26,11 @@ public class Advance extends Order {
 	 * This is a constructor of the Advance class
 	 *
 	 * @param p_countryFrom
-	 *            The country from where the armies are to move
+	 *                      The country from where the armies are to move
 	 * @param p_countryTo
-	 *            The country to where the armies are to move
+	 *                      The country to where the armies are to move
 	 * @param p_numOfArmies
-	 *            The number of armies that the order is issued to
+	 *                      The number of armies that the order is issued to
 	 */
 	public Advance(Country p_countryFrom, Country p_countryTo, int p_numOfArmies) {
 		this.d_countryFrom = p_countryFrom;
@@ -71,23 +71,27 @@ public class Advance extends Order {
 	 * of armies and advances them to the country
 	 */
 	public void execute() {
+		// Check if the advancing player does not own the countryFrom
 		if (!this.d_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
 			d_logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
+		// If countryFrom and countryTo are owned by the same player
 		if (this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());
 			d_logger.log(MessageFormat.format(Constants.ADVANCE_DEPLOY_SUCCEED, this.d_countryFrom.getOwner().getName(),
 					this.d_numOfArmies, this.d_countryTo.getCountryName()));
 		} else {
+			// Start the attack between different owners of countryFrom and countryTo
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
-			// attack
 			d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_START, this.d_countryFrom.getOwner().getName(),
 					this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
+			// Calculate remaining armies after the battle and handle battle outcomes
 			int l_noOfAttackingArmies = this.d_numOfArmies;
 			int l_noOfDefendingArmies = this.d_countryTo.getArmyCount();
+			// Calculate remaining armies for attacker and defender after the battle
 			int l_leftoverAttackingArmies = (int) Math
 					.max(Math.floor(l_noOfAttackingArmies - 0.7 * l_noOfDefendingArmies), 0);
 			int l_leftoverDefendingArmies = (int) Math
@@ -95,12 +99,14 @@ public class Advance extends Order {
 			if (l_leftoverDefendingArmies == 0) {
 				d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_WON, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName()));
+				// Update armies and ownership after winning the battle
 				this.d_countryTo.setArmyCount(l_leftoverAttackingArmies);
 				this.d_countryTo.getOwner().removeCountry(d_countryTo);
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
 				this.d_countryFrom.getOwner().addCountry(d_countryTo);
 				this.d_countryFrom.getOwner().addCard(CardType.getRandomCard());
 			} else {
+				// Defender wins the battle
 				d_logger.log(
 						MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
 								this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
@@ -113,7 +119,7 @@ public class Advance extends Order {
 	 * This function is used to check the input format for advance command.
 	 *
 	 * @param p_inputArray
-	 *            the input string split by space
+	 *                     the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidAdvanceInput(String[] p_inputArray) {

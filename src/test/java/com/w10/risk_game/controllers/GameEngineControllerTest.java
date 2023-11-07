@@ -55,6 +55,7 @@ class GameEngineControllerTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
 		d_mapEditorController.loadMap(l_mapFilePath);
 
+		
 		d_gameEngineController.createPlayer(d_player1.getName());
 		d_gameEngineController.createPlayer(d_player2.getName());
 

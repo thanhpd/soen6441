@@ -48,13 +48,18 @@ class DeployTest {
 	 */
 	@Test
 	void checkValidDeployInputTest() {
+		// Test Case 1: "invalid input"
 		String l_input1 = "invalid input";
 		boolean l_isValidForm = Deploy.CheckValidDeployInput(l_input1.split(" "));
 		assertEquals(false, l_isValidForm);
+		// Test Case 2: "invalid input 1"
 		String l_input2 = "invalid input 1";
 		boolean l_isValidForm2 = Deploy.CheckValidDeployInput(l_input2.split(" "));
 		assertEquals(false, l_isValidForm2);
+		// Test Case 3: "invalid 1 input"
 		String l_input3 = "invalid 1 input";
+		// Check whether the Deploy.CheckValidDeployInput method correctly identifies
+		// invalid input
 		boolean l_isValidForm3 = Deploy.CheckValidDeployInput(l_input3.split(" "));
 		assertEquals(false, l_isValidForm3);
 	}
@@ -70,7 +75,9 @@ class DeployTest {
 		String l_input = "deploy 0 6";
 		String[] l_inputArray = l_input.split(" ");
 		String l_countryId = l_inputArray[1];
+		// Fetch a list of countries owned by a player
 		List<Country> l_countries = d_player1.getCountriesOwned();
+		// Check if the country is valid for deployment
 		boolean l_isValidCountry = Deploy.CheckValidCountry(l_countries, l_countryId);
 		assertEquals(false, l_isValidCountry);
 	}
@@ -87,6 +94,7 @@ class DeployTest {
 		String l_input = "deploy 1 20";
 		String[] l_inputArray = l_input.split(" ");
 		String l_num = l_inputArray[2];
+		// Check if the number of armies is valid for deployment
 		boolean l_isValidNum = Deploy.CheckValidArmy(d_player1, Integer.parseInt(l_num));
 		assertEquals(false, l_isValidNum);
 	}

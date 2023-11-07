@@ -41,7 +41,7 @@ public class GameEngineController {
 	 * The constructor of the GameEngineController class.
 	 *
 	 * @param p_mapEditorController
-	 *            The map editor controller object.
+	 *                              The map editor controller object.
 	 */
 	public GameEngineController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;
@@ -64,7 +64,7 @@ public class GameEngineController {
 	 * The function sets the list of players in a game.
 	 *
 	 * @param p_playerListForDiplomacy
-	 *            a list of players in a game.
+	 *                                 a list of players in a game.
 	 */
 	public void setPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
 		this.d_playerListForDiplomacy = p_playerListForDiplomacy;
@@ -84,7 +84,8 @@ public class GameEngineController {
 	 * the provided list of Order objects.
 	 *
 	 * @param p_otherOrders
-	 *            The parameter "p_otherOrders" is a List of Order objects.
+	 *                      The parameter "p_otherOrders" is a List of Order
+	 *                      objects.
 	 */
 	public static void setOtherOrders(List<Order> p_otherOrders) {
 		d_otherOrders = p_otherOrders;
@@ -95,20 +96,27 @@ public class GameEngineController {
 	 * players, checking for duplicate names.
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player being created.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
+			// Create a new player object with the given player name, an empty list of
+			// countries, empty list of orders, and 0 reinforcement armies
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
+			// Check if the player name doesn't already exist in the game
 			if (!this.d_players.containsKey(p_playerName.trim())) {
+				// Add the new player to the players' collection and player list for diplomacy
 				this.d_players.put(p_playerName, l_player);
 				this.d_playerListForDiplomacy.add(l_player);
 				d_logger.log(MessageFormat.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName).toString());
 			} else {
+				// Log an error message as the player name already exists in the game
 				d_logger.log(Constants.GAME_ENGINE_ERROR_PLAYER_NAME_ALREADY_EXISTS);
 			}
 		} catch (Exception e) {
+			// Log an error if there is an exception during player creation
 			d_logger.log(Constants.GAME_ENGINE_ERROR_ADD_PLAYER);
 		}
 	}
@@ -117,11 +125,13 @@ public class GameEngineController {
 	 * The function removes a player from a list of players in a game engine.
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player that needs to be removed.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player that needs to be removed.
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
+		// Retrieve the game map from the Map Editor Controller
 		this.d_gameMap = this.d_mapEditorController.getGameMap();
 		try {
 			if (!this.d_players.containsKey(p_playerName)) {
@@ -131,6 +141,8 @@ public class GameEngineController {
 			this.d_players.remove(p_playerName.trim());
 			d_logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
 		} catch (Exception e) {
+			// If an exception occurs during player removal, print the stack trace and log
+			// an error
 			e.printStackTrace();
 			d_logger.log(Constants.GAME_ENGINE_ERROR_REMOVE_PLAYER);
 		}
@@ -142,15 +154,23 @@ public class GameEngineController {
 	 *
 	 */
 	public void showAllPlayers() {
+		// Iterate through all players in the game
 		this.d_players.forEach((p_playerName, p_player) -> {
+			// Log the player's name
 			d_logger.log(p_playerName);
+
+			// Iterate through the countries owned by the player
 			for (Country c : p_player.getCountriesOwned()) {
 				try {
+					// Log the name of each country owned by the player
 					d_logger.log(c.getCountryName());
 				} catch (Exception e) {
+					// If an exception occurs while printing country details, log an error
 					d_logger.log(Constants.GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS);
 				}
 			}
+
+			// Log an empty line for visual separation between players
 			d_logger.log("");
 		});
 	}
@@ -211,13 +231,16 @@ public class GameEngineController {
 	 */
 	public boolean assignPlayersReinforcements() {
 		try {
+			// Get the game map from the Map Editor Controller
 			this.d_gameMap = this.d_mapEditorController.getGameMap();
 			for (Player l_player : this.d_players.values()) {
 				l_player.setLeftoverArmies(0);
+				// Assign reinforcements to the current player using the game map
 				Reinforcements.AssignPlayerReinforcements(l_player, this.d_gameMap);
 			}
 			this.d_isCountriesAssigned = true;
 			d_logger.log(Constants.CLI_ASSIGN_REINFORCEMENTS);
+			// Return true to indicate successful assignment of reinforcements
 			return true;
 		} catch (Exception e) {
 			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
@@ -239,7 +262,8 @@ public class GameEngineController {
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *            The name of the player for which you want to retrieve the details.
+	 *                     The name of the player for which you want to retrieve the
+	 *                     details.
 	 * @return The method is returning a Player object.
 	 *
 	 */
@@ -313,6 +337,7 @@ public class GameEngineController {
 	 */
 	public boolean executePlayerOrders() {
 		try {
+			// Create lists to separate different types of orders
 			List<Order> l_deployOrders = new ArrayList<>();
 			List<Order> l_airliftOrders = new ArrayList<>();
 			List<Order> l_negotiateOrders = new ArrayList<>();
@@ -321,6 +346,7 @@ public class GameEngineController {
 			for (Player l_player : this.d_players.values()) {
 				while (!l_player.getOrders().isEmpty()) {
 					Order l_order = l_player.nextOrder();
+					// Categorize orders based on their type
 					if (l_order instanceof Deploy) {
 						l_deployOrders.add(l_order);
 					} else if (l_order instanceof Airlift) {
@@ -328,11 +354,13 @@ public class GameEngineController {
 					} else if (l_order instanceof Negotiate) {
 						l_negotiateOrders.add(l_order);
 					} else {
+						// Add any other type of order to a separate list
 						d_otherOrders.add(l_order);
 					}
 				}
 			}
 
+			// Execute orders of each type separately
 			for (Order l_order : l_deployOrders) {
 				l_order.execute();
 			}
@@ -345,6 +373,7 @@ public class GameEngineController {
 			for (Order l_order : d_otherOrders) {
 				l_order.execute();
 			}
+			// Clear the list of other orders
 			d_otherOrders.removeAll(d_otherOrders);
 
 			// Re-initialize variables used in the Issue Order phase again

@@ -66,6 +66,7 @@ public class Airlift extends Order {
 				// log a success message
 				d_logger.log(MessageFormat.format(Constants.AIRLIFT_SUCCEED, d_armyToAirlift,
 						l_sourceCountry.getCountryName(), l_targetCountry.getCountryName()));
+
 			} else {
 				// If source country doesn't have enough armies, log a message
 				l_formatter.format(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);

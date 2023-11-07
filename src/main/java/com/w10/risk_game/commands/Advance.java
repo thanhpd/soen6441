@@ -19,7 +19,7 @@ public class Advance extends Order {
 	private Country d_countryFrom;
 	private Country d_countryTo;
 	private int d_numOfArmies;
-	private String p_advancingPlayerName;
+	private String d_advancingPlayerName;
 
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -27,17 +27,17 @@ public class Advance extends Order {
 	 * This is a constructor of the Advance class
 	 *
 	 * @param p_countryFrom
-	 *            The country from where the armies are to move
+	 *                      The country from where the armies are to move
 	 * @param p_countryTo
-	 *            The country to where the armies are to move
+	 *                      The country to where the armies are to move
 	 * @param p_numOfArmies
-	 *            The number of armies that the order is issued to
+	 *                      The number of armies that the order is issued to
 	 */
 	public Advance(Country p_countryFrom, Country p_countryTo, int p_numOfArmies) {
 		this.d_countryFrom = p_countryFrom;
 		this.d_countryTo = p_countryTo;
 		this.d_numOfArmies = p_numOfArmies;
-		this.p_advancingPlayerName = p_countryFrom.getOwner().getName();
+		this.d_advancingPlayerName = p_countryFrom.getOwner().getName();
 	}
 
 	/**
@@ -72,8 +72,8 @@ public class Advance extends Order {
 	 * of armies and advances them to the country
 	 */
 	public void execute() {
-		if (!this.p_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
-			d_logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.p_advancingPlayerName,
+		if (!this.d_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
+			d_logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
@@ -114,7 +114,7 @@ public class Advance extends Order {
 	 * This function is used to check the input format for advance command.
 	 *
 	 * @param p_inputArray
-	 *            the input string split by space
+	 *                     the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidAdvanceInput(String[] p_inputArray) {

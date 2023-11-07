@@ -2,7 +2,6 @@ package com.w10.risk_game;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.Scanner;
 
 import com.google.common.base.Joiner;
@@ -25,8 +24,7 @@ public class GameEngine {
 
 	private final GameEngineController d_gameEngineController;
 	private final MapEditorController d_mapEditorController;
-	private Formatter d_formatter;
-	
+
 	public static Phase d_phase;
 	public static String Command = "";
 
@@ -89,11 +87,8 @@ public class GameEngine {
 				l_player = this.d_gameEngineController.getCurrentPlayer();
 				d_logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
 
-				this.d_formatter = new Formatter();
-				this.d_formatter.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
-						l_player.getLeftoverArmies());
-				d_logger.log(this.d_formatter.toString());
-				this.d_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
+						l_player.getLeftoverArmies()));
 
 				// Display Player Cards
 				if (!l_player.getPlayerCards().isEmpty()) {
@@ -265,11 +260,8 @@ public class GameEngine {
 	 *            iteration.
 	 */
 	private void displayLoopIterationMessage(ArrayList<String> p_options) {
-		this.d_formatter = new Formatter();
-		this.d_formatter.format(Constants.CLI_ITERATION_OPTION, p_options.get(0),
-				p_options.subList(1, p_options.size()));
-		d_logger.log(this.d_formatter.toString());
-		this.d_formatter.close();
+		d_logger.log(MessageFormat.format(Constants.CLI_ITERATION_OPTION, p_options.get(0),
+				p_options.subList(1, p_options.size())));
 	}
 
 	/**

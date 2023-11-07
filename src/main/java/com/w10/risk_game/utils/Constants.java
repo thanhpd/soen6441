@@ -51,15 +51,15 @@ public final class Constants {
 	public static final String CLI_LOAD_MAP = "Loading Map: ";
 	public static final String CLI_SHOW_MAP = "Displaying Map";
 	public static final String CLI_GAME_PLAYER_REMOVE = "Removed Player: ";
-	public static final String CLI_GAME_PLAYER_CREATE = "Created Player: %s";
+	public static final String CLI_GAME_PLAYER_CREATE = "Created Player: {0}";
 	public static final String CLI_ASSIGN_COUNTRIES = "Assigning Countries...";
 	public static final String CLI_ASSIGN_REINFORCEMENTS = "Reinforcements have been assigned to the players.";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
-	public static final String CLI_ITERATION_OPTION = "%n===========%nRunning the %s option with the parameters %s.%n";
+	public static final String CLI_ITERATION_OPTION = "\n===========\nRunning the {0} option with the parameters {1}.\n";
 
 	// Game Engine constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";
-	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign %d countries to %d players!";
+	public static final String GAME_ENGINE_ERROR_ASSIGNING_COUNTRIES = "Cannot assign {0} countries to {1} players!";
 	public static final String GAME_ENGINE_ERROR_ADD_PLAYER = "Player cannot be added!";
 	public static final String GAME_ENGINE_ERROR_REMOVE_PLAYER = "Player cannot be removed!";
 	public static final String GAME_ENGINE_ERROR_PLAYER_NAME_DOESNT_EXIST = "Player doesn't exist!";
@@ -71,11 +71,11 @@ public final class Constants {
 	public static final String GAME_ENGINE_MAP_VALID = "Map is valid";
 	public static final String GAME_ENGINE_MAP_INVALID = "Map is invalid!";
 	public static final String GAME_ENGINE_MAP_EDIT_SUCCESS = "Map loaded successfully, please start editing..!";
-	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File %s does not exist!%nCreating new map named %s.";
-	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named %s. Please try again.%n%s";
+	public static final String GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST = "File {0} does not exist!\nCreating new map named {0}.";
+	public static final String GAME_ENGINE_ERROR_CREATE_MAP = "Error creating map named {0}. Please try again.\n{1}";
 	public static final String GAME_ENGINE_CANNOT_SAVE_MAP = "Cannot save map";
 	public static final String GAME_ENGINE_EXECUTING_ORDERS = "Executing orders now...";
-	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for %d armies";
+	public static final String GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES = "You can issue orders for {0} armies";
 	public static final String GAME_ENGINE_ISSUE_ORDER_PHASE_STRING = "ISSUEORDER PHASE";
 	public static final String GAME_ENGINE_GAME_OVER = "GAME OVER!!! ";
 	public static final String GAME_ENGINE_END_GAME = " is the winner of the game!!!";
@@ -98,9 +98,9 @@ public final class Constants {
 	public static final String PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE = "Invalid input! The order type should be \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\", \"showmap\" or \"quit\".";
 	public static final String PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY = "Invalid input! The country id should be one of the countries owned by the player. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_NO_CARD = "The player does not have that card. It will not be added to the list of orders.";
-	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = %s.";
+	public static final String BLOCKADE_CARD_NO_VALID_COUNTRY = "No valid country to block with ID = {0}.";
 	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift!";
-	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
+	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = {0}.";
 	public static final String PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS = "Invalid input! The {0} command should contain {1} parts. Please try again.";
 	public static final String PLAYER_ISSUE_ORDER_INCORRECT = "This {0} order is invalid. It will not be added to the list of orders.";
 	public static final String PLAYER_ISSUE_ORDER_SUCCEED = "This order is added to the list of orders successfully.";
@@ -143,12 +143,12 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
 
 	// Map Display constants
-	public static final String MAP_DISPLAY_TABLE1_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+%n";
-	public static final String MAP_DISPLAY_TABLE1_COLUMN_NAMES = "| Country       |ID | Continent     |Bonus| Neighbor Countries                                                                                      |%n";
-	public static final String MAP_DISPLAY_TABLE1_FORMAT_PATTERN = "|%-15s|%-3s|%-15s|%-5s|%-105s|%n";
-	public static final String MAP_DISPLAY_TABLE2_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+------------+--------+%n";
-	public static final String MAP_DISPLAY_TABLE2_COLUMN_NAMES = "| Country       |ID | Continent     |Bonus| Neighbor Countries                                                                                      |   Owner    | Armies |%n";
-	public static final String MAP_DISPLAY_TABLE2_FORMAT_PATTERN = "|%-15s|%-3s|%-15s|%-5s|%-105s|%-12s|%-8s|%n";
+	public static final String MAP_DISPLAY_TABLE1_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+\n";
+	public static final String MAP_DISPLAY_TABLE1_COLUMN_NAMES = "| Country       |ID | Continent     |Bonus| Neighbor Countries                                                                                      |\n";
+	public static final String MAP_DISPLAY_TABLE1_FORMAT_PATTERN = "|%-15s|%-3s|%-15s|%-5s|%-105s|\n";
+	public static final String MAP_DISPLAY_TABLE2_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+------------+--------+\n";
+	public static final String MAP_DISPLAY_TABLE2_COLUMN_NAMES = "| Country       |ID | Continent     |Bonus| Neighbor Countries                                                                                      |   Owner    | Armies |\n";
+	public static final String MAP_DISPLAY_TABLE2_FORMAT_PATTERN = "|%-15s|%-3s|%-15s|%-5s|%-105s|%-12s|%-8s|\n";
 	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
 
 	// Map Reader constants
@@ -188,6 +188,6 @@ public final class Constants {
 	public static final String ADVANCE_INVALID_COUNTRY_NOT_OWNED = "Invalid input! Country {0} is not owned by {1}.";
 
 	// Bomb constants
-	public static final String BOMB_SUCCEED = "Player %s bombed country %s. %s lost half of their armies.";
-	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = %s.";
+	public static final String BOMB_SUCCEED = "Player {0} bombed country {1}. {2} lost half of their armies.";
+	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = {0}.";
 }

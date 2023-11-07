@@ -1,7 +1,6 @@
 package com.w10.risk_game.commands;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 import java.util.List;
 
 import com.w10.risk_game.models.Country;
@@ -49,8 +48,6 @@ public class Airlift extends Order {
 	 */
 	@Override
 	public void execute() {
-		Formatter l_formatter = new Formatter();
-
 		// Retrieves the country for airlift
 		Country l_targetCountry = getCountryForAirlift(d_player, d_targetCountryId);
 		Country l_sourceCountry = getCountryForAirlift(d_player, d_sourceCountryId);
@@ -65,9 +62,7 @@ public class Airlift extends Order {
 				l_targetCountry.setArmyCount(Integer.parseInt(d_armyToAirlift) + l_airliftCountryArmy);
 			} else {
 				// If source country doesn't have enough armies, log a message
-				l_formatter.format(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
 			}
 		}
 	}
@@ -106,13 +101,9 @@ public class Airlift extends Order {
 	 *         null or not found.
 	 */
 	public static Country getCountryForAirlift(Player p_player, String p_countryId) {
-		Formatter l_formatter = new Formatter();
-
 		if (p_countryId == null) {
 			// Log a message if the country ID is null
-			l_formatter.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -129,13 +120,11 @@ public class Airlift extends Order {
 
 			if (l_countryToAirlift == null) {
 				// Log a message if the requested country is not a valid neighbor
-				d_logger.log(l_formatter.toString());
+				d_logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
 			// Log a message if an exception occurs while processing
-			d_logger.log(l_formatter.toString());
-		} finally {
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 		return l_countryToAirlift;
 	}

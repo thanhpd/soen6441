@@ -71,14 +71,20 @@ public class GameEngineController {
 	}
 
 	/**
-	 * This function is used to get the list of other orders
+	 * The function returns a list of other orders.
+	 *
+	 * @return The method is returning a List of Order objects.
 	 */
 	public static List<Order> getOtherOrders() {
 		return d_otherOrders;
 	}
 
 	/**
-	 * This function is used to set the list of other orders
+	 * The function sets the value of a static variable called "d_otherOrders" to
+	 * the provided list of Order objects.
+	 *
+	 * @param p_otherOrders
+	 *            The parameter "p_otherOrders" is a List of Order objects.
 	 */
 	public static void setOtherOrders(List<Order> p_otherOrders) {
 		d_otherOrders = p_otherOrders;

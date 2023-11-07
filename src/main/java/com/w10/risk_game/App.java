@@ -26,6 +26,9 @@ public class App {
 	/**
 	 * The main function creates an instance of the App class and calls its
 	 * startGame method.
+	 *
+	 * @param args
+	 *            arguments
 	 */
 	public static void main(String[] args) {
 		App d_app = new App();

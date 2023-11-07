@@ -68,14 +68,23 @@ public class Airlift extends Order {
 	}
 
 	/**
-	 * The function checks if a player can perform an airlift order by validating
-	 * the source and target countries, as well as the number of armies to airlift.
+	 * The function "ValidateOrder" checks if a player can perform an airlift order
+	 * by validating the source and target countries, as well as the number of
+	 * armies to airlift.
 	 *
+	 * @param p_player
+	 *            The player object representing the player who is initiating the
+	 *            order.
+	 * @param p_sourceCountryId
+	 *            The ID of the country from which the player wants to airlift
+	 *            armies.
 	 * @param p_targetCountryId
-	 *            The ID of the country where the player wants to airlift their
-	 *            armies to. The "armiesToAirlift" parameter is a String that
-	 *            represents the number of layer wants to airlift from the source
-	 *            country to the target country.
+	 *            The target country ID is a string that represents the ID of the
+	 *            country where the player wants to airlift their armies to.
+	 * @param p_armiesToAirlift
+	 *            The parameter "p_armiesToAirlift" represents the number of armies
+	 *            that the player wants to airlift from the source country to the
+	 *            target country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,

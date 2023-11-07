@@ -34,8 +34,8 @@ public class GameEngine {
 	 * The function sets the phase of an object and then prints the available
 	 * commands for that phase.
 	 *
-	 * @param d_phase
-	 *            The parameter "d_phase" is of type "Phase".
+	 * @param p_phase
+	 *            The parameter "p_phase" is of type "Phase".
 	 */
 	public static void setPhase(Phase p_phase) {
 		d_phase = p_phase;

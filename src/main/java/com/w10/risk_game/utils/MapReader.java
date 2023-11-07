@@ -18,7 +18,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * @author Omnia Alam
  */
 public class MapReader {
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The function reads country data from a scanner and maps it to a collection of

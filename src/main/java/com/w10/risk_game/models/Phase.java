@@ -19,7 +19,7 @@ public abstract class Phase {
 	protected GamePlayController d_gamePlayController;
 	protected MapEditorController d_mapEditorController;
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The constructor for the Phase class.

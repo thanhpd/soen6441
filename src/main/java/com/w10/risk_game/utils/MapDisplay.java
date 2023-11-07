@@ -18,7 +18,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * @author Sherwyn Dsouza
  */
 public class MapDisplay {
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The `displayMap` function takes a `GameMap` object and a boolean flag as

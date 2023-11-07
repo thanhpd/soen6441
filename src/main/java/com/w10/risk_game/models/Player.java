@@ -27,7 +27,7 @@ public class Player {
 	private List<CardType> d_playerCards = new ArrayList<>();
 	private boolean d_hasCommitted = false;
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The `Player` constructor is initializing a new instance of the `Player` class

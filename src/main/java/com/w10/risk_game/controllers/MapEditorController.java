@@ -33,7 +33,7 @@ public class MapEditorController {
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * Game Engine constructor

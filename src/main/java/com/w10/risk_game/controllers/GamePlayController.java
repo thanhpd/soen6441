@@ -36,7 +36,7 @@ public class GamePlayController {
 	private static List<Order> OtherOrders = new ArrayList<>();
 	private static List<Player> PlayerListForDiplomacy = new ArrayList<>();
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The constructor of the GamePlayController class.

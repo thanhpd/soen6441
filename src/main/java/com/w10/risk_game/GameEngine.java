@@ -28,7 +28,7 @@ public class GameEngine {
 	public static Phase Phase;
 	public static String Command = "";
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The function sets the phase of an object and then prints the available

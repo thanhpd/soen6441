@@ -26,7 +26,7 @@ public class GameMap {
 	private Map<Integer, Continent> d_continents;
 	private Map<Integer, Player> d_player;
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * This constructor initializes the `d_countries`, `d_continents`, and

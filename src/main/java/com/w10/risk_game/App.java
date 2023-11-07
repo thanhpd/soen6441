@@ -12,7 +12,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  */
 public class App {
 
-	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The `App` constructor attaches the Console Logger and File Logger as

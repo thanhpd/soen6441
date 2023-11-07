@@ -192,4 +192,7 @@ public final class Constants {
 	// Bomb constants
 	public static final String BOMB_SUCCEED = "Player {0} bombed country {1}. {2} lost half of their armies.";
 	public static final String BOMB_CARD_NO_VALID_COUNTRY = "No valid country to bomb with ID = {0}.";
+
+	// Blockade constants
+	public static final String BLOCKADE_SUCCEED = "Player {0} blockaded the country {1}. Country {1} became neutral and has {2} armies now.";
 }

@@ -41,7 +41,7 @@ public class Bomb extends Order {
 
 		if (l_countryToBomb != null) {
 			int l_initArmyCount = l_countryToBomb.getArmyCount();
-			int l_newArmyCount = l_initArmyCount / 2;
+			int l_newArmyCount = (int) Math.floor((double) l_initArmyCount / 2);
 			l_countryToBomb.setArmyCount(l_newArmyCount);
 			d_logger.log(MessageFormat.format(Constants.BOMB_SUCCEED, d_player.getName(),
 					l_countryToBomb.getCountryName(), l_countryToBomb.getCountryName()));

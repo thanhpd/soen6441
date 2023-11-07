@@ -1,0 +1,29 @@
+; map: artic.map
+; map made with the map maker
+; yura.net Risk 1.0.9.3
+
+[files]
+pic artic_pic.png
+map artic_map.gif
+crd artic.cards
+
+[continents]
+continent1 5 white
+continent2 5 green
+continent3 8 yellow
+
+[countries]
+1 country1 1 108 66
+2 country2 1 148 77
+3 country3 2 74 83
+4 country4 2 161 109
+5 country5 3 43 115
+6 country6 3 97 129
+
+[borders]
+1 2 3 5
+2 1 3
+3 1 2 4 6
+4 3 6
+5 1 6
+6 4 5 3

@@ -108,6 +108,7 @@ public class CommandInterpreter {
 	 *            An ArrayList of ArrayLists of Strings. Each inner ArrayList
 	 *            represents a set of options for a command.
 	 * @exception ApplicationException
+	 *                Global general application exception
 	 */
 	public static void CheckValidArgumentOptions(String[] p_argList, String p_command,
 			ArrayList<ArrayList<String>> p_listOfOptions) throws ApplicationException {

@@ -51,7 +51,7 @@ public class Blockade extends Order {
 
 			// Remove the country from the player's list of owned countries
 			d_player.getCountriesOwned().remove(l_countryToBlock);
-			d_logger.log(MessageFormat.format(Constants.BLOCKADE_SUCCEED, d_player.getName(),
+			Logger.log(MessageFormat.format(Constants.BLOCKADE_SUCCEED, d_player.getName(),
 					l_countryToBlock.getCountryName(), l_countryToBlock.getArmyCount()));
 		}
 	}

@@ -390,8 +390,12 @@ public class GameEngineController {
 	public boolean checkIfGameIsOver() {
 		String l_player = "";
 		for (Country l_country : this.d_mapEditorController.getGameMap().getCountries().values()) {
+			// If no owner that means the country is neutral and the game is not over
+			if (l_country.getOwner() == null)
+				return false;
 			if (l_player.equals(""))
 				l_player = l_country.getOwner().getName();
+			// Check if a country has a different owner
 			else if (!l_player.equals(l_country.getOwner().getName()))
 				return false;
 		}

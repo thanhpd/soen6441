@@ -55,7 +55,7 @@ class GameEngineControllerTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
 		d_mapEditorController.loadMap(l_mapFilePath);
 
-		
+		// Create two player instances
 		d_gameEngineController.createPlayer(d_player1.getName());
 		d_gameEngineController.createPlayer(d_player2.getName());
 
@@ -64,6 +64,8 @@ class GameEngineControllerTest {
 
 		d_gameEngineController.assignCountries();
 
+		// Check that both players have the expected number of countries assigned after
+		// the assignment
 		assertEquals(12, d_gameEngineController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
 		assertEquals(12, d_gameEngineController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 	}
@@ -75,11 +77,14 @@ class GameEngineControllerTest {
 	 */
 	@Test
 	void testCreatePlayer() {
+		// Creating the first and second players
 		d_gameEngineController.createPlayer(d_player1.getName());
 		d_gameEngineController.createPlayer(d_player2.getName());
 		assertEquals(2, d_gameEngineController.getNoOfPlayers());
 
 		d_gameEngineController.createPlayer(d_player2.getName());
+		// Test that the total count of players remains at 2 after attempting to
+		// create a player with an existing name
 		assertEquals(2, d_gameEngineController.getNoOfPlayers());
 	}
 
@@ -93,9 +98,10 @@ class GameEngineControllerTest {
 		d_gameEngineController.createPlayer(d_player1.getName());
 		d_gameEngineController.createPlayer(d_player2.getName());
 
+		// Removing the second player and ensuring the total count of players is 1
 		d_gameEngineController.removePlayer(d_player2.getName());
 		assertEquals(1, d_gameEngineController.getNoOfPlayers());
-
+		// Removing the first player and asserting that the total count of players is 0
 		d_gameEngineController.removePlayer(d_player1.getName());
 		assertEquals(0, d_gameEngineController.getNoOfPlayers());
 	}

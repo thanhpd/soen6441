@@ -432,7 +432,8 @@ public class Player {
 						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED, l_countryNameFrom,
 								this.getName()));
 					if (l_countryTo == null)
-						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME, l_countryNameTo));
+						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_NEIGHBOR, l_countryNameTo,
+								l_countryNameFrom));
 				} else if (d_advanceArmies <= 0)
 					Logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
 				else

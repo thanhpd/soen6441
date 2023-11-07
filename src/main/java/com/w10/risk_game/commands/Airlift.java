@@ -60,6 +60,9 @@ public class Airlift extends Order {
 				// adjust the army count in countries
 				l_sourceCountry.setArmyCount(l_airliftCountryFromArmy - Integer.parseInt(d_armyToAirlift));
 				l_targetCountry.setArmyCount(Integer.parseInt(d_armyToAirlift) + l_airliftCountryArmy);
+				// log a success message
+				Logger.log(MessageFormat.format(Constants.AIRLIFT_SUCCEED, d_armyToAirlift,
+						l_sourceCountry.getCountryName(), l_targetCountry.getCountryName()));
 			} else {
 				// If source country doesn't have enough armies, log a message
 				Logger.log(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
@@ -92,6 +95,16 @@ public class Airlift extends Order {
 		Country l_sourceCountry = GetCountryForAirlift(p_player, p_sourceCountryId);
 		Country l_targetCountry = GetCountryForAirlift(p_player, p_targetCountryId);
 		int l_armyToAirlift = Integer.parseInt(p_armiesToAirlift);
+
+		if (!p_player.hasCountry(Integer.parseInt(p_sourceCountryId))) {
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_sourceCountryId,
+					p_player.getName()));
+		}
+
+		if (!p_player.hasCountry(Integer.parseInt(p_targetCountryId))) {
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_targetCountryId,
+					p_player.getName()));
+		}
 
 		return l_sourceCountry != null && l_targetCountry != null && l_armyToAirlift > 0
 				&& l_armyToAirlift <= l_sourceCountry.getArmyCount();

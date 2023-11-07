@@ -77,14 +77,16 @@ public class Advance extends Order {
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
-		if (this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
+		if (this.d_countryTo.getOwner() != null
+				&& this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
+			// This code block is simulating a movement of armies to player's own country
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());
 			d_logger.log(MessageFormat.format(Constants.ADVANCE_DEPLOY_SUCCEED, this.d_countryFrom.getOwner().getName(),
 					this.d_numOfArmies, this.d_countryTo.getCountryName()));
 		} else {
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
-			// attack
+			// This code block is simulating a battle between two countries in the game.
 			d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_START, this.d_countryFrom.getOwner().getName(),
 					this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
 			int l_noOfAttackingArmies = this.d_numOfArmies;
@@ -93,7 +95,7 @@ public class Advance extends Order {
 					.max(Math.floor(l_noOfAttackingArmies - 0.7 * l_noOfDefendingArmies), 0);
 			int l_leftoverDefendingArmies = (int) Math
 					.max(Math.floor(l_noOfDefendingArmies - 0.6 * l_noOfAttackingArmies), 0);
-			if (l_leftoverDefendingArmies == 0) {
+			if (l_leftoverDefendingArmies == 0) {// attacker wins
 				d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_WON, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName()));
 				this.d_countryTo.setArmyCount(l_leftoverAttackingArmies);
@@ -101,7 +103,7 @@ public class Advance extends Order {
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
 				this.d_countryFrom.getOwner().addCountry(d_countryTo);
 				this.d_countryFrom.getOwner().addCard(CardType.getRandomCard());
-			} else {
+			} else { // attacker loses
 				d_logger.log(
 						MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
 								this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));

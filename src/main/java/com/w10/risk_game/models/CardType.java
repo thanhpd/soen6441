@@ -12,8 +12,8 @@ public enum CardType {
 	 * @return The method is returning a random CardType.
 	 */
 	public static CardType getRandomCard() {
-		Random d_Random = new Random();
-		CardType d_Type = values()[d_Random.nextInt(values().length)];
+		// Random d_Random = new Random();
+		CardType d_Type = AIRLIFT;
 		return d_Type;
 	}
 }

@@ -162,8 +162,6 @@ class GameEngineControllerTest {
 		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
 		d_gameEngineController.issuePlayerOrder();
 
-		assertTrue(true);
-
 		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
 		d_gameEngineController.issuePlayerOrder();
 

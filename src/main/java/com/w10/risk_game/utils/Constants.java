@@ -165,6 +165,7 @@ public final class Constants {
 
 	// Logger constants
 	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
+	public static final String LOGGER_FILE_ISSUE = "Issue with log file!";
 
 	// Deploy constants
 	public static final String DEPLOY_SUCCEED = "Player {0} deployed {1} armies to country {2}";

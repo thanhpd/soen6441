@@ -178,6 +178,7 @@ public final class Constants {
 	public static final String NEGOTIATE_NO_PLAYER = "No player with id {0}";
 
 	// Advance constants
+	public static final String ADVANCE_NOT_OWNER = "Advance order issued by {0} can no longer be executed as player no longer owns {1}.";
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";
 	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You''ve conquered {1}. Keep the conquest going!";
 	public static final String ADVANCE_BATTLE_LOST = "{0}''s forces have been defeated in the battle for {1}, owned by {2}.";

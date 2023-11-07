@@ -19,6 +19,7 @@ public class Advance extends Order {
 	private Country d_countryFrom;
 	private Country d_countryTo;
 	private int d_numOfArmies;
+	private String d_advancingPlayerName;
 
 	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
 
@@ -36,6 +37,7 @@ public class Advance extends Order {
 		this.d_countryFrom = p_countryFrom;
 		this.d_countryTo = p_countryTo;
 		this.d_numOfArmies = p_numOfArmies;
+		this.d_advancingPlayerName = p_countryFrom.getOwner().getName();
 	}
 
 	/**
@@ -70,6 +72,11 @@ public class Advance extends Order {
 	 * of armies and advances them to the country
 	 */
 	public void execute() {
+		if (!this.d_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
+			d_logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
+					this.d_countryFrom.getCountryName()));
+			return;
+		}
 		if (this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());

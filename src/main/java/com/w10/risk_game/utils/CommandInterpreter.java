@@ -125,9 +125,13 @@ public class CommandInterpreter {
 		String[] l_commandsWithOptionsToCheck = new String[]{Constants.USER_INPUT_COMMAND_EDIT_CONTINENT,
 				Constants.USER_INPUT_COMMAND_EDIT_COUNTRY, Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR,
 				Constants.USER_INPUT_COMMAND_GAMEPLAYER};
+
 		// Check if the command requires options and if there's at least one option for
 		// the command
 		if (Arrays.asList(l_commandsWithOptionsToCheck).contains(p_command)) {
+			// Check if the user has not provided any options
+			if (p_listOfOptions.isEmpty())
+				throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 			for (ArrayList<String> l_options : p_listOfOptions) {
 				int l_minOptionsLength = GetMinOptionsLength(p_command, l_options);
 

@@ -9,6 +9,12 @@ import org.junit.jupiter.api.Test;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 
+/**
+ * The AdvanceTest class is a JUnit test class that tests the functionality of
+ * the Advance class, which represents an advance order in a game.
+ *
+ * @author Darlene-Naz
+ */
 class AdvanceTest {
 	private Country d_country1;
 	private Country d_country2;
@@ -16,6 +22,9 @@ class AdvanceTest {
 	private Player d_player2;
 	private Order d_order1;
 
+	/**
+	 * The setUp() function initializes objects for testing in a Java program.
+	 */
 	@BeforeEach
 	public void setUp() {
 		d_country1 = new Country(1, "England", 1, 10);
@@ -29,6 +38,11 @@ class AdvanceTest {
 		d_order1 = new Advance(d_country1, d_country2, 3);
 	}
 
+	/**
+	 * The testSameOwnerTransfer function tests if the execute method of d_order1
+	 * correctly transfers armies from d_country1 to d_country2 when they have the
+	 * same owner.
+	 */
 	@Test
 	void testSameOwnerTransfer() {
 		d_country2.setOwner(d_player1);
@@ -37,6 +51,9 @@ class AdvanceTest {
 		assertEquals(7, d_country1.getArmyCount());
 	}
 
+	/**
+	 * The testBattleWon function tests various assertions after a battle is won.
+	 */
 	@Test
 	void testBattleWon() {
 		d_order1.execute();
@@ -48,6 +65,10 @@ class AdvanceTest {
 		assertEquals(1, d_player1.getPlayerCards().size());
 	}
 
+	/**
+	 * The testBattleLost function tests if the attacking country loses the battle
+	 * and the appropriate changes are made to the army counts.
+	 */
 	@Test
 	void testBattleLost() {
 		d_order1 = new Advance(d_country2, d_country1, 2);

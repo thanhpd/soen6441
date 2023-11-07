@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.w10.risk_game.commands.Bomb;
-import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,18 +16,18 @@ import org.junit.jupiter.api.Test;
  *
  * @author Darlene-Naz, Yajing Liu
  */
-public class PlayerTest {
+class PlayerTest {
 	private Player d_player;
 	private Player d_player1;
 	private Player d_player2;
-	GameEngineController d_gameEngineController;
+	GamePlayController d_gamePlayController;
 
 	/**
 	 * The function sets up a Player object with a specific name, no territories,
 	 * and a starting army count of 10 for testing purposes.
 	 */
 	@BeforeEach
-	public void beforeAllPlayerTests() {
+	void beforeAllPlayerTests() {
 		d_player = new Player("TestPlayerName", new ArrayList<Country>(), List.of(), 10);
 
 		// Set for country
@@ -62,8 +61,8 @@ public class PlayerTest {
 		l_players.add(d_player1);
 		l_players.add(d_player2);
 		MapEditorController l_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(l_mapEditorController);
-		d_gameEngineController.setPlayerListForDiplomacy(l_players);
+		d_gamePlayController = new GamePlayController(l_mapEditorController);
+		d_gamePlayController.SetPlayerListForDiplomacy(l_players);
 	}
 
 	/**
@@ -71,7 +70,7 @@ public class PlayerTest {
 	 * adding 2 armies and checking if the leftover armies is equal to 12.
 	 */
 	@Test
-	public void testAddArmies() {
+	void testAddArmies() {
 		d_player.addArmies(2);
 		assertEquals(12, d_player.getLeftoverArmies());
 	}
@@ -82,7 +81,7 @@ public class PlayerTest {
 	 * armies.
 	 */
 	@Test
-	public void testDeployArmies() {
+	void testDeployArmies() {
 		d_player.deployArmies(3);
 		assertEquals(7, d_player.getLeftoverArmies());
 	}
@@ -92,7 +91,7 @@ public class PlayerTest {
 	 * the invalid deploy order can be prevented from adding to order list.
 	 */
 	@Test
-	public void issueDeployOrderTest() {
+	void issueDeployOrderTest() {
 		// Test valid deploy order
 		String l_command = "deploy";
 		String l_countryId = "1";
@@ -127,7 +126,7 @@ public class PlayerTest {
 	 * the invalid advance order can be prevented from adding to order list.
 	 */
 	@Test
-	public void issueAdvanceOrderTest() {
+	void issueAdvanceOrderTest() {
 		// Prepare for advance order test
 		String l_command = "deploy";
 		String l_countryId = "1";
@@ -189,7 +188,7 @@ public class PlayerTest {
 	 * the invalid bomb order can be prevented from adding to order list.
 	 */
 	@Test
-	public void issueBombOrderTest() {
+	void issueBombOrderTest() {
 		// Test not have bomb card
 		String l_command = "bomb";
 		String l_countryId = "2";
@@ -231,7 +230,7 @@ public class PlayerTest {
 	 * list.
 	 */
 	@Test
-	public void issueBlockadeOrderTest() {
+	void issueBlockadeOrderTest() {
 		// Test not have blockade card
 		String l_command = "blockade";
 		String l_countryId = "4";
@@ -264,7 +263,7 @@ public class PlayerTest {
 	 * the invalid airlift order can be prevented from adding to order list.
 	 */
 	@Test
-	public void issueAirliftOrder() {
+	void issueAirliftOrder() {
 		// Test not have airlift card
 		String l_command = "airlift";
 		String l_countryIdFrom = "4";
@@ -320,7 +319,7 @@ public class PlayerTest {
 	 * list.
 	 */
 	@Test
-	public void issueDiplomacyOrderTest() {
+	void issueDiplomacyOrderTest() {
 		// Test not have diplomacy card
 		String l_command = "negotiate";
 		String l_playerName = "Player1";

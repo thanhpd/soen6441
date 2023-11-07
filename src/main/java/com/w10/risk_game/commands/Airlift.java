@@ -1,7 +1,6 @@
 package com.w10.risk_game.commands;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 import java.util.List;
 
 import com.w10.risk_game.models.Country;
@@ -16,7 +15,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * @author Tazin Morshed
  */
 public class Airlift extends Order {
-	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	private final Player d_player;
 	private final String d_sourceCountryId;
@@ -49,11 +48,9 @@ public class Airlift extends Order {
 	 */
 	@Override
 	public void execute() {
-		Formatter l_formatter = new Formatter();
-
 		// Retrieves the country for airlift
-		Country l_targetCountry = getCountryForAirlift(d_player, d_targetCountryId);
-		Country l_sourceCountry = getCountryForAirlift(d_player, d_sourceCountryId);
+		Country l_targetCountry = GetCountryForAirlift(d_player, d_targetCountryId);
+		Country l_sourceCountry = GetCountryForAirlift(d_player, d_sourceCountryId);
 
 		// Check if both target and source countries are valid
 		if (l_targetCountry != null && l_sourceCountry != null) {
@@ -63,32 +60,67 @@ public class Airlift extends Order {
 				// adjust the army count in countries
 				l_sourceCountry.setArmyCount(l_airliftCountryFromArmy - Integer.parseInt(d_armyToAirlift));
 				l_targetCountry.setArmyCount(Integer.parseInt(d_armyToAirlift) + l_airliftCountryArmy);
+				// log a success message
+				Logger.log(MessageFormat.format(Constants.AIRLIFT_SUCCEED, d_armyToAirlift,
+						l_sourceCountry.getCountryName(), l_targetCountry.getCountryName()));
 			} else {
 				// If source country doesn't have enough armies, log a message
-				l_formatter.format(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				Logger.log(Constants.AIRLIFT_CARD_NOT_ENOUGH_ARMIES);
 			}
 		}
 	}
 
 	/**
-	 * The function checks if a player can perform an airlift order by validating
-	 * the source and target countries, as well as the number of armies to airlift.
+	 * The function "ValidateOrder" checks if a player can perform an airlift order
+	 * by validating the source and target countries, as well as the number of
+	 * armies to airlift.
 	 *
+	 * @param p_player
+	 *            The player object representing the player who is initiating the
+	 *            order.
+	 * @param p_sourceCountryId
+	 *            The ID of the country from which the player wants to airlift
+	 *            armies.
 	 * @param p_targetCountryId
-	 *            The ID of the country where the player wants to airlift their
-	 *            armies to. The "armiesToAirlift" parameter is a String that
-	 *            represents the number of layer wants to airlift from the source
-	 *            country to the target country.
+	 *            The target country ID is a string that represents the ID of the
+	 *            country where the player wants to airlift their armies to.
+	 * @param p_armiesToAirlift
+	 *            The parameter "p_armiesToAirlift" represents the number of armies
+	 *            that the player wants to airlift from the source country to the
+	 *            target country.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_sourceCountryId, String p_targetCountryId,
 			String p_armiesToAirlift) {
-		Country l_sourceCountry = getCountryForAirlift(p_player, p_sourceCountryId);
-		Country l_targetCountry = getCountryForAirlift(p_player, p_targetCountryId);
+		// Retrieve the source and target countries and the number of armies to be
+		// airlifted
+		Country l_sourceCountry = GetCountryForAirlift(p_player, p_sourceCountryId);
+		Country l_targetCountry = GetCountryForAirlift(p_player, p_targetCountryId);
 		int l_armyToAirlift = Integer.parseInt(p_armiesToAirlift);
 
+		// Check if the player has the source and target countries
+		if (!p_player.hasCountry(Integer.parseInt(p_sourceCountryId))) {
+			// Log a message if the source country does not belong to the player
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_sourceCountryId,
+					p_player.getName()));
+		}
+
+		if (!p_player.hasCountry(Integer.parseInt(p_targetCountryId))) {
+			// Log a message if the target country does not belong to the player
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_targetCountryId,
+					p_player.getName()));
+		}
+
+		// Check if both source and target countries exist and if the source country has
+		// enough armies to airlift
+		if (l_sourceCountry != null && l_targetCountry != null && l_armyToAirlift > l_sourceCountry.getArmyCount()) {
+			// Log a message if the source country doesn't have enough armies for airlift
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY, l_sourceCountry.getCountryName(),
+					l_sourceCountry.getArmyCount()));
+		}
+
+		// Return a boolean indicating if the order is valid based on multiple
+		// conditions
 		return l_sourceCountry != null && l_targetCountry != null && l_armyToAirlift > 0
 				&& l_armyToAirlift <= l_sourceCountry.getArmyCount();
 	}
@@ -105,14 +137,10 @@ public class Airlift extends Order {
 	 * @return The Country intended for airlift; returns null if the country ID is
 	 *         null or not found.
 	 */
-	public static Country getCountryForAirlift(Player p_player, String p_countryId) {
-		Formatter l_formatter = new Formatter();
-
+	public static Country GetCountryForAirlift(Player p_player, String p_countryId) {
 		if (p_countryId == null) {
 			// Log a message if the country ID is null
-			l_formatter.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 			return null;
 		}
 
@@ -129,13 +157,11 @@ public class Airlift extends Order {
 
 			if (l_countryToAirlift == null) {
 				// Log a message if the requested country is not a valid neighbor
-				d_logger.log(l_formatter.toString());
+				Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 			}
 		} catch (Exception e) {
 			// Log a message if an exception occurs while processing
-			d_logger.log(l_formatter.toString());
-		} finally {
-			l_formatter.close();
+			Logger.log(MessageFormat.format(Constants.AIRLIFT_CARD_NO_VALID_COUNTRY, p_countryId));
 		}
 		return l_countryToAirlift;
 	}
@@ -150,7 +176,7 @@ public class Airlift extends Order {
 	public static boolean CheckValidAirliftInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 4) {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift",
+			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "airlift",
 					"four"));
 			return false;
 		}
@@ -160,20 +186,20 @@ public class Airlift extends Order {
 		String l_num = p_inputArray[3];
 		for (int i = 0; i < l_sourceCountryId.length(); i++) {
 			if (!Character.isDigit(l_sourceCountryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		for (int i = 0; i < l_targetCountryId.length(); i++) {
 			if (!Character.isDigit(l_targetCountryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		// Step 3: Check whether the number of armies is positive integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}

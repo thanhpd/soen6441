@@ -6,7 +6,6 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 
 /**
  * This class is the Advance order class. It extends the Order class. It defines
@@ -21,17 +20,17 @@ public class Advance extends Order {
 	private int d_numOfArmies;
 	private String d_advancingPlayerName;
 
-	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * This is a constructor of the Advance class
 	 *
 	 * @param p_countryFrom
-	 *            The country from where the armies are to move
+	 *                      The country from where the armies are to move
 	 * @param p_countryTo
-	 *            The country to where the armies are to move
+	 *                      The country to where the armies are to move
 	 * @param p_numOfArmies
-	 *            The number of armies that the order is issued to
+	 *                      The number of armies that the order is issued to
 	 */
 	public Advance(Country p_countryFrom, Country p_countryTo, int p_numOfArmies) {
 		this.d_countryFrom = p_countryFrom;
@@ -73,7 +72,7 @@ public class Advance extends Order {
 	 */
 	public void execute() {
 		if (!this.d_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
-			d_logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
+			Logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
@@ -82,12 +81,12 @@ public class Advance extends Order {
 			// This code block is simulating a movement of armies to player's own country
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());
-			d_logger.log(MessageFormat.format(Constants.ADVANCE_DEPLOY_SUCCEED, this.d_countryFrom.getOwner().getName(),
+			Logger.log(MessageFormat.format(Constants.ADVANCE_DEPLOY_SUCCEED, this.d_countryFrom.getOwner().getName(),
 					this.d_numOfArmies, this.d_countryTo.getCountryName()));
 		} else {
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			// This code block is simulating a battle between two countries in the game.
-			d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_START, this.d_countryFrom.getOwner().getName(),
+			Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_START, this.d_countryFrom.getOwner().getName(),
 					this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
 			int l_noOfAttackingArmies = this.d_numOfArmies;
 			int l_noOfDefendingArmies = this.d_countryTo.getArmyCount();
@@ -96,17 +95,16 @@ public class Advance extends Order {
 			int l_leftoverDefendingArmies = (int) Math
 					.max(Math.floor(l_noOfDefendingArmies - 0.6 * l_noOfAttackingArmies), 0);
 			if (l_leftoverDefendingArmies == 0) {// attacker wins
-				d_logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_WON, this.d_countryFrom.getOwner().getName(),
+				Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_WON, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName()));
 				this.d_countryTo.setArmyCount(l_leftoverAttackingArmies);
 				this.d_countryTo.getOwner().removeCountry(d_countryTo);
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
 				this.d_countryFrom.getOwner().addCountry(d_countryTo);
-				this.d_countryFrom.getOwner().addCard(CardType.getRandomCard());
+				this.d_countryFrom.getOwner().addCard(CardType.GetRandomCard());
 			} else { // attacker loses
-				d_logger.log(
-						MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
-								this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
+				Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
+						this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
 				this.d_countryTo.setArmyCount(l_leftoverDefendingArmies);
 			}
 		}
@@ -116,13 +114,13 @@ public class Advance extends Order {
 	 * This function is used to check the input format for advance command.
 	 *
 	 * @param p_inputArray
-	 *            the input string split by space
+	 *                     the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidAdvanceInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 4) {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance",
+			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "advance",
 					"four"));
 			return false;
 		}
@@ -130,7 +128,7 @@ public class Advance extends Order {
 		String l_num = p_inputArray[3];
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}

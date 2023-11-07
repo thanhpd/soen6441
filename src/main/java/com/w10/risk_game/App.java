@@ -12,20 +12,23 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  */
 public class App {
 
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The `App` constructor attaches the Console Logger and File Logger as
 	 * Observers
 	 */
 	public App() {
-		d_logger.attach(new ConsoleLogger());
-		d_logger.attach(new FileLogger());
+		Logger.attach(new ConsoleLogger());
+		Logger.attach(new FileLogger());
 	}
 
 	/**
 	 * The main function creates an instance of the App class and calls its
 	 * startGame method.
+	 *
+	 * @param args
+	 *            arguments
 	 */
 	public static void main(String[] args) {
 		App d_app = new App();
@@ -37,13 +40,13 @@ public class App {
 	 * and starts the game, logging any exceptions that occur.
 	 */
 	public void startGame() {
-		d_logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
+		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
 		GameEngine l_gameEngine = new GameEngine();
 		try {
 			l_gameEngine.start();
 		} catch (Exception e) {
-			d_logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
-			d_logger.log(e.getMessage());
+			Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
+			Logger.log(e.getMessage());
 		}
 	}
 }

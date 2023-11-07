@@ -1,6 +1,6 @@
 package com.w10.risk_game.commands;
 
-import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
@@ -18,17 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @see Negotiate
  * @author Yajing Liu
  */
-public class NegotiateTest {
+class NegotiateTest {
 	Player d_player1;
 	Player d_player2;
 	Order d_negotiateOrder;
-	GameEngineController d_gameEngineController;
+	GamePlayController d_gamePlayController;
 
 	/**
 	 * This method is to set up the test environment
 	 */
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		// Set for player1
 		Country l_country1 = new Country(1, "England", 1, 10);
 		Country l_country2 = new Country(2, "France", 1, 10);
@@ -56,28 +56,28 @@ public class NegotiateTest {
 		l_players.add(d_player1);
 		l_players.add(d_player2);
 		MapEditorController l_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(l_mapEditorController);
-		d_gameEngineController.setPlayerListForDiplomacy(l_players);
+		d_gamePlayController = new GamePlayController(l_mapEditorController);
+		d_gamePlayController.SetPlayerListForDiplomacy(l_players);
 		List<Order> l_otherOrders = new ArrayList<>();
 		l_otherOrders.add(l_advance1);
 		l_otherOrders.add(l_order2);
-		d_gameEngineController.setOtherOrders(l_otherOrders);
+		d_gamePlayController.SetOtherOrders(l_otherOrders);
 	}
 
 	/**
 	 * This method is to test the method of execute
 	 */
 	@Test
-	public void executeTest() {
+	void executeTest() {
 		d_negotiateOrder.execute();
-		assertEquals(0, d_gameEngineController.getOtherOrders().size());
+		assertEquals(0, d_gamePlayController.GetOtherOrders().size());
 	}
 
 	/**
 	 * This method is to test the method of validateOrder
 	 */
 	@Test
-	public void validateOrderTest() {
+	void validateOrderTest() {
 		boolean l_isNotNegotiateSelf = Negotiate.ValidateOrder(d_player1, "Player1");
 		assertEquals(false, l_isNotNegotiateSelf);
 		boolean l_isNotNegotiatePlayerNotExist = Negotiate.ValidateOrder(d_player1, "Player3");

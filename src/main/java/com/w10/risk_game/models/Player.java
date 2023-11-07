@@ -7,7 +7,6 @@ import com.w10.risk_game.commands.*;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.Formatter;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.utils.Constants;
@@ -28,7 +27,7 @@ public class Player {
 	private List<CardType> d_playerCards = new ArrayList<>();
 	private boolean d_hasCommitted = false;
 
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The `Player` constructor is initializing a new instance of the `Player` class
@@ -242,10 +241,10 @@ public class Player {
 			Scanner l_scanner = new Scanner(System.in);
 			// Step 1: Handle invalid input
 			if (l_failed) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_RESTART);
-				d_logger.log(Constants.USER_INPUT_REQUEST);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_RESTART);
+				Logger.log(Constants.USER_INPUT_REQUEST);
 				l_input = l_scanner.nextLine();
-				d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
+				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
 
 				// Check if user enters quit after an invalid order
 				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_QUIT)) {
@@ -254,9 +253,8 @@ public class Player {
 				}
 				// Check if user enters showmap after an invalid order
 				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_SHOWMAP)) {
-					GameEngine.d_phase.showMap();
-					l_input = Constants.USER_INPUT_COMMAND_SHOWMAP;
-					l_failed = false;
+					GameEngine.Phase.showMap();
+					continue;
 				}
 				l_inputArray = l_input.split(" ");
 			}
@@ -290,20 +288,15 @@ public class Player {
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 					if (d_leftoverArmies == 0) {
 						setHasCommitted(true);
-						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
+						Logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
 						l_failed = false;
 					} else {
-						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
+						Logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
 						l_failed = true;
 					}
 					break;
-				case Constants.USER_INPUT_COMMAND_SHOWMAP :
-					d_logger.log(Constants.USER_INPUT_REQUEST);
-					l_input = l_scanner.nextLine();
-					d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
-					break;
 				default :
-					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
+					Logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 					l_failed = true;
 			}
 			if (l_failed) {
@@ -347,10 +340,9 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
-			case Constants.USER_INPUT_COMMAND_SHOWMAP :
 				return true;
 			default :
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
 				return false;
 		}
 	}
@@ -404,13 +396,11 @@ public class Player {
 			Order order = new Deploy(this, Integer.parseInt(p_inputArray[1]), Integer.parseInt(p_inputArray[2]));
 			d_orders.add(order);
 			deployArmies(Integer.parseInt(p_inputArray[2]));
-			d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+			Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 			return true;
 		} else {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT, Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY);
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
 			return false;
 		}
 	}
@@ -439,19 +429,20 @@ public class Player {
 					d_advanceArmies, l_countryFrom.getArmyCount(), l_countryFrom.getCountryId())) {
 				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
 				d_orders.add(l_order);
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
 				if (l_countryFrom == null || l_countryTo == null) {
 					if (l_countryFrom == null)
-						d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED,
-								l_countryNameFrom, this.getName()));
+						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED, l_countryNameFrom,
+								this.getName()));
 					if (l_countryTo == null)
-						d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME, l_countryNameTo));
+						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_NEIGHBOR, l_countryNameTo,
+								l_countryNameFrom));
 				} else if (d_advanceArmies <= 0)
-					d_logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
+					Logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
 				else
-					d_logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
+					Logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
 				return false;
 			}
 		}
@@ -472,10 +463,10 @@ public class Player {
 				Order order = new Bomb(this, l_countryIdToBomb);
 				d_orders.add(order);
 				removeCard(CardType.BOMB);
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB));
 				return false;
 			}
@@ -498,10 +489,10 @@ public class Player {
 				Order order = new Blockade(this, l_countryIdToBlockade);
 				d_orders.add(order);
 				removeCard(CardType.BLOCKADE);
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE));
 				return false;
 			}
@@ -525,10 +516,10 @@ public class Player {
 				Order order = new Negotiate(this, l_playerId);
 				d_orders.add(order);
 				removeCard(CardType.DIPLOMACY);
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE));
 				return false;
 			}
@@ -558,10 +549,10 @@ public class Player {
 				Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
 				d_orders.add(order);
 				removeCard(CardType.AIRLIFT);
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
 				return false;
 			}
@@ -582,7 +573,7 @@ public class Player {
 			return true;
 		}
 
-		d_logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
+		Logger.log(Constants.PLAYER_ISSUE_ORDER_NO_CARD);
 		return false;
 	}
 

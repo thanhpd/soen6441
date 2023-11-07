@@ -6,7 +6,6 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
-import java.util.Formatter;
 import java.util.List;
 
 /**
@@ -20,7 +19,7 @@ public class Deploy extends Order {
 	private Player d_player;
 	private int d_countryId;
 	private int d_num;
-	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * This is a constructor of the Deploy class
@@ -37,18 +36,25 @@ public class Deploy extends Order {
 		this.d_countryId = p_countryId;
 		this.d_num = p_num;
 	}
+
 	/**
-	 * This method is used to get the country id
+	 * The function returns the country ID.
+	 *
+	 * @return The method is returning the value of the variable "d_countryId".
 	 */
 	public int getCountryId() {
 		return d_countryId;
 	}
+
 	/**
-	 * This method is used to get the number of armies
+	 * The function "getNum" returns the value of the variable "d_num".
+	 *
+	 * @return The method is returning the value of the variable "d_num".
 	 */
 	public int getNum() {
 		return d_num;
 	}
+
 	/**
 	 * This method extends the execute method in the Order class. It gets the number
 	 * of armies and deploys them to the country
@@ -59,7 +65,7 @@ public class Deploy extends Order {
 			if (l_country.getCountryId() == d_countryId) {
 				int l_countryArmies = l_country.getArmyCount();
 				l_country.setArmyCount(l_countryArmies + d_num);
-				d_logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
+				Logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
 			}
 		}
 	}
@@ -104,29 +110,32 @@ public class Deploy extends Order {
 				return true;
 			}
 		}
-		d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY);
+		Logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY);
 		return false;
 	}
 
 	/**
-	 * This function is used to check the number of armies for deploy command. The
-	 * number of armies should be less than the number of leftover armies
+	 * The function CheckValidArmy checks if the number of armies to be deployed is
+	 * valid for a given player.
 	 *
+	 * @param p_player
+	 *            The player object that represents a player in the game.
 	 * @param p_num
-	 *            the number of armies
-	 * @return boolean value to show whether the number of armies is valid
+	 *            The number of armies that the player wants to deploy.
+	 * @return The method is returning a boolean value.
 	 */
 	public static boolean CheckValidArmy(Player p_player, int p_num) {
 		if (p_num <= 0) {
-			d_logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
+			Logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
 			return false;
 		}
 		if (p_num > p_player.getLeftoverArmies()) {
-			d_logger.log(Constants.DEPLOY_INVALID_ARMIES);
+			Logger.log(Constants.DEPLOY_INVALID_ARMIES);
 			return false;
 		}
 		return true;
 	}
+
 	/**
 	 * This function is used to check the input format for deploy command. The input
 	 * should have three parts (one string and two positive integers)
@@ -138,7 +147,7 @@ public class Deploy extends Order {
 	public static boolean CheckValidDeployInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy",
+			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy",
 					"three"));
 			return false;
 		}
@@ -147,14 +156,14 @@ public class Deploy extends Order {
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		// Step 3: Check whether the number of armies is positive integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}

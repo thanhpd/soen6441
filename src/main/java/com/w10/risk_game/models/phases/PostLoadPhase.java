@@ -17,11 +17,11 @@ public class PostLoadPhase extends MapEditorPhase {
 	/**
 	 * The constructor for the PostLoadPhase class.
 	 *
-	 * @param p_GameEngine
-	 *            The parameter p_GameEngine is a GameEngine object.
+	 * @param p_gameEngine
+	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	public PostLoadPhase(GameEngine p_GameEngine) {
-		super(p_GameEngine);
+	public PostLoadPhase(GameEngine p_gameEngine) {
+		super(p_gameEngine);
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	@Override
 	public void nextPhase() {
 		if (this.d_mapEditorController.checkIfMapIsValid()) {
-			d_gameEngine.setPhase(new PlaySetupPhase(d_gameEngine));
+			d_gameEngine.SetPhase(new PlaySetupPhase(d_gameEngine));
 		}
 	}
 
@@ -182,6 +182,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	public boolean checkIfMapIsValid() {
 		return this.d_mapEditorController.checkIfMapIsValid();
 	}
+
 	/**
 	 * The function is an overridden method that calls itself recursively,
 	 * potentially causing an infinite loop.

@@ -1,17 +1,13 @@
-package com.w10.risk_game.models;
+package com.w10.risk_game.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.w10.risk_game.controllers.MapEditorController;
-import com.w10.risk_game.controllers.GameEngineController;
 import com.w10.risk_game.utils.Constants;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,13 +15,13 @@ import org.junit.jupiter.api.Test;
 /**
  * The GameEngineTest class contains unit test for various methods in the
  * GameEngine class.
+ *
+ * @author Omnia Alam
  */
-public class MapEditorControllerTest {
-	private GameEngineController d_gameEngineController;
+class MapEditorControllerTest {
+	private GamePlayController d_gamePlayController;
 	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
-	// Player d_player1;
-	// Player d_player2;
 
 	/**
 	 * The function "beforeAllGameEngineTests" initializes a new instance of the
@@ -36,7 +32,7 @@ public class MapEditorControllerTest {
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
 		d_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(d_mapEditorController);
+		d_gamePlayController = new GamePlayController(d_mapEditorController);
 		d_outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(d_outputStream));
 	}
@@ -44,8 +40,6 @@ public class MapEditorControllerTest {
 	/**
 	 * The testLoadMap function tests whether the d_RiskGame successfully loads the
 	 * "europe.map" file.
-	 *
-	 * @author Sherwyn Dsouza
 	 */
 	@Test
 	void testLoadMap() {
@@ -60,14 +54,13 @@ public class MapEditorControllerTest {
 	@Test
 	void testShowMap() {
 		d_mapEditorController.showMap(false);
-		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
+		assertTrue(d_gamePlayController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
 	}
 
 	/**
 	 * The testGameMap function tests if the game engine successfully loads a map
 	 * and returns a non-null game map object.
 	 *
-	 * @author Sherwyn Dsouza
 	 */
 	@Test
 	void testGameMap() {

@@ -192,5 +192,6 @@ public final class Constants {
 	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifed from {1} to {2}";
 	public static final String AIRLIFT_CARD_NOT_ENOUGH_ARMIES = "Not enough armies to airlift!";
 	public static final String AIRLIFT_CARD_NO_VALID_COUNTRY = "No valid country to airlift with ID = %s.";
+	public static final String AIRLIFT_COUNTRY_DOESNOT_EXISTS = "{0} doesnt belong to {1}";
 
 }

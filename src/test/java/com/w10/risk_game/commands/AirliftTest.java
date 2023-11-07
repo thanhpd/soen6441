@@ -48,8 +48,7 @@ public class AirliftTest {
 
 	/**
 	 * The testAirliftExecution function creates an Airlift order, executes it, and
-	 * checks if the
-	 * number of armies in country1 has been updated as expected.
+	 * checks if the number of armies in country1 has been updated as expected.
 	 */
 	@Test
 	public void testAirliftExecution() {

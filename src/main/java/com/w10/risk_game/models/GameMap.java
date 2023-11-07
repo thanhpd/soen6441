@@ -87,13 +87,13 @@ public class GameMap {
 	 * The function returns a Country object by searching for a matching country
 	 * name in a collection of countries.
 	 *
-	 * @param p_countryNmae
-	 *            The parameter "p_countryNmae" is a String representing the name of
+	 * @param p_countryName
+	 *            The parameter "p_countryName" is a String representing the name of
 	 *            the country that you want to retrieve.
 	 * @return The method is returning an object of type "Country".
 	 */
-	public Country getCountryByName(String p_countryNmae) {
-		return d_countries.values().stream().filter(counrty -> counrty.getCountryName().equals(p_countryNmae))
+	public Country getCountryByName(String p_countryName) {
+		return d_countries.values().stream().filter(country -> country.getCountryName().equals(p_countryName))
 				.findFirst().get();
 	}
 

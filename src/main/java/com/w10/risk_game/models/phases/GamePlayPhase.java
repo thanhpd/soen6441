@@ -74,7 +74,7 @@ public abstract class GamePlayPhase extends Phase {
 	 */
 	@Override
 	public void showMap() {
-		this.d_gameEngineController.showMap();
+		this.d_gamePlayController.showMap();
 	}
 
 	/**

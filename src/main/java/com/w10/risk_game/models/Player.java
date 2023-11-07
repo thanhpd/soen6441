@@ -252,6 +252,12 @@ public class Player {
 					GameEngine.Command = Constants.USER_INPUT_COMMAND_QUIT;
 					break;
 				}
+				// Check if user enters showmap after an invalid order
+				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_SHOWMAP)) {
+					GameEngine.d_phase.showMap();
+					l_input = Constants.USER_INPUT_COMMAND_SHOWMAP;
+					l_failed = false;
+				}
 				l_inputArray = l_input.split(" ");
 			}
 			// Step 2: Check the input format
@@ -290,6 +296,11 @@ public class Player {
 						d_logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
 						l_failed = true;
 					}
+					break;
+				case Constants.USER_INPUT_COMMAND_SHOWMAP :
+					d_logger.log(Constants.USER_INPUT_REQUEST);
+					l_input = l_scanner.nextLine();
+					d_logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
 					break;
 				default :
 					d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
@@ -336,6 +347,7 @@ public class Player {
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 				return Negotiate.CheckValidNegotiateInput(p_inputArray);
 			case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
+			case Constants.USER_INPUT_COMMAND_SHOWMAP :
 				return true;
 			default :
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
@@ -425,10 +437,13 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				if (l_countryFrom == null || l_countryTo == null)
-					d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME,
-							l_countryFrom == null ? l_countryNameFrom : l_countryNameTo));
-				else if (d_advanceArmies <= 0)
+				if (l_countryFrom == null || l_countryTo == null) {
+					if (l_countryFrom == null)
+						d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED,
+								l_countryNameFrom, this.getName()));
+					if (l_countryTo == null)
+						d_logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NAME, l_countryNameTo));
+				} else if (d_advanceArmies <= 0)
 					d_logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
 				else
 					d_logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
@@ -455,11 +470,8 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB));
 				return false;
 			}
 		} else {
@@ -484,11 +496,8 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE));
 				return false;
 			}
 		} else {
@@ -514,11 +523,8 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE));
 				return false;
 			}
 		} else {
@@ -550,11 +556,8 @@ public class Player {
 				d_logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 				return true;
 			} else {
-				Formatter l_formatter = new Formatter();
-				l_formatter.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
-				d_logger.log(l_formatter.toString());
-				l_formatter.close();
+				d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
 				return false;
 			}
 		} else {

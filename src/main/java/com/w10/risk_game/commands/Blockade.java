@@ -1,5 +1,6 @@
 package com.w10.risk_game.commands;
 
+import java.text.MessageFormat;
 import java.util.Formatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -126,10 +127,8 @@ public class Blockade extends Order {
 	public static boolean CheckValidBlockadeInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 2) {
-			Formatter l_formatter = new Formatter();
-			l_formatter.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade", "two");
-			d_logger.log(l_formatter.toString());
-			l_formatter.close();
+			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "blockade",
+					"two"));
 			return false;
 		}
 		// Step 2: Check whether the country id is positive integer

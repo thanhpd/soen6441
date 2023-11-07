@@ -40,7 +40,6 @@ public class NegotiateTest {
 		d_negotiateOrder = new Negotiate(d_player1, "Player2");
 		Order l_advance1 = new Advance(l_country1, l_country2, 3);
 		orderList1.add(d_negotiateOrder);
-		orderList1.add(l_advance1);
 		d_player1.setOrders(orderList1);
 
 		// Set for player2
@@ -50,7 +49,6 @@ public class NegotiateTest {
 		d_player2 = new Player("Player2", l_countries2, new ArrayList<>(), 10);
 		l_country2.setOwner(d_player2);
 		Order l_order2 = new Advance(l_country2, l_country1, 3);
-		orderList2.add(l_order2);
 		d_player2.setOrders(orderList2);
 
 		// Set for game engine controller
@@ -60,6 +58,10 @@ public class NegotiateTest {
 		MapEditorController l_mapEditorController = new MapEditorController();
 		d_gameEngineController = new GameEngineController(l_mapEditorController);
 		d_gameEngineController.setPlayerListForDiplomacy(l_players);
+		List<Order> l_otherOrders = new ArrayList<>();
+		l_otherOrders.add(l_advance1);
+		l_otherOrders.add(l_order2);
+		d_gameEngineController.setOtherOrders(l_otherOrders);
 	}
 
 	/**
@@ -68,8 +70,7 @@ public class NegotiateTest {
 	@Test
 	public void executeTest() {
 		d_negotiateOrder.execute();
-		assertEquals(1, d_player1.getOrders().size());
-		assertEquals(0, d_player2.getOrders().size());
+		assertEquals(0, d_gameEngineController.getOtherOrders().size());
 	}
 
 	/**

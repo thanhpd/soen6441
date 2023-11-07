@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
  * @author Omnia Alam
  */
 class MapEditorControllerTest {
-	private GameEngineController d_gameEngineController;
+	private GamePlayController d_gamePlayController;
 	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
 
@@ -32,7 +32,7 @@ class MapEditorControllerTest {
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
 		d_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(d_mapEditorController);
+		d_gamePlayController = new GamePlayController(d_mapEditorController);
 		d_outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(d_outputStream));
 	}
@@ -54,7 +54,7 @@ class MapEditorControllerTest {
 	@Test
 	void testShowMap() {
 		d_mapEditorController.showMap(false);
-		assertTrue(d_gameEngineController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
+		assertTrue(d_gamePlayController.checkIfGameCanBegin() == d_mapEditorController.checkIfMapIsValid());
 	}
 
 	/**

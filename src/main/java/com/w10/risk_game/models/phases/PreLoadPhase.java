@@ -43,7 +43,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	 */
 	public void next() {
 		if (this.d_mapEditorController.checkIfMapIsValid()) {
-			d_gameEngine.setPhase(new PostLoadPhase(d_gameEngine));
+			d_gameEngine.SetPhase(new PostLoadPhase(d_gameEngine));
 		}
 
 	}

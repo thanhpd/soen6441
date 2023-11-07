@@ -33,7 +33,7 @@ public class MapEditorController {
 	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
 
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * Game Engine constructor
@@ -61,7 +61,7 @@ public class MapEditorController {
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
 
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+			Logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 		}
 	}
 
@@ -109,20 +109,19 @@ public class MapEditorController {
 		// map file
 		if (l_file.exists()) {
 			this.loadMap(p_mapFilePath);
-			d_logger.log(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
+			Logger.log(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
 			return true;
 		} else {
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
-				d_logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
+				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]));
 				boolean l_isFileCreated = new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
 				if (l_isFileCreated)
 					this.loadMap(p_mapFilePath);
 				return l_isFileCreated;
 			} catch (IOException e) {
-				d_logger.log(
-						MessageFormat.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage()));
+				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage()));
 			}
 		}
 		return false;
@@ -142,9 +141,9 @@ public class MapEditorController {
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
 			String l_output = this.d_mapEditor.addContinent(p_continentName, p_bonus);
-			d_logger.log(l_output);
+			Logger.log(l_output);
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -165,9 +164,9 @@ public class MapEditorController {
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
 		try {
 			String l_output = this.d_mapEditor.addCountry(p_countryId, p_countryName, p_continentName);
-			d_logger.log(l_output);
+			Logger.log(l_output);
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -182,9 +181,9 @@ public class MapEditorController {
 	public void removeContinent(String p_continentName) {
 		try {
 			String l_output = this.d_mapEditor.removeContinent(p_continentName);
-			d_logger.log(l_output);
+			Logger.log(l_output);
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -199,9 +198,9 @@ public class MapEditorController {
 	public void removeCountry(int p_countryId) {
 		try {
 			String l_output = this.d_mapEditor.removeCountry(p_countryId);
-			d_logger.log(l_output);
+			Logger.log(l_output);
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -220,9 +219,9 @@ public class MapEditorController {
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
 		try {
 			String l_output = this.d_mapEditor.addNeighbor(p_countryId, p_neighbourCountryId);
-			d_logger.log(l_output);
+			Logger.log(l_output);
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -241,9 +240,9 @@ public class MapEditorController {
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
 		try {
 			String l_output = this.d_mapEditor.removeNeighbor(p_countryId, p_neighborCountryId);
-			d_logger.log(l_output);
+			Logger.log(l_output);
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_EDIT_MAP);
 		}
 	}
 
@@ -260,18 +259,18 @@ public class MapEditorController {
 			// else false
 			if (this.d_gameMap.isMapCreated()) {
 				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
-					d_logger.log(Constants.GAME_ENGINE_MAP_VALID);
+					Logger.log(Constants.GAME_ENGINE_MAP_VALID);
 					return true;
 				} else {
-					d_logger.log(Constants.GAME_ENGINE_MAP_INVALID);
+					Logger.log(Constants.GAME_ENGINE_MAP_INVALID);
 					return false;
 				}
 			} else {
-				d_logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
+				Logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
 				return false;
 			}
 		} catch (Exception e) {
-			d_logger.log(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
+			Logger.log(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
 			return false;
 		}
 	}
@@ -288,7 +287,7 @@ public class MapEditorController {
 		if (checkIfMapIsValid()) {
 			this.d_gameMap.saveMap(p_mapFilePath);
 		} else {
-			d_logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
+			Logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
 	}
 }

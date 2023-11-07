@@ -19,7 +19,7 @@ public class Deploy extends Order {
 	private Player d_player;
 	private int d_countryId;
 	private int d_num;
-	private static final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * This is a constructor of the Deploy class
@@ -65,7 +65,7 @@ public class Deploy extends Order {
 			if (l_country.getCountryId() == d_countryId) {
 				int l_countryArmies = l_country.getArmyCount();
 				l_country.setArmyCount(l_countryArmies + d_num);
-				d_logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
+				Logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
 			}
 		}
 	}
@@ -110,7 +110,7 @@ public class Deploy extends Order {
 				return true;
 			}
 		}
-		d_logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY);
+		Logger.log(Constants.PLAYER_ISSUE_ORDER_DEPLOY_INVALID_COUNTRY);
 		return false;
 	}
 
@@ -126,11 +126,11 @@ public class Deploy extends Order {
 	 */
 	public static boolean CheckValidArmy(Player p_player, int p_num) {
 		if (p_num <= 0) {
-			d_logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
+			Logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
 			return false;
 		}
 		if (p_num > p_player.getLeftoverArmies()) {
-			d_logger.log(Constants.DEPLOY_INVALID_ARMIES);
+			Logger.log(Constants.DEPLOY_INVALID_ARMIES);
 			return false;
 		}
 		return true;
@@ -147,7 +147,7 @@ public class Deploy extends Order {
 	public static boolean CheckValidDeployInput(String[] p_inputArray) {
 		// Step 1: Check the length of the input
 		if (p_inputArray.length != 3) {
-			d_logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy",
+			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_NOT_CONTAIN_ALL_NECESSARY_PARTS, "deploy",
 					"three"));
 			return false;
 		}
@@ -156,14 +156,14 @@ public class Deploy extends Order {
 		String l_num = p_inputArray[2];
 		for (int i = 0; i < l_countryId.length(); i++) {
 			if (!Character.isDigit(l_countryId.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_COUNTRY_ID_NOT_INTEGER);
 				return false;
 			}
 		}
 		// Step 3: Check whether the number of armies is positive integer
 		for (int i = 0; i < l_num.length(); i++) {
 			if (!Character.isDigit(l_num.charAt(i))) {
-				d_logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_ARMIES_NOT_INTEGER);
 				return false;
 			}
 		}

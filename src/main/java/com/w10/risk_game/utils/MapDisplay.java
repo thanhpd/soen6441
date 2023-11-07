@@ -18,7 +18,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * @author Sherwyn Dsouza
  */
 public class MapDisplay {
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The `displayMap` function takes a `GameMap` object and a boolean flag as
@@ -53,17 +53,17 @@ public class MapDisplay {
 
 			// Print the table header to the console and file
 			l_formatter.format(l_mapDisplayLine);
-			d_logger.log(l_formatter.toString());
+			Logger.log(l_formatter.toString());
 			l_formatter.close();
 
 			l_formatter = new Formatter();
 			l_formatter.format(l_mapDisplayColumnNames);
-			d_logger.log(l_formatter.toString());
+			Logger.log(l_formatter.toString());
 			l_formatter.close();
 
 			l_formatter = new Formatter();
 			l_formatter.format(l_mapDisplayLine);
-			d_logger.log(l_formatter.toString());
+			Logger.log(l_formatter.toString());
 			l_formatter.close();
 
 			// Iterate over every continent and country in the map and print table data
@@ -95,12 +95,12 @@ public class MapDisplay {
 						l_formatter.format(l_table, l_country.getCountryName(), l_country.getCountryId(),
 								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue);
 					}
-					d_logger.log(l_formatter.toString());
+					Logger.log(l_formatter.toString());
 					l_formatter.close();
 				}
 			}
 		} catch (Exception e) {
-			d_logger.log(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
+			Logger.log(Constants.MAP_DISPLAY_CANNOT_DISPLAY_MAP);
 			l_formatter.close();
 		}
 	}

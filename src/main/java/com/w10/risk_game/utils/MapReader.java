@@ -18,7 +18,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * @author Omnia Alam
  */
 public class MapReader {
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The function reads country data from a scanner and maps it to a collection of
@@ -210,7 +210,7 @@ public class MapReader {
 			l_gameMap.addContinents(l_continents);
 
 		} catch (FileNotFoundException e) {
-			d_logger.log(Constants.MAP_READER_FILE_NOT_FOUND);
+			Logger.log(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
 		return l_gameMap;
 	}

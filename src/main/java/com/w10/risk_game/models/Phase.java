@@ -4,7 +4,7 @@ import java.util.Set;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
-import com.w10.risk_game.controllers.GameEngineController;
+import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import com.w10.risk_game.controllers.MapEditorController;
 
@@ -16,10 +16,10 @@ import com.w10.risk_game.controllers.MapEditorController;
  */
 public abstract class Phase {
 	protected GameEngine d_gameEngine;
-	protected GameEngineController d_gameEngineController;
+	protected GamePlayController d_gamePlayController;
 	protected MapEditorController d_mapEditorController;
 
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * The constructor for the Phase class.
@@ -29,7 +29,7 @@ public abstract class Phase {
 	 */
 	protected Phase(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_gameEngineController = p_gameEngine.getGame();
+		this.d_gamePlayController = p_gameEngine.getGame();
 		this.d_mapEditorController = p_gameEngine.getMapEditorController();
 	}
 
@@ -238,7 +238,7 @@ public abstract class Phase {
 	 * current state.
 	 */
 	public void printInvalidCommandMessage() {
-		d_logger.log("Invalid command in state " + getPhaseName());
+		Logger.log("Invalid command in state " + getPhaseName());
 	}
 
 	/**
@@ -257,7 +257,7 @@ public abstract class Phase {
 	 */
 	public void printAvailableCommand() {
 		String avaliableCommandsText = getAvailableCommands().toString();
-		d_logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
+		Logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
 				+ avaliableCommandsText);
 	}
 }

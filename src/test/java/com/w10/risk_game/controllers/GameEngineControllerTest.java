@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
  * the GameEngineControllerTest class.
  */
 class GameEngineControllerTest {
-	private GameEngineController d_gameEngineController;
+	private GamePlayController d_gamePlayController;
 	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;
 	Player d_player1;
@@ -37,7 +37,7 @@ class GameEngineControllerTest {
 	@BeforeEach
 	public void beforeAllGameEngineTests() {
 		d_mapEditorController = new MapEditorController();
-		d_gameEngineController = new GameEngineController(d_mapEditorController);
+		d_gamePlayController = new GamePlayController(d_mapEditorController);
 		d_player1 = new Player("TestPlayerName1", new ArrayList<Country>(), null, 0);
 		d_player2 = new Player("TestPlayerName2", new ArrayList<Country>(), null, 0);
 
@@ -55,16 +55,16 @@ class GameEngineControllerTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
 		d_mapEditorController.loadMap(l_mapFilePath);
 
-		d_gameEngineController.createPlayer(d_player1.getName());
-		d_gameEngineController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName());
+		d_gamePlayController.createPlayer(d_player2.getName());
 
-		assertEquals(0, d_gameEngineController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(0, d_gameEngineController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(0, d_gamePlayController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(0, d_gamePlayController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 
-		d_gameEngineController.assignCountries();
+		d_gamePlayController.assignCountries();
 
-		assertEquals(12, d_gameEngineController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
-		assertEquals(12, d_gameEngineController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
+		assertEquals(12, d_gamePlayController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
+		assertEquals(12, d_gamePlayController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
 	}
 
 	/**
@@ -74,12 +74,12 @@ class GameEngineControllerTest {
 	 */
 	@Test
 	void testCreatePlayer() {
-		d_gameEngineController.createPlayer(d_player1.getName());
-		d_gameEngineController.createPlayer(d_player2.getName());
-		assertEquals(2, d_gameEngineController.getNoOfPlayers());
+		d_gamePlayController.createPlayer(d_player1.getName());
+		d_gamePlayController.createPlayer(d_player2.getName());
+		assertEquals(2, d_gamePlayController.getNoOfPlayers());
 
-		d_gameEngineController.createPlayer(d_player2.getName());
-		assertEquals(2, d_gameEngineController.getNoOfPlayers());
+		d_gamePlayController.createPlayer(d_player2.getName());
+		assertEquals(2, d_gamePlayController.getNoOfPlayers());
 	}
 
 	/**
@@ -89,14 +89,14 @@ class GameEngineControllerTest {
 	 */
 	@Test
 	void testRemovePlayer() {
-		d_gameEngineController.createPlayer(d_player1.getName());
-		d_gameEngineController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName());
+		d_gamePlayController.createPlayer(d_player2.getName());
 
-		d_gameEngineController.removePlayer(d_player2.getName());
-		assertEquals(1, d_gameEngineController.getNoOfPlayers());
+		d_gamePlayController.removePlayer(d_player2.getName());
+		assertEquals(1, d_gamePlayController.getNoOfPlayers());
 
-		d_gameEngineController.removePlayer(d_player1.getName());
-		assertEquals(0, d_gameEngineController.getNoOfPlayers());
+		d_gamePlayController.removePlayer(d_player1.getName());
+		assertEquals(0, d_gamePlayController.getNoOfPlayers());
 	}
 
 	/**
@@ -105,7 +105,7 @@ class GameEngineControllerTest {
 	 */
 	@Test
 	void testShowAllPlayers() {
-		d_gameEngineController.showAllPlayers();
+		d_gamePlayController.showAllPlayers();
 		// Capture the actual output
 		String l_actualOutput = d_outputStream.toString().trim();
 		String l_expectedOutput = "";
@@ -114,16 +114,16 @@ class GameEngineControllerTest {
 
 	/**
 	 * The testGetNoOfPlayers() function tests the getNoOfPlayers() method in the
-	 * d_gameEngineController class to ensure that it returns the correct number of
+	 * d_gamePlayController class to ensure that it returns the correct number of
 	 * players.
 	 *
 	 */
 	@Test
 	void testGetNoOfPlayers() {
-		d_gameEngineController.createPlayer(d_player1.getName());
-		d_gameEngineController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName());
+		d_gamePlayController.createPlayer(d_player2.getName());
 
-		assertEquals(2, d_gameEngineController.getNoOfPlayers());
+		assertEquals(2, d_gamePlayController.getNoOfPlayers());
 	}
 
 	/**
@@ -133,8 +133,8 @@ class GameEngineControllerTest {
 	 */
 	@Test
 	void testGetPlayerDetails() {
-		d_gameEngineController.createPlayer(d_player1.getName());
-		assertEquals(d_player1.getName(), d_gameEngineController.getPlayerDetails(d_player1.getName()).getName());
+		d_gamePlayController.createPlayer(d_player1.getName());
+		assertEquals(d_player1.getName(), d_gamePlayController.getPlayerDetails(d_player1.getName()).getName());
 	}
 
 	/**
@@ -146,60 +146,60 @@ class GameEngineControllerTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-win.map";
 		d_mapEditorController.loadMap(l_mapFilePath);
 
-		d_gameEngineController.createPlayer(d_player1.getName());
-		d_gameEngineController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName());
+		d_gamePlayController.createPlayer(d_player2.getName());
 
-		d_gameEngineController.assignCountries();
+		d_gamePlayController.assignCountries();
 
-		Country l_countryOfPlayer1 = d_gameEngineController.getPlayerDetails(d_player1.getName()).getCountriesOwned()
+		Country l_countryOfPlayer1 = d_gamePlayController.getPlayerDetails(d_player1.getName()).getCountriesOwned()
 				.get(0);
-		Country l_countryOfPlayer2 = d_gameEngineController.getPlayerDetails(d_player2.getName()).getCountriesOwned()
+		Country l_countryOfPlayer2 = d_gamePlayController.getPlayerDetails(d_player2.getName()).getCountriesOwned()
 				.get(0);
 
-		d_gameEngineController.assignPlayersReinforcements();
+		d_gamePlayController.assignPlayersReinforcements();
 
 		// Round 1 - Player A advances to Player B country and loses
 		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = MessageFormat.format("advance {0} {1} 3", l_countryOfPlayer1.getCountryName(),
 				l_countryOfPlayer2.getCountryName());
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
-		d_gameEngineController.executePlayerOrders();
+		d_gamePlayController.executePlayerOrders();
 
-		assertFalse(d_gameEngineController.checkIfGameIsOver());
+		assertFalse(d_gamePlayController.checkIfGameIsOver());
 
 		// Round 2 - Player B advances to Player A country and wins
-		d_gameEngineController.assignPlayersReinforcements();
+		d_gamePlayController.assignPlayersReinforcements();
 
 		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = MessageFormat.format("advance {0} {1} 4", l_countryOfPlayer2.getCountryName(),
 				l_countryOfPlayer1.getCountryName());
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
 		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
-		d_gameEngineController.issuePlayerOrder();
+		d_gamePlayController.issuePlayerOrder();
 
-		d_gameEngineController.executePlayerOrders();
+		d_gamePlayController.executePlayerOrders();
 
-		assertTrue(d_gameEngineController.checkIfGameIsOver());
+		assertTrue(d_gamePlayController.checkIfGameIsOver());
 	}
 }

@@ -26,7 +26,7 @@ public class GameMap {
 	private Map<Integer, Continent> d_continents;
 	private Map<Integer, Player> d_player;
 
-	private final LogEntryBuffer d_logger = LogEntryBuffer.getInstance();
+	private final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
 	 * This constructor initializes the `d_countries`, `d_continents`, and
@@ -254,10 +254,10 @@ public class GameMap {
 					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
 							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
 				}
-				d_logger.log(Constants.MAP_SAVE_SUCCESS);
+				Logger.log(Constants.MAP_SAVE_SUCCESS);
 				l_printWriter.close();
 			} catch (IOException e) {
-				d_logger.log(Constants.MAP_SAVE_ERROR);
+				Logger.log(Constants.MAP_SAVE_ERROR);
 			}
 	}
 

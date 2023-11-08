@@ -51,8 +51,9 @@ public class MapEditorController {
 	 * checks if the map is valid.
 	 *
 	 * @param p_filePath
-	 *            The parameter `p_filePath` is a String that represents the full
-	 *            path of the file from which the map will be loaded.
+	 *                   The parameter `p_filePath` is a String that represents the
+	 *                   full
+	 *                   path of the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_filePath) {
 		try {
@@ -69,10 +70,12 @@ public class MapEditorController {
 	 * The function displays the game map, showing armies if specified.
 	 *
 	 * @param p_showArmies
-	 *            A boolean value indicating whether or not to display the armies on
-	 *            the map. If p_showArmies is true, the armies will be displayed on
-	 *            the map. If p_showArmies is false, the armies will not be
-	 *            displayed on the map.
+	 *                     A boolean value indicating whether or not to display the
+	 *                     armies on
+	 *                     the map. If p_showArmies is true, the armies will be
+	 *                     displayed on
+	 *                     the map. If p_showArmies is false, the armies will not be
+	 *                     displayed on the map.
 	 */
 	public void showMap(boolean p_showArmies) {
 		if (checkIfMapIsValid()) {
@@ -96,47 +99,55 @@ public class MapEditorController {
 	 * failure.
 	 *
 	 * @param p_mapFilePath
-	 *            The parameter `p_mapFileName` is a String that represents the file
-	 *            name or path of the map file that needs to be edited.
+	 *                      The parameter `p_mapFileName` is a String that
+	 *                      represents the file
+	 *                      name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
 	 *
 	 */
 	public boolean editMap(String p_mapFilePath) {
-
 		File l_file = new File(p_mapFilePath);
 
-		// If file with the input filename exists then load that map else create a new
-		// map file
+		// If the file with the given filename exists, load the existing map
 		if (l_file.exists()) {
 			this.loadMap(p_mapFilePath);
 			Logger.log(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
-			return true;
+			return true; // Indicates successful map edit by loading the existing map
 		} else {
+			// If the file doesn't exist, try to create a new map file
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]));
+
+				// Create a new file with the given file path
 				boolean l_isFileCreated = new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
-				if (l_isFileCreated)
+
+				// If the file is created successfully, load the new map
+				if (l_isFileCreated) {
 					this.loadMap(p_mapFilePath);
-				return l_isFileCreated;
+				}
+				return l_isFileCreated; // Returns true if a new file is created, else false
 			} catch (IOException e) {
+				// Log an error message if an exception occurs during file creation
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage()));
 			}
 		}
-		return false;
+		return false; // Indicates an unsuccessful map edit
 	}
 
 	/**
 	 * The function adds a continent to a map editor and prints the output.
 	 *
 	 * @param p_continentName
-	 *            The parameter "p_continentName" is a String that represents the
-	 *            name of the continent that you want to add.
+	 *                        The parameter "p_continentName" is a String that
+	 *                        represents the
+	 *                        name of the continent that you want to add.
 	 *
 	 * @param p_bonus
-	 *            The p_bonus parameter is an integer that represents the bonus for
-	 *            each continent.
+	 *                        The p_bonus parameter is an integer that represents
+	 *                        the bonus for
+	 *                        each continent.
 	 */
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
@@ -151,14 +162,17 @@ public class MapEditorController {
 	 * The function adds a country to a map editor and prints the output.
 	 *
 	 * @param p_countryId
-	 *            The p_countryId parameter is an integer that represents the unique
-	 *            identifier for the country being added.
+	 *                        The p_countryId parameter is an integer that
+	 *                        represents the unique
+	 *                        identifier for the country being added.
 	 * @param p_countryName
-	 *            The parameter "p_countryName" is a String that represents the name
-	 *            of the country that you want to add.
+	 *                        The parameter "p_countryName" is a String that
+	 *                        represents the name
+	 *                        of the country that you want to add.
 	 * @param p_continentName
-	 *            The p_continentName parameter is an integer that represents the ID
-	 *            of the continent to which the country belongs.
+	 *                        The p_continentName parameter is an integer that
+	 *                        represents the ID
+	 *                        of the continent to which the country belongs.
 	 *
 	 */
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
@@ -174,8 +188,9 @@ public class MapEditorController {
 	 * The function removes a continent from a map in a game editor.
 	 *
 	 * @param p_continentName
-	 *            The parameter "p_continentId" is an integer that represents the ID
-	 *            of the continent that needs to be removed.
+	 *                        The parameter "p_continentId" is an integer that
+	 *                        represents the ID
+	 *                        of the continent that needs to be removed.
 	 *
 	 */
 	public void removeContinent(String p_continentName) {
@@ -192,8 +207,9 @@ public class MapEditorController {
 	 * error message if an exception occurs.
 	 *
 	 * @param p_countryId
-	 *            The parameter "p_countryId" is an integer that represents the ID
-	 *            of the country that needs to be removed.
+	 *                    The parameter "p_countryId" is an integer that represents
+	 *                    the ID
+	 *                    of the country that needs to be removed.
 	 */
 	public void removeCountry(int p_countryId) {
 		try {
@@ -208,12 +224,15 @@ public class MapEditorController {
 	 * The function adds a neighbor country to a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *            The p_countryId parameter represents the ID of the country to
-	 *            which you want to add a neighbor.
+	 *                             The p_countryId parameter represents the ID of
+	 *                             the country to
+	 *                             which you want to add a neighbor.
 	 * @param p_neighbourCountryId
-	 *            The parameter "p_neighbourCountryId" represents the ID of the
-	 *            neighboring country that you want to add to the country with the
-	 *            ID "p_countryId".
+	 *                             The parameter "p_neighbourCountryId" represents
+	 *                             the ID of the
+	 *                             neighboring country that you want to add to the
+	 *                             country with the
+	 *                             ID "p_countryId".
 	 *
 	 */
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
@@ -229,12 +248,15 @@ public class MapEditorController {
 	 * The function removes a neighbor country from a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *            The p_countryId parameter represents the ID of the country from
-	 *            which you want to remove a neighbor.
+	 *                            The p_countryId parameter represents the ID of the
+	 *                            country from
+	 *                            which you want to remove a neighbor.
 	 * @param p_neighborCountryId
-	 *            The parameter "p_neighborCountryId" represents the ID of the
-	 *            neighbor country that you want to remove from the country with ID
-	 *            "p_countryId".
+	 *                            The parameter "p_neighborCountryId" represents the
+	 *                            ID of the
+	 *                            neighbor country that you want to remove from the
+	 *                            country with ID
+	 *                            "p_countryId".
 	 *
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -255,23 +277,23 @@ public class MapEditorController {
 	 */
 	public boolean checkIfMapIsValid() {
 		try {
-			// First check if the map is created, then if map is valid it will return true
-			// else false
+			// Check if the map is created
 			if (this.d_gameMap.isMapCreated()) {
+				// If the map is created, validate its correctness
 				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
 					Logger.log(Constants.GAME_ENGINE_MAP_VALID);
-					return true;
+					return true; // Indicates a valid map
 				} else {
 					Logger.log(Constants.GAME_ENGINE_MAP_INVALID);
-					return false;
+					return false; // Indicates an invalid map
 				}
 			} else {
 				Logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
-				return false;
+				return false; // Indicates that the map is not created
 			}
 		} catch (Exception e) {
 			Logger.log(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
-			return false;
+			return false; // Indicates an exception occurred while validating the map
 		}
 	}
 
@@ -280,7 +302,7 @@ public class MapEditorController {
 	 * an error message.
 	 *
 	 * @param p_mapFilePath
-	 *            The full path of the file where the map will be saved.
+	 *                      The full path of the file where the map will be saved.
 	 *
 	 */
 	public void saveMap(String p_mapFilePath) {

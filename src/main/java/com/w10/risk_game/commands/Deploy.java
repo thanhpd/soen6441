@@ -25,11 +25,11 @@ public class Deploy extends Order {
 	 * This is a constructor of the Deploy class
 	 *
 	 * @param p_player
-	 *            The player who issues the order
+	 *                    The player who issues the order
 	 * @param p_countryId
-	 *            The country id that the order is issued to
+	 *                    The country id that the order is issued to
 	 * @param p_num
-	 *            The number of armies that the order is issued to
+	 *                    The number of armies that the order is issued to
 	 */
 	public Deploy(Player p_player, int p_countryId, int p_num) {
 		this.d_player = p_player;
@@ -60,11 +60,21 @@ public class Deploy extends Order {
 	 * of armies and deploys them to the country
 	 */
 	public void execute() {
+		// Get the list of countries owned by the player
 		List<Country> l_countries = d_player.getCountriesOwned();
+
+		// Iterate through the player's owned countries
 		for (Country l_country : l_countries) {
+			// Check if the country ID matches the specified ID for deployment
 			if (l_country.getCountryId() == d_countryId) {
+				// Retrieve the current army count of the selected country
 				int l_countryArmies = l_country.getArmyCount();
+
+				// Increase the army count of the selected country by the specified number of
+				// armies
 				l_country.setArmyCount(l_countryArmies + d_num);
+
+				// Log a message indicating successful deployment of armies
 				Logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
 			}
 		}
@@ -75,18 +85,28 @@ public class Deploy extends Order {
 	 * and the number of armies are valid
 	 *
 	 * @param p_player
-	 *            The player who issues the order
+	 *                    The player who issues the order
 	 * @param p_countryId
-	 *            The country id that the order is issued to
+	 *                    The country id that the order is issued to
 	 * @param p_num
-	 *            The number of armies that the order is issued to
+	 *                    The number of armies that the order is issued to
 	 * @return boolean value to show whether the order is valid
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_countryId, String p_num) {
+		// Retrieve the list of countries owned by the player
 		List<Country> l_countries = p_player.getCountriesOwned();
+
+		// Check if the specified country ID is valid
 		boolean l_validCountry = CheckValidCountry(l_countries, p_countryId);
+
+		// Convert the specified army count to an integer
 		int l_num = Integer.parseInt(p_num);
+
+		// Check if the specified number of armies is valid
 		boolean l_validNum = CheckValidArmy(p_player, l_num);
+
+		// Return true if both the country ID and the number of armies are valid, else
+		// return false
 		if (l_validCountry && l_validNum) {
 			return true;
 		} else {
@@ -99,9 +119,9 @@ public class Deploy extends Order {
 	 * id should be one of the countries owned by the player
 	 *
 	 * @param p_countries
-	 *            the list of countries owned by the player
+	 *                    the list of countries owned by the player
 	 * @param p_countryId
-	 *            the country id
+	 *                    the country id
 	 * @return boolean value to show whether the country id is valid
 	 */
 	public static boolean CheckValidCountry(List<Country> p_countries, String p_countryId) {
@@ -119,20 +139,27 @@ public class Deploy extends Order {
 	 * valid for a given player.
 	 *
 	 * @param p_player
-	 *            The player object that represents a player in the game.
+	 *                 The player object that represents a player in the game.
 	 * @param p_num
-	 *            The number of armies that the player wants to deploy.
+	 *                 The number of armies that the player wants to deploy.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean CheckValidArmy(Player p_player, int p_num) {
+		// Check if the specified number of armies is zero or negative
 		if (p_num <= 0) {
+			// Log a message if the number of armies is zero or negative
 			Logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
-			return false;
+			return false; // Indicates that the specified number of armies is invalid
 		}
+
+		// Check if the specified number of armies exceeds the player's available armies
 		if (p_num > p_player.getLeftoverArmies()) {
+			// Log a message if the number of armies exceeds the player's available armies
 			Logger.log(Constants.DEPLOY_INVALID_ARMIES);
-			return false;
+			return false; // Indicates that the specified number of armies is invalid
 		}
+
+		// If the specified number of armies is valid, return true
 		return true;
 	}
 
@@ -141,7 +168,7 @@ public class Deploy extends Order {
 	 * should have three parts (one string and two positive integers)
 	 *
 	 * @param p_inputArray
-	 *            the input string
+	 *                     the input string
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidDeployInput(String[] p_inputArray) {

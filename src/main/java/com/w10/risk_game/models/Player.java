@@ -165,11 +165,11 @@ public class Player {
 		if (d_countriesOwned == null) {
 			return false;
 		}
-      for (Country country : d_countriesOwned) {
-        if (country.getCountryId() == p_CountryId) {
-          return true;
-        }
-      }
+		for (Country country : d_countriesOwned) {
+			if (country.getCountryId() == p_CountryId) {
+				return true;
+			}
+		}
 		return false;
 	}
 

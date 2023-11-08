@@ -25,11 +25,11 @@ public class Deploy extends Order {
 	 * This is a constructor of the Deploy class
 	 *
 	 * @param p_player
-	 *                    The player who issues the order
+	 *            The player who issues the order
 	 * @param p_countryId
-	 *                    The country id that the order is issued to
+	 *            The country id that the order is issued to
 	 * @param p_num
-	 *                    The number of armies that the order is issued to
+	 *            The number of armies that the order is issued to
 	 */
 	public Deploy(Player p_player, int p_countryId, int p_num) {
 		this.d_player = p_player;
@@ -85,11 +85,11 @@ public class Deploy extends Order {
 	 * and the number of armies are valid
 	 *
 	 * @param p_player
-	 *                    The player who issues the order
+	 *            The player who issues the order
 	 * @param p_countryId
-	 *                    The country id that the order is issued to
+	 *            The country id that the order is issued to
 	 * @param p_num
-	 *                    The number of armies that the order is issued to
+	 *            The number of armies that the order is issued to
 	 * @return boolean value to show whether the order is valid
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_countryId, String p_num) {
@@ -119,9 +119,9 @@ public class Deploy extends Order {
 	 * id should be one of the countries owned by the player
 	 *
 	 * @param p_countries
-	 *                    the list of countries owned by the player
+	 *            the list of countries owned by the player
 	 * @param p_countryId
-	 *                    the country id
+	 *            the country id
 	 * @return boolean value to show whether the country id is valid
 	 */
 	public static boolean CheckValidCountry(List<Country> p_countries, String p_countryId) {
@@ -139,9 +139,9 @@ public class Deploy extends Order {
 	 * valid for a given player.
 	 *
 	 * @param p_player
-	 *                 The player object that represents a player in the game.
+	 *            The player object that represents a player in the game.
 	 * @param p_num
-	 *                 The number of armies that the player wants to deploy.
+	 *            The number of armies that the player wants to deploy.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean CheckValidArmy(Player p_player, int p_num) {
@@ -168,7 +168,7 @@ public class Deploy extends Order {
 	 * should have three parts (one string and two positive integers)
 	 *
 	 * @param p_inputArray
-	 *                     the input string
+	 *            the input string
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidDeployInput(String[] p_inputArray) {

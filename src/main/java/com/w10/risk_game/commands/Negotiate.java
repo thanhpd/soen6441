@@ -26,9 +26,9 @@ public class Negotiate extends Order {
 	 * This is a constructor of the Negotiate class
 	 *
 	 * @param p_player
-	 *                     The player who issues the order
+	 *            The player who issues the order
 	 * @param p_playerName
-	 *                     The player name of the player to negotiate with
+	 *            The player name of the player to negotiate with
 	 */
 	public Negotiate(Player p_player, String p_playerName) {
 		this.d_currentPlayer = p_player;
@@ -45,8 +45,8 @@ public class Negotiate extends Order {
 		// negotiate with
 		if (ValidateOrder(d_currentPlayer, d_playerName)) {
 			// Log a message indicating the use of the negotiate card
-			Logger.log(
-					MessageFormat.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(), PlayerToNegotiate.getName()));
+			Logger.log(MessageFormat.format(Constants.NEGOTIATE_CARD_USED, d_currentPlayer.getName(),
+					PlayerToNegotiate.getName()));
 
 			// Retrieve other orders from the game
 			List<Order> l_otherOrders = GamePlayController.GetOtherOrders();
@@ -56,9 +56,10 @@ public class Negotiate extends Order {
 			// Iterate through other orders to handle negotiation effects
 			for (Order l_order : l_otherOrders) {
 				// Check if negotiation prevents the attack initiated by the current player
-				if ((l_order instanceof Advance)
-						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName().equals(d_currentPlayer.getName())
-								&& ((Advance) l_order).getCountryNameTo().getOwner().getName().equals(PlayerToNegotiate.getName()))) {
+				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner().getName()
+						.equals(d_currentPlayer.getName())
+						&& ((Advance) l_order).getCountryNameTo().getOwner().getName()
+								.equals(PlayerToNegotiate.getName()))) {
 					// Log a message indicating prevention of the attack initiated by the current
 					// player
 					Logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
@@ -68,9 +69,10 @@ public class Negotiate extends Order {
 				}
 
 				// Check if negotiation prevents the attack initiated by the negotiating player
-				if ((l_order instanceof Advance)
-						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName().equals(PlayerToNegotiate.getName())
-								&& ((Advance) l_order).getCountryNameTo().getOwner().getName().equals(d_currentPlayer.getName()))) {
+				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner().getName()
+						.equals(PlayerToNegotiate.getName())
+						&& ((Advance) l_order).getCountryNameTo().getOwner().getName()
+								.equals(d_currentPlayer.getName()))) {
 					// Log a message indicating prevention of the attack initiated by the
 					// negotiating player
 					Logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, PlayerToNegotiate.getName(),
@@ -99,9 +101,9 @@ public class Negotiate extends Order {
 	 * with exists.
 	 *
 	 * @param p_currentPlayer
-	 *                        The player who issues the order
+	 *            The player who issues the order
 	 * @param p_playerId
-	 *                        The player id of the player to negotiate with
+	 *            The player id of the player to negotiate with
 	 * @return the boolean value to indicate if the order is valid
 	 */
 	public static boolean ValidateOrder(Player p_currentPlayer, String p_playerId) {
@@ -135,7 +137,7 @@ public class Negotiate extends Order {
 	 * This function is used to check the input format for negotiate command.
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidNegotiateInput(String[] p_inputArray) {

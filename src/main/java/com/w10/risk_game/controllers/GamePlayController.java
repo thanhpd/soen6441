@@ -42,7 +42,7 @@ public class GamePlayController {
 	 * The constructor of the GamePlayController class.
 	 *
 	 * @param p_mapEditorController
-	 *                              The map editor controller object.
+	 *            The map editor controller object.
 	 */
 	public GamePlayController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;
@@ -65,7 +65,7 @@ public class GamePlayController {
 	 * The function sets the list of players in a game.
 	 *
 	 * @param p_playerListForDiplomacy
-	 *                                 a list of players in a game.
+	 *            a list of players in a game.
 	 */
 	public void SetPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
 		PlayerListForDiplomacy = p_playerListForDiplomacy;
@@ -85,8 +85,7 @@ public class GamePlayController {
 	 * provided list of Order objects.
 	 *
 	 * @param p_otherOrders
-	 *                      The parameter "p_otherOrders" is a List of Order
-	 *                      objects.
+	 *            The parameter "p_otherOrders" is a List of Order objects.
 	 */
 	public static void SetOtherOrders(List<Order> p_otherOrders) {
 		OtherOrders = p_otherOrders;
@@ -97,9 +96,8 @@ public class GamePlayController {
 	 * players, checking for duplicate names.
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player being created.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player being created.
 	 */
 	public void createPlayer(String p_playerName) {
 		try {
@@ -130,9 +128,8 @@ public class GamePlayController {
 	 * The function removes a player from a list of players in a game engine.
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player that needs to be removed.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player that needs to be removed.
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
@@ -283,8 +280,7 @@ public class GamePlayController {
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *                     The name of the player for which you want to retrieve the
-	 *                     details.
+	 *            The name of the player for which you want to retrieve the details.
 	 * @return The method is returning a Player object.
 	 *
 	 */

@@ -36,3 +36,4 @@ target
 
 docs
 src/main/resources/logs/log.txt
+src/test/resources/logs/log.txt

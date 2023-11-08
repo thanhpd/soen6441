@@ -221,6 +221,13 @@ public class PreLoadPhase extends MapEditorPhase {
 		return false;
 	}
 
+	/**
+	 * The function editMap returns false and prints an invalid command message.
+	 *
+	 * @param p_mapFilePath
+	 *            The file path of the map that needs to be edited.
+	 * @return The method is returning a boolean value, specifically false.
+	 */
 	@Override
 	public boolean editMap(String p_mapFilePath) {
 		this.printInvalidCommandMessage();

@@ -29,8 +29,8 @@ class AdvanceTest {
 	public void setUp() {
 		d_country1 = new Country(1, "England", 1, 10);
 		d_country2 = new Country(2, "France", 1, 2);
-		d_player1 = new Player("Player1", new ArrayList<>(), new ArrayList<>(), 0);
-		d_player2 = new Player("Player2", new ArrayList<>(), new ArrayList<>(), 0);
+		d_player1 = new Player("Player1", new ArrayList<>(), new ArrayList<>(), 3);
+		d_player2 = new Player("Player2", new ArrayList<>(), new ArrayList<>(), 3);
 		d_country1.setOwner(d_player1);
 		d_country2.setOwner(d_player2);
 		d_player1.addCountry(d_country1);
@@ -76,5 +76,24 @@ class AdvanceTest {
 		assertEquals(0, d_country2.getArmyCount());
 		assertEquals(8, d_country1.getArmyCount());
 		assertEquals("Player1", d_country1.getOwner().getName());
+	}
+
+	/**
+	 * The testDeployAfterBattleWon function tests various assertions and deploy's
+	 * armies to newly acquired country after a battle is won.
+	 */
+	@Test
+	void testDeployAfterBattleWon() {
+		d_order1.execute();
+		assertEquals(7, d_country1.getArmyCount());
+		assertEquals(1, d_country2.getArmyCount());
+		assertEquals("Player1", d_country2.getOwner().getName());
+		assertEquals(0, d_player2.getCountriesOwned().size());
+		assertEquals(2, d_player1.getCountriesOwned().size());
+		assertEquals(1, d_player1.getPlayerCards().size());
+
+		Order deploy = new Deploy(d_player1, d_country2.getCountryId(), 3);
+		deploy.execute();
+		assertEquals(4, d_country2.getArmyCount());
 	}
 }

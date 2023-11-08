@@ -2,6 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +11,16 @@ import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.utils.Constants;
 
+/**
+ * The PreLoadPhaseTest class tests the functionality of the PreLoadPhase class in a game engine.
+ */
 public class PreLoadPhaseTest {
 
     Phase phase;
 
+    /**
+     * The setup function initializes a GameEngine object and sets its phase to a PreLoadPhase.
+     */
     @BeforeEach
     public void setup(){
 
@@ -21,24 +29,40 @@ public class PreLoadPhaseTest {
             phase = GameEngine.Phase;
         }
 
+    /**
+     * The testPhaseName function tests that the phase name is "PreLoad PHASE".
+     */
     @Test
     void testPhaseName() {
             assertEquals("PreLoad PHASE", phase.getPhaseName());
 
     }
 
+   /**
+    * The testAvailableCommands function tests that the available commands in the phase object are
+    * correctly returned as a string.
+    */
         @Test
     void testAvailableCommands() {
             assertEquals("[loadmap]", phase.getAvailableCommands().toString());
 
     }
    
+    /**
+     * The testNext function tests if the phase name after loading a map is "PostLoad PHASE".
+     */
     @Test
     void testNext() {
         phase.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map");
         phase=GameEngine.Phase;
         assertEquals("PostLoad PHASE", phase.getPhaseName());
     }
-
+/**
+ * The "end" function sets the "phase" variable to null.
+ */
+@AfterEach
+public void end(){
+    phase=null;
+}
    
 }

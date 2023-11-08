@@ -13,11 +13,12 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 
 /**
- * @author Omnia Alam This is test class on the MapEditor There are some test
- *         cases added to fulfile some validation on different methods of the
- *         class For example: add country, add continent, add neighbor remove
- *         country , continent and neighbor. Delcaring all the instancs for the
- *         test
+ * This is test class on the MapEditor There are some test cases added to
+ * fulfill some validation on different methods of the class For example: add
+ * country, add continent, add neighbor remove country , continent and neighbor.
+ * Declaring all the instances for the test
+ *
+ * @author Omnia Alam
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MapEditorTest {

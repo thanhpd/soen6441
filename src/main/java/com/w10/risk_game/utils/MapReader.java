@@ -11,10 +11,10 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
-/*
-* This class reads a map file and initialize into the Country and Continents.
-* This is used to populate the Gamemap.
-
+/**
+ * This class reads a map file and initialize into the Country and Continents.
+ * This is used to populate the Gamemap.
+ *
  * @author Omnia Alam
  */
 public class MapReader {

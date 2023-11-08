@@ -15,7 +15,7 @@ public class PostLoadPhaseTest {
   GameEngine l_GameEngine;
 
     /**
-     * The setup function initializes a GameEngine object and sets its phase to a PreLoadPhase.
+     * The setup function initializes a GameEngine object and sets its phase to a PostLoadPhase.
      */
     @BeforeEach
     public void setup(){
@@ -30,7 +30,7 @@ public class PostLoadPhaseTest {
 
 
        /**
-     * The testPhaseName function tests that the phase name is "PreLoad PHASE".
+     * The testPhaseName function tests that the phase name is "PostLoad PHASE".
      */
     @Test
     void testPhaseName() {
@@ -59,8 +59,8 @@ public class PostLoadPhaseTest {
         assertEquals("PlaySetup PHASE", phase.getPhaseName());
     }
 /**
- * The testNextIfMapInvalid function tests if the nextPhase method in the PreLoadPhase class correctly
- * sets the phase to PreLoadPhase when an invalid map is loaded.
+ * The testNextIfMapInvalid function tests if the nextPhase method in the PostLoadPhase class correctly
+ * sets the phase to PostLoadPhase when an invalid map is loaded.
  */
 @Test
 void testNextIfMapInvalid(){

@@ -20,7 +20,7 @@ public class App {
 	 */
 	public App() {
 		Logger.attach(new ConsoleLogger());
-		Logger.attach(new FileLogger());
+		Logger.attach(new FileLogger(Constants.LOGGER_FILE_PATH));
 	}
 
 	/**

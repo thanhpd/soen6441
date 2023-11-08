@@ -15,13 +15,19 @@ import com.w10.risk_game.utils.Observer;
  * @author Sherwyn Dsouza
  */
 public class FileLogger implements Observer {
+	private String d_filePath;
+
 	/**
 	 * The constructor for the FileLogger class. It creates a new file `log.txt` if
 	 * not present and clears all existing data in the file.
+	 *
+	 * @param p_filePath
+	 *            Path of the log file
 	 */
-	public FileLogger() {
+	public FileLogger(String p_filePath) {
+		this.d_filePath = p_filePath;
 		try {
-			File l_file = new File(Constants.LOGGER_FILE_NAME);
+			File l_file = new File(d_filePath);
 			BufferedWriter l_writer = new BufferedWriter(new FileWriter(l_file));
 			l_writer.write("");
 			l_writer.flush();
@@ -40,7 +46,7 @@ public class FileLogger implements Observer {
 	 */
 	@Override
 	public void update(String p_data) {
-		try (BufferedWriter l_writer = new BufferedWriter(new FileWriter(Constants.LOGGER_FILE_NAME, true))) {
+		try (BufferedWriter l_writer = new BufferedWriter(new FileWriter(this.d_filePath, true))) {
 			l_writer.append(p_data);
 			l_writer.newLine();
 		} catch (IOException e) {

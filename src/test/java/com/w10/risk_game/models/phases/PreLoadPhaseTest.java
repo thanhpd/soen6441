@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.utils.Constants;
 
@@ -23,7 +24,6 @@ public class PreLoadPhaseTest {
      */
     @BeforeEach
     public void setup(){
-
             GameEngine l_GameEngine= new GameEngine();
             GameEngine.SetPhase(new PreLoadPhase(l_GameEngine));
             phase = GameEngine.Phase;
@@ -47,16 +47,18 @@ public class PreLoadPhaseTest {
             assertEquals("[loadmap]", phase.getAvailableCommands().toString());
 
     }
-   
-    /**
-     * The testNext function tests if the phase name after loading a map is "PostLoad PHASE".
-     */
-    @Test
-    void testNext() {
-        phase.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map");
+
+  /**
+   * The testNextIfMapValid function tests if the phase loads a valid map correctly.
+   */
+    @Test 
+    void testNextIfMapValid(){
+        phase.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map");
         phase=GameEngine.Phase;
-        assertEquals("PostLoad PHASE", phase.getPhaseName());
+        assertEquals("PostLoad PHASE", GameEngine.Phase.getPhaseName());
     }
+   
+  
 /**
  * The "end" function sets the "phase" variable to null.
  */

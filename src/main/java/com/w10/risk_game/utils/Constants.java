@@ -164,7 +164,8 @@ public final class Constants {
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
 
 	// Logger constants
-	public static final String LOGGER_FILE_NAME = "src/main/resources/logs/log.txt";
+	public static final String LOGGER_FILE_PATH = "src/main/resources/logs/log.txt";
+	public static final String LOGGER_FILE_TEST_PATH = "src/test/resources/logs/log.txt";
 	public static final String LOGGER_FILE_ISSUE = "Issue with log file!";
 
 	// Deploy constants

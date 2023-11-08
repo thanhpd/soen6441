@@ -2,7 +2,10 @@ package com.w10.risk_game.commands;
 
 import com.w10.risk_game.utils.Constants;
 
-// The code snippet is defining an enum called `Command`.
+/**
+ * The Command enum represents the possible commands that can be issued by a
+ * user
+ */
 public enum Command {
 
 	loadmap(Constants.USER_INPUT_COMMAND_LOADMAP), showmap(Constants.USER_INPUT_COMMAND_SHOWMAP), editmap(

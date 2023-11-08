@@ -2,6 +2,9 @@ package com.w10.risk_game.models;
 
 import java.util.Random;
 
+/**
+ * An enum for possible player cards.
+ */
 public enum CardType {
 
 	BOMB, BLOCKADE, AIRLIFT, DIPLOMACY;

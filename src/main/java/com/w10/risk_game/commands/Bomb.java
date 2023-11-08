@@ -23,9 +23,9 @@ public class Bomb extends Order {
 	 * Constructor for Bomb class.
 	 *
 	 * @param p_player
-	 *            The player who is issuing the order.
+	 *                    The player who is issuing the order.
 	 * @param p_countryId
-	 *            The country id of the country to bomb.
+	 *                    The country id of the country to bomb.
 	 */
 	public Bomb(Player p_player, String p_countryId) {
 		this.d_player = p_player;
@@ -43,8 +43,7 @@ public class Bomb extends Order {
 		if (l_countryToBomb != null) {
 			// Retrieve the initial army count of the country to be bombed
 			int l_initArmyCount = l_countryToBomb.getArmyCount();
-			// Calculate the new army count after bombing (reducing by half)
-			int l_newArmyCount = l_initArmyCount / 2;
+			int l_newArmyCount = (int) Math.floor((double) l_initArmyCount / 2);
 			l_countryToBomb.setArmyCount(l_newArmyCount);
 			Logger.log(MessageFormat.format(Constants.BOMB_SUCCEED, d_player.getName(),
 					l_countryToBomb.getCountryName(), l_countryToBomb.getCountryName()));
@@ -55,11 +54,13 @@ public class Bomb extends Order {
 	 * Checks if a player can bomb a specific country.
 	 *
 	 * @param p_player
-	 *            The player object that represents the player who is trying to
-	 *            validate the order.
+	 *                    The player object that represents the player who is trying
+	 *                    to
+	 *                    validate the order.
 	 * @param p_countryId
-	 *            The country ID identifying the country that the player wants to
-	 *            bomb.
+	 *                    The country ID identifying the country that the player
+	 *                    wants to
+	 *                    bomb.
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_countryId) {
@@ -73,10 +74,12 @@ public class Bomb extends Order {
 	 * object that the player can bomb, based on the given country ID.
 	 *
 	 * @param p_player
-	 *            The player object for which we want to find a country to bomb.
+	 *                    The player object for which we want to find a country to
+	 *                    bomb.
 	 * @param p_countryId
-	 *            The parameter "p_countryId" is a String representing the ID of the
-	 *            country to be bombed.
+	 *                    The parameter "p_countryId" is a String representing the
+	 *                    ID of the
+	 *                    country to be bombed.
 	 * @return The method is returning a Country object.
 	 */
 	public static Country GetCountryToBomb(Player p_player, String p_countryId) {
@@ -116,8 +119,8 @@ public class Bomb extends Order {
 	 * are neighbors of the countries owned by the given player.
 	 *
 	 * @param p_player
-	 *            The parameter "p_player" is of type Player and represents the
-	 *            player for whom we want to find the foreign neighbors.
+	 *                 The parameter "p_player" is of type Player and represents the
+	 *                 player for whom we want to find the foreign neighbors.
 	 * @return The method is returning a list of countries that are owned by other
 	 *         players and are neighbors of the countries owned by the given player.
 	 */
@@ -147,7 +150,7 @@ public class Bomb extends Order {
 	 * This function is used to check the input format for airlift command.
 	 *
 	 * @param p_inputArray
-	 *            the input string split by space
+	 *                     the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidBombInput(String[] p_inputArray) {

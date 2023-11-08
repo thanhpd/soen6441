@@ -79,7 +79,8 @@ class AdvanceTest {
 	}
 
 	/**
-	 * The testBattleWon function tests various assertions after a battle is won.
+	 * The testDeployAfterBattleWon function tests various assertions and deploy's
+	 * armies to newly acquired country after a battle is won.
 	 */
 	@Test
 	void testDeployAfterBattleWon() {

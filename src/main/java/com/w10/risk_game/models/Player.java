@@ -558,21 +558,31 @@ public class Player {
 	 */
 	public boolean issueDiplomacyOrder(String[] p_inputArray) {
 		String l_playerId = p_inputArray[1];
-		String l_playerName = l_playerId;
+		String l_playerName = l_playerId; // Obtaining the player's ID
+
+		// Check if the player has a diplomacy card
 		if (hasCard(CardType.DIPLOMACY)) {
+			// Validate the negotiation order
 			if (Negotiate.ValidateOrder(this, l_playerName)) {
+				// If the negotiation order is valid, create a Negotiate order and add it to the
+				// list of orders
 				Order order = new Negotiate(this, l_playerId);
 				d_orders.add(order);
+
+				// Remove the diplomacy card from the player's hand
 				removeCard(CardType.DIPLOMACY);
+
+				// Log a success message for the diplomacy order execution
 				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true;
+				return true; // Return true for a successful order execution
 			} else {
+				// Log if the diplomacy order was incorrect or invalid
 				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE));
-				return false;
+				return false; // Return false for an unsuccessful order execution
 			}
 		} else {
-			return false;
+			return false; // Return false if the player does not have a diplomacy card
 		}
 	}
 
@@ -590,24 +600,34 @@ public class Player {
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean issueAirliftOrder(String[] p_inputArray) {
-		// airlift countryIdToAirliftFrom countryIdToAirlift NumberOfArmiesToAirlift
+		// Extract information from the player's input array
 		String l_countryIdToAirliftFrom = p_inputArray[1];
 		String l_countryIdToAirlift = p_inputArray[2];
 		String l_airliftArmies = p_inputArray[3];
+
+		// Check if the player has an airlift card
 		if (hasCard(CardType.AIRLIFT)) {
+			// Validate the airlift order
 			if (Airlift.ValidateOrder(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
+				// If the airlift order is valid, create an Airlift order and add it to the list
+				// of orders
 				Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
 				d_orders.add(order);
+
+				// Remove the airlift card from the player's hand
 				removeCard(CardType.AIRLIFT);
+
+				// Log a success message for the airlift order execution
 				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true;
+				return true; // Return true for a successful order execution
 			} else {
+				// Log if the airlift order was incorrect or invalid
 				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
-				return false;
+				return false; // Return false for an unsuccessful order execution
 			}
 		} else {
-			return false;
+			return false; // Return false if the player does not have an airlift card
 		}
 	}
 

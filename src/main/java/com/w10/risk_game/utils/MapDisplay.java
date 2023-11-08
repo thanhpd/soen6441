@@ -26,14 +26,19 @@ public class MapDisplay {
 	 * continents, countries, and their neighbors in the map.
 	 *
 	 * @param p_map
-	 *            The `p_map` parameter is an instance of the `GameMap` class, which
-	 *            represents the game map containing continents, countries, and
-	 *            their connections.
+	 *                     The `p_map` parameter is an instance of the `GameMap`
+	 *                     class, which
+	 *                     represents the game map containing continents, countries,
+	 *                     and
+	 *                     their connections.
 	 * @param p_showArmies
-	 *            The parameter `p_showArmies` is a boolean value that determines
-	 *            whether to display the number of armies in each country or not. If
-	 *            `p_showArmies` is `true`, the number of armies will be displayed.
-	 *            If `p_showArmies` is `false`, the number of
+	 *                     The parameter `p_showArmies` is a boolean value that
+	 *                     determines
+	 *                     whether to display the number of armies in each country
+	 *                     or not. If
+	 *                     `p_showArmies` is `true`, the number of armies will be
+	 *                     displayed.
+	 *                     If `p_showArmies` is `false`, the number of
 	 */
 	public void displayMap(GameMap p_map, boolean p_showArmies) {
 		Formatter l_formatter = new Formatter();
@@ -79,11 +84,13 @@ public class MapDisplay {
 				while (l_countryIterator.hasNext()) {
 					Country l_country = (Country) l_countryIterator.next();
 					ArrayList<String> l_neighborNames = new ArrayList<>();
+					// Fetch neighbors' details to display
 					for (Country neighbor : l_country.getNeighbors().values()) {
 						l_neighborNames.add(neighbor.getCountryId() + "-" + neighbor.getCountryName());
 					}
 					String l_neighborValue = String.join(", ", l_neighborNames);
 					l_formatter = new Formatter();
+					// Format the details of each country based on the display requirements
 					if (p_showArmies) {
 						l_formatter.format(l_table, l_country.getCountryName(), l_country.getCountryId(),
 								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue,

@@ -102,29 +102,34 @@ public class MapEditorController {
 	 *
 	 */
 	public boolean editMap(String p_mapFilePath) {
-
 		File l_file = new File(p_mapFilePath);
 
-		// If file with the input filename exists then load that map else create a new
-		// map file
+		// If the file with the given filename exists, load the existing map
 		if (l_file.exists()) {
 			this.loadMap(p_mapFilePath);
 			Logger.log(Constants.GAME_ENGINE_MAP_EDIT_SUCCESS);
-			return true;
+			return true; // Indicates successful map edit by loading the existing map
 		} else {
+			// If the file doesn't exist, try to create a new map file
 			String[] l_filePathSplit = p_mapFilePath.split("/");
 			try {
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_MAP_DOES_NOT_EXIST, p_mapFilePath,
 						l_filePathSplit[l_filePathSplit.length - 1]));
+
+				// Create a new file with the given file path
 				boolean l_isFileCreated = new File(l_filePathSplit[l_filePathSplit.length - 1]).createNewFile();
-				if (l_isFileCreated)
+
+				// If the file is created successfully, load the new map
+				if (l_isFileCreated) {
 					this.loadMap(p_mapFilePath);
-				return l_isFileCreated;
+				}
+				return l_isFileCreated; // Returns true if a new file is created, else false
 			} catch (IOException e) {
+				// Log an error message if an exception occurs during file creation
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ERROR_CREATE_MAP, p_mapFilePath, e.getMessage()));
 			}
 		}
-		return false;
+		return false; // Indicates an unsuccessful map edit
 	}
 
 	/**
@@ -255,23 +260,23 @@ public class MapEditorController {
 	 */
 	public boolean checkIfMapIsValid() {
 		try {
-			// First check if the map is created, then if map is valid it will return true
-			// else false
+			// Check if the map is created
 			if (this.d_gameMap.isMapCreated()) {
+				// If the map is created, validate its correctness
 				if (MapValidator.IsMapCorrect(this.d_gameMap)) {
 					Logger.log(Constants.GAME_ENGINE_MAP_VALID);
-					return true;
+					return true; // Indicates a valid map
 				} else {
 					Logger.log(Constants.GAME_ENGINE_MAP_INVALID);
-					return false;
+					return false; // Indicates an invalid map
 				}
 			} else {
 				Logger.log(Constants.GAME_ENGINE_MAP_NOT_CREATED);
-				return false;
+				return false; // Indicates that the map is not created
 			}
 		} catch (Exception e) {
 			Logger.log(Constants.GAME_ENGINE_FAILED_TO_VALIDATE_MAP);
-			return false;
+			return false; // Indicates an exception occurred while validating the map
 		}
 	}
 

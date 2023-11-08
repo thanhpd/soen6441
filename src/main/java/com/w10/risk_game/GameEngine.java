@@ -101,14 +101,25 @@ public class GameEngine {
 			}
 
 			try {
+				// Display a user input request
 				Logger.log(Constants.USER_INPUT_REQUEST);
+
+				// Create a Scanner to read the input from the user
 				Scanner l_scanner = new Scanner(System.in);
+
+				// Read the user's input and log the command that was entered
 				Command = l_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
+
+				// Get the main command and argument list from the entered command
 				String l_mainCommand = CommandInterpreter.GetMainCommand(Command);
 				String[] l_argList = CommandInterpreter.GetArgumentList(Command);
+
+				// Get a list of options for each argument in the command
 				ArrayList<ArrayList<String>> l_listOfOptions = CommandInterpreter.GetCommandOptions(Command);
 
+				// Check for the validity of the provided argument options based on the main
+				// command
 				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
 
 				switch (l_mainCommand) {
@@ -134,7 +145,9 @@ public class GameEngine {
 					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
+							// Log a message for the current iteration
 							this.displayLoopIterationMessage(l_options);
+							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
@@ -151,6 +164,7 @@ public class GameEngine {
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
+							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
@@ -168,6 +182,7 @@ public class GameEngine {
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
+							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
@@ -191,6 +206,7 @@ public class GameEngine {
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
+							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :

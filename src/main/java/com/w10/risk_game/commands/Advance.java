@@ -71,11 +71,14 @@ public class Advance extends Order {
 	 * of armies and advances them to the country
 	 */
 	public void execute() {
+		// Check if the advancing player is the owner of the country from which armies
+		// are being moved
 		if (!this.d_advancingPlayerName.equals(this.d_countryFrom.getOwner().getName())) {
 			Logger.log(MessageFormat.format(Constants.ADVANCE_NOT_OWNER, this.d_advancingPlayerName,
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
+		// Check if the target country is owned by the same player as the source country
 		if (this.d_countryTo.getOwner() != null
 				&& this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
 			// This code block is simulating a movement of armies to player's own country
@@ -84,10 +87,11 @@ public class Advance extends Order {
 			Logger.log(MessageFormat.format(Constants.ADVANCE_DEPLOY_SUCCEED, this.d_countryFrom.getOwner().getName(),
 					this.d_numOfArmies, this.d_countryTo.getCountryName()));
 		} else {
+			// Simulate a battle between two countries in the game
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
-			// This code block is simulating a battle between two countries in the game.
 			Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_START, this.d_countryFrom.getOwner().getName(),
 					this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
+			// Determine the number of attacking and defending armies for the battle
 			int l_noOfAttackingArmies = this.d_numOfArmies;
 			int l_noOfDefendingArmies = this.d_countryTo.getArmyCount();
 			int l_leftoverAttackingArmies = (int) Math
@@ -97,6 +101,7 @@ public class Advance extends Order {
 			if (l_leftoverDefendingArmies == 0) {// attacker wins
 				Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_WON, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName()));
+				// Update army counts and ownership after the attacker wins
 				this.d_countryTo.setArmyCount(l_leftoverAttackingArmies);
 				this.d_countryTo.getOwner().removeCountry(d_countryTo);
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
@@ -105,6 +110,7 @@ public class Advance extends Order {
 			} else { // attacker loses
 				Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
+				// Update the defender's army count after the battle
 				this.d_countryTo.setArmyCount(l_leftoverDefendingArmies);
 			}
 		}

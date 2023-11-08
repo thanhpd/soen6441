@@ -60,11 +60,21 @@ public class Deploy extends Order {
 	 * of armies and deploys them to the country
 	 */
 	public void execute() {
+		// Get the list of countries owned by the player
 		List<Country> l_countries = d_player.getCountriesOwned();
+
+		// Iterate through the player's owned countries
 		for (Country l_country : l_countries) {
+			// Check if the country ID matches the specified ID for deployment
 			if (l_country.getCountryId() == d_countryId) {
+				// Retrieve the current army count of the selected country
 				int l_countryArmies = l_country.getArmyCount();
+
+				// Increase the army count of the selected country by the specified number of
+				// armies
 				l_country.setArmyCount(l_countryArmies + d_num);
+
+				// Log a message indicating successful deployment of armies
 				Logger.log(MessageFormat.format(Constants.DEPLOY_SUCCEED, d_player.getName(), d_num, d_countryId));
 			}
 		}
@@ -83,10 +93,20 @@ public class Deploy extends Order {
 	 * @return boolean value to show whether the order is valid
 	 */
 	public static boolean ValidateOrder(Player p_player, String p_countryId, String p_num) {
+		// Retrieve the list of countries owned by the player
 		List<Country> l_countries = p_player.getCountriesOwned();
+
+		// Check if the specified country ID is valid
 		boolean l_validCountry = CheckValidCountry(l_countries, p_countryId);
+
+		// Convert the specified army count to an integer
 		int l_num = Integer.parseInt(p_num);
+
+		// Check if the specified number of armies is valid
 		boolean l_validNum = CheckValidArmy(p_player, l_num);
+
+		// Return true if both the country ID and the number of armies are valid, else
+		// return false
 		if (l_validCountry && l_validNum) {
 			return true;
 		} else {
@@ -125,14 +145,21 @@ public class Deploy extends Order {
 	 * @return The method is returning a boolean value.
 	 */
 	public static boolean CheckValidArmy(Player p_player, int p_num) {
+		// Check if the specified number of armies is zero or negative
 		if (p_num <= 0) {
+			// Log a message if the number of armies is zero or negative
 			Logger.log(Constants.DEPLOY_INVALID_ARMIES_ZERO);
-			return false;
+			return false; // Indicates that the specified number of armies is invalid
 		}
+
+		// Check if the specified number of armies exceeds the player's available armies
 		if (p_num > p_player.getLeftoverArmies()) {
+			// Log a message if the number of armies exceeds the player's available armies
 			Logger.log(Constants.DEPLOY_INVALID_ARMIES);
-			return false;
+			return false; // Indicates that the specified number of armies is invalid
 		}
+
+		// If the specified number of armies is valid, return true
 		return true;
 	}
 

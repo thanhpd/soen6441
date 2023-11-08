@@ -16,6 +16,7 @@ import com.w10.risk_game.models.GameMap;
  */
 public class MapEditor {
 	private GameMap l_gameMap;
+
 	public MapEditor(GameMap originalMap) {
 		this.l_gameMap = originalMap;
 	}
@@ -36,24 +37,36 @@ public class MapEditor {
 	 */
 	public String addCountry(int p_countryId, String p_countryName, String p_continentName) {
 
+		// Check if the provided country name is blank
 		if (StringUtils.isBlank(p_countryName)) {
 			return Constants.MAP_EDITOR_EMPTY_COUNTRY_NAME;
-
 		}
+
+		// Check if the country name already exists in the map
 		if (l_gameMap.containsCountry(p_countryName)) {
 			return Constants.MAP_EDITOR_COUNTRY_NAME_EXIST;
 		}
+
+		// Check if the country ID already exists in the map
 		if (l_gameMap.containsCountry(p_countryId)) {
 			return Constants.MAP_EDITOR_COUNTRY_ID_EXIST;
 		}
 
-		if (l_gameMap.containsContinent(p_continentName) == false) {
+		// Check if the provided continent name does not exist in the map
+		if (!l_gameMap.containsContinent(p_continentName)) {
 			return Constants.MAP_EDITOR_CONTINENT_NOT_EXIST;
 		}
+
+		// Fetch the continent object based on the provided continent name
 		Continent l_continent = l_gameMap.getContinentByName(p_continentName);
+
+		// Create a new country object and add it to the map and the continent
 		Country l_country = new Country(p_countryId, p_countryName, l_continent.getContinentId(), 0);
 		l_gameMap.getCountries().put(p_countryId, l_country);
 		l_continent.addCountry(l_country);
+
+		// Return a success message indicating the addition of the country to the
+		// specified continent
 		return p_countryName + Constants.MAP_EDITOR_ADD_COUNTRY + p_continentName;
 	}
 
@@ -69,14 +82,20 @@ public class MapEditor {
 	 *         continent.
 	 */
 	public String addContinent(String p_continentName, int p_bonus) {
+
+		// Check if the provided continent name already exists in the map
 		if (l_gameMap.containsContinent(p_continentName)) {
 			return Constants.MAP_EDITOR_CONTINENT_NAME_EXIST;
 		}
 
+		// Calculate a new ID for the continent
 		int l_newContinentId = l_gameMap.getContinents().size() + 1;
-		Continent l_continent = new Continent(l_newContinentId, p_continentName, 0);
+
+		// Create a new Continent object with the provided details and add it to the map
+		Continent l_continent = new Continent(l_newContinentId, p_continentName, p_bonus);
 		l_gameMap.getContinents().put(l_newContinentId, l_continent);
 
+		// Return a success message indicating the addition of the new continent
 		return p_continentName + Constants.MAP_EDITOR_ADD_CONTINENT;
 	}
 

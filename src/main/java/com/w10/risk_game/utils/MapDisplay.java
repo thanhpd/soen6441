@@ -79,11 +79,13 @@ public class MapDisplay {
 				while (l_countryIterator.hasNext()) {
 					Country l_country = (Country) l_countryIterator.next();
 					ArrayList<String> l_neighborNames = new ArrayList<>();
+					// Fetch neighbors' details to display
 					for (Country neighbor : l_country.getNeighbors().values()) {
 						l_neighborNames.add(neighbor.getCountryId() + "-" + neighbor.getCountryName());
 					}
 					String l_neighborValue = String.join(", ", l_neighborNames);
 					l_formatter = new Formatter();
+					// Format the details of each country based on the display requirements
 					if (p_showArmies) {
 						l_formatter.format(l_table, l_country.getCountryName(), l_country.getCountryId(),
 								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue,

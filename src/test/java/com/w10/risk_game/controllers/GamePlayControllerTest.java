@@ -18,10 +18,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * The GameEngineControllerTest class contains unit test for various methods in
- * the GameEngineControllerTest class.
+ * The GamePlayControllerTest class contains unit test for various methods in
+ * the GamePlayControllerTest class.
  */
-class GameEngineControllerTest {
+class GamePlayControllerTest {
 	private GamePlayController d_gamePlayController;
 	private MapEditorController d_mapEditorController;
 	private ByteArrayOutputStream d_outputStream;

@@ -46,7 +46,7 @@ public class GameMap {
 	 * @return The method is returning a boolean value.
 	 */
 	public boolean isMapCreated() {
-		return this.d_continents.size() != 0 && this.d_countries.size() != 0;
+		return !this.d_continents.isEmpty() && !this.d_countries.isEmpty();
 	}
 
 	/**

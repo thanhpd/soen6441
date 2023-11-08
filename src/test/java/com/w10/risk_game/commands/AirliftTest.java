@@ -43,6 +43,10 @@ public class AirliftTest {
 		d_player1.setCountriesOwned(countries1);
 	}
 
+	/**
+	 * The testAirliftExecution function creates an Airlift order, executes it, and
+	 * then checks if the army counts of two countries have been updated correctly.
+	 */
 	@Test
 	public void testAirliftExecution() {
 		// Create an Airlift order

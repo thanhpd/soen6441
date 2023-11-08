@@ -48,18 +48,21 @@ public class Negotiate extends Order {
 			List<Order> l_otherOrdersAfterNegotiate = new ArrayList<>();
 			boolean l_isNegotiate = false;
 			for (Order l_order : l_otherOrders) {
-				if ((l_order instanceof Advance)
-						&& (((Advance) l_order).getCountryNameFrom().getOwner().getName() == d_currentPlayer.getName()
-								&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == PlayerToNegotiate
-										.getName())) {
+				// negotiation prevents the attack initiated by current player
+				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner().getName()
+						.equals(d_currentPlayer.getName())
+						&& ((Advance) l_order).getCountryNameTo().getOwner().getName()
+								.equals(PlayerToNegotiate.getName()))) {
 					Logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, d_currentPlayer.getName(),
 							PlayerToNegotiate.getName()));
 					l_isNegotiate = true;
 					continue;
 				}
-				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner()
-						.getName() == PlayerToNegotiate.getName()
-						&& ((Advance) l_order).getCountryNameTo().getOwner().getName() == d_currentPlayer.getName())) {
+				// negotiation prevents the attack initiated by negotiating player
+				if ((l_order instanceof Advance) && (((Advance) l_order).getCountryNameFrom().getOwner().getName()
+						.equals(PlayerToNegotiate.getName())
+						&& ((Advance) l_order).getCountryNameTo().getOwner().getName()
+								.equals(d_currentPlayer.getName()))) {
 					Logger.log(MessageFormat.format(Constants.NEGOTIATE_ATTACK_PREVENT, PlayerToNegotiate.getName(),
 							d_currentPlayer.getName()));
 					l_isNegotiate = true;

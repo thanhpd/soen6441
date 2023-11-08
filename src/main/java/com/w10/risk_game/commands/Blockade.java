@@ -50,10 +50,9 @@ public class Blockade extends Order {
 			l_countryToBlock.setOwner(null);
 
 			// Remove the country from the player's list of owned countries
-			List<Country> l_newCountriesOwned = d_player.getCountriesOwned().stream()
-					.filter(country -> country.getCountryId() != l_countryToBlock.getCountryId())
-					.collect(Collectors.toList());
-			d_player.setCountriesOwned(l_newCountriesOwned);
+			d_player.getCountriesOwned().remove(l_countryToBlock);
+			Logger.log(MessageFormat.format(Constants.BLOCKADE_SUCCEED, d_player.getName(),
+					l_countryToBlock.getCountryName(), l_countryToBlock.getArmyCount()));
 		}
 	}
 

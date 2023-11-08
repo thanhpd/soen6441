@@ -165,8 +165,8 @@ public class Player {
 		if (d_countriesOwned == null) {
 			return false;
 		}
-		for (int l_country = 0; l_country < d_countriesOwned.size(); l_country++) {
-			if (d_countriesOwned.get(l_country).getCountryId() == p_CountryId) {
+		for (Country country : d_countriesOwned) {
+			if (country.getCountryId() == p_CountryId) {
 				return true;
 			}
 		}

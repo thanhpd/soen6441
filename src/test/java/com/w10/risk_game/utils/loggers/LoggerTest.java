@@ -13,6 +13,12 @@ import org.junit.jupiter.api.Test;
 
 import com.w10.risk_game.utils.Constants;
 
+/**
+ * The LoggerTest class is a JUnit test class that tests the logging
+ * functionality of a Logger class.
+ *
+ * @author Sherwyn Dsouza
+ */
 class LoggerTest {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	private ByteArrayOutputStream d_outputStream;

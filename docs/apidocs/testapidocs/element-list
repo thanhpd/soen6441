@@ -1,3 +1,7 @@
+com.w10.risk_game.commands
+com.w10.risk_game.controllers
 com.w10.risk_game.models
+com.w10.risk_game.models.phases
 com.w10.risk_game.suites
 com.w10.risk_game.utils
+com.w10.risk_game.utils.loggers

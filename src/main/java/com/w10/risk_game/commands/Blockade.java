@@ -1,8 +1,6 @@
 package com.w10.risk_game.commands;
 
 import java.text.MessageFormat;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;

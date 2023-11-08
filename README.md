@@ -11,6 +11,7 @@
 		- [To build and run the project](#to-build-and-run-the-project)
 		- [To run unit tests](#to-run-unit-tests)
 		- [To generate Javadoc documentation](#to-generate-javadoc-documentation)
+	+ [Log file](#log-file)
 	+ [Code formatting](#code-formatting)
 		- [For VSCode Editor](#for-vscode-editor)
 		- [For IntelliJ IDEA](#for-intellij-idea)
@@ -60,6 +61,9 @@ $ mvn javadoc:javadoc javadoc:test-javadoc
 The doclint option is enabled by default via `maven-javadoc-plugin`. See
 - https://maven.apache.org/plugins/maven-javadoc-plugin/javadoc-mojo.html#doclint
 - https://docs.oracle.com/en/java/javase/11/tools/javadoc.html
+
+### Log file
+A log file is generated for the game, it is placed at `src/main/resources/logs/log.txt`.
 
 ### Code formatting
 #### For VSCode Editor

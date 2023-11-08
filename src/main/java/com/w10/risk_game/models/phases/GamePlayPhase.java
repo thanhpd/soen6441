@@ -5,7 +5,7 @@ import com.w10.risk_game.models.Phase;
 
 /**
  * The GamePlayPhase class is an abstract class that extends the Phase class and
- * provides default implementations for map-related methods.
+ * provides default implementations for gameplay-related methods.
  *
  * @author Sherwyn Dsouza
  */

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
-import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
@@ -16,8 +15,8 @@ import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngine class is responsible for managing the game map, players,
- * issuing orders, executing orders and their interactions in a game.
+ * The MapEditorController class is responsible for managing the game map,
+ * players, issuing orders, executing orders and their interactions in a game.
  *
  * @author Omnia Alam
  */

@@ -31,7 +31,7 @@ public class PlaySetupPhaseTest {
 		phase = GameEngine.Phase;
 		phase.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map");
 		phase = GameEngine.Phase;
-		phase.nextPhase();;
+		phase.nextPhase();
 		phase = GameEngine.Phase;
 	}
 

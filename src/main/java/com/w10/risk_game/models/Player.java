@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import com.w10.risk_game.commands.*;
+import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
+import com.w10.risk_game.models.strategies.PlayerStrategy;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,6 +32,12 @@ public class Player {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
+	 * The behavioral strategy of the player.
+	 * Default is Human. Must not be null.
+	 */
+	protected PlayerStrategy d_strategy;
+
+	/**
 	 * The `Player` constructor is initializing a new instance of the `Player` class
 	 * with the provided parameters. It sets the player's name (`d_name`), the list
 	 * of countries owned by the player (`d_countriesOwned`), the list of orders for
@@ -46,10 +54,16 @@ public class Player {
 	 *            the number of current army in possess by the player
 	 */
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
+
+				this(p_name, p_countriesOwned, p_orders, p_leftoverArmies, new HumanPlayerStrategy());
+	}
+
+	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies, PlayerStrategy p_strategy) {
 		this.d_name = p_name;
 		this.d_countriesOwned = p_countriesOwned;
 		this.d_orders = p_orders;
 		this.d_leftoverArmies = p_leftoverArmies;
+		this.d_strategy = p_strategy;
 	}
 
 	/**
@@ -232,6 +246,8 @@ public class Player {
 	 * creates an order object and adds it to the list of orders
 	 */
 	public void issueOrder() {
+
+
 		// Set the 'hasCommitted' flag to false for the current player
 		setHasCommitted(false);
 		// Retrieve the player's input command from the GameEngine
@@ -309,6 +325,8 @@ public class Player {
 				l_again = false;
 			}
 		}
+
+		
 	}
 
 	/**
@@ -406,28 +424,7 @@ public class Player {
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public boolean issueDeployOrder(String[] p_inputArray) {
-		// Extract country ID and number of armies from the input array
-		String l_countryId = p_inputArray[1];
-		String l_num = p_inputArray[2];
-
-		// Validate the order
-		if (Deploy.ValidateOrder(this, l_countryId, l_num)) {
-			// If the order is valid, create a Deploy order and add it to the list of orders
-			Order order = new Deploy(this, Integer.parseInt(p_inputArray[1]), Integer.parseInt(p_inputArray[2]));
-			d_orders.add(order);
-
-			// Deploy the specified number of armies to the country
-			deployArmies(Integer.parseInt(p_inputArray[2]));
-
-			// Log that the deploy order was successful
-			Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true; // Return true indicating the successful execution of the order
-		} else {
-			// Log if the deploy order was incorrect or invalid
-			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
-			return false; // Return false for an unsuccessful order execution
-		}
+		return d_strategy.issueDeployOrder(p_inputArray);
 	}
 
 	/**
@@ -672,4 +669,11 @@ public class Player {
 		this.d_countriesOwned.add(p_country);
 	}
 
+	public PlayerStrategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(PlayerStrategy strategy) {
+		this.strategy = strategy;
+	}
 }

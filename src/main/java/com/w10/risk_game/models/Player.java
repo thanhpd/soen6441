@@ -53,10 +53,7 @@ public class Player {
 	 * @param p_leftoverArmies
 	 *            the number of current army in possess by the player
 	 */
-	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
-
-				this(p_name, p_countriesOwned, p_orders, p_leftoverArmies, new HumanPlayerStrategy());
-	}
+	
 
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies, PlayerStrategy p_strategy) {
 		this.d_name = p_name;
@@ -64,6 +61,13 @@ public class Player {
 		this.d_orders = p_orders;
 		this.d_leftoverArmies = p_leftoverArmies;
 		this.d_strategy = p_strategy;
+	}
+	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
+		this.d_name = p_name;
+		this.d_countriesOwned = p_countriesOwned;
+		this.d_orders = p_orders;
+		this.d_leftoverArmies = p_leftoverArmies;
+		this.setStrategy(new HumanPlayerStrategy(this));
 	}
 
 	/**
@@ -670,10 +674,10 @@ public class Player {
 	}
 
 	public PlayerStrategy getStrategy() {
-		return strategy;
+		return d_strategy;
 	}
 
-	public void setStrategy(PlayerStrategy strategy) {
-		this.strategy = strategy;
+	public void setStrategy(PlayerStrategy p_strategy) {
+		this.d_strategy = p_strategy;
 	}
 }

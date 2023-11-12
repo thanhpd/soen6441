@@ -9,6 +9,7 @@ import com.w10.risk_game.utils.Constants;
 
 public class HumanPlayerStrategy extends PlayerStrategy{
 
+
     public HumanPlayerStrategy(Player p_player) {
         super(p_player);
     }

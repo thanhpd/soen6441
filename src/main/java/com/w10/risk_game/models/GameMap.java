@@ -3,9 +3,7 @@ package com.w10.risk_game.models;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -107,7 +105,7 @@ public class GameMap {
 	 * @return The method is returning a Continent object.
 	 */
 	public Continent getContinentByName(String p_continentName) {
-		return d_continents.values().stream().filter(counrty -> counrty.getContinentName().equals(p_continentName))
+		return d_continents.values().stream().filter(country -> country.getContinentName().equals(p_continentName))
 				.findFirst().get();
 	}
 
@@ -232,12 +230,13 @@ public class GameMap {
 			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
 				// Initialize PrintWriter object
 				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
-				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);
+				l_printWriter.println(Constants.DOMINATION_MAP_READER_MAP + Constants.NEW_LINE
+						+ Constants.DOMINATION_MAP_READER_CONTINENTS);
 				// Writes continents details to new map file
 				for (Continent continent : this.d_continents.values()) {
 					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
 				}
-				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
+				l_printWriter.println(Constants.NEW_LINE + Constants.DOMINATION_MAP_READER_COUNTRIES);
 				// Assigns new continent id
 				int l_continentNumber = 1;
 				for (Continent l_continent : this.d_continents.values()) {
@@ -249,7 +248,7 @@ public class GameMap {
 					l_continentNumber++;
 				}
 				// Writes border details to new map file
-				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_BORDERS);
+				l_printWriter.println(Constants.NEW_LINE + Constants.DOMINATION_MAP_READER_BORDERS);
 				for (Country country : this.d_countries.values()) {
 					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
 							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));

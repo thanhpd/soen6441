@@ -8,9 +8,9 @@ import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.MapDisplay;
 import com.w10.risk_game.utils.MapEditor;
-import com.w10.risk_game.utils.MapReader;
 import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
+import com.w10.risk_game.utils.MapReaderDriver;
 
 /**
  * The MapEditorController class is responsible for managing the game map,
@@ -24,8 +24,6 @@ public class MapEditorController {
 	// The above code is declaring a variable named "d_mapEditor" of an unknown data
 	// type. The code is also using the pound sign (#) to create a comment, which
 	// means that the line "
-
-	private MapReader d_mapReader;
 	private MapDisplay d_displayMap;
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
@@ -35,7 +33,6 @@ public class MapEditorController {
 	 */
 	public MapEditorController() {
 		this.d_gameMap = new GameMap();
-		this.d_mapReader = new MapReader();
 		this.d_displayMap = new MapDisplay();
 	}
 
@@ -49,12 +46,14 @@ public class MapEditorController {
 	 */
 	public void loadMap(String p_filePath) {
 		try {
-			this.d_mapReader = new MapReader();
-			this.d_gameMap = d_mapReader.loadMapFile(p_filePath);
+			this.d_gameMap = MapReaderDriver.readMapFile(p_filePath);
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
 
 		} catch (Exception e) {
 			Logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
+			Logger.log(e.getMessage());
+			e.printStackTrace();
+			throw e;
 		}
 	}
 
@@ -283,6 +282,7 @@ public class MapEditorController {
 	 */
 	public void saveMap(String p_mapFilePath) {
 		if (checkIfMapIsValid()) {
+			// TODO: use Dominator/Conquest format
 			this.d_gameMap.saveMap(p_mapFilePath);
 		} else {
 			Logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);

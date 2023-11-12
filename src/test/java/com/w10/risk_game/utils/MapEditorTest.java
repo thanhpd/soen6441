@@ -43,7 +43,7 @@ public class MapEditorTest {
 	@BeforeAll
 	public void setUp() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map";
-		MapReader l_mapReader = new MapReader();
+		DominationMapReader l_mapReader = new DominationMapReader();
 		d_gameMap = l_mapReader.loadMapFile(l_mapFilePath);
 		d_mapEditor = new MapEditor(d_gameMap);
 

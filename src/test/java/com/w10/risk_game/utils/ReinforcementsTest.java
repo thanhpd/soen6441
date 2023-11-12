@@ -26,7 +26,7 @@ public class ReinforcementsTest {
 	List<Country> d_countries;
 	List<Country> d_countries2;
 	List<Country> d_countries3;
-	MapReader d_mapReader = new MapReader();
+	DominationMapReader d_mapReader = new DominationMapReader();
 
 	/**
 	 * This method is to set up the test environment

@@ -53,4 +53,10 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 		throw new UnsupportedOperationException("Unimplemented method 'issueAdvanceOrder'");
 	}
 
+	@Override
+	public void issueOrder() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'issueOrder'");
+	}
+
 }

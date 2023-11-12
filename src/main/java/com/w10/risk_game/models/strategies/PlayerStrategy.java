@@ -18,4 +18,5 @@ public abstract class PlayerStrategy {
 
 	public abstract boolean issueDeployOrder(String[] p_inputArray);
 	public abstract boolean issueAdvanceOrder(String[] p_inputArray);
+	public abstract void issueOrder();
 }

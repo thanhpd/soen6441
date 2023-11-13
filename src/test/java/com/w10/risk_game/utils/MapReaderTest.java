@@ -18,9 +18,9 @@ import java.util.Scanner;
  * for a risk game.
  */
 
-public class DominationMapReaderTest {
+public class MapReaderTest {
 
-	DominationMapReader d_mapReader = new DominationMapReader();
+	MapReader d_mapReader = new MapReader();
 
 	/**
 	 * The testLoadMapFile function tests if a map file can be successfully loaded

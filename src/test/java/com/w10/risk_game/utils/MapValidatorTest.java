@@ -12,7 +12,7 @@ import com.w10.risk_game.models.GameMap;
  * correctness of a game map.
  */
 public class MapValidatorTest {
-	private final DominationMapReader d_mapReader = new DominationMapReader();
+	private final MapReader d_mapReader = new MapReader();
 
 	/**
 	 * The testMapCorrectness function tests whether the loaded map file is correct

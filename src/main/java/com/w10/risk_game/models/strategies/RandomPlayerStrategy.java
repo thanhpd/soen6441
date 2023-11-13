@@ -23,8 +23,17 @@ public class RandomPlayerStrategy extends PlayerStrategy{
 
     @Override
     public void issueOrder() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'issueOrder'");
+       deployOnRandomCountry();
+       attackRandomNeighbor();
+       moveArmiesRandomCountry();
     }
-    
+    protected void deployOnRandomCountry(){
+
+    }
+    protected void attackRandomNeighbor(){
+
+    }
+    protected void moveArmiesRandomCountry(){
+
+    }
 }

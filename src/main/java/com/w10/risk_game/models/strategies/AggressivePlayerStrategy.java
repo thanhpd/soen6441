@@ -55,8 +55,21 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 
 	@Override
 	public void issueOrder() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueOrder'");
+		deployOnStrongestCountry();
+		attackWithStrongestCountry();
+		moveArmyToMaximizeForce();
+	}
+
+	protected void deployOnStrongestCountry() {
+
+	}
+
+	protected void attackWithStrongestCountry() {
+		
+	}
+
+	protected void moveArmyToMaximizeForce() {
+
 	}
 
 }

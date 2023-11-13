@@ -23,8 +23,13 @@ public class BenevolentPlayerStrategy extends PlayerStrategy{
 
     @Override
     public void issueOrder() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'issueOrder'");
+        getWeakContries();
+        moveArmiesToWeakCountries();
     }
-    
+    protected void getWeakContries(){
+
+    }
+    protected void moveArmiesToWeakCountries(){
+
+    }
 }

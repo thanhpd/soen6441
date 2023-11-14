@@ -9,6 +9,7 @@ import java.util.List;
 import com.w10.risk_game.commands.Airlift;
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Negotiate;
+import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.commands.Order;
@@ -397,6 +398,14 @@ public class GamePlayController {
 				l_order.execute();
 			}
 			OtherOrders.removeAll(OtherOrders);
+
+			// gift card if player has conquered new country
+			for (Player l_player : this.d_players.values()) {
+				if (l_player.hasConqueredNewCountry()) {
+					l_player.addCard(CardType.GetRandomCard());
+					l_player.setHasConqueredNewCountry(false);
+				}
+			}
 
 			// Re-initialize variables used in the Issue Order phase again
 			this.d_currentPlayerIndex = 0;

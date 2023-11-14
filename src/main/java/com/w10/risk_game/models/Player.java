@@ -29,6 +29,8 @@ public class Player {
 	private List<CardType> d_playerCards = new ArrayList<>();
 	private boolean d_hasCommitted = false;
 
+	private boolean d_hasConqueredNewCountry = false;
+
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
@@ -517,4 +519,26 @@ public class Player {
 	public void setStrategy(PlayerStrategy p_strategy) {
 		this.d_strategy = p_strategy;
 	}
+	/**
+	 * The function returns a boolean value indicating whether the player has
+	 * conquered a new country.
+	 *
+	 * @return The method is returning a boolean value.
+	 */
+	public boolean hasConqueredNewCountry() {
+		return d_hasConqueredNewCountry;
+	}
+
+	/**
+	 * The function sets the value of a boolean variable indicating whether a
+	 * country has been conquered.
+	 *
+	 * @param d_hasConqueredNewCountry
+	 *            This parameter is a boolean variable that represents whether or
+	 *            not a player has conquered a new country.
+	 */
+	public void setHasConqueredNewCountry(boolean d_hasConqueredNewCountry) {
+		this.d_hasConqueredNewCountry = d_hasConqueredNewCountry;
+	}
+
 }

@@ -106,7 +106,7 @@ public class Advance extends Order {
 				this.d_countryTo.getOwner().removeCountry(d_countryTo);
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
 				this.d_countryFrom.getOwner().addCountry(d_countryTo);
-				this.d_countryFrom.getOwner().addCard(CardType.GetRandomCard());
+				this.d_countryFrom.getOwner().setHasConqueredNewCountry(true);
 			} else { // attacker loses
 				Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));

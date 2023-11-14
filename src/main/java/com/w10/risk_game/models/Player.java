@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import com.w10.risk_game.commands.*;
+import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
+import com.w10.risk_game.models.strategies.PlayerStrategy;
 
 import java.util.List;
 import java.util.Scanner;
@@ -32,6 +34,11 @@ public class Player {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
+	 * The behavioral strategy of the player. Default is Human. Must not be null.
+	 */
+	protected PlayerStrategy d_strategy;
+
+	/**
 	 * The `Player` constructor is initializing a new instance of the `Player` class
 	 * with the provided parameters. It sets the player's name (`d_name`), the list
 	 * of countries owned by the player (`d_countriesOwned`), the list of orders for
@@ -47,11 +54,22 @@ public class Player {
 	 * @param p_leftoverArmies
 	 *            the number of current army in possess by the player
 	 */
+
+	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies,
+			PlayerStrategy p_strategy) {
+		this.d_name = p_name;
+		this.d_countriesOwned = p_countriesOwned;
+		this.d_orders = p_orders;
+		this.d_leftoverArmies = p_leftoverArmies;
+		this.d_strategy = p_strategy;
+	}
+
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies) {
 		this.d_name = p_name;
 		this.d_countriesOwned = p_countriesOwned;
 		this.d_orders = p_orders;
 		this.d_leftoverArmies = p_leftoverArmies;
+		this.setStrategy(new HumanPlayerStrategy(this));
 	}
 
 	/**
@@ -240,90 +258,6 @@ public class Player {
 	}
 
 	/**
-	 * This method is used to issue an order This method gets the command input,
-	 * creates an order object and adds it to the list of orders
-	 */
-	public void issueOrder() {
-		// Set the 'hasCommitted' flag to false for the current player
-		setHasCommitted(false);
-		// Retrieve the player's input command from the GameEngine
-		String l_input = GameEngine.Command;
-		String[] l_inputArray = l_input.split(" ");
-		boolean l_again = true;
-		boolean l_failed = false;
-		while (l_again) {
-			Scanner l_scanner = new Scanner(System.in);
-			// Step 1: Handle invalid input
-			if (l_failed) {
-				Logger.log(Constants.PLAYER_ISSUE_ORDER_RESTART);
-				Logger.log(Constants.USER_INPUT_REQUEST);
-				l_input = l_scanner.nextLine();
-				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + l_input);
-
-				// Check if user enters quit after an invalid order
-				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_QUIT)) {
-					GameEngine.Command = Constants.USER_INPUT_COMMAND_QUIT;
-					break;
-				}
-				// Check if user enters showmap after an invalid order
-				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_SHOWMAP)) {
-					GameEngine.Phase.showMap();
-					continue;
-				}
-				l_inputArray = l_input.split(" ");
-			}
-			// Step 2: Check the input format
-			boolean isValidOrderInput = checkValidOrderInput(l_inputArray);
-			if (!isValidOrderInput) {
-				l_failed = true;
-				continue;
-			}
-			String l_orderType = l_inputArray[0];
-			// Process the order based on the order type
-			switch (l_orderType) {
-				// Step 3: Create order object and add it to the list of orders
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
-					l_failed = !Deploy.ValidateIssueDeployOrder(this, l_inputArray);
-					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
-					l_failed = !Advance.ValidateIssueAdvanceOrder(this, l_inputArray);
-					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
-					l_failed = !Bomb.ValidateIssueBombOrder(this, l_inputArray);
-					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
-					l_failed = !Blockade.ValidateIssueBlockadeOrder(this, l_inputArray);
-					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
-					l_failed = !Airlift.ValidateIssueAirliftOrder(this, l_inputArray);
-					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
-					l_failed = !Negotiate.ValidateIssueDiplomacyOrder(this, l_inputArray);
-					break;
-				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
-					if (d_leftoverArmies == 0) {
-						setHasCommitted(true);
-						Logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_SUCCEED);
-						l_failed = false;
-					} else {
-						Logger.log(Constants.PLAYER_ISSUE_ORDER_COMMIT_INVALID);
-						l_failed = true;
-					}
-					break;
-				default :
-					Logger.log(Constants.PLAYER_ISSUE_ORDER_INVALID_INPUT_TYPE);
-					l_failed = true;
-			}
-			// Check if the order failed; re-enter if true, exit the loop if false
-			if (l_failed) {
-				l_again = true;
-			} else {
-				l_again = false;
-			}
-		}
-	}
-
-	/**
 	 * The function "nextOrder" returns and removes the first element from a list of
 	 * player's orders.
 	 *
@@ -373,6 +307,14 @@ public class Player {
 	}
 
 	/**
+	 * The function issueOrder() calls the issueOrder() method of the d_strategy
+	 * object.
+	 */
+	public void issueOrder() {
+		d_strategy.issueOrder();
+	}
+
+	/**
 	 * The function checks whether a player has a card of a given type.
 	 *
 	 * @param p_cardType
@@ -417,6 +359,14 @@ public class Player {
 	 */
 	public void addCountry(Country p_country) {
 		this.d_countriesOwned.add(p_country);
+	}
+
+	public PlayerStrategy getStrategy() {
+		return d_strategy;
+	}
+
+	public void setStrategy(PlayerStrategy p_strategy) {
+		this.d_strategy = p_strategy;
 	}
 
 	/**

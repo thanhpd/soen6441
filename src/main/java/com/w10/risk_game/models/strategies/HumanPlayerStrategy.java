@@ -104,17 +104,21 @@ public class HumanPlayerStrategy extends PlayerStrategy {
 	}
 
 	/**
-     * The function issueDeployOrder takes an input array, extracts the country ID and number of armies,
-     * validates the order, creates a Deploy order and adds it to the list of orders, deploys the
-     * specified number of armies to the country, and logs the success or failure of the order.
-     * 
-     * @param p_inputArray An array of strings containing the input values for the deploy order. The first
-     * element is not used in this method. The second element (index 1) is the country ID, and the third
-     * element (index 2) is the number of armies to deploy.
-     * @return The method is returning a boolean value. If the deploy order is valid and successfully
-     * executed, it returns true. If the deploy order is incorrect or invalid, it returns false.
-     */
-    public boolean issueDeployOrder(String[] p_inputArray) {
+	 * The function issueDeployOrder takes an input array, extracts the country ID
+	 * and number of armies, validates the order, creates a Deploy order and adds it
+	 * to the list of orders, deploys the specified number of armies to the country,
+	 * and logs the success or failure of the order.
+	 *
+	 * @param p_inputArray
+	 *            An array of strings containing the input values for the deploy
+	 *            order. The first element is not used in this method. The second
+	 *            element (index 1) is the country ID, and the third element (index
+	 *            2) is the number of armies to deploy.
+	 * @return The method is returning a boolean value. If the deploy order is valid
+	 *         and successfully executed, it returns true. If the deploy order is
+	 *         incorrect or invalid, it returns false.
+	 */
+	public boolean issueDeployOrder(String[] p_inputArray) {
 		// Extract country ID and number of armies from the input array
 		String l_countryId = p_inputArray[1];
 		String l_num = p_inputArray[2];

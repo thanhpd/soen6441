@@ -244,8 +244,6 @@ public class Player {
 		this.d_leftoverArmies += p_num;
 	}
 
-	
-
 	/**
 	 * The function "nextOrder" returns and removes the first element from a list of
 	 * player's orders.
@@ -306,7 +304,7 @@ public class Player {
 		return d_strategy.issueDeployOrder(p_inputArray);
 	}
 
-	public void issueOrder(){
+	public void issueOrder() {
 		d_strategy.issueOrder();
 	}
 

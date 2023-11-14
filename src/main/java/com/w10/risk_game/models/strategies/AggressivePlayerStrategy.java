@@ -24,21 +24,23 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 
 		// // Validate the order
 		// if (Deploy.ValidateOrder(d_Player, l_countryId, l_num)) {
-		// 	// If the order is valid, create a Deploy order and add it to the list of orders
-		// 	Order order = new Deploy(d_Player, Integer.parseInt(p_inputArray[1]), Integer.parseInt(p_inputArray[2]));
-		// 	d_Player.getOrders().add(order);
+		// // If the order is valid, create a Deploy order and add it to the list of
+		// orders
+		// Order order = new Deploy(d_Player, Integer.parseInt(p_inputArray[1]),
+		// Integer.parseInt(p_inputArray[2]));
+		// d_Player.getOrders().add(order);
 
-		// 	// Deploy the specified number of armies to the country
-		// 	d_Player.deployArmies(Integer.parseInt(p_inputArray[2]));
+		// // Deploy the specified number of armies to the country
+		// d_Player.deployArmies(Integer.parseInt(p_inputArray[2]));
 
-		// 	// Log that the deploy order was successful
-		// 	Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-		// 	return true; // Return true indicating the successful execution of the order
+		// // Log that the deploy order was successful
+		// Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+		// return true; // Return true indicating the successful execution of the order
 		// } else {
-		// 	// Log if the deploy order was incorrect or invalid
-		// 	Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-		// 			Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
-		 	return false; // Return false for an unsuccessful order execution
+		// // Log if the deploy order was incorrect or invalid
+		// Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+		// Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
+		return false; // Return false for an unsuccessful order execution
 		// }
 	}
 
@@ -65,7 +67,7 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	}
 
 	protected void attackWithStrongestCountry() {
-		
+
 	}
 
 	protected void moveArmyToMaximizeForce() {

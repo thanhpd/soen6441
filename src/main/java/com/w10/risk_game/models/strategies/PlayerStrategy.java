@@ -4,8 +4,8 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The PlayerStrategy class is an abstract class that provides a framework for implementing different
- * strategies for a player in a game.
+ * The PlayerStrategy class is an abstract class that provides a framework for
+ * implementing different strategies for a player in a game.
  */
 public abstract class PlayerStrategy {
 

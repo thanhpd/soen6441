@@ -53,6 +53,24 @@ public class Player {
 	}
 
 	/**
+	 * The `Player` constructor is initializing a new instance of the `Player` class
+	 * @param d_name player name
+	 * @param d_countriesOwned player owned countries
+	 * @param d_orders player orders
+	 * @param d_leftoverArmies player leftover armies
+	 * @param d_playerCards player cards
+	 * @param d_hasCommitted player has committed
+	 */
+	public Player(String d_name, List<Country> d_countriesOwned, List<Order> d_orders, int d_leftoverArmies, List<CardType> d_playerCards, boolean d_hasCommitted) {
+		this.d_name = d_name;
+		this.d_countriesOwned = d_countriesOwned;
+		this.d_orders = d_orders;
+		this.d_leftoverArmies = d_leftoverArmies;
+		this.d_playerCards = d_playerCards;
+		this.d_hasCommitted = d_hasCommitted;
+	}
+
+	/**
 	 * The function returns the name of the player.
 	 *
 	 * @return The method is returning the player's name.

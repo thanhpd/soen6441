@@ -147,4 +147,11 @@ public class Negotiate extends Order {
 		}
 		return true;
 	}
+	/**
+	 * This method is to get the player name of the player to negotiate with
+	 * @return the player name of the player to negotiate with
+	 */
+	public String getPlayerName() {
+		return d_playerName;
+	}
 }

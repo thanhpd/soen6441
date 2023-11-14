@@ -1,5 +1,6 @@
 package com.w10.risk_game.commands;
 
+import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 
@@ -165,5 +166,47 @@ public class Bomb extends Order {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * The function validates and executes a bomb order for a player in a game.
+	 *
+	 * @param p_player
+	 *            The player object that is issuing the bomb order.
+	 * @param p_inputArray
+	 *            An array of strings containing the user input for the bomb order
+	 *            command. The first element of the array is the command itself, and
+	 *            the second element is the country ID to bomb.
+	 * @return The method returns a boolean value. If the bomb order is successfully
+	 *         validated and executed, it returns true. If the bomb order is
+	 *         incorrect or invalid, it returns false. If the player does not have a
+	 *         bomb card, it also returns false.
+	 */
+	public static boolean ValidateIssueBombOrder(Player p_player, String[] p_inputArray) {
+		String l_countryIdToBomb = p_inputArray[1];
+
+		// Check if the player has a bomb card
+		if (p_player.hasCard(CardType.BOMB)) {
+			// Validate the bomb order
+			if (ValidateOrder(p_player, l_countryIdToBomb)) {
+				// If the order is valid, create a Bomb order and add it to the list of orders
+				Order order = new Bomb(p_player, l_countryIdToBomb);
+				p_player.addOrder(order);
+
+				// Remove the bomb card from the player's hand
+				p_player.removeCard(CardType.BOMB);
+
+				// Log a success message for the bomb order execution
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true; // Return true for a successful order execution
+			} else {
+				// Log if the bomb order was incorrect or invalid
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB));
+				return false; // Return false for an unsuccessful order execution
+			}
+		} else {
+			return false; // Return false if the player does not have a bomb card
+		}
 	}
 }

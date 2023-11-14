@@ -169,15 +169,19 @@ public class Bomb extends Order {
 	}
 
 	/**
-	 * The function try to add bomb order to the player's order list
+	 * The function validates and executes a bomb order for a player in a game.
 	 *
+	 * @param p_player
+	 *            The player object that is issuing the bomb order.
 	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the order is added successfully
+	 *            An array of strings containing the user input for the bomb order
+	 *            command. The first element of the array is the command itself, and
+	 *            the second element is the country ID to bomb.
+	 * @return The method returns a boolean value. If the bomb order is successfully
+	 *         validated and executed, it returns true. If the bomb order is
+	 *         incorrect or invalid, it returns false. If the player does not have a
+	 *         bomb card, it also returns false.
 	 */
-	// The above code is implementing a method called `issueBombOrder` in a Java
-	// class. This method takes
-	// an array of strings as input and returns a boolean value.
 	public static boolean ValidateIssueBombOrder(Player p_player, String[] p_inputArray) {
 		String l_countryIdToBomb = p_inputArray[1];
 

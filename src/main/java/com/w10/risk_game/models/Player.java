@@ -53,6 +53,8 @@ public class Player {
 	 *            the list of orders to issue
 	 * @param p_leftoverArmies
 	 *            the number of current army in possess by the player
+	 * @param p_strategy
+	 *            the strategy of the player
 	 */
 
 	public Player(String p_name, List<Country> p_countriesOwned, List<Order> p_orders, int p_leftoverArmies,
@@ -166,8 +168,8 @@ public class Player {
 	/**
 	 * The function adds a card to the player's list of cards.
 	 *
-	 * @param card
-	 *            The parameter "card" is an object of type CardType.
+	 * @param p_card
+	 *            The parameter "p_card" is an object of type CardType.
 	 */
 	public void addCard(CardType p_card) {
 		this.d_playerCards.add(p_card);
@@ -176,8 +178,8 @@ public class Player {
 	/**
 	 * The function adds a order to the player's list of orders.
 	 *
-	 * @param card
-	 *            The parameter "order" is an object of type Order.
+	 * @param p_order
+	 *            The parameter "p_order" is an object of type Order.
 	 */
 	public void addOrder(Order p_order) {
 		this.d_orders.add(p_order);

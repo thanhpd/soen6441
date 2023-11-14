@@ -239,6 +239,8 @@ public class Airlift extends Order {
 	 * validates the order before creating a new airlift order and adding it to the
 	 * list of orders.
 	 *
+	 * @param p_player
+	 *            the player who issue the order
 	 * @param p_inputArray
 	 *            An array of strings that represents the input command. The first
 	 *            element is the command itself, and the following elements are the

@@ -145,6 +145,8 @@ public class Advance extends Order {
 	/**
 	 * The function try to add advance order to the player's order list
 	 *
+	 * @param p_player
+	 *            the player who issue the order
 	 * @param p_inputArray
 	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
@@ -190,6 +192,8 @@ public class Advance extends Order {
 	 * The function checks whether a player can advance X armies from a country Y
 	 * onto a country Z or not
 	 *
+	 * @param p_player
+	 *            the player who issue the order
 	 * @param p_noOfArmiesToAdvance
 	 *            number of armies to advance
 	 * @param p_currentArmiesOnCountry

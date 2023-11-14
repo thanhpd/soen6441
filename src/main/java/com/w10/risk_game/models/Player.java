@@ -151,8 +151,18 @@ public class Player {
 	 * @param card
 	 *            The parameter "card" is an object of type CardType.
 	 */
-	public void addCard(CardType card) {
-		this.d_playerCards.add(card);
+	public void addCard(CardType p_card) {
+		this.d_playerCards.add(p_card);
+	}
+
+	/**
+	 * The function adds a order to the player's list of orders.
+	 *
+	 * @param card
+	 *            The parameter "order" is an object of type Order.
+	 */
+	public void addOrder(Order p_order) {
+		this.d_orders.add(p_order);
 	}
 
 	/**
@@ -273,22 +283,22 @@ public class Player {
 			switch (l_orderType) {
 				// Step 3: Create order object and add it to the list of orders
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
-					l_failed = !issueDeployOrder(l_inputArray);
+					l_failed = !Deploy.ValidateIssueDeployOrder(this, l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
-					l_failed = !issueAdvanceOrder(l_inputArray);
+					l_failed = !Advance.ValidateIssueAdvanceOrder(this, l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
-					l_failed = !issueBombOrder(l_inputArray);
+					l_failed = !Bomb.ValidateIssueBombOrder(this, l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
-					l_failed = !issueBlockadeOrder(l_inputArray);
+					l_failed = !Blockade.ValidateIssueBlockadeOrder(this, l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
-					l_failed = !issueAirliftOrder(l_inputArray);
+					l_failed = !Airlift.ValidateIssueAirliftOrder(this, l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
-					l_failed = !issueDiplomacyOrder(l_inputArray);
+					l_failed = !Negotiate.ValidateIssueDiplomacyOrder(this, l_inputArray);
 					break;
 				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 					if (d_leftoverArmies == 0) {
@@ -363,278 +373,13 @@ public class Player {
 	}
 
 	/**
-	 * The function checks whether a player can advance X armies from a country Y
-	 * onto a country Z or not
-	 *
-	 * @param p_noOfArmiesToAdvance
-	 *            number of armies to advance
-	 * @param p_currentArmiesOnCountry
-	 *            current armies on country
-	 * @param p_advanceFromCountryId
-	 *            country id to advance from
-	 * @return boolean value to show whether the player can advance
-	 */
-	private boolean checkValidAdvanceOrder(int p_noOfArmiesToAdvance, int p_currentArmiesOnCountry,
-			int p_advanceFromCountryId) {
-		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
-		// Iterate through existing orders to check total armies deployed or moved
-		for (Order l_order : this.getOrders()) {
-			if ((l_order instanceof Deploy) && ((Deploy) l_order).getCountryId() == p_advanceFromCountryId) {
-				l_totalArmiesDeployed += ((Deploy) l_order).getNum();
-			} else if ((l_order instanceof Airlift)
-					&& ((Airlift) l_order).getTargetCountryId() == p_advanceFromCountryId) {
-				l_totalArmiesDeployed += ((Airlift) l_order).getArmyToAirlift();
-			} else if ((l_order instanceof Airlift)
-					&& ((Airlift) l_order).getSourceCountryId() == p_advanceFromCountryId) {
-				l_totalArmiesDeployed -= ((Airlift) l_order).getArmyToAirlift();
-			} else if ((l_order instanceof Advance)
-					&& ((Advance) l_order).getCountryNameTo().getCountryId() == p_advanceFromCountryId) {
-				l_totalArmiesDeployed += ((Advance) l_order).getNumOfArmies();
-			} else if ((l_order instanceof Advance)
-					&& ((Advance) l_order).getCountryNameFrom().getCountryId() == p_advanceFromCountryId) {
-				l_totalArmiesDeployed -= ((Advance) l_order).getNumOfArmies();
-			}
-		}
-		// Return true if the total armies deployed or moved is greater than or equal to
-		// the requested number of armies to advance
-		return l_totalArmiesDeployed >= p_noOfArmiesToAdvance;
-	}
-
-	/**
-	 * The function try to add deploy order to the player's order list
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the order is added successfully
-	 */
-	public boolean issueDeployOrder(String[] p_inputArray) {
-		// Extract country ID and number of armies from the input array
-		String l_countryId = p_inputArray[1];
-		String l_num = p_inputArray[2];
-
-		// Validate the order
-		if (Deploy.ValidateOrder(this, l_countryId, l_num)) {
-			// If the order is valid, create a Deploy order and add it to the list of orders
-			Order order = new Deploy(this, Integer.parseInt(p_inputArray[1]), Integer.parseInt(p_inputArray[2]));
-			d_orders.add(order);
-
-			// Deploy the specified number of armies to the country
-			deployArmies(Integer.parseInt(p_inputArray[2]));
-
-			// Log that the deploy order was successful
-			Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true; // Return true indicating the successful execution of the order
-		} else {
-			// Log if the deploy order was incorrect or invalid
-			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
-			return false; // Return false for an unsuccessful order execution
-		}
-	}
-
-	/**
-	 * The function try to add advance order to the player's order list
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the order is added successfully
-	 */
-	public boolean issueAdvanceOrder(String[] p_inputArray) {
-		if (Advance.CheckValidAdvanceInput(p_inputArray)) {
-			// Step 1: Get the variables needed to create an advance order
-			String l_countryNameFrom = p_inputArray[1];
-			String l_countryNameTo = p_inputArray[2];
-			Country l_countryFrom = this.d_countriesOwned.stream()
-					.filter(l_c -> l_c.getCountryName().equals(l_countryNameFrom)).findAny().orElse(null);
-			Country l_countryTo = l_countryFrom != null
-					? l_countryFrom.getNeighbors().values().stream()
-							.filter(c -> c.getCountryName().equals(l_countryNameTo)).findAny().orElse(null)
-					: null;
-			int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
-			// Step 2: Check whether the order is valid
-			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && checkValidAdvanceOrder(
-					d_advanceArmies, l_countryFrom.getArmyCount(), l_countryFrom.getCountryId())) {
-				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
-				d_orders.add(l_order);
-				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true;
-			} else {
-				if (l_countryFrom == null || l_countryTo == null) {
-					if (l_countryFrom == null)
-						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED, l_countryNameFrom,
-								this.getName()));
-					if (l_countryTo == null)
-						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_NEIGHBOR, l_countryNameTo,
-								l_countryNameFrom));
-				} else if (d_advanceArmies <= 0)
-					Logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
-				else
-					Logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
-				return false;
-			}
-		}
-		return false;
-	}
-
-	/**
-	 * The function try to add bomb order to the player's order list
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the order is added successfully
-	 */
-	public boolean issueBombOrder(String[] p_inputArray) {
-		String l_countryIdToBomb = p_inputArray[1];
-
-		// Check if the player has a bomb card
-		if (hasCard(CardType.BOMB)) {
-			// Validate the bomb order
-			if (Bomb.ValidateOrder(this, l_countryIdToBomb)) {
-				// If the order is valid, create a Bomb order and add it to the list of orders
-				Order order = new Bomb(this, l_countryIdToBomb);
-				d_orders.add(order);
-
-				// Remove the bomb card from the player's hand
-				removeCard(CardType.BOMB);
-
-				// Log a success message for the bomb order execution
-				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true; // Return true for a successful order execution
-			} else {
-				// Log if the bomb order was incorrect or invalid
-				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB));
-				return false; // Return false for an unsuccessful order execution
-			}
-		} else {
-			return false; // Return false if the player does not have a bomb card
-		}
-	}
-
-	/**
-	 * The function try to add blockade order to the player's order list
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the order is added successfully
-	 */
-	public boolean issueBlockadeOrder(String[] p_inputArray) {
-		String l_countryIdToBlockade = p_inputArray[1];
-
-		// Check if the player has a blockade card
-		if (hasCard(CardType.BLOCKADE)) {
-			// Validate the blockade order
-			if (Blockade.ValidateOrder(this, l_countryIdToBlockade)) {
-				// If the order is valid, create a Blockade order and add it to the list of
-				// orders
-				Order order = new Blockade(this, l_countryIdToBlockade);
-				d_orders.add(order);
-
-				// Remove the blockade card from the player's hand
-				removeCard(CardType.BLOCKADE);
-
-				// Log a success message for the blockade order execution
-				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true; // Return true for a successful order execution
-			} else {
-				// Log if the blockade order was incorrect or invalid
-				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE));
-				return false; // Return false for an unsuccessful order execution
-			}
-		} else {
-			return false; // Return false if the player does not have a blockade card
-		}
-	}
-
-	/**
-	 * The function try to add diplomacy order to the player's order list
-	 *
-	 * @param p_inputArray
-	 *            the input string split by space
-	 * @return boolean value to show whether the order is added successfully
-	 */
-	public boolean issueDiplomacyOrder(String[] p_inputArray) {
-		String l_playerId = p_inputArray[1];
-		String l_playerName = l_playerId; // Obtaining the player's ID
-
-		// Check if the player has a diplomacy card
-		if (hasCard(CardType.DIPLOMACY)) {
-			// Validate the negotiation order
-			if (Negotiate.ValidateOrder(this, l_playerName)) {
-				// If the negotiation order is valid, create a Negotiate order and add it to the
-				// list of orders
-				Order order = new Negotiate(this, l_playerId);
-				d_orders.add(order);
-
-				// Remove the diplomacy card from the player's hand
-				removeCard(CardType.DIPLOMACY);
-
-				// Log a success message for the diplomacy order execution
-				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true; // Return true for a successful order execution
-			} else {
-				// Log if the diplomacy order was incorrect or invalid
-				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE));
-				return false; // Return false for an unsuccessful order execution
-			}
-		} else {
-			return false; // Return false if the player does not have a diplomacy card
-		}
-	}
-
-	/**
-	 * The function issueAirliftOrder checks if the player has an airlift card and
-	 * validates the order before creating a new airlift order and adding it to the
-	 * list of orders.
-	 *
-	 * @param p_inputArray
-	 *            An array of strings that represents the input command. The first
-	 *            element is the command itself, and the following elements are the
-	 *            parameters for the command.
-	 * @return The method is returning a boolean value.
-	 */
-	public boolean issueAirliftOrder(String[] p_inputArray) {
-		// Extract information from the player's input array
-		String l_countryIdToAirliftFrom = p_inputArray[1];
-		String l_countryIdToAirlift = p_inputArray[2];
-		String l_airliftArmies = p_inputArray[3];
-
-		// Check if the player has an airlift card
-		if (hasCard(CardType.AIRLIFT)) {
-			// Validate the airlift order
-			if (Airlift.ValidateOrder(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
-				// If the airlift order is valid, create an Airlift order and add it to the list
-				// of orders
-				Order order = new Airlift(this, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
-				d_orders.add(order);
-
-				// Remove the airlift card from the player's hand
-				removeCard(CardType.AIRLIFT);
-
-				// Log a success message for the airlift order execution
-				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-				return true; // Return true for a successful order execution
-			} else {
-				// Log if the airlift order was incorrect or invalid
-				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
-				return false; // Return false for an unsuccessful order execution
-			}
-		} else {
-			return false; // Return false if the player does not have an airlift card
-		}
-	}
-
-	/**
 	 * The function checks whether a player has a card of a given type.
 	 *
 	 * @param p_cardType
 	 *            cart type
 	 * @return boolean value to show whether the player has specific card
 	 */
-	private boolean hasCard(CardType p_cardType) {
+	public boolean hasCard(CardType p_cardType) {
 		if (d_playerCards.contains(p_cardType)) {
 			return true;
 		}
@@ -649,7 +394,7 @@ public class Player {
 	 * @param p_cardType
 	 *            card type
 	 */
-	private void removeCard(CardType p_cardType) {
+	public void removeCard(CardType p_cardType) {
 		d_playerCards.remove(p_cardType);
 	}
 

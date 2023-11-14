@@ -5,10 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.w10.risk_game.controllers.GamePlayController;
-import com.w10.risk_game.controllers.MapEditorController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.w10.risk_game.commands.Advance;
+import com.w10.risk_game.commands.Airlift;
+import com.w10.risk_game.commands.Blockade;
+import com.w10.risk_game.commands.Bomb;
+import com.w10.risk_game.commands.Deploy;
+import com.w10.risk_game.commands.Negotiate;
+import com.w10.risk_game.controllers.GamePlayController;
+import com.w10.risk_game.controllers.MapEditorController;
 
 /**
  * The PlayerTest class is a JUnit test class that tests the functionality of
@@ -97,7 +104,7 @@ class PlayerTest {
 		String l_countryId = "1";
 		String l_armyCount = "5";
 		String[] l_inputArray = {l_command, l_countryId, l_armyCount};
-		boolean l_result = d_player1.issueDeployOrder(l_inputArray);
+		boolean l_result = Deploy.ValidateIssueDeployOrder(d_player1, l_inputArray);
 		assertEquals(true, l_result);
 		int l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -105,7 +112,7 @@ class PlayerTest {
 		// Test deploy armies to a country that does not belong to the player
 		l_countryId = "30";
 		l_inputArray[1] = l_countryId;
-		l_result = d_player1.issueDeployOrder(l_inputArray);
+		l_result = Deploy.ValidateIssueDeployOrder(d_player1, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -115,7 +122,7 @@ class PlayerTest {
 		l_inputArray[1] = l_countryId;
 		l_armyCount = "20";
 		l_inputArray[2] = l_armyCount;
-		l_result = d_player1.issueDeployOrder(l_inputArray);
+		l_result = Deploy.ValidateIssueDeployOrder(d_player1, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -132,7 +139,7 @@ class PlayerTest {
 		String l_countryId = "1";
 		String l_armyCount = "5";
 		String[] l_inputArray1 = {l_command, l_countryId, l_armyCount};
-		boolean l_result = d_player1.issueDeployOrder(l_inputArray1);
+		boolean l_result = Deploy.ValidateIssueDeployOrder(d_player1, l_inputArray1);
 		assertEquals(true, l_result);
 
 		// Test valid advance order between two countries owned by different users
@@ -141,7 +148,7 @@ class PlayerTest {
 		String l_countryNameTo = "Scotland";
 		String l_numArmies = "2";
 		String[] l_inputArray2 = {l_command, l_countryNameFrom, l_countryNameTo, l_numArmies};
-		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
+		l_result = Advance.ValidateIssueAdvanceOrder(d_player1, l_inputArray2);
 		assertEquals(true, l_result);
 		int l_orderLength = d_player1.getOrders().size();
 		assertEquals(2, l_orderLength);
@@ -149,7 +156,7 @@ class PlayerTest {
 		// Test valid advance order between two countries owned by the same user
 		l_countryNameTo = "Wales";
 		l_inputArray2[2] = l_countryNameTo;
-		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
+		l_result = Advance.ValidateIssueAdvanceOrder(d_player1, l_inputArray2);
 		assertEquals(true, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(3, l_orderLength);
@@ -157,7 +164,7 @@ class PlayerTest {
 		// Test advance order from a country that does not belong to the player
 		l_countryNameFrom = "Scotland";
 		l_inputArray2[1] = l_countryNameFrom;
-		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
+		l_result = Advance.ValidateIssueAdvanceOrder(d_player1, l_inputArray2);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(3, l_orderLength);
@@ -167,7 +174,7 @@ class PlayerTest {
 		// Test advance order to a country that is not a neighbor of the source country
 		l_countryNameTo = "Ireland";
 		l_inputArray2[2] = l_countryNameTo;
-		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
+		l_result = Advance.ValidateIssueAdvanceOrder(d_player1, l_inputArray2);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(3, l_orderLength);
@@ -177,7 +184,7 @@ class PlayerTest {
 		// Test advance order with invalid number of armies
 		l_numArmies = "20";
 		l_inputArray2[3] = l_numArmies;
-		l_result = d_player1.issueAdvanceOrder(l_inputArray2);
+		l_result = Advance.ValidateIssueAdvanceOrder(d_player1, l_inputArray2);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(3, l_orderLength);
@@ -193,7 +200,7 @@ class PlayerTest {
 		String l_command = "bomb";
 		String l_countryId = "2";
 		String[] l_inputArray = {l_command, l_countryId};
-		boolean l_result = d_player1.issueBombOrder(l_inputArray);
+		boolean l_result = Bomb.ValidateIssueBombOrder(d_player1, l_inputArray);
 		assertEquals(false, l_result);
 		int l_orderLength = d_player1.getOrders().size();
 		assertEquals(0, l_orderLength);
@@ -202,7 +209,7 @@ class PlayerTest {
 		List<CardType> l_cardTypes = new ArrayList<>();
 		l_cardTypes.add(CardType.BOMB);
 		d_player1.setPlayerCards(l_cardTypes);
-		l_result = d_player1.issueBombOrder(l_inputArray);
+		l_result = Bomb.ValidateIssueBombOrder(d_player1, l_inputArray);
 		assertEquals(true, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -210,7 +217,7 @@ class PlayerTest {
 		// Test bomb a country belong to the player
 		l_countryId = "1";
 		l_inputArray[1] = l_countryId;
-		l_result = d_player1.issueBombOrder(l_inputArray);
+		l_result = Bomb.ValidateIssueBombOrder(d_player1, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -218,7 +225,7 @@ class PlayerTest {
 		// Test bomb a country that is not a neighbor of the source country
 		l_countryId = "4";
 		l_inputArray[1] = l_countryId;
-		l_result = d_player1.issueBombOrder(l_inputArray);
+		l_result = Bomb.ValidateIssueBombOrder(d_player1, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player1.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -235,7 +242,7 @@ class PlayerTest {
 		String l_command = "blockade";
 		String l_countryId = "4";
 		String[] l_inputArray = {l_command, l_countryId};
-		boolean l_result = d_player2.issueBlockadeOrder(l_inputArray);
+		boolean l_result = Blockade.ValidateIssueBlockadeOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		int l_orderLength = d_player2.getOrders().size();
 		assertEquals(0, l_orderLength);
@@ -244,7 +251,7 @@ class PlayerTest {
 		List<CardType> l_cardTypes = new ArrayList<>();
 		l_cardTypes.add(CardType.BLOCKADE);
 		d_player2.setPlayerCards(l_cardTypes);
-		l_result = d_player2.issueBlockadeOrder(l_inputArray);
+		l_result = Blockade.ValidateIssueBlockadeOrder(d_player2, l_inputArray);
 		assertEquals(true, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -252,7 +259,7 @@ class PlayerTest {
 		// Test blockade a country not belong to the player
 		l_countryId = "1";
 		l_inputArray[1] = l_countryId;
-		l_result = d_player2.issueBlockadeOrder(l_inputArray);
+		l_result = Blockade.ValidateIssueBlockadeOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -270,7 +277,7 @@ class PlayerTest {
 		String l_countryIdTo = "2";
 		String l_numArmies = "3";
 		String[] l_inputArray = {l_command, l_countryIdFrom, l_countryIdTo, l_numArmies};
-		boolean l_result = d_player2.issueAirliftOrder(l_inputArray);
+		boolean l_result = Airlift.ValidateIssueAirliftOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		int l_orderLength = d_player2.getOrders().size();
 		assertEquals(0, l_orderLength);
@@ -279,7 +286,7 @@ class PlayerTest {
 		List<CardType> l_cardTypes = new ArrayList<>();
 		l_cardTypes.add(CardType.AIRLIFT);
 		d_player2.setPlayerCards(l_cardTypes);
-		l_result = d_player2.issueAirliftOrder(l_inputArray);
+		l_result = Airlift.ValidateIssueAirliftOrder(d_player2, l_inputArray);
 		assertEquals(true, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -287,7 +294,7 @@ class PlayerTest {
 		// Test airlift source country not belong to the player
 		l_countryIdFrom = "1";
 		l_inputArray[1] = l_countryIdFrom;
-		l_result = d_player2.issueAirliftOrder(l_inputArray);
+		l_result = Airlift.ValidateIssueAirliftOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -297,7 +304,7 @@ class PlayerTest {
 		// Test airlift destination country not belong to the player
 		l_countryIdTo = "1";
 		l_inputArray[2] = l_countryIdTo;
-		l_result = d_player2.issueAirliftOrder(l_inputArray);
+		l_result = Airlift.ValidateIssueAirliftOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -307,7 +314,7 @@ class PlayerTest {
 		// Test airlift armies more than the source country's armies
 		l_numArmies = "20";
 		l_inputArray[3] = l_numArmies;
-		l_result = d_player2.issueAirliftOrder(l_inputArray);
+		l_result = Airlift.ValidateIssueAirliftOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -324,7 +331,7 @@ class PlayerTest {
 		String l_command = "negotiate";
 		String l_playerName = "Player1";
 		String[] l_inputArray = {l_command, l_playerName};
-		boolean l_result = d_player2.issueDiplomacyOrder(l_inputArray);
+		boolean l_result = Negotiate.ValidateIssueDiplomacyOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		int l_orderLength = d_player2.getOrders().size();
 		assertEquals(0, l_orderLength);
@@ -333,7 +340,7 @@ class PlayerTest {
 		List<CardType> l_cardTypes = new ArrayList<>();
 		l_cardTypes.add(CardType.DIPLOMACY);
 		d_player2.setPlayerCards(l_cardTypes);
-		l_result = d_player2.issueDiplomacyOrder(l_inputArray);
+		l_result = Negotiate.ValidateIssueDiplomacyOrder(d_player2, l_inputArray);
 		assertEquals(true, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);
@@ -341,7 +348,7 @@ class PlayerTest {
 		// Test negotiate with the player self
 		l_playerName = "Player2";
 		l_inputArray[1] = l_playerName;
-		l_result = d_player2.issueDiplomacyOrder(l_inputArray);
+		l_result = Negotiate.ValidateIssueDiplomacyOrder(d_player2, l_inputArray);
 		assertEquals(false, l_result);
 		l_orderLength = d_player2.getOrders().size();
 		assertEquals(1, l_orderLength);

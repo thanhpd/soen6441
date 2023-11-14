@@ -10,25 +10,15 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 	}
 
 	@Override
-	public boolean issueDeployOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueDeployOrder'");
-	}
-
-	@Override
-	public boolean issueAdvanceOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueAdvanceOrder'");
-	}
-
-	@Override
 	public void issueOrder() {
 		getWeakContries();
 		moveArmiesToWeakCountries();
 	}
+
 	protected void getWeakContries() {
 
 	}
+
 	protected void moveArmiesToWeakCountries() {
 
 	}

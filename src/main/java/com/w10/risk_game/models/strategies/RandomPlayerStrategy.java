@@ -19,18 +19,6 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 	}
 
 	@Override
-	public boolean issueDeployOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueDeployOrder'");
-	}
-
-	@Override
-	public boolean issueAdvanceOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueAdvanceOrder'");
-	}
-
-	@Override
 	public void issueOrder() {
 		deployOnRandomCountry();
 		attackRandomNeighbor();
@@ -43,10 +31,11 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 	protected void deployOnRandomCountry() {
 
 	}
+
 	protected void attackRandomNeighbor() {
 		Map<Country, ArrayList<Country>> countryAttackbleNeighbors = new HashMap<>();
 
-		for (Country country : d_Player.getCountriesOwned()) {
+		for (Country country : d_player.getCountriesOwned()) {
 			if (country.getArmyCount() > 0) {
 
 				var enemies = getAtackbleNeighbors(country);
@@ -70,11 +59,11 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 		var enemies = countryEnemiesEntrySet.getValue();
 		var targetEnemyCountry = enemies.get(random.nextInt(enemies.size()));
 		var armyCountToAttackWith = targetEnemyCountry.getArmyCount();// random.nextInt(selectedEnemyCountry.getArmyCount())
-																		// + 1;
+		// + 1;
 
 		// add orders
 		Order l_order = new Advance(selectedOwnCountry, targetEnemyCountry, armyCountToAttackWith);
-		d_Player.getOrders().add(l_order);
+		d_player.getOrders().add(l_order);
 		Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
 	}
 
@@ -85,7 +74,7 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 	private ArrayList<Country> getAtackbleNeighbors(Country ownCountry) {
 		ArrayList<Country> enemies = new ArrayList<>();
 		for (var neighbor : ownCountry.getNeighbors().values()) {
-			if (neighbor.getOwner() != d_Player) {
+			if (neighbor.getOwner() != d_player) {
 				enemies.add(neighbor);
 			}
 		}

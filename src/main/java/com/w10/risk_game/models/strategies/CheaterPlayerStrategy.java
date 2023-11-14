@@ -29,24 +29,12 @@ public class CheaterPlayerStrategy extends PlayerStrategy {
 	}
 
 	protected void conquerNeighborCountries() {
-		d_Player.getCountriesOwned();
+		d_player.getCountriesOwned();
 
 	}
 
 	protected void doubleArmiesInCountriesWithEnemyNeighbor() {
 
-	}
-
-	@Override
-	public boolean issueDeployOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueDeployOrder'");
-	}
-
-	@Override
-	public boolean issueAdvanceOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueAdvanceOrder'");
 	}
 
 }

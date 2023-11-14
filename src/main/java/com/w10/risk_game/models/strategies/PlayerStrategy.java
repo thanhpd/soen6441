@@ -10,13 +10,11 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public abstract class PlayerStrategy {
 
 	protected static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
-	protected Player d_Player;
+	protected Player d_player;
 
 	public PlayerStrategy(Player p_player) {
-		this.d_Player = p_player;
+		this.d_player = p_player;
 	}
 
-	public abstract boolean issueDeployOrder(String[] p_inputArray);
-	public abstract boolean issueAdvanceOrder(String[] p_inputArray);
 	public abstract void issueOrder();
 }

@@ -17,42 +17,9 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean issueDeployOrder(String[] p_inputArray) {
-		// String l_countryId = getStrongestCountryId() + "";
-		// String l_num = p_inputArray[2];
-
-		// // Validate the order
-		// if (Deploy.ValidateOrder(d_Player, l_countryId, l_num)) {
-		// // If the order is valid, create a Deploy order and add it to the list of
-		// orders
-		// Order order = new Deploy(d_Player, Integer.parseInt(p_inputArray[1]),
-		// Integer.parseInt(p_inputArray[2]));
-		// d_Player.getOrders().add(order);
-
-		// // Deploy the specified number of armies to the country
-		// d_Player.deployArmies(Integer.parseInt(p_inputArray[2]));
-
-		// // Log that the deploy order was successful
-		// Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-		// return true; // Return true indicating the successful execution of the order
-		// } else {
-		// // Log if the deploy order was incorrect or invalid
-		// Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
-		// Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
-		return false; // Return false for an unsuccessful order execution
-		// }
-	}
-
 	protected int getStrongestCountryId() {
-		return d_Player.getCountriesOwned().stream().max(Comparator.comparing(Country::getArmyCount)).get()
+		return d_player.getCountriesOwned().stream().max(Comparator.comparing(Country::getArmyCount)).get()
 				.getCountryId();
-	}
-
-	@Override
-	public boolean issueAdvanceOrder(String[] p_inputArray) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'issueAdvanceOrder'");
 	}
 
 	@Override

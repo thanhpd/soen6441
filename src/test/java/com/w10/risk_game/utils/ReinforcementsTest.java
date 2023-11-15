@@ -4,7 +4,7 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.utils.maps.DominationMap;
+import com.w10.risk_game.utils.maps.DominationMapDriver;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class ReinforcementsTest {
 	List<Country> d_countries;
 	List<Country> d_countries2;
 	List<Country> d_countries3;
-	DominationMap d_mapReader = new DominationMap();
+	DominationMapDriver d_mapReader = new DominationMapDriver();
 
 	/**
 	 * This method is to set up the test environment

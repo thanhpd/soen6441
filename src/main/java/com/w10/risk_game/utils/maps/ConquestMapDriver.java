@@ -15,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ConquestMap {
+public class ConquestMapDriver {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	public ConquestGameMap loadMapFile(String p_mapFilePath) {

@@ -22,7 +22,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  *
  * @author Omnia Alam
  */
-public class DominationMap {
+public class DominationMapDriver {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
@@ -30,11 +30,14 @@ public class DominationMap {
 	 * countries, associating each country with its corresponding continent.
 	 *
 	 * @param p_scanner
-	 *            The scanner object used to read the input file line by line.
+	 *                     The scanner object used to read the input file line by
+	 *                     line.
 	 * @param p_continents
-	 *            p_continents is a map that contains the continents of the world.
-	 *            The key is an Integer representing the continent ID, and the value
-	 *            is a Continent object representing the continent.
+	 *                     p_continents is a map that contains the continents of the
+	 *                     world.
+	 *                     The key is an Integer representing the continent ID, and
+	 *                     the value
+	 *                     is a Continent object representing the continent.
 	 * @return The method is returning a object containing continentID as key and
 	 *         Continent object as value.
 	 */
@@ -68,11 +71,15 @@ public class DominationMap {
 	 * neighboring countries to each country object in a map.
 	 *
 	 * @param p_countries
-	 *            p_countries is a map object which stores the countries in the
-	 *            game. The keys are integers representing the country IDs, and the
-	 *            values are Country objects representing the countries themselves.
+	 *                    p_countries is a map object which stores the countries in
+	 *                    the
+	 *                    game. The keys are integers representing the country IDs,
+	 *                    and the
+	 *                    values are Country objects representing the countries
+	 *                    themselves.
 	 * @param p_scanner
-	 *            A Scanner object used to read input from a file or other source.
+	 *                    A Scanner object used to read input from a file or other
+	 *                    source.
 	 */
 	public void parseBorders(Map<Integer, Country> p_countries, Scanner p_scanner) {
 		String l_line;
@@ -104,9 +111,11 @@ public class DominationMap {
 	 * continent objects.
 	 *
 	 * @param p_scanner
-	 *            The parameter `p_scanner` is of type `Scanner`. It is used to read
-	 *            input from a source, such as a file or user input. In this method,
-	 *            it is used to read lines of text from the input source.
+	 *                  The parameter `p_scanner` is of type `Scanner`. It is used
+	 *                  to read
+	 *                  input from a source, such as a file or user input. In this
+	 *                  method,
+	 *                  it is used to read lines of text from the input source.
 	 * @return The method is returning a object containing continentID as key and
 	 *         Continent object as value.
 	 */
@@ -135,8 +144,9 @@ public class DominationMap {
 	 * and uses the substrings to create and return a new Country object.
 	 *
 	 * @param p_line
-	 *            The parameter `p_line` is a string that represents a line of data
-	 *            containing information about a country.
+	 *               The parameter `p_line` is a string that represents a line of
+	 *               data
+	 *               containing information about a country.
 	 * @return The method is returning a Country object.
 	 */
 	public Country mapCountry(String p_line) {
@@ -150,11 +160,13 @@ public class DominationMap {
 	 * population extracted from the string.
 	 *
 	 * @param p_line
-	 *            The p_line parameter is a string that represents a line of data
-	 *            containing information about a continent.
+	 *                      The p_line parameter is a string that represents a line
+	 *                      of data
+	 *                      containing information about a continent.
 	 * @param p_continentId
-	 *            The p_continentId parameter is an integer that represents the
-	 *            unique identifier for the continent.
+	 *                      The p_continentId parameter is an integer that
+	 *                      represents the
+	 *                      unique identifier for the continent.
 	 * @return The method is returning a Continent object.
 	 */
 	public Continent mapContinent(String p_line, int p_continentId) {
@@ -168,8 +180,9 @@ public class DominationMap {
 	 * this information.
 	 *
 	 * @param p_mapFilePath
-	 *            A String that represents the path of the map file that needs to be
-	 *            loaded.
+	 *                      A String that represents the path of the map file that
+	 *                      needs to be
+	 *                      loaded.
 	 * @return The method is returning a GameMap object.
 	 */
 	public GameMap loadMapFile(String p_mapFilePath) {
@@ -224,9 +237,9 @@ public class DominationMap {
 	 * The saveMap function saves the game map to a file in a specific format.
 	 *
 	 * @param p_filePath
-	 *            The file path where the map will be saved.
+	 *                   The file path where the map will be saved.
 	 * @param p_gameMap
-	 *            The game map that will be saved.
+	 *                   The game map that will be saved.
 	 */
 	public void saveMap(String p_filePath, GameMap p_gameMap) {
 		if (MapValidator.IsMapCorrect(p_gameMap))

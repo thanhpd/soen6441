@@ -13,14 +13,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * The DominationMapTest class is a JUnit test class that tests the
- * functionality of the DominationMap class, which is responsible for reading
+ * The DominationMapDriverTest class is a JUnit test class that tests the
+ * functionality of the DominationMapDriver class, which is responsible for
+ * reading
  * and parsing map files for a risk game.
  */
 
-public class DominationMapTest {
+public class DominationMapDriverTest {
 
-	DominationMap d_mapReader = new DominationMap();
+	DominationMapDriver d_mapReader = new DominationMapDriver();
 
 	/**
 	 * The testLoadMapFile function tests if a map file can be successfully loaded

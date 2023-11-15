@@ -15,8 +15,7 @@ import java.util.Scanner;
 /**
  * The DominationMapDriverTest class is a JUnit test class that tests the
  * functionality of the DominationMapDriver class, which is responsible for
- * reading
- * and parsing map files for a risk game.
+ * reading and parsing map files for a risk game.
  */
 
 public class DominationMapDriverTest {

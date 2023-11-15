@@ -1,6 +1,6 @@
 package com.w10.risk_game.models.phases;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engine.GameEngine;
 import com.w10.risk_game.models.Phase;
 
 /**

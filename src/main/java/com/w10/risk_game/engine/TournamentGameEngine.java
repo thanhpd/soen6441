@@ -1,4 +1,4 @@
-package com.w10.risk_game;
+package com.w10.risk_game.engine;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * The GameEngine class is responsible for managing the game flow, handling user
  * input, and executing commands in the Risk game.
  *
- * @author Sherwyn Dsouza
+ * @author Omnia Alam
  */
-public class GameEngine {
+public class TournamentGameEngine {
 
 	private final GamePlayController d_gamePlayController;
 	private final MapEditorController d_mapEditorController;
@@ -46,7 +46,9 @@ public class GameEngine {
 	 * The `GameEngine` constructor initializes a new instance of the
 	 * `MapEditorController` class and `GamePlayController` class.
 	 */
-	public GameEngine() {
+	public TournamentGameEngine() {
+		//Arraylist of gamemaps
+		//Arraylist of players
 		this.d_mapEditorController = new MapEditorController();
 		this.d_gamePlayController = new GamePlayController(d_mapEditorController);
 	}
@@ -57,7 +59,7 @@ public class GameEngine {
 	 * phase.
 	 */
 	public void start() {
-		SetPhase(new PreLoadPhase(this));
+		//SetPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
 		Player l_player;
 

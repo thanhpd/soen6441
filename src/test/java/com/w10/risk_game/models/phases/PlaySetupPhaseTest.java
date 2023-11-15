@@ -7,7 +7,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engine.GameEngine;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.utils.Constants;
 

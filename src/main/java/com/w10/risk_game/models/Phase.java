@@ -2,11 +2,11 @@ package com.w10.risk_game.models;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.engine.GameEngine;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game

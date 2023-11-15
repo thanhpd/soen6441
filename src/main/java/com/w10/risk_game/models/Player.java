@@ -4,11 +4,11 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import com.w10.risk_game.commands.*;
+import com.w10.risk_game.engine.GameEngine;
 
 import java.util.List;
 import java.util.Scanner;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 

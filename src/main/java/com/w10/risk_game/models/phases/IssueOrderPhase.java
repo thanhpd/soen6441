@@ -2,8 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.engine.GameEngine;
 
 /**
  * The `IssueOrderPhase` class is a subclass of `GamePlayPhase` that represents

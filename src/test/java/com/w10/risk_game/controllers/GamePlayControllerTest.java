@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engine.GameEngine;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;

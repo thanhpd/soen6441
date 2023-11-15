@@ -1,5 +1,6 @@
 package com.w10.risk_game;
 
+import com.w10.risk_game.engine.GameEngine;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.ConsoleLogger;
 import com.w10.risk_game.utils.loggers.FileLogger;

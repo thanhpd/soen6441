@@ -67,7 +67,6 @@ public class GameEngine {
 			// Check if in issue order phase
 			if (Phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
 				if (!d_gamePlayController.checkIfOrdersCanBeIssued()) {
-					;
 					if (d_gamePlayController.checkIfOrdersCanBeExecuted()) {
 						Phase.next();
 						Logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
@@ -78,10 +77,8 @@ public class GameEngine {
 							Logger.log(Constants.GAME_ENGINE_GAME_OVER + this.d_gamePlayController.getWinner()
 									+ Constants.GAME_ENGINE_END_GAME);
 							break;
-						} else
-							Phase.next();
-
-						// Reassign reinforcements to players
+						}
+						Phase.next();
 						Phase.assignPlayerReinforcements();
 					} else
 						continue;
@@ -89,8 +86,9 @@ public class GameEngine {
 				l_player = this.d_gamePlayController.getCurrentPlayer();
 				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
 
-				if (l_player.getStrategy().getStrategyName()
-						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT)) {
+				// If non-human strategy then issue order
+				if (!l_player.getStrategy().getStrategyName()
+						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
 					l_player.issueOrder();
 					continue;
 				}

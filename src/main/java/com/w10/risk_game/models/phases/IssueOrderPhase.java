@@ -17,7 +17,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The constructor for the IssueOrderPhase class.
 	 *
 	 * @param p_gameEngine
-	 *                     The parameter p_gameEngine is a GameEngine object.
+	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
 	protected IssueOrderPhase(GameEngine p_gameEngine) {
 		super(p_gameEngine);
@@ -27,9 +27,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The loadMap function prints an invalid command message.
 	 *
 	 * @param p_filePath
-	 *                   The parameter "p_filePath" is a String that represents the
-	 *                   file
-	 *                   path of the map that needs to be loaded.
+	 *            The parameter "p_filePath" is a String that represents the file
+	 *            path of the map that needs to be loaded.
 	 */
 	@Override
 	public void loadMap(String p_filePath) {
@@ -49,7 +48,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The function editMap prints an invalid command message and returns false.
 	 *
 	 * @param p_mapFilePath
-	 *                      The file path of the map that needs to be edited.
+	 *            The file path of the map that needs to be edited.
 	 * @return The method is returning a boolean value of false.
 	 */
 	@Override
@@ -62,15 +61,13 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The addCountry function prints an invalid command message.
 	 *
 	 * @param p_countryId
-	 *                        The unique identifier for the country. It could be an
-	 *                        integer or
-	 *                        any other suitable data type.
+	 *            The unique identifier for the country. It could be an integer or
+	 *            any other suitable data type.
 	 * @param p_countryName
-	 *                        The name of the country that you want to add.
+	 *            The name of the country that you want to add.
 	 * @param p_continentName
-	 *                        The parameter "p_continentName" is a String that
-	 *                        represents the
-	 *                        name of the continent to which the country belongs.
+	 *            The parameter "p_continentName" is a String that represents the
+	 *            name of the continent to which the country belongs.
 	 */
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
@@ -81,11 +78,10 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The addContinent function prints an invalid command message.
 	 *
 	 * @param p_continentName
-	 *                        The name of the continent that you want to add.
+	 *            The name of the continent that you want to add.
 	 * @param p_bonus
-	 *                        The p_bonus parameter is an integer that represents
-	 *                        the bonus
-	 *                        value associated with the continent.
+	 *            The p_bonus parameter is an integer that represents the bonus
+	 *            value associated with the continent.
 	 */
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
@@ -96,12 +92,10 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The addNeighbor function prints an invalid command message.
 	 *
 	 * @param p_countryId
-	 *                            The ID of the country to which you want to add a
-	 *                            neighbor.
+	 *            The ID of the country to which you want to add a neighbor.
 	 * @param p_neighborCountryId
-	 *                            The parameter "p_neighborCountryId" is an integer
-	 *                            that represents
-	 *                            the ID of a neighboring country.
+	 *            The parameter "p_neighborCountryId" is an integer that represents
+	 *            the ID of a neighboring country.
 	 */
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -112,9 +106,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The removeCountry function prints an invalid command message.
 	 *
 	 * @param p_countryId
-	 *                    The parameter p_countryId is an integer that represents
-	 *                    the ID of
-	 *                    the country that needs to be removed.
+	 *            The parameter p_countryId is an integer that represents the ID of
+	 *            the country that needs to be removed.
 	 */
 	@Override
 	public void removeCountry(int p_countryId) {
@@ -126,9 +119,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * command message.
 	 *
 	 * @param p_continentName
-	 *                        The parameter "p_continentName" is a String that
-	 *                        represents the
-	 *                        name of the continent that needs to be removed.
+	 *            The parameter "p_continentName" is a String that represents the
+	 *            name of the continent that needs to be removed.
 	 */
 	@Override
 	public void removeContinent(String p_continentName) {
@@ -139,14 +131,11 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The function "removeNeighbor" prints an invalid command message.
 	 *
 	 * @param p_countryId
-	 *                            The ID of the country from which you want to
-	 *                            remove a neighbor.
+	 *            The ID of the country from which you want to remove a neighbor.
 	 * @param p_neighborCountryId
-	 *                            The parameter "p_neighborCountryId" represents the
-	 *                            ID of the
-	 *                            neighbor country that needs to be removed from the
-	 *                            list of
-	 *                            neighbors of a particular country.
+	 *            The parameter "p_neighborCountryId" represents the ID of the
+	 *            neighbor country that needs to be removed from the list of
+	 *            neighbors of a particular country.
 	 */
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -157,9 +146,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The function "saveMap" prints an invalid command message.
 	 *
 	 * @param p_mapFilePath
-	 *                      The parameter "p_mapFilePath" is a String that
-	 *                      represents the file
-	 *                      path where the map will be saved.
+	 *            The parameter "p_mapFilePath" is a String that represents the file
+	 *            path where the map will be saved.
 	 */
 	@Override
 	public void saveMap(String p_mapFilePath, String p_mapType) {
@@ -170,9 +158,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The function "createPlayer" prints an invalid command message.
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player that needs to be created.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player that needs to be created.
 	 */
 	@Override
 	public void createPlayer(String p_playerName) {
@@ -183,9 +170,8 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * The function "removePlayer" prints an invalid command message.
 	 *
 	 * @param p_playerName
-	 *                     The parameter "p_playerName" is a String that represents
-	 *                     the name
-	 *                     of the player that needs to be removed.
+	 *            The parameter "p_playerName" is a String that represents the name
+	 *            of the player that needs to be removed.
 	 */
 	@Override
 	public void removePlayer(String p_playerName) {

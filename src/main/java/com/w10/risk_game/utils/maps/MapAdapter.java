@@ -1,4 +1,4 @@
-package com.w10.risk_game.utils;
+package com.w10.risk_game.utils.maps;
 
 import com.w10.risk_game.models.ConquestGameMap;
 
@@ -9,11 +9,11 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapReaderAdapter extends DominationMapReader {
+public class MapAdapter extends DominationMap {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
-	private final ConquestMapReader d_conquestMapReader;
+	private final ConquestMap d_conquestMapReader;
 
-	public MapReaderAdapter(ConquestMapReader p_conquestMapReader) {
+	public MapAdapter(ConquestMap p_conquestMapReader) {
 		d_conquestMapReader = p_conquestMapReader;
 	}
 
@@ -21,7 +21,8 @@ public class MapReaderAdapter extends DominationMapReader {
 		return translateToDominationGameMap(d_conquestMapReader.loadMapFile(p_mapFilePath));
 	}
 
-	public void saveMapFile(String p_mapFilePath, GameMap p_gameMap) {
+	@Override
+	public void saveMap(String p_mapFilePath, GameMap p_gameMap) {
 		d_conquestMapReader.saveMap(p_mapFilePath, translateToConquestGameMap(p_gameMap));
 	}
 

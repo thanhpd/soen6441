@@ -1,8 +1,9 @@
-package com.w10.risk_game.utils;
+package com.w10.risk_game.utils.maps;
 
 import com.w10.risk_game.models.ConquestGameMap;
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
+import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,7 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class ConquestMapReader {
+public class ConquestMap {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	public ConquestGameMap loadMapFile(String p_mapFilePath) {
@@ -58,10 +59,11 @@ public class ConquestMapReader {
 
 	public void saveMap(String p_filePath, ConquestGameMap p_gameMap) {
 		try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
+			Logger.log(Constants.MAP_START_SAVE_CONQUEST);
 			// Initialize PrintWriter object
 			PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
-			l_printWriter.println(Constants.CONQUEST_MAP_READER_MAP + Constants.NEW_LINE
-					+ Constants.CONQUEST_MAP_READER_CONTINENTS);
+			l_printWriter.println(
+					Constants.CONQUEST_MAP_READER_MAP + Constants.NEW_LINE + Constants.CONQUEST_MAP_READER_CONTINENTS);
 			// Writes continents details to new map file
 			for (Continent continent : p_gameMap.getContinents().values()) {
 				l_printWriter.format("%s=%d%n", continent.getContinentName(), continent.getBonus());
@@ -72,12 +74,10 @@ public class ConquestMapReader {
 				// Writes country details to new map file
 				for (Country country : l_continent.getCountries()) {
 					/**
-					 * For each country of a continent, do the following:
-					 * - Get the country name
-					 * - Get 0 and 0 as the coordinates
-					 * - Get the continent name
-					 * - Get the names of the neighbors of the country
-					 * - Merge all the above details into a single string, separated by comma
+					 * For each country of a continent, do the following: - Get the country name -
+					 * Get 0 and 0 as the coordinates - Get the continent name - Get the names of
+					 * the neighbors of the country - Merge all the above details into a single
+					 * string, separated by comma
 					 */
 					l_printWriter.format("%s,0,0,%s,%s%n", country.getCountryName(), l_continent.getContinentName(),
 							country.getNeighbors().values().stream().map(item -> item.getCountryName())

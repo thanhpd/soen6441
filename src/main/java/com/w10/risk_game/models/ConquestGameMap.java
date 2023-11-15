@@ -39,9 +39,8 @@ public class ConquestGameMap {
 	 * The function adds a collection of countries to an existing map of countries.
 	 *
 	 * @param p_countries
-	 *                    The parameter "p_countries" is a Map object that maps
-	 *                    Integer keys
-	 *                    to Country values.
+	 *            The parameter "p_countries" is a Map object that maps Integer keys
+	 *            to Country values.
 	 */
 	public void addCountries(Map<String, Country> p_countries) {
 		this.d_countriesByCountryId.putAll(p_countries);
@@ -51,9 +50,8 @@ public class ConquestGameMap {
 	 * The function adds a collection of continents to a map of continents.
 	 *
 	 * @param p_continents
-	 *                     A map where the keys are integers and the values are
-	 *                     objects of
-	 *                     type Continent.
+	 *            A map where the keys are integers and the values are objects of
+	 *            type Continent.
 	 */
 	public void addContinents(Map<String, Continent> p_continents) {
 		this.d_continentsByContinentId.putAll(p_continents);

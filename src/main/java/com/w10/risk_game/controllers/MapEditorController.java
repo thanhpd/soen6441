@@ -8,15 +8,14 @@ import java.text.MessageFormat;
 import java.util.Scanner;
 
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.utils.ConquestMapReader;
 import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.DominationMapReader;
-import com.w10.risk_game.utils.MapDisplay;
-import com.w10.risk_game.utils.MapEditor;
-import com.w10.risk_game.utils.DominationMapReader;
-import com.w10.risk_game.utils.MapReaderAdapter;
-import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
+import com.w10.risk_game.utils.maps.ConquestMap;
+import com.w10.risk_game.utils.maps.DominationMap;
+import com.w10.risk_game.utils.maps.MapAdapter;
+import com.w10.risk_game.utils.maps.MapDisplay;
+import com.w10.risk_game.utils.maps.MapEditor;
+import com.w10.risk_game.utils.maps.MapValidator;
 
 /**
  * The MapEditorController class is responsible for managing the game map,
@@ -27,11 +26,6 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public class MapEditorController {
 	private GameMap d_gameMap;
 	private MapEditor d_mapEditor;
-	// The above code is declaring a variable named "d_mapEditor" of an unknown data
-	// type. The code is also using the pound sign (#) to create a comment, which
-	// means that the line "
-
-	private DominationMapReader d_mapReader;
 	private MapDisplay d_displayMap;
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
@@ -41,7 +35,6 @@ public class MapEditorController {
 	 */
 	public MapEditorController() {
 		this.d_gameMap = new GameMap();
-		this.d_mapReader = new DominationMapReader();
 		this.d_displayMap = new MapDisplay();
 	}
 
@@ -50,9 +43,8 @@ public class MapEditorController {
 	 * checks if the map is valid.
 	 *
 	 * @param p_filePath
-	 *                   The parameter `p_filePath` is a String that represents the
-	 *                   full
-	 *                   path of the file from which the map will be loaded.
+	 *            The parameter `p_filePath` is a String that represents the full
+	 *            path of the file from which the map will be loaded.
 	 */
 	public void loadMap(String p_filePath) {
 		try {
@@ -68,12 +60,10 @@ public class MapEditorController {
 	 * The function displays the game map, showing armies if specified.
 	 *
 	 * @param p_showArmies
-	 *                     A boolean value indicating whether or not to display the
-	 *                     armies on
-	 *                     the map. If p_showArmies is true, the armies will be
-	 *                     displayed on
-	 *                     the map. If p_showArmies is false, the armies will not be
-	 *                     displayed on the map.
+	 *            A boolean value indicating whether or not to display the armies on
+	 *            the map. If p_showArmies is true, the armies will be displayed on
+	 *            the map. If p_showArmies is false, the armies will not be
+	 *            displayed on the map.
 	 */
 	public void showMap(boolean p_showArmies) {
 		if (checkIfMapIsValid()) {
@@ -97,9 +87,8 @@ public class MapEditorController {
 	 * failure.
 	 *
 	 * @param p_mapFilePath
-	 *                      The parameter `p_mapFileName` is a String that
-	 *                      represents the file
-	 *                      name or path of the map file that needs to be edited.
+	 *            The parameter `p_mapFileName` is a String that represents the file
+	 *            name or path of the map file that needs to be edited.
 	 * @return The method is returning a boolean value.
 	 *
 	 */
@@ -138,14 +127,12 @@ public class MapEditorController {
 	 * The function adds a continent to a map editor and prints the output.
 	 *
 	 * @param p_continentName
-	 *                        The parameter "p_continentName" is a String that
-	 *                        represents the
-	 *                        name of the continent that you want to add.
+	 *            The parameter "p_continentName" is a String that represents the
+	 *            name of the continent that you want to add.
 	 *
 	 * @param p_bonus
-	 *                        The p_bonus parameter is an integer that represents
-	 *                        the bonus for
-	 *                        each continent.
+	 *            The p_bonus parameter is an integer that represents the bonus for
+	 *            each continent.
 	 */
 	public void addContinent(String p_continentName, int p_bonus) {
 		try {
@@ -160,17 +147,14 @@ public class MapEditorController {
 	 * The function adds a country to a map editor and prints the output.
 	 *
 	 * @param p_countryId
-	 *                        The p_countryId parameter is an integer that
-	 *                        represents the unique
-	 *                        identifier for the country being added.
+	 *            The p_countryId parameter is an integer that represents the unique
+	 *            identifier for the country being added.
 	 * @param p_countryName
-	 *                        The parameter "p_countryName" is a String that
-	 *                        represents the name
-	 *                        of the country that you want to add.
+	 *            The parameter "p_countryName" is a String that represents the name
+	 *            of the country that you want to add.
 	 * @param p_continentName
-	 *                        The p_continentName parameter is an integer that
-	 *                        represents the ID
-	 *                        of the continent to which the country belongs.
+	 *            The p_continentName parameter is an integer that represents the ID
+	 *            of the continent to which the country belongs.
 	 *
 	 */
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
@@ -186,9 +170,8 @@ public class MapEditorController {
 	 * The function removes a continent from a map in a game editor.
 	 *
 	 * @param p_continentName
-	 *                        The parameter "p_continentId" is an integer that
-	 *                        represents the ID
-	 *                        of the continent that needs to be removed.
+	 *            The parameter "p_continentId" is an integer that represents the ID
+	 *            of the continent that needs to be removed.
 	 *
 	 */
 	public void removeContinent(String p_continentName) {
@@ -205,9 +188,8 @@ public class MapEditorController {
 	 * error message if an exception occurs.
 	 *
 	 * @param p_countryId
-	 *                    The parameter "p_countryId" is an integer that represents
-	 *                    the ID
-	 *                    of the country that needs to be removed.
+	 *            The parameter "p_countryId" is an integer that represents the ID
+	 *            of the country that needs to be removed.
 	 */
 	public void removeCountry(int p_countryId) {
 		try {
@@ -222,15 +204,12 @@ public class MapEditorController {
 	 * The function adds a neighbor country to a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *                             The p_countryId parameter represents the ID of
-	 *                             the country to
-	 *                             which you want to add a neighbor.
+	 *            The p_countryId parameter represents the ID of the country to
+	 *            which you want to add a neighbor.
 	 * @param p_neighbourCountryId
-	 *                             The parameter "p_neighbourCountryId" represents
-	 *                             the ID of the
-	 *                             neighboring country that you want to add to the
-	 *                             country with the
-	 *                             ID "p_countryId".
+	 *            The parameter "p_neighbourCountryId" represents the ID of the
+	 *            neighboring country that you want to add to the country with the
+	 *            ID "p_countryId".
 	 *
 	 */
 	public void addNeighbor(int p_countryId, int p_neighbourCountryId) {
@@ -246,15 +225,12 @@ public class MapEditorController {
 	 * The function removes a neighbor country from a given country in a map editor.
 	 *
 	 * @param p_countryId
-	 *                            The p_countryId parameter represents the ID of the
-	 *                            country from
-	 *                            which you want to remove a neighbor.
+	 *            The p_countryId parameter represents the ID of the country from
+	 *            which you want to remove a neighbor.
 	 * @param p_neighborCountryId
-	 *                            The parameter "p_neighborCountryId" represents the
-	 *                            ID of the
-	 *                            neighbor country that you want to remove from the
-	 *                            country with ID
-	 *                            "p_countryId".
+	 *            The parameter "p_neighborCountryId" represents the ID of the
+	 *            neighbor country that you want to remove from the country with ID
+	 *            "p_countryId".
 	 *
 	 */
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -300,13 +276,20 @@ public class MapEditorController {
 	 * an error message.
 	 *
 	 * @param p_mapFilePath
-	 *                      The full path of the file where the map will be saved.
+	 *            The full path of the file where the map will be saved.
+	 * @param p_mapType
+	 *            The type of the map to save. 1 for Domination, 2 for Conquest.
 	 *
 	 */
-	public void saveMap(String p_mapFilePath) {
+	public void saveMap(String p_mapFilePath, String p_mapType) {
 		if (checkIfMapIsValid()) {
-			// TODO: use Dominator/Conquest format
-			this.d_gameMap.saveMapConquest(p_mapFilePath);
+			if (p_mapType == null || p_mapType.equals(Constants.MAP_FORMAT_DOMINATION)) {
+				DominationMap l_dominationMapReader = new DominationMap();
+				l_dominationMapReader.saveMap(p_mapFilePath, d_gameMap);
+			} else if (p_mapType.equals(Constants.MAP_FORMAT_CONQUEST)) {
+				MapAdapter l_mapReaderAdapter = new MapAdapter(new ConquestMap());
+				l_mapReaderAdapter.saveMap(p_mapFilePath, d_gameMap);
+			}
 		} else {
 			Logger.log(Constants.GAME_ENGINE_CANNOT_SAVE_MAP);
 		}
@@ -342,25 +325,15 @@ public class MapEditorController {
 		}
 
 		if (l_useDominationMapReader) {
-			DominationMapReader l_dominationMapReader = new DominationMapReader();
+			DominationMap l_dominationMapReader = new DominationMap();
 			return l_dominationMapReader.loadMapFile(p_mapFilePath);
 		}
 
 		if (l_useConquestMapReader) {
-			MapReaderAdapter l_mapReaderAdapter = new MapReaderAdapter(new ConquestMapReader());
+			MapAdapter l_mapReaderAdapter = new MapAdapter(new ConquestMap());
 			return l_mapReaderAdapter.loadMapFile(p_mapFilePath);
 		}
 
 		return null;
-	}
-
-	private void saveMapFile(String p_mapFilePath, GameMap p_gameMap, String p_mapType) {
-		if (p_mapType.equals("1")) {
-			DominationMapReader l_dominationMapReader = new DominationMapReader();
-			l_dominationMapReader.saveMap(p_mapFilePath, p_gameMap);
-		} else if (p_mapType.equals("2")) {
-			MapReaderAdapter l_mapReaderAdapter = new MapReaderAdapter(new ConquestMapReader());
-			l_mapReaderAdapter.saveMap(p_mapFilePath, p_gameMap);
-		}
 	}
 }

@@ -1,7 +1,8 @@
-package com.w10.risk_game.utils;
+package com.w10.risk_game.utils.maps;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.util.*;

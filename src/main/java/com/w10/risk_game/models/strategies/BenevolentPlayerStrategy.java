@@ -35,7 +35,7 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 
 	/**
 	 * The function issues deploy, advance and commit orders to the weakest country
-	 * owned by the player.
+	 * and play cards owned by the player.
 	 */
 	@Override
 	public void issueOrder() {

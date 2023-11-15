@@ -10,6 +10,7 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
+import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -66,6 +67,7 @@ public class GameEngine {
 			// Check if in issue order phase
 			if (Phase.getPhaseName().equalsIgnoreCase(Constants.GAME_ENGINE_ISSUE_ORDER_PHASE_STRING)) {
 				if (!d_gamePlayController.checkIfOrdersCanBeIssued()) {
+					;
 					if (d_gamePlayController.checkIfOrdersCanBeExecuted()) {
 						Phase.next();
 						Logger.log(Constants.GAME_ENGINE_EXECUTING_ORDERS);
@@ -86,6 +88,12 @@ public class GameEngine {
 				}
 				l_player = this.d_gamePlayController.getCurrentPlayer();
 				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
+
+				if (l_player.getStrategy().getStrategyName()
+						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT)) {
+					l_player.issueOrder();
+					continue;
+				}
 
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
 						l_player.getLeftoverArmies()));
@@ -210,7 +218,7 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									Phase.createPlayer(l_options.get(1));
+									Phase.createPlayer(l_options.get(1), l_options.get(2));
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removePlayer(l_options.get(1));

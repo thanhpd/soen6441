@@ -98,10 +98,12 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 	private void issueAdvanceOrdersToWeakestCountry(Country l_weakestCountry) {
 		Collection<Country> l_weakCountryNeighbors = l_weakestCountry.getNeighbors().values();
 		for (Country l_country : l_weakCountryNeighbors) {
-			String[] l_advanceOrder = new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
-					l_country.getCountryName(), l_weakestCountry.getCountryName(),
-					Integer.toString(l_country.getArmyCount())};
-			Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
+			if (l_country.getArmyCount() > 0) {
+				String[] l_advanceOrder = new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
+						l_country.getCountryName(), l_weakestCountry.getCountryName(),
+						Integer.toString(l_country.getArmyCount())};
+				Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
+			}
 		}
 	}
 
@@ -133,5 +135,10 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 					Integer.toString(l_strongestEnemyCountry.getCountryId())};
 			Negotiate.ValidateIssueDiplomacyOrder(d_player, l_order);
 		}
+	}
+
+	@Override
+	public String getStrategyName() {
+		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT;
 	}
 }

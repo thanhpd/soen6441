@@ -238,19 +238,16 @@ public class DominationMapDriver {
 						+ Constants.DOMINATION_MAP_READER_CONTINENTS);
 				// Writes continents details to new map file
 				for (Continent continent : p_gameMap.getContinents().values()) {
-					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
+					l_printWriter.format("%s %d%n", replaceSpaces(continent.getContinentName()), continent.getBonus());
 				}
 				l_printWriter.println(Constants.NEW_LINE + Constants.DOMINATION_MAP_READER_COUNTRIES);
+
 				// Assigns new continent id
-				int l_continentNumber = 1;
-				for (Continent l_continent : p_gameMap.getContinents().values()) {
-					// Writes country details to new map file
-					for (Country country : l_continent.getCountries()) {
-						l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
-								l_continentNumber);
-					}
-					l_continentNumber++;
+				for (Country country : p_gameMap.getCountries().values()) {
+					l_printWriter.format("%d %s %d%n", country.getCountryId(), replaceSpaces(country.getCountryName()),
+							country.getContinentId());
 				}
+
 				// Writes border details to new map file
 				l_printWriter.println(Constants.NEW_LINE + Constants.DOMINATION_MAP_READER_BORDERS);
 				for (Country country : p_gameMap.getCountries().values()) {
@@ -262,5 +259,16 @@ public class DominationMapDriver {
 			} catch (IOException e) {
 				Logger.log(Constants.MAP_SAVE_ERROR);
 			}
+	}
+
+	/**
+	 * Replace spaces in the string by underscores.
+	 *
+	 * @param p_string
+	 *            The string in which spaces need to be replaced.
+	 * @return The string with spaces replaced by underscores.
+	 */
+	private String replaceSpaces(String p_string) {
+		return p_string.replaceAll(Constants.SPACE, Constants.UNDERSCORE);
 	}
 }

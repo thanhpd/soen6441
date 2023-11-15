@@ -50,7 +50,6 @@ public class MapEditorController {
 		try {
 			this.d_gameMap = readMapFile(p_filePath);
 			this.d_mapEditor = new MapEditor(this.d_gameMap);
-
 		} catch (Exception e) {
 			Logger.log(Constants.GAME_ENGINE_CANNOT_LOAD_MAP);
 		}
@@ -283,7 +282,7 @@ public class MapEditorController {
 	 */
 	public void saveMap(String p_mapFilePath, String p_mapType) {
 		if (checkIfMapIsValid()) {
-			if (p_mapType == null || p_mapType.equals(Constants.MAP_FORMAT_DOMINATION)) {
+			if (p_mapType.equals(Constants.MAP_FORMAT_DOMINATION)) {
 				DominationMapDriver l_dominationMapReader = new DominationMapDriver();
 				l_dominationMapReader.saveMap(p_mapFilePath, d_gameMap);
 			} else if (p_mapType.equals(Constants.MAP_FORMAT_CONQUEST)) {

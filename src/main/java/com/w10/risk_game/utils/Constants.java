@@ -85,6 +85,7 @@ public final class Constants {
 	public static final String SPACE = " ";
 	public static final String EQUAL = "=";
 	public static final String COMMA = ",";
+	public static final String UNDERSCORE = "_";
 	public static final String NEW_LINE = "\n";
 
 	// Maps Folder Path

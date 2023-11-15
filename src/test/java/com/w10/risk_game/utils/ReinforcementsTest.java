@@ -1,11 +1,10 @@
-package com.w10.risk_game.utils.maps;
+package com.w10.risk_game.utils;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.Reinforcements;
+import com.w10.risk_game.utils.maps.DominationMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

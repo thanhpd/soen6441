@@ -13,12 +13,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * The MapReaderTest class is a JUnit test class that tests the functionality of
- * the MapReader class, which is responsible for reading and parsing map files
- * for a risk game.
+ * The DominationMapTest class is a JUnit test class that tests the
+ * functionality of the DominationMap class, which is responsible for reading
+ * and parsing map files for a risk game.
  */
 
-public class MapReaderTest {
+public class DominationMapTest {
 
 	DominationMap d_mapReader = new DominationMap();
 

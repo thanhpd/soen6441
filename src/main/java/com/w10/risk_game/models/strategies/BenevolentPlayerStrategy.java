@@ -1,5 +1,6 @@
 package com.w10.risk_game.models.strategies;
 
+import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -43,7 +44,8 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 		if (l_weakestCountry != null) {
 			Deploy.ValidateIssueDeployOrder(d_player, this.getDeployOrder(l_weakestCountry));
 			this.issueAdvanceOrdersToWeakestCountry(l_weakestCountry);
-			if (d_player.hasCard(CardType.AIRLIFT) || d_player.hasCard(CardType.DIPLOMACY))
+			if (d_player.getPlayerCards().contains(CardType.AIRLIFT)
+					|| d_player.getPlayerCards().contains(CardType.DIPLOMACY))
 				this.issuePlayerCardOrders(l_weakestCountry);
 			d_player.setHasCommitted(true);
 		}
@@ -70,6 +72,7 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 				}
 			}
 		}
+		System.out.println(l_weakestCountry.getCountryName());
 		return l_weakestCountry;
 	}
 
@@ -98,10 +101,13 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 	private void issueAdvanceOrdersToWeakestCountry(Country l_weakestCountry) {
 		Collection<Country> l_weakCountryNeighbors = l_weakestCountry.getNeighbors().values();
 		for (Country l_country : l_weakCountryNeighbors) {
-			if (l_country.getArmyCount() > 0) {
+			if (l_country.getArmyCount() > 0 && l_country.getOwner().getName().equals(d_player.getName())) {
 				String[] l_advanceOrder = new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
 						l_country.getCountryName(), l_weakestCountry.getCountryName(),
 						Integer.toString(l_country.getArmyCount())};
+				System.out.println(MessageFormat.format("{0} {1} {2} {3}",
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE, l_country.getCountryName(),
+						l_weakestCountry.getCountryName(), Integer.toString(l_country.getArmyCount())));
 				Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
 			}
 		}
@@ -117,7 +123,7 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 	private void issuePlayerCardOrders(Country l_weakestCountry) {
 		String[] l_order;
 
-		if (d_player.hasCard(CardType.AIRLIFT)) {
+		if (d_player.getPlayerCards().contains(CardType.AIRLIFT)) {
 			Country l_strongestCountry = d_player.getCountriesOwned().stream()
 					.max(Comparator.comparingInt(Country::getArmyCount)).orElse(null);
 			l_order = new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT,
@@ -127,7 +133,7 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 			Airlift.ValidateIssueAirliftOrder(d_player, l_order);
 		}
 
-		if (d_player.hasCard(CardType.DIPLOMACY)) {
+		if (d_player.getPlayerCards().contains(CardType.DIPLOMACY)) {
 			Country l_strongestEnemyCountry = l_weakestCountry.getNeighbors().values().stream()
 					.filter(l_country -> !l_country.getOwner().getName().equals(d_player.getName()))
 					.max(Comparator.comparingInt(Country::getArmyCount)).orElse(null);
@@ -137,6 +143,12 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 		}
 	}
 
+	/**
+	 * The function returns the name of a benevolent player strategy.
+	 *
+	 * @return The method is returning the constant value
+	 *         "USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT".
+	 */
 	@Override
 	public String getStrategyName() {
 		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT;

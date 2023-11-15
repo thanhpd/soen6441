@@ -28,8 +28,8 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 	}
 
 	/**
-	 * The function issues deploy and advance orders to the weakest country owned by
-	 * the player.
+	 * The function issues deploy, advance and commit orders to the weakest country
+	 * owned by the player.
 	 */
 	@Override
 	public void issueOrder() {
@@ -37,6 +37,7 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 		if (l_weakestCountry != null) {
 			Deploy.ValidateIssueDeployOrder(d_player, this.getDeployOrder(l_weakestCountry));
 			this.issueAdvanceOrdersToWeakestCountry(l_weakestCountry);
+			d_player.setHasCommitted(true);
 		}
 	}
 

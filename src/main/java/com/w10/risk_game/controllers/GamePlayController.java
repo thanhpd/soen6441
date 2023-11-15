@@ -382,6 +382,7 @@ public class GamePlayController {
 						OtherOrders.add(l_order);
 					}
 				}
+				l_player.setHasCommitted(false);
 			}
 
 			// Execute orders by their types

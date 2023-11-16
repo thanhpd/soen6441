@@ -86,13 +86,6 @@ public class GameEngine {
 				l_player = this.d_gamePlayController.getCurrentPlayer();
 				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
 
-				// If non-human strategy then issue order
-				if (!l_player.getStrategy().getStrategyName()
-						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
-					l_player.issueOrder();
-					continue;
-				}
-
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
 						l_player.getLeftoverArmies()));
 
@@ -104,6 +97,14 @@ public class GameEngine {
 					Logger.log(Constants.SHOW_PLAYER_CARDS_EMPTY);
 				}
 				Logger.log("");
+
+				// If non-human strategy then issue order
+				if (!l_player.getStrategy().getStrategyName()
+						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
+					l_player.issueOrder();
+					Logger.log("");
+					continue;
+				}
 			}
 
 			try {

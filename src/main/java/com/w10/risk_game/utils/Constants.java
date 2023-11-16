@@ -21,6 +21,11 @@ public final class Constants {
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
 	public static final String USER_INPUT_COMMAND_ENTERED = "Command entered is: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT_MODE= "tournament";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT_MAPS= "-M";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT_PLAYERS= "-P";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT_GAMES= "-G";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT_TURNS= "-D";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
 	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
 	public static final String USER_INPUT_COMMAND_EDITMAP = "editmap";
@@ -56,6 +61,7 @@ public final class Constants {
 	public static final String CLI_ASSIGN_REINFORCEMENTS = "Reinforcements have been assigned to the players.";
 	public static final String CLI_ISSUE_ORDER_PLAYER = "Issuing orders for player ";
 	public static final String CLI_ITERATION_OPTION = "\n===========\nRunning the {0} option with the parameters {1}.\n";
+	public static final String CLI_TOURNAMENT_RUN="Running Tournament.";
 
 	// Game Engine constants
 	public static final String GAME_ENGINE_ERROR_PRINTING_COUNTRY_DETAILS = "Error in printing country name!";

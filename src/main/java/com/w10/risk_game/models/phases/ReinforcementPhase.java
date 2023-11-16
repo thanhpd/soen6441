@@ -151,7 +151,7 @@ public class ReinforcementPhase extends GamePlayPhase {
 	 *            path where the map will be saved.
 	 */
 	@Override
-	public void saveMap(String p_mapFilePath) {
+	public void saveMap(String p_mapFilePath, String p_mapType) {
 		this.printInvalidCommandMessage();
 	}
 

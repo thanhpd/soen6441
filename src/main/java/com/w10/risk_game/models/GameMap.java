@@ -3,16 +3,14 @@ package com.w10.risk_game.models;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.MapValidator;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
+import com.w10.risk_game.utils.maps.MapValidator;
 
 /**
  * The GameMap class represents a game map that contains countries, continents,
@@ -220,45 +218,4 @@ public class GameMap {
 	public void addContinents(Map<Integer, Continent> p_continents) {
 		this.d_continents.putAll(p_continents);
 	}
-
-	/**
-	 * The saveMap function saves the game map to a file in a specific format.
-	 *
-	 * @param p_filePath
-	 *            The file path where the map will be saved.
-	 */
-	public void saveMap(String p_filePath) {
-		if (MapValidator.IsMapCorrect(this))
-			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
-				// Initialize PrintWriter object
-				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
-				l_printWriter.println(Constants.MAP_READER_MAP + Constants.NEW_LINE + Constants.MAP_READER_CONTINENTS);
-				// Writes continents details to new map file
-				for (Continent continent : this.d_continents.values()) {
-					l_printWriter.format("%s %d%n", continent.getContinentName(), continent.getBonus());
-				}
-				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_COUNTRIES);
-				// Assigns new continent id
-				int l_continentNumber = 1;
-				for (Continent l_continent : this.d_continents.values()) {
-					// Writes country details to new map file
-					for (Country country : l_continent.getCountries()) {
-						l_printWriter.format("%d %s %d%n", country.getCountryId(), country.getCountryName(),
-								l_continentNumber);
-					}
-					l_continentNumber++;
-				}
-				// Writes border details to new map file
-				l_printWriter.println(Constants.NEW_LINE + Constants.MAP_READER_BORDERS);
-				for (Country country : this.d_countries.values()) {
-					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
-							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
-				}
-				Logger.log(Constants.MAP_SAVE_SUCCESS);
-				l_printWriter.close();
-			} catch (IOException e) {
-				Logger.log(Constants.MAP_SAVE_ERROR);
-			}
-	}
-
 }

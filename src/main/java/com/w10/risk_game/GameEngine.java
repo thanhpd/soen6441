@@ -136,7 +136,8 @@ public class GameEngine {
 						Phase.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
-						Phase.saveMap(l_argList[1]);
+						Phase.saveMap(l_argList[1],
+								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						Logger.log(Constants.CLI_SHOW_MAP);

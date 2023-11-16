@@ -1,4 +1,4 @@
-package com.w10.risk_game.utils;
+package com.w10.risk_game.utils.maps;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.TestInstance;
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.utils.Constants;
 
 /**
  * This is test class on the MapEditor There are some test cases added to
@@ -43,7 +44,7 @@ public class MapEditorTest {
 	@BeforeAll
 	public void setUp() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test.map";
-		MapReader l_mapReader = new MapReader();
+		DominationMapDriver l_mapReader = new DominationMapDriver();
 		d_gameMap = l_mapReader.loadMapFile(l_mapFilePath);
 		d_mapEditor = new MapEditor(d_gameMap);
 

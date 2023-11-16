@@ -44,9 +44,7 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 		if (l_weakestCountry != null) {
 			Deploy.ValidateIssueDeployOrder(d_player, this.getDeployOrder(l_weakestCountry));
 			this.issueAdvanceOrdersToWeakestCountry(l_weakestCountry);
-			if (d_player.getPlayerCards().contains(CardType.AIRLIFT)
-					|| d_player.getPlayerCards().contains(CardType.DIPLOMACY))
-				this.issuePlayerCardOrders(l_weakestCountry);
+			this.issuePlayerCardOrders(l_weakestCountry);
 			d_player.setHasCommitted(true);
 		}
 	}
@@ -72,7 +70,6 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 				}
 			}
 		}
-		System.out.println(l_weakestCountry.getCountryName());
 		return l_weakestCountry;
 	}
 
@@ -87,8 +84,11 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 	 * @return The method is returning a String array.
 	 */
 	private String[] getDeployOrder(Country l_weakestCountry) {
-		return new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY,
+		String[] l_deployOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY,
 				Integer.toString(l_weakestCountry.getCountryId()), Integer.toString(d_player.getLeftoverArmies())};
+		Logger.log(MessageFormat.format(Constants.USER_INPUT_COMMAND_ENTERED + "{0} {1} {2}", l_deployOrder[0],
+				l_deployOrder[1], l_deployOrder[2]));
+		return l_deployOrder;
 	}
 
 	/**
@@ -105,9 +105,8 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 				String[] l_advanceOrder = new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
 						l_country.getCountryName(), l_weakestCountry.getCountryName(),
 						Integer.toString(l_country.getArmyCount())};
-				System.out.println(MessageFormat.format("{0} {1} {2} {3}",
-						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE, l_country.getCountryName(),
-						l_weakestCountry.getCountryName(), Integer.toString(l_country.getArmyCount())));
+				Logger.log(MessageFormat.format(Constants.USER_INPUT_COMMAND_ENTERED + "{0} {1} {2} {3}",
+						l_advanceOrder[0], l_advanceOrder[1], l_advanceOrder[2], l_advanceOrder[3]));
 				Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
 			}
 		}

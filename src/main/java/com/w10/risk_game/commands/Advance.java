@@ -1,6 +1,5 @@
 package com.w10.risk_game.commands;
 
-import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;

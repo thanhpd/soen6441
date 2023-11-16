@@ -1,32 +1,25 @@
 package com.w10.risk_game.controllers;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
-import com.google.common.base.Joiner;
-import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.exceptions.ApplicationException;
-import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
-import com.w10.risk_game.models.phases.PreLoadPhase;
+import com.w10.risk_game.models.MatchResult;
 import com.w10.risk_game.models.strategies.AggressivePlayerStrategy;
 import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
 import com.w10.risk_game.models.strategies.CheaterPlayerStrategy;
 import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
-import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
+
 /**
- * The GameEngine class is responsible for managing the game flow, handling user
- * input, and executing commands in the Risk game.
- *
- * @author Omnia Alam
+ * The TournamentController class is responsible for managing and running a series of games on
+ * different maps using a set of player strategies.
  */
 public class TournamentController {
 
@@ -58,12 +51,19 @@ public class TournamentController {
 		this.d_gamePlayController = new GamePlayController(d_mapEditorController);
 	}
 
+	
 	/**
-	 * The start() function is the main loop of the game engine, where it handles
-	 * user input and executes the corresponding commands based on the current game
-	 * phase.
+	 * The start function runs a series of games on different maps using a set of player strategies, and
+	 * prints the winner of each game.
+	 * 
+	 * @param p_playerStrategyNames A set of strings representing the names of the player strategies.
+	 * @param maps A set of strings representing the names of the maps to be played.
+	 * @param gamesCount The `gamesCount` parameter represents the number of games that will be played for
+	 * each map.
+	 * @param maxTurns The parameter "maxTurns" represents the maximum number of turns allowed in a game.
 	 */
 	public void start(Set<String> p_playerStrategyNames, Set<String> maps, int gamesCount, int maxTurns) {
+		ArrayList<MatchResult> l_listofMatchResults= new ArrayList<MatchResult>();
 		
 
 		for(var map : maps) { 
@@ -73,14 +73,22 @@ public class TournamentController {
 			d_gamePlayController= new GamePlayController(d_mapEditorController);
 			
 			var players =  createPlayers(p_playerStrategyNames);
-			var winner = playGame(map, players, maxTurns);
-			System.out.println(winner);
-			// save winner for display purpose
+			var l_result = playGame(map, players, maxTurns);
+			MatchResult l_winner = new MatchResult(l_result,i,map);
+			l_listofMatchResults.add(l_winner);
+			displayResult(l_listofMatchResults);
 		}
 
 		}
 	}
 
+/**
+ * The function creates a set of players based on a set of player strategy names, assigns the
+ * corresponding strategy to each player, and returns the set of players.
+ * 
+ * @param p_playerStrategyNames A set of strings representing the names of player strategies.
+ * @return The method is returning a Set of Player objects.
+ */
 	private Set<Player> createPlayers(Set<String> p_playerStrategyNames) {
 		Set<Player> l_listofPlayers= new HashSet<>();
 		for (String l_strategy : p_playerStrategyNames) {
@@ -113,9 +121,8 @@ public class TournamentController {
 
 		d_mapEditorController.loadMap(map);
 		d_gamePlayController.assignCountries();
-
 		for (int i = 1; i<= maxTurns; i++) {
-			for(Player player : players) {
+			for(i=1; i<=d_gamePlayController.getNoOfPlayers();i++) {
 			// issue order or play turn for each player
 				d_gamePlayController.issuePlayerOrder();
 				if(d_gamePlayController.getWinner()!=null){
@@ -130,7 +137,8 @@ public class TournamentController {
 		return "Draw";
 	}
 
-	public void displayResult(List<String> winners) {
+	public void displayResult(List<MatchResult> l_listofMatchResults) {
+		System.out.println("Result of the trounament:");
 
 	}
 

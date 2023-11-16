@@ -104,4 +104,9 @@ public class HumanPlayerStrategy extends PlayerStrategy {
 			}
 		}
 	}
+
+	@Override
+	public String getStrategyName() {
+		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN;
+	}
 }

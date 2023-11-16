@@ -30,8 +30,8 @@ public class RandomPlayerStrategyTest {
 		d_player2 = new Player("RandomPlayer2", new ArrayList<Country>(), null, 15,
 				new RandomPlayerStrategy(d_player2));
 
-		d_gamePlayController.createPlayer(d_player1.getName());
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 		d_GameMap = new GameMap();
 		d_gamePlayController.assignCountries();
 

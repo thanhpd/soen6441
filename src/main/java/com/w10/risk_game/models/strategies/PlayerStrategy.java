@@ -17,4 +17,7 @@ public abstract class PlayerStrategy {
 	}
 
 	public abstract void issueOrder();
+
+	public abstract String getStrategyName();
+
 }

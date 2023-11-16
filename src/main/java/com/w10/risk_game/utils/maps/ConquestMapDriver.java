@@ -125,7 +125,7 @@ public class ConquestMapDriver {
 	 *
 	 * @param p_scanner
 	 *            A Scanner object used to read input from a file or other source.
-	 * @return The method is returning a LinkedHashMap<String, Continent>.
+	 * @return The method is returning a map of continents by continent name
 	 */
 	protected LinkedHashMap<String, Continent> readContinents(Scanner p_scanner) {
 		String l_line;
@@ -155,7 +155,7 @@ public class ConquestMapDriver {
 	 * @param p_continents
 	 *            A LinkedHashMap containing the continents in the game, where the
 	 *            key is the continent name and the value is the Continent object.
-	 * @return The method is returning a LinkedHashMap<String, Country> object.
+	 * @return The method is returning a map of countries by country name object.
 	 */
 	protected LinkedHashMap<String, Country> readTerritories(Scanner p_scanner,
 			LinkedHashMap<String, Continent> p_continents) {

@@ -125,10 +125,12 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * @param p_mapFilePath
 	 *            The parameter "p_mapFilePath" is a String that represents the file
 	 *            path where the map will be saved.
+	 * @param p_mapType
+	 *            The map type to be saved.
 	 */
 	@Override
-	public void saveMap(String p_mapFilePath) {
-		this.d_mapEditorController.saveMap(p_mapFilePath);
+	public void saveMap(String p_mapFilePath, String p_mapType) {
+		this.d_mapEditorController.saveMap(p_mapFilePath, p_mapType);
 	}
 
 	/**
@@ -169,7 +171,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.editmap, Command.editcountry, Command.editcontinent, Command.showmap,
+		return Set.of(Command.editmap, Command.editcountry, Command.editcontinent, Command.savemap, Command.showmap,
 				Command.editneighbor, Command.validatemap, Command.next);
 	}
 

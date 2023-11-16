@@ -1,4 +1,4 @@
-package com.w10.risk_game.utils;
+package com.w10.risk_game.utils.maps;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.utils.Constants;
 
 /**
  * This class operates on the current Game map. It adds and removes Gamemap

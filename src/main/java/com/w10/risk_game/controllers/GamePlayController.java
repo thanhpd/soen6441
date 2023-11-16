@@ -14,6 +14,11 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.models.strategies.AggressivePlayerStrategy;
+import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
+import com.w10.risk_game.models.strategies.CheaterPlayerStrategy;
+import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
+import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.Reinforcements;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -99,11 +104,25 @@ public class GamePlayController {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player being created.
+	 * @param p_playerStrategy
+	 *            The strategy of the player
 	 */
-	public void createPlayer(String p_playerName) {
+	public void createPlayer(String p_playerName, String p_playerStrategy) {
 		try {
-			// Create a new player object
-			Player l_player = new Player(p_playerName.trim(), new ArrayList<Country>(), new ArrayList<Order>(), 0);
+			Player l_player = new Player(p_playerName.trim(), new ArrayList<>(), new ArrayList<>(), 0);
+
+			// Set player strategy
+			if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
+				l_player.setStrategy(new HumanPlayerStrategy(l_player));
+			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE)) {
+				l_player.setStrategy(new AggressivePlayerStrategy(l_player));
+			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT)) {
+				l_player.setStrategy(new BenevolentPlayerStrategy(l_player));
+			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM)) {
+				l_player.setStrategy(new RandomPlayerStrategy(l_player));
+			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER)) {
+				l_player.setStrategy(new CheaterPlayerStrategy(l_player));
+			}
 
 			// Check if the player name is not already present in the player list
 			if (!this.d_players.containsKey(p_playerName.trim())) {
@@ -382,6 +401,7 @@ public class GamePlayController {
 						OtherOrders.add(l_order);
 					}
 				}
+				l_player.setHasCommitted(false);
 			}
 
 			// Execute orders by their types

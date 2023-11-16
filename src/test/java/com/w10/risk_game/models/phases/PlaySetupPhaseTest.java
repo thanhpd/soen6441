@@ -58,8 +58,8 @@ public class PlaySetupPhaseTest {
 	 */
 	@Test
 	void testNext() {
-		phase.createPlayer("player1");
-		phase.createPlayer("player2");
+		phase.createPlayer("player1", Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		phase.createPlayer("player2", Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 		phase.assignCountries();
 		phase = GameEngine.Phase;
 		assertEquals("Reinforcement PHASE", phase.getPhaseName());

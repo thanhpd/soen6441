@@ -45,6 +45,11 @@ public final class Constants {
 	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";
 	public static final String USER_INPUT_ERROR_ARG_LIST_INVALID = "The provided command option(s) is invalid!";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN = "Human";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE = "Aggressive";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT = "Benevolent";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM = "Random";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER = "Cheater";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants
@@ -83,6 +88,9 @@ public final class Constants {
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 	public static final String SPACE = " ";
+	public static final String EQUAL = "=";
+	public static final String COMMA = ",";
+	public static final String UNDERSCORE = "_";
 	public static final String NEW_LINE = "\n";
 
 	// Maps Folder Path
@@ -153,12 +161,19 @@ public final class Constants {
 	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
 
 	// Map Reader constants
-	public static final String MAP_READER_MAP = "[map]";
-	public static final String MAP_READER_CONTINENTS = "[continents]";
-	public static final String MAP_READER_COUNTRIES = "[countries]";
-	public static final String MAP_READER_BORDERS = "[borders]";
+	public static final String DOMINATION_MAP_READER_MAP = "[map]";
+	public static final String DOMINATION_MAP_READER_CONTINENTS = "[continents]";
+	public static final String DOMINATION_MAP_READER_COUNTRIES = "[countries]";
+	public static final String DOMINATION_MAP_READER_BORDERS = "[borders]";
+	public static final String CONQUEST_MAP_READER_MAP = "[Map]";
+	public static final String CONQUEST_MAP_READER_CONTINENTS = "[Continents]";
+	public static final String CONQUEST_MAP_READER_TERRITORIES = "[Territories]";
 	public static final String MAP_SAVE_ERROR = "Unable to save file. Please try again.";
 	public static final String MAP_SAVE_SUCCESS = "Map Saved Successfully";
+	public static final String MAP_START_SAVE_DOMINATION = "Start saving map in Domination format";
+	public static final String MAP_START_SAVE_CONQUEST = "Start saving map in Conquest format";
+	public static final String MAP_FORMAT_DOMINATION = "1";
+	public static final String MAP_FORMAT_CONQUEST = "2";
 
 	// Reinforcements constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;

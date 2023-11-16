@@ -4,6 +4,8 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
 import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.utils.maps.DominationMapDriver;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +28,7 @@ public class ReinforcementsTest {
 	List<Country> d_countries;
 	List<Country> d_countries2;
 	List<Country> d_countries3;
-	MapReader d_mapReader = new MapReader();
+	DominationMapDriver d_mapDriver = new DominationMapDriver();
 
 	/**
 	 * This method is to set up the test environment
@@ -83,7 +85,7 @@ public class ReinforcementsTest {
 	@Test
 	public void testReinforcementPhase() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		GameMap d_gameMap = d_mapDriver.loadMapFile(l_mapFilePath);
 		// Test bonus
 		Reinforcements.AssignPlayerReinforcements(d_player, d_gameMap);
 		assertEquals(17, d_player.getLeftoverArmies());
@@ -100,7 +102,7 @@ public class ReinforcementsTest {
 	@Test
 	public void testGroupCountry() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		GameMap d_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		GameMap d_gameMap = d_mapDriver.loadMapFile(l_mapFilePath);
 		// Test all countries belong to one continent
 		List<String> l_groupCountries = Reinforcements.GroupCountries(d_countries, d_gameMap);
 		assertEquals("1 2 3 4 5 6 7", l_groupCountries.get(0));

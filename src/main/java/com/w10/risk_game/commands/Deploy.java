@@ -107,11 +107,7 @@ public class Deploy extends Order {
 
 		// Return true if both the country ID and the number of armies are valid, else
 		// return false
-		if (l_validCountry && l_validNum) {
-			return true;
-		} else {
-			return false;
-		}
+		return l_validCountry && l_validNum;
 	}
 
 	/**
@@ -154,12 +150,9 @@ public class Deploy extends Order {
 
 		// Check if the specified number of armies exceeds the player's available armies
 		if (p_num > p_player.getLeftoverArmies()) {
-			// Log a message if the number of armies exceeds the player's available armies
 			Logger.log(Constants.DEPLOY_INVALID_ARMIES);
-			return false; // Indicates that the specified number of armies is invalid
+			return false;
 		}
-
-		// If the specified number of armies is valid, return true
 		return true;
 	}
 
@@ -223,12 +216,12 @@ public class Deploy extends Order {
 
 			// Log that the deploy order was successful
 			Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
-			return true; // Return true indicating the successful execution of the order
+			return true;
 		} else {
 			// Log if the deploy order was incorrect or invalid
 			Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
 					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY));
-			return false; // Return false for an unsuccessful order execution
+			return false;
 		}
 	}
 }

@@ -10,6 +10,7 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
+import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -76,16 +77,21 @@ public class GameEngine {
 							Logger.log(Constants.GAME_ENGINE_GAME_OVER + this.d_gamePlayController.getWinner()
 									+ Constants.GAME_ENGINE_END_GAME);
 							break;
-						} else
-							Phase.next();
-
-						// Reassign reinforcements to players
+						}
+						Phase.next();
 						Phase.assignPlayerReinforcements();
 					} else
 						continue;
 				}
 				l_player = this.d_gamePlayController.getCurrentPlayer();
 				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
+
+				// If non-human strategy then issue order
+				if (!l_player.getStrategy().getStrategyName()
+						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
+					l_player.issueOrder();
+					continue;
+				}
 
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
 						l_player.getLeftoverArmies()));
@@ -211,7 +217,10 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									Phase.createPlayer(l_options.get(1));
+									Phase.createPlayer(l_options.get(1),
+											l_options.size() > 2
+													? l_options.get(2)
+													: Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removePlayer(l_options.get(1));

@@ -2,6 +2,7 @@ package com.w10.risk_game.models.strategies;
 
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
+import com.w10.risk_game.utils.Constants;
 
 public class CheaterPlayerStrategy extends PlayerStrategy {
 
@@ -35,6 +36,11 @@ public class CheaterPlayerStrategy extends PlayerStrategy {
 
 	protected void doubleArmiesInCountriesWithEnemyNeighbor() {
 
+	}
+
+	@Override
+	public String getStrategyName() {
+		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER;
 	}
 
 }

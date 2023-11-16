@@ -152,8 +152,11 @@ public abstract class Phase {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that you want to create.
+	 *
+	 * @param p_playerStrategy
+	 *            The strategy of the player
 	 */
-	public abstract void createPlayer(String p_playerName);
+	public abstract void createPlayer(String p_playerName, String p_playerStrategy);
 
 	/**
 	 * The function removes a player from a game.

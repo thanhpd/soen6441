@@ -55,8 +55,8 @@ class GamePlayControllerTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
 		d_mapEditorController.loadMap(l_mapFilePath);
 
-		d_gamePlayController.createPlayer(d_player1.getName());
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 
 		assertEquals(0, d_gamePlayController.getPlayerDetails(d_player1.getName()).getCountriesOwned().size());
 		assertEquals(0, d_gamePlayController.getPlayerDetails(d_player2.getName()).getCountriesOwned().size());
@@ -74,11 +74,11 @@ class GamePlayControllerTest {
 	 */
 	@Test
 	void testCreatePlayer() {
-		d_gamePlayController.createPlayer(d_player1.getName());
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 		assertEquals(2, d_gamePlayController.getNoOfPlayers());
 
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 		assertEquals(2, d_gamePlayController.getNoOfPlayers());
 	}
 
@@ -89,8 +89,8 @@ class GamePlayControllerTest {
 	 */
 	@Test
 	void testRemovePlayer() {
-		d_gamePlayController.createPlayer(d_player1.getName());
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 
 		d_gamePlayController.removePlayer(d_player2.getName());
 		assertEquals(1, d_gamePlayController.getNoOfPlayers());
@@ -120,8 +120,8 @@ class GamePlayControllerTest {
 	 */
 	@Test
 	void testGetNoOfPlayers() {
-		d_gamePlayController.createPlayer(d_player1.getName());
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 
 		assertEquals(2, d_gamePlayController.getNoOfPlayers());
 	}
@@ -133,7 +133,7 @@ class GamePlayControllerTest {
 	 */
 	@Test
 	void testGetPlayerDetails() {
-		d_gamePlayController.createPlayer(d_player1.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 		assertEquals(d_player1.getName(), d_gamePlayController.getPlayerDetails(d_player1.getName()).getName());
 	}
 
@@ -146,8 +146,8 @@ class GamePlayControllerTest {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-win.map";
 		d_mapEditorController.loadMap(l_mapFilePath);
 
-		d_gamePlayController.createPlayer(d_player1.getName());
-		d_gamePlayController.createPlayer(d_player2.getName());
+		d_gamePlayController.createPlayer(d_player1.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
+		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 
 		d_gamePlayController.assignCountries();
 

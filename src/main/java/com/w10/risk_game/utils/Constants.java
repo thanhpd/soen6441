@@ -45,6 +45,11 @@ public final class Constants {
 	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";
 	public static final String USER_INPUT_ERROR_ARG_LIST_INVALID = "The provided command option(s) is invalid!";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN = "Human";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE = "Aggressive";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT = "Benevolent";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM = "Random";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER = "Cheater";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants

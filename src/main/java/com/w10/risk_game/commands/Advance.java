@@ -79,6 +79,19 @@ public class Advance extends Order {
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
+		// Check if the number of armies specified in the advance order is greater than
+		// the number of armies currently present on the country from which the armies
+		// are being moved.
+		if (this.d_numOfArmies > this.d_countryFrom.getArmyCount()) {
+			if (this.d_countryFrom.getArmyCount() == 0) {
+				Logger.log(MessageFormat.format(Constants.ADVANCE_NO_ARMIES, this.d_advancingPlayerName,
+						this.d_countryFrom.getCountryName()));
+				return;
+			}
+			Logger.log(MessageFormat.format(Constants.ADVANCE_FEWER_ARMIES_AFTER_ATTACK, this.d_advancingPlayerName,
+					this.d_numOfArmies, this.d_countryFrom.getCountryName(), this.d_countryTo.getCountryName()));
+			this.d_numOfArmies = this.d_countryFrom.getArmyCount();
+		}
 		// Check if the target country is owned by the same player as the source country
 		if (this.d_countryTo.getOwner() != null
 				&& this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {

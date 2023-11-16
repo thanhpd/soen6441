@@ -197,6 +197,8 @@ public final class Constants {
 
 	// Advance constants
 	public static final String ADVANCE_NOT_OWNER = "Advance order issued by {0} can no longer be executed as player no longer owns {1}.";
+	public static final String ADVANCE_FEWER_ARMIES_AFTER_ATTACK = "Advance order issued by {0} is no longer valid, as the remaining armies have dwindled to {1}. Proceeding to advance from {2} to {3} with the remaining {1} armies.";
+	public static final String ADVANCE_NO_ARMIES = "Advance order issued by {0} is no longer executable, as there are no remaining armies on {1}.";
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";
 	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You''ve conquered {1}. Keep the conquest going!";
 	public static final String ADVANCE_BATTLE_LOST = "{0}''s forces have been defeated in the battle for {1}, owned by {2}.";
@@ -215,8 +217,8 @@ public final class Constants {
 	public static final String BLOCKADE_SUCCEED = "Player {0} blockaded the country {1}. Country {1} became neutral and has {2} armies now.";
 
 	// Airlift constants
-	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifed from {1} to {2}";
-	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} doesnt belong to {1}";
+	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifted from {1} to {2}";
+	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} does not belong to {1}";
 	public static final String AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY = "Country {0} can airlift at most {1} armies";
 
 }

@@ -30,8 +30,8 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  */
 public class TournamentController {
 
-	private final GamePlayController d_gamePlayController;
-	private final MapEditorController d_mapEditorController;
+	private  GamePlayController d_gamePlayController;
+	private  MapEditorController d_mapEditorController;
 
 	public static Phase Phase;
 	public static String l_mainCommand = "tournament -M euprope.map test.map -D";
@@ -63,23 +63,27 @@ public class TournamentController {
 	 * user input and executes the corresponding commands based on the current game
 	 * phase.
 	 */
-	// public void start(Set<String> playerStrategiesName, Set<String> maps, int gamesCount, int maxTurns) {
+	public void start(Set<String> p_playerStrategyNames, Set<String> maps, int gamesCount, int maxTurns) {
 		
 
-	// 	for(var map : maps) { // for each map play gamesCount mach
+		for(var map : maps) { 
 
-	// 	for (int i = 1; i <= gamesCount; i++) {
-	// 		var players =  CreatepLayers();
-	// 		var winner = playGame(map, players, maxTurns);
-	// 		// save winner for display purpose
-	// 	}
+		for (int i = 1; i <= gamesCount; i++) {
+			d_mapEditorController=new MapEditorController();
+			d_gamePlayController= new GamePlayController(d_mapEditorController);
+			
+			var players =  createPlayers(p_playerStrategyNames);
+			var winner = playGame(map, players, maxTurns);
+			System.out.println(winner);
+			// save winner for display purpose
+		}
 
-	// 	}
-	// }
+		}
+	}
 
-	private Set<Player> createPlayers(Set<String> playerStrategyNames) {
+	private Set<Player> createPlayers(Set<String> p_playerStrategyNames) {
 		Set<Player> l_listofPlayers= new HashSet<>();
-		for (String l_strategy : playerStrategyNames) {
+		for (String l_strategy : p_playerStrategyNames) {
 			d_gamePlayController.createPlayer(l_strategy);
 			Player l_player= d_gamePlayController.getPlayerDetails(l_strategy);
 			switch(l_strategy){
@@ -105,20 +109,26 @@ public class TournamentController {
 		return l_listofPlayers;
 	}
 
-	// protected String playGame(String map, Set<Player> players, int maxTurns) {
+	protected String playGame(String map, Set<Player> players, int maxTurns) {
 
-	// 	// initi everthimng
+		d_mapEditorController.loadMap(map);
+		d_gamePlayController.assignCountries();
 
-	// 	for (int i = 1; i<= maxTurns; i++) {
-	// 		for(Player player : players) {
-				
-	// 		// issue order or play turn for each player	
-	// 		}
-	// 	}
+		for (int i = 1; i<= maxTurns; i++) {
+			for(Player player : players) {
+			// issue order or play turn for each player
+				d_gamePlayController.issuePlayerOrder();
+				if(d_gamePlayController.getWinner()!=null){
+					return d_gamePlayController.getWinner();
+				}
+			}
+		}
 
-	// 	// returns the winner name
-	// 	//after play game add it to the list
-	// }
+		// returns the winner name  
+		// after max turn return draw
+
+		return "Draw";
+	}
 
 	public void displayResult(List<String> winners) {
 

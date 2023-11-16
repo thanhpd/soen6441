@@ -27,11 +27,11 @@ public class Advance extends Order {
 	 * This is a constructor of the Advance class
 	 *
 	 * @param p_countryFrom
-	 *                      The country from where the armies are to move
+	 *            The country from where the armies are to move
 	 * @param p_countryTo
-	 *                      The country to where the armies are to move
+	 *            The country to where the armies are to move
 	 * @param p_numOfArmies
-	 *                      The number of armies that the order is issued to
+	 *            The number of armies that the order is issued to
 	 */
 	public Advance(Country p_countryFrom, Country p_countryTo, int p_numOfArmies) {
 		this.d_countryFrom = p_countryFrom;
@@ -134,7 +134,7 @@ public class Advance extends Order {
 	 * This function is used to check the input format for advance command.
 	 *
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the input format is valid
 	 */
 	public static boolean CheckValidAdvanceInput(String[] p_inputArray) {
@@ -159,9 +159,9 @@ public class Advance extends Order {
 	 * The function try to add advance order to the player's order list
 	 *
 	 * @param p_player
-	 *                     the player who issue the order
+	 *            the player who issue the order
 	 * @param p_inputArray
-	 *                     the input string split by space
+	 *            the input string split by space
 	 * @return boolean value to show whether the order is added successfully
 	 */
 	public static boolean ValidateIssueAdvanceOrder(Player p_player, String[] p_inputArray) {
@@ -205,11 +205,11 @@ public class Advance extends Order {
 	 * The function gets the number of armies deployed/advanced to country X
 	 *
 	 * @param p_player
-	 *                                 the player who issue the order
+	 *            the player who issue the order
 	 * @param p_currentArmiesOnCountry
-	 *                                 current armies on country
+	 *            current armies on country
 	 * @param p_advanceFromCountryId
-	 *                                 country id to advance from
+	 *            country id to advance from
 	 * @return boolean value to show whether the player can advance
 	 */
 	public static int GetTotalArmiesDeployed(Player p_player, int p_currentArmiesOnCountry,

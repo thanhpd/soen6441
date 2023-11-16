@@ -216,7 +216,10 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									Phase.createPlayer(l_options.get(1), l_options.get(2));
+									Phase.createPlayer(l_options.get(1),
+											l_options.size() > 2
+													? l_options.get(2)
+													: Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removePlayer(l_options.get(1));

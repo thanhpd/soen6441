@@ -294,6 +294,14 @@ public class MapEditorController {
 		}
 	}
 
+	/**
+	 * The function reads a map file and determines which map reader to use based on
+	 * the file contents, then returns the loaded game map.
+	 *
+	 * @param p_mapFilePath
+	 *            The file path of the map file that needs to be read.
+	 * @return The method returns a GameMap object.
+	 */
 	private GameMap readMapFile(String p_mapFilePath) {
 		boolean l_useDominationMapReader = false;
 		boolean l_useConquestMapReader = false;
@@ -304,7 +312,7 @@ public class MapEditorController {
 			try (Scanner l_scanner = new Scanner(l_reader)) {
 				String l_line;
 
-				// read until continents
+				// read until continents and set the flag
 				while (l_scanner.hasNextLine()) {
 					l_line = l_scanner.nextLine();
 					if (l_line.equals(Constants.DOMINATION_MAP_READER_CONTINENTS)) {
@@ -323,6 +331,7 @@ public class MapEditorController {
 			Logger.log(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
 
+		// Based on the flag, use the appropriate map reader
 		if (l_useDominationMapReader) {
 			DominationMapDriver l_dominationMapReader = new DominationMapDriver();
 			return l_dominationMapReader.loadMapFile(p_mapFilePath);

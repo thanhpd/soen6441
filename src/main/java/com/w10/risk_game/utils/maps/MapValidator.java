@@ -88,7 +88,7 @@ public class MapValidator {
 	 *         given game map is empty or not.
 	 */
 	protected static boolean IsMapEmpty(GameMap p_gameMap) {
-		return p_gameMap.getCountries().isEmpty() || p_gameMap.getContinents().isEmpty();
+		return p_gameMap == null || p_gameMap.getCountries().isEmpty() || p_gameMap.getContinents().isEmpty();
 	}
 
 	/**

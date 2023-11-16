@@ -3,6 +3,8 @@ package com.w10.risk_game.utils.maps;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.w10.risk_game.controllers.MapEditorController;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.w10.risk_game.models.GameMap;
@@ -13,7 +15,16 @@ import com.w10.risk_game.utils.Constants;
  * correctness of a game map.
  */
 public class MapValidatorTest {
-	private final DominationMapDriver d_mapReader = new DominationMapDriver();
+	private MapEditorController d_mapEditorController;
+
+	/**
+	 * The setUp() function is used to initialize the MapEditorController object
+	 * before each test case.
+	 */
+	@BeforeEach
+	public void setUp() {
+		d_mapEditorController = new MapEditorController();
+	}
 
 	/**
 	 * The testMapCorrectness function tests whether the loaded map file is correct
@@ -21,9 +32,17 @@ public class MapValidatorTest {
 	 */
 	@Test
 	public void testMapCorrectness() {
+		// Domination map
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertTrue(MapValidator.IsMapCorrect(l_gameMap));
+
+		// Conquest map
+		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe-conquest.map";
+		d_mapEditorController.loadMap(l_mapFilePath2);
+		GameMap l_gameMap2 = d_mapEditorController.getGameMap();
+		assertTrue(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
 	/**
@@ -32,9 +51,17 @@ public class MapValidatorTest {
 	 */
 	@Test
 	public void testMapWithIsolatedCountries() {
+		// Domination map
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-connected.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
+
+		// Conquest map
+		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-connected-conquest.map";
+		d_mapEditorController.loadMap(l_mapFilePath2);
+		GameMap l_gameMap2 = d_mapEditorController.getGameMap();
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
 	/**
@@ -43,9 +70,17 @@ public class MapValidatorTest {
 	 */
 	@Test
 	public void testMapWithContinents() {
+		// Domination map
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-continents-no-country.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
+
+		// Conquest map
+		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-continents-no-country-conquest.map";
+		d_mapEditorController.loadMap(l_mapFilePath2);
+		GameMap l_gameMap2 = d_mapEditorController.getGameMap();
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
 	/**
@@ -55,11 +90,13 @@ public class MapValidatorTest {
 	@Test
 	public void testMapEmpty() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-empty.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 
 		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-empty2.map";
-		GameMap l_gameMap2 = d_mapReader.loadMapFile(l_mapFilePath2);
+		d_mapEditorController.loadMap(l_mapFilePath2);
+		GameMap l_gameMap2 = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
@@ -69,9 +106,17 @@ public class MapValidatorTest {
 	 */
 	@Test
 	public void testMapHasNonExistentContinent() {
+		// Domination map
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-continents-exist.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
+
+		// Conquest map
+		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-continents-exist-conquest.map";
+		d_mapEditorController.loadMap(l_mapFilePath2);
+		GameMap l_gameMap2 = d_mapEditorController.getGameMap();
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
 	/**
@@ -81,7 +126,8 @@ public class MapValidatorTest {
 	@Test
 	public void testMapHasNonExistentCountry() {
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-countries-exist.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
 	}
 
@@ -91,9 +137,17 @@ public class MapValidatorTest {
 	 */
 	@Test
 	public void testMapHasSelfReferencingNeighbor() {
+		// Domination map
 		String l_mapFilePath = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-self-referencing.map";
-		GameMap l_gameMap = d_mapReader.loadMapFile(l_mapFilePath);
+		d_mapEditorController.loadMap(l_mapFilePath);
+		GameMap l_gameMap = d_mapEditorController.getGameMap();
 		assertFalse(MapValidator.IsMapCorrect(l_gameMap));
+
+		// Conquest map
+		String l_mapFilePath2 = Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test-self-referencing-conquest.map";
+		d_mapEditorController.loadMap(l_mapFilePath2);
+		GameMap l_gameMap2 = d_mapEditorController.getGameMap();
+		assertFalse(MapValidator.IsMapCorrect(l_gameMap2));
 	}
 
 }

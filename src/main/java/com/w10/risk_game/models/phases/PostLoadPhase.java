@@ -125,6 +125,8 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * @param p_mapFilePath
 	 *            The parameter "p_mapFilePath" is a String that represents the file
 	 *            path where the map will be saved.
+	 * @param p_mapType
+	 *            The map type to be saved.
 	 */
 	@Override
 	public void saveMap(String p_mapFilePath, String p_mapType) {

@@ -1,59 +1,65 @@
 package com.w10.risk_game.models;
 
-import com.w10.risk_game.utils.Constants;
-import com.w10.risk_game.utils.loggers.LogEntryBuffer;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+/**
+ * The ConquestGameMap class represents a game map consisting of countries and
+ * continents, and provides methods to add countries and continents to the map.
+ */
 public class ConquestGameMap {
-	private final LinkedHashMap<String, Country> d_countriesByCountryId;
-	private final LinkedHashMap<String, Continent> d_continentsByContinentId;
+	private final LinkedHashMap<String, Country> d_countriesByCountryName;
+	private final LinkedHashMap<String, Continent> d_continentsByContinentName;
 
-	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
-
+	/**
+	 * The constructor initializes the map of countries and the map of continents.
+	 */
 	public ConquestGameMap() {
-		this.d_countriesByCountryId = new LinkedHashMap<>();
-		this.d_continentsByContinentId = new LinkedHashMap<>();
-	}
-
-	public Map<String, Country> getCountries() {
-		return d_countriesByCountryId;
+		this.d_countriesByCountryName = new LinkedHashMap<>();
+		this.d_continentsByContinentName = new LinkedHashMap<>();
 	}
 
 	/**
-	 * The function returns a map of continents, where the key is an integer and the
-	 * value is a Continent object.
+	 * The getCountries() function returns a map of countries, where the keys are
+	 * country names and the values are Country objects.
 	 *
-	 * @return A map of integers to continents is being returned.
+	 * @return A map of countries, where the keys are strings representing the
+	 *         country names and the values are objects of type Country.
+	 */
+	public Map<String, Country> getCountries() {
+		return d_countriesByCountryName;
+	}
+
+	/**
+	 * The function returns a LinkedHashMap containing continents mapped to their
+	 * names.
+	 *
+	 * @return A LinkedHashMap with String keys and Continent values is being
+	 *         returned.
 	 */
 	public LinkedHashMap<String, Continent> getContinents() {
-		return d_continentsByContinentId;
+		return d_continentsByContinentName;
 	}
 
 	/**
-	 * The function adds a collection of countries to an existing map of countries.
+	 * The function adds a map of countries to an existing map of countries, using
+	 * the country name as the key.
 	 *
 	 * @param p_countries
-	 *            The parameter "p_countries" is a Map object that maps Integer keys
-	 *            to Country values.
+	 *            A map of country names (String) to Country objects.
 	 */
 	public void addCountries(Map<String, Country> p_countries) {
-		this.d_countriesByCountryId.putAll(p_countries);
+		this.d_countriesByCountryName.putAll(p_countries);
 	}
 
 	/**
-	 * The function adds a collection of continents to a map of continents.
+	 * The function adds a collection of continents to a map.
 	 *
 	 * @param p_continents
-	 *            A map where the keys are integers and the values are objects of
-	 *            type Continent.
+	 *            A map containing continent names as keys and Continent objects as
+	 *            values.
 	 */
 	public void addContinents(Map<String, Continent> p_continents) {
-		this.d_continentsByContinentId.putAll(p_continents);
+		this.d_continentsByContinentName.putAll(p_continents);
 	}
 }

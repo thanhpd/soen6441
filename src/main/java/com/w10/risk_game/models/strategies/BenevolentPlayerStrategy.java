@@ -63,6 +63,8 @@ public class BenevolentPlayerStrategy extends PlayerStrategy {
 			int l_minArmies = l_listOfCountriesOwned.get(0).getArmyCount();
 			l_weakestCountry = l_listOfCountriesOwned.get(0);
 
+			// Iterate over all countries owned by player and find the country with least
+			// armies
 			for (Country l_country : l_listOfCountriesOwned) {
 				if (l_country.getArmyCount() < l_minArmies) {
 					l_minArmies = l_country.getArmyCount();

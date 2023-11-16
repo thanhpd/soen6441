@@ -68,8 +68,8 @@ public class Advance extends Order {
 	}
 
 	/**
-	 * This method extends the execute method in the Advance class. It gets the
-	 * number of armies and advances them to the country
+	 * This method extends the execute method in the Order class. It gets the number
+	 * of armies and advances them to the country
 	 */
 	public void execute() {
 		// Check if the advancing player is the owner of the country from which armies

@@ -177,8 +177,8 @@ public class Advance extends Order {
 					: null;
 			int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
 			// Step 2: Check whether the order is valid
-			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && CheckValidAdvanceOrder(p_player,
-					d_advanceArmies, l_countryFrom.getArmyCount(), l_countryFrom.getCountryId())) {
+			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && GetTotalArmiesDeployed(p_player,
+					l_countryFrom.getArmyCount(), l_countryFrom.getCountryId()) >= d_advanceArmies) {
 				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
 				p_player.addOrder(l_order);
 				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
@@ -202,21 +202,18 @@ public class Advance extends Order {
 	}
 
 	/**
-	 * The function checks whether a player can advance X armies from a country Y
-	 * onto a country Z or not
+	 * The function gets the number of armies deployed/advanced to country X
 	 *
 	 * @param p_player
 	 *            the player who issue the order
-	 * @param p_noOfArmiesToAdvance
-	 *            number of armies to advance
 	 * @param p_currentArmiesOnCountry
 	 *            current armies on country
 	 * @param p_advanceFromCountryId
 	 *            country id to advance from
 	 * @return boolean value to show whether the player can advance
 	 */
-	private static boolean CheckValidAdvanceOrder(Player p_player, int p_noOfArmiesToAdvance,
-			int p_currentArmiesOnCountry, int p_advanceFromCountryId) {
+	public static int GetTotalArmiesDeployed(Player p_player, int p_currentArmiesOnCountry,
+			int p_advanceFromCountryId) {
 		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
 		// Iterate through existing orders to check total armies deployed or moved
 		for (Order l_order : p_player.getOrders()) {
@@ -236,9 +233,8 @@ public class Advance extends Order {
 				l_totalArmiesDeployed -= ((Advance) l_order).getNumOfArmies();
 			}
 		}
-		// Return true if the total armies deployed or moved is greater than or equal to
-		// the requested number of armies to advance
-		return l_totalArmiesDeployed >= p_noOfArmiesToAdvance;
+		// Return total armies deployed or moved
+		return l_totalArmiesDeployed;
 	}
 
 }

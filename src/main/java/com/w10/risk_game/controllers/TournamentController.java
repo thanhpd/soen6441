@@ -139,6 +139,12 @@ public class TournamentController {
 
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		System.out.println("Result of the trounament:");
+		for (MatchResult result : l_listofMatchResults) {
+			System.out.format("%7s %14s %7s", result.l_gameCount, result.l_map,result.l_playerName);  
+			System.out.println();  
+
+		} 
+		
 
 	}
 

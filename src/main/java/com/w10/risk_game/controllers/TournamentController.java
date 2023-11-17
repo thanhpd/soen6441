@@ -95,7 +95,7 @@ public class TournamentController {
 	private Set<Player> createPlayers(Set<String> p_playerStrategyNames) {
 		Set<Player> l_listofPlayers = new HashSet<>();
 		for (String l_strategy : p_playerStrategyNames) {
-			d_gamePlayController.createPlayer(l_strategy,l_strategy);
+			d_gamePlayController.createPlayer(l_strategy, l_strategy);
 			Player l_player = d_gamePlayController.getPlayerDetails(l_strategy);
 			switch (l_strategy) {
 				case "Random" :

@@ -23,6 +23,8 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
 	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
+	public static final String USER_INPUT_COMMAND_TOURNAMENTMODE = "tournament";
+	public static final String USER_INPUT_COMMAND_SINGLEPLAYERMODE = "Single Player Mode ";
 	public static final String USER_INPUT_COMMAND_EDITMAP = "editmap";
 	public static final String USER_INPUT_COMMAND_VALIDATEMAP = "validatemap";
 	public static final String USER_INPUT_COMMAND_EDIT_CONTINENT = "editcontinent";

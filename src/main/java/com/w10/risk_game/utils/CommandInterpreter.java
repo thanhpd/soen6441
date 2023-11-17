@@ -20,12 +20,14 @@ public class CommandInterpreter {
 	 * splitting it on spaces.
 	 *
 	 * @param p_command
-	 *            The parameter `p_command` is a string that represents a command
-	 *            input from the user.
+	 *                  The parameter `p_command` is a string that represents a
+	 *                  command
+	 *                  input from the user.
 	 *
 	 * @throws ApplicationException
-	 *             If the user enters an invalid command, show 'Please enter a valid
-	 *             command!' to the user
+	 *                              If the user enters an invalid command, show
+	 *                              'Please enter a valid
+	 *                              command!' to the user
 	 *
 	 * @return The method is returning the main command from the given input
 	 *         command.
@@ -41,10 +43,12 @@ public class CommandInterpreter {
 	 * arguments, throwing an exception if the command is invalid.
 	 *
 	 * @param p_command
-	 *            The parameter `p_command` is a string that represents a command.
+	 *                  The parameter `p_command` is a string that represents a
+	 *                  command.
 	 * @throws ApplicationException
-	 *             If the user enters an invalid command, show 'Please enter a valid
-	 *             command!' to the user
+	 *                              If the user enters an invalid command, show
+	 *                              'Please enter a valid
+	 *                              command!' to the user
 	 *
 	 * @return The method is returning a String array.
 	 */
@@ -60,11 +64,13 @@ public class CommandInterpreter {
 	 * a list of options and their corresponding values.
 	 *
 	 * @param p_command
-	 *            The parameter `p_command` is a string representing a command.
+	 *                  The parameter `p_command` is a string representing a
+	 *                  command.
 	 * @return The method is returning an ArrayList of ArrayLists of Strings.
 	 * @exception ApplicationException
-	 *                If the user enters an invalid command, show 'Please enter a
-	 *                valid command!' to the user
+	 *                                 If the user enters an invalid command, show
+	 *                                 'Please enter a
+	 *                                 valid command!' to the user
 	 */
 	public static ArrayList<ArrayList<String>> GetCommandOptions(String p_command) throws ApplicationException {
 		ArrayList<ArrayList<String>> l_listOfOptions = new ArrayList<>();
@@ -100,34 +106,39 @@ public class CommandInterpreter {
 	 * based on predefined rules.
 	 *
 	 * @param p_argList
-	 *            An array of strings representing the arguments passed to the
-	 *            command.
+	 *                        An array of strings representing the arguments passed
+	 *                        to the
+	 *                        command.
 	 * @param p_command
-	 *            The command that the user has entered.
+	 *                        The command that the user has entered.
 	 * @param p_listOfOptions
-	 *            An ArrayList of ArrayLists of Strings. Each inner ArrayList
-	 *            represents a set of options for a command.
+	 *                        An ArrayList of ArrayLists of Strings. Each inner
+	 *                        ArrayList
+	 *                        represents a set of options for a command.
 	 * @exception ApplicationException
-	 *                Global general application exception
+	 *                                 Global general application exception
 	 */
 	public static void CheckValidArgumentOptions(String[] p_argList, String p_command,
 			ArrayList<ArrayList<String>> p_listOfOptions) throws ApplicationException {
 		// Define commands that require arguments
-		String[] l_commandsWithArgToCheck = new String[]{Constants.USER_INPUT_COMMAND_LOADMAP,
+		String[] l_commandsWithArgToCheck = new String[] { Constants.USER_INPUT_COMMAND_LOADMAP,
 				Constants.USER_INPUT_COMMAND_SAVEMAP, Constants.USER_INPUT_COMMAND_EDITMAP,
+				Constants.USER_INPUT_COMMAND_TOURNAMENTMODE,
 				Constants.USER_INPUT_COMMAND_EDIT_CONTINENT, Constants.USER_INPUT_COMMAND_EDIT_COUNTRY,
 				Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR, Constants.USER_INPUT_COMMAND_GAMEPLAYER,
-				Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY};
+				Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY };
 		// Check if the command requires arguments and if there's at least one argument
 		// for the command
 		if (Arrays.asList(l_commandsWithArgToCheck).contains(p_command) && p_argList.length < 2) {
+			System.out.println("hello");
 			throw new ApplicationException(Constants.USER_INPUT_ERROR_ARG_LIST_INVALID);
 		}
 
 		// Define commands that require options
-		String[] l_commandsWithOptionsToCheck = new String[]{Constants.USER_INPUT_COMMAND_EDIT_CONTINENT,
+		String[] l_commandsWithOptionsToCheck = new String[] { Constants.USER_INPUT_COMMAND_EDIT_CONTINENT,
 				Constants.USER_INPUT_COMMAND_EDIT_COUNTRY, Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR,
-				Constants.USER_INPUT_COMMAND_GAMEPLAYER};
+				Constants.USER_INPUT_COMMAND_GAMEPLAYER, Constants.USER_INPUT_COMMAND_TOURNAMENTMODE,
+		};
 
 		// Check if the command requires options and if there's at least one option for
 		// the command
@@ -150,10 +161,11 @@ public class CommandInterpreter {
 	 * given command and options.
 	 *
 	 * @param p_command
-	 *            The command that the user has entered. It is a string value.
+	 *                  The command that the user has entered. It is a string value.
 	 * @param l_options
-	 *            An ArrayList of strings containing the options provided by the
-	 *            user.
+	 *                  An ArrayList of strings containing the options provided by
+	 *                  the
+	 *                  user.
 	 * @return The method is returning the minimum length of options required for a
 	 *         given command and options list.
 	 */

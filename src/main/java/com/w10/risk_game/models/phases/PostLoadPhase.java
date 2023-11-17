@@ -18,7 +18,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The constructor for the PostLoadPhase class.
 	 *
 	 * @param p_gameEngine
-	 *            The parameter p_gameEngine is a GameEngine object.
+	 *                     The parameter p_gameEngine is a GameEngine object.
 	 */
 	public PostLoadPhase(GameEngine p_gameEngine) {
 		super(p_gameEngine);
@@ -38,12 +38,13 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * specified country ID, country name, and continent name.
 	 *
 	 * @param p_countryId
-	 *            The unique identifier for the country being added.
+	 *                        The unique identifier for the country being added.
 	 * @param p_countryName
-	 *            The name of the country that you want to add.
+	 *                        The name of the country that you want to add.
 	 * @param p_continentName
-	 *            The p_continentName parameter is a String that represents the name
-	 *            of the continent where the country belongs to.
+	 *                        The p_continentName parameter is a String that
+	 *                        represents the name
+	 *                        of the continent where the country belongs to.
 	 */
 	@Override
 	public void addCountry(int p_countryId, String p_countryName, String p_continentName) {
@@ -55,11 +56,13 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * controller.
 	 *
 	 * @param p_continentName
-	 *            The name of the continent that you want to add. It should be a
-	 *            String value.
+	 *                        The name of the continent that you want to add. It
+	 *                        should be a
+	 *                        String value.
 	 * @param p_bonus
-	 *            The p_bonus parameter is an integer that represents the bonus
-	 *            value for the continent being added.
+	 *                        The p_bonus parameter is an integer that represents
+	 *                        the bonus
+	 *                        value for the continent being added.
 	 */
 	@Override
 	public void addContinent(String p_continentName, int p_bonus) {
@@ -70,10 +73,13 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The addNeighbor function adds a neighbor country to a given country.
 	 *
 	 * @param p_countryId
-	 *            The ID of the country to which you want to add a neighbor.
+	 *                            The ID of the country to which you want to add a
+	 *                            neighbor.
 	 * @param p_neighborCountryId
-	 *            The parameter "p_neighborCountryId" represents the ID of the
-	 *            neighboring country that you want to add to the current country.
+	 *                            The parameter "p_neighborCountryId" represents the
+	 *                            ID of the
+	 *                            neighboring country that you want to add to the
+	 *                            current country.
 	 */
 	@Override
 	public void addNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -84,8 +90,9 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The removeCountry function removes a country based on its ID.
 	 *
 	 * @param p_countryId
-	 *            The parameter p_countryId is an integer that represents the unique
-	 *            identifier of the country that needs to be removed.
+	 *                    The parameter p_countryId is an integer that represents
+	 *                    the unique
+	 *                    identifier of the country that needs to be removed.
 	 */
 	@Override
 	public void removeCountry(int p_countryId) {
@@ -96,8 +103,9 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The function removes a continent from the editor controller.
 	 *
 	 * @param p_continentName
-	 *            The parameter "p_continentName" is a String that represents the
-	 *            name of the continent that needs to be removed.
+	 *                        The parameter "p_continentName" is a String that
+	 *                        represents the
+	 *                        name of the continent that needs to be removed.
 	 */
 	@Override
 	public void removeContinent(String p_continentName) {
@@ -108,11 +116,14 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The removeNeighbor function removes a neighbor country from a given country.
 	 *
 	 * @param p_countryId
-	 *            The ID of the country from which you want to remove a neighbor.
+	 *                            The ID of the country from which you want to
+	 *                            remove a neighbor.
 	 * @param p_neighborCountryId
-	 *            The parameter "p_neighborCountryId" represents the ID of the
-	 *            neighbor country that you want to remove from the country with the
-	 *            ID "p_countryId".
+	 *                            The parameter "p_neighborCountryId" represents the
+	 *                            ID of the
+	 *                            neighbor country that you want to remove from the
+	 *                            country with the
+	 *                            ID "p_countryId".
 	 */
 	@Override
 	public void removeNeighbor(int p_countryId, int p_neighborCountryId) {
@@ -123,10 +134,11 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The function saves a map to a specified file path.
 	 *
 	 * @param p_mapFilePath
-	 *            The parameter "p_mapFilePath" is a String that represents the file
-	 *            path where the map will be saved.
+	 *                      The parameter "p_mapFilePath" is a String that
+	 *                      represents the file
+	 *                      path where the map will be saved.
 	 * @param p_mapType
-	 *            The map type to be saved.
+	 *                      The map type to be saved.
 	 */
 	@Override
 	public void saveMap(String p_mapFilePath, String p_mapType) {
@@ -137,8 +149,9 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * The loadMap function prints an invalid command message.
 	 *
 	 * @param p_filePath
-	 *            The parameter `p_filePath` is a string that represents the file
-	 *            path of the map that needs to be loaded.
+	 *                   The parameter `p_filePath` is a string that represents the
+	 *                   file
+	 *                   path of the map that needs to be loaded.
 	 */
 	@Override
 	public void loadMap(String p_filePath) {
@@ -171,9 +184,16 @@ public class PostLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.editmap, Command.editcountry, Command.editcontinent, Command.savemap, Command.showmap,
-				Command.editneighbor, Command.validatemap, Command.next);
+		return Set.of(
+				Command.singlePlayerMode, Command.tournament);
 	}
+	// @Override
+	// // public Set<Command> getAvailableCommands() {
+	// // return Set.of(Command.editmap, Command.editcountry, Command.editcontinent,
+	// Command.savemap, Command.showmap,
+	// // Command.editneighbor, Command.validatemap, Command.next,
+	// Command.singlePlayerMode, Command.tournament);
+	// // }
 
 	/**
 	 * The function checks if a map is valid.
@@ -190,7 +210,7 @@ public class PostLoadPhase extends MapEditorPhase {
 	 * potentially causing an infinite loop.
 	 *
 	 * @param p_mapFilePath
-	 *            The file path of the map that you want to edit.
+	 *                      The file path of the map that you want to edit.
 	 * @return The method is returning a boolean value.
 	 */
 	@Override

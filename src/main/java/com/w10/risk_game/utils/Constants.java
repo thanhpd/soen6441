@@ -151,7 +151,7 @@ public final class Constants {
 	public static final String MAP_DISPLAY_TABLE2_FORMAT_PATTERN = "|%-15s|%-3s|%-15s|%-5s|%-105s|%-12s|%-8s|\n";
 	public static final String MAP_DISPLAY_NEUTRAL_COUNTRY = "Neutral";
 	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
-	
+
 	// Map Reader constants
 	public static final String MAP_READER_MAP = "[map]";
 	public static final String MAP_READER_CONTINENTS = "[continents]";

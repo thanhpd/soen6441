@@ -16,20 +16,19 @@ import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
-
 /**
- * The TournamentController class is responsible for managing and running a series of games on
- * different maps using a set of player strategies.
+ * The TournamentController class is responsible for managing and running a
+ * series of games on different maps using a set of player strategies.
  */
 public class TournamentController {
 
-	private  GamePlayController d_gamePlayController;
-	private  MapEditorController d_mapEditorController;
+	private GamePlayController d_gamePlayController;
+	private MapEditorController d_mapEditorController;
 
 	public static Phase Phase;
 	public static String l_mainCommand = "tournament -M euprope.map test.map -D";
-	ArrayList<String> l_listofMaps= new ArrayList<>();
-	ArrayList<String> l_listofPlayers= new ArrayList<>();
+	ArrayList<String> l_listofMaps = new ArrayList<>();
+	ArrayList<String> l_listofPlayers = new ArrayList<>();
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
@@ -45,75 +44,79 @@ public class TournamentController {
 		Phase.printAvailableCommand();
 	}
 
-
 	public TournamentController() {
 		this.d_mapEditorController = new MapEditorController();
 		this.d_gamePlayController = new GamePlayController(d_mapEditorController);
 	}
 
-	
 	/**
-	 * The start function runs a series of games on different maps using a set of player strategies, and
-	 * prints the winner of each game.
-	 * 
-	 * @param p_playerStrategyNames A set of strings representing the names of the player strategies.
-	 * @param maps A set of strings representing the names of the maps to be played.
-	 * @param gamesCount The `gamesCount` parameter represents the number of games that will be played for
-	 * each map.
-	 * @param maxTurns The parameter "maxTurns" represents the maximum number of turns allowed in a game.
+	 * The start function runs a series of games on different maps using a set of
+	 * player strategies, and prints the winner of each game.
+	 *
+	 * @param p_playerStrategyNames
+	 *            A set of strings representing the names of the player strategies.
+	 * @param maps
+	 *            A set of strings representing the names of the maps to be played.
+	 * @param gamesCount
+	 *            The `gamesCount` parameter represents the number of games that
+	 *            will be played for each map.
+	 * @param maxTurns
+	 *            The parameter "maxTurns" represents the maximum number of turns
+	 *            allowed in a game.
 	 */
 	public void start(Set<String> p_playerStrategyNames, Set<String> maps, int gamesCount, int maxTurns) {
-		ArrayList<MatchResult> l_listofMatchResults= new ArrayList<MatchResult>();
-		
+		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
 
-		for(var map : maps) { 
+		for (var map : maps) {
 
-		for (int i = 1; i <= gamesCount; i++) {
-			d_mapEditorController=new MapEditorController();
-			d_gamePlayController= new GamePlayController(d_mapEditorController);
-			
-			var players =  createPlayers(p_playerStrategyNames);
-			var l_result = playGame(map, players, maxTurns);
-			MatchResult l_winner = new MatchResult(l_result,i,map);
-			l_listofMatchResults.add(l_winner);
-			displayResult(l_listofMatchResults);
-		}
+			for (int i = 1; i <= gamesCount; i++) {
+				d_mapEditorController = new MapEditorController();
+				d_gamePlayController = new GamePlayController(d_mapEditorController);
+
+				var players = createPlayers(p_playerStrategyNames);
+				var l_result = playGame(map, players, maxTurns);
+				MatchResult l_winner = new MatchResult(l_result, i, map);
+				l_listofMatchResults.add(l_winner);
+				displayResult(l_listofMatchResults);
+			}
 
 		}
 	}
 
-/**
- * The function creates a set of players based on a set of player strategy names, assigns the
- * corresponding strategy to each player, and returns the set of players.
- * 
- * @param p_playerStrategyNames A set of strings representing the names of player strategies.
- * @return The method is returning a Set of Player objects.
- */
+	/**
+	 * The function creates a set of players based on a set of player strategy
+	 * names, assigns the corresponding strategy to each player, and returns the set
+	 * of players.
+	 *
+	 * @param p_playerStrategyNames
+	 *            A set of strings representing the names of player strategies.
+	 * @return The method is returning a Set of Player objects.
+	 */
 	private Set<Player> createPlayers(Set<String> p_playerStrategyNames) {
-		Set<Player> l_listofPlayers= new HashSet<>();
+		Set<Player> l_listofPlayers = new HashSet<>();
 		for (String l_strategy : p_playerStrategyNames) {
 			d_gamePlayController.createPlayer(l_strategy);
-			Player l_player= d_gamePlayController.getPlayerDetails(l_strategy);
-			switch(l_strategy){
-				case "Random":
-				l_player.setStrategy(new RandomPlayerStrategy(l_player));
-				break;
-				case "Cheater":
-				l_player.setStrategy(new CheaterPlayerStrategy(l_player));
-				break;
-				case "Benevolent":
-				l_player.setStrategy(new BenevolentPlayerStrategy(l_player));
-				break;
-				case "Aggressive":
-				l_player.setStrategy(new AggressivePlayerStrategy(l_player));
-				break;
-				default:
-				break;
+			Player l_player = d_gamePlayController.getPlayerDetails(l_strategy);
+			switch (l_strategy) {
+				case "Random" :
+					l_player.setStrategy(new RandomPlayerStrategy(l_player));
+					break;
+				case "Cheater" :
+					l_player.setStrategy(new CheaterPlayerStrategy(l_player));
+					break;
+				case "Benevolent" :
+					l_player.setStrategy(new BenevolentPlayerStrategy(l_player));
+					break;
+				case "Aggressive" :
+					l_player.setStrategy(new AggressivePlayerStrategy(l_player));
+					break;
+				default :
+					break;
 			}
-			
+
 			l_listofPlayers.add(l_player);
 		}
-		
+
 		return l_listofPlayers;
 	}
 
@@ -121,17 +124,17 @@ public class TournamentController {
 
 		d_mapEditorController.loadMap(map);
 		d_gamePlayController.assignCountries();
-		for (int i = 1; i<= maxTurns; i++) {
-			for(i=1; i<=d_gamePlayController.getNoOfPlayers();i++) {
-			// issue order or play turn for each player
+		for (int i = 1; i <= maxTurns; i++) {
+			for (i = 1; i <= d_gamePlayController.getNoOfPlayers(); i++) {
+				// issue order or play turn for each player
 				d_gamePlayController.issuePlayerOrder();
-				if(d_gamePlayController.getWinner()!=null){
+				if (d_gamePlayController.getWinner() != null) {
 					return d_gamePlayController.getWinner();
 				}
 			}
 		}
 
-		// returns the winner name  
+		// returns the winner name
 		// after max turn return draw
 
 		return "Draw";
@@ -140,17 +143,14 @@ public class TournamentController {
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		System.out.println("Result of the trounament:");
 		for (MatchResult result : l_listofMatchResults) {
-			System.out.format("%7s %14s %7s", result.l_gameCount, result.l_map,result.l_playerName);  
-			System.out.println();  
+			System.out.format("%7s %14s %7s", result.l_gameCount, result.l_map, result.l_playerName);
+			System.out.println();
 
-		} 
-		
+		}
 
 	}
 
-
-	
-/**
+	/**
 	 * The function takes a command as input and returns the main command by
 	 * splitting it on spaces.
 	 *
@@ -170,7 +170,6 @@ public class TournamentController {
 			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_EMPTY);
 		return p_command.split(Constants.REGEX_SPLIT_ON_SPACE)[0];
 	}
-	
 
 	/**
 	 * The function returns the game engine controller object.

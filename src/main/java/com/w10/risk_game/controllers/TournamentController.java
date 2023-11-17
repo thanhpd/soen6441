@@ -26,7 +26,7 @@ public class TournamentController {
 	private MapEditorController d_mapEditorController;
 
 	public static Phase Phase;
-	public static String l_mainCommand = "tournament -M euprope.map test.map -D";
+
 	ArrayList<String> l_listofMaps = new ArrayList<>();
 	ArrayList<String> l_listofPlayers = new ArrayList<>();
 
@@ -64,17 +64,17 @@ public class TournamentController {
 	 *            The parameter "maxTurns" represents the maximum number of turns
 	 *            allowed in a game.
 	 */
-	public void start(Set<String> p_playerStrategyNames, Set<String> maps, int gamesCount, int maxTurns) {
+	public void start(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
 
-		for (var map : maps) {
+		for (var map : p_maps) {
 
-			for (int i = 1; i <= gamesCount; i++) {
+			for (int i = 1; i <= p_gamesCount; i++) {
 				d_mapEditorController = new MapEditorController();
 				d_gamePlayController = new GamePlayController(d_mapEditorController);
 
 				var players = createPlayers(p_playerStrategyNames);
-				var l_result = playGame(map, players, maxTurns);
+				var l_result = playGame(map, players, p_maxTurns);
 				MatchResult l_winner = new MatchResult(l_result, i, map);
 				l_listofMatchResults.add(l_winner);
 				displayResult(l_listofMatchResults);
@@ -120,11 +120,11 @@ public class TournamentController {
 		return l_listofPlayers;
 	}
 
-	protected String playGame(String map, Set<Player> players, int maxTurns) {
+	protected String playGame(String p_map, Set<Player> p_players, int p_maxTurns) {
 
-		d_mapEditorController.loadMap(map);
+		d_mapEditorController.loadMap(p_map);
 		d_gamePlayController.assignCountries();
-		for (int i = 1; i <= maxTurns; i++) {
+		for (int i = 1; i <= p_maxTurns; i++) {
 			for (i = 1; i <= d_gamePlayController.getNoOfPlayers(); i++) {
 				// issue order or play turn for each player
 				d_gamePlayController.issuePlayerOrder();

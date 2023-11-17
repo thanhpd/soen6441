@@ -1,5 +1,6 @@
 package com.w10.risk_game.models.strategies;
 
+import java.text.MessageFormat;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -57,10 +58,12 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	 */
 	private void deployOnStrongestCountry() {
 		if (d_strongestCountryOwned != null) {
-			Deploy.ValidateIssueDeployOrder(d_player,
-					new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY,
-							Integer.toString(this.d_strongestCountryOwned.getCountryId()),
-							Integer.toString(this.d_player.getLeftoverArmies())});
+			String[] l_deployOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY,
+					Integer.toString(this.d_strongestCountryOwned.getCountryId()),
+					Integer.toString(this.d_player.getLeftoverArmies())};
+			Logger.log(
+					MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER, String.join(Constants.SPACE, l_deployOrder)));
+			Deploy.ValidateIssueDeployOrder(d_player, l_deployOrder);
 		}
 	}
 
@@ -77,8 +80,11 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 						.filter(l_neighbor -> !this.d_player.getName().equals(l_neighbor.getOwner().getName()))
 						.max(Comparator.comparingInt(Country::getArmyCount)).orElse(null);
 				if (l_enemyCountryWithMaxArmy != null) {
-					Bomb.ValidateIssueBombOrder(d_player, new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB,
-							Integer.toString(l_enemyCountryWithMaxArmy.getCountryId())});
+					String[] d_bombOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB,
+							Integer.toString(l_enemyCountryWithMaxArmy.getCountryId())};
+					Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+							String.join(Constants.SPACE, d_bombOrder)));
+					Bomb.ValidateIssueBombOrder(d_player, d_bombOrder);
 				}
 			}
 			List<Country> l_enemyCountries = d_strongestCountryOwned.getNeighbors().values().stream()
@@ -89,10 +95,12 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 			for (Country l_enemyCountry : l_enemyCountries) {
 				if (l_noOfArmiesOnStrongestCountry > 0
 						&& l_enemyCountry.getArmyCount() < l_noOfArmiesOnStrongestCountry) {
-					Advance.ValidateIssueAdvanceOrder(d_player,
-							new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
-									d_strongestCountryOwned.getCountryName(), l_enemyCountry.getCountryName(),
-									Integer.toString(l_enemyCountry.getArmyCount() + 1)});
+					String[] l_advanceOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
+							d_strongestCountryOwned.getCountryName(), l_enemyCountry.getCountryName(),
+							Integer.toString(l_enemyCountry.getArmyCount() + 1)};
+					Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+							String.join(Constants.SPACE, l_advanceOrder)));
+					Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
 					l_noOfArmiesOnStrongestCountry -= l_enemyCountry.getArmyCount() - 1;
 				} else
 					break;
@@ -110,10 +118,12 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 			Country l_toCountry = l_neighborsWithEnemies.stream().max(Comparator.comparingInt(Country::getArmyCount))
 					.orElse(null);
 			if (Objects.nonNull(d_strongestCountryOwned) && Objects.nonNull(l_toCountry)) {
-				Advance.ValidateIssueAdvanceOrder(d_player,
-						new String[]{Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
-								d_strongestCountryOwned.getCountryName(), l_toCountry.getCountryName(),
-								Integer.toString(d_strongestCountryOwned.getArmyCount())});
+				String[] l_advanceOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
+						d_strongestCountryOwned.getCountryName(), l_toCountry.getCountryName(),
+						Integer.toString(d_strongestCountryOwned.getArmyCount())};
+				Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+						String.join(Constants.SPACE, l_advanceOrder)));
+				Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
 			}
 		}
 	}
@@ -123,10 +133,10 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	 * enemy country.
 	 *
 	 * @param p_fromCountry
-	 *            The country from which we want to find neighbors with enemies.
-	 * @return The method is returning a list of countries that are neighbors of the
-	 *         given country and have at least one neighbor that is owned by a
-	 *         different player.
+	 *            The country from which we want to find neighbors with enemies. The
+	 *            method is returning a list of countries that are neighbors of the
+	 *            given country and have at least one neighbor that is owned by a
+	 *            different player.
 	 */
 	private List<Country> getNeighborsWithEnemies(Country p_fromCountry) {
 		return p_fromCountry.getNeighbors().values().stream().takeWhile(l_neighbor -> {

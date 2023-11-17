@@ -51,17 +51,16 @@ public class TournamentController {
 
 	/**
 	 * The start function runs a series of games on different maps using a set of
-	 * player strategies, and prints the winner of each game.
+	 * player strategies, and stores the results in a list.
 	 *
 	 * @param p_playerStrategyNames
 	 *            A set of strings representing the names of the player strategies.
-	 * @param maps
-	 *            A set of strings representing the names of the maps to be played.
-	 * @param gamesCount
-	 *            The `gamesCount` parameter represents the number of games that
-	 *            will be played for each map.
-	 * @param maxTurns
-	 *            The parameter "maxTurns" represents the maximum number of turns
+	 * @param p_maps
+	 *            A set of strings representing the names of different maps.
+	 * @param p_gamesCount
+	 *            The number of games to be played for each map.
+	 * @param p_maxTurns
+	 *            The parameter `p_maxTurns` represents the maximum number of turns
 	 *            allowed in a game.
 	 */
 	public void start(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
@@ -120,6 +119,24 @@ public class TournamentController {
 		return l_listofPlayers;
 	}
 
+	/**
+	 * The function "playGame" takes a map, a set of players, and a maximum number
+	 * of turns as input, and simulates a game by assigning countries to players and
+	 * allowing each player to take turns until a winner is determined or the
+	 * maximum number of turns is reached.
+	 *
+	 * @param p_map
+	 *            The parameter "p_map" is a string that represents the map being
+	 *            used for the game.
+	 * @param p_players
+	 *            The parameter "p_players" is a Set of Player objects. It
+	 *            represents the set of players participating in the game.
+	 * @param p_maxTurns
+	 *            The maximum number of turns that the game will be played for.
+	 * @return The method is returning a String value. If there is a winner, it will
+	 *         return the name of the winner. If there is no winner after the
+	 *         maximum number of turns, it will return "Draw".
+	 */
 	protected String playGame(String p_map, Set<Player> p_players, int p_maxTurns) {
 
 		d_mapEditorController.loadMap(p_map);
@@ -140,6 +157,14 @@ public class TournamentController {
 		return "Draw";
 	}
 
+	/**
+	 * The function displays the results of a tournament by printing the game count,
+	 * map, and player name for each match result in a given list.
+	 *
+	 * @param l_listofMatchResults
+	 *            The parameter `l_listofMatchResults` is a List of MatchResult
+	 *            objects.
+	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		System.out.println("Result of the trounament:");
 		for (MatchResult result : l_listofMatchResults) {

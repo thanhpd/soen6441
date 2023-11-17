@@ -34,7 +34,7 @@ public class AirliftTest {
 		d_player1 = new Player("Player1", new ArrayList<>(), new ArrayList<>(), 10);
 
 		// Create a list of countries and assign them to the player
-		ArrayList countries1 = new ArrayList<>();
+		ArrayList<Country> countries1 = new ArrayList<>();
 		countries1.add(d_country1);
 		countries1.add(d_country2);
 

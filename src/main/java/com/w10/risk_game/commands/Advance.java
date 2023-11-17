@@ -1,6 +1,5 @@
 package com.w10.risk_game.commands;
 
-import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
@@ -99,7 +98,7 @@ public class Advance extends Order {
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);
 			this.d_countryTo.setArmyCount(this.d_numOfArmies + this.d_countryTo.getArmyCount());
 			Logger.log(MessageFormat.format(Constants.ADVANCE_DEPLOY_SUCCEED, this.d_countryFrom.getOwner().getName(),
-					this.d_numOfArmies, this.d_countryTo.getCountryName()));
+					this.d_numOfArmies, this.d_countryFrom.getCountryName(), this.d_countryTo.getCountryName()));
 		} else {
 			// Simulate a battle between two countries in the game
 			this.d_countryFrom.setArmyCount(this.d_countryFrom.getArmyCount() - this.d_numOfArmies);

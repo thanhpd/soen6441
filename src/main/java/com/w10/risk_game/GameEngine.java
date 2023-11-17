@@ -10,6 +10,7 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
+import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -76,10 +77,8 @@ public class GameEngine {
 							Logger.log(Constants.GAME_ENGINE_GAME_OVER + this.d_gamePlayController.getWinner()
 									+ Constants.GAME_ENGINE_END_GAME);
 							break;
-						} else
-							Phase.next();
-
-						// Reassign reinforcements to players
+						}
+						Phase.next();
 						Phase.assignPlayerReinforcements();
 					} else
 						continue;
@@ -98,6 +97,14 @@ public class GameEngine {
 					Logger.log(Constants.SHOW_PLAYER_CARDS_EMPTY);
 				}
 				Logger.log("");
+
+				// If non-human strategy then issue order
+				if (!l_player.getStrategy().getStrategyName()
+						.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
+					l_player.issueOrder();
+					Logger.log("");
+					continue;
+				}
 			}
 
 			try {
@@ -130,7 +137,8 @@ public class GameEngine {
 						Phase.loadMap(l_argList[1]);
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
-						Phase.saveMap(l_argList[1]);
+						Phase.saveMap(l_argList[1],
+								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						Logger.log(Constants.CLI_SHOW_MAP);
@@ -210,7 +218,10 @@ public class GameEngine {
 							String optionName = l_options.get(0);
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
-									Phase.createPlayer(l_options.get(1));
+									Phase.createPlayer(l_options.get(1),
+											l_options.size() > 2
+													? l_options.get(2)
+													: Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 									break;
 								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removePlayer(l_options.get(1));

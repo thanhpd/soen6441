@@ -46,10 +46,13 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that you want to create.
+	 *
+	 * @param p_playerStrategy
+	 *            The strategy of the player
 	 */
 	@Override
-	public void createPlayer(String p_playerName) {
-		this.d_gamePlayController.createPlayer(p_playerName);
+	public void createPlayer(String p_playerName, String p_playerStrategy) {
+		this.d_gamePlayController.createPlayer(p_playerName, p_playerStrategy);
 	}
 
 	/**

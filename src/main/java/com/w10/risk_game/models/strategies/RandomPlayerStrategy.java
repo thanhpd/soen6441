@@ -80,4 +80,9 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 		}
 		return enemies;
 	}
+
+	@Override
+	public String getStrategyName() {
+		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM;
+	}
 }

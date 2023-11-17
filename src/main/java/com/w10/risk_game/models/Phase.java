@@ -126,8 +126,10 @@ public abstract class Phase {
 	 *
 	 * @param p_mapFilePath
 	 *            The file path where the map will be saved.
+	 * @param p_mapType
+	 *            The type of the map to save. 1 for Domination, 2 for Conquest.
 	 */
-	public abstract void saveMap(String p_mapFilePath);
+	public abstract void saveMap(String p_mapFilePath, String p_mapType);
 
 	/**
 	 * The function is an abstract method that checks if a map is valid and returns
@@ -150,8 +152,11 @@ public abstract class Phase {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that you want to create.
+	 *
+	 * @param p_playerStrategy
+	 *            The strategy of the player
 	 */
-	public abstract void createPlayer(String p_playerName);
+	public abstract void createPlayer(String p_playerName, String p_playerStrategy);
 
 	/**
 	 * The function removes a player from a game.

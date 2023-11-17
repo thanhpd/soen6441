@@ -78,6 +78,19 @@ public class Advance extends Order {
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
+		// Check if the number of armies specified in the advance order is greater than
+		// the number of armies currently present on the country from which the armies
+		// are being moved.
+		if (this.d_numOfArmies > this.d_countryFrom.getArmyCount()) {
+			if (this.d_countryFrom.getArmyCount() == 0) {
+				Logger.log(MessageFormat.format(Constants.ADVANCE_NO_ARMIES, this.d_advancingPlayerName,
+						this.d_countryFrom.getCountryName()));
+				return;
+			}
+			Logger.log(MessageFormat.format(Constants.ADVANCE_FEWER_ARMIES_AFTER_ATTACK, this.d_advancingPlayerName,
+					this.d_numOfArmies, this.d_countryFrom.getCountryName(), this.d_countryTo.getCountryName()));
+			this.d_numOfArmies = this.d_countryFrom.getArmyCount();
+		}
 		// Check if the target country is owned by the same player as the source country
 		if (this.d_countryTo.getOwner() != null
 				&& this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
@@ -163,7 +176,7 @@ public class Advance extends Order {
 					: null;
 			int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
 			// Step 2: Check whether the order is valid
-			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && checkValidAdvanceOrder(p_player,
+			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && CheckValidAdvanceOrder(p_player,
 					d_advanceArmies, l_countryFrom.getArmyCount(), l_countryFrom.getCountryId())) {
 				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
 				p_player.addOrder(l_order);
@@ -201,7 +214,7 @@ public class Advance extends Order {
 	 *            country id to advance from
 	 * @return boolean value to show whether the player can advance
 	 */
-	private static boolean checkValidAdvanceOrder(Player p_player, int p_noOfArmiesToAdvance,
+	private static boolean CheckValidAdvanceOrder(Player p_player, int p_noOfArmiesToAdvance,
 			int p_currentArmiesOnCountry, int p_advanceFromCountryId) {
 		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
 		// Iterate through existing orders to check total armies deployed or moved

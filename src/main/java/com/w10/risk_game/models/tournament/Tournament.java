@@ -32,8 +32,7 @@ public class Tournament {
 		String l_GameCount = l_CommandList.get(l_CommandList.indexOf("-G") + 1);
 		String l_maxTries = l_CommandList.get(l_CommandList.indexOf("-D") + 1);
 		d_Options.getMap().addAll(Arrays.asList(l_MapValue.split(",")));
-		d_Options.getPlayerStrategies()
-				.addAll(Arrays.asList(l_PlayerTypes.split(",")));
+		d_Options.getPlayerStrategies().addAll(Arrays.asList(l_PlayerTypes.split(",")));
 		int l_NumOfGames = Integer.parseInt(l_GameCount);
 		int l_NumofTurns = Integer.parseInt(l_maxTries);
 		d_Options.setGames(l_NumOfGames);

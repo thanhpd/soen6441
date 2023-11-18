@@ -49,6 +49,10 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 	 * randomly selected country owned by the player.
 	 */
 	private void deployOnRandomCountry() {
+		if (d_player.getLeftoverArmies() == 0 || d_player.getCountriesOwned().isEmpty()) {
+			return;
+		}
+
 		// Get a random country owned by the player
 		Random random = new Random();
 		int l_index = random.nextInt(d_player.getCountriesOwned().size());
@@ -74,16 +78,18 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 		if (d_player.getPlayerCards().contains(CardType.BOMB)) {
 			// Select a random enemy neighbor to bomb
 			List<Country> l_neighbors = GamePlayHelper.GetForeignNeighbors(d_player);
-			Country l_randomEnemyNeighbor = l_neighbors.get(new Random().nextInt(l_neighbors.size()));
-
-			// Create a bomb command
-			if (l_randomEnemyNeighbor != null) {
-				String[] d_bombOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB,
-						Integer.toString(l_randomEnemyNeighbor.getCountryId())};
-				Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
-						String.join(Constants.SPACE, d_bombOrder)));
-				Bomb.ValidateIssueBombOrder(d_player, d_bombOrder);
+			if (!l_neighbors.isEmpty()) {
+				Country l_randomEnemyNeighbor = l_neighbors.get(new Random().nextInt(l_neighbors.size()));
+				// Create a bomb command
+				if (l_randomEnemyNeighbor != null) {
+					String[] d_bombOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB,
+							Integer.toString(l_randomEnemyNeighbor.getCountryId())};
+					Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+							String.join(Constants.SPACE, d_bombOrder)));
+					Bomb.ValidateIssueBombOrder(d_player, d_bombOrder);
+				}
 			}
+
 		}
 
 		// If the player has an airlift card, use that card
@@ -91,17 +97,22 @@ public class RandomPlayerStrategy extends PlayerStrategy {
 			// Select two random countries owned by the player
 			Random random = new Random();
 			List<Country> l_countriesOwned = d_player.getCountriesOwned();
-			Country l_country1 = l_countriesOwned.get(random.nextInt(l_countriesOwned.size()));
-			Country l_country2 = l_countriesOwned.get(random.nextInt(l_countriesOwned.size()));
+			List<Country> l_countriesOwnedWithArmy = l_countriesOwned.stream().filter(c -> c.getArmyCount() > 0)
+					.collect(Collectors.toList());
 
-			// Create an airlift command
-			if (l_country1 != null && l_country2 != null && l_country1 != l_country2) {
-				String[] d_airliftOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT,
-						Integer.toString(l_country1.getCountryId()), Integer.toString(l_country2.getCountryId()),
-						Integer.toString(random.nextInt(l_country1.getArmyCount()) + 1)};
-				Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
-						String.join(Constants.SPACE, d_airliftOrder)));
-				Airlift.ValidateIssueAirliftOrder(d_player, d_airliftOrder);
+			if (!l_countriesOwnedWithArmy.isEmpty()) {
+				Country l_country1 = l_countriesOwnedWithArmy.get(random.nextInt(l_countriesOwnedWithArmy.size()));
+				Country l_country2 = l_countriesOwned.get(random.nextInt(l_countriesOwned.size()));
+
+				// Create an airlift command
+				if (l_country1 != null && l_country2 != null && l_country1 != l_country2) {
+					String[] d_airliftOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT,
+							Integer.toString(l_country1.getCountryId()), Integer.toString(l_country2.getCountryId()),
+							Integer.toString(random.nextInt(l_country1.getArmyCount()) + 1)};
+					Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+							String.join(Constants.SPACE, d_airliftOrder)));
+					Airlift.ValidateIssueAirliftOrder(d_player, d_airliftOrder);
+				}
 			}
 		}
 	}

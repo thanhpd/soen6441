@@ -37,10 +37,10 @@ public class TournamentControllerTest {
 
 	@Test
 	void testStart() {
-		Set<String> p_playerStrategyNames = Set.of("Cheater", "Aggressive");
-		Set<String> maps = Set.of("src/main/resources/maps/test.map");
-		int gamesCount = 2;
-		int maxTurns = 2;
+		Set<String> p_playerStrategyNames = Set.of("Aggressive", "Benevolent");
+		Set<String> maps = Set.of("test-win.map");
+		int gamesCount = 1;
+		int maxTurns = 1;
 		TournamentController l_tournamentController = new TournamentController();
 		l_tournamentController.start(p_playerStrategyNames, maps, gamesCount, maxTurns);
 

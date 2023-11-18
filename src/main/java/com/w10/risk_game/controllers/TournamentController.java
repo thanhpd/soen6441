@@ -139,20 +139,22 @@ public class TournamentController {
 	 */
 	protected String playGame(String p_map, Set<Player> p_players, int p_maxTurns) {
 
-		d_mapEditorController.loadMap(p_map);
+		d_mapEditorController.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "" + p_map);
 		d_gamePlayController.assignCountries();
+		d_gamePlayController.assignPlayersReinforcements();
+		d_gamePlayController.showMap();
 		for (int i = 1; i <= p_maxTurns; i++) {
-			for (i = 1; i <= d_gamePlayController.getNoOfPlayers(); i++) {
-				// issue order or play turn for each player
+			for (int j = 1; j <= d_gamePlayController.getNoOfPlayers(); j++) {
 				d_gamePlayController.issuePlayerOrder();
 				if (d_gamePlayController.getWinner() != null) {
 					return d_gamePlayController.getWinner();
 				}
-			}
-		}
 
-		// returns the winner name
-		// after max turn return draw
+			}
+
+			d_gamePlayController.showMap();
+
+		}
 
 		return "Draw";
 	}
@@ -166,12 +168,14 @@ public class TournamentController {
 	 *            objects.
 	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
-		System.out.println("Result of the trounament:");
-		for (MatchResult result : l_listofMatchResults) {
-			System.out.format("%7s %14s %7s", result.l_gameCount, result.l_map, result.l_playerName);
-			System.out.println();
+		// System.out.println("Result of the trounament:");
+		// System.out.println(String.format("%-10s%-10s%-10s", "Game Count", "Map",
+		// "Result"));
+		// for (MatchResult result : l_listofMatchResults) {
 
-		}
+		// System.out.println(String.format("%-10s%-10s%-10d", result.l_gameCount,
+		// result.l_map, result.l_playerName));
+		// }
 
 	}
 

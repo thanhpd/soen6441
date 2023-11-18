@@ -1,5 +1,6 @@
 package com.w10.risk_game;
 
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.ConsoleLogger;
 import com.w10.risk_game.utils.loggers.FileLogger;
@@ -41,7 +42,7 @@ public class App {
 	 */
 	public void startGame() {
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
-		GameEngine l_gameEngine = new GameEngine();
+		SinglePlayerEngine l_gameEngine = new SinglePlayerEngine();
 		try {
 			l_gameEngine.start();
 		} catch (Exception e) {

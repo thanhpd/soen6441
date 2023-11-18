@@ -1,11 +1,12 @@
-package com.w10.risk_game.controllers;
+package com.w10.risk_game.engines;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.w10.risk_game.exceptions.ApplicationException;
+import com.w10.risk_game.controllers.GamePlayController;
+import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.MatchResult;
@@ -20,7 +21,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  * The TournamentController class is responsible for managing and running a
  * series of games on different maps using a set of player strategies.
  */
-public class TournamentController {
+public class TournamentEngine {
 
 	private GamePlayController d_gamePlayController;
 	private MapEditorController d_mapEditorController;
@@ -44,7 +45,7 @@ public class TournamentController {
 		Phase.printAvailableCommand();
 	}
 
-	public TournamentController() {
+	public TournamentEngine() {
 		this.d_mapEditorController = new MapEditorController();
 		this.d_gamePlayController = new GamePlayController(d_mapEditorController);
 	}
@@ -179,42 +180,4 @@ public class TournamentController {
 
 	}
 
-	/**
-	 * The function takes a command as input and returns the main command by
-	 * splitting it on spaces.
-	 *
-	 * @param p_command
-	 *            The parameter `p_command` is a string that represents a command
-	 *            input from the user.
-	 *
-	 * @throws ApplicationException
-	 *             If the user enters an invalid command, show 'Please enter a valid
-	 *             command!' to the user
-	 *
-	 * @return The method is returning the main command from the given input
-	 *         command.
-	 */
-	public static String GetMainCommand(String p_command) throws ApplicationException {
-		if (p_command.isBlank())
-			throw new ApplicationException(Constants.USER_INPUT_ERROR_COMMAND_EMPTY);
-		return p_command.split(Constants.REGEX_SPLIT_ON_SPACE)[0];
-	}
-
-	/**
-	 * The function returns the game engine controller object.
-	 *
-	 * @return The method is returning an object of type GamePlayController.
-	 */
-	public GamePlayController getGame() {
-		return this.d_gamePlayController;
-	}
-
-	/**
-	 * The function returns the MapEditorController object.
-	 *
-	 * @return The method is returning an object of type MapEditorController.
-	 */
-	public MapEditorController getMapEditorController() {
-		return this.d_mapEditorController;
-	}
 }

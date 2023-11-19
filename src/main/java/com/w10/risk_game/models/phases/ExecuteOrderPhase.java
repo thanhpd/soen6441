@@ -152,9 +152,12 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	 * @param p_mapFilePath
 	 *            The parameter "p_mapFilePath" is a String that represents the file
 	 *            path where the map will be saved.
+	 * @param p_mapType
+	 *            The parameter "p_mapType" is a String that represents the type of
+	 *            map that needs to be saved.
 	 */
 	@Override
-	public void saveMap(String p_mapFilePath) {
+	public void saveMap(String p_mapFilePath, String p_mapType) {
 		this.printInvalidCommandMessage();
 	}
 
@@ -164,9 +167,12 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	 * @param p_playerName
 	 *            The parameter "p_playerName" is a String that represents the name
 	 *            of the player that needs to be created.
+	 *
+	 * @param p_playerStrategy
+	 *            The strategy of the player
 	 */
 	@Override
-	public void createPlayer(String p_playerName) {
+	public void createPlayer(String p_playerName, String p_playerStrategy) {
 		this.printInvalidCommandMessage();
 	}
 

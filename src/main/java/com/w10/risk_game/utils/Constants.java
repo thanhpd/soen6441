@@ -45,6 +45,11 @@ public final class Constants {
 	public static final String USER_INPUT_ERROR_COMMAND_INVALID = "Please enter a valid command!";
 	public static final String USER_INPUT_ERROR_SOME_ERROR_OCCURRED = "Some errors occurred!";
 	public static final String USER_INPUT_ERROR_ARG_LIST_INVALID = "The provided command option(s) is invalid!";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN = "Human";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE = "Aggressive";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT = "Benevolent";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM = "Random";
+	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER = "Cheater";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
 
 	// CLI output command constants
@@ -83,6 +88,9 @@ public final class Constants {
 	// Other constants
 	public static final String REGEX_SPLIT_ON_SPACE = "\\s+";
 	public static final String SPACE = " ";
+	public static final String EQUAL = "=";
+	public static final String COMMA = ",";
+	public static final String UNDERSCORE = "_";
 	public static final String NEW_LINE = "\n";
 
 	// Maps Folder Path
@@ -153,12 +161,19 @@ public final class Constants {
 	public static final String MAP_DISPLAY_CANNOT_DISPLAY_MAP = "Cannot display map!";
 
 	// Map Reader constants
-	public static final String MAP_READER_MAP = "[map]";
-	public static final String MAP_READER_CONTINENTS = "[continents]";
-	public static final String MAP_READER_COUNTRIES = "[countries]";
-	public static final String MAP_READER_BORDERS = "[borders]";
+	public static final String DOMINATION_MAP_READER_MAP = "[map]";
+	public static final String DOMINATION_MAP_READER_CONTINENTS = "[continents]";
+	public static final String DOMINATION_MAP_READER_COUNTRIES = "[countries]";
+	public static final String DOMINATION_MAP_READER_BORDERS = "[borders]";
+	public static final String CONQUEST_MAP_READER_MAP = "[Map]";
+	public static final String CONQUEST_MAP_READER_CONTINENTS = "[Continents]";
+	public static final String CONQUEST_MAP_READER_TERRITORIES = "[Territories]";
 	public static final String MAP_SAVE_ERROR = "Unable to save file. Please try again.";
 	public static final String MAP_SAVE_SUCCESS = "Map Saved Successfully";
+	public static final String MAP_START_SAVE_DOMINATION = "Start saving map in Domination format";
+	public static final String MAP_START_SAVE_CONQUEST = "Start saving map in Conquest format";
+	public static final String MAP_FORMAT_DOMINATION = "1";
+	public static final String MAP_FORMAT_CONQUEST = "2";
 
 	// Reinforcements constants
 	public static final int REINFORCEMENTS_MIN_NUMBER_OF_ARMIES = 3;
@@ -182,6 +197,8 @@ public final class Constants {
 
 	// Advance constants
 	public static final String ADVANCE_NOT_OWNER = "Advance order issued by {0} can no longer be executed as player no longer owns {1}.";
+	public static final String ADVANCE_FEWER_ARMIES_AFTER_ATTACK = "Advance order issued by {0} is no longer valid, as the remaining armies have dwindled to {1}. Proceeding to advance from {2} to {3} with the remaining {1} armies.";
+	public static final String ADVANCE_NO_ARMIES = "Advance order issued by {0} is no longer executable, as there are no remaining armies on {1}.";
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";
 	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You''ve conquered {1}. Keep the conquest going!";
 	public static final String ADVANCE_BATTLE_LOST = "{0}''s forces have been defeated in the battle for {1}, owned by {2}.";
@@ -200,10 +217,12 @@ public final class Constants {
 	public static final String BLOCKADE_SUCCEED = "Player {0} blockaded the country {1}. Country {1} became neutral and has {2} armies now.";
 
 	// Airlift constants
-	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifed from {1} to {2}";
-	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} doesnt belong to {1}";
+	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifted from {1} to {2}";
+	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} does not belong to {1}";
 	public static final String AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY = "Country {0} can airlift at most {1} armies";
 
+	// Strategy constants
+	public static final String STRATEGY_ISSUE_ORDER = "Order: {0}";
 	// SaveLoad constants
 	public static final String SAVE_LOAD_FILE_PATH = "src/main/resources/archives/";
 	public static final String SAVE_SUCCESS = "Game saved successfully";

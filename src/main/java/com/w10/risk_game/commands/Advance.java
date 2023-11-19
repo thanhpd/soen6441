@@ -2,6 +2,7 @@ package com.w10.risk_game.commands;
 
 import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
+import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -78,6 +79,19 @@ public class Advance extends Order {
 					this.d_countryFrom.getCountryName()));
 			return;
 		}
+		// Check if the number of armies specified in the advance order is greater than
+		// the number of armies currently present on the country from which the armies
+		// are being moved.
+		if (this.d_numOfArmies > this.d_countryFrom.getArmyCount()) {
+			if (this.d_countryFrom.getArmyCount() == 0) {
+				Logger.log(MessageFormat.format(Constants.ADVANCE_NO_ARMIES, this.d_advancingPlayerName,
+						this.d_countryFrom.getCountryName()));
+				return;
+			}
+			Logger.log(MessageFormat.format(Constants.ADVANCE_FEWER_ARMIES_AFTER_ATTACK, this.d_advancingPlayerName,
+					this.d_numOfArmies, this.d_countryFrom.getCountryName(), this.d_countryTo.getCountryName()));
+			this.d_numOfArmies = this.d_countryFrom.getArmyCount();
+		}
 		// Check if the target country is owned by the same player as the source country
 		if (this.d_countryTo.getOwner() != null
 				&& this.d_countryFrom.getOwner().getName().equals(this.d_countryTo.getOwner().getName())) {
@@ -106,7 +120,7 @@ public class Advance extends Order {
 				this.d_countryTo.getOwner().removeCountry(d_countryTo);
 				this.d_countryTo.setOwner(this.d_countryFrom.getOwner());
 				this.d_countryFrom.getOwner().addCountry(d_countryTo);
-				this.d_countryFrom.getOwner().addCard(CardType.GetRandomCard());
+				this.d_countryFrom.getOwner().setHasConqueredNewCountry(true);
 			} else { // attacker loses
 				Logger.log(MessageFormat.format(Constants.ADVANCE_BATTLE_LOST, this.d_countryFrom.getOwner().getName(),
 						this.d_countryTo.getCountryName(), this.d_countryTo.getOwner().getName()));
@@ -140,4 +154,87 @@ public class Advance extends Order {
 		}
 		return true;
 	}
+
+	/**
+	 * The function try to add advance order to the player's order list
+	 *
+	 * @param p_player
+	 *            the player who issue the order
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public static boolean ValidateIssueAdvanceOrder(Player p_player, String[] p_inputArray) {
+		if (Advance.CheckValidAdvanceInput(p_inputArray)) {
+			// Step 1: Get the variables needed to create an advance order
+			String l_countryNameFrom = p_inputArray[1];
+			String l_countryNameTo = p_inputArray[2];
+			Country l_countryFrom = p_player.getCountriesOwned().stream()
+					.filter(l_c -> l_c.getCountryName().equals(l_countryNameFrom)).findAny().orElse(null);
+			Country l_countryTo = l_countryFrom != null
+					? l_countryFrom.getNeighbors().values().stream()
+							.filter(c -> c.getCountryName().equals(l_countryNameTo)).findAny().orElse(null)
+					: null;
+			int d_advanceArmies = Integer.parseInt(p_inputArray[3]);
+			// Step 2: Check whether the order is valid
+			if (l_countryFrom != null && l_countryTo != null && d_advanceArmies > 0 && GetTotalArmiesDeployed(p_player,
+					l_countryFrom.getArmyCount(), l_countryFrom.getCountryId()) >= d_advanceArmies) {
+				Order l_order = new Advance(l_countryFrom, l_countryTo, d_advanceArmies);
+				p_player.addOrder(l_order);
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true;
+			} else {
+				if (l_countryFrom == null || l_countryTo == null) {
+					if (l_countryFrom == null)
+						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_OWNED, l_countryNameFrom,
+								p_player.getName()));
+					if (l_countryTo == null)
+						Logger.log(MessageFormat.format(Constants.ADVANCE_INVALID_COUNTRY_NOT_NEIGHBOR, l_countryNameTo,
+								l_countryNameFrom));
+				} else if (d_advanceArmies <= 0)
+					Logger.log(Constants.ADVANCE_INVALID_ARMY_LESS);
+				else
+					Logger.log(Constants.ADVANCE_INVALID_ARMY_MORE);
+				return false;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * The function gets the number of armies deployed/advanced to country X
+	 *
+	 * @param p_player
+	 *            the player who issue the order
+	 * @param p_currentArmiesOnCountry
+	 *            current armies on country
+	 * @param p_advanceFromCountryId
+	 *            country id to advance from
+	 * @return boolean value to show whether the player can advance
+	 */
+	public static int GetTotalArmiesDeployed(Player p_player, int p_currentArmiesOnCountry,
+			int p_advanceFromCountryId) {
+		int l_totalArmiesDeployed = p_currentArmiesOnCountry;
+		// Iterate through existing orders to check total armies deployed or moved
+		for (Order l_order : p_player.getOrders()) {
+			if ((l_order instanceof Deploy) && ((Deploy) l_order).getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Deploy) l_order).getNum();
+			} else if ((l_order instanceof Airlift)
+					&& ((Airlift) l_order).getTargetCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Airlift) l_order).getArmyToAirlift();
+			} else if ((l_order instanceof Airlift)
+					&& ((Airlift) l_order).getSourceCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed -= ((Airlift) l_order).getArmyToAirlift();
+			} else if ((l_order instanceof Advance)
+					&& ((Advance) l_order).getCountryNameTo().getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed += ((Advance) l_order).getNumOfArmies();
+			} else if ((l_order instanceof Advance)
+					&& ((Advance) l_order).getCountryNameFrom().getCountryId() == p_advanceFromCountryId) {
+				l_totalArmiesDeployed -= ((Advance) l_order).getNumOfArmies();
+			}
+		}
+		// Return total armies deployed or moved
+		return l_totalArmiesDeployed;
+	}
+
 }

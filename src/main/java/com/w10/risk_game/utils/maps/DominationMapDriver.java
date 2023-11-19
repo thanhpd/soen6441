@@ -1,14 +1,19 @@
-package com.w10.risk_game.utils;
+package com.w10.risk_game.utils.maps;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import com.w10.risk_game.models.Continent;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
+import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
@@ -17,7 +22,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  *
  * @author Omnia Alam
  */
-public class MapReader {
+public class DominationMapDriver {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
 	/**
@@ -41,8 +46,8 @@ public class MapReader {
 			l_line = p_scanner.nextLine();
 			// If the line indicates the start of continents, borders, or is empty, stop
 			// reading.
-			if (l_line.equals(Constants.MAP_READER_CONTINENTS) || l_line.equals(Constants.MAP_READER_BORDERS)
-					|| l_line.isEmpty()) {
+			if (l_line.equals(Constants.DOMINATION_MAP_READER_CONTINENTS)
+					|| l_line.equals(Constants.DOMINATION_MAP_READER_BORDERS) || l_line.isEmpty()) {
 				break;
 			}
 			// Parse the line to create a Country object and add it to the map of countries.
@@ -73,8 +78,8 @@ public class MapReader {
 		String l_line;
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
-			if (l_line.equals(Constants.MAP_READER_CONTINENTS) || l_line.equals(Constants.MAP_READER_COUNTRIES)
-					|| l_line.isEmpty()) {
+			if (l_line.equals(Constants.DOMINATION_MAP_READER_CONTINENTS)
+					|| l_line.equals(Constants.DOMINATION_MAP_READER_COUNTRIES) || l_line.isEmpty()) {
 				break;
 			}
 
@@ -113,8 +118,8 @@ public class MapReader {
 		while (p_scanner.hasNextLine()) {
 			l_line = p_scanner.nextLine();
 
-			if (l_line.equals(Constants.MAP_READER_COUNTRIES) || l_line.equals(Constants.MAP_READER_BORDERS)
-					|| l_line.isEmpty()) {
+			if (l_line.equals(Constants.DOMINATION_MAP_READER_COUNTRIES)
+					|| l_line.equals(Constants.DOMINATION_MAP_READER_BORDERS) || l_line.isEmpty()) {
 				break;
 			}
 			// Parse the line to create a Continent object with the current continent ID.
@@ -181,7 +186,7 @@ public class MapReader {
 			// read until continents
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
-				if (l_line.equals(Constants.MAP_READER_CONTINENTS)) {
+				if (l_line.equals(Constants.DOMINATION_MAP_READER_CONTINENTS)) {
 					l_continents = readContinents(l_scanner);
 					break;
 				}
@@ -190,7 +195,7 @@ public class MapReader {
 			// read until countries
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
-				if (l_line.equals(Constants.MAP_READER_COUNTRIES)) {
+				if (l_line.equals(Constants.DOMINATION_MAP_READER_COUNTRIES)) {
 					l_countries = readCountries(l_scanner, l_continents);
 					break;
 				}
@@ -199,7 +204,7 @@ public class MapReader {
 			// read until border
 			while (l_scanner.hasNextLine()) {
 				l_line = l_scanner.nextLine();
-				if (l_line.equals(Constants.MAP_READER_BORDERS)) {
+				if (l_line.equals(Constants.DOMINATION_MAP_READER_BORDERS)) {
 					parseBorders(l_countries, l_scanner);
 					break;
 				}
@@ -213,5 +218,57 @@ public class MapReader {
 			Logger.log(Constants.MAP_READER_FILE_NOT_FOUND);
 		}
 		return l_gameMap;
+	}
+
+	/**
+	 * The saveMap function saves the game map to a file in a specific format.
+	 *
+	 * @param p_filePath
+	 *            The file path where the map will be saved.
+	 * @param p_gameMap
+	 *            The game map that will be saved.
+	 */
+	public void saveMap(String p_filePath, GameMap p_gameMap) {
+		if (MapValidator.IsMapCorrect(p_gameMap))
+			try (FileWriter l_fileWriter = new FileWriter(p_filePath)) {
+				Logger.log(Constants.MAP_START_SAVE_DOMINATION);
+				// Initialize PrintWriter object
+				PrintWriter l_printWriter = new PrintWriter(l_fileWriter);
+				l_printWriter.println(Constants.DOMINATION_MAP_READER_MAP + Constants.NEW_LINE
+						+ Constants.DOMINATION_MAP_READER_CONTINENTS);
+				// Writes continents details to new map file
+				for (Continent continent : p_gameMap.getContinents().values()) {
+					l_printWriter.format("%s %d%n", replaceSpaces(continent.getContinentName()), continent.getBonus());
+				}
+				l_printWriter.println(Constants.NEW_LINE + Constants.DOMINATION_MAP_READER_COUNTRIES);
+
+				// Assigns new continent id
+				for (Country country : p_gameMap.getCountries().values()) {
+					l_printWriter.format("%d %s %d%n", country.getCountryId(), replaceSpaces(country.getCountryName()),
+							country.getContinentId());
+				}
+
+				// Writes border details to new map file
+				l_printWriter.println(Constants.NEW_LINE + Constants.DOMINATION_MAP_READER_BORDERS);
+				for (Country country : p_gameMap.getCountries().values()) {
+					l_printWriter.format("%d %s%n", country.getCountryId(), country.getNeighbors().keySet().stream()
+							.map(Object::toString).collect(Collectors.joining(Constants.SPACE)));
+				}
+				Logger.log(Constants.MAP_SAVE_SUCCESS);
+				l_printWriter.close();
+			} catch (IOException e) {
+				Logger.log(Constants.MAP_SAVE_ERROR);
+			}
+	}
+
+	/**
+	 * Replace spaces in the string by underscores.
+	 *
+	 * @param p_string
+	 *            The string in which spaces need to be replaced.
+	 * @return The string with spaces replaced by underscores.
+	 */
+	private String replaceSpaces(String p_string) {
+		return p_string.replaceAll(Constants.SPACE, Constants.UNDERSCORE);
 	}
 }

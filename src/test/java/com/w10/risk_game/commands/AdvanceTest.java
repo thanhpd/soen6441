@@ -1,6 +1,7 @@
 package com.w10.risk_game.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +63,7 @@ class AdvanceTest {
 		assertEquals("Player1", d_country2.getOwner().getName());
 		assertEquals(0, d_player2.getCountriesOwned().size());
 		assertEquals(2, d_player1.getCountriesOwned().size());
-		assertEquals(1, d_player1.getPlayerCards().size());
+		assertTrue(d_player1.hasConqueredNewCountry());
 	}
 
 	/**
@@ -90,7 +91,7 @@ class AdvanceTest {
 		assertEquals("Player1", d_country2.getOwner().getName());
 		assertEquals(0, d_player2.getCountriesOwned().size());
 		assertEquals(2, d_player1.getCountriesOwned().size());
-		assertEquals(1, d_player1.getPlayerCards().size());
+		assertTrue(d_player1.hasConqueredNewCountry());
 
 		Order deploy = new Deploy(d_player1, d_country2.getCountryId(), 3);
 		deploy.execute();

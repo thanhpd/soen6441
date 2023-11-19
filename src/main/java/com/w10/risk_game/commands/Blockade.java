@@ -2,6 +2,7 @@ package com.w10.risk_game.commands;
 
 import java.text.MessageFormat;
 
+import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
@@ -133,6 +134,43 @@ public class Blockade extends Order {
 		return true;
 	}
 
+	/**
+	 * The function try to add blockade order to the player's order list
+	 *
+	 * @param p_player
+	 *            the player who issue the order
+	 * @param p_inputArray
+	 *            the input string split by space
+	 * @return boolean value to show whether the order is added successfully
+	 */
+	public static boolean ValidateIssueBlockadeOrder(Player p_player, String[] p_inputArray) {
+		String l_countryIdToBlockade = p_inputArray[1];
+
+		// Check if the player has a blockade card
+		if (p_player.hasCard(CardType.BLOCKADE)) {
+			// Validate the blockade order
+			if (ValidateOrder(p_player, l_countryIdToBlockade)) {
+				// If the order is valid, create a Blockade order and add it to the list of
+				// orders
+				Order order = new Blockade(p_player, l_countryIdToBlockade);
+				p_player.addOrder(order);
+
+				// Remove the blockade card from the player's hand
+				p_player.removeCard(CardType.BLOCKADE);
+
+				// Log a success message for the blockade order execution
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true; // Return true for a successful order execution
+			} else {
+				// Log if the blockade order was incorrect or invalid
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE));
+				return false; // Return false for an unsuccessful order execution
+			}
+		} else {
+			return false; // Return false if the player does not have a blockade card
+		}
+	}
 	/**
 	 * The function returns the country ID to block.
 	 *

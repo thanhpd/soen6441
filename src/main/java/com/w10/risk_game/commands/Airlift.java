@@ -3,6 +3,7 @@ package com.w10.risk_game.commands;
 import java.text.MessageFormat;
 import java.util.List;
 
+import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
@@ -232,4 +233,50 @@ public class Airlift extends Order {
 	public int getSourceCountryId() {
 		return Integer.parseInt(d_sourceCountryId);
 	}
+
+	/**
+	 * The function issueAirliftOrder checks if the player has an airlift card and
+	 * validates the order before creating a new airlift order and adding it to the
+	 * list of orders.
+	 *
+	 * @param p_player
+	 *            the player who issue the order
+	 * @param p_inputArray
+	 *            An array of strings that represents the input command. The first
+	 *            element is the command itself, and the following elements are the
+	 *            parameters for the command.
+	 * @return The method is returning a boolean value.
+	 */
+	public static boolean ValidateIssueAirliftOrder(Player p_player, String[] p_inputArray) {
+		// Extract information from the player's input array
+		String l_countryIdToAirliftFrom = p_inputArray[1];
+		String l_countryIdToAirlift = p_inputArray[2];
+		String l_airliftArmies = p_inputArray[3];
+
+		// Check if the player has an airlift card
+		if (p_player.hasCard(CardType.AIRLIFT)) {
+			// Validate the airlift order
+			if (ValidateOrder(p_player, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies)) {
+				// If the airlift order is valid, create an Airlift order and add it to the list
+				// of orders
+				Order order = new Airlift(p_player, l_countryIdToAirliftFrom, l_countryIdToAirlift, l_airliftArmies);
+				p_player.addOrder(order);
+
+				// Remove the airlift card from the player's hand
+				p_player.removeCard(CardType.AIRLIFT);
+
+				// Log a success message for the airlift order execution
+				Logger.log(Constants.PLAYER_ISSUE_ORDER_SUCCEED);
+				return true; // Return true for a successful order execution
+			} else {
+				// Log if the airlift order was incorrect or invalid
+				Logger.log(MessageFormat.format(Constants.PLAYER_ISSUE_ORDER_INCORRECT,
+						Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT));
+				return false; // Return false for an unsuccessful order execution
+			}
+		} else {
+			return false; // Return false if the player does not have an airlift card
+		}
+	}
+
 }

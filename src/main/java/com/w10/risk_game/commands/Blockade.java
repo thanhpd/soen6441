@@ -135,6 +135,7 @@ public class Blockade extends Order {
 
 	/**
 	 * The function returns the country ID to block.
+	 *
 	 * @return country id to block
 	 */
 	public String getCountryIdToBlock() {

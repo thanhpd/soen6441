@@ -6,6 +6,7 @@ import java.util.ArrayList;
 /**
  * The DataStorage class is responsible for storing data for saving and loading
  * the game.
+ *
  * @author Yajing Liu
  */
 public class DataStorage implements Serializable {

@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * The SaveLoad class is responsible for saving and loading the game.
+ *
  * @author Yajing
  */
 public class SaveLoad {
@@ -32,7 +33,9 @@ public class SaveLoad {
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	/**
 	 * Constructor for SaveLoad class.
-	 * @param p_gameEngine The parameter `p_gameEngine` is a GameEngine object.
+	 *
+	 * @param p_gameEngine
+	 *            The parameter `p_gameEngine` is a GameEngine object.
 	 */
 	public SaveLoad(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
@@ -41,23 +44,50 @@ public class SaveLoad {
 		// TODO: Get Global GameMap
 		this.d_gameMapForSave = p_gameEngine.getMapEditorController().getGameMap();
 	}
-	public SaveLoad (GameMap p_gameMap, List<Player> p_playerList){
+
+	/**
+	 * Constructor for SaveLoad class. This constructor is only used for testing.
+	 *
+	 * @param p_gameMap
+	 *            GameMap
+	 * @param p_playerList
+	 *            List of players
+	 */
+	public SaveLoad(GameMap p_gameMap, List<Player> p_playerList) {
 		this.d_gameMapForSave = p_gameMap;
 		this.d_playerListForSave = p_playerList;
 	}
-
+	/**
+	 * The function getPlayerListForSave() returns the player list for save.
+	 *
+	 * @return a list of players to be saved.
+	 */
 	public List<Player> getPlayerListForSave() {
 		return d_playerListForSave;
 	}
-
+	/**
+	 * The function getPlayerListForLoad() returns the player list for load.
+	 *
+	 * @return a list of players to be loaded.
+	 */
 	public List<Player> getPlayerListForLoad() {
 		return d_playerListForLoad;
 	}
 
+	/**
+	 * The function getGameMapForSave() returns the game map for save.
+	 *
+	 * @return a game map to be saved.
+	 */
 	public GameMap getGameMapForSave() {
 		return d_gameMapForSave;
 	}
 
+	/**
+	 * The function getGameMapForLoad() returns the game map for load.
+	 *
+	 * @return a game map to be loaded.
+	 */
 	public GameMap getGameMapForLoad() {
 		return d_gameMapForLoad;
 	}
@@ -67,23 +97,23 @@ public class SaveLoad {
 	 */
 	public void saveGame(String p_fileName) {
 		String l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
-		try{
+		try {
 			ObjectOutputStream l_out = new ObjectOutputStream(new FileOutputStream(l_filePath));
 			d_dataForSave = new DataStorage();
 			// Save Country Data
-			for (Map.Entry<Integer,Country> entry : d_gameMapForSave.getCountries().entrySet()) {
+			for (Map.Entry<Integer, Country> entry : d_gameMapForSave.getCountries().entrySet()) {
 				d_dataForSave.d_countryIds.add(entry.getKey());
 				d_dataForSave.d_countryNames.add(entry.getValue().getCountryName());
 				d_dataForSave.d_belongContinentIds.add(entry.getValue().getContinentId());
 				d_dataForSave.d_armyCounts.add(entry.getValue().getArmyCount());
 				d_dataForSave.d_ownerNames.add(entry.getValue().getOwner().getName());
 				d_dataForSave.d_numberOfNeighbors.add(entry.getValue().getNeighbors().size());
-				for (Map.Entry<Integer, Country> neighbor: entry.getValue().getNeighbors().entrySet()){
+				for (Map.Entry<Integer, Country> neighbor : entry.getValue().getNeighbors().entrySet()) {
 					d_dataForSave.d_neighborIds.add(neighbor.getValue().getCountryId());
 				}
 			}
 			// Save Continent Data
-			for (Map.Entry<Integer,Continent> entry : d_gameMapForSave.getContinents().entrySet()) {
+			for (Map.Entry<Integer, Continent> entry : d_gameMapForSave.getContinents().entrySet()) {
 				d_dataForSave.d_continentIds.add(entry.getKey());
 				d_dataForSave.d_continentNames.add(entry.getValue().getContinentName());
 				d_dataForSave.d_continentBonus.add(entry.getValue().getBonus());
@@ -121,7 +151,7 @@ public class SaveLoad {
 	/**
 	 * The function loadGame() loads the game.
 	 */
-	public void loadGame(String p_fileName){
+	public void loadGame(String p_fileName) {
 		String l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
 		GameMap l_gameMap = new GameMap();
 		List<Player> l_playerList = new ArrayList<>();
@@ -129,38 +159,40 @@ public class SaveLoad {
 			ObjectInputStream l_in = new ObjectInputStream(new FileInputStream(l_filePath));
 			d_dataForLoad = (DataStorage) l_in.readObject();
 			// Load Country Data
-			ArrayList <Integer> l_countryIds = d_dataForLoad.d_countryIds;
-			ArrayList <String> l_countryNames = d_dataForLoad.d_countryNames;
-			ArrayList <Integer> l_belongContinentIds = d_dataForLoad.d_belongContinentIds;
-			ArrayList <Integer> l_armyCounts = d_dataForLoad.d_armyCounts;
-			ArrayList <String> l_ownerNames = d_dataForLoad.d_ownerNames;
-			ArrayList <Integer> l_numberOfNeighbors = d_dataForLoad.d_numberOfNeighbors;
-			ArrayList <Integer> l_neighborIds = d_dataForLoad.d_neighborIds;
+			ArrayList<Integer> l_countryIds = d_dataForLoad.d_countryIds;
+			ArrayList<String> l_countryNames = d_dataForLoad.d_countryNames;
+			ArrayList<Integer> l_belongContinentIds = d_dataForLoad.d_belongContinentIds;
+			ArrayList<Integer> l_armyCounts = d_dataForLoad.d_armyCounts;
+			ArrayList<String> l_ownerNames = d_dataForLoad.d_ownerNames;
+			ArrayList<Integer> l_numberOfNeighbors = d_dataForLoad.d_numberOfNeighbors;
+			ArrayList<Integer> l_neighborIds = d_dataForLoad.d_neighborIds;
 			int l_countryNumber = l_countryIds.size();
 			d_countriesForLoad = new HashMap<>();
-			for (int i = 0; i < l_countryNumber; i++){
-				Country l_country = new Country(l_countryIds.get(i), l_countryNames.get(i), l_belongContinentIds.get(i), l_armyCounts.get(i));
+			for (int i = 0; i < l_countryNumber; i++) {
+				Country l_country = new Country(l_countryIds.get(i), l_countryNames.get(i), l_belongContinentIds.get(i),
+						l_armyCounts.get(i));
 				d_countriesForLoad.put(l_countryIds.get(i), l_country);
 			}
-			for (int i = 0; i < l_countryNumber; i++){
+			for (int i = 0; i < l_countryNumber; i++) {
 				Country l_country = d_countriesForLoad.get(l_countryIds.get(i));
 				int l_currentCountryNumberOfNeighbors = l_numberOfNeighbors.get(i);
-				for (int j = 0; j < l_currentCountryNumberOfNeighbors; j++){
+				for (int j = 0; j < l_currentCountryNumberOfNeighbors; j++) {
 					Country l_neighbor = d_countriesForLoad.get(l_neighborIds.remove(0));
 					l_country.addNeighbor(l_neighbor);
 				}
 			}
 			// Load Continent Data
-			ArrayList <Integer> l_continentIds = d_dataForLoad.d_continentIds;
-			ArrayList <String> l_continentNames = d_dataForLoad.d_continentNames;
-			ArrayList <Integer> l_continentBonus = d_dataForLoad.d_continentBonus;
+			ArrayList<Integer> l_continentIds = d_dataForLoad.d_continentIds;
+			ArrayList<String> l_continentNames = d_dataForLoad.d_continentNames;
+			ArrayList<Integer> l_continentBonus = d_dataForLoad.d_continentBonus;
 			int l_continentNumber = l_continentIds.size();
 			Map<Integer, Continent> l_continents = new HashMap<>();
-			for (int i = 0; i < l_continentNumber; i++){
-				Continent l_continent = new Continent(l_continentIds.get(i), l_continentNames.get(i), l_continentBonus.get(i));
+			for (int i = 0; i < l_continentNumber; i++) {
+				Continent l_continent = new Continent(l_continentIds.get(i), l_continentNames.get(i),
+						l_continentBonus.get(i));
 				l_continents.put(l_continentIds.get(i), l_continent);
 			}
-			for (int i = 0; i < l_countryNumber; i++){
+			for (int i = 0; i < l_countryNumber; i++) {
 				Country l_country = d_countriesForLoad.get(l_countryIds.get(i));
 				Continent l_continent = l_continents.get(l_belongContinentIds.get(i));
 				l_continent.addCountry(l_country);
@@ -168,30 +200,31 @@ public class SaveLoad {
 			l_gameMap.addCountries(d_countriesForLoad);
 			l_gameMap.addContinents(l_continents);
 			// Load Player Data
-			ArrayList <String> l_playerNames = d_dataForLoad.d_playerNames;
-			ArrayList <Integer> l_playerLeftoverArmies = d_dataForLoad.d_playerLeftoverArmies;
-			ArrayList <Boolean> l_playerHasCommitted = d_dataForLoad.d_playerHasCommitted;
-			ArrayList <Integer> l_numberOfOrders = d_dataForLoad.d_numberOfOrders;
-			ArrayList <Integer> l_numberOfCountries = d_dataForLoad.d_numberOfCountries;
-			ArrayList <Integer> l_ownedCountryIds = d_dataForLoad.d_ownedCountryIds;
-			ArrayList <Integer> l_numberOfCards = d_dataForLoad.d_numberOfCards;
+			ArrayList<String> l_playerNames = d_dataForLoad.d_playerNames;
+			ArrayList<Integer> l_playerLeftoverArmies = d_dataForLoad.d_playerLeftoverArmies;
+			ArrayList<Boolean> l_playerHasCommitted = d_dataForLoad.d_playerHasCommitted;
+			ArrayList<Integer> l_numberOfOrders = d_dataForLoad.d_numberOfOrders;
+			ArrayList<Integer> l_numberOfCountries = d_dataForLoad.d_numberOfCountries;
+			ArrayList<Integer> l_ownedCountryIds = d_dataForLoad.d_ownedCountryIds;
+			ArrayList<Integer> l_numberOfCards = d_dataForLoad.d_numberOfCards;
 			int l_playerNumber = l_playerNames.size();
-			for (int i = 0; i < l_playerNumber; i++){
-				Player l_player = new Player(l_playerNames.get(i), new ArrayList<>(), new ArrayList<>(), l_playerLeftoverArmies.get(i), new ArrayList<>(), l_playerHasCommitted.get(i));
+			for (int i = 0; i < l_playerNumber; i++) {
+				Player l_player = new Player(l_playerNames.get(i), new ArrayList<>(), new ArrayList<>(),
+						l_playerLeftoverArmies.get(i), new ArrayList<>(), l_playerHasCommitted.get(i));
 				// Load Country Data
 				int l_currentPlayerNumberOfCountries = l_numberOfCountries.get(i);
-				for (int j = 0; j < l_currentPlayerNumberOfCountries; j++){
+				for (int j = 0; j < l_currentPlayerNumberOfCountries; j++) {
 					Country l_country = d_countriesForLoad.get(l_ownedCountryIds.remove(0));
 					l_country.setOwner(l_player);
 					l_player.addCountry(l_country);
 				}
 				// Load Order Data
 				int l_currentPlayerNumberOfOrders = l_numberOfOrders.get(i);
-				List <Order> l_orderList = loadOrder(l_player, l_currentPlayerNumberOfOrders);
+				List<Order> l_orderList = loadOrder(l_player, l_currentPlayerNumberOfOrders);
 				l_player.setOrders(l_orderList);
 				// Load Card Data
 				int l_currentPlayerNumberOfCards = l_numberOfCards.get(i);
-				List <CardType> l_cardList = loadCard(l_currentPlayerNumberOfCards);
+				List<CardType> l_cardList = loadCard(l_currentPlayerNumberOfCards);
 				l_player.setPlayerCards(l_cardList);
 				l_playerList.add(l_player);
 			}
@@ -201,20 +234,24 @@ public class SaveLoad {
 			// TODO: Set Global PlayerList
 			// TODO: Set Global GameMap
 			Logger.log(Constants.LOAD_SUCCESS);
-		}catch (Exception e){
+		} catch (Exception e) {
 			Logger.log(Constants.LOAD_FAIL);
 		}
 	}
 	/**
 	 * The function saveOrder() saves the order.
-	 * @param p_order The parameter `p_order` is an Order object.
+	 *
+	 * @param p_order
+	 *            The parameter `p_order` is an Order object.
 	 */
-	private void saveOrder(Order p_order){
+	private void saveOrder(Order p_order) {
 		if (p_order instanceof Advance) {
 			// Save information of Advance
 			d_dataForSave.d_orderTypes.add("Advance");
-			d_dataForSave.d_advanceCountryFromIds.add(Integer.toString(((Advance) p_order).getCountryNameFrom().getCountryId()));
-			d_dataForSave.d_advanceCountryToIds.add(Integer.toString(((Advance) p_order).getCountryNameTo().getCountryId()));
+			d_dataForSave.d_advanceCountryFromIds
+					.add(Integer.toString(((Advance) p_order).getCountryNameFrom().getCountryId()));
+			d_dataForSave.d_advanceCountryToIds
+					.add(Integer.toString(((Advance) p_order).getCountryNameTo().getCountryId()));
 			d_dataForSave.d_advanceNums.add(((Advance) p_order).getNumOfArmies());
 		} else if (p_order instanceof Airlift) {
 			// Save information of Airlift
@@ -243,14 +280,16 @@ public class SaveLoad {
 	}
 	/**
 	 * The function saveCard() saves the card.
-	 * @param p_card The parameter `p_card` is a CardType object.
+	 *
+	 * @param p_card
+	 *            The parameter `p_card` is a CardType object.
 	 */
 	private void saveCard(CardType p_card) {
 		if (p_card == CardType.AIRLIFT) {
 			d_dataForSave.d_cards.add("Airlift");
 		} else if (p_card == CardType.BOMB) {
 			d_dataForSave.d_cards.add("Bomb");
-		} else if (p_card == CardType.BLOCKADE){
+		} else if (p_card == CardType.BLOCKADE) {
 			d_dataForSave.d_cards.add("Blockade");
 		} else if (p_card == CardType.DIPLOMACY) {
 			d_dataForSave.d_cards.add("Diplomacy");
@@ -259,16 +298,20 @@ public class SaveLoad {
 
 	/**
 	 * The function loadOrder() loads the order.
-	 * @param p_player The parameter `p_player` is current player.
-	 * @param p_numberOfOrder The parameter `p_numberOfOrder` is the number of orders of current player.
+	 *
+	 * @param p_player
+	 *            The parameter `p_player` is current player.
+	 * @param p_numberOfOrder
+	 *            The parameter `p_numberOfOrder` is the number of orders of current
+	 *            player.
 	 * @return a list of orders.
 	 */
-	private List<Order> loadOrder(Player p_player, int p_numberOfOrder){
+	private List<Order> loadOrder(Player p_player, int p_numberOfOrder) {
 		List<Order> l_orders = new ArrayList<>();
-		for (int i = 0; i < p_numberOfOrder; i++){
+		for (int i = 0; i < p_numberOfOrder; i++) {
 			String l_orderType = d_dataForLoad.d_orderTypes.remove(0);
 			switch (l_orderType) {
-				case "Advance": {
+				case "Advance" : {
 					// Create advance order
 					int l_countryFromId = Integer.parseInt(d_dataForLoad.d_advanceCountryFromIds.remove(0));
 					int l_countryToId = Integer.parseInt(d_dataForLoad.d_advanceCountryToIds.remove(0));
@@ -279,30 +322,31 @@ public class SaveLoad {
 					l_orders.add(l_advance);
 					break;
 				}
-				case "Airlift": {
+				case "Airlift" : {
 					// Create airlift order
 					int l_countryFromId = Integer.parseInt(d_dataForLoad.d_airliftCountryFromIds.remove(0));
 					int l_countryToId = Integer.parseInt(d_dataForLoad.d_airliftCountryToIds.remove(0));
 					int l_numOfArmies = Integer.parseInt(d_dataForLoad.d_airliftNums.remove(0));
-					Order l_airlift = new Airlift(p_player, Integer.toString(l_countryFromId), Integer.toString(l_countryToId), Integer.toString(l_numOfArmies));
+					Order l_airlift = new Airlift(p_player, Integer.toString(l_countryFromId),
+							Integer.toString(l_countryToId), Integer.toString(l_numOfArmies));
 					l_orders.add(l_airlift);
 					break;
 				}
-				case "Blockade": {
+				case "Blockade" : {
 					// Create blockade order
 					String l_countryId = d_dataForLoad.d_blockadeCountryIds.remove(0);
 					Order l_blockade = new Blockade(p_player, l_countryId);
 					l_orders.add(l_blockade);
 					break;
 				}
-				case "Bomb": {
+				case "Bomb" : {
 					// Create bomb order
 					String l_countryId = d_dataForLoad.d_bombCountryIds.remove(0);
 					Order l_bomb = new Bomb(p_player, l_countryId);
 					l_orders.add(l_bomb);
 					break;
 				}
-				case "Deploy": {
+				case "Deploy" : {
 					// Create deploy order
 					int l_countryId = d_dataForLoad.d_deployCountryIds.remove(0);
 					int l_numOfArmies = d_dataForLoad.d_deployNums.remove(0);
@@ -310,38 +354,41 @@ public class SaveLoad {
 					l_orders.add(l_deploy);
 					break;
 				}
-				case "Negotiate":
+				case "Negotiate" :
 					// Create negotiate order
 					String l_playerName = d_dataForLoad.d_negotiatePlayerName.remove(0);
 					Order l_negotiate = new Negotiate(p_player, l_playerName);
 					l_orders.add(l_negotiate);
 					break;
 			}
-	}
+		}
 		return l_orders;
 	}
 
 	/**
 	 * The function loadCard() loads the card.
-	 * @param p_cardNum The parameter `p_cardNum` is the number of cards of current player.
+	 *
+	 * @param p_cardNum
+	 *            The parameter `p_cardNum` is the number of cards of current
+	 *            player.
 	 * @return a list of cards.
 	 */
-	public List <CardType> loadCard (int p_cardNum){
-		List <CardType> l_cardList = new ArrayList<>();
-		for (int i = 0; i < p_cardNum; i++){
+	public List<CardType> loadCard(int p_cardNum) {
+		List<CardType> l_cardList = new ArrayList<>();
+		for (int i = 0; i < p_cardNum; i++) {
 			String l_cardType = d_dataForLoad.d_cards.remove(0);
 			// Create card based on card type
 			switch (l_cardType) {
-				case "Airlift":
+				case "Airlift" :
 					l_cardList.add(CardType.AIRLIFT);
 					break;
-				case "Bomb":
+				case "Bomb" :
 					l_cardList.add(CardType.BOMB);
 					break;
-				case "Blockade":
+				case "Blockade" :
 					l_cardList.add(CardType.BLOCKADE);
 					break;
-				case "Diplomacy":
+				case "Diplomacy" :
 					l_cardList.add(CardType.DIPLOMACY);
 					break;
 			}

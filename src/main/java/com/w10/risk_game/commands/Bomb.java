@@ -169,6 +169,7 @@ public class Bomb extends Order {
 
 	/**
 	 * The function returns the country ID of the country to bomb.
+	 *
 	 * @return the country ID of the country to bomb.
 	 */
 	public String getCountryIdToBomb() {

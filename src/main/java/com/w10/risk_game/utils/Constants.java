@@ -204,4 +204,10 @@ public final class Constants {
 	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} doesnt belong to {1}";
 	public static final String AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY = "Country {0} can airlift at most {1} armies";
 
+	// SaveLoad constants
+	public static final String SAVE_LOAD_FILE_PATH = "src/main/resources/archives/";
+	public static final String SAVE_SUCCESS = "Game saved successfully";
+	public static final String SAVE_FAIL = "Game failed to save";
+	public static final String LOAD_SUCCESS = "Game loaded successfully";
+	public static final String LOAD_FAIL = "Game failed to load";
 }

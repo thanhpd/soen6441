@@ -1,0 +1,24 @@
+Countries
+1 England 1 3 Player1 2
+2 Scotland 1 4 Player1 1
+3 Canada 2 5 Player2 1
+Neighbor Countries
+2 3 1 1 
+Continents
+1 Europe 5
+2 North America 5
+Players
+Player2 7 false 0 1 2
+Player1 5 false 6 2 2
+Order Types
+deploy advance bomb blockade airlift negotiate 
+deploy 1 3
+advance 1 2 3
+airlift 1 2 2
+blockade 3
+bomb 3
+negotiate Player2
+Players' Countries
+1 2 3 
+Cards
+blockade negotiate bomb airlift 

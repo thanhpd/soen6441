@@ -85,9 +85,9 @@ public class SaveLoadTest {
 		// Set player
 		Player l_player2 = new Player("Player2", l_countriesList2, new ArrayList<Order>(), 7, l_cardTypes2, false);
 		l_country3.setOwner(l_player2);
-		List<Player> l_players = new ArrayList<>();
-		l_players.add(l_player1);
-		l_players.add(l_player2);
+		HashMap<String, Player> l_players = new HashMap<>();
+		l_players.put(l_player1.getName(), l_player1);
+		l_players.put(l_player2.getName(), l_player2);
 		d_saveLoad = new SaveLoad(l_gameMap, l_players);
 	}
 	/**
@@ -97,21 +97,21 @@ public class SaveLoadTest {
 	@Test
 	public void testSaveLoad() {
 		// Save and get save data
-		d_saveLoad.saveGame("testSave");
+		d_saveLoad.saveGame(Constants.SAVE_LOAD_TEST_FILE_NAME);
 		GameMap l_gameMapForSave = d_saveLoad.getGameMapForSave();
 		Map<Integer, Country> l_countriesForSave = l_gameMapForSave.getCountries();
 		Map<Integer, Continent> l_continentsForSave = l_gameMapForSave.getContinents();
-		List<Player> l_playerListForSave = d_saveLoad.getPlayerListForSave();
+		HashMap<String, Player> l_playersForSave = d_saveLoad.getPlayersForSave();
 		// Load and get load data
-		d_saveLoad.loadGame("testSave");
+		d_saveLoad.loadGame(Constants.SAVE_LOAD_TEST_FILE_NAME);
 		GameMap l_gameMapForLoad = d_saveLoad.getGameMapForLoad();
 		Map<Integer, Country> l_countriesForLoad = l_gameMapForLoad.getCountries();
 		Map<Integer, Continent> l_continentsForLoad = l_gameMapForLoad.getContinents();
-		List<Player> l_playerListForLoad = d_saveLoad.getPlayerListForLoad();
+		HashMap<String, Player> l_playersForLoad = d_saveLoad.getPlayersForLoad();
 		// Compare the size of the data
 		assertEquals(l_gameMapForSave.getCountries().size(), l_gameMapForLoad.getCountries().size());
 		assertEquals(l_gameMapForSave.getContinents().size(), l_gameMapForLoad.getContinents().size());
-		assertEquals(l_playerListForSave.size(), l_playerListForLoad.size());
+		assertEquals(l_playersForSave.size(), l_playersForLoad.size());
 		// Compare Country of save data and load data
 		for (Map.Entry<Integer, Country> entry : l_countriesForSave.entrySet()) {
 			assertEquals(entry.getValue().getCountryId(), l_countriesForLoad.get(entry.getKey()).getCountryId());
@@ -141,28 +141,28 @@ public class SaveLoadTest {
 			}
 		}
 		// Compare Player of save data and load data
-		for (int i = 0; i < l_playerListForSave.size(); i++) {
-			assertEquals(l_playerListForSave.get(i).getName(), l_playerListForLoad.get(i).getName());
-			assertEquals(l_playerListForSave.get(i).getCountriesOwned().size(),
-					l_playerListForLoad.get(i).getCountriesOwned().size());
-			for (int j = 0; j < l_playerListForSave.get(i).getCountriesOwned().size(); j++) {
-				assertEquals(l_playerListForSave.get(i).getCountriesOwned().get(j).getCountryName(),
-						l_playerListForLoad.get(i).getCountriesOwned().get(j).getCountryName());
+		for (Map.Entry<String, Player> entry : l_playersForSave.entrySet()) {
+			assertEquals(entry.getValue().getName(), l_playersForLoad.get(entry.getKey()).getName());
+			assertEquals(entry.getValue().getCountriesOwned().size(),
+					l_playersForLoad.get(entry.getKey()).getCountriesOwned().size());
+			for (int i = 0; i < entry.getValue().getCountriesOwned().size(); i++) {
+				assertEquals(entry.getValue().getCountriesOwned().get(i).getCountryName(),
+						l_playersForLoad.get(entry.getKey()).getCountriesOwned().get(i).getCountryName());
 			}
-			assertEquals(l_playerListForSave.get(i).getOrders().size(), l_playerListForLoad.get(i).getOrders().size());
-			for (int j = 0; j < l_playerListForSave.get(i).getOrders().size(); j++) {
-				assertEquals(l_playerListForSave.get(i).getOrders().get(j).getClass(),
-						l_playerListForLoad.get(i).getOrders().get(j).getClass());
+			assertEquals(entry.getValue().getOrders().size(), l_playersForLoad.get(entry.getKey()).getOrders().size());
+			for (int i = 0; i < entry.getValue().getOrders().size(); i++) {
+				assertEquals(entry.getValue().getOrders().get(i).getClass(),
+						l_playersForLoad.get(entry.getKey()).getOrders().get(i).getClass());
 			}
-			assertEquals(l_playerListForSave.get(i).getLeftoverArmies(),
-					l_playerListForLoad.get(i).getLeftoverArmies());
-			assertEquals(l_playerListForSave.get(i).getPlayerCards().size(),
-					l_playerListForLoad.get(i).getPlayerCards().size());
-			for (int j = 0; j < l_playerListForSave.get(i).getPlayerCards().size(); j++) {
-				assertEquals(l_playerListForSave.get(i).getPlayerCards().get(j),
-						l_playerListForLoad.get(i).getPlayerCards().get(j));
+			assertEquals(entry.getValue().getLeftoverArmies(),
+					l_playersForLoad.get(entry.getKey()).getLeftoverArmies());
+			assertEquals(entry.getValue().getPlayerCards().size(),
+					l_playersForLoad.get(entry.getKey()).getPlayerCards().size());
+			for (int i = 0; i < entry.getValue().getPlayerCards().size(); i++) {
+				assertEquals(entry.getValue().getPlayerCards().get(i),
+						l_playersForLoad.get(entry.getKey()).getPlayerCards().get(i));
 			}
-			assertEquals(l_playerListForSave.get(i).getHasCommitted(), l_playerListForLoad.get(i).getHasCommitted());
+			assertEquals(entry.getValue().getHasCommitted(), l_playersForLoad.get(entry.getKey()).getHasCommitted());
 		}
 	}
 }

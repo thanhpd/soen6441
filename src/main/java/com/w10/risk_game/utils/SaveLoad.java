@@ -2,15 +2,10 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
-import com.w10.risk_game.controllers.GamePlayController;
-import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +20,8 @@ public class SaveLoad {
 	GameEngine d_gameEngine;
 	DataStorage d_dataForSave;
 	DataStorage d_dataForLoad;
-	List<Player> d_playerListForSave;
-	List<Player> d_playerListForLoad;
+	HashMap<String, Player> d_playersForSave;
+	HashMap<String, Player> d_playersForLoad;
 	Map<Integer, Country> d_countriesForLoad;
 	GameMap d_gameMapForSave;
 	GameMap d_gameMapForLoad;
@@ -39,10 +34,10 @@ public class SaveLoad {
 	 */
 	public SaveLoad(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		// TODO: Get Global PlayerList
-		this.d_playerListForSave = p_gameEngine.getGame().GetPlayerListForDiplomacy();
-		// TODO: Get Global GameMap
+		this.d_playersForSave = p_gameEngine.getGame().getPlayers();
 		this.d_gameMapForSave = p_gameEngine.getMapEditorController().getGameMap();
+		this.d_playersForLoad = new HashMap<>();
+		this.d_gameMapForLoad = new GameMap();
 	}
 
 	/**
@@ -53,25 +48,27 @@ public class SaveLoad {
 	 * @param p_playerList
 	 *            List of players
 	 */
-	public SaveLoad(GameMap p_gameMap, List<Player> p_playerList) {
+	public SaveLoad(GameMap p_gameMap, HashMap<String, Player> p_playerList) {
 		this.d_gameMapForSave = p_gameMap;
-		this.d_playerListForSave = p_playerList;
+		this.d_playersForSave = p_playerList;
+		this.d_playersForLoad = new HashMap<>();
+		this.d_gameMapForLoad = new GameMap();
 	}
 	/**
 	 * The function getPlayerListForSave() returns the player list for save.
 	 *
-	 * @return a list of players to be saved.
+	 * @return players for save.
 	 */
-	public List<Player> getPlayerListForSave() {
-		return d_playerListForSave;
+	public HashMap<String, Player> getPlayersForSave() {
+		return d_playersForSave;
 	}
 	/**
 	 * The function getPlayerListForLoad() returns the player list for load.
 	 *
-	 * @return a list of players to be loaded.
+	 * @return players for load
 	 */
-	public List<Player> getPlayerListForLoad() {
-		return d_playerListForLoad;
+	public HashMap<String, Player> getPlayersForLoad() {
+		return d_playersForLoad;
 	}
 
 	/**
@@ -119,30 +116,30 @@ public class SaveLoad {
 				d_dataForSave.d_continentBonus.add(entry.getValue().getBonus());
 			}
 			// Save Player Data
-			for (Player player : d_playerListForSave) {
-				d_dataForSave.d_playerNames.add(player.getName());
-				d_dataForSave.d_playerLeftoverArmies.add(player.getLeftoverArmies());
-				d_dataForSave.d_playerHasCommitted.add(player.getHasCommitted());
+			for (Map.Entry<String, Player> entry : d_playersForSave.entrySet()) {
+				d_dataForSave.d_playerNames.add(entry.getValue().getName());
+				d_dataForSave.d_playerLeftoverArmies.add(entry.getValue().getLeftoverArmies());
+				d_dataForSave.d_playerHasCommitted.add(entry.getValue().getHasCommitted());
 				// Save Order Data
-				int numberOfOrders = player.getOrders().size();
+				int numberOfOrders = entry.getValue().getOrders().size();
 				d_dataForSave.d_numberOfOrders.add(numberOfOrders);
-				for (Order order : player.getOrders()) {
+				for (Order order : entry.getValue().getOrders()) {
 					saveOrder(order);
 				}
 				// Save Country Data
-				d_dataForSave.d_numberOfCountries.add(player.getCountriesOwned().size());
-				for (Country country : player.getCountriesOwned()) {
+				d_dataForSave.d_numberOfCountries.add(entry.getValue().getCountriesOwned().size());
+				for (Country country : entry.getValue().getCountriesOwned()) {
 					d_dataForSave.d_ownedCountryIds.add(country.getCountryId());
 				}
 				// Save Card Data
-				d_dataForSave.d_numberOfCards.add(player.getPlayerCards().size());
-				for (CardType card : player.getPlayerCards()) {
+				d_dataForSave.d_numberOfCards.add(entry.getValue().getPlayerCards().size());
+				for (CardType card : entry.getValue().getPlayerCards()) {
 					saveCard(card);
 				}
 			}
 			l_out.writeObject(d_dataForSave);
 			l_out.close();
-			Logger.log(Constants.SAVE_SUCCESS);
+			saveGameTxt(p_fileName);
 		} catch (Exception e) {
 			Logger.log(Constants.SAVE_FAIL);
 		}
@@ -230,9 +227,11 @@ public class SaveLoad {
 			}
 			l_in.close();
 			d_gameMapForLoad = l_gameMap;
-			d_playerListForLoad = l_playerList;
-			// TODO: Set Global PlayerList
-			// TODO: Set Global GameMap
+			for (Player player : l_playerList) {
+				d_playersForLoad.put(player.getName(), player);
+			}
+			d_gameEngine.getGame().setPlayers(d_playersForLoad);
+			d_gameEngine.getMapEditorController().setGameMap(d_gameMapForLoad);
 			Logger.log(Constants.LOAD_SUCCESS);
 		} catch (Exception e) {
 			Logger.log(Constants.LOAD_FAIL);
@@ -247,7 +246,7 @@ public class SaveLoad {
 	private void saveOrder(Order p_order) {
 		if (p_order instanceof Advance) {
 			// Save information of Advance
-			d_dataForSave.d_orderTypes.add("Advance");
+			d_dataForSave.d_orderTypes.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE);
 			d_dataForSave.d_advanceCountryFromIds
 					.add(Integer.toString(((Advance) p_order).getCountryNameFrom().getCountryId()));
 			d_dataForSave.d_advanceCountryToIds
@@ -255,26 +254,26 @@ public class SaveLoad {
 			d_dataForSave.d_advanceNums.add(((Advance) p_order).getNumOfArmies());
 		} else if (p_order instanceof Airlift) {
 			// Save information of Airlift
-			d_dataForSave.d_orderTypes.add("Airlift");
+			d_dataForSave.d_orderTypes.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
 			d_dataForSave.d_airliftCountryFromIds.add(Integer.toString(((Airlift) p_order).getSourceCountryId()));
 			d_dataForSave.d_airliftCountryToIds.add(Integer.toString(((Airlift) p_order).getTargetCountryId()));
 			d_dataForSave.d_airliftNums.add(Integer.toString(((Airlift) p_order).getArmyToAirlift()));
 		} else if (p_order instanceof Blockade) {
 			// Save information of Blockade
-			d_dataForSave.d_orderTypes.add("Blockade");
+			d_dataForSave.d_orderTypes.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE);
 			d_dataForSave.d_blockadeCountryIds.add(((Blockade) p_order).getCountryIdToBlock());
 		} else if (p_order instanceof Bomb) {
 			// Save information of Bomb
-			d_dataForSave.d_orderTypes.add("Bomb");
+			d_dataForSave.d_orderTypes.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
 			d_dataForSave.d_bombCountryIds.add(((Bomb) p_order).getCountryIdToBomb());
 		} else if (p_order instanceof Deploy) {
 			// Save information of Deploy
-			d_dataForSave.d_orderTypes.add("Deploy");
+			d_dataForSave.d_orderTypes.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY);
 			d_dataForSave.d_deployCountryIds.add(((Deploy) p_order).getCountryId());
 			d_dataForSave.d_deployNums.add(((Deploy) p_order).getNum());
 		} else if (p_order instanceof Negotiate) {
 			// Save information of Negotiate
-			d_dataForSave.d_orderTypes.add("Negotiate");
+			d_dataForSave.d_orderTypes.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
 			d_dataForSave.d_negotiatePlayerName.add(((Negotiate) p_order).getPlayerName());
 		}
 	}
@@ -286,13 +285,13 @@ public class SaveLoad {
 	 */
 	private void saveCard(CardType p_card) {
 		if (p_card == CardType.AIRLIFT) {
-			d_dataForSave.d_cards.add("Airlift");
+			d_dataForSave.d_cards.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
 		} else if (p_card == CardType.BOMB) {
-			d_dataForSave.d_cards.add("Bomb");
+			d_dataForSave.d_cards.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
 		} else if (p_card == CardType.BLOCKADE) {
-			d_dataForSave.d_cards.add("Blockade");
+			d_dataForSave.d_cards.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE);
 		} else if (p_card == CardType.DIPLOMACY) {
-			d_dataForSave.d_cards.add("Diplomacy");
+			d_dataForSave.d_cards.add(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
 		}
 	}
 
@@ -311,7 +310,7 @@ public class SaveLoad {
 		for (int i = 0; i < p_numberOfOrder; i++) {
 			String l_orderType = d_dataForLoad.d_orderTypes.remove(0);
 			switch (l_orderType) {
-				case "Advance" : {
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE : {
 					// Create advance order
 					int l_countryFromId = Integer.parseInt(d_dataForLoad.d_advanceCountryFromIds.remove(0));
 					int l_countryToId = Integer.parseInt(d_dataForLoad.d_advanceCountryToIds.remove(0));
@@ -322,7 +321,7 @@ public class SaveLoad {
 					l_orders.add(l_advance);
 					break;
 				}
-				case "Airlift" : {
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT : {
 					// Create airlift order
 					int l_countryFromId = Integer.parseInt(d_dataForLoad.d_airliftCountryFromIds.remove(0));
 					int l_countryToId = Integer.parseInt(d_dataForLoad.d_airliftCountryToIds.remove(0));
@@ -332,21 +331,21 @@ public class SaveLoad {
 					l_orders.add(l_airlift);
 					break;
 				}
-				case "Blockade" : {
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE : {
 					// Create blockade order
 					String l_countryId = d_dataForLoad.d_blockadeCountryIds.remove(0);
 					Order l_blockade = new Blockade(p_player, l_countryId);
 					l_orders.add(l_blockade);
 					break;
 				}
-				case "Bomb" : {
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB : {
 					// Create bomb order
 					String l_countryId = d_dataForLoad.d_bombCountryIds.remove(0);
 					Order l_bomb = new Bomb(p_player, l_countryId);
 					l_orders.add(l_bomb);
 					break;
 				}
-				case "Deploy" : {
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY : {
 					// Create deploy order
 					int l_countryId = d_dataForLoad.d_deployCountryIds.remove(0);
 					int l_numOfArmies = d_dataForLoad.d_deployNums.remove(0);
@@ -354,7 +353,7 @@ public class SaveLoad {
 					l_orders.add(l_deploy);
 					break;
 				}
-				case "Negotiate" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					// Create negotiate order
 					String l_playerName = d_dataForLoad.d_negotiatePlayerName.remove(0);
 					Order l_negotiate = new Negotiate(p_player, l_playerName);
@@ -379,20 +378,125 @@ public class SaveLoad {
 			String l_cardType = d_dataForLoad.d_cards.remove(0);
 			// Create card based on card type
 			switch (l_cardType) {
-				case "Airlift" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 					l_cardList.add(CardType.AIRLIFT);
 					break;
-				case "Bomb" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 					l_cardList.add(CardType.BOMB);
 					break;
-				case "Blockade" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 					l_cardList.add(CardType.BLOCKADE);
 					break;
-				case "Diplomacy" :
+				case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 					l_cardList.add(CardType.DIPLOMACY);
 					break;
 			}
 		}
 		return l_cardList;
+	}
+	/**
+	 * This function saves the game in txt format.
+	 *
+	 * @param p_fileName
+	 *            The name of the file.
+	 */
+	public void saveGameTxt(String p_fileName) {
+		String l_referenceFilePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".txt";
+		try {
+			File l_referenceFile = new File(l_referenceFilePath);
+			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
+			BufferedWriter l_bufferedWriter = new BufferedWriter(l_fileWriter);
+			// Save Country Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_COUNTRIES);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_countryIds.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_countryIds.get(i) + " " + d_dataForSave.d_countryNames.get(i)
+						+ " " + d_dataForSave.d_belongContinentIds.get(i) + " " + d_dataForSave.d_armyCounts.get(i)
+						+ " " + d_dataForSave.d_ownerNames.get(i) + " " + d_dataForSave.d_numberOfNeighbors.get(i));
+				l_bufferedWriter.newLine();
+			}
+			l_bufferedWriter.write(Constants.SAVE_LOAD_NEIGHBOR_COUNTRIES);
+			l_bufferedWriter.newLine();
+			for (int j = 0; j < d_dataForSave.d_neighborIds.size(); j++) {
+				l_bufferedWriter.write(d_dataForSave.d_neighborIds.get(j) + " ");
+			}
+			l_bufferedWriter.newLine();
+			// Save Continent Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_CONTINENTS);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_continentIds.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_continentIds.get(i) + " " + d_dataForSave.d_continentNames.get(i)
+						+ " " + d_dataForSave.d_continentBonus.get(i));
+				l_bufferedWriter.newLine();
+			}
+			// Save Player Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_playerNames.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_playerNames.get(i) + " "
+						+ d_dataForSave.d_playerLeftoverArmies.get(i) + " " + d_dataForSave.d_playerHasCommitted.get(i)
+						+ " " + d_dataForSave.d_numberOfOrders.get(i) + " " + d_dataForSave.d_numberOfCountries.get(i)
+						+ " " + d_dataForSave.d_numberOfCards.get(i));
+				l_bufferedWriter.newLine();
+			}
+			// Save Order Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_ORDER);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_orderTypes.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_orderTypes.get(i) + " ");
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY);
+			for (int i = 0; i < d_dataForSave.d_deployCountryIds.size(); i++) {
+				l_bufferedWriter
+						.write(" " + d_dataForSave.d_deployCountryIds.get(i) + " " + d_dataForSave.d_deployNums.get(i));
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE);
+			for (int i = 0; i < d_dataForSave.d_advanceCountryFromIds.size(); i++) {
+				l_bufferedWriter.write(" " + d_dataForSave.d_advanceCountryFromIds.get(i) + " "
+						+ d_dataForSave.d_advanceCountryToIds.get(i) + " " + d_dataForSave.d_advanceNums.get(i));
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
+			for (int i = 0; i < d_dataForSave.d_airliftCountryFromIds.size(); i++) {
+				l_bufferedWriter.write(" " + d_dataForSave.d_airliftCountryFromIds.get(i) + " "
+						+ d_dataForSave.d_airliftCountryToIds.get(i) + " " + d_dataForSave.d_airliftNums.get(i));
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE);
+			for (int i = 0; i < d_dataForSave.d_blockadeCountryIds.size(); i++) {
+				l_bufferedWriter.write(" " + d_dataForSave.d_blockadeCountryIds.get(i));
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
+			for (int i = 0; i < d_dataForSave.d_bombCountryIds.size(); i++) {
+				l_bufferedWriter.write(" " + d_dataForSave.d_bombCountryIds.get(i));
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
+			for (int i = 0; i < d_dataForSave.d_negotiatePlayerName.size(); i++) {
+				l_bufferedWriter.write(" " + d_dataForSave.d_negotiatePlayerName.get(i));
+			}
+			l_bufferedWriter.newLine();
+			// Save Player Countries Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS_COUNTRIES);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_countryIds.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_countryIds.get(i) + " ");
+			}
+			l_bufferedWriter.newLine();
+			// Save Player Cards Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS_CARDS);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_cards.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_cards.get(i) + " ");
+			}
+			l_bufferedWriter.newLine();
+			l_bufferedWriter.close();
+			Logger.log(Constants.SAVE_SUCCESS);
+		} catch (Exception e) {
+			Logger.log(Constants.SAVE_FAIL);
+		}
 	}
 }

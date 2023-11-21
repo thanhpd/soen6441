@@ -485,4 +485,22 @@ public class GamePlayController {
 	public String getWinner() {
 		return this.d_winner;
 	}
+
+	/**
+	 * This function is used to get the list of players
+	 *
+	 * @return players
+	 */
+	public HashMap<String, Player> getPlayers() {
+		return d_players;
+	}
+	/**
+	 * This function is used to get the list of players
+	 *
+	 * @param d_players
+	 *            players
+	 */
+	public void setPlayers(HashMap<String, Player> d_players) {
+		this.d_players = d_players;
+	}
 }

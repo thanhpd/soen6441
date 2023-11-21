@@ -229,4 +229,12 @@ public final class Constants {
 	public static final String SAVE_FAIL = "Game failed to save";
 	public static final String LOAD_SUCCESS = "Game loaded successfully";
 	public static final String LOAD_FAIL = "Game failed to load";
+	public static final String SAVE_LOAD_COUNTRIES = "Countries";
+	public static final String SAVE_LOAD_CONTINENTS = "Continents";
+	public static final String SAVE_LOAD_NEIGHBOR_COUNTRIES = "Neighbor Countries";
+	public static final String SAVE_LOAD_PLAYERS = "Players";
+	public static final String SAVE_LOAD_ORDER = "Order Types";
+	public static final String SAVE_LOAD_PLAYERS_COUNTRIES = "Players' Countries";
+	public static final String SAVE_LOAD_PLAYERS_CARDS = "Cards";
+	public static final String SAVE_LOAD_TEST_FILE_NAME = "testSave";
 }

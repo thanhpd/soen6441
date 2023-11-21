@@ -129,8 +129,7 @@ public class SinglePlayerEngine {
 
 				// Check for the validity of the provided argument options based on the main
 				// command
-				// CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand,
-				// l_listOfOptions);
+				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
 				switch (l_mainCommand) {
 					// Map editor Phase commands
 

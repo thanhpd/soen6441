@@ -3,6 +3,11 @@ package com.w10.risk_game.models.tournament;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The TournamentOptions class is used to store and retrieve information about
+ * the map, player strategies, number of games, and maximum number of tries for
+ * a tournament.
+ */
 public class TournamentOptions {
 
 	/**

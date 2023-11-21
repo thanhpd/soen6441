@@ -54,7 +54,6 @@ public class Reinforcements {
 		// Step 3: Calculate the total number of reinforcement armies
 		int l_countrySize = l_playerCountries.size();
 		int l_reinforceArmies = (int) (Math.floor(l_countrySize / 3) + l_bonus);
-
 		p_player.setLeftoverArmies((l_armies + l_reinforceArmies) < Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
 				? Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
 				: (l_armies + l_reinforceArmies));

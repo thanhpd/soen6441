@@ -98,14 +98,7 @@ public class MapDisplay {
 						l_formatter.format(l_table, l_country.getCountryName(), l_country.getCountryId(),
 								l_continent.getContinentName(), l_continent.getBonus(), l_neighborValue);
 					}
-					Logger.log(// `l_formatter` is an instance of the `Formatter` class that is used to format
-								// the
-								// output of the map display. It is used to format the table rows with the
-								// appropriate
-								// values for each country and continent. The formatted string is then logged
-								// using the
-								// `Logger` class.
-							l_formatter.toString());
+					Logger.log(l_formatter.toString());
 					l_formatter.close();
 				}
 			}

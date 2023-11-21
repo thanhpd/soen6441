@@ -99,23 +99,6 @@ public class TournamentEngine {
 		for (String l_strategy : p_playerStrategyNames) {
 			d_gamePlayController.createPlayer(l_strategy, l_strategy);
 			Player l_player = d_gamePlayController.getPlayerDetails(l_strategy);
-			switch (l_strategy) {
-				case "Random" :
-					l_player.setStrategy(new RandomPlayerStrategy(l_player));
-					break;
-				case "Cheater" :
-					l_player.setStrategy(new CheaterPlayerStrategy(l_player));
-					break;
-				case "Benevolent" :
-					l_player.setStrategy(new BenevolentPlayerStrategy(l_player));
-					break;
-				case "Aggressive" :
-					l_player.setStrategy(new AggressivePlayerStrategy(l_player));
-					break;
-				default :
-					break;
-			}
-
 			l_listofPlayers.add(l_player);
 		}
 
@@ -170,16 +153,15 @@ public class TournamentEngine {
 	 *            objects.
 	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
-		System.out.println("Result of the trounament:");
+		Logger.log("Result of the tournament:");
 		Formatter l_formatter = new Formatter();
-		String l_table, l_mapDisplayLine, l_mapDisplayColumnNames;
+		String l_table, l_resultDisplayColumnNames;
 		l_table = Constants.RESULT_DISPLAY_TABLE_FORMAT_PATTERN;
-		l_mapDisplayLine = Constants.RESULT_DISPLAY_TABLE_LINE;
-		l_mapDisplayColumnNames = Constants.RESULT_DISPLAY_TABLE_COLUMN_NAMES;
-		l_formatter.format(l_mapDisplayColumnNames);
+		l_resultDisplayColumnNames = Constants.RESULT_DISPLAY_TABLE_COLUMN_NAMES;
+		l_formatter.format(l_resultDisplayColumnNames);
 		for (MatchResult result : l_listofMatchResults) {
 
-			l_formatter.format(l_table, result.l_map, result.l_gameCount, result.l_playerName);
+			l_formatter.format(l_table, result.d_map, result.d_gameCount, result.d_playerName);
 		}
 		System.out.println(l_formatter.toString());
 		l_formatter.close();

@@ -38,11 +38,7 @@ public class Tournament {
 		d_Options.setGames(l_NumOfGames);
 		d_Options.setMaxTries(l_NumofTurns);
 
-		// System.out.println("Print");
-		// System.out.println(d_Options.getMap());
-		// System.out.println(d_Options.getPlayerStrategies());
-		// System.out.println(d_Options.getMaxTries());
-		// System.out.println(d_Options.getGames());
+		
 	}
 
 }

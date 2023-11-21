@@ -142,18 +142,22 @@ public class TournamentEngine {
 
 		d_mapEditorController.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "" + p_map);
 		d_gamePlayController.assignCountries();
+		//d_gamePlayController.showMap();
 		d_gamePlayController.assignPlayersReinforcements();
 		d_gamePlayController.showMap();
 		for (int i = 1; i <= p_maxTurns; i++) {
 			for (int j = 1; j <= d_gamePlayController.getNoOfPlayers(); j++) {
 				d_gamePlayController.issuePlayerOrder();
+				d_gamePlayController.showMap();
+				if (this.d_gamePlayController.checkIfGameIsOver()) {
 				if (d_gamePlayController.getWinner() != null) {
 					return d_gamePlayController.getWinner();
 				}
-
 			}
+			}
+			d_gamePlayController.executePlayerOrders();
 
-			d_gamePlayController.showMap();
+			
 
 		}
 
@@ -169,14 +173,14 @@ public class TournamentEngine {
 	 *            objects.
 	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
-		// System.out.println("Result of the trounament:");
+		System.out.println("Result of the trounament:");
 		// System.out.println(String.format("%-10s%-10s%-10s", "Game Count", "Map",
 		// "Result"));
-		// for (MatchResult result : l_listofMatchResults) {
+		for (MatchResult result : l_listofMatchResults) {
 
-		// System.out.println(String.format("%-10s%-10s%-10d", result.l_gameCount,
-		// result.l_map, result.l_playerName));
-		// }
+		System.out.println(""+ result.l_gameCount+""+
+		result.l_map+""+ result.l_playerName);
+		}
 
 	}
 

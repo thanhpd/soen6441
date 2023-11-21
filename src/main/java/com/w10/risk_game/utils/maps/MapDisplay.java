@@ -106,7 +106,6 @@ public class MapDisplay {
 								// using the
 								// `Logger` class.
 							l_formatter.toString());
-					System.out.println(l_formatter.toString());
 					l_formatter.close();
 				}
 			}

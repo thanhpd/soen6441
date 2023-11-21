@@ -1,6 +1,7 @@
 package com.w10.risk_game.engines;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -77,10 +78,11 @@ public class TournamentEngine {
 				var l_result = playGame(map, players, p_maxTurns);
 				MatchResult l_winner = new MatchResult(l_result, i, map);
 				l_listofMatchResults.add(l_winner);
-				displayResult(l_listofMatchResults);
+				
 			}
 
 		}
+		displayResult(l_listofMatchResults);
 	}
 
 	/**
@@ -142,9 +144,7 @@ public class TournamentEngine {
 
 		d_mapEditorController.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "" + p_map);
 		d_gamePlayController.assignCountries();
-		//d_gamePlayController.showMap();
 		d_gamePlayController.assignPlayersReinforcements();
-		d_gamePlayController.showMap();
 		for (int i = 1; i <= p_maxTurns; i++) {
 			for (int j = 1; j <= d_gamePlayController.getNoOfPlayers(); j++) {
 				d_gamePlayController.issuePlayerOrder();
@@ -156,9 +156,6 @@ public class TournamentEngine {
 			}
 			}
 			d_gamePlayController.executePlayerOrders();
-
-			
-
 		}
 
 		return "Draw";
@@ -174,14 +171,18 @@ public class TournamentEngine {
 	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		System.out.println("Result of the trounament:");
-		// System.out.println(String.format("%-10s%-10s%-10s", "Game Count", "Map",
-		// "Result"));
+		Formatter l_formatter = new Formatter();
+		String l_table, l_mapDisplayLine, l_mapDisplayColumnNames;
+		l_table = Constants.RESULT_DISPLAY_TABLE_FORMAT_PATTERN;
+		l_mapDisplayLine = Constants.RESULT_DISPLAY_TABLE_LINE;
+		l_mapDisplayColumnNames = Constants.RESULT_DISPLAY_TABLE_COLUMN_NAMES;
+		l_formatter.format(l_mapDisplayColumnNames);       
 		for (MatchResult result : l_listofMatchResults) {
 
-		System.out.println(""+ result.l_gameCount+""+
-		result.l_map+""+ result.l_playerName);
+			l_formatter.format(l_table,result.l_map, result.l_gameCount,result.l_playerName);
 		}
-
+	System.out.println(l_formatter.toString());
+	l_formatter.close();
 	}
-
+	
 }

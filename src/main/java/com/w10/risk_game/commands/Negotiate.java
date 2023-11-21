@@ -8,7 +8,9 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is to negotiate with other players. In this turn, the two players
@@ -117,14 +119,14 @@ public class Negotiate extends Order {
 		}
 
 		// Get the list of players available for diplomacy from the game
-		List<Player> l_players = GamePlayController.GetPlayerListForDiplomacy();
+		HashMap<String, Player> l_players = GamePlayController.GetPlayers();
 
 		// Iterate through the players to find the player to negotiate with
-		for (Player l_player : l_players) {
+		for (Map.Entry<String, Player> entry : l_players.entrySet()) {
 			// Check if the specified player to negotiate with is valid
-			if (l_player.getName().equals(p_playerId)) {
+			if (entry.getValue().getName().equals(p_playerId)) {
 				// Set the player to negotiate with
-				PlayerToNegotiate = l_player;
+				PlayerToNegotiate = entry.getValue();
 				return true; // Indicates that the player to negotiate with is valid
 			}
 		}

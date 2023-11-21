@@ -2,6 +2,7 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
+import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -34,7 +35,7 @@ public class SaveLoad {
 	 */
 	public SaveLoad(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_playersForSave = p_gameEngine.getGame().getPlayers();
+		this.d_playersForSave = GamePlayController.GetPlayers();
 		this.d_gameMapForSave = p_gameEngine.getMapEditorController().getGameMap();
 		this.d_playersForLoad = new HashMap<>();
 		this.d_gameMapForLoad = new GameMap();
@@ -160,7 +161,6 @@ public class SaveLoad {
 			ArrayList<String> l_countryNames = d_dataForLoad.d_countryNames;
 			ArrayList<Integer> l_belongContinentIds = d_dataForLoad.d_belongContinentIds;
 			ArrayList<Integer> l_armyCounts = d_dataForLoad.d_armyCounts;
-			ArrayList<String> l_ownerNames = d_dataForLoad.d_ownerNames;
 			ArrayList<Integer> l_numberOfNeighbors = d_dataForLoad.d_numberOfNeighbors;
 			ArrayList<Integer> l_neighborIds = d_dataForLoad.d_neighborIds;
 			int l_countryNumber = l_countryIds.size();
@@ -230,7 +230,7 @@ public class SaveLoad {
 			for (Player player : l_playerList) {
 				d_playersForLoad.put(player.getName(), player);
 			}
-			d_gameEngine.getGame().setPlayers(d_playersForLoad);
+			GamePlayController.SetPlayers(d_playersForLoad);
 			d_gameEngine.getMapEditorController().setGameMap(d_gameMapForLoad);
 			Logger.log(Constants.LOAD_SUCCESS);
 		} catch (Exception e) {

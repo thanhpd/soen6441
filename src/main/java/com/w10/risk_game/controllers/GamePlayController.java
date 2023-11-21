@@ -31,7 +31,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
  */
 public class GamePlayController {
 	private GameMap d_gameMap;
-	private HashMap<String, Player> d_players;
+	private static HashMap<String, Player> d_players;
 	private boolean d_isCountriesAssigned;
 	private Player d_currentPlayer;
 	private int d_currentPlayerIndex;
@@ -40,9 +40,7 @@ public class GamePlayController {
 	private String d_winner;
 
 	private static List<Order> OtherOrders = new ArrayList<>();
-	private static List<Player> PlayerListForDiplomacy = new ArrayList<>();
 	private List<Boolean> d_finishIssueOrder = new ArrayList<>();
-
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
@@ -58,25 +56,6 @@ public class GamePlayController {
 		this.d_isCountriesAssigned = false;
 		this.d_currentPlayerIndex = 0;
 		this.d_winner = null;
-	}
-
-	/**
-	 * The function returns the list of players in a game.
-	 *
-	 * @return a list of players in a game.
-	 */
-	public static List<Player> GetPlayerListForDiplomacy() {
-		return PlayerListForDiplomacy;
-	}
-
-	/**
-	 * The function sets the list of players in a game.
-	 *
-	 * @param p_playerListForDiplomacy
-	 *            a list of players in a game.
-	 */
-	public void SetPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
-		PlayerListForDiplomacy = p_playerListForDiplomacy;
 	}
 
 	/**
@@ -131,8 +110,6 @@ public class GamePlayController {
 				// Add the new player to the player list
 				this.d_players.put(p_playerName, l_player);
 
-				// Add the new player to the list for diplomacy
-				PlayerListForDiplomacy.add(l_player);
 				// Add the new false value to the list of finish issue order
 				d_finishIssueOrder.add(false);
 
@@ -352,7 +329,7 @@ public class GamePlayController {
 			this.d_finishIssueOrder.set(d_currentPlayerIndex % this.d_playerList.size(), true);
 
 			// If the finish issue order list contains all true values, then no more orders
-			if (!this.d_finishIssueOrder.contains(false)){
+			if (!this.d_finishIssueOrder.contains(false)) {
 				this.d_currentPlayer = null;
 				return false;
 			}
@@ -376,11 +353,11 @@ public class GamePlayController {
 	 */
 	public boolean checkIfOrdersCanBeExecuted() {
 		if (!d_finishIssueOrder.contains(false)) {
-			for (int i = 0; i < this.d_finishIssueOrder.size(); i++){
+			for (int i = 0; i < this.d_finishIssueOrder.size(); i++) {
 				this.d_finishIssueOrder.set(i, false);
 			}
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 
@@ -505,16 +482,16 @@ public class GamePlayController {
 	 *
 	 * @return players
 	 */
-	public HashMap<String, Player> getPlayers() {
+	public static HashMap<String, Player> GetPlayers() {
 		return d_players;
 	}
 	/**
 	 * This function is used to get the list of players
 	 *
-	 * @param d_players
+	 * @param p_players
 	 *            players
 	 */
-	public void setPlayers(HashMap<String, Player> d_players) {
-		this.d_players = d_players;
+	public static void SetPlayers(HashMap<String, Player> p_players) {
+		d_players = p_players;
 	}
 }

@@ -3,6 +3,7 @@ package com.w10.risk_game.models;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -64,12 +65,12 @@ class PlayerTest {
 		l_country4.setOwner(d_player2);
 
 		// Set for game engine controller
-		List<Player> l_players = new ArrayList<>();
-		l_players.add(d_player1);
-		l_players.add(d_player2);
+		HashMap<String, Player> l_players = new HashMap<>();
+		l_players.put("Player1", d_player1);
+		l_players.put("Player2", d_player2);
 		MapEditorController l_mapEditorController = new MapEditorController();
 		d_gamePlayController = new GamePlayController(l_mapEditorController);
-		d_gamePlayController.SetPlayerListForDiplomacy(l_players);
+		GamePlayController.SetPlayers(l_players);
 	}
 
 	/**

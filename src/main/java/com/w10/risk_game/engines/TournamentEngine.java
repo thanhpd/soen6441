@@ -78,7 +78,7 @@ public class TournamentEngine {
 				var l_result = playGame(map, players, p_maxTurns);
 				MatchResult l_winner = new MatchResult(l_result, i, map);
 				l_listofMatchResults.add(l_winner);
-				
+
 			}
 
 		}
@@ -150,10 +150,10 @@ public class TournamentEngine {
 				d_gamePlayController.issuePlayerOrder();
 				d_gamePlayController.showMap();
 				if (this.d_gamePlayController.checkIfGameIsOver()) {
-				if (d_gamePlayController.getWinner() != null) {
-					return d_gamePlayController.getWinner();
+					if (d_gamePlayController.getWinner() != null) {
+						return d_gamePlayController.getWinner();
+					}
 				}
-			}
 			}
 			d_gamePlayController.executePlayerOrders();
 		}
@@ -176,13 +176,13 @@ public class TournamentEngine {
 		l_table = Constants.RESULT_DISPLAY_TABLE_FORMAT_PATTERN;
 		l_mapDisplayLine = Constants.RESULT_DISPLAY_TABLE_LINE;
 		l_mapDisplayColumnNames = Constants.RESULT_DISPLAY_TABLE_COLUMN_NAMES;
-		l_formatter.format(l_mapDisplayColumnNames);       
+		l_formatter.format(l_mapDisplayColumnNames);
 		for (MatchResult result : l_listofMatchResults) {
 
-			l_formatter.format(l_table,result.l_map, result.l_gameCount,result.l_playerName);
+			l_formatter.format(l_table, result.l_map, result.l_gameCount, result.l_playerName);
 		}
-	System.out.println(l_formatter.toString());
-	l_formatter.close();
+		System.out.println(l_formatter.toString());
+		l_formatter.close();
 	}
-	
+
 }

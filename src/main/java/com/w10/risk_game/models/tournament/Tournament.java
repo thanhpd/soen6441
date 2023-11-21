@@ -38,7 +38,6 @@ public class Tournament {
 		d_Options.setGames(l_NumOfGames);
 		d_Options.setMaxTries(l_NumofTurns);
 
-		
 	}
 
 }

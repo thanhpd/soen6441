@@ -47,7 +47,7 @@ public class App {
 			l_gameEngine.start();
 		} catch (Exception e) {
 			Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
-			Logger.log(e.getMessage());
+			e.printStackTrace(System.out);
 		}
 	}
 }

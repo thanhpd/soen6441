@@ -203,7 +203,7 @@ public final class Constants {
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";
 	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You''ve conquered {1}. Keep the conquest going!";
 	public static final String ADVANCE_BATTLE_LOST = "{0}''s forces have been defeated in the battle for {1}, owned by {2}.";
-	public static final String ADVANCE_DEPLOY_SUCCEED = "{0} deployed {1} armies to {2}.";
+	public static final String ADVANCE_DEPLOY_SUCCEED = "{0} transferred {1} armies from {2} to {3}.";
 	public static final String ADVANCE_INVALID_COUNTRY_NAME = "Invalid input! Country name {0} does not exist.";
 	public static final String ADVANCE_INVALID_ARMY_LESS = "Invalid input! Number of armies must be greater than 0.";
 	public static final String ADVANCE_INVALID_ARMY_MORE = "Invalid input! Number of armies to advance cannot be greater than those deployed on the country.";
@@ -224,4 +224,6 @@ public final class Constants {
 
 	// Strategy constants
 	public static final String STRATEGY_ISSUE_ORDER = "Order: {0}";
+	public static final String STRATEGY_CHEATER_TAKE_OVER = "Cheater player {0} took over country {1} from player {2}";
+	public static final String STRATEGY_CHEATER_DOUBLE_ARMY = "Cheater player {0} doubled the army in country {1}";
 }

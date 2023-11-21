@@ -261,8 +261,8 @@ public abstract class Phase {
 	 * The function prints the available commands in a specific phase.
 	 */
 	public void printAvailableCommand() {
-		String avaliableCommandsText = getAvailableCommands().toString();
-		Logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands avaliable are: "
-				+ avaliableCommandsText);
+		String availableCommandsText = getAvailableCommands().toString();
+		Logger.log("\nYou are in the " + getPhaseName().toUpperCase() + ". Commands available are: "
+				+ availableCommandsText);
 	}
 }

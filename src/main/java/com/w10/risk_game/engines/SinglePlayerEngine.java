@@ -86,7 +86,8 @@ public class SinglePlayerEngine {
 						continue;
 				}
 				l_player = this.d_gamePlayController.getCurrentPlayer();
-				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
+				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + " " + "("
+						+ l_player.getStrategy().getStrategyName() + ")" + ":");
 
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
 						l_player.getLeftoverArmies()));

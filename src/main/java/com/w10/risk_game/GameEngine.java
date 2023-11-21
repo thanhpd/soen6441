@@ -10,7 +10,6 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
-import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -84,7 +83,8 @@ public class GameEngine {
 						continue;
 				}
 				l_player = this.d_gamePlayController.getCurrentPlayer();
-				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
+				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + " " + "("
+						+ l_player.getStrategy().getStrategyName() + ")" + ":");
 
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
 						l_player.getLeftoverArmies()));

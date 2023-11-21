@@ -223,6 +223,8 @@ public final class Constants {
 
 	// Strategy constants
 	public static final String STRATEGY_ISSUE_ORDER = "Order: {0}";
+	public static final String STRATEGY_CHEATER_TAKE_OVER = "Cheater player {0} took over country {1} from player {2}";
+	public static final String STRATEGY_CHEATER_DOUBLE_ARMY = "Cheater player {0} doubled the army in country {1}";
 	// SaveLoad constants
 	public static final String SAVE_LOAD_FILE_PATH = "src/main/resources/archives/";
 	public static final String SAVE_SUCCESS = "Game saved successfully";

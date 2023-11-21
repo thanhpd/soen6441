@@ -1,16 +1,11 @@
 package com.w10.risk_game.models;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
-import com.w10.risk_game.utils.maps.MapValidator;
 
 /**
  * The GameMap class represents a game map that contains countries, continents,

@@ -41,6 +41,8 @@ public class GamePlayController {
 
 	private static List<Order> OtherOrders = new ArrayList<>();
 	private static List<Player> PlayerListForDiplomacy = new ArrayList<>();
+	private List<Boolean> d_finishIssueOrder = new ArrayList<>();
+
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 
@@ -131,6 +133,8 @@ public class GamePlayController {
 
 				// Add the new player to the list for diplomacy
 				PlayerListForDiplomacy.add(l_player);
+				// Add the new false value to the list of finish issue order
+				d_finishIssueOrder.add(false);
 
 				// Log a message indicating successful creation of the player
 				Logger.log(MessageFormat.format(Constants.CLI_GAME_PLAYER_CREATE, p_playerName).toString());
@@ -166,6 +170,8 @@ public class GamePlayController {
 
 			// Remove the player from the player list
 			this.d_players.remove(p_playerName.trim());
+			// Remove a false value from the list of finish issue order
+			d_finishIssueOrder.remove(false);
 
 			// Log a message indicating the successful removal of the player
 			Logger.log(Constants.CLI_GAME_PLAYER_REMOVE + p_playerName);
@@ -342,17 +348,17 @@ public class GamePlayController {
 	public boolean checkIfOrdersCanBeIssued() {
 		// Check if the current player has no leftover armies and has committed orders
 		if (this.d_currentPlayer.getLeftoverArmies() == 0 && this.d_currentPlayer.getHasCommitted()) {
-			// Remove the current player from the player list
-			this.d_playerList.remove(d_currentPlayerIndex % this.d_playerList.size());
+			// Set the current player's finish issue order flag to true
+			this.d_finishIssueOrder.set(d_currentPlayerIndex % this.d_playerList.size(), true);
 
-			// If the player list is empty, reset the current player and return false
-			if (this.d_playerList.isEmpty()) {
+			// If the finish issue order list contains all true values, then no more orders
+			if (!this.d_finishIssueOrder.contains(false)){
 				this.d_currentPlayer = null;
 				return false;
 			}
 
 			// Update the current player to the next player in the list
-			this.d_currentPlayer = this.d_playerList.get(d_currentPlayerIndex % this.d_playerList.size());
+			this.d_currentPlayer = this.d_playerList.get((d_currentPlayerIndex + 1) % this.d_playerList.size());
 			return false; // Indicates orders cannot be issued
 		}
 
@@ -369,7 +375,15 @@ public class GamePlayController {
 	 *
 	 */
 	public boolean checkIfOrdersCanBeExecuted() {
-		return this.d_playerList.isEmpty();
+		if (!d_finishIssueOrder.contains(false)) {
+			for (int i = 0; i < this.d_finishIssueOrder.size(); i++){
+				this.d_finishIssueOrder.set(i, false);
+			}
+			return true;
+		}else{
+			return false;
+		}
+
 	}
 
 	/**

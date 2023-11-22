@@ -315,4 +315,5 @@ public class SinglePlayerEngine {
 	public MapEditorController getMapEditorController() {
 		return this.d_mapEditorController;
 	}
+
 }

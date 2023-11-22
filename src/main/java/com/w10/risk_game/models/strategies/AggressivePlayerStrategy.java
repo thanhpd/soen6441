@@ -152,4 +152,22 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE;
 	}
 
+	/**
+	 * The function returns the strongest country owned by the player.
+	 *
+	 * @return the strongest country owned by the player.
+	 */
+	public Country getStrongestCountryOwned() {
+		return d_strongestCountryOwned;
+	}
+
+	/**
+	 * The function sets the strongest country owned by the player.
+	 *
+	 * @param d_strongestCountryOwned
+	 *            the strongest country owned by the player.
+	 */
+	public void setStrongestCountryOwned(Country d_strongestCountryOwned) {
+		this.d_strongestCountryOwned = d_strongestCountryOwned;
+	}
 }

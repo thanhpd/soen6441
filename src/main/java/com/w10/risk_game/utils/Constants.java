@@ -239,4 +239,5 @@ public final class Constants {
 	public static final String SAVE_LOAD_PLAYERS_COUNTRIES = "Players' Countries";
 	public static final String SAVE_LOAD_PLAYERS_CARDS = "Cards";
 	public static final String SAVE_LOAD_TEST_FILE_NAME = "testSave";
+	public static final String SAVE_LOAD_PLAYERS_STRATEGY = "Players' Strategy";
 }

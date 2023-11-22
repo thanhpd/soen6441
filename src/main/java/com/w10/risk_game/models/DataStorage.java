@@ -10,8 +10,6 @@ import java.util.ArrayList;
  * @author Yajing Liu
  */
 public class DataStorage implements Serializable {
-	// Phase
-	// TODO: Phase Data;
 	// Map
 	// Country
 	public ArrayList<Integer> d_countryIds = new ArrayList<Integer>();
@@ -33,6 +31,8 @@ public class DataStorage implements Serializable {
 	public ArrayList<Integer> d_playerLeftoverArmies = new ArrayList<Integer>();
 	public ArrayList<Integer> d_numberOfCards = new ArrayList<Integer>();
 	public ArrayList<Boolean> d_playerHasCommitted = new ArrayList<Boolean>();
+	public ArrayList<String> d_playerStrategyNames = new ArrayList<String>();
+	public ArrayList<Integer> d_playerStrongestCountryOwnedIds = new ArrayList<Integer>();
 	// Order
 	public ArrayList<String> d_orderTypes = new ArrayList<String>();
 	// Deploy
@@ -54,5 +54,4 @@ public class DataStorage implements Serializable {
 	public ArrayList<String> d_negotiatePlayerName = new ArrayList<String>();
 	// Card
 	public ArrayList<String> d_cards = new ArrayList<String>();
-	// TODO: loggers
 }

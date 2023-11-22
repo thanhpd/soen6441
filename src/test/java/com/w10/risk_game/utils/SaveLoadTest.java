@@ -2,6 +2,8 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.commands.*;
 import com.w10.risk_game.models.*;
+import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
+import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -85,6 +87,8 @@ public class SaveLoadTest {
 		// Set player
 		Player l_player2 = new Player("Player2", l_countriesList2, new ArrayList<Order>(), 7, l_cardTypes2, false);
 		l_country3.setOwner(l_player2);
+		l_player1.setStrategy(new HumanPlayerStrategy(l_player1));
+		l_player2.setStrategy(new RandomPlayerStrategy(l_player2));
 		HashMap<String, Player> l_players = new HashMap<>();
 		l_players.put(l_player1.getName(), l_player1);
 		l_players.put(l_player2.getName(), l_player2);
@@ -162,6 +166,7 @@ public class SaveLoadTest {
 				assertEquals(entry.getValue().getPlayerCards().get(i),
 						l_playersForLoad.get(entry.getKey()).getPlayerCards().get(i));
 			}
+			assertEquals(entry.getValue().getStrategy().getClass(), l_playersForLoad.get(entry.getKey()).getStrategy().getClass());
 			assertEquals(entry.getValue().getHasCommitted(), l_playersForLoad.get(entry.getKey()).getHasCommitted());
 		}
 	}

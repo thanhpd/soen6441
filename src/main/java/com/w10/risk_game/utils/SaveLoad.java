@@ -4,6 +4,7 @@ import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.models.*;
+import com.w10.risk_game.models.strategies.*;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.io.*;
@@ -121,6 +122,11 @@ public class SaveLoad {
 				d_dataForSave.d_playerNames.add(entry.getValue().getName());
 				d_dataForSave.d_playerLeftoverArmies.add(entry.getValue().getLeftoverArmies());
 				d_dataForSave.d_playerHasCommitted.add(entry.getValue().getHasCommitted());
+				PlayerStrategy l_playerStrategy = entry.getValue().getStrategy();
+				d_dataForSave.d_playerStrategyNames.add(l_playerStrategy.getStrategyName());
+				if (l_playerStrategy.getStrategyName() == Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE){
+					d_dataForSave.d_playerStrongestCountryOwnedIds.add(((AggressivePlayerStrategy)l_playerStrategy).getStrongestCountryOwned().getCountryId());
+				}
 				// Save Order Data
 				int numberOfOrders = entry.getValue().getOrders().size();
 				d_dataForSave.d_numberOfOrders.add(numberOfOrders);
@@ -204,6 +210,7 @@ public class SaveLoad {
 			ArrayList<Integer> l_numberOfCountries = d_dataForLoad.d_numberOfCountries;
 			ArrayList<Integer> l_ownedCountryIds = d_dataForLoad.d_ownedCountryIds;
 			ArrayList<Integer> l_numberOfCards = d_dataForLoad.d_numberOfCards;
+			ArrayList<String> l_playerStrategyNames = d_dataForLoad.d_playerStrategyNames;
 			int l_playerNumber = l_playerNames.size();
 			for (int i = 0; i < l_playerNumber; i++) {
 				Player l_player = new Player(l_playerNames.get(i), new ArrayList<>(), new ArrayList<>(),
@@ -224,6 +231,10 @@ public class SaveLoad {
 				List<CardType> l_cardList = loadCard(l_currentPlayerNumberOfCards);
 				l_player.setPlayerCards(l_cardList);
 				l_playerList.add(l_player);
+				// Load Strategy Data
+				String l_playerStrategyName =l_playerStrategyNames.get(i);
+				PlayerStrategy l_playerStrategy = loadStrategy(l_playerStrategyName, l_player);
+				l_player.setStrategy(l_playerStrategy);
 			}
 			l_in.close();
 			d_gameMapForLoad = l_gameMap;
@@ -395,6 +406,34 @@ public class SaveLoad {
 		return l_cardList;
 	}
 	/**
+	 * This function loads player strategy.
+	 * @param p_stateName strategy name
+	 * @param p_player player
+	 */
+	public PlayerStrategy loadStrategy(String p_stateName, Player p_player) {
+		PlayerStrategy l_playerStrategy = null;
+		switch (p_stateName) {
+			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN :
+				l_playerStrategy = new HumanPlayerStrategy(p_player);
+				break;
+			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE :
+				l_playerStrategy = new AggressivePlayerStrategy(p_player);
+				Country l_country = d_countriesForLoad.get(d_dataForLoad.d_playerStrongestCountryOwnedIds.remove(0));
+				((AggressivePlayerStrategy)l_playerStrategy).setStrongestCountryOwned(l_country);
+				break;
+			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT :
+				l_playerStrategy = new BenevolentPlayerStrategy(p_player);
+				break;
+			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER :
+				l_playerStrategy = new CheaterPlayerStrategy(p_player);
+				break;
+			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM :
+				l_playerStrategy = new RandomPlayerStrategy(p_player);
+				break;
+		}
+		return l_playerStrategy;
+	}
+	/**
 	 * This function saves the game in txt format.
 	 *
 	 * @param p_fileName
@@ -493,6 +532,16 @@ public class SaveLoad {
 				l_bufferedWriter.write(d_dataForSave.d_cards.get(i) + " ");
 			}
 			l_bufferedWriter.newLine();
+			// Save Player Strategy Data
+			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS_STRATEGY);
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_playerStrategyNames.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_playerStrategyNames.get(i) + " ");
+			}
+			l_bufferedWriter.newLine();
+			for (int i = 0; i < d_dataForSave.d_playerStrongestCountryOwnedIds.size(); i++) {
+				l_bufferedWriter.write(d_dataForSave.d_playerStrongestCountryOwnedIds.get(i) + " ");
+			}
 			l_bufferedWriter.close();
 			Logger.log(Constants.SAVE_SUCCESS);
 		} catch (Exception e) {

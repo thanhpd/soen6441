@@ -22,3 +22,5 @@ Players' Countries
 1 2 3 
 Cards
 blockade negotiate bomb airlift 
+Players' Strategy
+Random Human 

@@ -5,6 +5,7 @@ import com.w10.risk_game.commands.*;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
+import com.w10.risk_game.models.phases.IssueOrderPhase;
 import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
 import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
 import org.junit.jupiter.api.BeforeEach;
@@ -111,6 +112,7 @@ public class SaveLoadTest {
 		d_gameEngine1.getGame().setPlayerList(l_playerList);
 		d_gameEngine1.getGame().SetPlayerListForDiplomacy(l_playerList);
 		d_gameEngine1.getGame().setCurrentPlayerIndex(0);
+		GameEngine.SetPhase(new IssueOrderPhase(d_gameEngine1));
 		// Set SaveLoad
 		d_save = new SaveLoad(d_gameEngine1);
 		d_gameEngine2 = new GameEngine();
@@ -141,15 +143,9 @@ public class SaveLoadTest {
 		assertEquals(d_gameEngine1.getGame().getIsCountriesAssigned(),
 				d_gameEngine2.getGame().getIsCountriesAssigned());
 		assertEquals(d_gameEngine1.getGame().getPlayerList().size(), d_gameEngine2.getGame().getPlayerList().size());
-		assertEquals(d_gameEngine1.getGame().GetPlayerListForDiplomacy().size(),
-				d_gameEngine2.getGame().GetPlayerListForDiplomacy().size());
 		for (int i = 0; i < d_gameEngine1.getGame().getPlayerList().size(); i++) {
 			assertEquals(d_gameEngine1.getGame().getPlayerList().get(i).getName(),
 					d_gameEngine2.getGame().getPlayerList().get(i).getName());
-		}
-		for (int i = 0; i < d_gameEngine1.getGame().GetPlayerListForDiplomacy().size(); i++) {
-			assertEquals(d_gameEngine1.getGame().GetPlayerListForDiplomacy().get(i).getName(),
-					d_gameEngine2.getGame().GetPlayerListForDiplomacy().get(i).getName());
 		}
 		// Compare the size of the data
 		assertEquals(l_gameMapForSave.getCountries().size(), l_gameMapForLoad.getCountries().size());

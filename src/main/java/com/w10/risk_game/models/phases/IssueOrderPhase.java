@@ -19,7 +19,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	protected IssueOrderPhase(GameEngine p_gameEngine) {
+	public IssueOrderPhase(GameEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 

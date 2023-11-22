@@ -5,6 +5,7 @@ import com.w10.risk_game.commands.*;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
+import com.w10.risk_game.models.phases.IssueOrderPhase;
 import com.w10.risk_game.models.strategies.*;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -251,6 +252,9 @@ public class SaveLoad {
 			}
 			d_gameEngine.getGame().setPlayerList(l_gamePlayControllerPlayerList);
 			d_gameEngine.getMapEditorController().setGameMap(d_gameMapForLoad);
+			// Load Phase Data
+			Phase l_currentPhase = new IssueOrderPhase(d_gameEngine);
+			GameEngine.SetPhase(l_currentPhase);
 			Logger.log(Constants.LOAD_SUCCESS);
 		} catch (Exception e) {
 			Logger.log(Constants.LOAD_FAIL);
@@ -456,6 +460,9 @@ public class SaveLoad {
 			File l_referenceFile = new File(l_referenceFilePath);
 			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
 			BufferedWriter l_bufferedWriter = new BufferedWriter(l_fileWriter);
+			// Phase Data
+			l_bufferedWriter.write(GameEngine.GetPhase().getClass().getSimpleName());
+			l_bufferedWriter.newLine();
 			// Save GamePlayController Data
 			l_bufferedWriter.write(d_dataForSave.d_currentPlayerIndex + " " + d_dataForSave.d_currentPlayerName + " "
 					+ d_dataForSave.d_isCountriesAssigned);

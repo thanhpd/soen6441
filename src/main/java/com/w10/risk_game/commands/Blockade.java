@@ -171,5 +171,12 @@ public class Blockade extends Order {
 			return false; // Return false if the player does not have a blockade card
 		}
 	}
-
+	/**
+	 * The function returns the country ID to block.
+	 *
+	 * @return country id to block
+	 */
+	public String getCountryIdToBlock() {
+		return d_countryIdToBlock;
+	}
 }

@@ -344,4 +344,14 @@ public class MapEditorController {
 
 		return null;
 	}
+
+	/**
+	 * The function sets the game map.
+	 *
+	 * @param d_gameMap
+	 *            The game map to set.
+	 */
+	public void setGameMap(GameMap d_gameMap) {
+		this.d_gameMap = d_gameMap;
+	}
 }

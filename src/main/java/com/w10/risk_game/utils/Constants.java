@@ -225,4 +225,19 @@ public final class Constants {
 	public static final String STRATEGY_ISSUE_ORDER = "Order: {0}";
 	public static final String STRATEGY_CHEATER_TAKE_OVER = "Cheater player {0} took over country {1} from player {2}";
 	public static final String STRATEGY_CHEATER_DOUBLE_ARMY = "Cheater player {0} doubled the army in country {1}";
+	// SaveLoad constants
+	public static final String SAVE_LOAD_FILE_PATH = "src/main/resources/archives/";
+	public static final String SAVE_SUCCESS = "Game saved successfully";
+	public static final String SAVE_FAIL = "Game failed to save";
+	public static final String LOAD_SUCCESS = "Game loaded successfully";
+	public static final String LOAD_FAIL = "Game failed to load";
+	public static final String SAVE_LOAD_COUNTRIES = "Countries";
+	public static final String SAVE_LOAD_CONTINENTS = "Continents";
+	public static final String SAVE_LOAD_NEIGHBOR_COUNTRIES = "Neighbor Countries";
+	public static final String SAVE_LOAD_PLAYERS = "Players";
+	public static final String SAVE_LOAD_ORDER = "Order Types";
+	public static final String SAVE_LOAD_PLAYERS_COUNTRIES = "Players' Countries";
+	public static final String SAVE_LOAD_PLAYERS_CARDS = "Cards";
+	public static final String SAVE_LOAD_TEST_FILE_NAME = "testSave";
+	public static final String SAVE_LOAD_PLAYERS_STRATEGY = "Players' Strategy";
 }

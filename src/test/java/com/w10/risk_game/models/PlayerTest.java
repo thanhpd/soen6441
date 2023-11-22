@@ -65,12 +65,12 @@ class PlayerTest {
 		l_country4.setOwner(d_player2);
 
 		// Set for game engine controller
-		HashMap<String, Player> l_players = new HashMap<>();
-		l_players.put("Player1", d_player1);
-		l_players.put("Player2", d_player2);
+		List<Player> l_players = new ArrayList<>();
+		l_players.add(d_player1);
+		l_players.add(d_player2);
 		MapEditorController l_mapEditorController = new MapEditorController();
 		d_gamePlayController = new GamePlayController(l_mapEditorController);
-		GamePlayController.SetPlayers(l_players);
+		d_gamePlayController.SetPlayerListForDiplomacy(l_players);
 	}
 
 	/**

@@ -119,14 +119,14 @@ public class Negotiate extends Order {
 		}
 
 		// Get the list of players available for diplomacy from the game
-		HashMap<String, Player> l_players = GamePlayController.GetPlayers();
+		List<Player> l_players = GamePlayController.GetPlayerListForDiplomacy();
 
 		// Iterate through the players to find the player to negotiate with
-		for (Map.Entry<String, Player> entry : l_players.entrySet()) {
+		for (Player l_player : l_players) {
 			// Check if the specified player to negotiate with is valid
-			if (entry.getValue().getName().equals(p_playerId)) {
+			if (l_player.getName().equals(p_playerId)) {
 				// Set the player to negotiate with
-				PlayerToNegotiate = entry.getValue();
+				PlayerToNegotiate = l_player;
 				return true; // Indicates that the player to negotiate with is valid
 			}
 		}

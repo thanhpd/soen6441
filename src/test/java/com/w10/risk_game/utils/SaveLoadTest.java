@@ -166,7 +166,8 @@ public class SaveLoadTest {
 				assertEquals(entry.getValue().getPlayerCards().get(i),
 						l_playersForLoad.get(entry.getKey()).getPlayerCards().get(i));
 			}
-			assertEquals(entry.getValue().getStrategy().getClass(), l_playersForLoad.get(entry.getKey()).getStrategy().getClass());
+			assertEquals(entry.getValue().getStrategy().getClass(),
+					l_playersForLoad.get(entry.getKey()).getStrategy().getClass());
 			assertEquals(entry.getValue().getHasCommitted(), l_playersForLoad.get(entry.getKey()).getHasCommitted());
 		}
 	}

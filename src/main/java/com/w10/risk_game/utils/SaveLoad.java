@@ -36,7 +36,7 @@ public class SaveLoad {
 	 */
 	public SaveLoad(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_playersForSave = GamePlayController.GetPlayers();
+		this.d_playersForSave = p_gameEngine.getGame().getPlayers();
 		this.d_gameMapForSave = p_gameEngine.getMapEditorController().getGameMap();
 		this.d_playersForLoad = new HashMap<>();
 		this.d_gameMapForLoad = new GameMap();
@@ -124,8 +124,9 @@ public class SaveLoad {
 				d_dataForSave.d_playerHasCommitted.add(entry.getValue().getHasCommitted());
 				PlayerStrategy l_playerStrategy = entry.getValue().getStrategy();
 				d_dataForSave.d_playerStrategyNames.add(l_playerStrategy.getStrategyName());
-				if (l_playerStrategy.getStrategyName() == Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE){
-					d_dataForSave.d_playerStrongestCountryOwnedIds.add(((AggressivePlayerStrategy)l_playerStrategy).getStrongestCountryOwned().getCountryId());
+				if (l_playerStrategy.getStrategyName() == Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE) {
+					d_dataForSave.d_playerStrongestCountryOwnedIds.add(
+							((AggressivePlayerStrategy) l_playerStrategy).getStrongestCountryOwned().getCountryId());
 				}
 				// Save Order Data
 				int numberOfOrders = entry.getValue().getOrders().size();
@@ -232,7 +233,7 @@ public class SaveLoad {
 				l_player.setPlayerCards(l_cardList);
 				l_playerList.add(l_player);
 				// Load Strategy Data
-				String l_playerStrategyName =l_playerStrategyNames.get(i);
+				String l_playerStrategyName = l_playerStrategyNames.get(i);
 				PlayerStrategy l_playerStrategy = loadStrategy(l_playerStrategyName, l_player);
 				l_player.setStrategy(l_playerStrategy);
 			}
@@ -241,7 +242,7 @@ public class SaveLoad {
 			for (Player player : l_playerList) {
 				d_playersForLoad.put(player.getName(), player);
 			}
-			GamePlayController.SetPlayers(d_playersForLoad);
+			d_gameEngine.getGame().setPlayers(d_playersForLoad);
 			d_gameEngine.getMapEditorController().setGameMap(d_gameMapForLoad);
 			Logger.log(Constants.LOAD_SUCCESS);
 		} catch (Exception e) {
@@ -407,8 +408,11 @@ public class SaveLoad {
 	}
 	/**
 	 * This function loads player strategy.
-	 * @param p_stateName strategy name
-	 * @param p_player player
+	 *
+	 * @param p_stateName
+	 *            strategy name
+	 * @param p_player
+	 *            player
 	 */
 	public PlayerStrategy loadStrategy(String p_stateName, Player p_player) {
 		PlayerStrategy l_playerStrategy = null;
@@ -419,7 +423,7 @@ public class SaveLoad {
 			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE :
 				l_playerStrategy = new AggressivePlayerStrategy(p_player);
 				Country l_country = d_countriesForLoad.get(d_dataForLoad.d_playerStrongestCountryOwnedIds.remove(0));
-				((AggressivePlayerStrategy)l_playerStrategy).setStrongestCountryOwned(l_country);
+				((AggressivePlayerStrategy) l_playerStrategy).setStrongestCountryOwned(l_country);
 				break;
 			case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT :
 				l_playerStrategy = new BenevolentPlayerStrategy(p_player);

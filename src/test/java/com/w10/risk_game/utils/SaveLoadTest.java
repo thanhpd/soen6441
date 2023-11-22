@@ -1,6 +1,9 @@
 package com.w10.risk_game.utils;
 
+import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
+import com.w10.risk_game.controllers.GamePlayController;
+import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
 import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
@@ -21,7 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Yajing Liu
  */
 public class SaveLoadTest {
-	SaveLoad d_saveLoad;
+	SaveLoad d_save;
+	SaveLoad d_load;
+	GameEngine d_gameEngine1;
+	GameEngine d_gameEngine2;
 
 	/**
 	 * This method is to set up the test environment
@@ -92,7 +98,23 @@ public class SaveLoadTest {
 		HashMap<String, Player> l_players = new HashMap<>();
 		l_players.put(l_player1.getName(), l_player1);
 		l_players.put(l_player2.getName(), l_player2);
-		d_saveLoad = new SaveLoad(l_gameMap, l_players);
+		// Set GameEngine
+		d_gameEngine1 = new GameEngine();
+		d_gameEngine1.getMapEditorController().setGameMap(l_gameMap);
+		d_gameEngine1.getGame().setPlayers(l_players);
+		d_gameEngine1.getGame().setGameMap(l_gameMap);
+		d_gameEngine1.getGame().setCurrentPlayer(l_player1);
+		d_gameEngine1.getGame().setIsCountriesAssigned(true);
+		List<Player> l_playerList = new ArrayList<>();
+		l_playerList.add(l_player1);
+		l_playerList.add(l_player2);
+		d_gameEngine1.getGame().setPlayerList(l_playerList);
+		d_gameEngine1.getGame().SetPlayerListForDiplomacy(l_playerList);
+		d_gameEngine1.getGame().setCurrentPlayerIndex(0);
+		// Set SaveLoad
+		d_save = new SaveLoad(d_gameEngine1);
+		d_gameEngine2 = new GameEngine();
+		d_load = new SaveLoad(d_gameEngine2);
 	}
 	/**
 	 * This method is to test the save and load function It tests whether the save
@@ -101,17 +123,34 @@ public class SaveLoadTest {
 	@Test
 	public void testSaveLoad() {
 		// Save and get save data
-		d_saveLoad.saveGame(Constants.SAVE_LOAD_TEST_FILE_NAME);
-		GameMap l_gameMapForSave = d_saveLoad.getGameMapForSave();
+		d_save.saveGame(Constants.SAVE_LOAD_TEST_FILE_NAME);
+		GameMap l_gameMapForSave = d_save.getGameMapForSave();
 		Map<Integer, Country> l_countriesForSave = l_gameMapForSave.getCountries();
 		Map<Integer, Continent> l_continentsForSave = l_gameMapForSave.getContinents();
-		HashMap<String, Player> l_playersForSave = d_saveLoad.getPlayersForSave();
+		HashMap<String, Player> l_playersForSave = d_save.getPlayersForSave();
 		// Load and get load data
-		d_saveLoad.loadGame(Constants.SAVE_LOAD_TEST_FILE_NAME);
-		GameMap l_gameMapForLoad = d_saveLoad.getGameMapForLoad();
+		d_load.loadGame(Constants.SAVE_LOAD_TEST_FILE_NAME);
+		GameMap l_gameMapForLoad = d_load.getGameMapForLoad();
 		Map<Integer, Country> l_countriesForLoad = l_gameMapForLoad.getCountries();
 		Map<Integer, Continent> l_continentsForLoad = l_gameMapForLoad.getContinents();
-		HashMap<String, Player> l_playersForLoad = d_saveLoad.getPlayersForLoad();
+		HashMap<String, Player> l_playersForLoad = d_load.getPlayersForLoad();
+		// Compare GamePlayController data
+		assertEquals(d_gameEngine1.getGame().getCurrentPlayer().getName(),
+				d_gameEngine2.getGame().getCurrentPlayer().getName());
+		assertEquals(d_gameEngine1.getGame().getCurrentPlayerIndex(), d_gameEngine2.getGame().getCurrentPlayerIndex());
+		assertEquals(d_gameEngine1.getGame().getIsCountriesAssigned(),
+				d_gameEngine2.getGame().getIsCountriesAssigned());
+		assertEquals(d_gameEngine1.getGame().getPlayerList().size(), d_gameEngine2.getGame().getPlayerList().size());
+		assertEquals(d_gameEngine1.getGame().GetPlayerListForDiplomacy().size(),
+				d_gameEngine2.getGame().GetPlayerListForDiplomacy().size());
+		for (int i = 0; i < d_gameEngine1.getGame().getPlayerList().size(); i++) {
+			assertEquals(d_gameEngine1.getGame().getPlayerList().get(i).getName(),
+					d_gameEngine2.getGame().getPlayerList().get(i).getName());
+		}
+		for (int i = 0; i < d_gameEngine1.getGame().GetPlayerListForDiplomacy().size(); i++) {
+			assertEquals(d_gameEngine1.getGame().GetPlayerListForDiplomacy().get(i).getName(),
+					d_gameEngine2.getGame().GetPlayerListForDiplomacy().get(i).getName());
+		}
 		// Compare the size of the data
 		assertEquals(l_gameMapForSave.getCountries().size(), l_gameMapForLoad.getCountries().size());
 		assertEquals(l_gameMapForSave.getContinents().size(), l_gameMapForLoad.getContinents().size());

@@ -506,4 +506,75 @@ public class GamePlayController {
 	public void setPlayers(HashMap<String, Player> d_players) {
 		this.d_players = d_players;
 	}
+	/**
+	 * This function is to set the game map
+	 *
+	 * @param p_gameMap
+	 *            the game map
+	 */
+	public void setGameMap(GameMap p_gameMap) {
+		this.d_gameMap = p_gameMap;
+	}
+	/**
+	 * This function is to set the current player
+	 *
+	 * @param p_currentPlayer
+	 *            the current player
+	 */
+	public void setCurrentPlayer(Player p_currentPlayer) {
+		this.d_currentPlayer = p_currentPlayer;
+	}
+	/**
+	 * This function is to get the current player index
+	 *
+	 * @return the current player index
+	 */
+	public int getCurrentPlayerIndex() {
+		return d_currentPlayerIndex;
+	}
+	/**
+	 * This function is to set the current player index
+	 *
+	 * @param p_currentPlayerIndex
+	 *            the current player index
+	 */
+	public void setCurrentPlayerIndex(int p_currentPlayerIndex) {
+		this.d_currentPlayerIndex = p_currentPlayerIndex;
+	}
+	/**
+	 * This function is to get player list
+	 *
+	 * @return player list
+	 */
+	public List<Player> getPlayerList() {
+		return d_playerList;
+	}
+	/**
+	 * This function is to set player list
+	 *
+	 * @param p_playerList
+	 *            player list
+	 */
+	public void setPlayerList(List<Player> p_playerList) {
+		this.d_playerList = p_playerList;
+	}
+
+	/**
+	 * This function is to get variable isCountriesAssigned
+	 *
+	 * @return isCountriesAssigned
+	 */
+	public boolean getIsCountriesAssigned() {
+		return d_isCountriesAssigned;
+	}
+
+	/**
+	 * This function is to set variable isCountriesAssigned
+	 *
+	 * @param p_isCountriesAssigned
+	 *            isCountriesAssigned
+	 */
+	public void setIsCountriesAssigned(boolean p_isCountriesAssigned) {
+		this.d_isCountriesAssigned = p_isCountriesAssigned;
+	}
 }

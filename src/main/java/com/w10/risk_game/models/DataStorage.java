@@ -10,6 +10,11 @@ import java.util.ArrayList;
  * @author Yajing Liu
  */
 public class DataStorage implements Serializable {
+	// GamePlayController
+	public String d_currentPlayerName;
+	public int d_currentPlayerIndex;
+	public ArrayList<String> d_gamePlayControllerPlayerNames = new ArrayList<String>();
+	public boolean d_isCountriesAssigned;
 	// Map
 	// Country
 	public ArrayList<Integer> d_countryIds = new ArrayList<Integer>();

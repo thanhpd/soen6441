@@ -3,6 +3,7 @@ package com.w10.risk_game.utils;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
 import com.w10.risk_game.controllers.GamePlayController;
+import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.models.strategies.*;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
@@ -27,6 +28,7 @@ public class SaveLoad {
 	Map<Integer, Country> d_countriesForLoad;
 	GameMap d_gameMapForSave;
 	GameMap d_gameMapForLoad;
+	GamePlayController d_gamePlayController;
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	/**
 	 * Constructor for SaveLoad class.
@@ -36,23 +38,9 @@ public class SaveLoad {
 	 */
 	public SaveLoad(GameEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
-		this.d_playersForSave = p_gameEngine.getGame().getPlayers();
+		this.d_gamePlayController = p_gameEngine.getGame();
+		this.d_playersForSave = d_gamePlayController.getPlayers();
 		this.d_gameMapForSave = p_gameEngine.getMapEditorController().getGameMap();
-		this.d_playersForLoad = new HashMap<>();
-		this.d_gameMapForLoad = new GameMap();
-	}
-
-	/**
-	 * Constructor for SaveLoad class. This constructor is only used for testing.
-	 *
-	 * @param p_gameMap
-	 *            GameMap
-	 * @param p_playerList
-	 *            List of players
-	 */
-	public SaveLoad(GameMap p_gameMap, HashMap<String, Player> p_playerList) {
-		this.d_gameMapForSave = p_gameMap;
-		this.d_playersForSave = p_playerList;
 		this.d_playersForLoad = new HashMap<>();
 		this.d_gameMapForLoad = new GameMap();
 	}
@@ -99,6 +87,13 @@ public class SaveLoad {
 		try {
 			ObjectOutputStream l_out = new ObjectOutputStream(new FileOutputStream(l_filePath));
 			d_dataForSave = new DataStorage();
+			// Save GamePlayController Data
+			d_dataForSave.d_currentPlayerName = d_gamePlayController.getCurrentPlayer().getName();
+			d_dataForSave.d_currentPlayerIndex = d_gamePlayController.getCurrentPlayerIndex();
+			d_dataForSave.d_isCountriesAssigned = d_gamePlayController.getIsCountriesAssigned();
+			for (Player player : d_gamePlayController.getPlayerList()) {
+				d_dataForSave.d_gamePlayControllerPlayerNames.add(player.getName());
+			}
 			// Save Country Data
 			for (Map.Entry<Integer, Country> entry : d_gameMapForSave.getCountries().entrySet()) {
 				d_dataForSave.d_countryIds.add(entry.getKey());
@@ -241,8 +236,20 @@ public class SaveLoad {
 			d_gameMapForLoad = l_gameMap;
 			for (Player player : l_playerList) {
 				d_playersForLoad.put(player.getName(), player);
+				if (player.getName().equals(d_dataForLoad.d_currentPlayerName)) {
+					d_gameEngine.getGame().setCurrentPlayer(player);
+				}
 			}
 			d_gameEngine.getGame().setPlayers(d_playersForLoad);
+			d_gameEngine.getGame().SetPlayerListForDiplomacy(l_playerList);
+			d_gameEngine.getGame().setGameMap(d_gameMapForLoad);
+			d_gameEngine.getGame().setCurrentPlayerIndex(d_dataForLoad.d_currentPlayerIndex);
+			d_gameEngine.getGame().setIsCountriesAssigned(d_dataForLoad.d_isCountriesAssigned);
+			List<Player> l_gamePlayControllerPlayerList = new ArrayList<>();
+			for (String playerName : d_dataForLoad.d_gamePlayControllerPlayerNames) {
+				l_gamePlayControllerPlayerList.add(d_playersForLoad.get(playerName));
+			}
+			d_gameEngine.getGame().setPlayerList(l_gamePlayControllerPlayerList);
 			d_gameEngine.getMapEditorController().setGameMap(d_gameMapForLoad);
 			Logger.log(Constants.LOAD_SUCCESS);
 		} catch (Exception e) {
@@ -449,6 +456,10 @@ public class SaveLoad {
 			File l_referenceFile = new File(l_referenceFilePath);
 			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
 			BufferedWriter l_bufferedWriter = new BufferedWriter(l_fileWriter);
+			// Save GamePlayController Data
+			l_bufferedWriter.write(d_dataForSave.d_currentPlayerIndex + " " + d_dataForSave.d_currentPlayerName + " "
+					+ d_dataForSave.d_isCountriesAssigned);
+			l_bufferedWriter.newLine();
 			// Save Country Data
 			l_bufferedWriter.write(Constants.SAVE_LOAD_COUNTRIES);
 			l_bufferedWriter.newLine();

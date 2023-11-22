@@ -1,8 +1,9 @@
 package com.w10.risk_game.utils;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engines.*;
 import com.w10.risk_game.commands.*;
 import com.w10.risk_game.controllers.GamePlayController;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.models.phases.IssueOrderPhase;
 import com.w10.risk_game.models.strategies.*;
@@ -20,7 +21,7 @@ import java.util.Map;
  * @author Yajing
  */
 public class SaveLoad {
-	GameEngine d_gameEngine;
+	SinglePlayerEngine d_gameEngine;
 	DataStorage d_dataForSave;
 	DataStorage d_dataForLoad;
 	HashMap<String, Player> d_playersForSave;
@@ -34,9 +35,9 @@ public class SaveLoad {
 	 * Constructor for SaveLoad class.
 	 *
 	 * @param p_gameEngine
-	 *            The parameter `p_gameEngine` is a GameEngine object.
+	 *            The parameter `p_gameEngine` is a SinglePlayerEngine object.
 	 */
-	public SaveLoad(GameEngine p_gameEngine) {
+	public SaveLoad(SinglePlayerEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
 		this.d_gamePlayController = p_gameEngine.getGame();
 		this.d_playersForSave = d_gamePlayController.getPlayers();
@@ -253,7 +254,7 @@ public class SaveLoad {
 			d_gameEngine.getMapEditorController().setGameMap(d_gameMapForLoad);
 			// Load Phase Data
 			Phase l_currentPhase = new IssueOrderPhase(d_gameEngine);
-			GameEngine.SetPhase(l_currentPhase);
+			SinglePlayerEngine.SetPhase(l_currentPhase);
 			Logger.log(Constants.LOAD_SUCCESS);
 		} catch (Exception e) {
 			Logger.log(Constants.LOAD_FAIL);
@@ -460,7 +461,7 @@ public class SaveLoad {
 			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
 			BufferedWriter l_bufferedWriter = new BufferedWriter(l_fileWriter);
 			// Phase Data
-			l_bufferedWriter.write(GameEngine.Phase.getClass().getSimpleName());
+			l_bufferedWriter.write(SinglePlayerEngine.Phase.getClass().getSimpleName());
 			l_bufferedWriter.newLine();
 			// Save GamePlayController Data
 			l_bufferedWriter.write(d_dataForSave.d_currentPlayerIndex + " " + d_dataForSave.d_currentPlayerName + " "

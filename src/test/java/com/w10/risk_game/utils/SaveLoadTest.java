@@ -1,6 +1,6 @@
 package com.w10.risk_game.utils;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.commands.*;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.models.phases.IssueOrderPhase;
@@ -25,8 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SaveLoadTest {
 	SaveLoad d_save;
 	SaveLoad d_load;
-	GameEngine d_gameEngine1;
-	GameEngine d_gameEngine2;
+	SinglePlayerEngine d_gameEngine1;
+	SinglePlayerEngine d_gameEngine2;
 
 	/**
 	 * This method is to set up the test environment
@@ -98,7 +98,7 @@ public class SaveLoadTest {
 		l_players.put(l_player1.getName(), l_player1);
 		l_players.put(l_player2.getName(), l_player2);
 		// Set GameEngine
-		d_gameEngine1 = new GameEngine();
+		d_gameEngine1 = new SinglePlayerEngine();
 		d_gameEngine1.getMapEditorController().setGameMap(l_gameMap);
 		d_gameEngine1.getGame().setPlayers(l_players);
 		d_gameEngine1.getGame().setGameMap(l_gameMap);
@@ -110,10 +110,10 @@ public class SaveLoadTest {
 		d_gameEngine1.getGame().setPlayerList(l_playerList);
 		d_gameEngine1.getGame().SetPlayerListForDiplomacy(l_playerList);
 		d_gameEngine1.getGame().setCurrentPlayerIndex(0);
-		GameEngine.SetPhase(new IssueOrderPhase(d_gameEngine1));
+		SinglePlayerEngine.SetPhase(new IssueOrderPhase(d_gameEngine1));
 		// Set SaveLoad
 		d_save = new SaveLoad(d_gameEngine1);
-		d_gameEngine2 = new GameEngine();
+		d_gameEngine2 = new SinglePlayerEngine();
 		d_load = new SaveLoad(d_gameEngine2);
 	}
 	/**

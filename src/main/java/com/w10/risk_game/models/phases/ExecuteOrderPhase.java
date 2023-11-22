@@ -2,8 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 
 /**
  * The ExecuteOrderPhase class is a subclass of GamePlayPhase that represents
@@ -19,7 +19,7 @@ public class ExecuteOrderPhase extends GamePlayPhase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	protected ExecuteOrderPhase(GameEngine p_gameEngine) {
+	protected ExecuteOrderPhase(SinglePlayerEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 

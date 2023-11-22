@@ -1,6 +1,6 @@
 package com.w10.risk_game.models.phases;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Phase;
 
 /**
@@ -18,7 +18,7 @@ public abstract class MapEditorPhase extends Phase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	public MapEditorPhase(GameEngine p_gameEngine) {
+	public MapEditorPhase(SinglePlayerEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 

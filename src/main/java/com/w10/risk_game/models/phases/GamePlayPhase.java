@@ -1,6 +1,6 @@
 package com.w10.risk_game.models.phases;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Phase;
 
 /**
@@ -17,7 +17,7 @@ public abstract class GamePlayPhase extends Phase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	public GamePlayPhase(GameEngine p_gameEngine) {
+	public GamePlayPhase(SinglePlayerEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 

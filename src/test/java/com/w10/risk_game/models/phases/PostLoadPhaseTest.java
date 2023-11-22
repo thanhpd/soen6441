@@ -7,13 +7,13 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.utils.Constants;
 
 public class PostLoadPhaseTest {
 	Phase phase;
-	GameEngine l_GameEngine;
+	SinglePlayerEngine l_GameEngine;
 
 	/**
 	 * The setup function initializes a GameEngine object and sets its phase to a
@@ -22,11 +22,11 @@ public class PostLoadPhaseTest {
 	@BeforeEach
 	public void setup() {
 
-		l_GameEngine = new GameEngine();
-		GameEngine.SetPhase(new PreLoadPhase(l_GameEngine));
-		phase = GameEngine.Phase;
+		l_GameEngine = new SinglePlayerEngine();
+		SinglePlayerEngine.SetPhase(new PreLoadPhase(l_GameEngine));
+		phase = SinglePlayerEngine.Phase;
 		phase.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "europe.map");
-		phase = GameEngine.Phase;
+		phase = SinglePlayerEngine.Phase;
 
 	}
 
@@ -55,7 +55,7 @@ public class PostLoadPhaseTest {
 	@Test
 	void testNextPhaseIfMapValid() {
 		phase.nextPhase();
-		phase = GameEngine.Phase;
+		phase = SinglePlayerEngine.Phase;
 		assertEquals("PlaySetup PHASE", phase.getPhaseName());
 	}
 	/**
@@ -65,12 +65,12 @@ public class PostLoadPhaseTest {
 	 */
 	@Test
 	void testNextIfMapInvalid() {
-		GameEngine.SetPhase(new PreLoadPhase(l_GameEngine));
-		phase = GameEngine.Phase;
+		SinglePlayerEngine.SetPhase(new PreLoadPhase(l_GameEngine));
+		phase = SinglePlayerEngine.Phase;
 		phase.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "test24.map");
-		phase = GameEngine.Phase;
+		phase = SinglePlayerEngine.Phase;
 		phase.nextPhase();
-		phase = GameEngine.Phase;
+		phase = SinglePlayerEngine.Phase;
 		assertEquals("PreLoad PHASE", phase.getPhaseName());
 	}
 

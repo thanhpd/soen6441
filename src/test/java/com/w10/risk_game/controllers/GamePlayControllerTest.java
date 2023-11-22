@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.w10.risk_game.GameEngine;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
@@ -159,20 +159,20 @@ class GamePlayControllerTest {
 		d_gamePlayController.assignPlayersReinforcements();
 
 		// Round 1 - Player A advances to Player B country and loses
-		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
+		SinglePlayerEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
+		SinglePlayerEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = MessageFormat.format("advance {0} {1} 3", l_countryOfPlayer1.getCountryName(),
+		SinglePlayerEngine.Command = MessageFormat.format("advance {0} {1} 3", l_countryOfPlayer1.getCountryName(),
 				l_countryOfPlayer2.getCountryName());
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
+		SinglePlayerEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
+		SinglePlayerEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
 		d_gamePlayController.issuePlayerOrder();
 
 		d_gamePlayController.executePlayerOrders();
@@ -182,20 +182,20 @@ class GamePlayControllerTest {
 		// Round 2 - Player B advances to Player A country and wins
 		d_gamePlayController.assignPlayersReinforcements();
 
-		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
+		SinglePlayerEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer1.getCountryId());
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
+		SinglePlayerEngine.Command = MessageFormat.format("deploy {0} 3", l_countryOfPlayer2.getCountryId());
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
+		SinglePlayerEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = MessageFormat.format("advance {0} {1} 4", l_countryOfPlayer2.getCountryName(),
+		SinglePlayerEngine.Command = MessageFormat.format("advance {0} {1} 4", l_countryOfPlayer2.getCountryName(),
 				l_countryOfPlayer1.getCountryName());
 		d_gamePlayController.issuePlayerOrder();
 
-		GameEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
+		SinglePlayerEngine.Command = Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT;
 		d_gamePlayController.issuePlayerOrder();
 
 		d_gamePlayController.executePlayerOrders();

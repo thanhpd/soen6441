@@ -3,7 +3,6 @@ package com.w10.risk_game.utils;
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
 import com.w10.risk_game.controllers.GamePlayController;
-import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.models.phases.IssueOrderPhase;
 import com.w10.risk_game.models.strategies.*;
@@ -461,7 +460,7 @@ public class SaveLoad {
 			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
 			BufferedWriter l_bufferedWriter = new BufferedWriter(l_fileWriter);
 			// Phase Data
-			l_bufferedWriter.write(GameEngine.GetPhase().getClass().getSimpleName());
+			l_bufferedWriter.write(GameEngine.Phase.getClass().getSimpleName());
 			l_bufferedWriter.newLine();
 			// Save GamePlayController Data
 			l_bufferedWriter.write(d_dataForSave.d_currentPlayerIndex + " " + d_dataForSave.d_currentPlayerName + " "

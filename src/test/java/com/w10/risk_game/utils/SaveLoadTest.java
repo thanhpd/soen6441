@@ -2,8 +2,6 @@ package com.w10.risk_game.utils;
 
 import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.*;
-import com.w10.risk_game.controllers.GamePlayController;
-import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.*;
 import com.w10.risk_game.models.phases.IssueOrderPhase;
 import com.w10.risk_game.models.strategies.HumanPlayerStrategy;

@@ -308,13 +308,4 @@ public class GameEngine {
 		return this.d_mapEditorController;
 	}
 
-	/**
-	 * The function returns the current phase of the game.
-	 *
-	 * @return The method is returning an object of type Phase.
-	 */
-	public static Phase GetPhase() {
-		return Phase;
-	}
-
 }

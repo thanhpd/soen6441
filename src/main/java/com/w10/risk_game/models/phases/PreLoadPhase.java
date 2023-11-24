@@ -179,7 +179,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.loadmap);
+		return Set.of(Command.loadmap, Command.loadgame);
 	}
 
 	/**

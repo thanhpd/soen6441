@@ -24,9 +24,11 @@ public enum Command {
 																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), airlift(
 																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
 																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), commit(
-																																	Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), none(
-																																			""), quit(
-																																					Constants.USER_INPUT_COMMAND_QUIT);
+																																	Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), savegame(
+																																			Constants.USER_INPUT_SAVE_GAME), loadgame(
+																																					Constants.USER_INPUT_LOAD_GAME), none(
+																																							""), quit(
+																																									Constants.USER_INPUT_COMMAND_QUIT);
 
 	private final String name;
 

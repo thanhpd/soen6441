@@ -15,6 +15,7 @@ import com.w10.risk_game.models.tournament.Tournament;
 import com.w10.risk_game.models.tournament.TournamentOptions;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.SaveLoad;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
@@ -132,6 +133,10 @@ public class SinglePlayerEngine {
 				// command
 				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
 				switch (l_mainCommand) {
+					case Constants.USER_INPUT_LOAD_GAME :
+						SaveLoad load = new SaveLoad(this);
+						load.loadGame(l_argList[1]);
+						break;
 					// Map editor Phase commands
 
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
@@ -248,6 +253,10 @@ public class SinglePlayerEngine {
 						break;
 
 					// Issue Order Commands
+					case Constants.USER_INPUT_SAVE_GAME :
+						SaveLoad save = new SaveLoad(this);
+						save.saveGame(l_argList[1]);
+						break;
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :

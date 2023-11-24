@@ -1,4 +1,4 @@
-package com.w10.risk_game;
+package com.w10.risk_game.engines;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -10,18 +10,21 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
+import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
+import com.w10.risk_game.models.tournament.Tournament;
+import com.w10.risk_game.models.tournament.TournamentOptions;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.SaveLoad;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngine class is responsible for managing the game flow, handling user
- * input, and executing commands in the Risk game.
+ * The SinglePlayerEngine class is responsible for managing the game flow,
+ * handling user input, and executing commands in the Risk game.
  *
  * @author Sherwyn Dsouza
  */
-public class GameEngine {
+public class SinglePlayerEngine {
 
 	private final GamePlayController d_gamePlayController;
 	private final MapEditorController d_mapEditorController;
@@ -44,10 +47,10 @@ public class GameEngine {
 	}
 
 	/**
-	 * The `GameEngine` constructor initializes a new instance of the
+	 * The `SinglePlayerEngine` constructor initializes a new instance of the
 	 * `MapEditorController` class and `GamePlayController` class.
 	 */
-	public GameEngine() {
+	public SinglePlayerEngine() {
 		this.d_mapEditorController = new MapEditorController();
 		this.d_gamePlayController = new GamePlayController(d_mapEditorController);
 	}
@@ -129,17 +132,22 @@ public class GameEngine {
 				// Check for the validity of the provided argument options based on the main
 				// command
 				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
-
 				switch (l_mainCommand) {
-					case Constants.USER_INPUT_LOAD_GAME:
+					case Constants.USER_INPUT_LOAD_GAME :
 						SaveLoad load = new SaveLoad(this);
 						load.loadGame(l_argList[1]);
 						break;
 					// Map editor Phase commands
+
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
+
 						String[] l_mapName = l_argList[1].split("/");
 						Logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						Phase.loadMap(l_argList[1]);
+						break;
+					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE :
+						Tournament tournamentMode = new Tournament();
+						tournamentMode.startTournament();
 						break;
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
 						Phase.saveMap(l_argList[1],
@@ -245,7 +253,7 @@ public class GameEngine {
 						break;
 
 					// Issue Order Commands
-					case Constants.USER_INPUT_SAVE_GAME:
+					case Constants.USER_INPUT_SAVE_GAME :
 						SaveLoad save = new SaveLoad(this);
 						save.saveGame(l_argList[1]);
 						break;

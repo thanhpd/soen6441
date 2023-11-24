@@ -2,11 +2,11 @@ package com.w10.risk_game.models;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 
 /**
  * The `Phase` class is an abstract class that represents a phase in a Risk game
@@ -15,7 +15,7 @@ import com.w10.risk_game.controllers.MapEditorController;
  * @author Omnia Alam, Sherwyn Dsouza
  */
 public abstract class Phase {
-	protected GameEngine d_gameEngine;
+	protected SinglePlayerEngine d_gameEngine;
 	protected GamePlayController d_gamePlayController;
 	protected MapEditorController d_mapEditorController;
 
@@ -27,7 +27,7 @@ public abstract class Phase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	protected Phase(GameEngine p_gameEngine) {
+	protected Phase(SinglePlayerEngine p_gameEngine) {
 		this.d_gameEngine = p_gameEngine;
 		this.d_gamePlayController = p_gameEngine.getGame();
 		this.d_mapEditorController = p_gameEngine.getMapEditorController();

@@ -3,7 +3,6 @@ package com.w10.risk_game.models.strategies;
 import java.text.MessageFormat;
 import java.util.Scanner;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Advance;
 import com.w10.risk_game.commands.Airlift;
 import com.w10.risk_game.commands.Blockade;
@@ -11,6 +10,7 @@ import com.w10.risk_game.commands.Bomb;
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Negotiate;
 import com.w10.risk_game.commands.Order;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
@@ -29,7 +29,7 @@ public class HumanPlayerStrategy extends PlayerStrategy {
 		// Set the 'hasCommitted' flag to false for the current player
 		d_player.setHasCommitted(false);
 		// Retrieve the player's input command from the GameEngine
-		String l_input = GameEngine.Command;
+		String l_input = SinglePlayerEngine.Command;
 		String[] l_inputArray = l_input.split(" ");
 		boolean l_again = true;
 		boolean l_failed = false;
@@ -44,12 +44,12 @@ public class HumanPlayerStrategy extends PlayerStrategy {
 
 				// Check if user enters quit after an invalid order
 				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_QUIT)) {
-					GameEngine.Command = Constants.USER_INPUT_COMMAND_QUIT;
+					SinglePlayerEngine.Command = Constants.USER_INPUT_COMMAND_QUIT;
 					break;
 				}
 				// Check if user enters showmap after an invalid order
 				if (l_input.trim().equals(Constants.USER_INPUT_COMMAND_SHOWMAP)) {
-					GameEngine.Phase.showMap();
+					SinglePlayerEngine.Phase.showMap();
 					continue;
 				}
 				l_inputArray = l_input.split(" ");

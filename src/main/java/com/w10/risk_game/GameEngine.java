@@ -12,6 +12,7 @@ import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.SaveLoad;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
@@ -130,6 +131,10 @@ public class GameEngine {
 				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
 
 				switch (l_mainCommand) {
+					case Constants.USER_INPUT_LOAD_GAME:
+						SaveLoad load = new SaveLoad(this);
+						load.loadGame(l_argList[1]);
+						break;
 					// Map editor Phase commands
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
 						String[] l_mapName = l_argList[1].split("/");
@@ -240,6 +245,10 @@ public class GameEngine {
 						break;
 
 					// Issue Order Commands
+					case Constants.USER_INPUT_SAVE_GAME:
+						SaveLoad save = new SaveLoad(this);
+						save.saveGame(l_argList[1]);
+						break;
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :

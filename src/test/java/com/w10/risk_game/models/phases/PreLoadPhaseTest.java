@@ -46,7 +46,7 @@ public class PreLoadPhaseTest {
 	 */
 	@Test
 	void testAvailableCommands() {
-		assertEquals("[loadmap]", phase.getAvailableCommands().toString());
+		assertEquals("[loadmap, loadgame]", phase.getAvailableCommands().toString());
 
 	}
 

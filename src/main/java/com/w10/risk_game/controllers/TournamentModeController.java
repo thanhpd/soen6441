@@ -100,66 +100,60 @@ public class TournamentModeController {
 
 	}
 
+	
+	
 	/**
-	 * The function extracts values from a command string that follow a specified
-	 * flag.
-	 *
-	 * @param command
-	 *            The `command` parameter is a string that represents the command
-	 *            from which we want to extract values. It could be any string that
-	 *            contains the flag and the values we are interested in.
-	 * @param flag
-	 *            The "flag" parameter is a string that represents the flag used in
-	 *            the command to indicate the values that need to be extracted. For
-	 *            example, if the command is "java -jar myprogram.jar --input
-	 *            file.txt", the flag could be "--input".
-	 * @return The method is returning a Set of Strings that represents the
-	 *         extracted values from the given command string.
+	 * The function extracts values from a command string that follow a specific flag.
+	 * 
+	 * @param p_command The p_command parameter is a string that represents the command from which we want
+	 * to extract values. It could be any command that contains the flag we are interested in.
+	 * @param p_flag The p_flag parameter is a String that represents the flag used in the command. A flag
+	 * is typically a command-line argument that starts with a hyphen or double hyphen and is used to
+	 * modify the behavior of a command. For example, in the command "java -jar myprogram.jar -f
+	 * @return The method is returning a Set of Strings that have been extracted from the input command
+	 * string.
 	 */
-	public static Set<String> extractValues(String command, String flag) {
-		Set<String> extractedValues = new HashSet<String>();
+	public static Set<String> extractValues(String p_command, String p_flag) {
+		Set<String> d_extractedValues = new HashSet<String>();
 
 		// Define the pattern for extracting values after the flag
-		Pattern pattern = Pattern.compile(flag + "\\s(\\S+)");
-		Matcher matcher = pattern.matcher(command);
+		Pattern d_pattern = Pattern.compile(p_flag + "\\s(\\S+)");
+		Matcher d_matcher = d_pattern.matcher(p_command);
 
-		if (matcher.find()) {
-			String values = matcher.group(1); // Extract values captured by the group
-			String[] splitValues = values.split(",");
+		if (d_matcher.find()) {
+			String l_values = d_matcher.group(1); // Extract values captured by the group
+			String[] d_splitValues = l_values.split(",");
 
-			for (String value : splitValues) {
-				extractedValues.add(value);
+			for (String l_value : d_splitValues) {
+				d_extractedValues.add(l_value);
 			}
 		}
 
-		return extractedValues;
+		return d_extractedValues;
 	}
 
+	
 	/**
-	 * The function extracts a value from a command string based on a specified
-	 * flag.
-	 *
-	 * @param command
-	 *            The `command` parameter is a string that represents the command
-	 *            from which we want to extract a value. It could be any string that
-	 *            contains the flag and the value we are interested in.
-	 * @param flag
-	 *            The "flag" parameter is a string that represents the flag or
-	 *            keyword that is used to identify the value you want to extract
-	 *            from the "command" string.
+	 * The function extracts a value from a command string based on a specified flag and returns it as an
+	 * integer.
+	 * 
+	 * @param p_command The p_command parameter is a string that represents a command or input from the
+	 * user. It is the string from which we want to extract a value.
+	 * @param p_flag The p_flag parameter is a string that represents a flag or keyword that is used to
+	 * identify the value that needs to be extracted from the p_command string.
 	 * @return The method is returning an integer value.
 	 */
-	public static int extractValue(String command, String flag) {
-		String extractedValue = "";
+	public static int extractValue(String p_command, String p_flag) {
+		String l_extractedValue = "";
 
 		// Define the pattern for extracting value after the flag
-		Pattern pattern = Pattern.compile(flag + "\\s(\\S+)");
-		Matcher matcher = pattern.matcher(command);
+		Pattern d_pattern = Pattern.compile(p_flag + "\\s(\\S+)");
+		Matcher d_matcher = d_pattern.matcher(p_command);
 
-		if (matcher.find()) {
-			extractedValue = matcher.group(1); // Extract value captured by the group
+		if (d_matcher.find()) {
+			l_extractedValue = d_matcher.group(1); // Extract value captured by the group
 		}
 
-		return Integer.parseInt(extractedValue);
+		return Integer.parseInt(l_extractedValue);
 	}
 }

@@ -159,7 +159,7 @@ public class TournamentEngine {
 
 			l_formatter.format(l_table, result.d_map, result.d_gameCount, result.d_playerName);
 		}
-		System.out.println(l_formatter.toString());
+		Logger.log(l_formatter.toString());
 		l_formatter.close();
 	}
 

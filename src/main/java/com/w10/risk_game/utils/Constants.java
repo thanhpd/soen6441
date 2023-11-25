@@ -19,6 +19,10 @@ public final class Constants {
 	public static final String STARTUP_PHASE_ENTRY_STRING1 = "!!!  Enter mode   !!!\n";
 	public static final String STARTUP_PHASE_ENTRY_STRING2 = "!!!  Enter tournament or singleplayer   !!!\n";
 
+	public static final String TOURNAMENT_PHASE_ENTRY= "!!!  You are in Tournament Game Mode   !!!\n";
+	public static final String TOURNAMENT_PHASE_ENTRY1= "!!!  Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns  !!!\n";;
+	public static final String TOURNAMENT_PHASE_ENTRY2= "!!!  Available commands: [tournament, exit]  !!!\n";
+
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
 	public static final String USER_INPUT_COMMAND_SINGLEPLAYER = "singleplayer";

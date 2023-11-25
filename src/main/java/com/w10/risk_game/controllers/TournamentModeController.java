@@ -40,10 +40,9 @@ public class TournamentModeController {
 		while (!l_exit) {
 			try {
 				// Display a user input request
-				Logger.log("You are in Tournament Game Mode");
-				Logger.log(
-						"Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns");
-				Logger.log("Available commands: [tournament, exit]");
+				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY);
+				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY1);
+				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY2);
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
 				// Create a Scanner to read the input from the user

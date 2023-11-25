@@ -6,9 +6,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.LookAndFeel;
 
+import com.w10.risk_game.App;
 import com.w10.risk_game.engines.TournamentEngine;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
@@ -25,6 +28,7 @@ public class TournamentModeController {
 	public void start(){
 		boolean l_exit = false;
 		Player l_player;
+		App l_app= new App();
 
 		while (!l_exit) {
 			try {
@@ -39,17 +43,31 @@ public class TournamentModeController {
 				Scanner l_scanner = new Scanner(System.in);
 
 				// Read the user's input and log the command that was entered
+				
 				Command = l_scanner.nextLine();
+				List<String> l_mainCommand= new ArrayList<String>();
+				l_mainCommand = Arrays.asList(Command.split(" "));
+				switch (l_mainCommand.get(0)) {
+				case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE :
 				parseCommand(Command);
-				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
+				//Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 				
 				//Quit command
-				if (Command.equals(Constants.USER_INPUT_COMMAND_QUIT))
+				case Constants.USER_INPUT_COMMAND_QUIT :
+				l_app.startGame();
 				l_scanner.close();
 				l_exit = true;
 				
+				default :
+						Logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
+					}
+					Logger.log("");
+					if (l_exit) {
+						break;
+					}
+			}
 	
-	}catch (Exception e) {
+	catch (Exception e) {
 		Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 		Logger.log(e.getMessage());
 		Logger.log("");
@@ -60,38 +78,43 @@ public class TournamentModeController {
 	private void parseCommand(String p_tournamentCommand) {
 		List<String> l_commandList= new ArrayList<String>();
 		l_commandList = Arrays.asList(p_tournamentCommand.split(" "));
-		Set<String> l_maps= new HashSet<String>();
-		Set<String> l_players= new HashSet<String>();
 		int noOfGames=0;
 		int noOfTurns=0;
 		for(int i=0; i<l_commandList.size();i++){
-			if (l_commandList.get(i).equals("-M")){
-				int j=i+1;
-				while(!l_commandList.equals("-")){
-					l_maps.add(l_commandList.get(i));
-					j++;
-				}	
-
-			}
-			if (l_commandList.get(i).equals("-P")){
-				int j=i+1;
-				while(!l_commandList.equals("-")){
-					l_players.add(l_commandList.get(j));
-					j++;
-				}	
-
-			}
 
 			if (l_commandList.get(i).equals("-G")){
 				noOfGames=Integer.parseInt(l_commandList.get(i++));
 			}
+		}
+		 for(int i=0; i<l_commandList.size();i++){
 			if (l_commandList.get(i).equals("-D")){
 				noOfTurns=Integer.parseInt(l_commandList.get(i++));
 			}
-
 		}
+
+		
 		TournamentEngine tournamentEngine= new TournamentEngine();
-		tournamentEngine.startGame(l_players,l_maps,noOfGames,noOfTurns);
+		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"),extractValues(p_tournamentCommand, "-M"),noOfGames,noOfTurns);
 		
 	}
+
+
+	 public static Set<String> extractValues(String command, String flag) {
+        Set<String> extractedValues = new HashSet<String>();
+        
+        // Define the pattern for extracting values after the flag
+        Pattern pattern = Pattern.compile(flag + "\\s(\\S+)");
+        Matcher matcher = pattern.matcher(command);
+        
+        if (matcher.find()) {
+            String values = matcher.group(1); // Extract values captured by the group
+            String[] splitValues = values.split(",");
+            
+            for (String value : splitValues) {
+                extractedValues.add(value);
+            }
+        }
+        
+        return extractedValues;
+    }
 }

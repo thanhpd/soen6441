@@ -50,7 +50,9 @@ public class App {
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING2);
 
 		SinglePlayerEngine l_singlegameEngine = new SinglePlayerEngine();
-		TournamentEngine l_tournamnetEngine= new TournamentEngine();
+		TournamentModeController l_tournamentModeController= new TournamentModeController();
+		boolean l_exit = false;
+		while (!l_exit) {
 		try {
 			// Display a user input request
 				Logger.log(Constants.USER_INPUT_REQUEST);
@@ -61,10 +63,26 @@ public class App {
 				// Read the user's input and log the command that was entered
 				Command = l_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
-
+				switch (Command) {
+					case Constants.USER_INPUT_COMMAND_SINGLEPLAYER:
+					l_singlegameEngine.start();
+					case Constants.USER_INPUT_COMMAND_TOURNAMENT:
+					l_tournamentModeController.start();
+					case Constants.USER_INPUT_COMMAND_QUIT :
+						l_scanner.close();
+						l_exit = true;
+						break;
+					default :
+						Logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
+					}
+					Logger.log("");
+					if (l_exit) {
+						break;
+					}
 		} catch (Exception e) {
 			Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 			e.printStackTrace(System.out);
 		}
+	}
 	}
 }

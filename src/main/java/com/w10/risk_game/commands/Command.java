@@ -15,8 +15,7 @@ public enum Command {
 									Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE), editcountry(
 											Constants.USER_INPUT_COMMAND_EDIT_COUNTRY), editneighbor(
 													Constants.CLI_GAME_PLAYER_REMOVE), gameplayer(
-															Constants.USER_INPUT_COMMAND_GAMEPLAYER), tournament(
-																	Constants.USER_INPUT_COMMAND_TOURNAMENTMODE), assigncountries(
+															Constants.USER_INPUT_COMMAND_GAMEPLAYER), assigncountries(
 																			Constants.CLI_ASSIGN_COUNTRIES), deploy(
 																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY), advance(
 																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE), bomb(

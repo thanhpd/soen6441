@@ -100,18 +100,22 @@ public class TournamentModeController {
 
 	}
 
-	
-	
 	/**
-	 * The function extracts values from a command string that follow a specific flag.
-	 * 
-	 * @param p_command The p_command parameter is a string that represents the command from which we want
-	 * to extract values. It could be any command that contains the flag we are interested in.
-	 * @param p_flag The p_flag parameter is a String that represents the flag used in the command. A flag
-	 * is typically a command-line argument that starts with a hyphen or double hyphen and is used to
-	 * modify the behavior of a command. For example, in the command "java -jar myprogram.jar -f
-	 * @return The method is returning a Set of Strings that have been extracted from the input command
-	 * string.
+	 * The function extracts values from a command string that follow a specific
+	 * flag.
+	 *
+	 * @param p_command
+	 *            The p_command parameter is a string that represents the command
+	 *            from which we want to extract values. It could be any command that
+	 *            contains the flag we are interested in.
+	 * @param p_flag
+	 *            The p_flag parameter is a String that represents the flag used in
+	 *            the command. A flag is typically a command-line argument that
+	 *            starts with a hyphen or double hyphen and is used to modify the
+	 *            behavior of a command. For example, in the command "java -jar
+	 *            myprogram.jar -f
+	 * @return The method is returning a Set of Strings that have been extracted
+	 *         from the input command string.
 	 */
 	public static Set<String> extractValues(String p_command, String p_flag) {
 		Set<String> d_extractedValues = new HashSet<String>();
@@ -132,15 +136,18 @@ public class TournamentModeController {
 		return d_extractedValues;
 	}
 
-	
 	/**
-	 * The function extracts a value from a command string based on a specified flag and returns it as an
-	 * integer.
-	 * 
-	 * @param p_command The p_command parameter is a string that represents a command or input from the
-	 * user. It is the string from which we want to extract a value.
-	 * @param p_flag The p_flag parameter is a string that represents a flag or keyword that is used to
-	 * identify the value that needs to be extracted from the p_command string.
+	 * The function extracts a value from a command string based on a specified flag
+	 * and returns it as an integer.
+	 *
+	 * @param p_command
+	 *            The p_command parameter is a string that represents a command or
+	 *            input from the user. It is the string from which we want to
+	 *            extract a value.
+	 * @param p_flag
+	 *            The p_flag parameter is a string that represents a flag or keyword
+	 *            that is used to identify the value that needs to be extracted from
+	 *            the p_command string.
 	 * @return The method is returning an integer value.
 	 */
 	public static int extractValue(String p_command, String p_flag) {

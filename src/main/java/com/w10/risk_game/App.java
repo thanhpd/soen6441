@@ -2,9 +2,9 @@ package com.w10.risk_game;
 
 import java.util.Scanner;
 
+import com.w10.risk_game.controllers.TournamentModeController;
 import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.engines.TournamentEngine;
-import com.w10.risk_game.models.tournament.Tournament;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.ConsoleLogger;
 import com.w10.risk_game.utils.loggers.FileLogger;
@@ -61,7 +61,7 @@ public class App {
 				// Read the user's input and log the command that was entered
 				Command = l_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
-				
+
 		} catch (Exception e) {
 			Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 			e.printStackTrace(System.out);

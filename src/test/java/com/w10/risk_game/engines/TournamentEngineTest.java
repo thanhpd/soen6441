@@ -21,7 +21,7 @@ public class TournamentEngineTest {
 		int gamesCount = 2;
 		int maxTurns = 10;
 		TournamentEngine l_tournamentController = new TournamentEngine();
-		l_tournamentController.start(p_playerStrategyNames, maps, gamesCount, maxTurns);
+		l_tournamentController.startGame(p_playerStrategyNames, maps, gamesCount, maxTurns);
 
 	}
 	/**
@@ -35,7 +35,7 @@ public class TournamentEngineTest {
 		int gamesCount = 2;
 		int maxTurns = 20;
 		TournamentEngine l_tournamentController = new TournamentEngine();
-		l_tournamentController.start(p_playerStrategyNames, maps, gamesCount, maxTurns);
+		l_tournamentController.startGame(p_playerStrategyNames, maps, gamesCount, maxTurns);
 
 	}
 }

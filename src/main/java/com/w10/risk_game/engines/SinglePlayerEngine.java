@@ -7,12 +7,11 @@ import java.util.Scanner;
 import com.google.common.base.Joiner;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.controllers.TournamentModeController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
-import com.w10.risk_game.models.tournament.Tournament;
-import com.w10.risk_game.models.tournament.TournamentOptions;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.SaveLoad;
@@ -145,10 +144,7 @@ public class SinglePlayerEngine {
 						Logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						Phase.loadMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE :
-						Tournament tournamentMode = new Tournament();
-						tournamentMode.startTournament();
-						break;
+				
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
 						Phase.saveMap(l_argList[1],
 								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);

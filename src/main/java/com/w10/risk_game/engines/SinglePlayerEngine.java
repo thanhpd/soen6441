@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.google.common.base.Joiner;
+import com.w10.risk_game.App;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.controllers.TournamentModeController;
@@ -55,11 +56,16 @@ public class SinglePlayerEngine {
 	}
 
 	/**
-	 * The start() function is the main loop of the game engine, where it handles
-	 * user input and executes the corresponding commands based on the current game
-	 * phase.
+	 * The start() function is responsible for running the game loop and handling
+	 * user input commands.
+	 *
+	 * @param p_app
+	 *            The parameter "p_app" is an instance of the "App" class. It is
+	 *            used to start the game.
+	 * @param p_scanner
+	 *            The scanner object used to read user input.
 	 */
-	public void start() {
+	public void start(App p_app, Scanner p_scanner) {
 		SetPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
 		Player l_player;
@@ -115,10 +121,10 @@ public class SinglePlayerEngine {
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
 				// Create a Scanner to read the input from the user
-				Scanner l_scanner = new Scanner(System.in);
+				// Scanner l_scanner = new Scanner(System.in);
 
 				// Read the user's input and log the command that was entered
-				Command = l_scanner.nextLine();
+				Command = p_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 
 				// Get the main command and argument list from the entered command
@@ -273,7 +279,7 @@ public class SinglePlayerEngine {
 
 					// Other commands
 					case Constants.USER_INPUT_COMMAND_QUIT :
-						l_scanner.close();
+						p_app.startGame();
 						l_exit = true;
 						break;
 					default :

@@ -29,13 +29,20 @@ public class TournamentModeController {
 	}
 
 	/**
-	 * The start() function prompts the user for input, reads the input, and
-	 * performs different actions based on the command entered.
+	 * The start function takes an App object and a Scanner object as parameters,
+	 * and then enters a loop where it prompts the user for input, reads the input,
+	 * and performs different actions based on the input.
 	 *
 	 * @param app
-	 *            The "app" parameter is an instance of the "App" class.
+	 *            The "app" parameter is an instance of the "App" class. It is used
+	 *            to access and call methods within the "App" class.
+	 * @param p_scanner
+	 *            The parameter `p_scanner` is a `Scanner` object that is used to
+	 *            read user input from the console. It is passed to the `start`
+	 *            method so that the method can read user input and process it
+	 *            accordingly.
 	 */
-	public void start(App app) {
+	public void start(App app, Scanner p_scanner) {
 		boolean l_exit = false;
 
 		while (!l_exit) {
@@ -46,12 +53,9 @@ public class TournamentModeController {
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY2);
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
-				// Create a Scanner to read the input from the user
-				Scanner l_scanner = new Scanner(System.in);
-
 				// Read the user's input and log the command that was entered
 
-				Command = l_scanner.nextLine();
+				Command = p_scanner.nextLine();
 				List<String> l_mainCommand = new ArrayList<String>();
 				l_mainCommand = Arrays.asList(Command.split(" "));
 				switch (l_mainCommand.get(0)) {
@@ -62,7 +66,7 @@ public class TournamentModeController {
 						// Quit command
 					case Constants.USER_INPUT_COMMAND_QUIT :
 						app.startGame();
-						l_scanner.close();
+						// p_scanner.close();
 						l_exit = true;
 
 					default :

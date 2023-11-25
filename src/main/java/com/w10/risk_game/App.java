@@ -65,9 +65,9 @@ public class App {
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 				switch (Command) {
 					case Constants.USER_INPUT_COMMAND_SINGLEPLAYER :
-						l_singlepPlayerEngine.start();
+						l_singlepPlayerEngine.start(this, l_scanner);
 					case Constants.USER_INPUT_COMMAND_TOURNAMENT :
-						l_tournamentModeController.start(this);
+						l_tournamentModeController.start(this, l_scanner);
 					case Constants.USER_INPUT_COMMAND_QUIT :
 						l_scanner.close();
 						l_exit = true;

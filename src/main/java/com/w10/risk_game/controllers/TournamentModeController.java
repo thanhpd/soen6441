@@ -96,7 +96,6 @@ public class TournamentModeController {
 	private void parseCommand(String p_tournamentCommand) {
 		List<String> l_commandList = new ArrayList<String>();
 		l_commandList = Arrays.asList(p_tournamentCommand.split(" "));
-		System.out.println("HELOOOOOO");
 		TournamentEngine tournamentEngine = new TournamentEngine();
 		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"), extractValues(p_tournamentCommand, "-M"),
 				extractValue(p_tournamentCommand, "-G"), extractValue(p_tournamentCommand, "-D"));

@@ -13,19 +13,23 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 /**
  * Initialize the Application
  *
- * @author Sherwyn Dsouza
+ * @author Sherwyn Dsouza, Omnia Alam
  */
 public class App {
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	public static String Command = "";
+	SinglePlayerEngine l_singlepPlayerEngine = new SinglePlayerEngine();
+	TournamentModeController l_tournamentModeController = new TournamentModeController();
 	/**
 	 * The `App` constructor attaches the Console Logger and File Logger as
 	 * Observers
 	 */
+
 	public App() {
 		Logger.attach(new ConsoleLogger());
 		Logger.attach(new FileLogger(Constants.LOGGER_FILE_PATH));
+
 	}
 
 	/**
@@ -49,8 +53,6 @@ public class App {
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING1);
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING2);
 
-		SinglePlayerEngine l_singlepPlayerEngine = new SinglePlayerEngine();
-		TournamentModeController l_tournamentModeController = new TournamentModeController();
 		boolean l_exit = false;
 		while (!l_exit) {
 			try {

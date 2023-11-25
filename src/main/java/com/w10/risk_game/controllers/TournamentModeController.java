@@ -27,15 +27,16 @@ public class TournamentModeController {
 	public TournamentModeController() {
 
 	}
+
 	/**
-	 * The start() function runs a loop that prompts the user for input, parses the
-	 * input, and performs the corresponding action until the user enters the "exit"
-	 * command.
+	 * The start() function prompts the user for input, reads the input, and
+	 * performs different actions based on the command entered.
+	 *
+	 * @param app
+	 *            The "app" parameter is an instance of the "App" class.
 	 */
-	public void start() {
+	public void start(App app) {
 		boolean l_exit = false;
-		Player l_player;
-		App l_app = new App();
 
 		while (!l_exit) {
 			try {
@@ -56,11 +57,11 @@ public class TournamentModeController {
 				switch (l_mainCommand.get(0)) {
 					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE :
 						parseCommand(Command);
-						// Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
+						Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 
 						// Quit command
 					case Constants.USER_INPUT_COMMAND_QUIT :
-						l_app.startGame();
+						app.startGame();
 						l_scanner.close();
 						l_exit = true;
 

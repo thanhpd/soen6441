@@ -49,7 +49,7 @@ public class App {
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING1);
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING2);
 
-		SinglePlayerEngine l_singlegameEngine = new SinglePlayerEngine();
+		SinglePlayerEngine l_singlepPlayerEngine = new SinglePlayerEngine();
 		TournamentModeController l_tournamentModeController = new TournamentModeController();
 		boolean l_exit = false;
 		while (!l_exit) {
@@ -65,9 +65,9 @@ public class App {
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 				switch (Command) {
 					case Constants.USER_INPUT_COMMAND_SINGLEPLAYER :
-						l_singlegameEngine.start();
+						l_singlepPlayerEngine.start();
 					case Constants.USER_INPUT_COMMAND_TOURNAMENT :
-						l_tournamentModeController.start();
+						l_tournamentModeController.start(this);
 					case Constants.USER_INPUT_COMMAND_QUIT :
 						l_scanner.close();
 						l_exit = true;

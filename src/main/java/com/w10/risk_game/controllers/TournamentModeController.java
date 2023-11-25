@@ -66,7 +66,6 @@ public class TournamentModeController {
 						// Quit command
 					case Constants.USER_INPUT_COMMAND_QUIT :
 						app.startGame();
-						// p_scanner.close();
 						l_exit = true;
 						break;
 

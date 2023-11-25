@@ -120,9 +120,6 @@ public class SinglePlayerEngine {
 				// Display a user input request
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
-				// Create a Scanner to read the input from the user
-				// Scanner l_scanner = new Scanner(System.in);
-
 				// Read the user's input and log the command that was entered
 				Command = p_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);

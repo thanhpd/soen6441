@@ -1,6 +1,10 @@
 package com.w10.risk_game;
 
+import java.util.Scanner;
+
 import com.w10.risk_game.engines.SinglePlayerEngine;
+import com.w10.risk_game.engines.TournamentEngine;
+import com.w10.risk_game.models.tournament.Tournament;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.ConsoleLogger;
 import com.w10.risk_game.utils.loggers.FileLogger;
@@ -14,7 +18,7 @@ import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 public class App {
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
-
+	public static String Command = "";
 	/**
 	 * The `App` constructor attaches the Console Logger and File Logger as
 	 * Observers
@@ -42,9 +46,22 @@ public class App {
 	 */
 	public void startGame() {
 		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
-		SinglePlayerEngine l_gameEngine = new SinglePlayerEngine();
+		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING1);
+		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING2);
+
+		SinglePlayerEngine l_singlegameEngine = new SinglePlayerEngine();
+		TournamentEngine l_tournamnetEngine= new TournamentEngine();
 		try {
-			l_gameEngine.start();
+			// Display a user input request
+				Logger.log(Constants.USER_INPUT_REQUEST);
+
+				// Create a Scanner to read the input from the user
+				Scanner l_scanner = new Scanner(System.in);
+
+				// Read the user's input and log the command that was entered
+				Command = l_scanner.nextLine();
+				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
+				
 		} catch (Exception e) {
 			Logger.log(Constants.USER_INPUT_ERROR_SOME_ERROR_OCCURRED);
 			e.printStackTrace(System.out);

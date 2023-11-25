@@ -16,9 +16,13 @@ public final class Constants {
 
 	// Menu constants
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING1 = "!!!  Enter mode   !!!\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING2 = "!!!  Enter tournament or singleplayer   !!!\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
+	public static final String USER_INPUT_COMMAND_SINGLEPLAYER="singleplayer";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT="tournament";
 	public static final String USER_INPUT_COMMAND_ENTERED = "Command entered is: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";

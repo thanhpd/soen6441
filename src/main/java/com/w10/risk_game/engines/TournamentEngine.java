@@ -65,7 +65,7 @@ public class TournamentEngine {
 	 *            The parameter `p_maxTurns` represents the maximum number of turns
 	 *            allowed in a game.
 	 */
-	public void start(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
+	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
 
 		for (var map : p_maps) {

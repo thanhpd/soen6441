@@ -144,7 +144,7 @@ public class SinglePlayerEngine {
 						Logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						Phase.loadMap(l_argList[1]);
 						break;
-				
+
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
 						Phase.saveMap(l_argList[1],
 								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);

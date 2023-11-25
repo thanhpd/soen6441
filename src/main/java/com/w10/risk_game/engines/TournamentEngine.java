@@ -11,10 +11,6 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.MatchResult;
-import com.w10.risk_game.models.strategies.AggressivePlayerStrategy;
-import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
-import com.w10.risk_game.models.strategies.CheaterPlayerStrategy;
-import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 

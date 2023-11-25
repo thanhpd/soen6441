@@ -68,6 +68,7 @@ public class TournamentModeController {
 						app.startGame();
 						// p_scanner.close();
 						l_exit = true;
+						break;
 
 					default :
 						Logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);

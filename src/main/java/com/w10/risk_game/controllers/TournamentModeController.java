@@ -78,23 +78,9 @@ public class TournamentModeController {
 	private void parseCommand(String p_tournamentCommand) {
 		List<String> l_commandList= new ArrayList<String>();
 		l_commandList = Arrays.asList(p_tournamentCommand.split(" "));
-		int noOfGames=0;
-		int noOfTurns=0;
-		for(int i=0; i<l_commandList.size();i++){
-
-			if (l_commandList.get(i).equals("-G")){
-				noOfGames=Integer.parseInt(l_commandList.get(i++));
-			}
-		}
-		 for(int i=0; i<l_commandList.size();i++){
-			if (l_commandList.get(i).equals("-D")){
-				noOfTurns=Integer.parseInt(l_commandList.get(i++));
-			}
-		}
-
 		
 		TournamentEngine tournamentEngine= new TournamentEngine();
-		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"),extractValues(p_tournamentCommand, "-M"),noOfGames,noOfTurns);
+		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"),extractValues(p_tournamentCommand, "-M"),extractValue(p_tournamentCommand, "-G"),extractValue(p_tournamentCommand, "-D"));
 		
 	}
 
@@ -116,5 +102,19 @@ public class TournamentModeController {
         }
         
         return extractedValues;
+    }
+
+	public static int extractValue(String command, String flag) {
+        String extractedValue = "";
+        
+        // Define the pattern for extracting value after the flag
+        Pattern pattern = Pattern.compile(flag + "\\s(\\S+)");
+        Matcher matcher = pattern.matcher(command);
+        
+        if (matcher.find()) {
+            extractedValue = matcher.group(1); // Extract value captured by the group
+        }
+        
+        return Integer.parseInt(extractedValue);
     }
 }

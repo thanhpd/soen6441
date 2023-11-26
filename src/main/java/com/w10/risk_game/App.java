@@ -38,7 +38,7 @@ public class App {
 	 * startGame method.
 	 *
 	 * @param args
-	 *             arguments
+	 *            arguments
 	 */
 	public static void main(String[] args) {
 		App d_app = new App();
@@ -66,17 +66,17 @@ public class App {
 				Command = l_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 				switch (Command) {
-					case Constants.USER_INPUT_COMMAND_SINGLEPLAYER:
+					case Constants.USER_INPUT_COMMAND_SINGLEPLAYER :
 						d_singlepPlayerEngine.start(l_scanner);
 						break;
-					case Constants.USER_INPUT_COMMAND_TOURNAMENT:
+					case Constants.USER_INPUT_COMMAND_TOURNAMENT :
 						d_tournamentModeController.start(l_scanner);
 						break;
-					case Constants.USER_INPUT_COMMAND_QUIT:
+					case Constants.USER_INPUT_COMMAND_QUIT :
 						l_scanner.close();
 						l_exit = true;
 						break;
-					default:
+					default :
 						Logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
 				Logger.log("");

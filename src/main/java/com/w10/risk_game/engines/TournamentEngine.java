@@ -35,7 +35,7 @@ public class TournamentEngine {
 	 * commands for that phase.
 	 *
 	 * @param p_phase
-	 *                The parameter "p_phase" is of type "Phase".
+	 *            The parameter "p_phase" is of type "Phase".
 	 */
 	public static void SetPhase(Phase p_phase) {
 		Phase = p_phase;
@@ -49,18 +49,19 @@ public class TournamentEngine {
 
 	/**
 	 * The startGame function runs a tournament by playing multiple games on
-	 * different maps with a given
-	 * set of player strategies, and then displays the results.
-	 * 
-	 * @param p_playerStrategyNames A set of strings representing the names of the
-	 *                              player strategies.
-	 * @param p_maps                A set of strings representing the names of the
-	 *                              maps to be used in the game.
-	 * @param p_gamesCount          The number of games to be played in the
-	 *                              tournament.
-	 * @param p_maxTurns            The parameter `p_maxTurns` represents the
-	 *                              maximum number of turns allowed in each
-	 *                              game.
+	 * different maps with a given set of player strategies, and then displays the
+	 * results.
+	 *
+	 * @param p_playerStrategyNames
+	 *            A set of strings representing the names of the player strategies.
+	 * @param p_maps
+	 *            A set of strings representing the names of the maps to be used in
+	 *            the game.
+	 * @param p_gamesCount
+	 *            The number of games to be played in the tournament.
+	 * @param p_maxTurns
+	 *            The parameter `p_maxTurns` represents the maximum number of turns
+	 *            allowed in each game.
 	 */
 	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
@@ -93,8 +94,7 @@ public class TournamentEngine {
 	 * of players.
 	 *
 	 * @param p_playerStrategyNames
-	 *                              A set of strings representing the names of
-	 *                              player strategies.
+	 *            A set of strings representing the names of player strategies.
 	 * @return The method is returning a Set of Player objects.
 	 */
 	private Set<Player> createPlayers(Set<String> p_playerStrategyNames) {
@@ -115,15 +115,13 @@ public class TournamentEngine {
 	 * maximum number of turns is reached.
 	 *
 	 * @param p_map
-	 *                   The parameter "p_map" is a string that represents the map
-	 *                   being
-	 *                   used for the game.
+	 *            The parameter "p_map" is a string that represents the map being
+	 *            used for the game.
 	 * @param p_players
-	 *                   The parameter "p_players" is a Set of Player objects. It
-	 *                   represents the set of players participating in the game.
+	 *            The parameter "p_players" is a Set of Player objects. It
+	 *            represents the set of players participating in the game.
 	 * @param p_maxTurns
-	 *                   The maximum number of turns that the game will be played
-	 *                   for.
+	 *            The maximum number of turns that the game will be played for.
 	 * @return The method is returning a String value. If there is a winner, it will
 	 *         return the name of the winner. If there is no winner after the
 	 *         maximum number of turns, it will return "Draw".
@@ -154,9 +152,8 @@ public class TournamentEngine {
 	 * map, and player name for each match result in a given list.
 	 *
 	 * @param l_listofMatchResults
-	 *                             The parameter `l_listofMatchResults` is a List of
-	 *                             MatchResult
-	 *                             objects.
+	 *            The parameter `l_listofMatchResults` is a List of MatchResult
+	 *            objects.
 	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		Logger.log("Result of the tournament:");

@@ -48,21 +48,19 @@ public class TournamentEngine {
 	}
 
 	/**
-	 * The start function runs a series of games on different maps using a set of
-	 * player strategies, and stores the results in a list.
-	 *
-	 * @param p_playerStrategyNames
-	 *                              A set of strings representing the names of the
+	 * The startGame function runs a tournament by playing multiple games on
+	 * different maps with a given
+	 * set of player strategies, and then displays the results.
+	 * 
+	 * @param p_playerStrategyNames A set of strings representing the names of the
 	 *                              player strategies.
-	 * @param p_maps
-	 *                              A set of strings representing the names of
-	 *                              different maps.
-	 * @param p_gamesCount
-	 *                              The number of games to be played for each map.
-	 * @param p_maxTurns
-	 *                              The parameter `p_maxTurns` represents the
-	 *                              maximum number of turns
-	 *                              allowed in a game.
+	 * @param p_maps                A set of strings representing the names of the
+	 *                              maps to be used in the game.
+	 * @param p_gamesCount          The number of games to be played in the
+	 *                              tournament.
+	 * @param p_maxTurns            The parameter `p_maxTurns` represents the
+	 *                              maximum number of turns allowed in each
+	 *                              game.
 	 */
 	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();

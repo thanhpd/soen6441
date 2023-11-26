@@ -36,7 +36,7 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	 */
 	@Override
 	public void issueOrder() {
-		sortCountriesOwnedByArmyCount();
+		setStrongestCountryOwned();
 		deployOnStrongestCountry();
 		attackWithStrongestCountry();
 		moveArmyToMaximizeForce();
@@ -47,7 +47,7 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	 * The function sorts the countries owned by a player based on their army count
 	 * and assigns the country with the highest army count to a variable.
 	 */
-	private void sortCountriesOwnedByArmyCount() {
+	private void setStrongestCountryOwned() {
 		this.d_strongestCountryOwned = d_player.getCountriesOwned().stream()
 				.max(Comparator.comparingInt(Country::getArmyCount)).orElse(null);
 	}
@@ -87,23 +87,18 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 					Bomb.ValidateIssueBombOrder(d_player, d_bombOrder);
 				}
 			}
-			List<Country> l_enemyCountries = d_strongestCountryOwned.getNeighbors().values().stream()
+			Country l_enemyNeighborWithMaxArmy = d_strongestCountryOwned.getNeighbors().values().stream()
 					.filter(l_neighbor -> !this.d_player.getName().equals(l_neighbor.getOwner().getName()))
-					.collect(Collectors.toList());
+					.max(Comparator.comparingInt(Country::getArmyCount)).orElse(null);
 			int l_noOfArmiesOnStrongestCountry = Advance.GetTotalArmiesDeployed(d_player,
 					d_strongestCountryOwned.getArmyCount(), d_strongestCountryOwned.getCountryId());
-			for (Country l_enemyCountry : l_enemyCountries) {
-				if (l_noOfArmiesOnStrongestCountry > 0
-						&& l_enemyCountry.getArmyCount() < l_noOfArmiesOnStrongestCountry) {
-					String[] l_advanceOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
-							d_strongestCountryOwned.getCountryName(), l_enemyCountry.getCountryName(),
-							Integer.toString(l_enemyCountry.getArmyCount() + 1)};
-					Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
-							String.join(Constants.SPACE, l_advanceOrder)));
-					Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
-					l_noOfArmiesOnStrongestCountry -= l_enemyCountry.getArmyCount() - 1;
-				} else
-					break;
+			if (l_enemyNeighborWithMaxArmy != null && l_noOfArmiesOnStrongestCountry > 1) {
+				String[] l_advanceOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
+						d_strongestCountryOwned.getCountryName(), l_enemyNeighborWithMaxArmy.getCountryName(),
+						Integer.toString(l_noOfArmiesOnStrongestCountry - 1)};
+				Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+						String.join(Constants.SPACE, l_advanceOrder)));
+				Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
 			}
 		}
 	}
@@ -113,17 +108,23 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	 * a neighboring country with enemies in order to maximize force.
 	 */
 	private void moveArmyToMaximizeForce() {
-		if (d_strongestCountryOwned.getArmyCount() > 0) {
-			List<Country> l_neighborsWithEnemies = getNeighborsWithEnemies(d_strongestCountryOwned);
-			Country l_toCountry = l_neighborsWithEnemies.stream().max(Comparator.comparingInt(Country::getArmyCount))
-					.orElse(null);
-			if (Objects.nonNull(d_strongestCountryOwned) && Objects.nonNull(l_toCountry)) {
-				String[] l_advanceOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
-						d_strongestCountryOwned.getCountryName(), l_toCountry.getCountryName(),
-						Integer.toString(d_strongestCountryOwned.getArmyCount())};
-				Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
-						String.join(Constants.SPACE, l_advanceOrder)));
-				Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
+		if (Objects.nonNull(d_strongestCountryOwned)) {
+			int l_noOfArmiesOnStrongestCountry = Advance.GetTotalArmiesDeployed(d_player,
+					d_strongestCountryOwned.getArmyCount(), d_strongestCountryOwned.getCountryId());
+			// check for l_noOfArmiesOnStrongestCountry > 1 i.e. attack didn't happen as no
+			// more neighboring enemies so we move to a neighbor with enemies
+			if (l_noOfArmiesOnStrongestCountry > 1) {
+				List<Country> l_neighborsWithEnemies = getNeighborsWithEnemies(d_strongestCountryOwned);
+				Country l_toCountry = l_neighborsWithEnemies.stream()
+						.max(Comparator.comparingInt(Country::getArmyCount)).orElse(null);
+				if (Objects.nonNull(l_toCountry)) {
+					String[] l_advanceOrder = {Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE,
+							d_strongestCountryOwned.getCountryName(), l_toCountry.getCountryName(),
+							Integer.toString(l_noOfArmiesOnStrongestCountry - 1)};
+					Logger.log(MessageFormat.format(Constants.STRATEGY_ISSUE_ORDER,
+							String.join(Constants.SPACE, l_advanceOrder)));
+					Advance.ValidateIssueAdvanceOrder(d_player, l_advanceOrder);
+				}
 			}
 		}
 	}
@@ -144,7 +145,7 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 					l_farNeighbor -> !l_farNeighbor.getOwner().getName().equals(p_fromCountry.getOwner().getName()))
 					.count();
 			return count > 0;
-		}).collect(Collectors.toList());
+		}).sorted(Comparator.comparingInt(Country::getArmyCount).reversed()).collect(Collectors.toList());
 	}
 
 	@Override

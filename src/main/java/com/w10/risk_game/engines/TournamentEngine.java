@@ -66,28 +66,27 @@ public class TournamentEngine {
 	 */
 	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
-		if (hasDuplicates(p_playerStrategyNames)) {
-			System.out.println("OKOK");
+		if (p_playerStrategyNames.size() == 1) {
+			Logger.log(Constants.TOURNAMENT_DUPLICATE_PLAYER_NAMES);
+		} else if (p_maps.size() == 1) {
+			Logger.log(Constants.TOURNAMENT_DUPLICATE_MAP_NAMES);
+		} else if (p_gamesCount < 1 && p_gamesCount > 5) {
+			Logger.log(Constants.TOURNAMENT_NUMBER_OF_GAMES);
+		} else if (p_maxTurns < 10 && p_maxTurns > 50) {
+			Logger.log(Constants.TOURNAMENT_NUMBER_OF_TURNS);
 		} else {
-			System.out.println("NOO");
+			for (var map : p_maps) {
+				for (int i = 1; i <= p_gamesCount; i++) {
+					d_mapEditorController = new MapEditorController();
+					d_gamePlayController = new GamePlayController(d_mapEditorController);
+					var players = createPlayers(p_playerStrategyNames);
+					var l_result = playGame(map, players, p_maxTurns);
+					MatchResult l_winner = new MatchResult(l_result, i, map);
+					l_listofMatchResults.add(l_winner);
+				}
+			}
+			displayResult(l_listofMatchResults);
 		}
-		// for (var map : p_maps) {
-
-		// for (int i = 1; i <= p_gamesCount; i++) {
-		// d_mapEditorController = new MapEditorController();
-		// d_gamePlayController = new GamePlayController(d_mapEditorController);
-
-		// var players = createPlayers(p_playerStrategyNames);
-		// var l_result = playGame(map, players, p_maxTurns);
-		// MatchResult l_winner = new MatchResult(l_result, i, map);
-		// l_listofMatchResults.add(l_winner);
-
-		// }
-
-		// }
-		// displayResult(l_listofMatchResults);
-		// }
-
 	}
 
 	/**
@@ -174,30 +173,6 @@ public class TournamentEngine {
 		}
 		Logger.log(l_formatter.toString());
 		l_formatter.close();
-	}
-
-	// Function to check for duplicates in a set
-	private static boolean hasDuplicates(Set<String> l_set) {
-		Set<String> d_uniqueElements = new HashSet<>();
-		Set<String> d_Elements = new HashSet<>();
-
-		for (String l_element : l_set) {
-			if (d_Elements.contains(l_element)) {
-				System.out.println(l_element);
-				d_uniqueElements.add(l_element);
-			} else {
-				d_Elements.add(l_element);
-			}
-		}
-
-		System.out.println();
-		System.out.println(d_Elements.size());
-		System.out.println(d_uniqueElements.size());
-		if (d_uniqueElements.size() > 0) {
-			return true; // has duplicate
-		} else {
-			return false;
-		}
 	}
 
 }

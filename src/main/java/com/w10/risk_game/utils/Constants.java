@@ -16,9 +16,17 @@ public final class Constants {
 
 	// Menu constants
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING1 = "!!!  Enter mode   !!!\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING2 = "!!!  Enter tournament or singleplayer   !!!\n";
+
+	public static final String TOURNAMENT_PHASE_ENTRY = "!!!  You are in Tournament Game Mode   !!!\n";
+	public static final String TOURNAMENT_PHASE_ENTRY1 = "!!!  Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns  !!!\n";;
+	public static final String TOURNAMENT_PHASE_ENTRY2 = "!!!  Available commands: [tournament, quit]  !!!\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
+	public static final String USER_INPUT_COMMAND_SINGLEPLAYER = "singleplayer";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT = "tournament";
 	public static final String USER_INPUT_COMMAND_ENTERED = "Command entered is: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
@@ -52,6 +60,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM = "Random";
 	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER = "Cheater";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
+	public static final String USER_INPUT_COMMAND_STOP_GAME = "stop";
 
 	// CLI output command constants
 	public static final String CLI_LOAD_MAP = "Loading Map: ";
@@ -96,6 +105,7 @@ public final class Constants {
 
 	// Maps Folder Path
 	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
 
 	// Map Reader constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";

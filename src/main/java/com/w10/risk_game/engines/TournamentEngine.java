@@ -11,10 +11,6 @@ import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.MatchResult;
-import com.w10.risk_game.models.strategies.AggressivePlayerStrategy;
-import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
-import com.w10.risk_game.models.strategies.CheaterPlayerStrategy;
-import com.w10.risk_game.models.strategies.RandomPlayerStrategy;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -65,7 +61,7 @@ public class TournamentEngine {
 	 *            The parameter `p_maxTurns` represents the maximum number of turns
 	 *            allowed in a game.
 	 */
-	public void start(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
+	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
 
 		for (var map : p_maps) {
@@ -125,7 +121,7 @@ public class TournamentEngine {
 	 */
 	protected String playGame(String p_map, Set<Player> p_players, int p_maxTurns) {
 
-		d_mapEditorController.loadMap(Constants.DEFAULT_GAME_MAP_TEST_FOLDER_PATH + "" + p_map);
+		d_mapEditorController.loadMap(Constants.DEFAULT_GAME_MAP_FOLDER_PATH + "" + p_map);
 		d_gamePlayController.assignCountries();
 		d_gamePlayController.assignPlayersReinforcements();
 		for (int i = 1; i <= p_maxTurns; i++) {
@@ -163,7 +159,7 @@ public class TournamentEngine {
 
 			l_formatter.format(l_table, result.d_map, result.d_gameCount, result.d_playerName);
 		}
-		System.out.println(l_formatter.toString());
+		Logger.log(l_formatter.toString());
 		l_formatter.close();
 	}
 

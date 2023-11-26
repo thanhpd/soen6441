@@ -21,7 +21,7 @@ public class TournamentEngineTest {
 		int gamesCount = 2;
 		int maxTurns = 10;
 		TournamentEngine l_tournamentController = new TournamentEngine();
-		l_tournamentController.start(p_playerStrategyNames, maps, gamesCount, maxTurns);
+		l_tournamentController.startGame(p_playerStrategyNames, maps, gamesCount, maxTurns);
 
 	}
 	/**
@@ -30,12 +30,12 @@ public class TournamentEngineTest {
 	 */
 	@Test
 	void testStart1() {
-		Set<String> p_playerStrategyNames = Set.of("Benevolent", "Random", "Cheater");
-		Set<String> maps = Set.of("europe.map", "europe-conquest.map");
+		Set<String> p_playerStrategyNames = Set.of("Aggressive", "Random", "Benevolent");
+		Set<String> maps = Set.of("europe.map", "france.map");
 		int gamesCount = 2;
 		int maxTurns = 20;
 		TournamentEngine l_tournamentController = new TournamentEngine();
-		l_tournamentController.start(p_playerStrategyNames, maps, gamesCount, maxTurns);
+		l_tournamentController.startGame(p_playerStrategyNames, maps, gamesCount, maxTurns);
 
 	}
 }

@@ -15,20 +15,19 @@ public enum Command {
 									Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE), editcountry(
 											Constants.USER_INPUT_COMMAND_EDIT_COUNTRY), editneighbor(
 													Constants.CLI_GAME_PLAYER_REMOVE), gameplayer(
-															Constants.USER_INPUT_COMMAND_GAMEPLAYER), tournament(
-																	Constants.USER_INPUT_COMMAND_TOURNAMENTMODE), assigncountries(
-																			Constants.CLI_ASSIGN_COUNTRIES), deploy(
-																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY), advance(
-																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE), bomb(
-																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), blockade(
-																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), airlift(
-																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
-																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), commit(
-																																	Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), savegame(
-																																			Constants.USER_INPUT_SAVE_GAME), loadgame(
-																																					Constants.USER_INPUT_LOAD_GAME), none(
-																																							""), quit(
-																																									Constants.USER_INPUT_COMMAND_QUIT);
+															Constants.USER_INPUT_COMMAND_GAMEPLAYER), assigncountries(
+																	Constants.CLI_ASSIGN_COUNTRIES), deploy(
+																			Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY), advance(
+																					Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE), bomb(
+																							Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB), blockade(
+																									Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE), airlift(
+																											Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT), negotiate(
+																													Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE), commit(
+																															Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT), savegame(
+																																	Constants.USER_INPUT_SAVE_GAME), loadgame(
+																																			Constants.USER_INPUT_LOAD_GAME), none(
+																																					""), quit(
+																																							Constants.USER_INPUT_COMMAND_QUIT);
 
 	private final String name;
 

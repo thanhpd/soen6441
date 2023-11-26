@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.google.common.base.Joiner;
+import com.w10.risk_game.App;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.controllers.TournamentModeController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
-import com.w10.risk_game.models.tournament.Tournament;
-import com.w10.risk_game.models.tournament.TournamentOptions;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.SaveLoad;
@@ -56,11 +56,13 @@ public class SinglePlayerEngine {
 	}
 
 	/**
-	 * The start() function is the main loop of the game engine, where it handles
-	 * user input and executes the corresponding commands based on the current game
-	 * phase.
+	 * The start() function is responsible for running the game loop and handling
+	 * user input commands.
+	 *
+	 * @param p_scanner
+	 *            The scanner object used to read user input.
 	 */
-	public void start() {
+	public void start(Scanner p_scanner) {
 		SetPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
 		Player l_player;
@@ -115,11 +117,8 @@ public class SinglePlayerEngine {
 				// Display a user input request
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
-				// Create a Scanner to read the input from the user
-				Scanner l_scanner = new Scanner(System.in);
-
 				// Read the user's input and log the command that was entered
-				Command = l_scanner.nextLine();
+				Command = p_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 
 				// Get the main command and argument list from the entered command
@@ -145,10 +144,7 @@ public class SinglePlayerEngine {
 						Logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
 						Phase.loadMap(l_argList[1]);
 						break;
-					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE :
-						Tournament tournamentMode = new Tournament();
-						tournamentMode.startTournament();
-						break;
+
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
 						Phase.saveMap(l_argList[1],
 								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
@@ -277,7 +273,6 @@ public class SinglePlayerEngine {
 
 					// Other commands
 					case Constants.USER_INPUT_COMMAND_QUIT :
-						l_scanner.close();
 						l_exit = true;
 						break;
 					default :

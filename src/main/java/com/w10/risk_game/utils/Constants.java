@@ -260,5 +260,6 @@ public final class Constants {
 	public static final String USER_INPUT_LOAD_GAME = "loadgame";
 	public static final String USER_MAP_PATH_MISSING = "Map file path missing";
 	public static final String USER_LOADGAME_ERROR = "could not load game";
+	public static final String USER_SAVEGAME_ERROR = "could not save game";
 
 }

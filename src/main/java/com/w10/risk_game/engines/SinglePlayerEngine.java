@@ -266,7 +266,7 @@ public class SinglePlayerEngine {
 						try {
 							save.saveGame(l_argList[1]);
 						} catch (Exception e) {
-							Logger.log(Constants.USER_MAP_PATH_MISSING);
+							Logger.log(Constants.USER_SAVEGAME_ERROR);
 						}
 						break;
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :

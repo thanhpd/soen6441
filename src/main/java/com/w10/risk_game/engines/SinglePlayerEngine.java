@@ -137,7 +137,7 @@ public class SinglePlayerEngine {
 						try {
 							load.loadGame(l_argList[1]);
 						} catch (Exception e) {
-							Logger.log(Constants.USER_MAP_PATH_MISSING);
+							Logger.log(Constants.USER_LOADGAME_ERROR);
 						}
 						break;
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
@@ -263,7 +263,11 @@ public class SinglePlayerEngine {
 					// Issue Order Commands
 					case Constants.USER_INPUT_SAVE_GAME :
 						SaveLoad save = new SaveLoad(this);
-						save.saveGame(l_argList[1]);
+						try {
+							save.saveGame(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 

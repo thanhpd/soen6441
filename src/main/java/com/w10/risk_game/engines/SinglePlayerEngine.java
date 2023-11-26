@@ -134,27 +134,39 @@ public class SinglePlayerEngine {
 				switch (l_mainCommand) {
 					case Constants.USER_INPUT_LOAD_GAME :
 						SaveLoad load = new SaveLoad(this);
-						load.loadGame(l_argList[1]);
+						try {
+							load.loadGame(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_LOADGAME_ERROR);
+						}
 						break;
-					// Map editor Phase commands
-
 					case Constants.USER_INPUT_COMMAND_LOADMAP :
-
 						String[] l_mapName = l_argList[1].split("/");
 						Logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
-						Phase.loadMap(l_argList[1]);
+						try {
+							Phase.loadMap(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
-
 					case Constants.USER_INPUT_COMMAND_SAVEMAP :
-						Phase.saveMap(l_argList[1],
-								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
+						try {
+							Phase.saveMap(l_argList[1],
+									l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						Logger.log(Constants.CLI_SHOW_MAP);
 						Phase.showMap();
 						break;
 					case Constants.USER_INPUT_COMMAND_EDITMAP :
-						Phase.editMap(l_argList[1]);
+						try {
+							Phase.editMap(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
 					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE :
 						Phase.nextPhase();
@@ -251,7 +263,11 @@ public class SinglePlayerEngine {
 					// Issue Order Commands
 					case Constants.USER_INPUT_SAVE_GAME :
 						SaveLoad save = new SaveLoad(this);
-						save.saveGame(l_argList[1]);
+						try {
+							save.saveGame(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_SAVEGAME_ERROR);
+						}
 						break;
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 

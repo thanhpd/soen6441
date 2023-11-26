@@ -24,6 +24,7 @@ public class TournamentModeController {
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	public static String Command = "";
+
 	public TournamentModeController() {
 
 	}
@@ -130,7 +131,7 @@ public class TournamentModeController {
 			String[] d_splitValues = l_values.split(",");
 
 			for (String l_value : d_splitValues) {
-				d_extractedValues.add(l_value);
+				d_extractedValues.add(l_value.toLowerCase());
 			}
 		}
 

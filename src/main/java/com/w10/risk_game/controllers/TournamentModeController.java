@@ -35,10 +35,12 @@ public class TournamentModeController {
 	 * and performs different actions based on the input.
 	 *
 	 * @param p_scanner
-	 *            The parameter `p_scanner` is a `Scanner` object that is used to
-	 *            read user input from the console. It is passed to the `start`
-	 *            method so that the method can read user input and process it
-	 *            accordingly.
+	 *                  The parameter `p_scanner` is a `Scanner` object that is used
+	 *                  to
+	 *                  read user input from the console. It is passed to the
+	 *                  `start`
+	 *                  method so that the method can read user input and process it
+	 *                  accordingly.
 	 */
 	public void start(Scanner p_scanner) {
 		boolean l_exit = false;
@@ -57,16 +59,16 @@ public class TournamentModeController {
 				List<String> l_mainCommand = new ArrayList<String>();
 				l_mainCommand = Arrays.asList(Command.split(" "));
 				switch (l_mainCommand.get(0)) {
-					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE :
+					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE:
 						parseCommand(Command);
 						Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 
 						// Quit command
-					case Constants.USER_INPUT_COMMAND_QUIT :
+					case Constants.USER_INPUT_COMMAND_QUIT:
 						l_exit = true;
 						break;
 
-					default :
+					default:
 						Logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
 				Logger.log("");
@@ -89,13 +91,13 @@ public class TournamentModeController {
 	 * game with the extracted values.
 	 *
 	 * @param p_tournamentCommand
-	 *            The `p_tournamentCommand` parameter is a string that represents
-	 *            the command for starting a tournament game.
+	 *                            The `p_tournamentCommand` parameter is a string
+	 *                            that represents
+	 *                            the command for starting a tournament game.
 	 */
 	private void parseCommand(String p_tournamentCommand) {
 		List<String> l_commandList = new ArrayList<String>();
 		l_commandList = Arrays.asList(p_tournamentCommand.split(" "));
-
 		TournamentEngine tournamentEngine = new TournamentEngine();
 		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"), extractValues(p_tournamentCommand, "-M"),
 				extractValue(p_tournamentCommand, "-G"), extractValue(p_tournamentCommand, "-D"));
@@ -107,15 +109,21 @@ public class TournamentModeController {
 	 * flag.
 	 *
 	 * @param p_command
-	 *            The p_command parameter is a string that represents the command
-	 *            from which we want to extract values. It could be any command that
-	 *            contains the flag we are interested in.
+	 *                  The p_command parameter is a string that represents the
+	 *                  command
+	 *                  from which we want to extract values. It could be any
+	 *                  command that
+	 *                  contains the flag we are interested in.
 	 * @param p_flag
-	 *            The p_flag parameter is a String that represents the flag used in
-	 *            the command. A flag is typically a command-line argument that
-	 *            starts with a hyphen or double hyphen and is used to modify the
-	 *            behavior of a command. For example, in the command "java -jar
-	 *            myprogram.jar -f
+	 *                  The p_flag parameter is a String that represents the flag
+	 *                  used in
+	 *                  the command. A flag is typically a command-line argument
+	 *                  that
+	 *                  starts with a hyphen or double hyphen and is used to modify
+	 *                  the
+	 *                  behavior of a command. For example, in the command "java
+	 *                  -jar
+	 *                  myprogram.jar -f
 	 * @return The method is returning a Set of Strings that have been extracted
 	 *         from the input command string.
 	 */
@@ -143,13 +151,16 @@ public class TournamentModeController {
 	 * and returns it as an integer.
 	 *
 	 * @param p_command
-	 *            The p_command parameter is a string that represents a command or
-	 *            input from the user. It is the string from which we want to
-	 *            extract a value.
+	 *                  The p_command parameter is a string that represents a
+	 *                  command or
+	 *                  input from the user. It is the string from which we want to
+	 *                  extract a value.
 	 * @param p_flag
-	 *            The p_flag parameter is a string that represents a flag or keyword
-	 *            that is used to identify the value that needs to be extracted from
-	 *            the p_command string.
+	 *                  The p_flag parameter is a string that represents a flag or
+	 *                  keyword
+	 *                  that is used to identify the value that needs to be
+	 *                  extracted from
+	 *                  the p_command string.
 	 * @return The method is returning an integer value.
 	 */
 	public static int extractValue(String p_command, String p_flag) {

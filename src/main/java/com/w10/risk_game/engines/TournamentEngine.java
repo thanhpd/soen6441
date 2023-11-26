@@ -35,7 +35,7 @@ public class TournamentEngine {
 	 * commands for that phase.
 	 *
 	 * @param p_phase
-	 *            The parameter "p_phase" is of type "Phase".
+	 *                The parameter "p_phase" is of type "Phase".
 	 */
 	public static void SetPhase(Phase p_phase) {
 		Phase = p_phase;
@@ -52,33 +52,42 @@ public class TournamentEngine {
 	 * player strategies, and stores the results in a list.
 	 *
 	 * @param p_playerStrategyNames
-	 *            A set of strings representing the names of the player strategies.
+	 *                              A set of strings representing the names of the
+	 *                              player strategies.
 	 * @param p_maps
-	 *            A set of strings representing the names of different maps.
+	 *                              A set of strings representing the names of
+	 *                              different maps.
 	 * @param p_gamesCount
-	 *            The number of games to be played for each map.
+	 *                              The number of games to be played for each map.
 	 * @param p_maxTurns
-	 *            The parameter `p_maxTurns` represents the maximum number of turns
-	 *            allowed in a game.
+	 *                              The parameter `p_maxTurns` represents the
+	 *                              maximum number of turns
+	 *                              allowed in a game.
 	 */
 	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
-
-		for (var map : p_maps) {
-
-			for (int i = 1; i <= p_gamesCount; i++) {
-				d_mapEditorController = new MapEditorController();
-				d_gamePlayController = new GamePlayController(d_mapEditorController);
-
-				var players = createPlayers(p_playerStrategyNames);
-				var l_result = playGame(map, players, p_maxTurns);
-				MatchResult l_winner = new MatchResult(l_result, i, map);
-				l_listofMatchResults.add(l_winner);
-
-			}
-
+		if (hasDuplicates(p_playerStrategyNames)) {
+			System.out.println("OKOK");
+		} else {
+			System.out.println("NOO");
 		}
-		displayResult(l_listofMatchResults);
+		// for (var map : p_maps) {
+
+		// for (int i = 1; i <= p_gamesCount; i++) {
+		// d_mapEditorController = new MapEditorController();
+		// d_gamePlayController = new GamePlayController(d_mapEditorController);
+
+		// var players = createPlayers(p_playerStrategyNames);
+		// var l_result = playGame(map, players, p_maxTurns);
+		// MatchResult l_winner = new MatchResult(l_result, i, map);
+		// l_listofMatchResults.add(l_winner);
+
+		// }
+
+		// }
+		// displayResult(l_listofMatchResults);
+		// }
+
 	}
 
 	/**
@@ -87,7 +96,8 @@ public class TournamentEngine {
 	 * of players.
 	 *
 	 * @param p_playerStrategyNames
-	 *            A set of strings representing the names of player strategies.
+	 *                              A set of strings representing the names of
+	 *                              player strategies.
 	 * @return The method is returning a Set of Player objects.
 	 */
 	private Set<Player> createPlayers(Set<String> p_playerStrategyNames) {
@@ -108,13 +118,15 @@ public class TournamentEngine {
 	 * maximum number of turns is reached.
 	 *
 	 * @param p_map
-	 *            The parameter "p_map" is a string that represents the map being
-	 *            used for the game.
+	 *                   The parameter "p_map" is a string that represents the map
+	 *                   being
+	 *                   used for the game.
 	 * @param p_players
-	 *            The parameter "p_players" is a Set of Player objects. It
-	 *            represents the set of players participating in the game.
+	 *                   The parameter "p_players" is a Set of Player objects. It
+	 *                   represents the set of players participating in the game.
 	 * @param p_maxTurns
-	 *            The maximum number of turns that the game will be played for.
+	 *                   The maximum number of turns that the game will be played
+	 *                   for.
 	 * @return The method is returning a String value. If there is a winner, it will
 	 *         return the name of the winner. If there is no winner after the
 	 *         maximum number of turns, it will return "Draw".
@@ -145,8 +157,9 @@ public class TournamentEngine {
 	 * map, and player name for each match result in a given list.
 	 *
 	 * @param l_listofMatchResults
-	 *            The parameter `l_listofMatchResults` is a List of MatchResult
-	 *            objects.
+	 *                             The parameter `l_listofMatchResults` is a List of
+	 *                             MatchResult
+	 *                             objects.
 	 */
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		Logger.log("Result of the tournament:");
@@ -161,6 +174,30 @@ public class TournamentEngine {
 		}
 		Logger.log(l_formatter.toString());
 		l_formatter.close();
+	}
+
+	// Function to check for duplicates in a set
+	private static boolean hasDuplicates(Set<String> l_set) {
+		Set<String> d_uniqueElements = new HashSet<>();
+		Set<String> d_Elements = new HashSet<>();
+
+		for (String l_element : l_set) {
+			if (d_Elements.contains(l_element)) {
+				System.out.println(l_element);
+				d_uniqueElements.add(l_element);
+			} else {
+				d_Elements.add(l_element);
+			}
+		}
+
+		System.out.println();
+		System.out.println(d_Elements.size());
+		System.out.println(d_uniqueElements.size());
+		if (d_uniqueElements.size() > 0) {
+			return true; // has duplicate
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -59,13 +59,10 @@ public class SinglePlayerEngine {
 	 * The start() function is responsible for running the game loop and handling
 	 * user input commands.
 	 *
-	 * @param p_app
-	 *            The parameter "p_app" is an instance of the "App" class. It is
-	 *            used to start the game.
 	 * @param p_scanner
 	 *            The scanner object used to read user input.
 	 */
-	public void start(App p_app, Scanner p_scanner) {
+	public void start(Scanner p_scanner) {
 		SetPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
 		Player l_player;
@@ -276,7 +273,6 @@ public class SinglePlayerEngine {
 
 					// Other commands
 					case Constants.USER_INPUT_COMMAND_QUIT :
-						p_app.startGame();
 						l_exit = true;
 						break;
 					default :

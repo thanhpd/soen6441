@@ -19,8 +19,8 @@ public class App {
 
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
 	public static String Command = "";
-	SinglePlayerEngine l_singlepPlayerEngine = new SinglePlayerEngine();
-	TournamentModeController l_tournamentModeController = new TournamentModeController();
+	SinglePlayerEngine d_singlepPlayerEngine = new SinglePlayerEngine();
+	TournamentModeController d_tournamentModeController = new TournamentModeController();
 	/**
 	 * The `App` constructor attaches the Console Logger and File Logger as
 	 * Observers
@@ -49,27 +49,28 @@ public class App {
 	 * and starts the game, logging any exceptions that occur.
 	 */
 	public void startGame() {
-		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
-		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING1);
-		Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING2);
 
 		boolean l_exit = false;
+		// Create a Scanner to read the input from the user
+		Scanner l_scanner = new Scanner(System.in);
 		while (!l_exit) {
 			try {
+				Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING);
+				Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING1);
+				Logger.log(Constants.STARTUP_PHASE_ENTRY_STRING2);
 				// Display a user input request
 				Logger.log(Constants.USER_INPUT_REQUEST);
-
-				// Create a Scanner to read the input from the user
-				Scanner l_scanner = new Scanner(System.in);
 
 				// Read the user's input and log the command that was entered
 				Command = l_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 				switch (Command) {
 					case Constants.USER_INPUT_COMMAND_SINGLEPLAYER :
-						l_singlepPlayerEngine.start(this, l_scanner);
+						d_singlepPlayerEngine.start(l_scanner);
+						break;
 					case Constants.USER_INPUT_COMMAND_TOURNAMENT :
-						l_tournamentModeController.start(this, l_scanner);
+						d_tournamentModeController.start(l_scanner);
+						break;
 					case Constants.USER_INPUT_COMMAND_QUIT :
 						l_scanner.close();
 						l_exit = true;

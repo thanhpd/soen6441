@@ -33,16 +33,13 @@ public class TournamentModeController {
 	 * and then enters a loop where it prompts the user for input, reads the input,
 	 * and performs different actions based on the input.
 	 *
-	 * @param app
-	 *            The "app" parameter is an instance of the "App" class. It is used
-	 *            to access and call methods within the "App" class.
 	 * @param p_scanner
 	 *            The parameter `p_scanner` is a `Scanner` object that is used to
 	 *            read user input from the console. It is passed to the `start`
 	 *            method so that the method can read user input and process it
 	 *            accordingly.
 	 */
-	public void start(App app, Scanner p_scanner) {
+	public void start(Scanner p_scanner) {
 		boolean l_exit = false;
 
 		while (!l_exit) {
@@ -65,7 +62,6 @@ public class TournamentModeController {
 
 						// Quit command
 					case Constants.USER_INPUT_COMMAND_QUIT :
-						app.startGame();
 						l_exit = true;
 						break;
 

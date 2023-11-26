@@ -60,6 +60,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM = "Random";
 	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER = "Cheater";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
+	public static final String USER_INPUT_COMMAND_STOP_GAME = "stop";
 
 	// CLI output command constants
 	public static final String CLI_LOAD_MAP = "Loading Map: ";

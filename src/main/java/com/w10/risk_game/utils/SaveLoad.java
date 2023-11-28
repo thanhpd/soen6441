@@ -83,7 +83,18 @@ public class SaveLoad {
 	 * The function saveGame() saves the game.
 	 */
 	public void saveGame(String p_fileName) {
-		String l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		int count = 0;
+		for (char c : p_fileName.toCharArray()) {
+			if (c == '/') {
+				count++;
+			}
+		}
+		String l_filePath = "";
+		if (count >= 4) {
+			l_filePath = p_fileName;
+		} else {
+			l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		}
 		try {
 			ObjectOutputStream l_out = new ObjectOutputStream(new FileOutputStream(l_filePath));
 			d_dataForSave = new DataStorage();
@@ -152,7 +163,18 @@ public class SaveLoad {
 	 * The function loadGame() loads the game.
 	 */
 	public void loadGame(String p_fileName) {
-		String l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		int count = 0;
+		for (char c : p_fileName.toCharArray()) {
+			if (c == '/') {
+				count++;
+			}
+		}
+		String l_filePath = "";
+		if (count >= 4) {
+			l_filePath = p_fileName;
+		} else {
+			l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		}
 		GameMap l_gameMap = new GameMap();
 		List<Player> l_playerList = new ArrayList<>();
 		try {

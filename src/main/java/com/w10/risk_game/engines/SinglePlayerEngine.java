@@ -2,6 +2,7 @@ package com.w10.risk_game.engines;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.google.common.base.Joiner;
@@ -63,7 +64,6 @@ public class SinglePlayerEngine {
 		SetPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
 		Player l_player;
-
 		while (!l_exit) {
 
 			// Check if in issue order phase
@@ -232,8 +232,10 @@ public class SinglePlayerEngine {
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
+
 							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
+
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
 									Phase.createPlayer(l_options.get(1),
@@ -286,6 +288,7 @@ public class SinglePlayerEngine {
 
 					// Other commands
 					case Constants.USER_INPUT_COMMAND_QUIT :
+						d_gamePlayController.resetPlayerCreation();
 						l_exit = true;
 						break;
 					default :

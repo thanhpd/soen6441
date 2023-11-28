@@ -20,6 +20,7 @@ public class App {
 	public static String Command = "";
 	SinglePlayerEngine d_singlepPlayerEngine = new SinglePlayerEngine();
 	TournamentModeController d_tournamentModeController = new TournamentModeController();
+
 	/**
 	 * The `App` constructor attaches the Console Logger and File Logger as
 	 * Observers

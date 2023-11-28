@@ -30,6 +30,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_ENTERED = "Command entered is: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
+	public static final String USER_INPUT_COMMAND_DUPLICATE = "duplicate";
 	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
 	public static final String USER_INPUT_COMMAND_TOURNAMENTMODE = "tournament";
 	public static final String USER_INPUT_COMMAND_EDITMAP = "editmap";
@@ -165,6 +166,12 @@ public final class Constants {
 	public static final String RESULT_DISPLAY_TABLE_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+\n";
 	public static final String RESULT_DISPLAY_TABLE_COLUMN_NAMES = "| Map           |Game Count     | Winner        |\n";
 	public static final String RESULT_DISPLAY_TABLE_FORMAT_PATTERN = "|%-15s|%-15s|%-15s|\n";
+
+	// Tournament Valudation
+	public static final String TOURNAMENT_PLAYER_DUPLICATE_STRING = "Similar Map names or Player names are not allowed";
+
+	public static final String TOURNAMENT_NUMBER_OF_GAMES = "Number of game should be from 1 to 5";
+	public static final String TOURNAMENT_NUMBER_OF_TURNS = "Number of turns should be from 10 to 50";
 
 	// Map Display constants
 	public static final String MAP_DISPLAY_TABLE1_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+\n";

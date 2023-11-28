@@ -17,13 +17,14 @@ public class TournamentEngineTest {
 	@Test
 	void testStart() {
 		Set<String> p_playerStrategyNames = Set.of("Cheater", "Aggressive");
-		Set<String> maps = Set.of("europe.map");
+		Set<String> maps = Set.of("europe-conquest.map");
 		int gamesCount = 2;
 		int maxTurns = 10;
 		TournamentEngine l_tournamentController = new TournamentEngine();
 		l_tournamentController.startGame(p_playerStrategyNames, maps, gamesCount, maxTurns);
 
 	}
+
 	/**
 	 * The testStart1 function starts a tournament with a set of player strategy
 	 * names, a set of maps, a number of games, and a maximum number of turns.
@@ -31,7 +32,7 @@ public class TournamentEngineTest {
 	@Test
 	void testStart1() {
 		Set<String> p_playerStrategyNames = Set.of("Aggressive", "Random", "Benevolent");
-		Set<String> maps = Set.of("europe.map", "france.map");
+		Set<String> maps = Set.of("europe.map", "europe-conquest.map");
 		int gamesCount = 2;
 		int maxTurns = 20;
 		TournamentEngine l_tournamentController = new TournamentEngine();

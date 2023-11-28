@@ -47,6 +47,7 @@ public class TournamentModeController {
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY);
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY1);
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY2);
+				Logger.log("Maps are being read from - " + Constants.DEFAULT_GAME_MAP_FOLDER_PATH);
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
 				// Read the user's input and log the command that was entered
@@ -93,7 +94,6 @@ public class TournamentModeController {
 	private void parseCommand(String p_tournamentCommand) {
 		List<String> l_commandList = new ArrayList<String>();
 		l_commandList = Arrays.asList(p_tournamentCommand.split(" "));
-
 		TournamentEngine tournamentEngine = new TournamentEngine();
 		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"), extractValues(p_tournamentCommand, "-M"),
 				extractValue(p_tournamentCommand, "-G"), extractValue(p_tournamentCommand, "-D"));
@@ -129,7 +129,10 @@ public class TournamentModeController {
 			String[] d_splitValues = l_values.split(",");
 
 			for (String l_value : d_splitValues) {
-				d_extractedValues.add(l_value.toLowerCase());
+				if (!d_extractedValues.add(l_values)) {
+					d_extractedValues.add(Constants.USER_INPUT_COMMAND_DUPLICATE);
+				}
+				d_extractedValues.add(l_value);
 			}
 		}
 

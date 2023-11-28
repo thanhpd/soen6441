@@ -258,5 +258,4 @@ public class IssueOrderPhase extends GamePlayPhase {
 		return Set.of(Command.deploy, Command.advance, Command.bomb, Command.airlift, Command.blockade,
 				Command.negotiate, Command.showmap, Command.commit, Command.quit, Command.savegame);
 	}
-
 }

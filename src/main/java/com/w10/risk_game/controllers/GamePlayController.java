@@ -147,6 +147,15 @@ public class GamePlayController {
 		}
 	}
 
+	public void resetPlayerCreation() {
+		this.d_players = new HashMap<>();
+		this.d_isCountriesAssigned = false;
+		this.d_currentPlayerIndex = 0;
+		this.d_winner = null;
+		// Log a message indicating that the player creation state has been reset
+		Logger.log("Player creation state has been reset.");
+	}
+
 	/**
 	 * The function removes a player from a list of players in a game engine.
 	 *
@@ -516,6 +525,7 @@ public class GamePlayController {
 	public void setPlayers(HashMap<String, Player> d_players) {
 		this.d_players = d_players;
 	}
+
 	/**
 	 * This function is to set the game map
 	 *
@@ -525,6 +535,7 @@ public class GamePlayController {
 	public void setGameMap(GameMap p_gameMap) {
 		this.d_gameMap = p_gameMap;
 	}
+
 	/**
 	 * This function is to set the current player
 	 *
@@ -534,6 +545,7 @@ public class GamePlayController {
 	public void setCurrentPlayer(Player p_currentPlayer) {
 		this.d_currentPlayer = p_currentPlayer;
 	}
+
 	/**
 	 * This function is to get the current player index
 	 *
@@ -542,6 +554,7 @@ public class GamePlayController {
 	public int getCurrentPlayerIndex() {
 		return d_currentPlayerIndex;
 	}
+
 	/**
 	 * This function is to set the current player index
 	 *
@@ -551,6 +564,7 @@ public class GamePlayController {
 	public void setCurrentPlayerIndex(int p_currentPlayerIndex) {
 		this.d_currentPlayerIndex = p_currentPlayerIndex;
 	}
+
 	/**
 	 * This function is to get player list
 	 *
@@ -559,6 +573,7 @@ public class GamePlayController {
 	public List<Player> getPlayerList() {
 		return d_playerList;
 	}
+
 	/**
 	 * This function is to set player list
 	 *

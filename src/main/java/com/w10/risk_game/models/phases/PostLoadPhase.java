@@ -240,4 +240,5 @@ public class PostLoadPhase extends MapEditorPhase {
 		this.printInvalidCommandMessage();
 		return false;
 	}
+
 }

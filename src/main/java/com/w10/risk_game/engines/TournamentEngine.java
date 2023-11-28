@@ -48,37 +48,43 @@ public class TournamentEngine {
 	}
 
 	/**
-	 * The start function runs a series of games on different maps using a set of
-	 * player strategies, and stores the results in a list.
+	 * The startGame function runs a tournament by playing multiple games on
+	 * different maps with a given set of player strategies, and then displays the
+	 * results.
 	 *
 	 * @param p_playerStrategyNames
 	 *            A set of strings representing the names of the player strategies.
 	 * @param p_maps
-	 *            A set of strings representing the names of different maps.
+	 *            A set of strings representing the names of the maps to be used in
+	 *            the game.
 	 * @param p_gamesCount
-	 *            The number of games to be played for each map.
+	 *            The number of games to be played in the tournament.
 	 * @param p_maxTurns
 	 *            The parameter `p_maxTurns` represents the maximum number of turns
-	 *            allowed in a game.
+	 *            allowed in each game.
 	 */
 	public void startGame(Set<String> p_playerStrategyNames, Set<String> p_maps, int p_gamesCount, int p_maxTurns) {
 		ArrayList<MatchResult> l_listofMatchResults = new ArrayList<MatchResult>();
+		if (p_playerStrategyNames.contains(Constants.USER_INPUT_COMMAND_DUPLICATE)) {
+			Logger.log(Constants.TOURNAMENT_PLAYER_DUPLICATE_STRING);
 
-		for (var map : p_maps) {
-
-			for (int i = 1; i <= p_gamesCount; i++) {
-				d_mapEditorController = new MapEditorController();
-				d_gamePlayController = new GamePlayController(d_mapEditorController);
-
-				var players = createPlayers(p_playerStrategyNames);
-				var l_result = playGame(map, players, p_maxTurns);
-				MatchResult l_winner = new MatchResult(l_result, i, map);
-				l_listofMatchResults.add(l_winner);
-
+		} else if (p_gamesCount < 1 || p_gamesCount > 5) {
+			Logger.log(Constants.TOURNAMENT_NUMBER_OF_GAMES);
+		} else if (p_maxTurns < 10 || p_maxTurns > 50) {
+			Logger.log(Constants.TOURNAMENT_NUMBER_OF_TURNS);
+		} else {
+			for (var map : p_maps) {
+				for (int i = 1; i <= p_gamesCount; i++) {
+					d_mapEditorController = new MapEditorController();
+					d_gamePlayController = new GamePlayController(d_mapEditorController);
+					var players = createPlayers(p_playerStrategyNames);
+					var l_result = playGame(map, players, p_maxTurns);
+					MatchResult l_winner = new MatchResult(l_result, i, map);
+					l_listofMatchResults.add(l_winner);
+				}
 			}
-
+			displayResult(l_listofMatchResults);
 		}
-		displayResult(l_listofMatchResults);
 	}
 
 	/**
@@ -135,7 +141,6 @@ public class TournamentEngine {
 				}
 			}
 			d_gamePlayController.executePlayerOrders();
-			d_gamePlayController.assignPlayersReinforcements();
 		}
 
 		return "Draw";

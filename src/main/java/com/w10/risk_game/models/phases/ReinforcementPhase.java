@@ -258,5 +258,4 @@ public class ReinforcementPhase extends GamePlayPhase {
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.none);
 	}
-
 }

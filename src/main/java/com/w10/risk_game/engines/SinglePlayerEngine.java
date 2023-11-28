@@ -14,8 +14,6 @@ import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
 import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
-import com.w10.risk_game.models.tournament.Tournament;
-import com.w10.risk_game.models.tournament.TournamentOptions;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.SaveLoad;
@@ -42,7 +40,7 @@ public class SinglePlayerEngine {
 	 * commands for that phase.
 	 *
 	 * @param p_phase
-	 *                The parameter "p_phase" is of type "Phase".
+	 *            The parameter "p_phase" is of type "Phase".
 	 */
 	public static void SetPhase(Phase p_phase) {
 		Phase = p_phase;
@@ -159,7 +157,7 @@ public class SinglePlayerEngine {
 							Logger.log(Constants.USER_MAP_PATH_MISSING);
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_SHOWMAP:
+					case Constants.USER_INPUT_COMMAND_SHOWMAP :
 						Logger.log(Constants.CLI_SHOW_MAP);
 						Phase.showMap();
 						break;
@@ -170,10 +168,10 @@ public class SinglePlayerEngine {
 							Logger.log(Constants.USER_MAP_PATH_MISSING);
 						}
 						break;
-					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE:
+					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE :
 						Phase.nextPhase();
 						break;
-					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT:
+					case Constants.USER_INPUT_COMMAND_EDIT_CONTINENT :
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							// Log a message for the current iteration
@@ -181,46 +179,46 @@ public class SinglePlayerEngine {
 							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
 									Phase.addContinent(l_options.get(1), Integer.parseInt(l_options.get(2)));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removeContinent(l_options.get(1));
 									break;
 							}
 						}
 						break;
 
-					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY:
+					case Constants.USER_INPUT_COMMAND_EDIT_COUNTRY :
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
 							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
 									Phase.addCountry(Integer.parseInt(l_options.get(1)), l_options.get(2),
 											l_options.get(3));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removeCountry(Integer.parseInt(l_options.get(1)));
 									break;
 							}
 						}
 						break;
 
-					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR:
+					case Constants.USER_INPUT_COMMAND_EDIT_NEIGHBOR :
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
 							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
 									Phase.addNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removeNeighbor(Integer.parseInt(l_options.get(1)),
 											Integer.parseInt(l_options.get(2)));
 									break;
@@ -228,12 +226,12 @@ public class SinglePlayerEngine {
 						}
 						break;
 
-					case Constants.USER_INPUT_COMMAND_VALIDATEMAP:
+					case Constants.USER_INPUT_COMMAND_VALIDATEMAP :
 						this.d_mapEditorController.checkIfMapIsValid();
 						break;
 
 					// Gameplay: Start up Phase commands
-					case Constants.USER_INPUT_COMMAND_GAMEPLAYER:
+					case Constants.USER_INPUT_COMMAND_GAMEPLAYER :
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
@@ -242,23 +240,23 @@ public class SinglePlayerEngine {
 							String optionName = l_options.get(0);
 
 							switch (optionName) {
-								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
+								case Constants.USER_INPUT_COMMAND_OPTION_ADD :
 									Phase.createPlayer(l_options.get(1),
 											l_options.size() > 2
 													? l_options.get(2)
 													: Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE:
+								case Constants.USER_INPUT_COMMAND_OPTION_REMOVE :
 									Phase.removePlayer(l_options.get(1));
 									break;
-								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL:
+								case Constants.USER_INPUT_COMMAND_OPTION_SHOW_ALL :
 									Phase.showAllPlayers();
 									break;
 							}
 						}
 						break;
 
-					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES:
+					case Constants.USER_INPUT_COMMAND_ASSIGN_COUNTRIES :
 						Logger.log(Constants.CLI_ASSIGN_COUNTRIES);
 						if (Phase.assignCountries())
 							Phase.assignPlayerReinforcements();
@@ -275,17 +273,17 @@ public class SinglePlayerEngine {
 						break;
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT :
 
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE :
 
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE :
 
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB :
 
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE :
 
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT:
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_COMMIT :
 						Phase.issuePlayerOrder();
 						if (Command.equals(Constants.USER_INPUT_COMMAND_QUIT))
 							l_exit = true;
@@ -296,7 +294,7 @@ public class SinglePlayerEngine {
 						d_gamePlayController.resetPlayerCreation();
 						l_exit = true;
 						break;
-					default:
+					default :
 						Logger.log(Constants.USER_INPUT_ERROR_COMMAND_INVALID);
 				}
 				Logger.log("");
@@ -315,8 +313,8 @@ public class SinglePlayerEngine {
 	 * The function displays a message with loop iteration options.
 	 *
 	 * @param p_options
-	 *                  An ArrayList of Strings containing the options for the loop
-	 *                  iteration.
+	 *            An ArrayList of Strings containing the options for the loop
+	 *            iteration.
 	 */
 	private void displayLoopIterationMessage(ArrayList<String> p_options) {
 		Logger.log(MessageFormat.format(Constants.CLI_ITERATION_OPTION, p_options.get(0),

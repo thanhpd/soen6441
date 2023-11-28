@@ -135,6 +135,7 @@ public class TournamentEngine {
 				}
 			}
 			d_gamePlayController.executePlayerOrders();
+			d_gamePlayController.assignPlayersReinforcements();
 		}
 
 		return "Draw";

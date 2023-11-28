@@ -46,7 +46,6 @@ public class PreLoadPhaseTest {
 	 * The testAvailableCommands function tests that the available commands in the
 	 * phase object are correctly returned as a string.
 	 */
-	@Disabled
 	@Test
 	void testAvailableCommands() {
 		assertTrue(phase.getAvailableCommands().toString().contains("loadmap"));

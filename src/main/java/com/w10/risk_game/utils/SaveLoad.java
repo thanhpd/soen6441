@@ -83,7 +83,7 @@ public class SaveLoad {
 	 * The function saveGame() saves the game.
 	 */
 	public void saveGame(String p_fileName) {
-		String l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		String l_filePath = getFilePath(p_fileName);
 		try {
 			ObjectOutputStream l_out = new ObjectOutputStream(new FileOutputStream(l_filePath));
 			d_dataForSave = new DataStorage();
@@ -142,7 +142,6 @@ public class SaveLoad {
 			}
 			l_out.writeObject(d_dataForSave);
 			l_out.close();
-			saveGameTxt(p_fileName);
 		} catch (Exception e) {
 			Logger.log(Constants.SAVE_FAIL);
 		}
@@ -152,7 +151,7 @@ public class SaveLoad {
 	 * The function loadGame() loads the game.
 	 */
 	public void loadGame(String p_fileName) {
-		String l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		String l_filePath = getFilePath(p_fileName);
 		GameMap l_gameMap = new GameMap();
 		List<Player> l_playerList = new ArrayList<>();
 		try {
@@ -448,125 +447,20 @@ public class SaveLoad {
 		return l_playerStrategy;
 	}
 	/**
-	 * This function saves the game in txt format.
+	 * This function gets the file path based on condition whether user input the
+	 * full path or just file name.
 	 *
 	 * @param p_fileName
-	 *            The name of the file.
+	 *            file name
+	 * @return file path
 	 */
-	public void saveGameTxt(String p_fileName) {
-		String l_referenceFilePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".txt";
-		try {
-			File l_referenceFile = new File(l_referenceFilePath);
-			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
-			BufferedWriter l_bufferedWriter = new BufferedWriter(l_fileWriter);
-			// Phase Data
-			l_bufferedWriter.write(SinglePlayerEngine.Phase.getClass().getSimpleName());
-			l_bufferedWriter.newLine();
-			// Save GamePlayController Data
-			l_bufferedWriter.write(d_dataForSave.d_currentPlayerIndex + " " + d_dataForSave.d_currentPlayerName + " "
-					+ d_dataForSave.d_isCountriesAssigned);
-			l_bufferedWriter.newLine();
-			// Save Country Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_COUNTRIES);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_countryIds.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_countryIds.get(i) + " " + d_dataForSave.d_countryNames.get(i)
-						+ " " + d_dataForSave.d_belongContinentIds.get(i) + " " + d_dataForSave.d_armyCounts.get(i)
-						+ " " + d_dataForSave.d_ownerNames.get(i) + " " + d_dataForSave.d_numberOfNeighbors.get(i));
-				l_bufferedWriter.newLine();
-			}
-			l_bufferedWriter.write(Constants.SAVE_LOAD_NEIGHBOR_COUNTRIES);
-			l_bufferedWriter.newLine();
-			for (int j = 0; j < d_dataForSave.d_neighborIds.size(); j++) {
-				l_bufferedWriter.write(d_dataForSave.d_neighborIds.get(j) + " ");
-			}
-			l_bufferedWriter.newLine();
-			// Save Continent Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_CONTINENTS);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_continentIds.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_continentIds.get(i) + " " + d_dataForSave.d_continentNames.get(i)
-						+ " " + d_dataForSave.d_continentBonus.get(i));
-				l_bufferedWriter.newLine();
-			}
-			// Save Player Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_playerNames.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_playerNames.get(i) + " "
-						+ d_dataForSave.d_playerLeftoverArmies.get(i) + " " + d_dataForSave.d_playerHasCommitted.get(i)
-						+ " " + d_dataForSave.d_numberOfOrders.get(i) + " " + d_dataForSave.d_numberOfCountries.get(i)
-						+ " " + d_dataForSave.d_numberOfCards.get(i));
-				l_bufferedWriter.newLine();
-			}
-			// Save Order Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_ORDER);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_orderTypes.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_orderTypes.get(i) + " ");
-			}
-			l_bufferedWriter.newLine();
-			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY);
-			for (int i = 0; i < d_dataForSave.d_deployCountryIds.size(); i++) {
-				l_bufferedWriter
-						.write(" " + d_dataForSave.d_deployCountryIds.get(i) + " " + d_dataForSave.d_deployNums.get(i));
-			}
-			l_bufferedWriter.newLine();
-			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_ADVANCE);
-			for (int i = 0; i < d_dataForSave.d_advanceCountryFromIds.size(); i++) {
-				l_bufferedWriter.write(" " + d_dataForSave.d_advanceCountryFromIds.get(i) + " "
-						+ d_dataForSave.d_advanceCountryToIds.get(i) + " " + d_dataForSave.d_advanceNums.get(i));
-			}
-			l_bufferedWriter.newLine();
-			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT);
-			for (int i = 0; i < d_dataForSave.d_airliftCountryFromIds.size(); i++) {
-				l_bufferedWriter.write(" " + d_dataForSave.d_airliftCountryFromIds.get(i) + " "
-						+ d_dataForSave.d_airliftCountryToIds.get(i) + " " + d_dataForSave.d_airliftNums.get(i));
-			}
-			l_bufferedWriter.newLine();
-			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BLOCKADE);
-			for (int i = 0; i < d_dataForSave.d_blockadeCountryIds.size(); i++) {
-				l_bufferedWriter.write(" " + d_dataForSave.d_blockadeCountryIds.get(i));
-			}
-			l_bufferedWriter.newLine();
-			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_BOMB);
-			for (int i = 0; i < d_dataForSave.d_bombCountryIds.size(); i++) {
-				l_bufferedWriter.write(" " + d_dataForSave.d_bombCountryIds.get(i));
-			}
-			l_bufferedWriter.newLine();
-			l_bufferedWriter.write(Constants.USER_INPUT_ISSUE_ORDER_COMMAND_NEGOTIATE);
-			for (int i = 0; i < d_dataForSave.d_negotiatePlayerName.size(); i++) {
-				l_bufferedWriter.write(" " + d_dataForSave.d_negotiatePlayerName.get(i));
-			}
-			l_bufferedWriter.newLine();
-			// Save Player Countries Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS_COUNTRIES);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_countryIds.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_countryIds.get(i) + " ");
-			}
-			l_bufferedWriter.newLine();
-			// Save Player Cards Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS_CARDS);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_cards.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_cards.get(i) + " ");
-			}
-			l_bufferedWriter.newLine();
-			// Save Player Strategy Data
-			l_bufferedWriter.write(Constants.SAVE_LOAD_PLAYERS_STRATEGY);
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_playerStrategyNames.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_playerStrategyNames.get(i) + " ");
-			}
-			l_bufferedWriter.newLine();
-			for (int i = 0; i < d_dataForSave.d_playerStrongestCountryOwnedIds.size(); i++) {
-				l_bufferedWriter.write(d_dataForSave.d_playerStrongestCountryOwnedIds.get(i) + " ");
-			}
-			l_bufferedWriter.close();
-			Logger.log(Constants.SAVE_SUCCESS);
-		} catch (Exception e) {
-			Logger.log(Constants.SAVE_FAIL);
+	public String getFilePath(String p_fileName) {
+		String l_filePath = "";
+		if (p_fileName.contains("/")) {
+			l_filePath = p_fileName;
+		} else {
+			l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
 		}
+		return l_filePath;
 	}
 }

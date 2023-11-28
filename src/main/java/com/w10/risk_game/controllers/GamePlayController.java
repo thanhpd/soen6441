@@ -6,13 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import com.w10.risk_game.commands.Airlift;
-import com.w10.risk_game.commands.Deploy;
-import com.w10.risk_game.commands.Negotiate;
+import com.w10.risk_game.commands.*;
 import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.GameMap;
-import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.strategies.AggressivePlayerStrategy;
 import com.w10.risk_game.models.strategies.BenevolentPlayerStrategy;
@@ -389,6 +386,7 @@ public class GamePlayController {
 			List<Order> l_deployOrders = new ArrayList<>();
 			List<Order> l_airliftOrders = new ArrayList<>();
 			List<Order> l_negotiateOrders = new ArrayList<>();
+			List<Order> l_bombOrders = new ArrayList<>();
 
 			// Execute the orders of the players
 			for (Player l_player : this.d_players.values()) {
@@ -400,6 +398,8 @@ public class GamePlayController {
 						l_airliftOrders.add(l_order);
 					} else if (l_order instanceof Negotiate) {
 						l_negotiateOrders.add(l_order);
+					} else if (l_order instanceof Bomb) {
+						l_bombOrders.add(l_order);
 					} else {
 						OtherOrders.add(l_order);
 					}
@@ -415,6 +415,9 @@ public class GamePlayController {
 				l_order.execute();
 			}
 			for (Order l_order : l_negotiateOrders) {
+				l_order.execute();
+			}
+			for (Order l_order : l_bombOrders) {
 				l_order.execute();
 			}
 			for (Order l_order : OtherOrders) {

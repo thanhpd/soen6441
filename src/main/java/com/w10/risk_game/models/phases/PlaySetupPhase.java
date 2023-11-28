@@ -18,7 +18,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 * The constructor for the PlaySetupPhase class.
 	 *
 	 * @param d_gameEngine
-	 *            The parameter d_gameEngine is a GameEngine object.
+	 *                     The parameter d_gameEngine is a GameEngine object.
 	 */
 	public PlaySetupPhase(SinglePlayerEngine d_gameEngine) {
 		super(d_gameEngine);
@@ -44,11 +44,12 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 * The function creates a player with the given name.
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player that you want to create.
+	 *                         The parameter "p_playerName" is a String that
+	 *                         represents the name
+	 *                         of the player that you want to create.
 	 *
 	 * @param p_playerStrategy
-	 *            The strategy of the player
+	 *                         The strategy of the player
 	 */
 	@Override
 	public void createPlayer(String p_playerName, String p_playerStrategy) {
@@ -59,7 +60,8 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 * The removePlayer function removes a player from the game.
 	 *
 	 * @param p_playerName
-	 *            The name of the player that you want to remove from the game.
+	 *                     The name of the player that you want to remove from the
+	 *                     game.
 	 */
 	@Override
 	public void removePlayer(String p_playerName) {
@@ -148,6 +150,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 */
 	@Override
 	public void executeAllPlayerOrders() {
-		this.printAvailableCommand();;
+		this.printAvailableCommand();
+		;
 	}
 }

@@ -48,7 +48,7 @@ public class GamePlayController {
 	 * The constructor of the GamePlayController class.
 	 *
 	 * @param p_mapEditorController
-	 *            The map editor controller object.
+	 *                              The map editor controller object.
 	 */
 	public GamePlayController(MapEditorController p_mapEditorController) {
 		this.d_mapEditorController = p_mapEditorController;
@@ -71,7 +71,7 @@ public class GamePlayController {
 	 * The function sets the list of players in a game.
 	 *
 	 * @param p_playerListForDiplomacy
-	 *            a list of players in a game.
+	 *                                 a list of players in a game.
 	 */
 	public void SetPlayerListForDiplomacy(List<Player> p_playerListForDiplomacy) {
 		PlayerListForDiplomacy = p_playerListForDiplomacy;
@@ -91,7 +91,8 @@ public class GamePlayController {
 	 * provided list of Order objects.
 	 *
 	 * @param p_otherOrders
-	 *            The parameter "p_otherOrders" is a List of Order objects.
+	 *                      The parameter "p_otherOrders" is a List of Order
+	 *                      objects.
 	 */
 	public static void SetOtherOrders(List<Order> p_otherOrders) {
 		OtherOrders = p_otherOrders;
@@ -102,10 +103,11 @@ public class GamePlayController {
 	 * players, checking for duplicate names.
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player being created.
+	 *                         The parameter "p_playerName" is a String that
+	 *                         represents the name
+	 *                         of the player being created.
 	 * @param p_playerStrategy
-	 *            The strategy of the player
+	 *                         The strategy of the player
 	 */
 	public void createPlayer(String p_playerName, String p_playerStrategy) {
 		try {
@@ -144,12 +146,22 @@ public class GamePlayController {
 		}
 	}
 
+	public void resetPlayerCreation() {
+		this.d_players = new HashMap<>();
+		this.d_isCountriesAssigned = false;
+		this.d_currentPlayerIndex = 0;
+		this.d_winner = null;
+		// Log a message indicating that the player creation state has been reset
+		Logger.log("Player creation state has been reset.");
+	}
+
 	/**
 	 * The function removes a player from a list of players in a game engine.
 	 *
 	 * @param p_playerName
-	 *            The parameter "p_playerName" is a String that represents the name
-	 *            of the player that needs to be removed.
+	 *                     The parameter "p_playerName" is a String that represents
+	 *                     the name
+	 *                     of the player that needs to be removed.
 	 *
 	 */
 	public void removePlayer(String p_playerName) {
@@ -302,7 +314,8 @@ public class GamePlayController {
 	 * The function returns the details of a player based on their name.
 	 *
 	 * @param p_playerName
-	 *            The name of the player for which you want to retrieve the details.
+	 *                     The name of the player for which you want to retrieve the
+	 *                     details.
 	 * @return The method is returning a Player object.
 	 *
 	 */
@@ -501,29 +514,32 @@ public class GamePlayController {
 	 * This function is to set all players in the game.
 	 *
 	 * @param d_players
-	 *            the players in the game
+	 *                  the players in the game
 	 */
 	public void setPlayers(HashMap<String, Player> d_players) {
 		this.d_players = d_players;
 	}
+
 	/**
 	 * This function is to set the game map
 	 *
 	 * @param p_gameMap
-	 *            the game map
+	 *                  the game map
 	 */
 	public void setGameMap(GameMap p_gameMap) {
 		this.d_gameMap = p_gameMap;
 	}
+
 	/**
 	 * This function is to set the current player
 	 *
 	 * @param p_currentPlayer
-	 *            the current player
+	 *                        the current player
 	 */
 	public void setCurrentPlayer(Player p_currentPlayer) {
 		this.d_currentPlayer = p_currentPlayer;
 	}
+
 	/**
 	 * This function is to get the current player index
 	 *
@@ -532,15 +548,17 @@ public class GamePlayController {
 	public int getCurrentPlayerIndex() {
 		return d_currentPlayerIndex;
 	}
+
 	/**
 	 * This function is to set the current player index
 	 *
 	 * @param p_currentPlayerIndex
-	 *            the current player index
+	 *                             the current player index
 	 */
 	public void setCurrentPlayerIndex(int p_currentPlayerIndex) {
 		this.d_currentPlayerIndex = p_currentPlayerIndex;
 	}
+
 	/**
 	 * This function is to get player list
 	 *
@@ -549,11 +567,12 @@ public class GamePlayController {
 	public List<Player> getPlayerList() {
 		return d_playerList;
 	}
+
 	/**
 	 * This function is to set player list
 	 *
 	 * @param p_playerList
-	 *            player list
+	 *                     player list
 	 */
 	public void setPlayerList(List<Player> p_playerList) {
 		this.d_playerList = p_playerList;
@@ -572,7 +591,7 @@ public class GamePlayController {
 	 * This function is to set variable isCountriesAssigned
 	 *
 	 * @param p_isCountriesAssigned
-	 *            isCountriesAssigned
+	 *                              isCountriesAssigned
 	 */
 	public void setIsCountriesAssigned(boolean p_isCountriesAssigned) {
 		this.d_isCountriesAssigned = p_isCountriesAssigned;

@@ -32,7 +32,7 @@ public class TournamentEngineTest {
 	@Test
 	void testStart1() {
 		Set<String> p_playerStrategyNames = Set.of("Aggressive", "Random", "Benevolent");
-		Set<String> maps = Set.of("europe.map", "france.map");
+		Set<String> maps = Set.of("src/test/resources/maps/europe.map", "src/test/resources/maps/europe-conquest.map");
 		int gamesCount = 2;
 		int maxTurns = 20;
 		TournamentEngine l_tournamentController = new TournamentEngine();

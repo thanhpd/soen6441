@@ -83,18 +83,7 @@ public class SaveLoad {
 	 * The function saveGame() saves the game.
 	 */
 	public void saveGame(String p_fileName) {
-		int count = 0;
-		for (char c : p_fileName.toCharArray()) {
-			if (c == '/') {
-				count++;
-			}
-		}
-		String l_filePath = "";
-		if (count >= 4) {
-			l_filePath = p_fileName;
-		} else {
-			l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
-		}
+		String l_filePath = getFilePath(p_fileName);
 		try {
 			ObjectOutputStream l_out = new ObjectOutputStream(new FileOutputStream(l_filePath));
 			d_dataForSave = new DataStorage();
@@ -153,7 +142,7 @@ public class SaveLoad {
 			}
 			l_out.writeObject(d_dataForSave);
 			l_out.close();
-			saveGameTxt(p_fileName);
+			saveGameTxt(l_filePath);
 		} catch (Exception e) {
 			Logger.log(Constants.SAVE_FAIL);
 		}
@@ -163,18 +152,7 @@ public class SaveLoad {
 	 * The function loadGame() loads the game.
 	 */
 	public void loadGame(String p_fileName) {
-		int count = 0;
-		for (char c : p_fileName.toCharArray()) {
-			if (c == '/') {
-				count++;
-			}
-		}
-		String l_filePath = "";
-		if (count >= 4) {
-			l_filePath = p_fileName;
-		} else {
-			l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
-		}
+		String l_filePath = getFilePath(p_fileName);
 		GameMap l_gameMap = new GameMap();
 		List<Player> l_playerList = new ArrayList<>();
 		try {
@@ -472,11 +450,11 @@ public class SaveLoad {
 	/**
 	 * This function saves the game in txt format.
 	 *
-	 * @param p_fileName
-	 *            The name of the file.
+	 * @param p_filePath
+	 *            The file path of the file.
 	 */
-	public void saveGameTxt(String p_fileName) {
-		String l_referenceFilePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".txt";
+	public void saveGameTxt(String p_filePath) {
+		String l_referenceFilePath = p_filePath.substring(0, p_filePath.length() - 4) + ".txt";
 		try {
 			File l_referenceFile = new File(l_referenceFilePath);
 			FileWriter l_fileWriter = new FileWriter(l_referenceFile);
@@ -590,5 +568,14 @@ public class SaveLoad {
 		} catch (Exception e) {
 			Logger.log(Constants.SAVE_FAIL);
 		}
+	}
+	public String getFilePath(String p_fileName) {
+		String l_filePath = "";
+		if (p_fileName.contains("/")) {
+			l_filePath = p_fileName;
+		} else {
+			l_filePath = Constants.SAVE_LOAD_FILE_PATH + p_fileName + ".dat";
+		}
+		return l_filePath;
 	}
 }

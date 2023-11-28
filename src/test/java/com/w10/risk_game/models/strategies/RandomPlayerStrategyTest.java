@@ -3,7 +3,6 @@ package com.w10.risk_game.models.strategies;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
@@ -18,6 +17,7 @@ public class RandomPlayerStrategyTest {
 	Player d_player1;
 	Player d_player2;
 	GameMap d_GameMap;
+
 	@BeforeEach
 	public void setup() {
 		d_mapEditorController = new MapEditorController();
@@ -34,35 +34,5 @@ public class RandomPlayerStrategyTest {
 		d_gamePlayController.createPlayer(d_player2.getName(), Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN);
 		d_GameMap = new GameMap();
 		d_gamePlayController.assignCountries();
-
-	}
-	@Test
-	void testAttackRandomNeighbor() {
-
-	}
-
-	@Test
-	void testDeployOnRandomCountry() {
-
-	}
-
-	@Test
-	void testIssueAdvanceOrder() {
-
-	}
-
-	@Test
-	void testIssueDeployOrder() {
-
-	}
-
-	@Test
-	void testIssueOrder() {
-		// d_player1.issueOrder();
-	}
-
-	@Test
-	void testMoveArmiesRandomCountry() {
-
 	}
 }

@@ -34,13 +34,6 @@ public class PlaySetupPhase extends GamePlayPhase {
 	}
 
 	/**
-	 * The function "checkIfOrdersCanBeExecuted" prints an invalid command message
-	 * and returns false.
-	 *
-	 * @return The method is returning a boolean value of false.
-	 */
-
-	/**
 	 * The function creates a player with the given name.
 	 *
 	 * @param p_playerName

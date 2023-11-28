@@ -127,7 +127,7 @@ public class TournamentEngine {
 	 */
 	protected String playGame(String p_map, Set<Player> p_players, int p_maxTurns) {
 
-		d_mapEditorController.loadMap(p_map);
+		d_mapEditorController.loadMap(Constants.DEFAULT_GAME_MAP_FOLDER_PATH + "" + p_map);
 		d_gamePlayController.assignCountries();
 		d_gamePlayController.assignPlayersReinforcements();
 		for (int i = 1; i <= p_maxTurns; i++) {
@@ -141,7 +141,6 @@ public class TournamentEngine {
 				}
 			}
 			d_gamePlayController.executePlayerOrders();
-			d_gamePlayController.assignPlayersReinforcements();
 		}
 
 		return "Draw";

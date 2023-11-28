@@ -49,6 +49,7 @@ public class TournamentModeController {
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY);
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY1);
 				Logger.log(Constants.TOURNAMENT_PHASE_ENTRY2);
+				Logger.log("Maps are being read from - " + Constants.DEFAULT_GAME_MAP_FOLDER_PATH);
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
 				// Read the user's input and log the command that was entered

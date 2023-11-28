@@ -167,7 +167,7 @@ public final class Constants {
 	public static final String RESULT_DISPLAY_TABLE_FORMAT_PATTERN = "|%-15s|%-15s|%-15s|\n";
 
 	// Tournament Valudation
-	public static final String TOURNAMENT_DUPLICATE_MAP_NAMES = "Similar map names are not allowed";
+	public static final String TOURNAMENT_DUPLICATE_MAP_NAMES = "Error faced while loading the map";
 	public static final String TOURNAMENT_DUPLICATE_PLAYER_NAMES = "Similar Players are not allowed";
 	public static final String TOURNAMENT_NUMBER_OF_GAMES = "Number of game should be from 1 to 5";
 	public static final String TOURNAMENT_NUMBER_OF_TURNS = "Number of turns should be from 10 to 50";

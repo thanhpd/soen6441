@@ -105,7 +105,7 @@ public class ConquestMapDriver {
 					 * string, separated by comma
 					 */
 					l_printWriter.format("%s,0,0,%s,%s%n", country.getCountryName(), l_continent.getContinentName(),
-							country.getNeighbors().values().stream().map(item -> item.getCountryName())
+							country.getNeighbors().values().stream().map(Country::getCountryName)
 									.collect(Collectors.joining(Constants.COMMA)));
 				}
 

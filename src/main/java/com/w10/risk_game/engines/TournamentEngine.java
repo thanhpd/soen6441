@@ -68,9 +68,9 @@ public class TournamentEngine {
 		if (p_playerStrategyNames.contains(Constants.USER_INPUT_COMMAND_DUPLICATE)) {
 			Logger.log(Constants.TOURNAMENT_PLAYER_DUPLICATE_STRING);
 
-		} else if (p_gamesCount < 1 && p_gamesCount > 5) {
+		} else if (p_gamesCount < 1 || p_gamesCount > 5) {
 			Logger.log(Constants.TOURNAMENT_NUMBER_OF_GAMES);
-		} else if (p_maxTurns < 10 && p_maxTurns > 50) {
+		} else if (p_maxTurns < 10 || p_maxTurns > 50) {
 			Logger.log(Constants.TOURNAMENT_NUMBER_OF_TURNS);
 		} else {
 			for (var map : p_maps) {

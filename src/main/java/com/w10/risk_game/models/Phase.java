@@ -205,11 +205,6 @@ public abstract class Phase {
 	 */
 	public abstract void executeAllPlayerOrders();
 
-	// end command
-	/**
-	 * The "endGame" function is an abstract method that does not have an
-	 * implementation and must be defined in a subclass.
-	 */
 	/**
 	 * The "endGame" function is an abstract method that does not have an
 	 * implementation and must be defined in a subclass.

@@ -3,13 +3,10 @@ package com.w10.risk_game.models.phases;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import com.w10.risk_game.controllers.MapEditorController;
 import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.utils.Constants;

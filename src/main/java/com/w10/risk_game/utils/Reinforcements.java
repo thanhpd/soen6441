@@ -53,7 +53,7 @@ public class Reinforcements {
 		}
 		// Step 3: Calculate the total number of reinforcement armies
 		int l_countrySize = l_playerCountries.size();
-		int l_reinforceArmies = (int) (Math.floor(l_countrySize / 3) + l_bonus);
+		int l_reinforceArmies = (int) (Math.floor((double) l_countrySize / 3) + l_bonus);
 		p_player.setLeftoverArmies((l_armies + l_reinforceArmies) < Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
 				? Constants.REINFORCEMENTS_MIN_NUMBER_OF_ARMIES
 				: (l_armies + l_reinforceArmies));
@@ -96,9 +96,7 @@ public class Reinforcements {
 		// Step 3: Sort the country ids in each continent string
 		for (int i = 0; i < l_groupCountries.size(); i++) {
 			List<String> countryIds = new ArrayList<>();
-			for (String countryId : l_groupCountries.get(i).split(" ")) {
-				countryIds.add(countryId);
-			}
+			Collections.addAll(countryIds, l_groupCountries.get(i).split(" "));
 			Collections.sort(countryIds);
 			l_groupCountries.set(i, String.join(" ", countryIds));
 		}

@@ -109,16 +109,22 @@ public class GamePlayController {
 			Player l_player = new Player(p_playerName.trim(), new ArrayList<>(), new ArrayList<>(), 0);
 
 			// Set player strategy
-			if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN)) {
-				l_player.setStrategy(new HumanPlayerStrategy(l_player));
-			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE)) {
-				l_player.setStrategy(new AggressivePlayerStrategy(l_player));
-			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT)) {
-				l_player.setStrategy(new BenevolentPlayerStrategy(l_player));
-			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM)) {
-				l_player.setStrategy(new RandomPlayerStrategy(l_player));
-			} else if (p_playerStrategy.equals(Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER)) {
-				l_player.setStrategy(new CheaterPlayerStrategy(l_player));
+			switch (p_playerStrategy) {
+				case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN :
+					l_player.setStrategy(new HumanPlayerStrategy(l_player));
+					break;
+				case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE :
+					l_player.setStrategy(new AggressivePlayerStrategy(l_player));
+					break;
+				case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_BENEVOLENT :
+					l_player.setStrategy(new BenevolentPlayerStrategy(l_player));
+					break;
+				case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM :
+					l_player.setStrategy(new RandomPlayerStrategy(l_player));
+					break;
+				case Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER :
+					l_player.setStrategy(new CheaterPlayerStrategy(l_player));
+					break;
 			}
 
 			// Check if the player name is not already present in the player list
@@ -473,7 +479,7 @@ public class GamePlayController {
 			// If no owner that means the country is neutral and the game is not over
 			if (l_country.getOwner() == null)
 				return false;
-			if (l_player.equals(""))
+			if (l_player.isEmpty())
 				l_player = l_country.getOwner().getName();
 			// Check if a country has a different owner
 			else if (!l_player.equals(l_country.getOwner().getName()))

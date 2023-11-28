@@ -1,6 +1,5 @@
 package com.w10.risk_game.models.strategies;
 
-import java.text.MessageFormat;
 import java.util.Scanner;
 
 import com.w10.risk_game.commands.Advance;
@@ -9,9 +8,7 @@ import com.w10.risk_game.commands.Blockade;
 import com.w10.risk_game.commands.Bomb;
 import com.w10.risk_game.commands.Deploy;
 import com.w10.risk_game.commands.Negotiate;
-import com.w10.risk_game.commands.Order;
 import com.w10.risk_game.engines.SinglePlayerEngine;
-import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 

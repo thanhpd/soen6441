@@ -68,17 +68,11 @@ public class MapDisplay {
 			l_formatter.close();
 
 			// Iterate over every continent and country in the map and print table data
-			Iterator<Map.Entry<Integer, Continent>> l_continentIterator = p_map.getContinents().entrySet().iterator();
-
-			while (l_continentIterator.hasNext()) {
-				Map.Entry<Integer, Continent> l_continentMap = (Map.Entry<Integer, Continent>) l_continentIterator
-						.next();
+			for (Map.Entry<Integer, Continent> l_continentMap : p_map.getContinents().entrySet()) {
 				Integer l_continentId = l_continentMap.getKey();
 				Continent l_continent = p_map.getContinents().get(l_continentId);
-				Iterator<Country> l_countryIterator = l_continent.getCountries().iterator();
 
-				while (l_countryIterator.hasNext()) {
-					Country l_country = (Country) l_countryIterator.next();
+				for (Country l_country : l_continent.getCountries()) {
 					ArrayList<String> l_neighborNames = new ArrayList<>();
 					// Fetch neighbors' details to display
 					for (Country neighbor : l_country.getNeighbors().values()) {

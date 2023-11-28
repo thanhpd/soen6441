@@ -129,7 +129,7 @@ public class TournamentModeController {
 			String[] d_splitValues = l_values.split(",");
 
 			for (String l_value : d_splitValues) {
-				if (!d_extractedValues.add(l_values)) {
+				if (!d_extractedValues.add(l_value)) {
 					d_extractedValues.add(Constants.USER_INPUT_COMMAND_DUPLICATE);
 				}
 				d_extractedValues.add(l_value);

@@ -16,15 +16,22 @@ public final class Constants {
 
 	// Menu constants
 	public static final String STARTUP_PHASE_ENTRY_STRING = "!!!   Hi Welcome to Risk Game   !!!\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING1 = "!!!  Enter mode   !!!\n";
+	public static final String STARTUP_PHASE_ENTRY_STRING2 = "!!!  Enter tournament or singleplayer   !!!\n";
+
+	public static final String TOURNAMENT_PHASE_ENTRY = "!!!  You are in Tournament Game Mode   !!!\n";
+	public static final String TOURNAMENT_PHASE_ENTRY1 = "!!!  Sample Command: tournament -M Map1.map,Map2.map -P strategy1,strategy2 -G noOfGames -D noOfTurns  !!!\n";;
+	public static final String TOURNAMENT_PHASE_ENTRY2 = "!!!  Available commands: [tournament, quit]  !!!\n";
 
 	// User input command constants
 	public static final String USER_INPUT_REQUEST = "Please enter a command: ";
+	public static final String USER_INPUT_COMMAND_SINGLEPLAYER = "singleplayer";
+	public static final String USER_INPUT_COMMAND_TOURNAMENT = "tournament";
 	public static final String USER_INPUT_COMMAND_ENTERED = "Command entered is: ";
 	public static final String USER_INPUT_COMMAND_LOADMAP = "loadmap";
 	public static final String USER_INPUT_COMMAND_SHOWMAP = "showmap";
 	public static final String USER_INPUT_COMMAND_SAVEMAP = "savemap";
 	public static final String USER_INPUT_COMMAND_TOURNAMENTMODE = "tournament";
-	public static final String USER_INPUT_COMMAND_SINGLEPLAYERMODE = "Single Player Mode ";
 	public static final String USER_INPUT_COMMAND_EDITMAP = "editmap";
 	public static final String USER_INPUT_COMMAND_VALIDATEMAP = "validatemap";
 	public static final String USER_INPUT_COMMAND_EDIT_CONTINENT = "editcontinent";
@@ -53,6 +60,7 @@ public final class Constants {
 	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_RANDOM = "Random";
 	public static final String USER_INPUT_COMMAND_PLAYER_STRATEGY_CHEATER = "Cheater";
 	public static final String USER_INPUT_COMMAND_QUIT = "quit";
+	public static final String USER_INPUT_COMMAND_STOP_GAME = "stop";
 
 	// CLI output command constants
 	public static final String CLI_LOAD_MAP = "Loading Map: ";
@@ -97,6 +105,7 @@ public final class Constants {
 
 	// Maps Folder Path
 	public static final String DEFAULT_GAME_MAP_TEST_FOLDER_PATH = "src/test/resources/maps/";
+	public static final String DEFAULT_GAME_MAP_FOLDER_PATH = "src/main/resources/maps/";
 
 	// Map Reader constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
@@ -152,6 +161,17 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_INACCESSIBLE = "MapValidator: Some countries are inaccessible";
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
 
+	// Tournament Result Display
+	public static final String RESULT_DISPLAY_TABLE_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+\n";
+	public static final String RESULT_DISPLAY_TABLE_COLUMN_NAMES = "| Map           |Game Count     | Winner        |\n";
+	public static final String RESULT_DISPLAY_TABLE_FORMAT_PATTERN = "|%-15s|%-15s|%-15s|\n";
+
+	// Tournament Valudation
+	public static final String TOURNAMENT_DUPLICATE_MAP_NAMES = "Similar map names are not allowed";
+	public static final String TOURNAMENT_DUPLICATE_PLAYER_NAMES = "Similar Players are not allowed";
+	public static final String TOURNAMENT_NUMBER_OF_GAMES = "Number of game should be from 1 to 5";
+	public static final String TOURNAMENT_NUMBER_OF_TURNS = "Number of turns should be from 10 to 50";
+
 	// Map Display constants
 	public static final String MAP_DISPLAY_TABLE1_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+\n";
 	public static final String MAP_DISPLAY_TABLE1_COLUMN_NAMES = "| Country       |ID | Continent     |Bonus| Neighbor Countries                                                                                      |\n";
@@ -204,7 +224,7 @@ public final class Constants {
 	public static final String ADVANCE_BATTLE_START = "{0} launches an attack on {1}, owned by {2}! The battle rages on...";
 	public static final String ADVANCE_BATTLE_WON = "{0} dominates! You''ve conquered {1}. Keep the conquest going!";
 	public static final String ADVANCE_BATTLE_LOST = "{0}''s forces have been defeated in the battle for {1}, owned by {2}.";
-	public static final String ADVANCE_DEPLOY_SUCCEED = "{0} deployed {1} armies to {2}.";
+	public static final String ADVANCE_DEPLOY_SUCCEED = "{0} transferred {1} armies from {2} to {3}.";
 	public static final String ADVANCE_INVALID_COUNTRY_NAME = "Invalid input! Country name {0} does not exist.";
 	public static final String ADVANCE_INVALID_ARMY_LESS = "Invalid input! Number of armies must be greater than 0.";
 	public static final String ADVANCE_INVALID_ARMY_MORE = "Invalid input! Number of armies to advance cannot be greater than those deployed on the country.";
@@ -222,5 +242,30 @@ public final class Constants {
 	public static final String AIRLIFT_SUCCEED = "{0} armies have been airlifted from {1} to {2}";
 	public static final String AIRLIFT_COUNTRY_DOESNOT_BELONG_TO_PLAYER = "Country ID - {0} does not belong to {1}";
 	public static final String AIRLIFT_COUNTRY_NOT_ENOUGH_ARMY = "Country {0} can airlift at most {1} armies";
+
+	// Strategy constants
+	public static final String STRATEGY_ISSUE_ORDER = "Order: {0}";
+	public static final String STRATEGY_CHEATER_TAKE_OVER = "Cheater player {0} took over country {1} from player {2}";
+	public static final String STRATEGY_CHEATER_DOUBLE_ARMY = "Cheater player {0} doubled the army in country {1}";
+	// SaveLoad constants
+	public static final String SAVE_LOAD_FILE_PATH = "src/main/resources/archives/";
+	public static final String SAVE_SUCCESS = "Game saved successfully";
+	public static final String SAVE_FAIL = "Game failed to save";
+	public static final String LOAD_SUCCESS = "Game loaded successfully";
+	public static final String LOAD_FAIL = "Game failed to load";
+	public static final String SAVE_LOAD_COUNTRIES = "Countries";
+	public static final String SAVE_LOAD_CONTINENTS = "Continents";
+	public static final String SAVE_LOAD_NEIGHBOR_COUNTRIES = "Neighbor Countries";
+	public static final String SAVE_LOAD_PLAYERS = "Players";
+	public static final String SAVE_LOAD_ORDER = "Order Types";
+	public static final String SAVE_LOAD_PLAYERS_COUNTRIES = "Players' Countries";
+	public static final String SAVE_LOAD_PLAYERS_CARDS = "Cards";
+	public static final String SAVE_LOAD_TEST_FILE_NAME = "testSave";
+	public static final String SAVE_LOAD_PLAYERS_STRATEGY = "Players' Strategy";
+	public static final String USER_INPUT_SAVE_GAME = "savegame";
+	public static final String USER_INPUT_LOAD_GAME = "loadgame";
+	public static final String USER_MAP_PATH_MISSING = "Map file path missing";
+	public static final String USER_LOADGAME_ERROR = "could not load game";
+	public static final String USER_SAVEGAME_ERROR = "could not save game";
 
 }

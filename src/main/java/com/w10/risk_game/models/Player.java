@@ -4,13 +4,13 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import com.w10.risk_game.commands.*;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.strategies.HumanPlayerStrategy;
 import com.w10.risk_game.models.strategies.PlayerStrategy;
 
 import java.util.List;
 import java.util.Scanner;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
@@ -72,6 +72,32 @@ public class Player {
 		this.d_orders = p_orders;
 		this.d_leftoverArmies = p_leftoverArmies;
 		this.setStrategy(new HumanPlayerStrategy(this));
+	}
+
+	/**
+	 * The `Player` constructor is initializing a new instance of the `Player` class
+	 *
+	 * @param d_name
+	 *            player name
+	 * @param d_countriesOwned
+	 *            player owned countries
+	 * @param d_orders
+	 *            player orders
+	 * @param d_leftoverArmies
+	 *            player leftover armies
+	 * @param d_playerCards
+	 *            player cards
+	 * @param d_hasCommitted
+	 *            player has committed
+	 */
+	public Player(String d_name, List<Country> d_countriesOwned, List<Order> d_orders, int d_leftoverArmies,
+			List<CardType> d_playerCards, boolean d_hasCommitted) {
+		this.d_name = d_name;
+		this.d_countriesOwned = d_countriesOwned;
+		this.d_orders = d_orders;
+		this.d_leftoverArmies = d_leftoverArmies;
+		this.d_playerCards = d_playerCards;
+		this.d_hasCommitted = d_hasCommitted;
 	}
 
 	/**

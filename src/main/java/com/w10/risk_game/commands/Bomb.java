@@ -5,10 +5,10 @@ import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.GamePlayHelper;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,10 +93,10 @@ public class Bomb extends Order {
 		try {
 			int l_countryId = Integer.parseInt(p_countryId);
 			// Get a list of foreign neighboring countries
-			List<Country> l_neighbors = GetForeignNeighbors(p_player);
+			List<Country> l_foreignNeighbors = GamePlayHelper.GetForeignNeighbors(p_player);
 
 			// Find the country to bomb among the foreign neighboring countries
-			l_countryToBomb = l_neighbors.stream().filter(neighbor -> neighbor.getCountryId() == l_countryId)
+			l_countryToBomb = l_foreignNeighbors.stream().filter(neighbor -> neighbor.getCountryId() == l_countryId)
 					.findFirst().orElse(null);
 
 			// Log a message if the country to bomb is not found among the neighbors
@@ -109,38 +109,6 @@ public class Bomb extends Order {
 		}
 
 		return l_countryToBomb;
-	}
-
-	/**
-	 * The function returns a list of countries that are owned by other players and
-	 * are neighbors of the countries owned by the given player.
-	 *
-	 * @param p_player
-	 *            The parameter "p_player" is of type Player and represents the
-	 *            player for whom we want to find the foreign neighbors.
-	 * @return The method is returning a list of countries that are owned by other
-	 *         players and are neighbors of the countries owned by the given player.
-	 */
-	private static List<Country> GetForeignNeighbors(Player p_player) {
-		// Get the list of countries owned by the player
-		List<Country> l_countries = p_player.getCountriesOwned();
-		// Initialize a list to store foreign neighboring countries
-		List<Country> l_neighbors = new ArrayList<>();
-
-		// Iterate through each country owned by the player
-		for (Country l_country : l_countries) {
-			// Retrieve the neighbors of the current country
-			for (Country l_neighbor : l_country.getNeighbors().values()) {
-				// Check if the neighbor is owned by a different player
-				if (l_neighbor.getOwner() != p_player) {
-					// Add the neighbor to the list of foreign neighboring countries
-					l_neighbors.add(l_neighbor);
-				}
-			}
-		}
-
-		// Return the list of neighboring countries not owned by the player
-		return l_neighbors;
 	}
 
 	/**
@@ -208,5 +176,13 @@ public class Bomb extends Order {
 		} else {
 			return false; // Return false if the player does not have a bomb card
 		}
+	}
+	/**
+	 * The function returns the country ID of the country to bomb.
+	 *
+	 * @return the country ID of the country to bomb.
+	 */
+	public String getCountryIdToBomb() {
+		return d_countryIdToBomb;
 	}
 }

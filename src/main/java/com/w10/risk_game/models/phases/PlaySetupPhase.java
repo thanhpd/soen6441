@@ -2,8 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 
 /**
  * The PlaySetupPhase class is a subclass of GamePlayPhase that handles the
@@ -20,7 +20,7 @@ public class PlaySetupPhase extends GamePlayPhase {
 	 * @param d_gameEngine
 	 *            The parameter d_gameEngine is a GameEngine object.
 	 */
-	public PlaySetupPhase(GameEngine d_gameEngine) {
+	public PlaySetupPhase(SinglePlayerEngine d_gameEngine) {
 		super(d_gameEngine);
 	}
 

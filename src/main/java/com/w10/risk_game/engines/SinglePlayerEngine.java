@@ -1,12 +1,15 @@
-package com.w10.risk_game;
+package com.w10.risk_game.engines;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import com.google.common.base.Joiner;
+import com.w10.risk_game.App;
 import com.w10.risk_game.controllers.GamePlayController;
 import com.w10.risk_game.controllers.MapEditorController;
+import com.w10.risk_game.controllers.TournamentModeController;
 import com.w10.risk_game.models.Phase;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.models.phases.PreLoadPhase;
@@ -15,15 +18,16 @@ import com.w10.risk_game.models.tournament.Tournament;
 import com.w10.risk_game.models.tournament.TournamentOptions;
 import com.w10.risk_game.utils.CommandInterpreter;
 import com.w10.risk_game.utils.Constants;
+import com.w10.risk_game.utils.SaveLoad;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The GameEngine class is responsible for managing the game flow, handling user
- * input, and executing commands in the Risk game.
+ * The SinglePlayerEngine class is responsible for managing the game flow,
+ * handling user input, and executing commands in the Risk game.
  *
  * @author Sherwyn Dsouza
  */
-public class GameEngine {
+public class SinglePlayerEngine {
 
 	private final GamePlayController d_gamePlayController;
 	private final MapEditorController d_mapEditorController;
@@ -46,24 +50,25 @@ public class GameEngine {
 	}
 
 	/**
-	 * The `GameEngine` constructor initializes a new instance of the
+	 * The `SinglePlayerEngine` constructor initializes a new instance of the
 	 * `MapEditorController` class and `GamePlayController` class.
 	 */
-	public GameEngine() {
+	public SinglePlayerEngine() {
 		this.d_mapEditorController = new MapEditorController();
 		this.d_gamePlayController = new GamePlayController(d_mapEditorController);
 	}
 
 	/**
-	 * The start() function is the main loop of the game engine, where it handles
-	 * user input and executes the corresponding commands based on the current game
-	 * phase.
+	 * The start() function is responsible for running the game loop and handling
+	 * user input commands.
+	 *
+	 * @param p_scanner
+	 *            The scanner object used to read user input.
 	 */
-	public void start() {
+	public void start(Scanner p_scanner) {
 		SetPhase(new PreLoadPhase(this));
 		boolean l_exit = false;
 		Player l_player;
-
 		while (!l_exit) {
 
 			// Check if in issue order phase
@@ -86,7 +91,8 @@ public class GameEngine {
 						continue;
 				}
 				l_player = this.d_gamePlayController.getCurrentPlayer();
-				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + ":");
+				Logger.log(Constants.CLI_ISSUE_ORDER_PLAYER + l_player.getName() + " " + "("
+						+ l_player.getStrategy().getStrategyName() + ")" + ":");
 
 				Logger.log(MessageFormat.format(Constants.GAME_ENGINE_ISSUE_ORDER_NUMBER_OF_ARMIES,
 						l_player.getLeftoverArmies()));
@@ -113,11 +119,8 @@ public class GameEngine {
 				// Display a user input request
 				Logger.log(Constants.USER_INPUT_REQUEST);
 
-				// Create a Scanner to read the input from the user
-				Scanner l_scanner = new Scanner(System.in);
-
 				// Read the user's input and log the command that was entered
-				Command = l_scanner.nextLine();
+				Command = p_scanner.nextLine();
 				Logger.log(Constants.USER_INPUT_COMMAND_ENTERED + Command);
 
 				// Get the main command and argument list from the entered command
@@ -129,31 +132,43 @@ public class GameEngine {
 
 				// Check for the validity of the provided argument options based on the main
 				// command
-				// CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand,
-				// l_listOfOptions);
+				CommandInterpreter.CheckValidArgumentOptions(l_argList, l_mainCommand, l_listOfOptions);
 				switch (l_mainCommand) {
-					// Map editor Phase commands
-
-					case Constants.USER_INPUT_COMMAND_LOADMAP:
-
+					case Constants.USER_INPUT_LOAD_GAME :
+						SaveLoad load = new SaveLoad(this);
+						try {
+							load.loadGame(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_LOADGAME_ERROR);
+						}
+						break;
+					case Constants.USER_INPUT_COMMAND_LOADMAP :
 						String[] l_mapName = l_argList[1].split("/");
 						Logger.log(Constants.CLI_LOAD_MAP + l_mapName[l_mapName.length - 1]);
-						Phase.loadMap(l_argList[1]);
+						try {
+							Phase.loadMap(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
-					case Constants.USER_INPUT_COMMAND_TOURNAMENTMODE:
-						Tournament tournamentMode = new Tournament();
-						tournamentMode.startTournament();
-						break;
-					case Constants.USER_INPUT_COMMAND_SAVEMAP:
-						Phase.saveMap(l_argList[1],
-								l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
+					case Constants.USER_INPUT_COMMAND_SAVEMAP :
+						try {
+							Phase.saveMap(l_argList[1],
+									l_argList.length > 2 ? l_argList[2] : Constants.MAP_FORMAT_DOMINATION);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
 					case Constants.USER_INPUT_COMMAND_SHOWMAP:
 						Logger.log(Constants.CLI_SHOW_MAP);
 						Phase.showMap();
 						break;
-					case Constants.USER_INPUT_COMMAND_EDITMAP:
-						Phase.editMap(l_argList[1]);
+					case Constants.USER_INPUT_COMMAND_EDITMAP :
+						try {
+							Phase.editMap(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_MAP_PATH_MISSING);
+						}
 						break;
 					case Constants.USER_INPUT_COMMAND_OPTION_NEXTPHASE:
 						Phase.nextPhase();
@@ -222,8 +237,10 @@ public class GameEngine {
 						// Process all provided command options by a loop
 						for (ArrayList<String> l_options : l_listOfOptions) {
 							this.displayLoopIterationMessage(l_options);
+
 							// Get the specific option name for this iteration
 							String optionName = l_options.get(0);
+
 							switch (optionName) {
 								case Constants.USER_INPUT_COMMAND_OPTION_ADD:
 									Phase.createPlayer(l_options.get(1),
@@ -248,7 +265,15 @@ public class GameEngine {
 						break;
 
 					// Issue Order Commands
-					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY:
+					case Constants.USER_INPUT_SAVE_GAME :
+						SaveLoad save = new SaveLoad(this);
+						try {
+							save.saveGame(l_argList[1]);
+						} catch (Exception e) {
+							Logger.log(Constants.USER_SAVEGAME_ERROR);
+						}
+						break;
+					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_DEPLOY :
 
 					case Constants.USER_INPUT_ISSUE_ORDER_COMMAND_AIRLIFT:
 
@@ -267,8 +292,8 @@ public class GameEngine {
 						break;
 
 					// Other commands
-					case Constants.USER_INPUT_COMMAND_QUIT:
-						l_scanner.close();
+					case Constants.USER_INPUT_COMMAND_QUIT :
+						d_gamePlayController.resetPlayerCreation();
 						l_exit = true;
 						break;
 					default:
@@ -315,4 +340,5 @@ public class GameEngine {
 	public MapEditorController getMapEditorController() {
 		return this.d_mapEditorController;
 	}
+
 }

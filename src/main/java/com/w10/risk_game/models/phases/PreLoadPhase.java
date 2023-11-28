@@ -2,8 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 
 /**
  * The PreLoadPhase class is a subclass of MapEditorPhase that handles the
@@ -20,7 +20,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	public PreLoadPhase(GameEngine p_gameEngine) {
+	public PreLoadPhase(SinglePlayerEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 
@@ -179,7 +179,7 @@ public class PreLoadPhase extends MapEditorPhase {
 	 */
 	@Override
 	public Set<Command> getAvailableCommands() {
-		return Set.of(Command.loadmap);
+		return Set.of(Command.loadmap, Command.loadgame);
 	}
 
 	/**

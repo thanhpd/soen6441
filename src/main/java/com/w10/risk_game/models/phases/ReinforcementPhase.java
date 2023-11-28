@@ -2,8 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 
 /**
  * The ReinforcementPhase class is a subclass of GamePlayPhase that handles the
@@ -19,7 +19,7 @@ public class ReinforcementPhase extends GamePlayPhase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	protected ReinforcementPhase(GameEngine p_gameEngine) {
+	protected ReinforcementPhase(SinglePlayerEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 
@@ -270,5 +270,4 @@ public class ReinforcementPhase extends GamePlayPhase {
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.none);
 	}
-
 }

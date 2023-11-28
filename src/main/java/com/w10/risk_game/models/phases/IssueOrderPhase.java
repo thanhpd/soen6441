@@ -2,8 +2,8 @@ package com.w10.risk_game.models.phases;
 
 import java.util.Set;
 
-import com.w10.risk_game.GameEngine;
 import com.w10.risk_game.commands.Command;
+import com.w10.risk_game.engines.SinglePlayerEngine;
 
 /**
  * The `IssueOrderPhase` class is a subclass of `GamePlayPhase` that represents
@@ -19,7 +19,7 @@ public class IssueOrderPhase extends GamePlayPhase {
 	 * @param p_gameEngine
 	 *            The parameter p_gameEngine is a GameEngine object.
 	 */
-	protected IssueOrderPhase(GameEngine p_gameEngine) {
+	public IssueOrderPhase(SinglePlayerEngine p_gameEngine) {
 		super(p_gameEngine);
 	}
 
@@ -268,7 +268,6 @@ public class IssueOrderPhase extends GamePlayPhase {
 	@Override
 	public Set<Command> getAvailableCommands() {
 		return Set.of(Command.deploy, Command.advance, Command.bomb, Command.airlift, Command.blockade,
-				Command.negotiate, Command.showmap, Command.commit, Command.quit);
+				Command.negotiate, Command.showmap, Command.commit, Command.quit, Command.savegame);
 	}
-
 }

@@ -187,5 +187,12 @@ public class Negotiate extends Order {
 			return false; // Return false if the player does not have a diplomacy card
 		}
 	}
-
+	/**
+	 * This method is to get the player name of the player to negotiate with
+	 *
+	 * @return the player name of the player to negotiate with
+	 */
+	public String getPlayerName() {
+		return d_playerName;
+	}
 }

@@ -103,18 +103,6 @@ public class IssueOrderPhase extends GamePlayPhase {
 	}
 
 	/**
-	 * The removeCountry function prints an invalid command message.
-	 *
-	 * @param p_countryId
-	 *            The parameter p_countryId is an integer that represents the ID of
-	 *            the country that needs to be removed.
-	 */
-	@Override
-	public void removeCountry(int p_countryId) {
-		this.printInvalidCommandMessage();
-	}
-
-	/**
 	 * The function removes a continent, but it currently only prints an invalid
 	 * command message.
 	 *

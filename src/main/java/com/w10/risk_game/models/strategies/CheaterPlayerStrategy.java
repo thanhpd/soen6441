@@ -75,8 +75,7 @@ public class CheaterPlayerStrategy extends PlayerStrategy {
 	 */
 	private void doubleArmiesInCountriesWithEnemyNeighbor() {
 		for (Country l_country : d_player.getCountriesOwned()) {
-			if (l_country.getNeighbors().values().stream().filter(p_country -> p_country.getOwner() != d_player)
-					.count() > 0) {
+			if (l_country.getNeighbors().values().stream().anyMatch(p_country -> p_country.getOwner() != d_player)) {
 				l_country.setArmyCount(l_country.getArmyCount() * 2);
 
 				Logger.log(MessageFormat.format(Constants.STRATEGY_CHEATER_DOUBLE_ARMY, d_player.getName(),

@@ -343,7 +343,8 @@ public class GamePlayController {
 	 */
 	public boolean checkIfOrdersCanBeIssued() {
 		// Check if the current player has no leftover armies and has committed orders
-		if (this.d_currentPlayer.getLeftoverArmies() == 0 && this.d_currentPlayer.getHasCommitted()) {
+		if ((this.d_currentPlayer.getLeftoverArmies() == 0 && this.d_currentPlayer.getHasCommitted())
+				|| this.d_currentPlayer.getCountriesOwned().isEmpty()) {
 			// Remove the current player from the player list
 			this.d_playerList.remove(d_currentPlayerIndex % this.d_playerList.size());
 

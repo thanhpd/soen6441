@@ -1,0 +1,33 @@
+IssueOrderPhase
+2 player3 true
+Countries
+1 country1 1 6 player3 3
+2 country2 1 1 player1 2
+3 country3 2 3 player3 4
+4 country4 2 8 player2 2
+5 country5 3 8 player2 2
+6 country6 3 0 player3 3
+Neighbor Countries
+2 3 5 1 3 1 2 4 6 3 6 1 6 3 4 5 
+Continents
+1 continent1 5
+2 continent2 5
+3 continent3 8
+Players
+player1 0 true 2 1 1
+player2 0 true 1 2 0
+player3 0 false 2 3 0
+Order Types
+deploy advance deploy deploy advance 
+deploy 2 3 5 3 1 3
+advance 2 1 1 1 2 9
+airlift
+blockade
+bomb
+negotiate
+Players' Countries
+1 2 3 4 5 6 
+Cards
+negotiate 
+Players' Strategy
+Random Benevolent Human 

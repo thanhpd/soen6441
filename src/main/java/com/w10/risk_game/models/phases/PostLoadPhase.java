@@ -4,6 +4,8 @@ import java.util.Set;
 
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.engines.SinglePlayerEngine;
+import com.w10.risk_game.models.Phase;
+import com.w10.risk_game.utils.Constants;
 
 /**
  * The PostLoadPhase class is a subclass of MapEditorPhase that represents the
@@ -239,6 +241,16 @@ public class PostLoadPhase extends MapEditorPhase {
 	public boolean assignPlayerReinforcements() {
 		this.printInvalidCommandMessage();
 		return false;
+	}
+
+	/**
+	 * The function overrides the printAvailableCommand method and logs an
+	 * instruction for saving a map.
+	 */
+	@Override
+	public void printAvailableCommand() {
+		super.printAvailableCommand();
+		Phase.Logger.log(Constants.MAP_SAVE_INSTRUCTION);
 	}
 
 }

@@ -30,6 +30,7 @@ public class SaveLoad {
 	GameMap d_gameMapForLoad;
 	GamePlayController d_gamePlayController;
 	private static final LogEntryBuffer Logger = LogEntryBuffer.GetInstance();
+
 	/**
 	 * Constructor for SaveLoad class.
 	 *
@@ -44,6 +45,7 @@ public class SaveLoad {
 		this.d_playersForLoad = new HashMap<>();
 		this.d_gameMapForLoad = new GameMap();
 	}
+
 	/**
 	 * The function getPlayerListForSave() returns the player list for save.
 	 *
@@ -52,6 +54,7 @@ public class SaveLoad {
 	public HashMap<String, Player> getPlayersForSave() {
 		return d_playersForSave;
 	}
+
 	/**
 	 * The function getPlayerListForLoad() returns the player list for load.
 	 *
@@ -142,6 +145,7 @@ public class SaveLoad {
 			}
 			l_out.writeObject(d_dataForSave);
 			l_out.close();
+			Logger.log(Constants.SAVE_SUCCESS + l_filePath);
 		} catch (Exception e) {
 			Logger.log(Constants.SAVE_FAIL);
 		}
@@ -258,6 +262,7 @@ public class SaveLoad {
 			Logger.log(Constants.LOAD_FAIL);
 		}
 	}
+
 	/**
 	 * The function saveOrder() saves the order.
 	 *
@@ -298,6 +303,7 @@ public class SaveLoad {
 			d_dataForSave.d_negotiatePlayerName.add(((Negotiate) p_order).getPlayerName());
 		}
 	}
+
 	/**
 	 * The function saveCard() saves the card.
 	 *
@@ -415,6 +421,7 @@ public class SaveLoad {
 		}
 		return l_cardList;
 	}
+
 	/**
 	 * This function loads player strategy.
 	 *
@@ -446,6 +453,7 @@ public class SaveLoad {
 		}
 		return l_playerStrategy;
 	}
+
 	/**
 	 * This function gets the file path based on condition whether user input the
 	 * full path or just file name.

@@ -110,6 +110,7 @@ public final class Constants {
 
 	// Map Reader constants
 	public static final String MAP_READER_FILE_NOT_FOUND = "Cannot find file with the entered filename!";
+	public static final String MAP_SAVE_INSTRUCTION = "To save map: savemap filename mode; mode = 1 for Domination, 2 for Conquest";
 
 	// Player constants
 	public static final String PLAYER_ISSUE_ORDER_RESTART = "Please re-enter the invalid order. The following orders are available: \"deploy\", \"advance\", \"bomb\", \"blockade\", \"airlift\", \"negotiate\", \"commit\", \"showmap\" or \"quit\".";
@@ -251,7 +252,7 @@ public final class Constants {
 	public static final String STRATEGY_CHEATER_DOUBLE_ARMY = "Cheater player {0} doubled the army in country {1}";
 	// SaveLoad constants
 	public static final String SAVE_LOAD_FILE_PATH = "src/main/resources/archives/";
-	public static final String SAVE_SUCCESS = "Game saved successfully";
+	public static final String SAVE_SUCCESS = "Game saved successfully at: ";
 	public static final String SAVE_FAIL = "Game failed to save";
 	public static final String LOAD_SUCCESS = "Game loaded successfully";
 	public static final String LOAD_FAIL = "Game failed to load";
@@ -269,5 +270,6 @@ public final class Constants {
 	public static final String USER_MAP_PATH_MISSING = "Map file path missing";
 	public static final String USER_LOADGAME_ERROR = "could not load game";
 	public static final String USER_SAVEGAME_ERROR = "could not save game";
+	public static final String LOAD_GAME_INSTRUCTION = "To load game: loadgame filename; Default location is src/main/resources/archives/";
 
 }

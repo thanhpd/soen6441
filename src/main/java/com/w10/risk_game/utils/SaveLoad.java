@@ -83,7 +83,10 @@ public class SaveLoad {
 	}
 
 	/**
-	 * The function saveGame() saves the game.
+	 * The function saves the current state of the game to a file.
+	 *
+	 * @param p_fileName
+	 *            The name of the file to save the game data to.
 	 */
 	public void saveGame(String p_fileName) {
 		String l_filePath = getFilePath(p_fileName);
@@ -152,7 +155,12 @@ public class SaveLoad {
 	}
 
 	/**
-	 * The function loadGame() loads the game.
+	 * The function `loadGame` loads game data from a file and initializes the game
+	 * map, players, continents, countries, orders, cards, and strategies.
+	 *
+	 * @param p_fileName
+	 *            The parameter `p_fileName` is a String that represents the name of
+	 *            the file from which the game data will be loaded.
 	 */
 	public void loadGame(String p_fileName) {
 		String l_filePath = getFilePath(p_fileName);
@@ -392,12 +400,12 @@ public class SaveLoad {
 	}
 
 	/**
-	 * The function loadCard() loads the card.
+	 * The function "loadCard" takes in a number of cards to load and returns a list
+	 * of CardType objects based on the card types specified in the Constants class.
 	 *
 	 * @param p_cardNum
-	 *            The parameter `p_cardNum` is the number of cards of current
-	 *            player.
-	 * @return a list of cards.
+	 *            The number of cards to load.
+	 * @return The method is returning a List of CardType objects.
 	 */
 	public List<CardType> loadCard(int p_cardNum) {
 		List<CardType> l_cardList = new ArrayList<>();

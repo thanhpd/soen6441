@@ -130,14 +130,17 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 	}
 
 	/**
-	 * The function returns a list of neighboring countries that have at least one
-	 * enemy country.
+	 * The function returns a list of neighboring countries of a given country that
+	 * have at least one enemy neighbor, sorted by their army count in descending
+	 * order.
 	 *
 	 * @param p_fromCountry
-	 *            The country from which we want to find neighbors with enemies. The
-	 *            method is returning a list of countries that are neighbors of the
-	 *            given country and have at least one neighbor that is owned by a
-	 *            different player.
+	 *            The parameter "p_fromCountry" represents the country for which we
+	 *            want to find its neighboring countries that have enemies.
+	 * @return The method is returning a list of countries that are neighbors of the
+	 *         given "p_fromCountry" and have at least one neighbor that is owned by
+	 *         a different player. The list is sorted in descending order based on
+	 *         the number of armies in each country.
 	 */
 	private List<Country> getNeighborsWithEnemies(Country p_fromCountry) {
 		return p_fromCountry.getNeighbors().values().stream().takeWhile(l_neighbor -> {
@@ -148,6 +151,13 @@ public class AggressivePlayerStrategy extends PlayerStrategy {
 		}).sorted(Comparator.comparingInt(Country::getArmyCount).reversed()).collect(Collectors.toList());
 	}
 
+	/**
+	 * The function returns the name of a strategy called "Aggressive" as a constant
+	 * string.
+	 *
+	 * @return The method is returning the constant value
+	 *         "USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE".
+	 */
 	@Override
 	public String getStrategyName() {
 		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_AGGRESSIVE;

@@ -163,9 +163,9 @@ public final class Constants {
 	public static final String MAP_VALIDATOR_COUNTRY_NOT_FULLY_CONNECTED = "MapValidator: Some continents are not fully-connected";
 
 	// Tournament Result Display
-	public static final String RESULT_DISPLAY_TABLE_LINE = "+---------------+---+---------------+-----+---------------------------------------------------------------------------------------------------------+\n";
-	public static final String RESULT_DISPLAY_TABLE_COLUMN_NAMES = "| Map           |Game Count     | Winner        |\n";
-	public static final String RESULT_DISPLAY_TABLE_FORMAT_PATTERN = "|%-15s|%-15s|%-15s|\n";
+	public static final String RESULT_DISPLAY_TABLE_LINE = "+---------------------+---+---------------------+-----+--------------------------------------------------+\n";
+	public static final String RESULT_DISPLAY_TABLE_COLUMN_NAMES = "|Game Count                    | Map                            | Winner                           |\n";
+	public static final String RESULT_DISPLAY_TABLE_FORMAT_PATTERN = "|%-30s|%-30s|%-30s|\n";
 
 	// Tournament Valudation
 	public static final String TOURNAMENT_PLAYER_DUPLICATE_STRING = "Similar Player names are not allowed";

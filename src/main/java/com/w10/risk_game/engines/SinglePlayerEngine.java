@@ -288,7 +288,7 @@ public class SinglePlayerEngine {
 
 					// Other commands
 					case Constants.USER_INPUT_COMMAND_QUIT :
-						d_gamePlayController.resetPlayerCreation();
+						// d_gamePlayController.resetPlayerCreation();
 						l_exit = true;
 						break;
 					default :

@@ -101,7 +101,6 @@ public class TournamentModeController {
 					extractValues(p_tournamentCommand, "-M"), extractValue(p_tournamentCommand, "-G"),
 					extractValue(p_tournamentCommand, "-D"));
 		}
-
 	}
 
 	/**

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import com.w10.risk_game.commands.Command;
 import com.w10.risk_game.engines.SinglePlayerEngine;
+import com.w10.risk_game.models.Phase;
+import com.w10.risk_game.utils.Constants;
 
 /**
  * The PreLoadPhase class is a subclass of MapEditorPhase that handles the
@@ -234,5 +236,15 @@ public class PreLoadPhase extends MapEditorPhase {
 	public boolean editMap(String p_mapFilePath) {
 		this.printInvalidCommandMessage();
 		return false;
+	}
+
+	/**
+	 * The function overrides the printAvailableCommand method and logs an
+	 * instruction for loading a map.
+	 */
+	@Override
+	public void printAvailableCommand() {
+		super.printAvailableCommand();
+		Phase.Logger.log(Constants.LOAD_GAME_INSTRUCTION);
 	}
 }

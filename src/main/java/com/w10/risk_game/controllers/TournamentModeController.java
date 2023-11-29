@@ -92,12 +92,15 @@ public class TournamentModeController {
 	 *            the command for starting a tournament game.
 	 */
 	private void parseCommand(String p_tournamentCommand) {
-		List<String> l_commandList = new ArrayList<String>();
-		l_commandList = Arrays.asList(p_tournamentCommand.split(" "));
-		TournamentEngine tournamentEngine = new TournamentEngine();
-		tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"), extractValues(p_tournamentCommand, "-M"),
-				extractValue(p_tournamentCommand, "-G"), extractValue(p_tournamentCommand, "-D"));
-
+		if (((extractValues(p_tournamentCommand, "-P")).contains("Human"))
+				|| ((extractValues(p_tournamentCommand, "-P")).contains("human"))) {
+			Logger.log(Constants.TOURNAMENT_PHASE_ENTRY3);
+		} else {
+			TournamentEngine tournamentEngine = new TournamentEngine();
+			tournamentEngine.startGame(extractValues(p_tournamentCommand, "-P"),
+					extractValues(p_tournamentCommand, "-M"), extractValue(p_tournamentCommand, "-G"),
+					extractValue(p_tournamentCommand, "-D"));
+		}
 	}
 
 	/**

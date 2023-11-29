@@ -386,10 +386,22 @@ public class Player {
 		this.d_countriesOwned.add(p_country);
 	}
 
+	/**
+	 * The function returns the strategy of a player.
+	 *
+	 * @return The method is returning an object of type PlayerStrategy.
+	 */
 	public PlayerStrategy getStrategy() {
 		return d_strategy;
 	}
 
+	/**
+	 * The function sets the strategy for a player.
+	 *
+	 * @param p_strategy
+	 *            The parameter "p_strategy" is of type PlayerStrategy. It is used
+	 *            to set the strategy for a player.
+	 */
 	public void setStrategy(PlayerStrategy p_strategy) {
 		this.d_strategy = p_strategy;
 	}

@@ -147,6 +147,10 @@ public class GamePlayController {
 		}
 	}
 
+	/**
+	 * The function resets the player creation state by initializing variables and
+	 * logging a message.
+	 */
 	public void resetPlayerCreation() {
 		this.d_players = new HashMap<>();
 		this.d_isCountriesAssigned = false;

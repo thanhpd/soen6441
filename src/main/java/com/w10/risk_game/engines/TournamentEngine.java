@@ -15,8 +15,8 @@ import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.LogEntryBuffer;
 
 /**
- * The TournamentController class is responsible for managing and running a
- * series of games on different maps using a set of player strategies.
+ * The TournamentEngine class is responsible for managing and running a series
+ * of games on different maps using a set of player strategies.
  */
 public class TournamentEngine {
 

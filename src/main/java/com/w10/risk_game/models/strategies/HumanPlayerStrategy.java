@@ -12,6 +12,10 @@ import com.w10.risk_game.engines.SinglePlayerEngine;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;
 
+/**
+ * The HumanPlayerStrategy class is a subclass of PlayerStrategy that allows a
+ * human player to issue orders in a game.
+ */
 public class HumanPlayerStrategy extends PlayerStrategy {
 
 	public HumanPlayerStrategy(Player p_player) {
@@ -102,6 +106,12 @@ public class HumanPlayerStrategy extends PlayerStrategy {
 		}
 	}
 
+	/**
+	 * The function returns the name of a strategy for a human player.
+	 *
+	 * @return The method is returning the constant value
+	 *         "Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN".
+	 */
 	@Override
 	public String getStrategyName() {
 		return Constants.USER_INPUT_COMMAND_PLAYER_STRATEGY_HUMAN;

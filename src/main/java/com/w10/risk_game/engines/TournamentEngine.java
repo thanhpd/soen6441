@@ -75,7 +75,9 @@ public class TournamentEngine {
 			Logger.log(Constants.TOURNAMENT_NUMBER_OF_TURNS);
 		} else {
 			for (var map : p_maps) {
+				Logger.log("####### For the map: " + map + "-----------------#################");
 				for (int i = 1; i <= p_gamesCount; i++) {
+					Logger.log(i + "####### Game Number: " + i + "-----------------#################");
 					d_mapEditorController = new MapEditorController();
 					d_gamePlayController = new GamePlayController(d_mapEditorController);
 					var players = createPlayers(p_playerStrategyNames);
@@ -132,6 +134,7 @@ public class TournamentEngine {
 		d_gamePlayController.assignCountries();
 		d_gamePlayController.assignPlayersReinforcements();
 		for (int i = 1; i <= p_maxTurns; i++) {
+			Logger.log("########## Number of turn:  " + i + "#################");
 			for (int j = 1; j <= d_gamePlayController.getNoOfPlayers(); j++) {
 				d_gamePlayController.issuePlayerOrder();
 				d_gamePlayController.showMap();
@@ -141,6 +144,7 @@ public class TournamentEngine {
 					}
 				}
 			}
+			d_gamePlayController.assignPlayersReinforcements();
 			d_gamePlayController.executePlayerOrders();
 		}
 
@@ -158,16 +162,33 @@ public class TournamentEngine {
 	public void displayResult(List<MatchResult> l_listofMatchResults) {
 		Logger.log("Result of the tournament:");
 		Formatter l_formatter = new Formatter();
-		String l_table, l_resultDisplayColumnNames;
+		String l_table, l_resultDisplayColumnNames, l_displayLine;
 		l_table = Constants.RESULT_DISPLAY_TABLE_FORMAT_PATTERN;
+		l_displayLine = Constants.RESULT_DISPLAY_TABLE_LINE;
 		l_resultDisplayColumnNames = Constants.RESULT_DISPLAY_TABLE_COLUMN_NAMES;
-		l_formatter.format(l_resultDisplayColumnNames);
-		for (MatchResult result : l_listofMatchResults) {
 
-			l_formatter.format(l_table, result.d_map, result.d_gameCount, result.d_playerName);
-		}
+		// Print the table header to the console and file
+		l_formatter.format(l_displayLine);
 		Logger.log(l_formatter.toString());
 		l_formatter.close();
+
+		l_formatter = new Formatter();
+		l_formatter.format(l_resultDisplayColumnNames);
+		Logger.log(l_formatter.toString());
+		l_formatter.close();
+
+		l_formatter = new Formatter();
+		l_formatter.format(l_displayLine);
+		Logger.log(l_formatter.toString());
+		l_formatter.close();
+
+		for (MatchResult result : l_listofMatchResults) {
+			l_formatter = new Formatter();
+			l_formatter.format(l_table, result.d_gameCount, result.d_map, result.d_playerName);
+			Logger.log(l_formatter.toString());
+			l_formatter.close();
+		}
+
 	}
 
 }

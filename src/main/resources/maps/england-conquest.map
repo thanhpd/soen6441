@@ -6,7 +6,6 @@ scroll=vertical
 warn=yes
 
 [Continents]
-
 North West=3
 Heart of England=3
 South West=4
@@ -73,4 +72,3 @@ Northumberland,275,82,North East,Tyne and Wear,Durham,Cumbria
 Tyne and Wear,306,107,North East,Northumberland,Durham
 Durham,292,138,North East,Northumberland,Tyne and Wear,Cleveland,North Yorkshire,Cumbria
 Cleveland,328,149,North East,Durham,North Yorkshire
-

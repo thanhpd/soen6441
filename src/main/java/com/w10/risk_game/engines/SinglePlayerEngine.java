@@ -81,6 +81,7 @@ public class SinglePlayerEngine {
 						if (this.d_gamePlayController.checkIfGameIsOver()) {
 							Logger.log(Constants.GAME_ENGINE_GAME_OVER + this.d_gamePlayController.getWinner()
 									+ Constants.GAME_ENGINE_END_GAME);
+							d_gamePlayController.resetPlayerCreation();
 							break;
 						}
 						Phase.next();

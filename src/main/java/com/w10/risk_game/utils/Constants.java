@@ -164,7 +164,7 @@ public final class Constants {
 
 	// Tournament Result Display
 	public static final String RESULT_DISPLAY_TABLE_LINE = "+---------------------+---+---------------------+-----+--------------------------------------------------+\n";
-	public static final String RESULT_DISPLAY_TABLE_COLUMN_NAMES = "|Game Count                    | Map                            | Winner                           |\n";
+	public static final String RESULT_DISPLAY_TABLE_COLUMN_NAMES = "|Game Count                    | Map                          | Winner                       |\n";
 	public static final String RESULT_DISPLAY_TABLE_FORMAT_PATTERN = "|%-30s|%-30s|%-30s|\n";
 
 	// Tournament Valudation

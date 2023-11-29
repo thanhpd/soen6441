@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import com.w10.risk_game.controllers.TournamentModeController;
 import com.w10.risk_game.engines.SinglePlayerEngine;
-import com.w10.risk_game.engines.TournamentEngine;
 import com.w10.risk_game.utils.Constants;
 import com.w10.risk_game.utils.loggers.ConsoleLogger;
 import com.w10.risk_game.utils.loggers.FileLogger;

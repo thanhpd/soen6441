@@ -2,14 +2,10 @@ package com.w10.risk_game.models.strategies;
 
 import java.text.MessageFormat;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 
 import com.w10.risk_game.commands.Advance;
-import com.w10.risk_game.commands.Airlift;
 import com.w10.risk_game.commands.Deploy;
-import com.w10.risk_game.commands.Negotiate;
-import com.w10.risk_game.models.CardType;
 import com.w10.risk_game.models.Country;
 import com.w10.risk_game.models.Player;
 import com.w10.risk_game.utils.Constants;

@@ -34,5 +34,6 @@ replay_pid*
 target
 .DS_Store
 
+docs/apidocs
 src/main/resources/logs/log.txt
 src/test/resources/logs/log.txt
